@@ -6,32 +6,26 @@ test('payment verification test', async ({ page }) => {
   
   try {
     // Initial page load
-    await page.goto('https://legacy-test.storagely-api.com/10-federal-storage/storage-units/north-carolina/high-point/greensboro-road', {
-      //waitUntil: 'networkidle',
-      //timeout: 60000
+      await page.goto('https://10federalstorage.com/storage-units/north-carolina/high-point/greensboro-road?Tareq123', {
+      //await page.goto('https://www.bestboxstorage.com/storage-units/missouri/ofallon/highway-k?Tareq123', {
     });
 
-    // Handle cookie consent
+    //  HANDLE cookie consent
     try {
-      await page.getByText('We use essential cookies to').click();
+      await page.getByText('We use essential cookies to').click();  //if cookie banner is not present in a page, it shall skip and move forward
       await page.getByRole('button', { name: 'Accept' }).click();
     } catch (error) {
       console.log('Cookie banner might not be present');
     }
 
     // Click Reserve button
-    await page.locator('sh_reservefullsection_10-federal-storage_3d361ed0-d2aa-41fa-8b95-85edbeca124f_371')
-      .filter({ hasText: 'RESERVE No credit card' })
-      .locator('a')
-      .click();
-
-    await page.getByText('Reserve Your Unit').click();
+    await page.locator('.listviewrows .whiteBtnStoragely:has-text("RESERVE")').first().click();
     await page.getByRole('button', { name: 'Close', exact: true }).click();
 
-    // Click RENT PAGE
-    await page.locator('sh_rentfullsection_10-federal-storage_3d361ed0-d2aa-41fa-8b95-85edbeca124f_371')
-      .getByRole('link', { name: 'RENT' })
-      .click();
+    // Click RENT PAGE 
+    await page.locator('.listviewrows .blackBtnStoragely:has-text("RENT")').first().click();
+
+
 
     // Fill the form
     await page.getByRole('heading', { name: 'Summary of Rental' }).click();
@@ -45,31 +39,29 @@ test('payment verification test', async ({ page }) => {
     await page.getByPlaceholder(' Zip Code ').fill('99540');
 
     // Wait for navigation after clicking continue
-    await Promise.all([
-      page.waitForNavigation({timeout: 60000 }),
+    //await Promise.all([
       page.getByRole('button', { name: 'CONTINUE TO NEXT STEP' }).click()
-    ]);
+    //]);
 
-    // Wait for payment form to be loaded
     // Fill payment details
-    await page.getByPlaceholder('Card Number').fill('5555 5555 5555 5555');
-    await page.getByPlaceholder('MM / YY').fill('05 / 55');
-    await page.getByPlaceholder('CVV').fill('5555');
-
-    // Check agreement boxes
+    await page.getByPlaceholder('Card Number').type('5555 5555 5555 5555', { delay: 100 });
+    await page.keyboard.press('Tab');  // Trigger blur
+    await page.getByPlaceholder('MM / YY').type('05 / 55', { delay: 100 });
+    await page.keyboard.press('Tab');  
+    await page.getByPlaceholder('CVV').type('5555', { delay: 100 });
+    await page.keyboard.press('Tab');  
+  
+    //Check Agreement checkboxes
     await page.getByLabel('I agree to the lease terms').check();
     await page.getByLabel('I agree to the protection').check();
     await page.getByLabel('I agree to the auto pay terms').check();
-
-    // CLICK RENT NOW - Step 5
+  
+    // Click RENT NOW
     await page.getByRole('button', { name: 'RENT NOW' }).click();
-
-
-    // Wait for error message and handle it
-    //await page.getByText('Error!!').click();
-    await page.getByText('Failed to process payment,').waitFor({ state: 'visible', timeout: 60000 });
-    await page.getByText('Failed to process payment,').click();
-    //await page.getByRole('button', { name: 'Close' }).click();
+  
+    // Wait for and verify the error toast to appear
+    await page.waitForSelector('text=Error!!', { timeout: 5000 });
+    await expect(page.getByText('Error!!')).toBeVisible();
 
   } catch (error) {
     console.error('Test failed:', error);
