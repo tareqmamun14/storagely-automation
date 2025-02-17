@@ -31,6 +31,11 @@
  
 //   await page.getByRole('alert').locator('div').filter({ hasText: 'Error!!' }).click();
 //   await page.getByText('Error!!').click();
-//   await page.getByText('Failed to process payment,').click();
+//   await page.getByText('Failed to process payment, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (Payrix): Error for field `payment.number` (Error code 15: invalid_card_number): Invalid credit card/debit card number').click();
+//   await page.getByText('Failed to process payment, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (Sage Payments Solutions): Payment Error:  INVALID CARDNUMBER').click();                        
 //   await page.getByText('Undefined array key 2055').click();
+//   await page.getByText('ErrorCode: 1002, The Payment failed. Invalid Account Data: Account number has incorrect check digit').click();
+                        
 // });
+
+
