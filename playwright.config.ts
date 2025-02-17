@@ -84,22 +84,22 @@ import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
-  fullyParallel: true,
-  workers: process.env.CI ? 2 : 5,
+  fullyParallel: true, // Enable parallel execution
+  workers: process.env.CI ? 2 : '50%', // Use 50% of available CPU cores
   timeout: 30 * 1000,
   expect: { timeout: 5000 },
   reporter: 'html',
+  use: {
+    headless: false, // Run in headed mode
+    viewport: { width: 1280, height: 720 },
+  },
   projects: [
     {
       name: 'chrome',
       use: {
-        // Use the actual installed Google Chrome instead of bundled Chromium
         browserName: 'chromium',
-        channel: 'chrome',  // This uses the Chrome channel
-        headless: false,    // Set to false to see the browser window
-        viewport: { width: 1280, height: 720 },
+        channel: 'chrome', // Use the installed Chrome browser
       },
     },
-    // You can define additional projects for other browsers if needed.
   ],
 });
