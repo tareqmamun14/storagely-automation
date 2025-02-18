@@ -1,24 +1,54 @@
 // tests/payment-verification.spec.ts
 import { test, expect } from '@playwright/test';
 
-const baseURLs = [
-  // 'https://10federalstorage.com/storage-units/north-carolina/high-point/greensboro-road',
-  // 'https://www.bestboxstorage.com/storage-units/missouri/ofallon/highway-k',
-   'https://radiantstorage.com/storage-units/texas/galveston/church-street',
-  // 'https://yourpremierstorage.com/storage-units/mississippi/laurel/ms-15',
-  // 'https://redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',
-  // 'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road',
-  // 'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',
-  // 'https://bluebirdstorage.ca/storage-units/alberta/calgary/blackfoot-trail',
-  // 'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club-road',
-  // 'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive',
-  // 'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road',
-  // 'https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street',
+const customerbaseURLs = [
+  // 'https://stoic-mendeleev.staging.storagely-api.com/10-federal-storage/storage-units/north-carolina/high-point/greensboro-road',
+  // 'https://stoic-mendeleev.staging.storagely-api.com/bestbox-storage/storage-units/missouri/ofallon/highway-k',
+  // 'https://stoic-mendeleev.staging.storagely-api.com/radiant-storage/storage-units/texas/galveston/church-street',
+  // 'https://stoic-mendeleev.staging.storagely-api.com/premier-storage/storage-units/mississippi/laurel/ms-15',
+  // 'https://stoic-mendeleev.staging.storagely-api.com/red-rocks-self-storage/storage-units/colorado/aurora/east-14th-avenue',
+  // 'https://stoic-mendeleev.staging.storagely-api.com/distinct-storage/storage-units/connecticut/new-milford/kent-road',
+  // 'https://stoic-mendeleev.staging.storagely-api.com/storage-star/storage-units/colorado/colorado-springs/aerotech-drive',
+  // 'https://stoic-mendeleev.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/blackfoot-trail',
+  // 'https://stoic-mendeleev.staging.storagely-api.com/sunbirdstorage/storage-units/nc/winston-salem/country-club-road',
+  // 'https://stoic-mendeleev.staging.storagely-api.com/rhino-storage/storage-units/louisiana/covington/philip-drive',
+  // 'https://stoic-mendeleev.staging.storagely-api.com/gatekeeper-self-storage/storage-units/georgia/peachtree-city/senoia-road',
+  // 'https://stoic-mendeleev.staging.storagely-api.com/storage-boss/storage-units/louisiana/ponchatoula/west-pine-street',
+  // //'https://stoic-mendeleev.staging.storagely-api.com/securitypublicstorage/storage-units/ca/roseville?location=L001',
+
+  'https://10federalstorage.com/storage-units/north-carolina/high-point/greensboro-road',
+  'https://www.bestboxstorage.com/storage-units/missouri/ofallon/highway-k',
+  'https://radiantstorage.com/storage-units/texas/galveston/church-street',
+  'https://yourpremierstorage.com/storage-units/mississippi/laurel/ms-15',
+  'https://redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',
+  'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road',
+  'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',
+  'https://bluebirdstorage.ca/storage-units/alberta/calgary/blackfoot-trail',
+  'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club-road',
+  'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive',
+  'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road',
+  'https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street',
   // 'https://www.securitypublicstorage.com/locations/roseville' 
 ]; 
 
+const FMSplatform : Record<string, string> = {
+  'https://10federalstorage.com/storage-units/north-carolina/high-point/greensboro-road': 'Storedge',
+  'https://www.bestboxstorage.com/storage-units/missouri/ofallon/highway-k': 'Storedge',
+  'https://radiantstorage.com/storage-units/texas/galveston/church-street': 'Storedge',
+  'https://yourpremierstorage.com/storage-units/mississippi/laurel/ms-15': 'Storedge',
+  'https://redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue': 'Storedge',
+  'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road': 'Storedge',
+  'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive': 'SSM',
+  'https://bluebirdstorage.ca/storage-units/alberta/calgary/blackfoot-trail': 'Sitelink',
+  'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club-road': 'Sitelink',
+  'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive': 'Sitelink',
+  'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road': 'Sitelink',
+  'https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street': 'Sitelink',
+  //'https://www.securitypublicstorage.com/locations/roseville': 'Sitelink',
+};
+
 test.describe('Payment Verification Tests', () => {
-  for (const baseURL of baseURLs) {
+  for (const baseURL of customerbaseURLs) {
     test(`Payment verification for ${baseURL}`, async ({ page }) => {
       test.setTimeout(120 * 1000); // 2 minutes
 
@@ -27,6 +57,10 @@ test.describe('Payment Verification Tests', () => {
       const urlWithQuery = baseURL.includes('?')
         ? `${baseURL}&${randomQueryParam}`
         : `${baseURL}?${randomQueryParam}`;
+
+            // Print Storage Facility URL and Platform
+            console.log(`Running test for Storage Facility: ${baseURL}`);
+            console.log(`Platform: ${FMSplatform[baseURL] ?? 'Unknown'}`);
 
       try {
         // Navigate to the URL
@@ -42,30 +76,13 @@ test.describe('Payment Verification Tests', () => {
             const acceptButton = page.getByRole('button', { name: 'Accept' });
             if (await acceptButton.isVisible()) {
               await acceptButton.click();
-            }
+            } 
           }
         } catch (error) {
           console.log('Cookie banner might not be present');
         }
 
         // ===== Click the Reserve button (if available) =====
-        // await page.waitForTimeout(1000); // Allow page to settle
-        // await page.locator('a.reserveBtnPop.whiteBtnStoragely:has-text("RESERVE")')
-        //   .or(page.locator('.listviewrows .whiteBtnStoragely:has-text("RESERVE")'))
-        //   .or(page.getByText('Join Waitlist', { exact: true }))
-        //   .first().click();
-
-        // // Try closing any modal that might pop up
-        // try {
-        //   await page.waitForTimeout(1500); // Allow modal to appear
-        //   const closeButton = page.getByRole('button', { name: 'Close', exact: true });
-        //   if (await closeButton.isVisible()) {
-        //     await closeButton.click();
-        //   }
-        // } catch (error) {
-        //   console.log('Close button might not be present');
-        // }
-
         const reserveButton = page.locator('a.reserveBtnPop.whiteBtnStoragely:has-text("RESERVE")')
         .or(page.locator('.listviewrows .whiteBtnStoragely:has-text("RESERVE")'))
         .or(page.locator('button:has-text("Join Waitlist")'))
