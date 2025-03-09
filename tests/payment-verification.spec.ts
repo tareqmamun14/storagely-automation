@@ -1,5 +1,5 @@
 // tests/payment-verification.spec.ts
-import { test, expect } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test';
 
 const customerbaseURLs = [
   // 'https://stoic-mendeleev.staging.storagely-api.com/10-federal-storage/storage-units/north-carolina/high-point/greensboro-road',
@@ -16,7 +16,7 @@ const customerbaseURLs = [
   // 'https://stoic-mendeleev.staging.storagely-api.com/storage-boss/storage-units/louisiana/ponchatoula/west-pine-street',
   // //'https://stoic-mendeleev.staging.storagely-api.com/securitypublicstorage/storage-units/ca/roseville?location=L001',
 
-  'https://10federalstorage.com/storage-units/north-carolina/high-point/greensboro-road',
+  'https://10federalstorage.com/storage-units/texas/arlington/avenue-f',
   'https://www.bestboxstorage.com/storage-units/missouri/ofallon/highway-k',
   'https://radiantstorage.com/storage-units/texas/galveston/church-street',
   'https://yourpremierstorage.com/storage-units/mississippi/laurel/ms-15',
@@ -28,7 +28,7 @@ const customerbaseURLs = [
   'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive',
   'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road',
   'https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street',
-  // 'https://www.securitypublicstorage.com/locations/roseville' 
+  // // 'https://www.securitypublicstorage.com/locations/roseville' 
 ]; 
 
 const FMSplatform : Record<string, string> = {
@@ -46,6 +46,18 @@ const FMSplatform : Record<string, string> = {
   'https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street': 'Sitelink',
   //'https://www.securitypublicstorage.com/locations/roseville': 'Sitelink',
 };
+
+test('Admin Login Test', async ({ page }: { page: Page }) => {
+  await page.goto('https://test.staging.storagely-api.com/10-federal-storage/admin');
+  await page.getByRole('textbox', { name: 'Email Address' }).fill('admin@localhost.com');
+  await page.getByRole('textbox', { name: 'Password' }).fill('adminadmin');
+  await page.getByRole('button', { name: 'Login' }).click();
+  
+  const heading = page.getByRole('heading', { name: 'Dashboard' });
+  console.log("Admin Page Header: " + await heading.innerText());
+  await expect(heading).toHaveText(/Dashboard/);
+  await page.close();
+});
 
 test.describe('Payment Verification Tests', () => {
   for (const baseURL of customerbaseURLs) {
@@ -128,14 +140,31 @@ test.describe('Payment Verification Tests', () => {
       }
 
       // If no button was found, proceed with the rest of the test
-      console.log('Continuing with the rest of the test as no RESERVE or Join Waitlist button was found.');
+      console.log('Continuing with the rest of the test as NO "RESERVE" or "Join Waitlist" button was found.');
 
         // ===== Click the RENT button =====
         await page.waitForTimeout(1500);
-        await page.locator('.listviewrows .blackBtnStoragely:has-text("RENT")')
+        // await page.locator('.listviewrows .blackBtnStoragely:has-text("RENT")')
+        // .or(page.locator('a:has-text("Reserve Unit")'))
+        // .first().click();
+        const button = await page.locator('.listviewrows .blackBtnStoragely:has-text("RENT")')
         .or(page.locator('a:has-text("Reserve Unit")'))
-        .first().click();
-
+        .or(page.locator('a.reserveBtnPop.whiteBtnStoragely:has-text("Select Pricing Option")'))
+        .first();
+    
+        const buttonTextVBP = await button.textContent(); // Get text in Value based pricing-VBP
+        console.log(`Clicked button: ${buttonText?.trim()}`); //Print Clicked Button
+        await button.scrollIntoViewIfNeeded();
+        await button.click();
+        
+        if (buttonTextVBP?.includes("Select Pricing Option")) {
+            // Wait for the new "RENT" button to appear after selecting pricing
+            const rentButton = page.locator('a.vbp_btn:has-text("Rent")').first();
+            await rentButton.waitFor();
+            console.log('Clicked button: RENT-(Select Pricing Option)');
+            await rentButton.click();
+        }
+    
         // ===== Fill out the rental form =====
         await page.getByRole('heading', { name: 'Summary of Rental' }).click();
         await page.waitForTimeout(1000); // Ensure form is visible
