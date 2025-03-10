@@ -1,35 +1,57 @@
 // tests/payment-verification.spec.ts
-import { test, expect } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test';
+import fs from 'fs';
+import path from 'path';
+const screenshotDir = './';
+
+fs.readdir(screenshotDir, (err, files) => {
+  if (err) {
+    console.error('Failed to read directory:', err);
+    return;
+  }
+
+  files.forEach((file) => {
+    if (file.startsWith('error-') && file.endsWith('.png')) {
+      fs.unlink(path.join(screenshotDir, file), (unlinkErr) => {
+        if (unlinkErr) {
+          console.error(`Failed to delete ${file}:`, unlinkErr);
+        } else {
+          console.log(`Deleted old screenshot: ${file}`);
+        }
+      });
+    }
+  });
+});
 
 const customerbaseURLs = [
-  // 'https://stoic-mendeleev.staging.storagely-api.com/10-federal-storage/storage-units/north-carolina/high-point/greensboro-road',
-  // 'https://stoic-mendeleev.staging.storagely-api.com/bestbox-storage/storage-units/missouri/ofallon/highway-k',
-  // 'https://stoic-mendeleev.staging.storagely-api.com/radiant-storage/storage-units/texas/galveston/church-street',
-  // 'https://stoic-mendeleev.staging.storagely-api.com/premier-storage/storage-units/mississippi/laurel/ms-15',
-  // 'https://stoic-mendeleev.staging.storagely-api.com/red-rocks-self-storage/storage-units/colorado/aurora/east-14th-avenue',
-  // 'https://stoic-mendeleev.staging.storagely-api.com/distinct-storage/storage-units/connecticut/new-milford/kent-road',
-  // 'https://stoic-mendeleev.staging.storagely-api.com/storage-star/storage-units/colorado/colorado-springs/aerotech-drive',
-  // 'https://stoic-mendeleev.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/blackfoot-trail',
-  // 'https://stoic-mendeleev.staging.storagely-api.com/sunbirdstorage/storage-units/nc/winston-salem/country-club-road',
-  // 'https://stoic-mendeleev.staging.storagely-api.com/rhino-storage/storage-units/louisiana/covington/philip-drive',
-  // 'https://stoic-mendeleev.staging.storagely-api.com/gatekeeper-self-storage/storage-units/georgia/peachtree-city/senoia-road',
-  // 'https://stoic-mendeleev.staging.storagely-api.com/storage-boss/storage-units/louisiana/ponchatoula/west-pine-street',
-  // //'https://stoic-mendeleev.staging.storagely-api.com/securitypublicstorage/storage-units/ca/roseville?location=L001',
+  //  TEST URL
+  // 'https://test.staging.storagely-api.com/10-federal-storage/storage-units/texas/arlington/avenue-f',
+  // 'https://test.staging.storagely-api.com/bestbox-storage/storage-units/missouri/ofallon/highway-k',
+  // 'https://test.staging.storagely-api.com/radiant-storage/storage-units/texas/galveston/church-street',
+  // 'https://test.staging.storagely-api.com/premier-storage/storage-units/mississippi/laurel/ms-15',
+  // 'https://test.staging.storagely-api.com/red-rocks-self-storage/storage-units/colorado/aurora/east-14th-avenue',
+  // 'https://test.staging.storagely-api.com/distinct-storage/storage-units/connecticut/new-milford/kent-road',
+  // 'https://test.staging.storagely-api.com/storage-star/storage-units/colorado/colorado-springs/aerotech-drive',
+  // 'https://test.staging.storagely-api.com/bluebirdstorage/storage-units/british-columbia/kimberley/304-street',
+  // 'https://test.staging.storagely-api.com/sunbirdstorage/storage-units/nc/winston-salem/country-club',
+  // 'https://test.staging.storagely-api.com/rhino-storage/storage-units/louisiana/covington/philip-drive',
+  // 'https://test.staging.storagely-api.com/gatekeeper-self-storage/storage-units/georgia/peachtree-city/senoia-road',
+  // 'https://test.staging.storagely-api.com/storage-boss/storage-units/louisiana/ponchatoula/west-pine-street',
 
-  'https://10federalstorage.com/storage-units/north-carolina/high-point/greensboro-road',
+  //  PROD URL 
+  'https://10federalstorage.com/storage-units/texas/arlington/avenue-f',
   'https://www.bestboxstorage.com/storage-units/missouri/ofallon/highway-k',
   'https://radiantstorage.com/storage-units/texas/galveston/church-street',
   'https://yourpremierstorage.com/storage-units/mississippi/laurel/ms-15',
   'https://redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',
   'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road',
   'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',
-  'https://bluebirdstorage.ca/storage-units/alberta/calgary/blackfoot-trail',
-  'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club-road',
+  'https://bluebirdstorage.ca/storage-units/british-columbia/kimberley/304-street',
+  'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club',
   'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive',
   'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road',
   'https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street',
-  // 'https://www.securitypublicstorage.com/locations/roseville' 
-]; 
+ ]; 
 
 const FMSplatform : Record<string, string> = {
   'https://10federalstorage.com/storage-units/north-carolina/high-point/greensboro-road': 'Storedge',
@@ -46,6 +68,18 @@ const FMSplatform : Record<string, string> = {
   'https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street': 'Sitelink',
   //'https://www.securitypublicstorage.com/locations/roseville': 'Sitelink',
 };
+
+test('Admin Login Test', async ({ page }: { page: Page }) => {
+  await page.goto('https://test.staging.storagely-api.com/10-federal-storage/admin');
+  await page.getByRole('textbox', { name: 'Email Address' }).fill('admin@localhost.com');
+  await page.getByRole('textbox', { name: 'Password' }).fill('adminadmin');
+  await page.getByRole('button', { name: 'Login' }).click();
+  
+  const heading = page.getByRole('heading', { name: 'Dashboard' });
+  console.log("Admin Page Header: " + await heading.innerText());
+  await expect(heading).toHaveText(/Dashboard/);
+  await page.close();
+});
 
 test.describe('Payment Verification Tests', () => {
   for (const baseURL of customerbaseURLs) {
@@ -132,9 +166,26 @@ test.describe('Payment Verification Tests', () => {
 
         // ===== Click the RENT button =====
         await page.waitForTimeout(1500);
-        await page.locator('.listviewrows .blackBtnStoragely:has-text("RENT")')
+        // await page.locator('.listviewrows .blackBtnStoragely:has-text("RENT")')
+        // .or(page.locator('a:has-text("Reserve Unit")'))
+        // .first().click();
+        const button = await page.locator('.listviewrows .blackBtnStoragely:has-text("RENT")')
         .or(page.locator('a:has-text("Reserve Unit")'))
-        .first().click();
+        .or(page.locator('a.reserveBtnPop.whiteBtnStoragely:has-text("Select Pricing Option")'))
+        .first();
+    
+        const buttonTextVBP = await button.textContent(); // Get text in Value based pricing-VBP
+        console.log(`Clicked button: ${buttonText?.trim()}`); //Print Clicked Button
+        await button.scrollIntoViewIfNeeded();
+        await button.click();
+        
+        if (buttonTextVBP?.includes("Select Pricing Option")) {
+            // Wait for the new "RENT" button to appear after selecting pricing
+            const rentButton = page.locator('a.vbp_btn:has-text("Rent")').first();
+            await rentButton.waitFor();
+            console.log('Clicked button: RENT-(Select Pricing Option)');
+            await rentButton.click();
+        }
 
         // ===== Fill out the rental form =====
         await page.getByRole('heading', { name: 'Summary of Rental' }).click();
@@ -149,14 +200,26 @@ test.describe('Payment Verification Tests', () => {
         await page.getByPlaceholder(/Zip Code|Postal Code/).fill('99540');
         
         const datepicker = page.locator('.datepicker-days .today.active.day');
-        if (await datepicker.isVisible()) {
-          await datepicker.click();
-          console.log('Clicked the datepicker element');
-        } else {
-          console.log('Datepicker element not found, skipping this step');
-        }
 
-        await page.getByRole('button', { name: 'CONTINUE TO NEXT STEP' }).click();
+        try {
+          // Wait for the datepicker element, but catch timeout errors
+          await datepicker.waitFor({ state: 'visible', timeout: 5000 });
+          
+          if (await datepicker.isVisible()) {
+            await datepicker.click();
+            console.log('Clicked the datepicker element');
+          } else {
+            console.log('Datepicker is not visible, skipping this step.');
+          }
+        } catch (error) {
+          console.log('Datepicker did not appear within the timeout, skipping this step.');
+        }
+        // Continue with the rest of the script
+        console.log('Proceeding to the next step...');
+
+        const continueButton = page.getByRole('button', { name: 'CONTINUE TO NEXT STEP' });
+        await continueButton.scrollIntoViewIfNeeded(); // Scrolls to the button if it's not in view
+        await continueButton.click();
         await page.waitForTimeout(2000); // Wait for payment step to load
 
         // ===== Fill in payment details (with extra delay for stability) =====
@@ -188,11 +251,39 @@ test.describe('Payment Verification Tests', () => {
           }
         }
 
+        // ===== Minimize if chatbox pops up =====
+        try {
+          // Wait for the iframe, but with a timeout to prevent infinite waiting
+          const chatIframeElement = await page.waitForSelector('iframe[title="LiveChat chat widget"]', { timeout: 5000 });
+        
+          if (chatIframeElement) {
+            const chatIframe = await chatIframeElement.contentFrame();
+        
+            if (chatIframe) {
+              const minimizeButton = await chatIframe.getByRole('button', { name: 'Minimize window' });
+        
+              // Check if the button is visible before clicking
+              if (await minimizeButton.isVisible()) {
+                await minimizeButton.click();
+                console.log("Minimized the chat window.");
+              } else {
+                console.log("Minimize button not visible, skipping.");
+              }
+            } else {
+              console.log("Chat iframe is not accessible.");
+            }
+          } else {
+            console.log("Chat iframe element not found.");
+          }
+        } catch (error) {
+          console.log("Chat iframe not found or an error occurred, proceeding without minimizing.", error);
+        }
+        
         // ===== Click RENT NOW to attempt payment =====
         await page.getByRole('button', { name: 'RENT NOW' }).click();
         await page.waitForTimeout(2000); // Give some time for response
 
-        // Verify toast container header
+        // ====- Verify toast container header =====
         await page.getByText('Error!!').waitFor({ state: 'visible', timeout: 10000 });
         const toastContainer = page.locator('.toast-container');
         await toastContainer.waitFor({ state: 'visible', timeout: 5000 });
