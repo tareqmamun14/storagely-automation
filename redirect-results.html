@@ -1,0 +1,963 @@
+
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <title>URL Redirect Check Results</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 20px; }
+      table { border-collapse: collapse; width: 100%; }
+      th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+      th { background-color: #f2f2f2; }
+      tr:nth-child(even) { background-color: #f9f9f9; }
+      .pass { color: green; font-weight: bold; }
+      .fail { color: red; font-weight: bold; }
+      .error { color: orange; font-weight: bold; }
+      .url-cell { max-width: 300px; word-break: break-all; }
+      .summary { margin-bottom: 20px; padding: 10px; background-color: #f8f8f8; border-radius: 5px; }
+    </style>
+  </head>
+  <body>
+    <h1>URL Redirect Check Results</h1>
+    
+    <div class="summary">
+      <h2>Summary</h2>
+      <p>Total URLs checked: 100</p>
+      <p>Passed: 53</p>
+      <p>Failed: 42</p>
+      <p>Errors: 5</p>
+    </div>
+    
+    <h2>Detailed Results</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Original URL</th>
+          <th>Expected Final URL</th>
+          <th>Actual Final URL</th>
+          <th>Status</th>
+          <th>Error Message</th>
+        </tr>
+      </thead>
+      <tbody>
+  
+        <tr>
+          <td>1</td>
+          <td class="url-cell">https://addaspaceministorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://addaspaceministorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://thestorageadvantage.com/storage-units-near-me</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>2</td>
+          <td class="url-cell">https://1stclassstorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://1stclassstorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://thestorageadvantage.com/storage-units-near-me</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>3</td>
+          <td class="url-cell">https://akronselfstorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://akronselfstorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://akronselfstorage.thestorageadvantage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>4</td>
+          <td class="url-cell">https://1stclassboatandrv.thestorageadvantage.com</td>
+          <td class="url-cell">https://1stclassboatandrv.thestorageadvantage.com</td>
+          <td class="url-cell">https://thestorageadvantage.com/storage-units-near-me</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>5</td>
+          <td class="url-cell">https://10federalstorage.com</td>
+          <td class="url-cell">https://10federalstorage.com</td>
+          <td class="url-cell">https://10federalstorage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>6</td>
+          <td class="url-cell">https://amazonstoragellc.com</td>
+          <td class="url-cell">https://amazonstoragellc.com</td>
+          <td class="url-cell">http://ww1.amazonstoragellc.com/?usid=24&utid=11144011698</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>7</td>
+          <td class="url-cell">https://arnoldselfstorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://arnoldselfstorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://arnoldselfstorage.thestorageadvantage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>8</td>
+          <td class="url-cell">https://arkansasstoragecenters.com</td>
+          <td class="url-cell">https://arkansasstoragecenters.com</td>
+          <td class="url-cell">https://www.arkansasstoragecenters.com/</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>9</td>
+          <td class="url-cell">https://biggergarageselfstorage.selfstorageunitsnearby.com</td>
+          <td class="url-cell">https://biggergarageselfstorage.selfstorageunitsnearby.com</td>
+          <td class="url-cell">https://biggergarageselfstorage.selfstorageunitsnearby.com/all-locations</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>10</td>
+          <td class="url-cell">https://allpurposestorage.selfstorageunitsnearby.com</td>
+          <td class="url-cell">https://allpurposestorage.selfstorageunitsnearby.com</td>
+          <td class="url-cell">https://selfstorageunitsnearby.com/</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>11</td>
+          <td class="url-cell">https://blog.bluebirdstorage.ca</td>
+          <td class="url-cell">https://blog.bluebirdstorage.ca</td>
+          <td class="url-cell">ERROR</td>
+          <td class="error">ERROR</td>
+          <td>page.goto: net::ERR_TOO_MANY_REDIRECTS at https://blog.bluebirdstorage.ca/
+Call log:
+  [2m- navigating to "https://blog.bluebirdstorage.ca/", waiting until "domcontentloaded"[22m
+</td>
+        </tr>
+    
+        <tr>
+          <td>12</td>
+          <td class="url-cell">https://burningtreeselfstorage.com</td>
+          <td class="url-cell">https://burningtreeselfstorage.com</td>
+          <td class="url-cell">https://burningtreeselfstorage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>13</td>
+          <td class="url-cell">https://brokenarrowselfstorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://brokenarrowselfstorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://thestorageadvantage.com/storage-units-near-me</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>14</td>
+          <td class="url-cell">https://capitalcitystorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://capitalcitystorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://thestorageadvantage.com/storage-units-topeka</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>15</td>
+          <td class="url-cell">https://bluebirdstorage.ca</td>
+          <td class="url-cell">https://bluebirdstorage.ca</td>
+          <td class="url-cell">https://bluebirdstorage.ca/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>16</td>
+          <td class="url-cell">https://demo.storagely.io</td>
+          <td class="url-cell">https://demo.storagely.io</td>
+          <td class="url-cell">ERROR</td>
+          <td class="error">ERROR</td>
+          <td>page.goto: net::ERR_NAME_NOT_RESOLVED at https://demo.storagely.io/
+Call log:
+  [2m- navigating to "https://demo.storagely.io/", waiting until "domcontentloaded"[22m
+</td>
+        </tr>
+    
+        <tr>
+          <td>17</td>
+          <td class="url-cell">https://delcostorage.selfstorageunitsnearby.com</td>
+          <td class="url-cell">https://delcostorage.selfstorageunitsnearby.com</td>
+          <td class="url-cell">https://delcostorage.selfstorageunitsnearby.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>18</td>
+          <td class="url-cell">https://dahlonegastorageuhaul.com</td>
+          <td class="url-cell">https://dahlonegastorageuhaul.com</td>
+          <td class="url-cell">https://dahlonegastorageuhaul.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>19</td>
+          <td class="url-cell">https://carolinasecurestorage.com</td>
+          <td class="url-cell">https://carolinasecurestorage.com</td>
+          <td class="url-cell">https://carolinasecurestorage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>20</td>
+          <td class="url-cell">https://cypressministorage.selfstorageunitsnearby.com</td>
+          <td class="url-cell">https://cypressministorage.selfstorageunitsnearby.com</td>
+          <td class="url-cell">https://selfstorageunitsnearby.com/</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>21</td>
+          <td class="url-cell">https://emeraldcoaststorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://emeraldcoaststorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://emeraldcoaststorage.thestorageadvantage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>22</td>
+          <td class="url-cell">https://doravilleselfstorage.com</td>
+          <td class="url-cell">https://doravilleselfstorage.com</td>
+          <td class="url-cell">https://doravilleselfstorage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>23</td>
+          <td class="url-cell">https://expertstoragemanagement.com</td>
+          <td class="url-cell">https://expertstoragemanagement.com</td>
+          <td class="url-cell">https://expertstoragemanagement.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>24</td>
+          <td class="url-cell">https://excaliburselfstorage.com</td>
+          <td class="url-cell">https://excaliburselfstorage.com</td>
+          <td class="url-cell">https://www.excaliburselfstorage.com/</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>25</td>
+          <td class="url-cell">https://distinctstorage.com</td>
+          <td class="url-cell">https://distinctstorage.com</td>
+          <td class="url-cell">https://distinctstorage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>26</td>
+          <td class="url-cell">https://gatekeeperstoragega.com</td>
+          <td class="url-cell">https://gatekeeperstoragega.com</td>
+          <td class="url-cell">https://gatekeeperstoragega.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>27</td>
+          <td class="url-cell">https://fremauxstorage.com</td>
+          <td class="url-cell">https://fremauxstorage.com</td>
+          <td class="url-cell">https://fremauxstorage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>28</td>
+          <td class="url-cell">https://fredericastorage.victorystoragegroup.com</td>
+          <td class="url-cell">https://fredericastorage.victorystoragegroup.com</td>
+          <td class="url-cell">https://fredericastorage.victorystoragegroup.com/storage-units/georgia/st-simons-island/sylvan-blvd</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>29</td>
+          <td class="url-cell">https://gate5selfstorage.com</td>
+          <td class="url-cell">https://gate5selfstorage.com</td>
+          <td class="url-cell">https://gate5selfstorage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>30</td>
+          <td class="url-cell">https://gleneaglestorage.com</td>
+          <td class="url-cell">https://gleneaglestorage.com</td>
+          <td class="url-cell">https://gleneaglestorage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>31</td>
+          <td class="url-cell">https://hfirestorage.com</td>
+          <td class="url-cell">https://hfirestorage.com</td>
+          <td class="url-cell">ERROR</td>
+          <td class="error">ERROR</td>
+          <td>page.goto: net::ERR_NAME_NOT_RESOLVED at https://hfirestorage.com/
+Call log:
+  [2m- navigating to "https://hfirestorage.com/", waiting until "domcontentloaded"[22m
+</td>
+        </tr>
+    
+        <tr>
+          <td>32</td>
+          <td class="url-cell">https://hartestorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://hartestorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://thestorageadvantage.com/storage-units-near-me</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>33</td>
+          <td class="url-cell">https://hobbsselfstorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://hobbsselfstorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://thestorageadvantage.com/storage-units-near-me</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>34</td>
+          <td class="url-cell">https://hamiltonroadstorage.victorystoragegroup.com</td>
+          <td class="url-cell">https://hamiltonroadstorage.victorystoragegroup.com</td>
+          <td class="url-cell">https://hamiltonroadstorage.victorystoragegroup.com/storage-units/georgia/st-simons-island/hamilton-road</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>35</td>
+          <td class="url-cell">https://highcountryselfstorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://highcountryselfstorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://thestorageadvantage.com/storage-units-near-me</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>36</td>
+          <td class="url-cell">https://kitchenerstorage.com</td>
+          <td class="url-cell">https://kitchenerstorage.com</td>
+          <td class="url-cell">https://www.kitchenerstorage.com/</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>37</td>
+          <td class="url-cell">https://irondoorstorage.com</td>
+          <td class="url-cell">https://irondoorstorage.com</td>
+          <td class="url-cell">https://www.citizenselfstorage.com/</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>38</td>
+          <td class="url-cell">https://horizonministorage.selfstorageunitsnearby.com</td>
+          <td class="url-cell">https://horizonministorage.selfstorageunitsnearby.com</td>
+          <td class="url-cell">https://horizonministorage.selfstorageunitsnearby.com/all-locations</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>39</td>
+          <td class="url-cell">https://juststoreit.com</td>
+          <td class="url-cell">https://juststoreit.com</td>
+          <td class="url-cell">https://juststoreit.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>40</td>
+          <td class="url-cell">https://lagrangeclimatestorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://lagrangeclimatestorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://thestorageadvantage.com/storage-units-near-me</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>41</td>
+          <td class="url-cell">https://lockngo.ca</td>
+          <td class="url-cell">https://lockngo.ca</td>
+          <td class="url-cell">https://lockngo.ca/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>42</td>
+          <td class="url-cell">https://modstorage.com</td>
+          <td class="url-cell">https://modstorage.com</td>
+          <td class="url-cell">https://modstorage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>43</td>
+          <td class="url-cell">https://modboxstorage.com</td>
+          <td class="url-cell">https://modboxstorage.com</td>
+          <td class="url-cell">https://modboxstorage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>44</td>
+          <td class="url-cell">https://masterkeystorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://masterkeystorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://thestorageadvantage.com/storage-units-roseburg</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>45</td>
+          <td class="url-cell">https://metcoministorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://metcoministorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://thestorageadvantage.com/storage-units-near-me</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>46</td>
+          <td class="url-cell">https://oldfoundrystorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://oldfoundrystorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://oldfoundrystorage.thestorageadvantage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>47</td>
+          <td class="url-cell">https://pothstorageandrv.com</td>
+          <td class="url-cell">https://pothstorageandrv.com</td>
+          <td class="url-cell">https://pothstorageandrv.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>48</td>
+          <td class="url-cell">https://parkforeststorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://parkforeststorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://thestorageadvantage.com/storage-units-near-me</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>49</td>
+          <td class="url-cell">https://radiantstorage.com</td>
+          <td class="url-cell">https://radiantstorage.com</td>
+          <td class="url-cell">https://radiantstorage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>50</td>
+          <td class="url-cell">https://moodyroadstorage.victorystoragegroup.com</td>
+          <td class="url-cell">https://moodyroadstorage.victorystoragegroup.com</td>
+          <td class="url-cell">https://moodyroadstorage.victorystoragegroup.com/storage-units/georgia/bonaire/moody-road</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>51</td>
+          <td class="url-cell">https://riverfrontselfstorage.com</td>
+          <td class="url-cell">https://riverfrontselfstorage.com</td>
+          <td class="url-cell">https://www.afternic.com/forsale/riverfrontselfstorage.com?utm_source=TDFS_DASLNC&utm_medium=parkedpages&utm_campaign=x_corp_tdfs-daslnc_base&traffic_type=TDFS_DASLNC&traffic_id=daslnc&</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>52</td>
+          <td class="url-cell">https://redrocksstorage.com</td>
+          <td class="url-cell">https://redrocksstorage.com</td>
+          <td class="url-cell">https://redrocksstorage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>53</td>
+          <td class="url-cell">https://rhino-storage.com</td>
+          <td class="url-cell">https://rhino-storage.com</td>
+          <td class="url-cell">https://rhino-storage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>54</td>
+          <td class="url-cell">https://rental.securitypublicstorage.com</td>
+          <td class="url-cell">https://rental.securitypublicstorage.com</td>
+          <td class="url-cell">https://rental.securitypublicstorage.com/all-locations</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>55</td>
+          <td class="url-cell">https://reddoorstorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://reddoorstorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://thestorageadvantage.com/storage-units-near-me</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>56</td>
+          <td class="url-cell">https://roxboroughstorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://roxboroughstorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://thestorageadvantage.com/storage-units-near-me</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>57</td>
+          <td class="url-cell">https://safestorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://safestorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://thestorageadvantage.com/storage-units-rome</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>58</td>
+          <td class="url-cell">https://selfstorageunitsnearby.com</td>
+          <td class="url-cell">https://selfstorageunitsnearby.com</td>
+          <td class="url-cell">https://selfstorageunitsnearby.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>59</td>
+          <td class="url-cell">https://route36storage.selfstorageunitsnearby.com</td>
+          <td class="url-cell">https://route36storage.selfstorageunitsnearby.com</td>
+          <td class="url-cell">https://selfstorageunitsnearby.com/</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>60</td>
+          <td class="url-cell">https://selfstorage.ca</td>
+          <td class="url-cell">https://selfstorage.ca</td>
+          <td class="url-cell">https://selfstorage.ca/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>61</td>
+          <td class="url-cell">https://smartstorage.selfstorageunitsnearby.com</td>
+          <td class="url-cell">https://smartstorage.selfstorageunitsnearby.com</td>
+          <td class="url-cell">https://smartstorage.selfstorageunitsnearby.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>62</td>
+          <td class="url-cell">https://slatestorage.selfstorageunitsnearby.com</td>
+          <td class="url-cell">https://slatestorage.selfstorageunitsnearby.com</td>
+          <td class="url-cell">https://slatestorage.selfstorageunitsnearby.com/all-locations</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>63</td>
+          <td class="url-cell">https://smartstorageohio.com</td>
+          <td class="url-cell">https://smartstorageohio.com</td>
+          <td class="url-cell">https://smartstorageohio.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>64</td>
+          <td class="url-cell">https://smithfieldsafestorage.selfstorageunitsnearby.com</td>
+          <td class="url-cell">https://smithfieldsafestorage.selfstorageunitsnearby.com</td>
+          <td class="url-cell">https://selfstorageunitsnearby.com/</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>65</td>
+          <td class="url-cell">https://smartspace.biz</td>
+          <td class="url-cell">https://smartspace.biz</td>
+          <td class="url-cell">https://smartspace.biz/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>66</td>
+          <td class="url-cell">https://spotdogstorage.com</td>
+          <td class="url-cell">https://spotdogstorage.com</td>
+          <td class="url-cell">https://spotdogstorage.com/lander</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>67</td>
+          <td class="url-cell">https://spacesaversstorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://spacesaversstorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://spacesaversstorage.thestorageadvantage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>68</td>
+          <td class="url-cell">https://storagedepot.10federalstorage.com</td>
+          <td class="url-cell">https://storagedepot.10federalstorage.com</td>
+          <td class="url-cell">https://storagedepot.10federalstorage.com/all-locations</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>69</td>
+          <td class="url-cell">https://southportstorage.victorystoragegroup.com</td>
+          <td class="url-cell">https://southportstorage.victorystoragegroup.com</td>
+          <td class="url-cell">https://southportstorage.victorystoragegroup.com/storage-units/georgia/brunswick/us-17</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>70</td>
+          <td class="url-cell">https://space-cubed.com</td>
+          <td class="url-cell">https://space-cubed.com</td>
+          <td class="url-cell">https://space-cubed.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>71</td>
+          <td class="url-cell">https://storagefirstpa.com</td>
+          <td class="url-cell">https://storagefirstpa.com</td>
+          <td class="url-cell">https://storagefirstpa.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>72</td>
+          <td class="url-cell">https://storagedepot.co</td>
+          <td class="url-cell">https://storagedepot.co</td>
+          <td class="url-cell">https://storagedepot.co/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>73</td>
+          <td class="url-cell">https://storagedepotla.com</td>
+          <td class="url-cell">https://storagedepotla.com</td>
+          <td class="url-cell">https://storagedepotla.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>74</td>
+          <td class="url-cell">https://storagepoint.co</td>
+          <td class="url-cell">https://storagepoint.co</td>
+          <td class="url-cell">https://storagepoint.co/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>75</td>
+          <td class="url-cell">https://storagesolutions.thestorageadvantage.com</td>
+          <td class="url-cell">https://storagesolutions.thestorageadvantage.com</td>
+          <td class="url-cell">https://thestorageadvantage.com/storage-units-near-me</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>76</td>
+          <td class="url-cell">https://thestoragelocker.com</td>
+          <td class="url-cell">https://thestoragelocker.com</td>
+          <td class="url-cell">https://thestoragelocker.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>77</td>
+          <td class="url-cell">https://thestorageadvantage.com</td>
+          <td class="url-cell">https://thestorageadvantage.com</td>
+          <td class="url-cell">https://thestorageadvantage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>78</td>
+          <td class="url-cell">https://sunbirdstorage.com</td>
+          <td class="url-cell">https://sunbirdstorage.com</td>
+          <td class="url-cell">https://sunbirdstorage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>79</td>
+          <td class="url-cell">https://thestorageplace.org</td>
+          <td class="url-cell">https://thestorageplace.org</td>
+          <td class="url-cell">https://thestorageplace.org/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>80</td>
+          <td class="url-cell">https://storesafetn.selfstorageunitsnearby.com</td>
+          <td class="url-cell">https://storesafetn.selfstorageunitsnearby.com</td>
+          <td class="url-cell">https://selfstorageunitsnearby.com/</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>81</td>
+          <td class="url-cell">https://topekaselfstorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://topekaselfstorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://topekaselfstorage.thestorageadvantage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>82</td>
+          <td class="url-cell">https://ulok.com</td>
+          <td class="url-cell">https://ulok.com</td>
+          <td class="url-cell">https://ulok.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>83</td>
+          <td class="url-cell">https://trilinkstorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://trilinkstorage.thestorageadvantage.com</td>
+          <td class="url-cell">https://www.trilinkstorage.com/</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>84</td>
+          <td class="url-cell">https://thestoragespace.thestorageadvantage.com</td>
+          <td class="url-cell">https://thestoragespace.thestorageadvantage.com</td>
+          <td class="url-cell">https://thestorageadvantage.com/storage-units-near-me</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>85</td>
+          <td class="url-cell">https://thunderboltselfstorage.victorystoragegroup.com</td>
+          <td class="url-cell">https://thunderboltselfstorage.victorystoragegroup.com</td>
+          <td class="url-cell">https://thunderboltselfstorage.victorystoragegroup.com/storage-units/georgia/savannah/east-victory-drive</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>86</td>
+          <td class="url-cell">https://ww2.storageonly.ca</td>
+          <td class="url-cell">https://ww2.storageonly.ca</td>
+          <td class="url-cell">ERROR</td>
+          <td class="error">ERROR</td>
+          <td>page.goto: net::ERR_NAME_NOT_RESOLVED at https://ww2.storageonly.ca/
+Call log:
+  [2m- navigating to "https://ww2.storageonly.ca/", waiting until "domcontentloaded"[22m
+</td>
+        </tr>
+    
+        <tr>
+          <td>87</td>
+          <td class="url-cell">https://victorystoragegroup.com</td>
+          <td class="url-cell">https://victorystoragegroup.com</td>
+          <td class="url-cell">https://victorystoragegroup.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>88</td>
+          <td class="url-cell">https://usarent-a-space.com</td>
+          <td class="url-cell">https://usarent-a-space.com</td>
+          <td class="url-cell">https://usarent-a-space.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>89</td>
+          <td class="url-cell">https://victorydriveselfstorage.victorystoragegroup.com</td>
+          <td class="url-cell">https://victorydriveselfstorage.victorystoragegroup.com</td>
+          <td class="url-cell">https://victorydriveselfstorage.victorystoragegroup.com/storage-units/georgia/thunderbolt/downing-street</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>90</td>
+          <td class="url-cell">https://ww2.carolinasecurestorage.com</td>
+          <td class="url-cell">https://ww2.carolinasecurestorage.com</td>
+          <td class="url-cell">https://10federalstorage.com/storage-units-rocky-mount</td>
+          <td class="fail">FAIL</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>91</td>
+          <td class="url-cell">https://www.hi-desertstorage.com</td>
+          <td class="url-cell">https://www.hi-desertstorage.com</td>
+          <td class="url-cell">https://www.hi-desertstorage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>92</td>
+          <td class="url-cell">https://www.21css.com</td>
+          <td class="url-cell">https://www.21css.com</td>
+          <td class="url-cell">https://www.21css.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>93</td>
+          <td class="url-cell">https://www.anytimeselfstorageusa.com</td>
+          <td class="url-cell">https://www.anytimeselfstorageusa.com</td>
+          <td class="url-cell">https://www.anytimeselfstorageusa.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>94</td>
+          <td class="url-cell">https://www.bestboxstorage.com</td>
+          <td class="url-cell">https://www.bestboxstorage.com</td>
+          <td class="url-cell">https://www.bestboxstorage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>95</td>
+          <td class="url-cell">https://www.10federalselfstorage.com</td>
+          <td class="url-cell">https://www.10federalselfstorage.com</td>
+          <td class="url-cell">ERROR</td>
+          <td class="error">ERROR</td>
+          <td>page.goto: net::ERR_CERT_DATE_INVALID at https://www.10federalselfstorage.com/
+Call log:
+  [2m- navigating to "https://www.10federalselfstorage.com/", waiting until "domcontentloaded"[22m
+</td>
+        </tr>
+    
+        <tr>
+          <td>96</td>
+          <td class="url-cell">https://www.mod-storage.com</td>
+          <td class="url-cell">https://www.mod-storage.com</td>
+          <td class="url-cell">https://www.mod-storage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>97</td>
+          <td class="url-cell">https://www.storeallpurpose.com</td>
+          <td class="url-cell">https://www.storeallpurpose.com</td>
+          <td class="url-cell">https://www.storeallpurpose.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>98</td>
+          <td class="url-cell">https://www.trilinkstorage.com</td>
+          <td class="url-cell">https://www.trilinkstorage.com</td>
+          <td class="url-cell">https://www.trilinkstorage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>99</td>
+          <td class="url-cell">https://yourpremierstorage.com</td>
+          <td class="url-cell">https://yourpremierstorage.com</td>
+          <td class="url-cell">https://yourpremierstorage.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+        <tr>
+          <td>100</td>
+          <td class="url-cell">https://www.storagestar.com</td>
+          <td class="url-cell">https://www.storagestar.com</td>
+          <td class="url-cell">https://www.storagestar.com/</td>
+          <td class="pass">PASS</td>
+          <td></td>
+        </tr>
+    
+      </tbody>
+    </table>
+  </body>
+  </html>
+  

@@ -25,14 +25,14 @@ fs.readdir(screenshotDir, (err, files) => {
 
 const customerbaseURLs = [
   //  TEST URL
-  // 'https://test.staging.storagely-api.com/10-federal-storage/storage-units/texas/arlington/avenue-f',
-  // 'https://test.staging.storagely-api.com/bestbox-storage/storage-units/missouri/ofallon/highway-k',
+  // 'https://test.staging.storagely-api.com/10-federal-storage/storage-units/texas/burleson/south-burleson-blvd',
+  // 'https://test.staging.storagely-api.com/bestbox-storage/storage-units/florida/pensacola/north-palafox',
   // 'https://test.staging.storagely-api.com/radiant-storage/storage-units/texas/galveston/church-street',
   // 'https://test.staging.storagely-api.com/premier-storage/storage-units/mississippi/laurel/ms-15',
   // 'https://test.staging.storagely-api.com/red-rocks-self-storage/storage-units/colorado/aurora/east-14th-avenue',
   // 'https://test.staging.storagely-api.com/distinct-storage/storage-units/connecticut/new-milford/kent-road',
   // 'https://test.staging.storagely-api.com/storage-star/storage-units/colorado/colorado-springs/aerotech-drive',
-  // 'https://test.staging.storagely-api.com/bluebirdstorage/storage-units/british-columbia/kimberley/304-street',
+  // 'https://test.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/mayland',
   // 'https://test.staging.storagely-api.com/sunbirdstorage/storage-units/nc/winston-salem/country-club',
   // 'https://test.staging.storagely-api.com/rhino-storage/storage-units/louisiana/covington/philip-drive',
   // 'https://test.staging.storagely-api.com/gatekeeper-self-storage/storage-units/georgia/peachtree-city/senoia-road',
@@ -40,13 +40,13 @@ const customerbaseURLs = [
 
   //  PROD URL 
   'https://10federalstorage.com/storage-units/texas/arlington/avenue-f',
-  'https://www.bestboxstorage.com/storage-units/missouri/ofallon/highway-k',
+  'https://www.bestboxstorage.com/storage-units/florida/pensacola/north-palafox',
   'https://radiantstorage.com/storage-units/texas/galveston/church-street',
   'https://yourpremierstorage.com/storage-units/mississippi/laurel/ms-15',
   'https://redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',
   'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road',
   'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',
-  'https://bluebirdstorage.ca/storage-units/british-columbia/kimberley/304-street',
+  'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland',
   'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club',
   'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive',
   'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road',
@@ -66,10 +66,10 @@ const FMSplatform : Record<string, string> = {
   'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive': 'Sitelink',
   'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road': 'Sitelink',
   'https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street': 'Sitelink',
-  //'https://www.securitypublicstorage.com/locations/roseville': 'Sitelink',
 };
 
 test('Admin Login Test', async ({ page }: { page: Page }) => {
+  //await page.goto('https://10federalstorage.com/admin');
   await page.goto('https://test.staging.storagely-api.com/10-federal-storage/admin');
   await page.getByRole('textbox', { name: 'Email Address' }).fill('admin@localhost.com');
   await page.getByRole('textbox', { name: 'Password' }).fill('adminadmin');
@@ -221,6 +221,28 @@ test.describe('Payment Verification Tests', () => {
         await continueButton.scrollIntoViewIfNeeded(); // Scrolls to the button if it's not in view
         await continueButton.click();
         await page.waitForTimeout(2000); // Wait for payment step to load
+
+
+        // LEASE SECTION
+        try {
+          const leaseHeader = await page.getByRole('heading', { name: /lease details/i });
+        
+          if (await leaseHeader.isVisible()) {
+            await leaseHeader.click();
+            await page.getByPlaceholder('Alternate Phone Number (must').fill('01674646008');
+            await page.getByPlaceholder('Alternate Email Address (must').fill('tareqmamun14@gmail.com');
+            await page.getByPlaceholder('Driver License #').fill('6244114');
+            await page.locator('#drivers_license_state').selectOption('Alaska');
+            await page.locator('#drivers_birth_month').selectOption('01');
+            await page.locator('#drivers_birth_date').selectOption('1');
+            await page.getByPlaceholder('Birth Year').fill('1990');
+          }
+        } catch (error) {
+          // If heading not found or not visible, skip and continue
+          console.log('Lease Details section not found. Skipping form fill.');
+        }
+
+
 
         // ===== Fill in payment details (with extra delay for stability) =====
         await page.getByPlaceholder('Card Number').type('5555 5555 5555 5555', { delay: 400 });
