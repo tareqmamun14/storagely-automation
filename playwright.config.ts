@@ -4,7 +4,7 @@ import { defineConfig } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true, // Enable parallel execution
-  workers: process.env.CI ? 2 : '50%', // Use 50% of available CPU cores
+  workers: 3, // Fixed to run 3 workers
   timeout: 30 * 1000,
   expect: { timeout: 5000 },
   reporter: 'html',
@@ -26,3 +26,13 @@ export default defineConfig({
   ],
 });
 
+
+// import { defineConfig } from '@playwright/test';
+
+// export default defineConfig({
+//   use: {
+//     headless: true, // Run in headless mode for speed
+//   },
+//   workers: 10, // Adjust based on your machine (more workers = faster)
+//   timeout: 30000, // Adjust timeout if needed
+// });
