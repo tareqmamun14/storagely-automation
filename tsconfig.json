@@ -6,10 +6,11 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
+    "allowJs": true,
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": ["@playwright/test"], 
+    "types": ["@playwright/test", "node"], 
     "forceConsistentCasingInFileNames": true
   },
   "include": ["tests/**/*.ts", "playwright.config.ts", "tests/payment-verification.spec.js"],
