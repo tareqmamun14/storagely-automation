@@ -19,7 +19,7 @@ export enum Environment {
     [Environment.STAGING]: [
       'https://test.staging.storagely-api.com/10-federal-storage/storage-units/texas/burleson/south-burleson-blvd',
       'https://test.staging.storagely-api.com/bestbox-storage/storage-units/florida/pensacola/north-palafox',
-      'https://test.staging.storagely-api.com/radiant-storage/storage-units/texas/galveston/church-street',
+      'https://test.staging.storagely-api.com/radiant-storage/storage-units/alabama/tuscaloosa/8th-avenue',
       'https://test.staging.storagely-api.com/premier-storage/storage-units/mississippi/laurel/ms-15',
       'https://test.staging.storagely-api.com/red-rocks-self-storage/storage-units/colorado/aurora/east-14th-avenue',
       'https://test.staging.storagely-api.com/distinct-storage/storage-units/connecticut/new-milford/kent-road',
@@ -29,12 +29,12 @@ export enum Environment {
       'https://test.staging.storagely-api.com/rhino-storage/storage-units/louisiana/covington/philip-drive',
       'https://test.staging.storagely-api.com/gatekeeper-self-storage/storage-units/georgia/peachtree-city/senoia-road',
       'https://test.staging.storagely-api.com/storage-boss/storage-units/louisiana/ponchatoula/west-pine-street',
-      'https://test.staging.storagely-api.com/mini-mall-storage/storage-units/new-brunswick/moncton/price-street',
+      'https://test.staging.storagely-api.com/mini-mall-storage/storage-units/arkansas/batesville/batesville-blvd',
     ],
     [Environment.PRODUCTION]: [
       'https://10federalstorage.com/storage-units/texas/arlington/avenue-f',
       'https://www.bestboxstorage.com/storage-units/florida/pensacola/north-palafox',
-      'https://radiantstorage.com/storage-units/texas/galveston/church-street',
+      'https://radiantstorage.com/storage-units/alabama/tuscaloosa/8th-avenue',
       'https://yourpremierstorage.com/storage-units/mississippi/laurel/ms-15',
       'https://redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',
       'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road',
@@ -44,7 +44,9 @@ export enum Environment {
       'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive',
       'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road',
       'https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street',
-      'https://app.storagely.io/mini-mall-storage/storage-units/alabama/courtland/highway-33',
+      'https://app.storagely.io/mini-mall-storage/storage-units/arkansas/batesville/batesville-blvd'
+
+
     ]
   };
   
@@ -62,6 +64,7 @@ export enum Environment {
     'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive': 'Sitelink',
     'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road': 'Sitelink',
     'https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street': 'Sitelink',
+    'https://app.storagely.io/mini-mall-storage/storage-units/alabama/courtland/highway-33': 'Stitelink',
   };
   
   // Helper function to get the current set of URLs based on environment

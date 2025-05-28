@@ -37,26 +37,25 @@ export class RentalDetailsPage extends BasePage {
     zipCode: string
   }): Promise<void> {
     await this.summaryHeading.click();
-    await this.wait(1000); // Ensure form is visible
-    
+    await this.wait(1000);
+
     await this.firstNameInput.fill(userData.firstName, { timeout: 5000 });
     await this.lastNameInput.fill(userData.lastName, { timeout: 5000 });
     await this.emailInput.fill(userData.email);
     await this.phoneInput.fill(userData.phone);
     await this.addressInput.fill(userData.address);
     await this.cityInput.fill(userData.city);
-    
-    // Handle dynamic province selection
+
     await this.selectAvailableProvince(userData.province);
-    
+
     await this.zipCodeInput.fill(userData.zipCode);
-    
+
     await this.selectDateIfAvailable();
     await this.proceedToNextStep();
   }
 
   /**
-   * Select the first available province from the provided options
+   * Select the first available province/state from the provided options
    */
   private async selectAvailableProvince(province: string | string[]): Promise<void> {
     const provinces = Array.isArray(province) ? province : [province];
@@ -74,16 +73,20 @@ export class RentalDetailsPage extends BasePage {
       }
 
       try {
-        const placeholderDropdown = this.page.getByPlaceholder('Province');
+        const placeholderDropdown = this.page.getByPlaceholder('Province').or(this.page.getByPlaceholder('State'));
         if (await placeholderDropdown.count() > 0) {
-          await placeholderDropdown.click();
-          const optionLocator = this.page.locator('p', { hasText: prov });
-          await optionLocator.first().click();
-          console.log(`Selected province via custom dropdown: ${prov}`);
-          return;
+          await placeholderDropdown.first().click();
+          const optionLocator = this.page.getByText(prov, { exact: true });
+          if (await optionLocator.count() > 0) {
+            await optionLocator.first().click();
+            console.log(`Selected province via custom dropdown: ${prov}`);
+            return;
+          } else {
+            console.warn(`Dropdown opened but no matching text for: ${prov}`);
+          }
         }
       } catch (clickError) {
-        console.warn(`Clickable dropdown failed for province "${prov}": ${clickError}`);
+        console.warn(`Clickable dropdown failed for province/state "${prov}": ${clickError}`);
       }
     }
 
@@ -96,7 +99,7 @@ export class RentalDetailsPage extends BasePage {
   private async selectDateIfAvailable(): Promise<void> {
     try {
       await this.datepicker.waitFor({ state: 'visible', timeout: 5000 });
-      
+
       if (await this.datepicker.isVisible()) {
         await this.datepicker.click();
         console.log('Clicked the datepicker element');
@@ -114,6 +117,6 @@ export class RentalDetailsPage extends BasePage {
   private async proceedToNextStep(): Promise<void> {
     await this.continueButton.scrollIntoViewIfNeeded();
     await this.continueButton.click();
-    await this.wait(2000); // Wait for payment step to load
+    await this.wait(2000);
   }
 }

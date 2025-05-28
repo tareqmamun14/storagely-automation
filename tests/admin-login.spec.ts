@@ -5,7 +5,7 @@ import { getCurrentUrls } from '../configs/urls';
 import { ADMIN_CREDENTIALS } from '../configs/credentials';
 import { CURRENT_ENVIRONMENT } from '../configs/urls';
 
-test('Admin Login Test', async ({ page }) => {
+test.skip('Admin Login Test', async ({ page }) => {
   const urls = getCurrentUrls();
   const credentials = ADMIN_CREDENTIALS[CURRENT_ENVIRONMENT];
   

@@ -17,15 +17,16 @@ export class PaymentDetailsPage extends BasePage {
   private get birthMonthSelect() { return this.page.locator('#drivers_birth_month'); }
   private get birthDateSelect() { return this.page.locator('#drivers_birth_date'); }
   private get birthYearInput() { return this.page.getByPlaceholder('Birth Year'); }
-  
+
   private get cardNumberInput() { return this.page.getByPlaceholder('Card Number'); }
   private get cardExpiryInput() { return this.page.getByPlaceholder('MM / YY'); }
   private get cardCvvInput() { return this.page.getByPlaceholder('CVV'); }
-  
+
   private get rentNowButton() { return this.page.getByRole('button', { name: 'RENT NOW' }); }
   private get toastContainer() { return this.page.locator('.toast-container'); }
   private get toastBody() { return this.toastContainer.locator('.toast-body'); }
   private get toastHeader() { return this.page.getByText('Error!!'); }
+  private get detailedErrorContainer() { return this.page.locator('p.text-sm.text-white'); }
 
   /**
    * Fill out the lease section if available
@@ -83,7 +84,7 @@ export class PaymentDetailsPage extends BasePage {
       'I agree to the protection',
       'I agree to the auto pay terms'
     ];
-    
+
     for (const label of checkboxes) {
       try {
         const checkbox = this.page.getByLabel(label);
@@ -104,18 +105,35 @@ export class PaymentDetailsPage extends BasePage {
     await this.minimizeLiveChat();
     await this.rentNowButton.click();
     await this.wait(2000);
-    
+
+    let toastError = '';
+    let detailedError = '';
+
     try {
       await this.toastHeader.waitFor({ state: 'visible', timeout: 10000 });
     } catch (e) {
       console.warn('Toast header not found, continuing...');
     }
 
-    await this.toastContainer.waitFor({ state: 'visible', timeout: 5000 });
-    await this.toastBody.waitFor({ state: 'visible', timeout: 5000 });
+    try {
+      await this.toastContainer.waitFor({ state: 'visible', timeout: 5000 });
+      await this.toastBody.waitFor({ state: 'visible', timeout: 5000 });
+      toastError = await this.toastBody.innerText();
+    } catch (e) {
+      console.warn('Standard toast not found.');
+    }
 
-    const errorMessage = await this.toastBody.innerText();
-    console.log('Toast Message:', errorMessage);
-    return errorMessage;
+    try {
+      const visibleDetailedError = this.detailedErrorContainer.filter({ hasText: 'Response Code' });
+      if (await visibleDetailedError.isVisible()) {
+        detailedError = await visibleDetailedError.innerText();
+      }
+    } catch (e) {
+      console.warn('Detailed error message not found.');
+    }
+
+    const finalError = detailedError || toastError;
+    console.log('Toast Message:', finalError);
+    return finalError;
   }
 }

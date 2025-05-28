@@ -20,7 +20,7 @@ const discountChecks = [
 
 test.describe.skip('Verify page discount from storage unit', () => {
   for (const { customer, url, expected } of discountChecks) {
-    test.skip(`Verify offer content ${customer}`, async ({ page }) => {
+    test(`Verify offer content ${customer}`, async ({ page }) => {
       await page.goto(url);
       const discountElements = page.locator('.page_discount');
       const count = await discountElements.count();
