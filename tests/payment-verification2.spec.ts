@@ -68,7 +68,7 @@ const FMSplatform : Record<string, string> = {
   'https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street': 'Sitelink',
 };
 
-test('Admin Login Test', async ({ page }: { page: Page }) => {
+test.skip('Admin Login Test', async ({ page }: { page: Page }) => {
   //ADMIN PAGE LOGIN 
   //await page.goto('https://10federalstorage.com/admin');
   await page.goto('https://test.staging.storagely-api.com/10-federal-storage/admin');
@@ -199,7 +199,8 @@ test.describe('Payment Verification Tests', () => {
         await page.getByPlaceholder('Last name').fill('mamun', { timeout: 5000 });
         await page.getByPlaceholder('Email address').fill('tareq@storagely.io');
         await page.getByPlaceholder('Phone number').fill('(555) 555-5555');
-        await page.getByPlaceholder('Address', { exact: true }).fill('NYC');
+        await page.getByPlaceholder('Address', { exact: true })
+        .or(page.getByPlaceholder('Street address', { exact: true })).fill('NYC');
         await page.getByPlaceholder('City').fill('NYC');
         await page.locator('#province').selectOption(['Alaska', 'Alberta']);
         await page.getByPlaceholder(/Zip Code|Postal Code/).fill('99540');

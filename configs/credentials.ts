@@ -20,7 +20,7 @@ export const TEST_USER = {
   phone: '(555) 555-5555',
   address: 'NYC',
   city: 'NYC',
-  province: 'Alaska',
+  province: ['Alaska', 'Alberta'],
   zipCode: '99540',
   alternatePhone: '01674646008',
   alternateEmail: 'tareqmamun14@gmail.com',

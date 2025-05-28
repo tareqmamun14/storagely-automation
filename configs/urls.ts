@@ -29,6 +29,7 @@ export enum Environment {
       'https://test.staging.storagely-api.com/rhino-storage/storage-units/louisiana/covington/philip-drive',
       'https://test.staging.storagely-api.com/gatekeeper-self-storage/storage-units/georgia/peachtree-city/senoia-road',
       'https://test.staging.storagely-api.com/storage-boss/storage-units/louisiana/ponchatoula/west-pine-street',
+      'https://test.staging.storagely-api.com/mini-mall-storage/storage-units/new-brunswick/moncton/price-street',
     ],
     [Environment.PRODUCTION]: [
       'https://10federalstorage.com/storage-units/texas/arlington/avenue-f',
@@ -43,6 +44,7 @@ export enum Environment {
       'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive',
       'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road',
       'https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street',
+      'https://app.storagely.io/mini-mall-storage/storage-units/alabama/courtland/highway-33',
     ]
   };
   

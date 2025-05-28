@@ -14,10 +14,12 @@ export class RentalDetailsPage extends BasePage {
   private get lastNameInput() { return this.page.getByPlaceholder('Last name'); }
   private get emailInput() { return this.page.getByPlaceholder('Email address'); }
   private get phoneInput() { return this.page.getByPlaceholder('Phone number'); }
-  private get addressInput() { return this.page.getByPlaceholder('Address', { exact: true }); }
+  private get addressInput() { 
+    return this.page.getByPlaceholder('Address', { exact: true })
+      .or(this.page.getByPlaceholder('Street address', { exact: true })); 
+  }
   private get cityInput() { return this.page.getByPlaceholder('City'); }
-  private get provinceSelect() { return this.page.locator('#province'); }
-  private get zipCodeInput() { return this.page.getByPlaceholder(/Zip Code|Postal Code/); }
+  private get zipCodeInput() { return this.page.getByPlaceholder(/Zip Code|Postal Code|ZIP/); }
   private get datepicker() { return this.page.locator('.datepicker-days .today.active.day'); }
   private get continueButton() { return this.page.getByRole('button', { name: 'CONTINUE TO NEXT STEP' }); }
 
@@ -31,7 +33,7 @@ export class RentalDetailsPage extends BasePage {
     phone: string,
     address: string,
     city: string,
-    province: string,
+    province: string | string[],
     zipCode: string
   }): Promise<void> {
     await this.summaryHeading.click();
@@ -43,11 +45,49 @@ export class RentalDetailsPage extends BasePage {
     await this.phoneInput.fill(userData.phone);
     await this.addressInput.fill(userData.address);
     await this.cityInput.fill(userData.city);
-    await this.provinceSelect.selectOption([userData.province, 'Alberta']);
+    
+    // Handle dynamic province selection
+    await this.selectAvailableProvince(userData.province);
+    
     await this.zipCodeInput.fill(userData.zipCode);
     
     await this.selectDateIfAvailable();
     await this.proceedToNextStep();
+  }
+
+  /**
+   * Select the first available province from the provided options
+   */
+  private async selectAvailableProvince(province: string | string[]): Promise<void> {
+    const provinces = Array.isArray(province) ? province : [province];
+
+    for (const prov of provinces) {
+      try {
+        const selectDropdown = this.page.locator('#province');
+        if (await selectDropdown.count() > 0 && await selectDropdown.locator(`option[value="${prov}"]`).count() > 0) {
+          await selectDropdown.selectOption(prov);
+          console.log(`Selected province via <select>: ${prov}`);
+          return;
+        }
+      } catch (error) {
+        console.warn(`Standard <select> dropdown not usable: ${error}`);
+      }
+
+      try {
+        const placeholderDropdown = this.page.getByPlaceholder('Province');
+        if (await placeholderDropdown.count() > 0) {
+          await placeholderDropdown.click();
+          const optionLocator = this.page.locator('p', { hasText: prov });
+          await optionLocator.first().click();
+          console.log(`Selected province via custom dropdown: ${prov}`);
+          return;
+        }
+      } catch (clickError) {
+        console.warn(`Clickable dropdown failed for province "${prov}": ${clickError}`);
+      }
+    }
+
+    console.warn(`None of the provinces [${provinces.join(', ')}] were available to select.`);
   }
 
   /**

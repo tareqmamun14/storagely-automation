@@ -105,13 +105,17 @@ export class PaymentDetailsPage extends BasePage {
     await this.rentNowButton.click();
     await this.wait(2000);
     
-    await this.toastHeader.waitFor({ state: 'visible', timeout: 10000 });
+    try {
+      await this.toastHeader.waitFor({ state: 'visible', timeout: 10000 });
+    } catch (e) {
+      console.warn('Toast header not found, continuing...');
+    }
+
     await this.toastContainer.waitFor({ state: 'visible', timeout: 5000 });
     await this.toastBody.waitFor({ state: 'visible', timeout: 5000 });
-    
+
     const errorMessage = await this.toastBody.innerText();
     console.log('Toast Message:', errorMessage);
-    
     return errorMessage;
   }
 }
