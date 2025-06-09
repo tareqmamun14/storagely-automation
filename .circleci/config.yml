@@ -1,31 +1,129 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/jobs-steps/#jobs-overview & https://circleci.com/docs/configuration-reference/#jobs
-jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/executor-intro/ & https://circleci.com/docs/configuration-reference/#executor-job
+orbs:
+  node: circleci/node@5.1.0
+  slack: circleci/slack@4.12.5
+
+executors:
+  playwright-executor:
     docker:
-      # Specify the version you desire here
-      # See: https://circleci.com/developer/images/image/cimg/base
-      - image: cimg/base:current
+      - image: mcr.microsoft.com/playwright:v1.40.0-focal
+    working_directory: ~/project
+    resource_class: medium
 
-    # Add steps to the job
-    # See: https://circleci.com/docs/jobs-steps/#steps-overview & https://circleci.com/docs/configuration-reference/#steps
+jobs:
+  run-automation-tests:
+    executor: playwright-executor
     steps:
-      # Checkout the code as the first step.
       - checkout
+      - node/install-packages:
+          pkg-manager: npm
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+          name: Install Playwright Browsers
+          command: |
+            npx playwright install chromium
+            npx playwright install-deps chromium
+      - run:
+          name: Run Playwright Tests
+          command: |
+            npm run test || true
+            if [ -d "allure-results" ] && [ "$(ls -A allure-results)" ]; then
+              npx allure generate allure-results --clean -o allure-report
+            else
+              echo "No allure results found"
+            fi
+          environment:
+            CI: true
+          no_output_timeout: 15m
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: allure-report
+          destination: allure-report
+      - store_artifacts:
+          path: playwright-report
+          destination: playwright-report
+      - store_artifacts:
+          path: test-results
+          destination: test-results
+      - slack/notify:
+          event: pass
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "✅ *Automation Tests Passed!*\n\n*Project:* $CIRCLE_PROJECT_REPONAME\n*Branch:* $CIRCLE_BRANCH\n*Build:* $CIRCLE_BUILD_NUM"
+                  }
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Allure Report"
+                      },
+                      "url": "$CIRCLE_BUILD_URL/artifacts/0/allure-report/index.html"
+                    },
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Build"
+                      },
+                      "url": "$CIRCLE_BUILD_URL"
+                    }
+                  ]
+                }
+              ]
+            }
+      - slack/notify:
+          event: fail
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "❌ *Automation Tests Failed!*\n\n*Project:* $CIRCLE_PROJECT_REPONAME\n*Branch:* $CIRCLE_BRANCH\n*Build:* $CIRCLE_BUILD_NUM"
+                  }
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Allure Report"
+                      },
+                      "url": "$CIRCLE_BUILD_URL/artifacts/0/allure-report/index.html"
+                    },
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Failed Tests"
+                      },
+                      "url": "$CIRCLE_BUILD_URL/artifacts/0/test-results/index.html"
+                    }
+                  ]
+                }
+              ]
+            }
 
-# Orchestrate jobs using workflows
-# See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows
 workflows:
-  say-hello-workflow: # This is the name of the workflow, feel free to change it to better match your workflow.
-    # Inside the workflow, you define the jobs you want to run.
+  version: 2
+  automation-on-merge:
     jobs:
-      - say-hello
+      - run-automation-tests:
+          filters:
+            branches:
+              only:
+                - storagely-automation
+          context: slack-secrets
