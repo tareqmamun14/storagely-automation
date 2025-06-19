@@ -1,0 +1,11 @@
+
+Running test for Storage Facility: https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland
+Company: bluebird Storage
+Platform: Unknown
+Found a button with text: "RESERVE"
+Clicked "RESERVE" button
+Closed the modal
+Clicking button: rent
+Successfully filled zip code: 99540
+Clicked the datepicker element
+Screenshot saved: error-bluebird-storage-1750096224587.png

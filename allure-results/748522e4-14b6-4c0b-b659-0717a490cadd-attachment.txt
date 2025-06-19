@@ -1,0 +1,5 @@
+
+Running test for Storage Facility: https://reverent-moore.staging.storagely-api.com/radiant-storage/storage-units/alabama/tuscaloosa/8th-avenue
+Company: Radiant Storage
+Platform: Unknown
+Screenshot saved: null

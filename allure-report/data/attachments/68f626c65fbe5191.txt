@@ -1,0 +1,12 @@
+
+Running test for Storage Facility: https://test.staging.storagely-api.com/10-federal-storage/storage-units/texas/arlington/avenue-f
+Company: 10 Federal Storage
+Platform: Unknown
+Found a button with text: "Reserve"
+Clicked "Reserve" button
+Closed the modal
+Clicking button: rent
+Successfully selected state via <select>: Alaska
+Successfully filled zip code: 99540
+Clicked the datepicker element
+Screenshot saved: error-10-federal-storage-1749851304062.png

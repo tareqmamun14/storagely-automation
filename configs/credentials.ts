@@ -14,13 +14,17 @@ export const ADMIN_CREDENTIALS = {
 };
 
 export const TEST_USER = {
-  firstName: 'tareq',
-  lastName: 'mamun',
+  firstName: 'Test',
+  lastName: 'Testing_Tareq',
   email: 'tareq@storagely.io',
-  phone: '(555) 555-5555',
+  phone: '5551234567',
   address: 'NYC',
   city: 'NYC',
-  province: ['Alaska', 'Alberta'],
+  province: {
+    alberta: 'Alberta',
+    alaska: 'Alaska',
+    alabama: 'Alabama'
+  },
   zipCode: '99540',
   alternatePhone: '01674646008',
   alternateEmail: 'tareqmamun14@gmail.com',

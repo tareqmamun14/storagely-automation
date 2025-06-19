@@ -1,0 +1,5 @@
+
+Running test for Storage Facility: https://reverent-moore.staging.storagely-api.com/premier-storage/storage-units/mississippi/laurel/ms-15
+Company: Premier Storage
+Platform: Unknown
+Screenshot saved: null

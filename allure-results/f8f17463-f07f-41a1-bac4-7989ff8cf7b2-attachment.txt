@@ -1,0 +1,5 @@
+
+Running test for Storage Facility: https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road
+Company: distinct Storage
+Platform: storEDGE
+Screenshot saved: error-distinct-storage-1749884176862.png

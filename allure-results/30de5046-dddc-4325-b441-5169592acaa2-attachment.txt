@@ -1,0 +1,48 @@
+Test failed for https://app.storagely.io/first-storage/storage-units/north-carolina/fayetteville/raeford-road: page.goto: net::ERR_NAME_NOT_RESOLVED at https://app.storagely.io/first-storage/storage-units/north-carolina/fayetteville/raeford-road?cacheBust=1749894344727-n33juj3y7wj
+Call log:
+  - navigating to "https://app.storagely.io/first-storage/storage-units/north-carolina/fayetteville/raeford-road?cacheBust=1749894344727-n33juj3y7wj", waiting until "domcontentloaded"
+
+    at StorageListingPage.goto (C:\Users\tareq\OneDrive\Documents\GitHub\storagely-automation\pages\BasePage.ts:32:21)
+    at StorageListingPage.navigateWithCacheBusting (C:\Users\tareq\OneDrive\Documents\GitHub\storagely-automation\pages\StorageListingPage.ts:44:16)
+    at C:\Users\tareq\OneDrive\Documents\GitHub\storagely-automation\tests\rent-reservation.spec.ts:40:34 {
+  name: 'Error',
+  [Symbol(step)]: {
+    stepId: 'pw:api@10',
+    location: {
+      file: 'C:\\Users\\tareq\\OneDrive\\Documents\\GitHub\\storagely-automation\\pages\\BasePage.ts',
+      line: 32,
+      column: 21,
+      function: 'StorageListingPage.goto'
+    },
+    category: 'pw:api',
+    title: 'page.goto(https://app.storagely.io/first-storage/storage-units/north-carolina/fayetteville/raeford-road?cacheBust=1749894344727-n33juj3y7wj)',
+    apiName: 'page.goto',
+    params: {
+      url: 'https://app.storagely.io/first-storage/storage-units/north-carolina/fayetteville/raeford-road?cacheBust=1749894344727-n33juj3y7wj',
+      waitUntil: 'domcontentloaded'
+    },
+    boxedStack: undefined,
+    steps: [],
+    attachmentIndices: [],
+    info: TestStepInfoImpl {
+      annotations: [],
+      _testInfo: [TestInfoImpl],
+      _stepId: 'pw:api@10'
+    },
+    complete: [Function: complete],
+    endWallTime: 1749894344807,
+    error: {
+      message: 'Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://app.storagely.io/first-storage/storage-units/north-carolina/fayetteville/raeford-road?cacheBust=1749894344727-n33juj3y7wj\n' +
+        'Call log:\n' +
+        '\x1B[2m  - navigating to "https://app.storagely.io/first-storage/storage-units/north-carolina/fayetteville/raeford-road?cacheBust=1749894344727-n33juj3y7wj", waiting until "domcontentloaded"\x1B[22m\n',
+      stack: 'Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://app.storagely.io/first-storage/storage-units/north-carolina/fayetteville/raeford-road?cacheBust=1749894344727-n33juj3y7wj\n' +
+        'Call log:\n' +
+        '\x1B[2m  - navigating to "https://app.storagely.io/first-storage/storage-units/north-carolina/fayetteville/raeford-road?cacheBust=1749894344727-n33juj3y7wj", waiting until "domcontentloaded"\x1B[22m\n' +
+        '\n' +
+        '    at StorageListingPage.goto (C:\\Users\\tareq\\OneDrive\\Documents\\GitHub\\storagely-automation\\pages\\BasePage.ts:32:21)\n' +
+        '    at StorageListingPage.navigateWithCacheBusting (C:\\Users\\tareq\\OneDrive\\Documents\\GitHub\\storagely-automation\\pages\\StorageListingPage.ts:44:16)\n' +
+        '    at C:\\Users\\tareq\\OneDrive\\Documents\\GitHub\\storagely-automation\\tests\\rent-reservation.spec.ts:40:34',
+      cause: undefined
+    }
+  }
+}

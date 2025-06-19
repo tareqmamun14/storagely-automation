@@ -1,0 +1,45 @@
+
+Running test for Storage Facility: https://test.staging.storagely-api.com/red-rocks-self-storage/storage-units/colorado/aurora/east-14th-avenue
+Company: Red Rocks Self Storage
+Platform: Unknown
+Found a button with text: "RESERVE"
+Clicked "RESERVE" button
+Closed the modal
+Clicking button: rent
+Successfully selected state via <select>: Alaska
+Successfully filled zip code: 99540
+Clicked the datepicker element
+Chat iframe not found or an error occurred, proceeding without minimizing.
+Toast Message: Failed to process payment, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (Storable Payments): 'Card Number' is not a valid credit card number.
+
+
+======== PAYMENT VERIFICATION TEST RESULTS ========
+------------------------------------------------
+Total Tests: 5
+✅ Successful: 5
+❌ Failed: 0
+------------------------------------------------
+
+ERROR MESSAGES BY COMPANY:
+
+10 Federal Storage (Unknown):
+URL: https://test.staging.storagely-api.com/10-federal-storage/storage-units/texas/arlington/avenue-f
+Error: Failed to process payment, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (Sage Payments Solutions): Payment Error: INVALID CARDNUMBER
+------------------------------------------------
+
+Bestbox Storage (Unknown):
+URL: https://test.staging.storagely-api.com/bestbox-storage/storage-units/florida/pensacola/north-palafox
+Error: Failed to process payment, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (TransactionExpress): (51421) Service Exception: Service Exception Fault
+------------------------------------------------
+
+Premier Storage (Unknown):
+URL: https://test.staging.storagely-api.com/premier-storage/storage-units/mississippi/laurel/ms-15
+Error: Failed to process payment, Tenant ledgers is invalid, Lead unit is not available, Account balances is invalid, Failed to process payment (Storable Payments): 'Card Number' is not a valid credit card number.
+------------------------------------------------
+
+Red Rocks Self Storage (Unknown):
+URL: https://test.staging.storagely-api.com/red-rocks-self-storage/storage-units/colorado/aurora/east-14th-avenue
+Error: Failed to process payment, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (Storable Payments): 'Card Number' is not a valid credit card number.
+------------------------------------------------
+
+

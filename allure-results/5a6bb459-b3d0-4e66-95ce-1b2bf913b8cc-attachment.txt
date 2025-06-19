@@ -1,0 +1,13 @@
+
+Running test for Storage Facility: https://radiantstorage.com/storage-units/alabama/tuscaloosa/8th-avenue
+Company: radiant Storage
+Platform: Unknown
+Found a button with text: "RESERVE"
+Clicked "RESERVE" button
+Closed the modal
+Clicking button: rent
+Successfully selected state via <select>: Alaska
+Successfully filled zip code: 99540
+Datepicker did not appear within the timeout, skipping this step.
+Chat iframe not found or an error occurred, proceeding without minimizing.
+Toast Message: Alternate contact Please enter a valid phone number, Unit is not available for move-in, Lead unit is not available, Lead events lead unit is not available, Please enter a valid phone number, Attached invoice Please enter a valid phone number

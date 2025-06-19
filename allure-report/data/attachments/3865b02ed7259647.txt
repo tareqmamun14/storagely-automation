@@ -1,0 +1,5 @@
+
+Running test for Storage Facility: https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive
+Company: storagestar
+Platform: SSM
+Screenshot saved: null

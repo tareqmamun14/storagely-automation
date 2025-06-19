@@ -1,0 +1,14 @@
+
+Running test for Storage Facility: https://test.staging.storagely-api.com/first-storage/storage-units/north-carolina/fayetteville/raeford-road
+Company: First Storage
+Platform: Unknown
+Found a button with text: "RESERVE"
+Clicked "RESERVE" button
+Closed the modal
+Clicking button: RENT NOW
+Successfully selected state via <select>: Alaska
+Successfully filled zip code: 99540
+Clicked the datepicker element
+Lease Details section not found. Skipping form fill.
+Chat iframe not found or an error occurred, proceeding without minimizing.
+Toast Message: 

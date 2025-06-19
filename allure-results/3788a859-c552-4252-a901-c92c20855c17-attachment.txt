@@ -1,0 +1,38 @@
+
+Running test for Storage Facility: https://reverent-moore.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/mayland
+Company: Bluebirdstorage
+Platform: Unknown
+No RESERVE or Join Waitlist button found, proceeding with the rest of the test.
+
+
+======== PAYMENT VERIFICATION TEST RESULTS ========
+------------------------------------------------
+Total Tests: 3
+✅ Successful: 0
+❌ Failed: 3
+------------------------------------------------
+
+ERROR MESSAGES BY COMPANY:
+
+Distinct Storage (Unknown):
+URL: https://reverent-moore.staging.storagely-api.com/distinct-storage/storage-units/connecticut/new-milford/kent-road
+Error: Test execution error: locator.textContent: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('.listviewrows .blackBtnStoragely:has-text("RENT")').or(locator('a:has-text("Reserve Unit")')).or(locator('a.reserveBtnPop.whiteBtnStoragely:has-text("Select Pricing Option")')).first()
+
+------------------------------------------------
+
+Storage Star (Unknown):
+URL: https://reverent-moore.staging.storagely-api.com/storage-star/storage-units/colorado/colorado-springs/aerotech-drive
+Error: Test execution error: locator.textContent: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('.listviewrows .blackBtnStoragely:has-text("RENT")').or(locator('a:has-text("Reserve Unit")')).or(locator('a.reserveBtnPop.whiteBtnStoragely:has-text("Select Pricing Option")')).first()
+
+------------------------------------------------
+
+Bluebirdstorage (Unknown):
+URL: https://reverent-moore.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/mayland
+Error: Test execution error: page.waitForTimeout: Target page, context or browser has been closed
+------------------------------------------------
+
+

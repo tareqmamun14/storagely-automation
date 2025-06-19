@@ -1,0 +1,34 @@
+
+Running test for Storage Facility: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road
+Company: gatekeeperstoragega
+Platform: SiteLink
+Found a button with text: "RESERVE"
+Clicked "RESERVE" button
+Closed the modal
+Clicking button: rent
+Successfully selected state via <select>: Alaska
+Successfully filled zip code: 99540
+Clicked the datepicker element
+Screenshot saved: error-gatekeeperstoragega-1749884496911.png
+
+
+======== PAYMENT VERIFICATION TEST RESULTS ========
+------------------------------------------------
+Total Tests: 1
+✅ Successful: 0
+❌ Failed: 1
+------------------------------------------------
+
+ERROR MESSAGES BY COMPANY:
+
+gatekeeperstoragega (SiteLink):
+URL: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road
+Error: Test execution error: locator.type: Timeout 30000ms exceeded.
+Call log:
+  - waiting for getByPlaceholder('Card Number')
+    - locator resolved to <input value="" type="text" id="card_number_T" name="card_number" data-wc-ignore="true" class="inputcardnum " placeholder="Card Number"/>
+  - elementHandle.type("5555 5555 5555 5555")
+
+------------------------------------------------
+
+

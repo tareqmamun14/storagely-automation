@@ -1,0 +1,51 @@
+
+Running test for Storage Facility: https://reverent-moore.staging.storagely-api.com/allpurposestorage/storage-units/maine/belgrade/manchester-road
+Company: Allpurposestorage
+Platform: Unknown
+Screenshot saved: error-allpurposestorage-1750160479121.png
+
+
+======== PAYMENT VERIFICATION TEST RESULTS ========
+------------------------------------------------
+Total Tests: 5
+✅ Successful: 2
+❌ Failed: 3
+------------------------------------------------
+
+ERROR MESSAGES BY COMPANY:
+
+Gatekeeper Self Storage (Unknown):
+URL: https://reverent-moore.staging.storagely-api.com/gatekeeper-self-storage/storage-units/georgia/peachtree-city/senoia-road
+Error: (-98) Invalid username/password
+------------------------------------------------
+
+Storage Boss (Unknown):
+URL: https://reverent-moore.staging.storagely-api.com/storage-boss/storage-units/louisiana/ponchatoula/west-pine-street
+Error: (-98) Invalid username/password
+------------------------------------------------
+
+Mini Mall Storage (Unknown):
+URL: https://reverent-moore.staging.storagely-api.com/mini-mall-storage/storage-units/mini-mall/training/ltrain
+Error: Test execution error: page.goto: Timeout 45000ms exceeded.
+Call log:
+  - navigating to "https://reverent-moore.staging.storagely-api.com/mini-mall-storage/storage-units/mini-mall/training/ltrain?cacheBust=1750160270527-9y03ga9sgrb", waiting until "domcontentloaded"
+
+------------------------------------------------
+
+First Storage (Unknown):
+URL: https://reverent-moore.staging.storagely-api.com/first-storage/storage-units/north-carolina/fayetteville/raeford-road
+Error: Test execution error: page.goto: Timeout 45000ms exceeded.
+Call log:
+  - navigating to "https://reverent-moore.staging.storagely-api.com/first-storage/storage-units/north-carolina/fayetteville/raeford-road?cacheBust=1750160352918-i2tkyv588h", waiting until "domcontentloaded"
+
+------------------------------------------------
+
+Allpurposestorage (Unknown):
+URL: https://reverent-moore.staging.storagely-api.com/allpurposestorage/storage-units/maine/belgrade/manchester-road
+Error: Test execution error: page.goto: Timeout 45000ms exceeded.
+Call log:
+  - navigating to "https://reverent-moore.staging.storagely-api.com/allpurposestorage/storage-units/maine/belgrade/manchester-road?cacheBust=1750160434078-hwflhr3sly9", waiting until "domcontentloaded"
+
+------------------------------------------------
+
+

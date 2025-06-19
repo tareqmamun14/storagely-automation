@@ -66,8 +66,8 @@ test.describe('Payment Verification Tests', () => {
         
         // STEP 5: Fill lease details if available
         await paymentDetailsPage.fillLeaseDetailsIfAvailable({
-          alternatePhone: TEST_USER.alternatePhone,
-          alternateEmail: TEST_USER.alternateEmail,
+          alternatePhone: TEST_USER.alternatePhone || undefined,
+          alternateEmail: TEST_USER.alternateEmail || undefined,
           driversLicense: TEST_USER.driversLicense,
           driversLicenseState: TEST_USER.driversLicenseState,
           birthMonth: TEST_USER.birthMonth,

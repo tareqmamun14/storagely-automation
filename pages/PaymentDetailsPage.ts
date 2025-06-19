@@ -29,30 +29,92 @@ export class PaymentDetailsPage extends BasePage {
   private get detailedErrorContainer() { return this.page.locator('p.text-sm.text-white'); }
 
   /**
+   * Helper method to safely fill a field if it exists and is visible
+   */
+  private async fillFieldIfExists(locator: any, value: string, fieldName: string): Promise<void> {
+    try {
+      if (await locator.isVisible({ timeout: 2000 })) {
+        await locator.fill(value);
+        console.log(`✓ Filled ${fieldName}: ${value}`);
+      } else {
+        console.log(`- ${fieldName} field not visible, skipping`);
+      }
+    } catch (error) {
+      console.log(`- ${fieldName} field not found, skipping`);
+    }
+  }
+
+  /**
+   * Helper method to safely select an option if the select element exists and is visible
+   */
+  private async selectOptionIfExists(locator: any, value: string, fieldName: string): Promise<void> {
+    try {
+      if (await locator.isVisible({ timeout: 2000 })) {
+        await locator.selectOption(value);
+        console.log(`✓ Selected ${fieldName}: ${value}`);
+      } else {
+        console.log(`- ${fieldName} select not visible, skipping`);
+      }
+    } catch (error) {
+      console.log(`- ${fieldName} select not found, skipping`);
+    }
+  }
+
+  /**
    * Fill out the lease section if available
    */
   async fillLeaseDetailsIfAvailable(userData: {
-    alternatePhone: string,
-    alternateEmail: string,
-    driversLicense: string,
-    driversLicenseState: string,
-    birthMonth: string,
-    birthDate: string,
-    birthYear: string
+    alternatePhone?: string,
+    alternateEmail?: string,
+    driversLicense?: string,
+    driversLicenseState?: string,
+    birthMonth?: string,
+    birthDate?: string,
+    birthYear?: string
   }): Promise<void> {
     try {
-      if (await this.leaseDetailsHeader.isVisible()) {
+      if (await this.leaseDetailsHeader.isVisible({ timeout: 5000 })) {
+        console.log('Lease Details section found, filling available fields...');
         await this.leaseDetailsHeader.click();
-        await this.alternatePhoneInput.fill(userData.alternatePhone);
-        await this.alternateEmailInput.fill(userData.alternateEmail);
-        await this.driversLicenseInput.fill(userData.driversLicense);
-        await this.driversLicenseStateSelect.selectOption(userData.driversLicenseState);
-        await this.birthMonthSelect.selectOption(userData.birthMonth);
-        await this.birthDateSelect.selectOption(userData.birthDate);
-        await this.birthYearInput.fill(userData.birthYear);
+        
+        // Wait a moment for the section to expand
+        await this.page.waitForTimeout(1000);
+
+        // Fill each field only if it exists and the data is provided
+        if (userData.alternatePhone) {
+          await this.fillFieldIfExists(this.alternatePhoneInput, userData.alternatePhone, 'Alternate Phone');
+        }
+
+        if (userData.alternateEmail) {
+          await this.fillFieldIfExists(this.alternateEmailInput, userData.alternateEmail, 'Alternate Email');
+        }
+
+        if (userData.driversLicense) {
+          await this.fillFieldIfExists(this.driversLicenseInput, userData.driversLicense, 'Driver License');
+        }
+
+        if (userData.driversLicenseState) {
+          await this.selectOptionIfExists(this.driversLicenseStateSelect, userData.driversLicenseState, 'Driver License State');
+        }
+
+        if (userData.birthMonth) {
+          await this.selectOptionIfExists(this.birthMonthSelect, userData.birthMonth, 'Birth Month');
+        }
+
+        if (userData.birthDate) {
+          await this.selectOptionIfExists(this.birthDateSelect, userData.birthDate, 'Birth Date');
+        }
+
+        if (userData.birthYear) {
+          await this.fillFieldIfExists(this.birthYearInput, userData.birthYear, 'Birth Year');
+        }
+
+        console.log('✓ Lease Details form filling completed');
+      } else {
+        console.log('Lease Details section not found, skipping');
       }
     } catch (error) {
-      console.log('Lease Details section not found. Skipping form fill.');
+      console.log('Error in lease details section, continuing with test:', error.message);
     }
   }
 
@@ -103,7 +165,7 @@ export class PaymentDetailsPage extends BasePage {
    */
   async submitPaymentAndCheckError(): Promise<string> {
     await this.minimizeLiveChat();
-    await this.rentNowButton.click();
+    await this.rentNowButton.click({ timeout: 30000 });
     await this.wait(2000);
 
     let toastError = '';

@@ -1,0 +1,6 @@
+
+Running test for Storage Facility: https://reverent-moore.staging.storagely-api.com/bestbox-storage/storage-units/florida/pensacola/north-palafox
+Company: Bestbox Storage
+Platform: Unknown
+No RESERVE or Join Waitlist button found, proceeding with the rest of the test.
+Screenshot saved: error-bestbox-storage-1750159636372.png

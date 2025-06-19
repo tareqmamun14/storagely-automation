@@ -1,0 +1,112 @@
+
+Running test for Storage Facility: https://test.staging.storagely-api.com/allpurposestorage/storage-units/maine/belgrade/manchester-road
+Company: Allpurposestorage
+Platform: Unknown
+Found a button with text: "Reserve"
+Clicked "Reserve" button
+Closed the modal
+Clicking button: rent
+Successfully selected state via <select>: Alaska
+Successfully filled zip code: 99540
+Clicked the datepicker element
+Lease Details section not found, skipping
+Chat iframe not found or an error occurred, proceeding without minimizing.
+Toast Message: Failed to process payment, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (Storable Payments): 'Card Number' is not a valid credit card number.
+
+
+======== PAYMENT VERIFICATION TEST RESULTS ========
+------------------------------------------------
+Total Tests: 5
+✅ Successful: 4
+❌ Failed: 1
+------------------------------------------------
+
+ERROR MESSAGES BY COMPANY:
+
+Gatekeeper Self Storage (Unknown):
+URL: https://test.staging.storagely-api.com/gatekeeper-self-storage/storage-units/georgia/peachtree-city/senoia-road
+Error: (-98) Invalid username/password
+------------------------------------------------
+
+Storage Boss (Unknown):
+URL: https://test.staging.storagely-api.com/storage-boss/storage-units/louisiana/ponchatoula/west-pine-street
+Error: (-98) Invalid username/password
+------------------------------------------------
+
+Mini Mall Storage (Unknown):
+URL: https://test.staging.storagely-api.com/mini-mall-storage/storage-units/mini-mall/training/ltrain
+Error: Test execution error: locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for getByRole('button', { name: 'RENT NOW' })
+    - locator resolved to <button class="font-body font-bold cursor-pointer inline-flex w-full gap-x-2 items-center justify-center px-4 py-2 text-base rounded-3xl transition uppercase bg-secondary hover:bg-primary text-white opacity-50 pointer-events-none">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex flex-col justify-between mt-4 gap-5">…</div> intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="flex flex-col justify-between mt-4 gap-5">…</div> intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex items-center gap-3">…</div> from <header class="sticky top-0 py-4 z-10 bg-white shadow">…</header> subtree intercepts pointer events
+  13 × retrying click action
+       - waiting 500ms
+       - waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div class="flex flex-col justify-between mt-4 gap-5">…</div> intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+       - waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div class="flex flex-col justify-between mt-4 gap-5">…</div> intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+       - waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div class="flex items-center gap-3">…</div> from <header class="sticky top-0 py-4 z-10 bg-white shadow">…</header> subtree intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+       - waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div class="flex items-center gap-3">…</div> from <header class="sticky top-0 py-4 z-10 bg-white shadow">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="flex flex-col justify-between mt-4 gap-5">…</div> intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+------------------------------------------------
+
+First Storage (Unknown):
+URL: https://test.staging.storagely-api.com/first-storage/storage-units/north-carolina/fayetteville/raeford-road
+Error: Failed to process payment, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (Storable Payments): 'Card Number' is not a valid credit card number.
+------------------------------------------------
+
+Allpurposestorage (Unknown):
+URL: https://test.staging.storagely-api.com/allpurposestorage/storage-units/maine/belgrade/manchester-road
+Error: Failed to process payment, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (Storable Payments): 'Card Number' is not a valid credit card number.
+------------------------------------------------
+
+

@@ -1,0 +1,221 @@
+Test failed for https://test.staging.storagely-api.com/mini-mall-storage/storage-units/mini-mall/training/ltrain: locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for getByRole('button', { name: 'RENT NOW' })
+    - locator resolved to <button class="font-body font-bold cursor-pointer inline-flex w-full gap-x-2 items-center justify-center px-4 py-2 text-base rounded-3xl transition uppercase bg-secondary hover:bg-primary text-white opacity-50 pointer-events-none">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex flex-col justify-between mt-4 gap-5">…</div> intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="flex flex-col justify-between mt-4 gap-5">…</div> intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex items-center gap-3">…</div> from <header class="sticky top-0 py-4 z-10 bg-white shadow">…</header> subtree intercepts pointer events
+  13 × retrying click action
+       - waiting 500ms
+       - waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div class="flex flex-col justify-between mt-4 gap-5">…</div> intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+       - waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div class="flex flex-col justify-between mt-4 gap-5">…</div> intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+       - waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div class="flex items-center gap-3">…</div> from <header class="sticky top-0 py-4 z-10 bg-white shadow">…</header> subtree intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+       - waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div class="flex items-center gap-3">…</div> from <header class="sticky top-0 py-4 z-10 bg-white shadow">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex flex-col justify-between mt-4 gap-5">…</div> intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+    at PaymentDetailsPage.submitPaymentAndCheckError (C:\Users\tareq\OneDrive\Documents\GitHub\storagely-automation\pages\PaymentDetailsPage.ts:106:30)
+    at C:\Users\tareq\OneDrive\Documents\GitHub\storagely-automation\tests\rent-reservation.spec.ts:85:30 {
+  name: 'TimeoutError',
+  [Symbol(step)]: {
+    stepId: 'pw:api@56',
+    location: {
+      file: 'C:\\Users\\tareq\\OneDrive\\Documents\\GitHub\\storagely-automation\\pages\\PaymentDetailsPage.ts',
+      line: 106,
+      column: 30,
+      function: 'PaymentDetailsPage.submitPaymentAndCheckError'
+    },
+    category: 'pw:api',
+    title: "locator.getByRole('button', { name: 'RENT NOW' }).click",
+    apiName: 'locator.click',
+    params: {
+      selector: 'internal:role=button[name="RENT NOW"i]',
+      strict: true,
+      timeout: 30000
+    },
+    boxedStack: undefined,
+    steps: [],
+    attachmentIndices: [],
+    info: TestStepInfoImpl {
+      annotations: [],
+      _testInfo: [TestInfoImpl],
+      _stepId: 'pw:api@56'
+    },
+    complete: [Function: complete],
+    endWallTime: 1750261413853,
+    error: {
+      message: 'TimeoutError: locator.click: Timeout 30000ms exceeded.\n' +
+        'Call log:\n' +
+        "\x1B[2m  - waiting for getByRole('button', { name: 'RENT NOW' })\x1B[22m\n" +
+        '\x1B[2m    - locator resolved to <button class="font-body font-bold cursor-pointer inline-flex w-full gap-x-2 items-center justify-center px-4 py-2 text-base rounded-3xl transition uppercase bg-secondary hover:bg-primary text-white opacity-50 pointer-events-none">…</button>\x1B[22m\n' +
+        '\x1B[2m  - attempting click action\x1B[22m\n' +
+        '\x1B[2m    2 × waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m      - done scrolling\x1B[22m\n' +
+        '\x1B[2m      - <div class="flex flex-col justify-between mt-4 gap-5">…</div> intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m    - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 20ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m    - done scrolling\x1B[22m\n' +
+        '\x1B[2m    - <div class="flex flex-col justify-between mt-4 gap-5">…</div> intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  2 × retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 100ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m      - done scrolling\x1B[22m\n' +
+        '\x1B[2m      - <div class="flex items-center gap-3">…</div> from <header class="sticky top-0 py-4 z-10 bg-white shadow">…</header> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  13 × retrying click action\x1B[22m\n' +
+        '\x1B[2m       - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m       - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m       - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m       - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m       - done scrolling\x1B[22m\n' +
+        '\x1B[2m       - <div class="flex flex-col justify-between mt-4 gap-5">…</div> intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m     - retrying click action\x1B[22m\n' +
+        '\x1B[2m       - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m       - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m       - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m       - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m       - done scrolling\x1B[22m\n' +
+        '\x1B[2m       - <div class="flex flex-col justify-between mt-4 gap-5">…</div> intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m     - retrying click action\x1B[22m\n' +
+        '\x1B[2m       - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m       - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m       - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m       - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m       - done scrolling\x1B[22m\n' +
+        '\x1B[2m       - <div class="flex items-center gap-3">…</div> from <header class="sticky top-0 py-4 z-10 bg-white shadow">…</header> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m     - retrying click action\x1B[22m\n' +
+        '\x1B[2m       - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m       - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m       - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m       - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m       - done scrolling\x1B[22m\n' +
+        '\x1B[2m       - <div class="flex items-center gap-3">…</div> from <header class="sticky top-0 py-4 z-10 bg-white shadow">…</header> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  2 × retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m      - done scrolling\x1B[22m\n' +
+        '\x1B[2m      - <div class="flex flex-col justify-between mt-4 gap-5">…</div> intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n',
+      stack: 'TimeoutError: locator.click: Timeout 30000ms exceeded.\n' +
+        'Call log:\n' +
+        "\x1B[2m  - waiting for getByRole('button', { name: 'RENT NOW' })\x1B[22m\n" +
+        '\x1B[2m    - locator resolved to <button class="font-body font-bold cursor-pointer inline-flex w-full gap-x-2 items-center justify-center px-4 py-2 text-base rounded-3xl transition uppercase bg-secondary hover:bg-primary text-white opacity-50 pointer-events-none">…</button>\x1B[22m\n' +
+        '\x1B[2m  - attempting click action\x1B[22m\n' +
+        '\x1B[2m    2 × waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m      - done scrolling\x1B[22m\n' +
+        '\x1B[2m      - <div class="flex flex-col justify-between mt-4 gap-5">…</div> intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m    - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 20ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m    - done scrolling\x1B[22m\n' +
+        '\x1B[2m    - <div class="flex flex-col justify-between mt-4 gap-5">…</div> intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  2 × retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 100ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m      - done scrolling\x1B[22m\n' +
+        '\x1B[2m      - <div class="flex items-center gap-3">…</div> from <header class="sticky top-0 py-4 z-10 bg-white shadow">…</header> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  13 × retrying click action\x1B[22m\n' +
+        '\x1B[2m       - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m       - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m       - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m       - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m       - done scrolling\x1B[22m\n' +
+        '\x1B[2m       - <div class="flex flex-col justify-between mt-4 gap-5">…</div> intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m     - retrying click action\x1B[22m\n' +
+        '\x1B[2m       - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m       - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m       - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m       - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m       - done scrolling\x1B[22m\n' +
+        '\x1B[2m       - <div class="flex flex-col justify-between mt-4 gap-5">…</div> intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m     - retrying click action\x1B[22m\n' +
+        '\x1B[2m       - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m       - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m       - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m       - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m       - done scrolling\x1B[22m\n' +
+        '\x1B[2m       - <div class="flex items-center gap-3">…</div> from <header class="sticky top-0 py-4 z-10 bg-white shadow">…</header> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m     - retrying click action\x1B[22m\n' +
+        '\x1B[2m       - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m       - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m       - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m       - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m       - done scrolling\x1B[22m\n' +
+        '\x1B[2m       - <div class="flex items-center gap-3">…</div> from <header class="sticky top-0 py-4 z-10 bg-white shadow">…</header> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  2 × retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m      - done scrolling\x1B[22m\n' +
+        '\x1B[2m      - <div class="flex flex-col justify-between mt-4 gap-5">…</div> intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\n' +
+        '    at PaymentDetailsPage.submitPaymentAndCheckError (C:\\Users\\tareq\\OneDrive\\Documents\\GitHub\\storagely-automation\\pages\\PaymentDetailsPage.ts:106:30)\n' +
+        '    at C:\\Users\\tareq\\OneDrive\\Documents\\GitHub\\storagely-automation\\tests\\rent-reservation.spec.ts:85:30',
+      cause: undefined
+    }
+  }
+}

@@ -1,0 +1,13 @@
+
+Running test for Storage Facility: https://reverent-moore.staging.storagely-api.com/distinct-storage/storage-units/connecticut/new-milford/kent-road
+Company: Distinct Storage
+Platform: Unknown
+Found a button with text: "RESERVE"
+Clicked "RESERVE" button
+Closed the modal
+Clicking button: rent
+Successfully selected state via <select>: Alaska
+Successfully filled zip code: 99540
+Clicked the datepicker element
+Chat iframe not found or an error occurred, proceeding without minimizing.
+Toast Message: Failed to process payment, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (Payrix): Error for field `payment.number` (Error code 15: invalid_card_number): Invalid credit card/debit card number

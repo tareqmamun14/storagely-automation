@@ -1,0 +1,517 @@
+Test failed for https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road: locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('.listviewrows .blackBtnStoragely:has-text("RENT")').or(locator('a:has-text("Reserve Unit")')).or(locator('a.reserveBtnPop.whiteBtnStoragely:has-text("Select Pricing Option")')).first()
+    - locator resolved to <a class="btn blackBtnStoragely" href="https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road/step_four?location=bdcb5515-201c-448a-9130-4f308b2de2b7&unit=4235048&type=rent&con=c85da468-0142-4bde-9189-80e19a8e5f12&is_sitelink=1&site_locations_id=40043&distinct-storage">…</a>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="row formstfivediv">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is not stable
+    - retrying click action
+      - waiting 100ms
+    - waiting for element to be visible, enabled and stable
+    - element is not stable
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="revervationmain">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="row formstfivediv">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> intercepts pointer events
+  3 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is not stable
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="revervationmain">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is not stable
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="revervationmain">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="row formstfivediv">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is not stable
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="revervationmain">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is not stable
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is not stable
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="revervationmain">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is not stable
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="revervationmain">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="row formstfivediv">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> intercepts pointer events
+  3 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is not stable
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="revervationmain">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is not stable
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is not stable
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="revervationmain">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+    at StorageListingPage.clickRentButton (C:\Users\tareq\OneDrive\Documents\GitHub\storagely-automation\pages\StorageListingPage.ts:92:27)
+    at C:\Users\tareq\OneDrive\Documents\GitHub\storagely-automation\tests\rent-reservation.spec.ts:53:9 {
+  name: 'TimeoutError',
+  [Symbol(step)]: {
+    stepId: 'pw:api@21',
+    location: {
+      file: 'C:\\Users\\tareq\\OneDrive\\Documents\\GitHub\\storagely-automation\\pages\\StorageListingPage.ts',
+      line: 92,
+      column: 27,
+      function: 'StorageListingPage.clickRentButton'
+    },
+    category: 'pw:api',
+    title: 'locator.click(.listviewrows .blackBtnStoragely:has-text("RENT") >> internal:or="a:has-text(\\"Reserve Unit\\")" >> internal:or="a.reserveBtnPop.whiteBtnStoragely:has-text(\\"Select Pricing Option\\")" >> nth=0)',
+    apiName: 'locator.click',
+    params: {
+      selector: '.listviewrows .blackBtnStoragely:has-text("RENT") >> internal:or="a:has-text(\\"Reserve Unit\\")" >> internal:or="a.reserveBtnPop.whiteBtnStoragely:has-text(\\"Select Pricing Option\\")" >> nth=0',
+      strict: true
+    },
+    boxedStack: undefined,
+    steps: [],
+    attachmentIndices: [],
+    info: TestStepInfoImpl {
+      annotations: [],
+      _testInfo: [TestInfoImpl],
+      _stepId: 'pw:api@21'
+    },
+    complete: [Function: complete],
+    endWallTime: 1750162594167,
+    error: {
+      message: 'TimeoutError: locator.click: Timeout 30000ms exceeded.\n' +
+        'Call log:\n' +
+        `\x1B[2m  - waiting for locator('.listviewrows .blackBtnStoragely:has-text("RENT")').or(locator('a:has-text("Reserve Unit")')).or(locator('a.reserveBtnPop.whiteBtnStoragely:has-text("Select Pricing Option")')).first()\x1B[22m\n` +
+        '\x1B[2m    - locator resolved to <a class="btn blackBtnStoragely" href="https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road/step_four?location=bdcb5515-201c-448a-9130-4f308b2de2b7&unit=4235048&type=rent&con=c85da468-0142-4bde-9189-80e19a8e5f12&is_sitelink=1&site_locations_id=40043&distinct-storage">…</a>\x1B[22m\n' +
+        '\x1B[2m  - attempting click action\x1B[22m\n' +
+        '\x1B[2m    2 × waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m      - done scrolling\x1B[22m\n' +
+        '\x1B[2m      - <div class="row formstfivediv">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m    - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 20ms\x1B[22m\n' +
+        '\x1B[2m    2 × waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is not stable\x1B[22m\n' +
+        '\x1B[2m    - retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 100ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is not stable\x1B[22m\n' +
+        '\x1B[2m  2 × retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m      - done scrolling\x1B[22m\n' +
+        '\x1B[2m      - <div class="revervationmain">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m    - done scrolling\x1B[22m\n' +
+        '\x1B[2m    - <div class="row formstfivediv">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  2 × retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m      - done scrolling\x1B[22m\n' +
+        '\x1B[2m      - <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  3 × retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is not stable\x1B[22m\n' +
+        '\x1B[2m    - retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m      - done scrolling\x1B[22m\n' +
+        '\x1B[2m      - <div class="revervationmain">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m    - retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is not stable\x1B[22m\n' +
+        '\x1B[2m    - retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m      - done scrolling\x1B[22m\n' +
+        '\x1B[2m      - <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m    - done scrolling\x1B[22m\n' +
+        '\x1B[2m    - <div class="revervationmain">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m    - done scrolling\x1B[22m\n' +
+        '\x1B[2m    - <div class="row formstfivediv">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  2 × retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m      - done scrolling\x1B[22m\n' +
+        '\x1B[2m      - <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m    - retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m      - done scrolling\x1B[22m\n' +
+        '\x1B[2m      - <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m    - retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is not stable\x1B[22m\n' +
+        '\x1B[2m    - retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m      - done scrolling\x1B[22m\n' +
+        '\x1B[2m      - <div class="revervationmain">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is not stable\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m    - done scrolling\x1B[22m\n' +
+        '\x1B[2m    - <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is not stable\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m    - done scrolling\x1B[22m\n' +
+        '\x1B[2m    - <div class="revervationmain">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is not stable\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m    - done scrolling\x1B[22m\n' +
+        '\x1B[2m    - <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m    - done scrolling\x1B[22m\n' +
+        '\x1B[2m    - <div class="revervationmain">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m    - done scrolling\x1B[22m\n' +
+        '\x1B[2m    - <div class="row formstfivediv">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercept'... 2610 more characters,
+      stack: 'TimeoutError: locator.click: Timeout 30000ms exceeded.\n' +
+        'Call log:\n' +
+        `\x1B[2m  - waiting for locator('.listviewrows .blackBtnStoragely:has-text("RENT")').or(locator('a:has-text("Reserve Unit")')).or(locator('a.reserveBtnPop.whiteBtnStoragely:has-text("Select Pricing Option")')).first()\x1B[22m\n` +
+        '\x1B[2m    - locator resolved to <a class="btn blackBtnStoragely" href="https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road/step_four?location=bdcb5515-201c-448a-9130-4f308b2de2b7&unit=4235048&type=rent&con=c85da468-0142-4bde-9189-80e19a8e5f12&is_sitelink=1&site_locations_id=40043&distinct-storage">…</a>\x1B[22m\n' +
+        '\x1B[2m  - attempting click action\x1B[22m\n' +
+        '\x1B[2m    2 × waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m      - done scrolling\x1B[22m\n' +
+        '\x1B[2m      - <div class="row formstfivediv">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m    - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 20ms\x1B[22m\n' +
+        '\x1B[2m    2 × waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is not stable\x1B[22m\n' +
+        '\x1B[2m    - retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 100ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is not stable\x1B[22m\n' +
+        '\x1B[2m  2 × retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m      - done scrolling\x1B[22m\n' +
+        '\x1B[2m      - <div class="revervationmain">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m    - done scrolling\x1B[22m\n' +
+        '\x1B[2m    - <div class="row formstfivediv">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  2 × retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m      - done scrolling\x1B[22m\n' +
+        '\x1B[2m      - <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  3 × retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is not stable\x1B[22m\n' +
+        '\x1B[2m    - retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m      - done scrolling\x1B[22m\n' +
+        '\x1B[2m      - <div class="revervationmain">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m    - retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is not stable\x1B[22m\n' +
+        '\x1B[2m    - retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m      - done scrolling\x1B[22m\n' +
+        '\x1B[2m      - <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m    - done scrolling\x1B[22m\n' +
+        '\x1B[2m    - <div class="revervationmain">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m    - done scrolling\x1B[22m\n' +
+        '\x1B[2m    - <div class="row formstfivediv">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  2 × retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m      - done scrolling\x1B[22m\n' +
+        '\x1B[2m      - <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m    - retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m      - done scrolling\x1B[22m\n' +
+        '\x1B[2m      - <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m    - retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is not stable\x1B[22m\n' +
+        '\x1B[2m    - retrying click action\x1B[22m\n' +
+        '\x1B[2m      - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m      - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m      - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m      - done scrolling\x1B[22m\n' +
+        '\x1B[2m      - <div class="revervationmain">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is not stable\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m    - done scrolling\x1B[22m\n' +
+        '\x1B[2m    - <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is not stable\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m    - done scrolling\x1B[22m\n' +
+        '\x1B[2m    - <div class="revervationmain">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is not stable\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m    - done scrolling\x1B[22m\n' +
+        '\x1B[2m    - <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m    - done scrolling\x1B[22m\n' +
+        '\x1B[2m    - <div class="revervationmain">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercepts pointer events\x1B[22m\n' +
+        '\x1B[2m  - retrying click action\x1B[22m\n' +
+        '\x1B[2m    - waiting 500ms\x1B[22m\n' +
+        '\x1B[2m    - waiting for element to be visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - element is visible, enabled and stable\x1B[22m\n' +
+        '\x1B[2m    - scrolling into view if needed\x1B[22m\n' +
+        '\x1B[2m    - done scrolling\x1B[22m\n' +
+        '\x1B[2m    - <div class="row formstfivediv">…</div> from <div tabindex="-1" role="dialog" aria-modal="true" id="reserveFormModal_v3" aria-labelledby="exampleModalLabel" class="modal fade reserveModelWrap show">…</div> subtree intercept'... 2855 more characters,
+      cause: undefined
+    }
+  }
+}

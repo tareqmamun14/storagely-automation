@@ -6,6 +6,7 @@ export enum Environment {
   }
   
   // Switch between environments
+  //export const CURRENT_ENVIRONMENT = Environment.STAGING;
   export const CURRENT_ENVIRONMENT = Environment.PRODUCTION;
   
   // Admin URLs
@@ -17,7 +18,8 @@ export enum Environment {
   // Customer URLs
   export const CUSTOMER_URLS = {
     [Environment.STAGING]: [
-      'https://test.staging.storagely-api.com/10-federal-storage/storage-units/texas/burleson/south-burleson-blvd',
+
+      'https://test.staging.storagely-api.com/10-federal-storage/storage-units/texas/arlington/avenue-f',
       'https://test.staging.storagely-api.com/bestbox-storage/storage-units/florida/pensacola/north-palafox',
       'https://test.staging.storagely-api.com/radiant-storage/storage-units/alabama/tuscaloosa/8th-avenue',
       'https://test.staging.storagely-api.com/premier-storage/storage-units/mississippi/laurel/ms-15',
@@ -29,12 +31,13 @@ export enum Environment {
       'https://test.staging.storagely-api.com/rhino-storage/storage-units/louisiana/covington/philip-drive',
       'https://test.staging.storagely-api.com/gatekeeper-self-storage/storage-units/georgia/peachtree-city/senoia-road',
       'https://test.staging.storagely-api.com/storage-boss/storage-units/louisiana/ponchatoula/west-pine-street',
-      'https://test.staging.storagely-api.com/mini-mall-storage/storage-units/arkansas/batesville/batesville-blvd',
+      'https://test.staging.storagely-api.com/mini-mall-storage/storage-units/mini-mall/training/ltrain', //LTRAIN
       'https://test.staging.storagely-api.com/first-storage/storage-units/north-carolina/fayetteville/raeford-road',
       'https://test.staging.storagely-api.com/allpurposestorage/storage-units/maine/belgrade/manchester-road',
-      
+
     ],
     [Environment.PRODUCTION]: [
+
       'https://10federalstorage.com/storage-units/texas/arlington/avenue-f',
       'https://www.bestboxstorage.com/storage-units/florida/pensacola/north-palafox',
       'https://radiantstorage.com/storage-units/alabama/tuscaloosa/8th-avenue',
@@ -47,10 +50,10 @@ export enum Environment {
       'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive',
       'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road',
       'https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street',
-      'https://app.storagely.io/mini-mall-storage/storage-units/arkansas/batesville/batesville-blvd',
+      'https://app.storagely.io/mini-mall-storage/storage-units/mini-mall/training/ltrain', //LTRAIN
       'https://app.storagely.io/first-storage/storage-units/north-carolina/fayetteville/raeford-road',
       'https://app.storagely.io/allpurposestorage/storage-units/maine/belgrade/manchester-road',
-    ]
+      ]
   };
   
   // FMS Platform information
@@ -73,6 +76,25 @@ export enum Environment {
 
   };
   
+export const storageSiteUrls = [
+  'https://smartstorageohio.com/',
+  'https://storagestar.com/',
+  'https://sunbirdstorage.com/',
+  'https://bluebirdstorage.ca/',
+  'https://gatekeeperstoragega.com/',
+  'https://10federalstorage.com/',
+  'https://www.firststorage.com/',
+  'https://www.storeallpurpose.com/',
+  'https://www.bestboxstorage.com/',
+  'https://radiantstorage.com/',
+  'https://yourpremierstorage.com/',
+  'https://redrocksstorage.com/',
+  'https://distinctstorage.com/',
+  'https://rhino-storage.com/',
+  'https://storagedepotla.com/'
+];
+
+
   // Helper function to get the current set of URLs based on environment
   export function getCurrentUrls() {
     return {

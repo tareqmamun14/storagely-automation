@@ -1,0 +1,32 @@
+
+Running test for Storage Facility: https://www.bestboxstorage.com/storage-units/florida/pensacola/north-palafox
+Company: bestbox Storage
+Platform: Unknown
+Found a button with text: "RESERVE"
+Clicked "RESERVE" button
+No RESERVE or Join Waitlist button found, proceeding with the rest of the test.
+
+
+======== PAYMENT VERIFICATION TEST RESULTS ========
+------------------------------------------------
+Total Tests: 2
+✅ Successful: 0
+❌ Failed: 2
+------------------------------------------------
+
+ERROR MESSAGES BY COMPANY:
+
+10federal Storage (Unknown):
+URL: https://10federalstorage.com/storage-units/texas/arlington/avenue-f
+Error: Test execution error: page.goto: Timeout 45000ms exceeded.
+Call log:
+  - navigating to "https://10federalstorage.com/storage-units/texas/arlington/avenue-f?cacheBust=1749884103010-favkf93lvmv", waiting until "domcontentloaded"
+
+------------------------------------------------
+
+bestbox Storage (Unknown):
+URL: https://www.bestboxstorage.com/storage-units/florida/pensacola/north-palafox
+Error: Test execution error: page.waitForTimeout: Target page, context or browser has been closed
+------------------------------------------------
+
+

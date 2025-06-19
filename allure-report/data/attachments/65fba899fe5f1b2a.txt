@@ -1,0 +1,5 @@
+
+Running test for Storage Facility: https://reverent-moore.staging.storagely-api.com/sunbirdstorage/storage-units/nc/winston-salem/country-club
+Company: Sunbirdstorage
+Platform: Unknown
+Screenshot saved: null

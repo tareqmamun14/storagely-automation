@@ -1,0 +1,5 @@
+
+Running test for Storage Facility: https://reverent-moore.staging.storagely-api.com/first-storage/storage-units/north-carolina/fayetteville/raeford-road
+Company: First Storage
+Platform: Unknown
+Screenshot saved: null

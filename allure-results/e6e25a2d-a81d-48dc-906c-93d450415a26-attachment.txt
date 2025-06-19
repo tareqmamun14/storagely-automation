@@ -1,0 +1,12 @@
+
+Running test for Storage Facility: https://test.staging.storagely-api.com/premier-storage/storage-units/mississippi/laurel/ms-15
+Company: Premier Storage
+Platform: Unknown
+Found a button with text: "RESERVE"
+Clicked "RESERVE" button
+Closed the modal
+Clicking button: rent
+Successfully selected state via <select>: Alaska
+Successfully filled zip code: 99540
+Clicked the datepicker element
+Screenshot saved: error-premier-storage-1749851520214.png

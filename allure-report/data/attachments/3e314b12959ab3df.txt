@@ -1,0 +1,54 @@
+
+Running test for Storage Facility: https://app.storagely.io/allpurposestorage/storage-units/maine/belgrade/manchester-road
+Company: app
+Platform: storEDGE
+Screenshot saved: error-app-1749894345886.png
+
+
+======== PAYMENT VERIFICATION TEST RESULTS ========
+------------------------------------------------
+Total Tests: 5
+✅ Successful: 1
+❌ Failed: 4
+------------------------------------------------
+
+ERROR MESSAGES BY COMPANY:
+
+gatekeeperstoragega (SiteLink):
+URL: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road
+Error: Invalid card expiry year
+------------------------------------------------
+
+storagedepotla (SiteLink):
+URL: https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street
+Error: Test execution error: page.goto: Timeout 45000ms exceeded.
+Call log:
+  - navigating to "https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street?cacheBust=1749894263177-ctg8li3odv", waiting until "domcontentloaded"
+
+------------------------------------------------
+
+app (Unknown):
+URL: https://app.storagely.io/mini-mall-storage/storage-units/arkansas/batesville/batesville-blvd
+Error: Test execution error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://app.storagely.io/mini-mall-storage/storage-units/arkansas/batesville/batesville-blvd?cacheBust=1749894343742-0l64xdab4edr
+Call log:
+  - navigating to "https://app.storagely.io/mini-mall-storage/storage-units/arkansas/batesville/batesville-blvd?cacheBust=1749894343742-0l64xdab4edr", waiting until "domcontentloaded"
+
+------------------------------------------------
+
+app (storEDGE):
+URL: https://app.storagely.io/first-storage/storage-units/north-carolina/fayetteville/raeford-road
+Error: Test execution error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://app.storagely.io/first-storage/storage-units/north-carolina/fayetteville/raeford-road?cacheBust=1749894344727-n33juj3y7wj
+Call log:
+  - navigating to "https://app.storagely.io/first-storage/storage-units/north-carolina/fayetteville/raeford-road?cacheBust=1749894344727-n33juj3y7wj", waiting until "domcontentloaded"
+
+------------------------------------------------
+
+app (storEDGE):
+URL: https://app.storagely.io/allpurposestorage/storage-units/maine/belgrade/manchester-road
+Error: Test execution error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://app.storagely.io/allpurposestorage/storage-units/maine/belgrade/manchester-road?cacheBust=1749894345796-oyn1zcjvs1
+Call log:
+  - navigating to "https://app.storagely.io/allpurposestorage/storage-units/maine/belgrade/manchester-road?cacheBust=1749894345796-oyn1zcjvs1", waiting until "domcontentloaded"
+
+------------------------------------------------
+
+

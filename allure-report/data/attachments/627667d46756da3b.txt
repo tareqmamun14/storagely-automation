@@ -1,0 +1,6 @@
+
+Running test for Storage Facility: https://reverent-moore.staging.storagely-api.com/gatekeeper-self-storage/storage-units/georgia/peachtree-city/senoia-road
+Company: Gatekeeper Self Storage
+Platform: Unknown
+No RESERVE or Join Waitlist button found, proceeding with the rest of the test.
+Screenshot saved: error-gatekeeper-self-storage-1750159572396.png

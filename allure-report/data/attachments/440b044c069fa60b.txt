@@ -1,0 +1,44 @@
+
+Running test for Storage Facility: https://app.storagely.io/allpurposestorage/storage-units/maine/belgrade/manchester-road
+Company: app
+Platform: storEDGE
+Found a button with text: "Reserve"
+Clicked "Reserve" button
+Closed the modal
+Clicking button: rent
+Successfully selected state via <select>: Alaska
+Successfully filled zip code: 99540
+Clicked the datepicker element
+Screenshot saved: error-app-1750179937788.png
+
+
+======== PAYMENT VERIFICATION TEST RESULTS ========
+------------------------------------------------
+Total Tests: 5
+✅ Successful: 4
+❌ Failed: 1
+------------------------------------------------
+
+ERROR MESSAGES BY COMPANY:
+
+gatekeeperstoragega (SiteLink):
+URL: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road
+Error: Invalid card expiry year
+------------------------------------------------
+
+storagedepotla (SiteLink):
+URL: https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street
+Error: Invalid card expiry year
+------------------------------------------------
+
+app (storEDGE):
+URL: https://app.storagely.io/allpurposestorage/storage-units/maine/belgrade/manchester-road
+Error: Test execution error: locator.type: Timeout 30000ms exceeded.
+Call log:
+  - waiting for getByPlaceholder('Card Number')
+    - locator resolved to <input value="" type="text" id="card_number_T" name="card_number" data-wc-ignore="true" class="inputcardnum " placeholder="Card Number"/>
+  - elementHandle.type("5555 5555 5555 5555")
+
+------------------------------------------------
+
+

@@ -1,0 +1,5 @@
+
+Running test for Storage Facility: https://reverent-moore.staging.storagely-api.com/mini-mall-storage/storage-units/mini-mall/training/ltrain
+Company: Mini Mall Storage
+Platform: Unknown
+Screenshot saved: null
