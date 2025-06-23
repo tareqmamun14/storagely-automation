@@ -1,6 +1,0 @@
-
-Running test for Storage Facility: https://reverent-moore.staging.storagely-api.com/storage-star/storage-units/colorado/colorado-springs/aerotech-drive
-Company: Storage Star
-Platform: Unknown
-No RESERVE or Join Waitlist button found, proceeding with the rest of the test.
-Screenshot saved: error-storage-star-1750159638956.png

@@ -1,9 +1,0 @@
-
-Running test for Storage Facility: https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club
-Company: sunbird Storage
-Platform: Unknown
-Found a button with text: "RESERVE"
-Clicked "RESERVE" button
-Closed the modal
-Clicking button: rent
-Screenshot saved: error-sunbird-storage-1749884674063.png

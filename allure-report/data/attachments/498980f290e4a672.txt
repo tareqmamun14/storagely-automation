@@ -1,5 +1,0 @@
-
-Running test for Storage Facility: https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland
-Company: bluebird Storage
-Platform: Unknown
-Screenshot saved: null

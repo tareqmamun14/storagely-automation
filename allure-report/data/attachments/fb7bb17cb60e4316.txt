@@ -1,7 +1,0 @@
-Verifying: https://distinctstorage.com/
-- Page loaded for https://distinctstorage.com/
-- Title verified for https://distinctstorage.com/: "Self Storage Units in New Milford, CT | Distinct Storage"
-- Logo verified for https://distinctstorage.com/
-- Navigation link verified for https://distinctstorage.com/
-- CTA button verified for https://distinctstorage.com/
-✅ Successfully verified: https://distinctstorage.com/

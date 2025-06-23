@@ -1,7 +1,0 @@
-Verifying: https://storagestar.com/
-- Page loaded for https://storagestar.com/
-- Title verified for https://storagestar.com/: "Self Storage Units | Storage Star"
-- Logo verified for https://storagestar.com/
-- Navigation link verified for https://storagestar.com/
-- CTA button verified for https://storagestar.com/
-✅ Successfully verified: https://storagestar.com/

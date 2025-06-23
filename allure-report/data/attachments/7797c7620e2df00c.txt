@@ -1,6 +1,0 @@
-
-Running test for Storage Facility: https://reverent-moore.staging.storagely-api.com/storage-boss/storage-units/louisiana/ponchatoula/west-pine-street
-Company: Storage Boss
-Platform: Unknown
-No RESERVE or Join Waitlist button found, proceeding with the rest of the test.
-Screenshot saved: error-storage-boss-1750159638893.png

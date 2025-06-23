@@ -1,6 +1,0 @@
-
-🔍 Testing Smart Self Storage : SSM
-📋 Expected: "Off 3 Months"
-📍 Found 20 elements with selector: .page_discount
-✅ Smart Self Storage : SSM | Found matching banner: "50% Off 3 Months
-Sale Ends Jun 30th"

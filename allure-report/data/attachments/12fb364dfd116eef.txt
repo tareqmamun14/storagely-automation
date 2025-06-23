@@ -1,7 +1,0 @@
-Verifying: https://rhino-storage.com/
-- Page loaded for https://rhino-storage.com/
-- Title verified for https://rhino-storage.com/: "RV, Boat & Vehicle Storage Covington - Secure & Affordable Solutions for Your Needs"
-- Logo verified for https://rhino-storage.com/
-- Navigation link verified for https://rhino-storage.com/
-- CTA button verified for https://rhino-storage.com/
-✅ Successfully verified: https://rhino-storage.com/

@@ -1,6 +1,0 @@
-
-Running test for Storage Facility: https://reverent-moore.staging.storagely-api.com/10-federal-storage/storage-units/texas/arlington/avenue-f
-Company: 10 Federal Storage
-Platform: Unknown
-No RESERVE or Join Waitlist button found, proceeding with the rest of the test.
-Screenshot saved: error-10-federal-storage-1750159569631.png

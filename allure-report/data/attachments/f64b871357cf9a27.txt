@@ -1,3 +1,0 @@
-
-🔍 Testing Smart Self Storage : SSM
-📋 Expected: "Off 3 Months"

@@ -1,9 +1,0 @@
-
-Running test for Storage Facility: https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road
-Company: distinct Storage
-Platform: storEDGE
-Found a button with text: "RESERVE"
-Clicked "RESERVE" button
-Close button might not be present
-Clicking button: rent
-Screenshot saved: error-distinct-storage-1750162594172.png

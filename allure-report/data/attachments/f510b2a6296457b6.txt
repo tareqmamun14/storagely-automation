@@ -1,7 +1,0 @@
-Verifying: https://gatekeeperstoragega.com/
-- Page loaded for https://gatekeeperstoragega.com/
-- Title verified for https://gatekeeperstoragega.com/: "Storage Units Peachtree City | Gatekeeper Self-Storage"
-- Logo verified for https://gatekeeperstoragega.com/
-- Navigation link verified for https://gatekeeperstoragega.com/
-- CTA button verified for https://gatekeeperstoragega.com/
-✅ Successfully verified: https://gatekeeperstoragega.com/

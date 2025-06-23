@@ -1,5 +1,0 @@
-
-Running test for Storage Facility: https://app.storagely.io/mini-mall-storage/storage-units/arkansas/batesville/batesville-blvd
-Company: app
-Platform: Unknown
-Screenshot saved: error-app-1749894343824.png

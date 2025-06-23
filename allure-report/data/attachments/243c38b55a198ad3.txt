@@ -1,8 +1,0 @@
-Verifying: https://10federalstorage.com/
-- Page loaded for https://10federalstorage.com/
-- Title verified for https://10federalstorage.com/: "10 Federal Storage | Storage Units Near Me"
-- Logo with role 'link' and name 'logo' not found for https://10federalstorage.com/, checking for alternative logo selectors...
-- Fallback logo verified for https://10federalstorage.com/
-- Navigation link verified for https://10federalstorage.com/
-- CTA button verified for https://10federalstorage.com/
-✅ Successfully verified: https://10federalstorage.com/

@@ -1,7 +1,0 @@
-Verifying: https://radiantstorage.com/
-- Page loaded for https://radiantstorage.com/
-- Title verified for https://radiantstorage.com/: "Self Storage Units Near Me | Radiant Storage"
-- Logo verified for https://radiantstorage.com/
-- Navigation link verified for https://radiantstorage.com/
-- CTA button verified for https://radiantstorage.com/
-✅ Successfully verified: https://radiantstorage.com/

@@ -1,5 +1,0 @@
-
-🔍 Testing Mini Mall : SiteLink
-📋 Expected: "First Month Free"
-📍 Found 3 elements with selector: .page_discount
-✅ Mini Mall : SiteLink | Found matching banner: "First Month Free"
