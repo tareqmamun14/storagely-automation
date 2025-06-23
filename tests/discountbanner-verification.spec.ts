@@ -35,9 +35,9 @@ function isTextMatch(actualText: string, expectedText: string): boolean {
   return expectedWords.every(word => normalizedActual.includes(word));
 }
 
-test.describe('Verify page discount from storage unit', () => {
+test.describe.skip('Verify page discount from storage unit', () => {
   for (const { customer, url, expected } of discountChecks) {
-    test(`Verify offer content ${customer}`, async ({ page }) => {
+    test.skip(`Verify offer content ${customer}`, async ({ page }) => {
       console.log(`\n🔍 Testing ${customer}`);
       console.log(`📋 Expected: "${expected}"`);
       

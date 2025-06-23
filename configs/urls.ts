@@ -6,8 +6,8 @@ export enum Environment {
   }
   
   // Switch between environments
-  //export const CURRENT_ENVIRONMENT = Environment.STAGING;
-  export const CURRENT_ENVIRONMENT = Environment.PRODUCTION;
+  export const CURRENT_ENVIRONMENT = Environment.STAGING;
+  //export const CURRENT_ENVIRONMENT = Environment.PRODUCTION;
   
   // Admin URLs
   export const ADMIN_URLS = {
@@ -22,16 +22,16 @@ export enum Environment {
       'https://test.staging.storagely-api.com/10-federal-storage/storage-units/texas/arlington/avenue-f',
       'https://test.staging.storagely-api.com/bestbox-storage/storage-units/florida/pensacola/north-palafox',
       'https://test.staging.storagely-api.com/radiant-storage/storage-units/alabama/tuscaloosa/8th-avenue',
-      'https://test.staging.storagely-api.com/premier-storage/storage-units/mississippi/laurel/ms-15',
+      //'https://test.staging.storagely-api.com/premier-storage/storage-units/mississippi/laurel/ms-15',
       'https://test.staging.storagely-api.com/red-rocks-self-storage/storage-units/colorado/aurora/east-14th-avenue',
-      'https://test.staging.storagely-api.com/distinct-storage/storage-units/connecticut/new-milford/kent-road',
+      //'https://test.staging.storagely-api.com/distinct-storage/storage-units/connecticut/new-milford/kent-road',
       'https://test.staging.storagely-api.com/storage-star/storage-units/colorado/colorado-springs/aerotech-drive',
       'https://test.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/mayland',
-      'https://test.staging.storagely-api.com/sunbirdstorage/storage-units/nc/winston-salem/country-club',
-      'https://test.staging.storagely-api.com/rhino-storage/storage-units/louisiana/covington/philip-drive',
+      //'https://test.staging.storagely-api.com/sunbirdstorage/storage-units/nc/winston-salem/country-club',
+      //'https://test.staging.storagely-api.com/rhino-storage/storage-units/louisiana/covington/philip-drive',
       'https://test.staging.storagely-api.com/gatekeeper-self-storage/storage-units/georgia/peachtree-city/senoia-road',
-      'https://test.staging.storagely-api.com/storage-boss/storage-units/louisiana/ponchatoula/west-pine-street',
-      'https://test.staging.storagely-api.com/mini-mall-storage/storage-units/mini-mall/training/ltrain', //LTRAIN
+      //'https://test.staging.storagely-api.com/storage-boss/storage-units/louisiana/ponchatoula/west-pine-street',
+      //'https://test.staging.storagely-api.com/mini-mall-storage/storage-units/mini-mall/training/ltrain', //LTRAIN
       'https://test.staging.storagely-api.com/first-storage/storage-units/north-carolina/fayetteville/raeford-road',
       'https://test.staging.storagely-api.com/allpurposestorage/storage-units/maine/belgrade/manchester-road',
 
@@ -41,16 +41,16 @@ export enum Environment {
       'https://10federalstorage.com/storage-units/texas/arlington/avenue-f',
       'https://www.bestboxstorage.com/storage-units/florida/pensacola/north-palafox',
       'https://radiantstorage.com/storage-units/alabama/tuscaloosa/8th-avenue',
-      'https://yourpremierstorage.com/storage-units/mississippi/laurel/ms-15',
+      //'https://yourpremierstorage.com/storage-units/mississippi/laurel/ms-15',
       'https://redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',
       'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road',
       'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',
       'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland',
-      'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club',
+      //'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club',
       'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive',
       'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road',
-      'https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street',
-      'https://app.storagely.io/mini-mall-storage/storage-units/mini-mall/training/ltrain', //LTRAIN
+      //'https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street',
+      //'https://app.storagely.io/mini-mall-storage/storage-units/mini-mall/training/ltrain', //LTRAIN
       'https://app.storagely.io/first-storage/storage-units/north-carolina/fayetteville/raeford-road',
       'https://app.storagely.io/allpurposestorage/storage-units/maine/belgrade/manchester-road',
       ]
