@@ -1,0 +1,79 @@
+
+Running test for Storage Facility: https://radiantstorage.com/storage-units/alabama/tuscaloosa/8th-avenue
+Company: radiant Storage
+Platform: Unknown
+Found a button with text: "RESERVE"
+Clicked "RESERVE" button
+Closed the modal
+Clicking button: rent
+No custom dropdown trigger found
+Found #province dropdown, checking available options and attempting selection
+Available options: [
+  'Select State',
+  'Alabama',
+  'Alaska',
+  'Arizona',
+  'Arkansas',
+  'California',
+  'Colorado',
+  'Connecticut',
+  'Delaware',
+  'District of Columbia (DC)',
+  'Florida',
+  'Georgia',
+  'Hawaii',
+  'Idaho',
+  'Illinois',
+  'Indiana',
+  'Iowa',
+  'Kansas',
+  'Kentucky',
+  'Louisiana',
+  'Maine',
+  'Maryland',
+  'Massachusetts',
+  'Michigan',
+  'Minnesota',
+  'Mississippi',
+  'Missouri',
+  'Montana',
+  'Nebraska',
+  'Nevada',
+  'New Hampshire',
+  'New Jersey',
+  'New Mexico',
+  'New York',
+  'North Carolina',
+  'North Dakota',
+  'Ohio',
+  'Oklahoma',
+  'Oregon',
+  'Pennsylvania',
+  'Rhode Island',
+  'South Carolina',
+  'South Dakota',
+  'Tennessee',
+  'Texas',
+  'Utah',
+  'Vermont',
+  'Virginia',
+  'Washington',
+  'West Virginia',
+  'Wisconsin',
+  'Wyoming'
+]
+Option Alberta not available in this dropdown
+Successfully selected Alabama using #province selector
+Successfully filled zip code: 99540
+Datepicker did not appear within the timeout, skipping this step.
+Lease Details section found, filling available fields...
+✓ Filled Alternate Phone: 01674646008
+✓ Filled Alternate Email: tareqmamun14@gmail.com
+✓ Filled Driver License: 6244114
+✓ Selected Driver License State: Alaska
+✓ Selected Birth Month: 01
+✓ Selected Birth Date: 1
+✓ Filled Birth Year: 1990
+✓ Lease Details form filling completed
+Chat iframe not found or an error occurred, proceeding without minimizing.
+Toast Message: Alternate contact Please enter a valid phone number, Unit is not available for move-in, Lead unit is not available, Lead events lead unit is not available, Please enter a valid phone number, Attached invoice Please enter a valid phone number

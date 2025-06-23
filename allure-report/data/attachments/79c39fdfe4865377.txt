@@ -1,0 +1,54 @@
+
+Running test for Storage Facility: https://test.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/mayland
+Company: Bluebirdstorage
+Platform: Unknown
+Found a button with text: "RESERVE"
+Clicked "RESERVE" button
+Closed the modal
+Clicking button: rent
+Found dropdown trigger, attempting to click
+Found #province dropdown, checking available options and attempting selection
+Available options: [
+  'Select State',
+  'Alberta',
+  'British Columbia',
+  'Manitoba',
+  'New Brunswick',
+  'Newfoundland and Labrador',
+  'Northwest Territories',
+  'Nova Scotia',
+  'Nunavut',
+  'Ontario',
+  'Prince Edward Island',
+  'Québec',
+  'Saskatchewan',
+  'Yukon'
+]
+Successfully selected Alberta using #province selector
+Successfully filled zip code: 99540
+Clicked the datepicker element
+Lease Details section not found, skipping
+Chat iframe not found or an error occurred, proceeding without minimizing.
+Toast Message: 
+
+
+======== PAYMENT VERIFICATION TEST RESULTS ========
+------------------------------------------------
+Total Tests: 3
+✅ Successful: 3
+❌ Failed: 0
+------------------------------------------------
+
+ERROR MESSAGES BY COMPANY:
+
+Red Rocks Self Storage (Unknown):
+URL: https://test.staging.storagely-api.com/red-rocks-self-storage/storage-units/colorado/aurora/east-14th-avenue
+Error: Failed to process payment, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (Storable Payments): 'Card Number' is not a valid credit card number.
+------------------------------------------------
+
+Storage Star (Unknown):
+URL: https://test.staging.storagely-api.com/storage-star/storage-units/colorado/colorado-springs/aerotech-drive
+Error: The Payment failed. Invalid Account Data: Account number has incorrect check digit
+------------------------------------------------
+
+

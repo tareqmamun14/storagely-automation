@@ -1,0 +1,32 @@
+
+Running test for Storage Facility: https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland
+Company: bluebird Storage
+Platform: Unknown
+Found a button with text: "RESERVE"
+Clicked "RESERVE" button
+Closed the modal
+Clicking button: rent
+Found dropdown trigger, attempting to click
+Found #province dropdown, checking available options and attempting selection
+Available options: [
+  'Select State',
+  'Alberta',
+  'British Columbia',
+  'Manitoba',
+  'New Brunswick',
+  'Newfoundland and Labrador',
+  'Northwest Territories',
+  'Nova Scotia',
+  'Nunavut',
+  'Ontario',
+  'Prince Edward Island',
+  'Québec',
+  'Saskatchewan',
+  'Yukon'
+]
+Successfully selected Alberta using #province selector
+Successfully filled zip code: 99540
+Clicked the datepicker element
+Lease Details section not found, skipping
+Chat iframe not found or an error occurred, proceeding without minimizing.
+Toast Message: 
