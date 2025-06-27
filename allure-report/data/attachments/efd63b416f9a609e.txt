@@ -1,0 +1,6 @@
+
+🔍 Testing Demo Account : StorEDGE
+📋 Expected: "50% OFF THE FIRST TWO MONTHS"
+📍 Found 6 elements with selector: .page_discount
+✅ Demo Account : StorEDGE | Found matching banner: "50% OFF THE FIRST TWO MONTHS, NO ADMIN FEE & A FREE LOCK!
+Sale Ends Jun 30th"
