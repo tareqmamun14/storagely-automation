@@ -1,0 +1,25 @@
+
+Running test for Storage Facility: https://test.staging.storagely-api.com/allpurposestorage/storage-units/maine/belgrade/manchester-road
+Company: Allpurposestorage
+Platform: Unknown
+Screenshot saved: error-allpurposestorage-1750700815316.png
+
+
+======== PAYMENT VERIFICATION TEST RESULTS ========
+------------------------------------------------
+Total Tests: 1
+✅ Successful: 0
+❌ Failed: 1
+------------------------------------------------
+
+ERROR MESSAGES BY COMPANY:
+
+Allpurposestorage (Unknown):
+URL: https://test.staging.storagely-api.com/allpurposestorage/storage-units/maine/belgrade/manchester-road
+Error: Test execution error: page.goto: Timeout 45000ms exceeded.
+Call log:
+  - navigating to "https://test.staging.storagely-api.com/allpurposestorage/storage-units/maine/belgrade/manchester-road?cacheBust=1750700770264-fqdyfzwnjr4", waiting until "domcontentloaded"
+
+------------------------------------------------
+
+

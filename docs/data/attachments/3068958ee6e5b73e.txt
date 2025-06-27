@@ -1,0 +1,34 @@
+❌ Verification failed for https://bluebirdstorage.ca/: expect.toBeVisible: Target page, context or browser has been closed
+    at StorageSitePage.verifyLandingPage (C:\Users\tareq\OneDrive\Documents\GitHub\storagely-automation\pages\HomePage.ts:47:36)
+    at C:\Users\tareq\OneDrive\Documents\GitHub\storagely-automation\tests\homePage-verification.spec.ts:13:7 {
+  [Symbol(step)]: {
+    stepId: 'expect@15',
+    category: 'expect',
+    title: 'expect.toBeVisible',
+    params: { expected: [Object] },
+    infectParentStepsWithError: undefined,
+    boxedStack: undefined,
+    location: {
+      file: 'C:\\Users\\tareq\\OneDrive\\Documents\\GitHub\\storagely-automation\\pages\\HomePage.ts',
+      line: 47,
+      column: 36,
+      function: 'StorageSitePage.verifyLandingPage'
+    },
+    steps: [],
+    attachmentIndices: [],
+    info: TestStepInfoImpl {
+      annotations: [],
+      _testInfo: [TestInfoImpl],
+      _stepId: 'expect@15'
+    },
+    complete: [Function: complete],
+    endWallTime: 1751062764640,
+    error: {
+      message: 'Error: expect.toBeVisible: Target page, context or browser has been closed',
+      stack: 'Error: expect.toBeVisible: Target page, context or browser has been closed\n' +
+        '    at StorageSitePage.verifyLandingPage (C:\\Users\\tareq\\OneDrive\\Documents\\GitHub\\storagely-automation\\pages\\HomePage.ts:47:36)\n' +
+        '    at C:\\Users\\tareq\\OneDrive\\Documents\\GitHub\\storagely-automation\\tests\\homePage-verification.spec.ts:13:7',
+      cause: undefined
+    }
+  }
+}

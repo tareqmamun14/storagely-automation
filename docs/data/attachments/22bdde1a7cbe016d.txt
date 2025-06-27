@@ -1,0 +1,71 @@
+
+Running test for Storage Facility: https://test.staging.storagely-api.com/sunbirdstorage/storage-units/nc/winston-salem/country-club
+Company: Sunbirdstorage
+Platform: Unknown
+Found a button with text: "RESERVE"
+Clicked "RESERVE" button
+Closed the modal
+Clicking button: rent
+Found dropdown trigger, attempting to click
+Found #province dropdown, checking available options and attempting selection
+Available options: [
+  'Select State',
+  'Alabama',
+  'Alaska',
+  'Arizona',
+  'Arkansas',
+  'California',
+  'Colorado',
+  'Connecticut',
+  'Delaware',
+  'District of Columbia (DC)',
+  'Florida',
+  'Georgia',
+  'Hawaii',
+  'Idaho',
+  'Illinois',
+  'Indiana',
+  'Iowa',
+  'Kansas',
+  'Kentucky',
+  'Louisiana',
+  'Maine',
+  'Maryland',
+  'Massachusetts',
+  'Michigan',
+  'Minnesota',
+  'Mississippi',
+  'Missouri',
+  'Montana',
+  'Nebraska',
+  'Nevada',
+  'New Hampshire',
+  'New Jersey',
+  'New Mexico',
+  'New York',
+  'North Carolina',
+  'North Dakota',
+  'Ohio',
+  'Oklahoma',
+  'Oregon',
+  'Pennsylvania',
+  'Rhode Island',
+  'South Carolina',
+  'South Dakota',
+  'Tennessee',
+  'Texas',
+  'Utah',
+  'Vermont',
+  'Virginia',
+  'Washington',
+  'West Virginia',
+  'Wisconsin',
+  'Wyoming'
+]
+Option Alberta not available in this dropdown
+Successfully selected Alabama using #province selector
+Successfully filled zip code: 99540
+Clicked the datepicker element
+Lease Details section not found, skipping
+Chat iframe not found or an error occurred, proceeding without minimizing.
+Toast Message: (-98) Invalid username/password

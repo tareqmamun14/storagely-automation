@@ -1,0 +1,33 @@
+
+Running test for Storage Facility: https://test.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/mayland
+Company: Bluebirdstorage
+Platform: Unknown
+Screenshot saved: null
+
+
+======== PAYMENT VERIFICATION TEST RESULTS ========
+------------------------------------------------
+Total Tests: 2
+✅ Successful: 0
+❌ Failed: 2
+------------------------------------------------
+
+ERROR MESSAGES BY COMPANY:
+
+Storage Star (Unknown):
+URL: https://test.staging.storagely-api.com/storage-star/storage-units/colorado/colorado-springs/aerotech-drive
+Error: Test execution error: page.goto: Timeout 45000ms exceeded.
+Call log:
+  - navigating to "https://test.staging.storagely-api.com/storage-star/storage-units/colorado/colorado-springs/aerotech-drive?cacheBust=1750700707388-7vdiidt1ync", waiting until "domcontentloaded"
+
+------------------------------------------------
+
+Bluebirdstorage (Unknown):
+URL: https://test.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/mayland
+Error: Test execution error: page.goto: Timeout 45000ms exceeded.
+Call log:
+  - navigating to "https://test.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/mayland?cacheBust=1750700774239-dcs1dyuv9s", waiting until "domcontentloaded"
+
+------------------------------------------------
+
+

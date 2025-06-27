@@ -1,0 +1,69 @@
+Dropdown trigger failed: Error: locator.isVisible: Error: strict mode violation: locator('div:has-text("Select State")') resolved to 13 elements:
+    1) <div class="wrapper1">…</div> aka locator('div').filter({ hasText: 'Find Storage Storage Types' }).first()
+    2) <div class="rentContent">…</div> aka locator('div').filter({ hasText: 'Find Storage Storage Types' }).nth(1)
+    3) <div class="brand--theme__wrapper">…</div> aka locator('.brand--theme__wrapper')
+    4) <div class="newrentalstepfivemain">…</div> aka locator('.newrentalstepfivemain')
+    5) <div class="container">…</div> aka locator('.newrentalstepfivemain > .container')
+    6) <div class="row">…</div> aka locator('.row').first()
+    7) <div class="col-md-6">…</div> aka locator('.row > div:nth-child(2)').first()
+    8) <div class="detailscradbb">…</div> aka locator('.detailscradbb')
+    9) <div class="TenantDetailsdiv">…</div> aka getByText('Tenant Details Select State')
+    10) <div class="row formstfivediv">…</div> aka locator('#step_four_form div').filter({ hasText: 'Select State Alabama Alaska' }).nth(1)
+    ...
+
+Call log:
+    - checking visibility of locator('div:has-text("Select State")')
+
+Option selector failed for Alabama: TimeoutError: locator.waitFor: Timeout 2000ms exceeded.
+Call log:
+  - waiting for getByText('Alabama', { exact: true }) to be visible
+    9 × locator resolved to hidden <option value="Alabama">Alabama</option>
+
+Option selector failed for Alabama: TimeoutError: locator.waitFor: Timeout 2000ms exceeded.
+Call log:
+  - waiting for locator('text=Alabama') to be visible
+    9 × locator resolved to hidden <option value="Alabama">Alabama</option>
+
+Option selector failed for Alabama: Error: locator.waitFor: Error: strict mode violation: locator('div:has-text("Alabama")') resolved to 13 elements:
+    1) <div class="wrapper1">…</div> aka locator('div').filter({ hasText: 'Find Storage Storage Types' }).first()
+    2) <div class="rentContent">…</div> aka locator('div').filter({ hasText: 'Find Storage Storage Types' }).nth(1)
+    3) <div class="brand--theme__wrapper">…</div> aka locator('.brand--theme__wrapper')
+    4) <div class="newrentalstepfivemain">…</div> aka locator('.newrentalstepfivemain')
+    5) <div class="container">…</div> aka locator('.newrentalstepfivemain > .container')
+    6) <div class="row">…</div> aka locator('.row').first()
+    7) <div class="col-md-6">…</div> aka locator('.row > div:nth-child(2)').first()
+    8) <div class="detailscradbb">…</div> aka locator('.detailscradbb')
+    9) <div class="TenantDetailsdiv">…</div> aka getByText('Tenant Details Select State')
+    10) <div class="row formstfivediv">…</div> aka locator('#step_four_form div').filter({ hasText: 'Select State Alabama Alaska' }).nth(1)
+    ...
+
+Call log:
+  - waiting for locator('div:has-text("Alabama")') to be visible
+
+Option selector failed for Alaska: TimeoutError: locator.waitFor: Timeout 2000ms exceeded.
+Call log:
+  - waiting for getByText('Alaska', { exact: true }) to be visible
+    9 × locator resolved to hidden <option value="Alaska">Alaska</option>
+
+Option selector failed for Alaska: TimeoutError: locator.waitFor: Timeout 2000ms exceeded.
+Call log:
+  - waiting for locator('text=Alaska') to be visible
+    9 × locator resolved to hidden <option value="Alaska">Alaska</option>
+
+Option selector failed for Alaska: Error: locator.waitFor: Error: strict mode violation: locator('div:has-text("Alaska")') resolved to 13 elements:
+    1) <div class="wrapper1">…</div> aka locator('div').filter({ hasText: 'Find Storage Storage Types' }).first()
+    2) <div class="rentContent">…</div> aka locator('div').filter({ hasText: 'Find Storage Storage Types' }).nth(1)
+    3) <div class="brand--theme__wrapper">…</div> aka locator('.brand--theme__wrapper')
+    4) <div class="newrentalstepfivemain">…</div> aka locator('.newrentalstepfivemain')
+    5) <div class="container">…</div> aka locator('.newrentalstepfivemain > .container')
+    6) <div class="row">…</div> aka locator('.row').first()
+    7) <div class="col-md-6">…</div> aka locator('.row > div:nth-child(2)').first()
+    8) <div class="detailscradbb">…</div> aka locator('.detailscradbb')
+    9) <div class="TenantDetailsdiv">…</div> aka getByText('Tenant Details Select State')
+    10) <div class="row formstfivediv">…</div> aka locator('#step_four_form div').filter({ hasText: 'Select State Alabama Alaska' }).nth(1)
+    ...
+
+Call log:
+  - waiting for locator('div:has-text("Alaska")') to be visible
+
+Custom dropdown was opened but no suitable option could be selected

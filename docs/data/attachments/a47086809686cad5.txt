@@ -1,0 +1,4 @@
+Verifying: https://bluebirdstorage.ca/
+- Page loaded for https://bluebirdstorage.ca/
+- Title verified for https://bluebirdstorage.ca/: "Bluebird Self Storage | Search Self Storage Near You"
+- Logo with role 'link' and name 'logo' not found for https://bluebirdstorage.ca/, checking for alternative logo selectors...

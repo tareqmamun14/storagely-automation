@@ -1,0 +1,8 @@
+
+Running test for Storage Facility: https://rhino-storage.com/storage-units/louisiana/covington/philip-drive
+Company: rhino- Storage
+Platform: SiteLink
+Found a button with text: "Join Waitlist"
+Clicked "Join Waitlist" button
+Closed the modal
+Test finished after handling "Join Waitlist"

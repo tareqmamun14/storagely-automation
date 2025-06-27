@@ -1,0 +1,122 @@
+Dropdown trigger failed: Error: locator.isVisible: Error: strict mode violation: locator('div:has-text("Select State")') resolved to 13 elements:
+    1) <div class="wrapper1">…</div> aka locator('div').filter({ hasText: 'All Locations Aurora | Red Rocks Self Storage Colorado Springs Chardonnay Grove' }).first()
+    2) <div class="rentContent">…</div> aka locator('div').filter({ hasText: 'All Locations Aurora | Red Rocks Self Storage Colorado Springs Chardonnay Grove' }).nth(1)
+    3) <div class="brand--theme__wrapper">…</div> aka locator('.brand--theme__wrapper')
+    4) <div class="newrentalstepfivemain">…</div> aka locator('.newrentalstepfivemain')
+    5) <div class="container">…</div> aka locator('.newrentalstepfivemain > .container')
+    6) <div class="row">…</div> aka locator('.row').first()
+    7) <div class="col-md-6">…</div> aka locator('.row > div:nth-child(2)').first()
+    8) <div class="detailscradbb">…</div> aka locator('.detailscradbb')
+    9) <div class="TenantDetailsdiv">…</div> aka getByText('Tenant Details Select State')
+    10) <div class="row formstfivediv">…</div> aka locator('#step_four_form div').filter({ hasText: 'Select State Alabama Alaska' }).nth(1)
+    ...
+
+Call log:
+    - checking visibility of locator('div:has-text("Select State")')
+
+Option selector failed for Alabama: TimeoutError: locator.waitFor: Timeout 2000ms exceeded.
+Call log:
+  - waiting for getByText('Alabama', { exact: true }) to be visible
+    9 × locator resolved to hidden <option value="Alabama">Alabama</option>
+
+Option selector failed for Alabama: TimeoutError: locator.waitFor: Timeout 2000ms exceeded.
+Call log:
+  - waiting for locator('text=Alabama') to be visible
+    9 × locator resolved to hidden <option value="Alabama">Alabama</option>
+
+Option selector failed for Alabama: Error: locator.waitFor: Error: strict mode violation: locator('div:has-text("Alabama")') resolved to 13 elements:
+    1) <div class="wrapper1">…</div> aka locator('div').filter({ hasText: 'All Locations Aurora | Red Rocks Self Storage Colorado Springs Chardonnay Grove' }).first()
+    2) <div class="rentContent">…</div> aka locator('div').filter({ hasText: 'All Locations Aurora | Red Rocks Self Storage Colorado Springs Chardonnay Grove' }).nth(1)
+    3) <div class="brand--theme__wrapper">…</div> aka locator('.brand--theme__wrapper')
+    4) <div class="newrentalstepfivemain">…</div> aka locator('.newrentalstepfivemain')
+    5) <div class="container">…</div> aka locator('.newrentalstepfivemain > .container')
+    6) <div class="row">…</div> aka locator('.row').first()
+    7) <div class="col-md-6">…</div> aka locator('.row > div:nth-child(2)').first()
+    8) <div class="detailscradbb">…</div> aka locator('.detailscradbb')
+    9) <div class="TenantDetailsdiv">…</div> aka getByText('Tenant Details Select State')
+    10) <div class="row formstfivediv">…</div> aka locator('#step_four_form div').filter({ hasText: 'Select State Alabama Alaska' }).nth(1)
+    ...
+
+Call log:
+  - waiting for locator('div:has-text("Alabama")') to be visible
+
+Option selector failed for Alaska: TimeoutError: locator.waitFor: Timeout 2000ms exceeded.
+Call log:
+  - waiting for getByText('Alaska', { exact: true }) to be visible
+    9 × locator resolved to hidden <option value="Alaska">Alaska</option>
+
+Option selector failed for Alaska: TimeoutError: locator.waitFor: Timeout 2000ms exceeded.
+Call log:
+  - waiting for locator('text=Alaska') to be visible
+    9 × locator resolved to hidden <option value="Alaska">Alaska</option>
+
+Option selector failed for Alaska: Error: locator.waitFor: Error: strict mode violation: locator('div:has-text("Alaska")') resolved to 13 elements:
+    1) <div class="wrapper1">…</div> aka locator('div').filter({ hasText: 'All Locations Aurora | Red Rocks Self Storage Colorado Springs Chardonnay Grove' }).first()
+    2) <div class="rentContent">…</div> aka locator('div').filter({ hasText: 'All Locations Aurora | Red Rocks Self Storage Colorado Springs Chardonnay Grove' }).nth(1)
+    3) <div class="brand--theme__wrapper">…</div> aka locator('.brand--theme__wrapper')
+    4) <div class="newrentalstepfivemain">…</div> aka locator('.newrentalstepfivemain')
+    5) <div class="container">…</div> aka locator('.newrentalstepfivemain > .container')
+    6) <div class="row">…</div> aka locator('.row').first()
+    7) <div class="col-md-6">…</div> aka locator('.row > div:nth-child(2)').first()
+    8) <div class="detailscradbb">…</div> aka locator('.detailscradbb')
+    9) <div class="TenantDetailsdiv">…</div> aka getByText('Tenant Details Select State')
+    10) <div class="row formstfivediv">…</div> aka locator('#step_four_form div').filter({ hasText: 'Select State Alabama Alaska' }).nth(1)
+    ...
+
+Call log:
+  - waiting for locator('div:has-text("Alaska")') to be visible
+
+Custom dropdown was opened but no suitable option could be selected
+Test failed for https://test.staging.storagely-api.com/red-rocks-self-storage/storage-units/colorado/aurora/east-14th-avenue: locator.type: Test timeout of 120000ms exceeded.
+Call log:
+  - waiting for getByPlaceholder('MM / YY')
+    - locator resolved to <input value="" type="text" maxlength="7" class="inputmmyy" id="card_expire_T" name="card_expire" placeholder="MM / YY"/>
+  - elementHandle.type("05 / 55")
+
+    at PaymentDetailsPage.fillPaymentDetails (C:\Users\tareq\OneDrive\Documents\GitHub\storagely-automation\pages\PaymentDetailsPage.ts:132:32)
+    at C:\Users\tareq\OneDrive\Documents\GitHub\storagely-automation\tests\rent-reservation.spec.ts:79:9 {
+  [Symbol(step)]: {
+    stepId: 'pw:api@85',
+    location: {
+      file: 'C:\\Users\\tareq\\OneDrive\\Documents\\GitHub\\storagely-automation\\pages\\PaymentDetailsPage.ts',
+      line: 132,
+      column: 32,
+      function: 'PaymentDetailsPage.fillPaymentDetails'
+    },
+    category: 'pw:api',
+    title: "locator.getByPlaceholder('MM / YY').type(05 / 55)",
+    apiName: 'locator.type',
+    params: {
+      selector: 'internal:attr=[placeholder="MM / YY"i]',
+      text: '05 / 55',
+      strict: true,
+      delay: 400
+    },
+    boxedStack: undefined,
+    steps: [],
+    attachmentIndices: [],
+    info: TestStepInfoImpl {
+      annotations: [],
+      _testInfo: [TestInfoImpl],
+      _stepId: 'pw:api@85'
+    },
+    complete: [Function: complete],
+    endWallTime: 1750700703413,
+    error: {
+      message: 'Error: locator.type: Test timeout of 120000ms exceeded.\n' +
+        'Call log:\n' +
+        "\x1B[2m  - waiting for getByPlaceholder('MM / YY')\x1B[22m\n" +
+        '\x1B[2m    - locator resolved to <input value="" type="text" maxlength="7" class="inputmmyy" id="card_expire_T" name="card_expire" placeholder="MM / YY"/>\x1B[22m\n' +
+        '\x1B[2m  - elementHandle.type("05 / 55")\x1B[22m\n',
+      stack: 'Error: locator.type: Test timeout of 120000ms exceeded.\n' +
+        'Call log:\n' +
+        "\x1B[2m  - waiting for getByPlaceholder('MM / YY')\x1B[22m\n" +
+        '\x1B[2m    - locator resolved to <input value="" type="text" maxlength="7" class="inputmmyy" id="card_expire_T" name="card_expire" placeholder="MM / YY"/>\x1B[22m\n' +
+        '\x1B[2m  - elementHandle.type("05 / 55")\x1B[22m\n' +
+        '\n' +
+        '    at PaymentDetailsPage.fillPaymentDetails (C:\\Users\\tareq\\OneDrive\\Documents\\GitHub\\storagely-automation\\pages\\PaymentDetailsPage.ts:132:32)\n' +
+        '    at C:\\Users\\tareq\\OneDrive\\Documents\\GitHub\\storagely-automation\\tests\\rent-reservation.spec.ts:79:9',
+      cause: undefined
+    }
+  }
+}
