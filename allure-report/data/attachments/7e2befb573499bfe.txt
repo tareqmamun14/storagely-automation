@@ -1,0 +1,14 @@
+
+Running test for Storage Facility: https://test.staging.storagely-api.com/mini-mall-storage/storage-units/mini-mall/training/ltrain
+Company: Mini Mall Storage
+Platform: Unknown
+Found a button with text: "RESERVE"
+Clicked "RESERVE" button
+Closed the modal
+Clicking button: rent
+No custom dropdown trigger found
+Attempting to select province: Alberta
+Successfully selected province: Alberta
+Successfully filled zip code: 99540
+Datepicker did not appear within the timeout, skipping this step.
+Screenshot saved: error-mini-mall-storage-1750790708624.png

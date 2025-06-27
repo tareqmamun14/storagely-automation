@@ -1,0 +1,6 @@
+
+Running test for Storage Facility: https://test.staging.storagely-api.com/distinct-storage/storage-units/connecticut/new-milford/kent-road
+Company: Distinct Storage
+Platform: Unknown
+No RESERVE or Join Waitlist button found, proceeding with the rest of the test.
+Screenshot saved: error-distinct-storage-1750973543945.png

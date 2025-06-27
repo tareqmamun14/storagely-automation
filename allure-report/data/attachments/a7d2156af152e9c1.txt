@@ -1,0 +1,48 @@
+Test failed for https://test.staging.storagely-api.com/radiant-storage/storage-units/alabama/tuscaloosa/8th-avenue: page.goto: Timeout 45000ms exceeded.
+Call log:
+  - navigating to "https://test.staging.storagely-api.com/radiant-storage/storage-units/alabama/tuscaloosa/8th-avenue?cacheBust=1750700837007-gghnbk15wq9", waiting until "domcontentloaded"
+
+    at StorageListingPage.goto (C:\Users\tareq\OneDrive\Documents\GitHub\storagely-automation\pages\BasePage.ts:32:21)
+    at StorageListingPage.navigateWithCacheBusting (C:\Users\tareq\OneDrive\Documents\GitHub\storagely-automation\pages\StorageListingPage.ts:44:16)
+    at C:\Users\tareq\OneDrive\Documents\GitHub\storagely-automation\tests\rent-reservation.spec.ts:40:34 {
+  name: 'TimeoutError',
+  [Symbol(step)]: {
+    stepId: 'pw:api@10',
+    location: {
+      file: 'C:\\Users\\tareq\\OneDrive\\Documents\\GitHub\\storagely-automation\\pages\\BasePage.ts',
+      line: 32,
+      column: 21,
+      function: 'StorageListingPage.goto'
+    },
+    category: 'pw:api',
+    title: 'page.goto(https://test.staging.storagely-api.com/radiant-storage/storage-units/alabama/tuscaloosa/8th-avenue?cacheBust=1750700837007-gghnbk15wq9)',
+    apiName: 'page.goto',
+    params: {
+      url: 'https://test.staging.storagely-api.com/radiant-storage/storage-units/alabama/tuscaloosa/8th-avenue?cacheBust=1750700837007-gghnbk15wq9',
+      waitUntil: 'domcontentloaded'
+    },
+    boxedStack: undefined,
+    steps: [],
+    attachmentIndices: [],
+    info: TestStepInfoImpl {
+      annotations: [],
+      _testInfo: [TestInfoImpl],
+      _stepId: 'pw:api@10'
+    },
+    complete: [Function: complete],
+    endWallTime: 1750700882107,
+    error: {
+      message: 'TimeoutError: page.goto: Timeout 45000ms exceeded.\n' +
+        'Call log:\n' +
+        '\x1B[2m  - navigating to "https://test.staging.storagely-api.com/radiant-storage/storage-units/alabama/tuscaloosa/8th-avenue?cacheBust=1750700837007-gghnbk15wq9", waiting until "domcontentloaded"\x1B[22m\n',
+      stack: 'TimeoutError: page.goto: Timeout 45000ms exceeded.\n' +
+        'Call log:\n' +
+        '\x1B[2m  - navigating to "https://test.staging.storagely-api.com/radiant-storage/storage-units/alabama/tuscaloosa/8th-avenue?cacheBust=1750700837007-gghnbk15wq9", waiting until "domcontentloaded"\x1B[22m\n' +
+        '\n' +
+        '    at StorageListingPage.goto (C:\\Users\\tareq\\OneDrive\\Documents\\GitHub\\storagely-automation\\pages\\BasePage.ts:32:21)\n' +
+        '    at StorageListingPage.navigateWithCacheBusting (C:\\Users\\tareq\\OneDrive\\Documents\\GitHub\\storagely-automation\\pages\\StorageListingPage.ts:44:16)\n' +
+        '    at C:\\Users\\tareq\\OneDrive\\Documents\\GitHub\\storagely-automation\\tests\\rent-reservation.spec.ts:40:34',
+      cause: undefined
+    }
+  }
+}

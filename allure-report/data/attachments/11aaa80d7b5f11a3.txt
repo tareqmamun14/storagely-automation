@@ -1,0 +1,91 @@
+
+Running test for Storage Facility: https://test.staging.storagely-api.com/red-rocks-self-storage/storage-units/colorado/aurora/east-14th-avenue
+Company: Red Rocks Self Storage
+Platform: Unknown
+Found a button with text: "RESERVE"
+Clicked "RESERVE" button
+Closed the modal
+Clicking button: rent
+Found dropdown trigger, attempting to click
+Found #province dropdown, checking available options and attempting selection
+Available options: [
+  'Select State',
+  'Alabama',
+  'Alaska',
+  'Arizona',
+  'Arkansas',
+  'California',
+  'Colorado',
+  'Connecticut',
+  'Delaware',
+  'District of Columbia (DC)',
+  'Florida',
+  'Georgia',
+  'Hawaii',
+  'Idaho',
+  'Illinois',
+  'Indiana',
+  'Iowa',
+  'Kansas',
+  'Kentucky',
+  'Louisiana',
+  'Maine',
+  'Maryland',
+  'Massachusetts',
+  'Michigan',
+  'Minnesota',
+  'Mississippi',
+  'Missouri',
+  'Montana',
+  'Nebraska',
+  'Nevada',
+  'New Hampshire',
+  'New Jersey',
+  'New Mexico',
+  'New York',
+  'North Carolina',
+  'North Dakota',
+  'Ohio',
+  'Oklahoma',
+  'Oregon',
+  'Pennsylvania',
+  'Rhode Island',
+  'South Carolina',
+  'South Dakota',
+  'Tennessee',
+  'Texas',
+  'Utah',
+  'Vermont',
+  'Virginia',
+  'Washington',
+  'West Virginia',
+  'Wisconsin',
+  'Wyoming'
+]
+Option Alberta not available in this dropdown
+Successfully selected Alabama using #province selector
+Successfully filled zip code: 99540
+Clicked the datepicker element
+Lease Details section not found, skipping
+
+
+======== PAYMENT VERIFICATION TEST RESULTS ========
+------------------------------------------------
+Total Tests: 1
+✅ Successful: 0
+❌ Failed: 1
+------------------------------------------------
+
+ERROR MESSAGES BY COMPANY:
+
+Red Rocks Self Storage (Unknown):
+URL: https://test.staging.storagely-api.com/red-rocks-self-storage/storage-units/colorado/aurora/east-14th-avenue
+Error: Test execution error: locator.type: Test timeout of 120000ms exceeded.
+Call log:
+  - waiting for getByPlaceholder('MM / YY')
+    - locator resolved to <input value="" type="text" maxlength="7" class="inputmmyy" id="card_expire_T" name="card_expire" placeholder="MM / YY"/>
+  - elementHandle.type("05 / 55")
+
+------------------------------------------------
+
+

@@ -1,0 +1,45 @@
+
+Running test for Storage Facility: https://test.staging.storagely-api.com/rhino-storage/storage-units/louisiana/covington/philip-drive
+Company: Rhino Storage
+Platform: Unknown
+Found a button with text: "Join Waitlist"
+Clicked "Join Waitlist" button
+Closed the modal
+Test finished after handling "Join Waitlist"
+
+
+======== PAYMENT VERIFICATION TEST RESULTS ========
+------------------------------------------------
+Total Tests: 5
+✅ Successful: 5
+❌ Failed: 0
+------------------------------------------------
+
+ERROR MESSAGES BY COMPANY:
+
+Distinct Storage (Unknown):
+URL: https://test.staging.storagely-api.com/distinct-storage/storage-units/connecticut/new-milford/kent-road
+Error: Failed to process payment, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (Payrix): Error for field `payment.number` (Error code 15: invalid_card_number): Invalid credit card/debit card number
+------------------------------------------------
+
+Storage Star (Unknown):
+URL: https://test.staging.storagely-api.com/storage-star/storage-units/colorado/colorado-springs/aerotech-drive
+Error: The Payment failed. Invalid Account Data: Account number has incorrect check digit
+------------------------------------------------
+
+Bluebirdstorage (Unknown):
+URL: https://test.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/mayland
+Error: (-98) Invalid username/password
+------------------------------------------------
+
+Sunbirdstorage (Unknown):
+URL: https://test.staging.storagely-api.com/sunbirdstorage/storage-units/nc/winston-salem/country-club
+Error: (-98) Invalid username/password
+------------------------------------------------
+
+Rhino Storage (Unknown):
+URL: https://test.staging.storagely-api.com/rhino-storage/storage-units/louisiana/covington/philip-drive
+Error: No error - Join Waitlist option
+------------------------------------------------
+
+
