@@ -1,0 +1,21 @@
+# Test Reports and Results
+
+allure-results/
+allure-report/
+test-results/
+blob-report/
+playwright/.cache/
+playwright-report/
+screenshots/
+videos/
+
+# Dependencies
+node_modules/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# IDE Files
+.vscode/
+.idea/

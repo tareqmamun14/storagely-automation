@@ -1,0 +1,30 @@
+{
+  "name": "storagely-automation",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:ui": "npx playwright test --ui",
+    "test:headed": "npx playwright test --headed",
+    "test:debug": "npx playwright test --debug",
+    "test:allure-only": "npx playwright test --reporter=allure-playwright",
+    "allure:generate": "npx allure generate allure-results --clean -o docs",
+    "allure:open": "npx allure open docs", 
+    "allure:serve": "npx allure serve allure-results",
+    "allure:clean": "rmdir /s /q allure-results 2>nul & rmdir /s /q docs 2>nul & echo Cleaned allure directories",
+    "deploy:only": "node deploy-only.js",
+    "test:deploy": "npm run test:allure-only && npm run allure:generate && node quick-deploy.js",
+    "test:allure:serve": "npm run test:allure-only && npm run allure:serve",
+    "test:ci": "npx playwright test --reporter=allure-playwright,html,junit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.54.2",
+    "@types/node": "^20.17.32",
+    "allure-commandline": "^2.25.0",
+    "allure-playwright": "^2.10.0"
+  }
+}

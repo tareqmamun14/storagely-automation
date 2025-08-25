@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "allowJs": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": ["@playwright/test", "node"], 
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["tests/**/*.ts", "playwright.config.ts", "tests/payment-verification.spec.js", "zunk/payment-verification2.spec.ts"],
+  "exclude": ["node_modules"]
+}
