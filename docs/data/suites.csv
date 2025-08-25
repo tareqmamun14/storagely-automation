@@ -1,0 +1,4 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","8725","Verify landing page for https://smartstorageohio.com/","chrome","Mon Aug 25 20:36:37 BDT 2025","passed","Mon Aug 25 20:36:45 BDT 2025","Storage Site Landing Page Verification","homePage-verification.spec.ts","",""
+"","8525","Verify landing page for https://modboxstorage.com/","chrome","Mon Aug 25 20:36:37 BDT 2025","passed","Mon Aug 25 20:36:45 BDT 2025","Storage Site Landing Page Verification","homePage-verification.spec.ts","",""
+"","5078","Verify landing page for https://ulok.com","chrome","Mon Aug 25 20:36:37 BDT 2025","failed","Mon Aug 25 20:36:42 BDT 2025","Storage Site Landing Page Verification","homePage-verification.spec.ts","",""
