@@ -1,0 +1,64 @@
+
+🏠 Starting contact page test for: https://ulok.com
+📞 Navigating to contact page: https://ulok.com/pages/contact?_cache_bust=1756158546581_dtvjmm0hzo
+⚠️  Failed to load https://ulok.com/pages/contact, error: page.goto: net::ERR_CERT_COMMON_NAME_INVALID at https://ulok.com/pages/contact?_cache_bust=1756158546581_dtvjmm0hzo
+Call log:
+  - navigating to "https://ulok.com/pages/contact?_cache_bust=1756158546581_dtvjmm0hzo", waiting until "domcontentloaded"
+
+❌ Contact page verification failed for: https://ulok.com
+   Error: Could not navigate to contact page: page.goto: net::ERR_CERT_COMMON_NAME_INVALID at https://ulok.com/pages/contact?_cache_bust=1756158546581_dtvjmm0hzo
+Call log:
+  - navigating to "https://ulok.com/pages/contact?_cache_bust=1756158546581_dtvjmm0hzo", waiting until "domcontentloaded"
+
+⚠️  Continuing with other sites...
+
+========================================================================================================================
+📞 CONTACT PAGE VERIFICATION RESULTS SUMMARY
+========================================================================================================================
+✅ Total Passed: 4
+❌ Total Failed: 1
+📋 Total Tests: 5
+========================================================================================================================
+
+📊 DETAILED RESULTS TABLE:
+┌─────┬─────────────────────────────────────────────────────────┬──────────┬─────────────────────────────────────────────┐
+│ No. │ Storage Site                                            │ Status   │ Found Elements / Error                      │
+├─────┼─────────────────────────────────────────────────────────┼──────────┼─────────────────────────────────────────────┤
+│   1 │ distinctstorage.com/                                    │ ✅ PASS  │ Contact Heading, Email Input, Message Textarea +9 more │
+│   2 │ rhino-storage.com/                                      │ ✅ PASS  │ Contact Heading, Get In Touch Heading, Email Input +12 more │
+│   3 │ storagedepotla.com/                                     │ ✅ PASS  │ Contact Heading, Get In Touch Heading, Need Assistance Heading +12 more │
+│   4 │ modboxstorage.com/                                      │ ✅ PASS  │ Contact Heading, Email Input, Message Textarea +6 more │
+│   5 │ ulok.com                                                │ ❌ FAIL  │ Could not navigate to contact page: page... │
+└─────┴─────────────────────────────────────────────────────────┴──────────┴─────────────────────────────────────────────┘
+
+🔍 FAILED SITES DETAILS:
+
+1. ❌ https://ulok.com
+   Contact URL: https://ulok.com/pages/contact
+   Error: Could not navigate to contact page: page.goto: net::ERR_CERT_COMMON_NAME_INVALID at https://ulok.com/pages/contact?_cache_bust=1756158546581_dtvjmm0hzo
+Call log:
+  - navigating to "https://ulok.com/pages/contact?_cache_bust=1756158546581_dtvjmm0hzo", waiting until "domcontentloaded"
+
+
+🎉 SUCCESSFUL SITES SUMMARY:
+
+1. ✅ https://distinctstorage.com/
+   Contact URL: https://distinctstorage.com//pages/contact
+   Found Elements (12): Contact Heading, Email Input, Message Textarea, Submit Button, Contact Form, Phone Heading, Corporate Address Heading, Phone Text, Address Text, Hours Text, Map Element, Contact Text
+
+2. ✅ https://rhino-storage.com/
+   Contact URL: https://rhino-storage.com//pages/contact
+   Found Elements (15): Contact Heading, Get In Touch Heading, Email Input, Message Textarea, Submit Button, Contact Form, Phone Link, Email Link, Phone Heading, Email Heading, Corporate Address Heading, Phone Text, Address Text, Map Element, Contact Text
+
+3. ✅ https://storagedepotla.com/
+   Contact URL: https://storagedepotla.com//pages/contact
+   Found Elements (15): Contact Heading, Get In Touch Heading, Need Assistance Heading, Email Input, Message Textarea, Submit Button, Contact Form, Phone Link, Email Link, Phone Heading, Email Heading, Social Links Heading, Phone Text, Map Element, Contact Text
+
+4. ✅ https://modboxstorage.com/
+   Contact URL: https://modboxstorage.com//pages/contact
+   Found Elements (9): Contact Heading, Email Input, Message Textarea, Submit Button, Contact Form, Email Heading, Hours Text, Map Element, Contact Text
+
+========================================================================================================================
+🏁 CONTACT PAGE VERIFICATION COMPLETE - 4/5 sites passed
+========================================================================================================================
+

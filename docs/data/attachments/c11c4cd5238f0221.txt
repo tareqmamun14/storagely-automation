@@ -1,0 +1,491 @@
+# Page snapshot
+
+```yaml
+- banner:
+  - navigation:
+    - link "logo":
+      - /url: https://app.storagely.io/allpurposestorage
+      - img "logo"
+    - list:
+      - listitem:
+        - button "Find Storage"
+      - listitem:
+        - button "Storage Types"
+      - listitem:
+        - button "Resources"
+      - listitem:
+        - link "About":
+          - /url: https://app.storagely.io/allpurposestorage/about-our-storage-facility
+      - listitem:
+        - link "Contact":
+          - /url: https://app.storagely.io/allpurposestorage/contact
+    - link "My Account":
+      - /url: https://myaccount.storeallpurpose.com/
+    - link "Rent Now":
+      - /url: https://app.storagely.io/allpurposestorage/storage-units-near-me
+- button "Slide 1"
+- button "Slide 2"
+- button "Slide 3"
+- button "Slide 4"
+- button "Slide 5"
+- button "Slide 6"
+- img "Belgrade self storage units"
+- button "Previous"
+- button "Next"
+- heading "Self Storage Units in Belgrade, ME" [level=1]:
+  - strong: Self Storage Units in Belgrade, ME
+- heading "All-Purpose Storage | Belgrade" [level=2]
+- link "688 Manchester Road Belgrade, Maine 04917":
+  - /url: https://www.google.com/maps/place/All+Purpose+Storage/@44.4292986,-69.8569302,17z/data=!3m1!4b1!4m6!3m5!1s0x4cb1f7895cf64707:0xc43fc089513629ea!8m2!3d44.4292986!4d-69.8543553!16s%2Fg%2F11rmv4xj3c?entry=ttu&g_ep=EgoyMDI0MTExMy4xIKXMDSoASAFQAw%3D%3D
+- link "(207) 386-8120":
+  - /url: tel:(207) 386-8120
+- button "Customer Care View Hours"
+- button "Access View Hours"
+- img
+- img
+- img
+- img
+- img
+- paragraph: 25 Reviews
+- link "Call":
+  - /url: tel:(207) 386-8120
+- link "Email":
+  - /url: mailto:belgrade@storeallpurpose.com
+- link "Directions":
+  - /url: https://www.google.com/maps/place/All+Purpose+Storage/@44.4292986,-69.8569302,17z/data=!3m1!4b1!4m6!3m5!1s0x4cb1f7895cf64707:0xc43fc089513629ea!8m2!3d44.4292986!4d-69.8543553!16s%2Fg%2F11rmv4xj3c?entry=ttu&g_ep=EgoyMDI0MTExMy4xIKXMDSoASAFQAw%3D%3D
+- link "What Size Do I Need?":
+  - /url: "#"
+- button "Sizes"
+- button "Deals"
+- button "Type"
+- button "Climate"
+- button "Reset filters"
+- text: "Sort by: Size Small to Large"
+- menu
+- img "Banner Desktop"
+- table:
+  - rowgroup:
+    - row "10 x 5 storage image Drive Up Access 10' WIDTH x 5' DEPTH What Size Do I Need? Your First Month is 98 Cents! $0.98/month Promo Price $57.00/month Standard Price Month to Month - No Long Term Commitments 1 unit available rent reserve No commitment required. Ground Floor Roll Up Door Drive-Up Access":
+      - cell "10 x 5 storage image Drive Up Access 10' WIDTH x 5' DEPTH What Size Do I Need? Your First Month is 98 Cents! $0.98/month Promo Price $57.00/month Standard Price Month to Month - No Long Term Commitments 1 unit available rent reserve No commitment required. Ground Floor Roll Up Door Drive-Up Access":
+        - link "10 x 5 storage image":
+          - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_24337146.webp
+          - img "10 x 5 storage image"
+        - text: Drive Up Access
+        - heading "10' WIDTH x 5' DEPTH" [level=2]
+        - paragraph:
+          - link "What Size Do I Need?":
+            - /url: "#"
+        - paragraph: Your First Month is 98 Cents!
+        - heading "$0.98/month" [level=3]
+        - text: Promo Price
+        - heading "$57.00/month" [level=3]
+        - text: Standard Price
+        - paragraph: Month to Month - No Long Term Commitments
+        - paragraph: 1 unit available
+        - link "rent":
+          - /url: https://app.storagely.io/allpurposestorage/storage-units/maine/belgrade/manchester-road/step_four?location=0740a300-0a7c-43ae-aa04-bf6f24cdb012&unit=4327312&type=rent&con=a4305969-7800-41fb-a41f-9024d88d0794&is_sitelink=1&site_locations_id=61917
+        - text: reserve No commitment required. Ground Floor Roll Up Door Drive-Up Access
+    - row "10 x 6 storage image Drive Up Access 10' WIDTH x 6' DEPTH What Size Do I Need? Your First Month is 98 Cents! $0.98/month Promo Price $59.00/month Standard Price Month to Month - No Long Term Commitments rent reserve No commitment required. Ground Floor Roll Up Door Drive-Up Access":
+      - cell "10 x 6 storage image Drive Up Access 10' WIDTH x 6' DEPTH What Size Do I Need? Your First Month is 98 Cents! $0.98/month Promo Price $59.00/month Standard Price Month to Month - No Long Term Commitments rent reserve No commitment required. Ground Floor Roll Up Door Drive-Up Access":
+        - link "10 x 6 storage image":
+          - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_24337146.webp
+          - img "10 x 6 storage image"
+        - text: Drive Up Access
+        - heading "10' WIDTH x 6' DEPTH" [level=2]
+        - paragraph:
+          - link "What Size Do I Need?":
+            - /url: "#"
+        - paragraph: Your First Month is 98 Cents!
+        - heading "$0.98/month" [level=3]
+        - text: Promo Price
+        - heading "$59.00/month" [level=3]
+        - text: Standard Price
+        - paragraph: Month to Month - No Long Term Commitments
+        - link "rent":
+          - /url: https://app.storagely.io/allpurposestorage/storage-units/maine/belgrade/manchester-road/step_four?location=0740a300-0a7c-43ae-aa04-bf6f24cdb012&unit=3586050&type=rent&con=a4305969-7800-41fb-a41f-9024d88d0794&is_sitelink=1&site_locations_id=61917
+        - text: reserve No commitment required. Ground Floor Roll Up Door Drive-Up Access
+    - row "10 x 10 storage image Drive Up Access 10' WIDTH x 10' DEPTH What Size Do I Need? Your First Month is 98 Cents! $0.98/month Promo Price $82.00/month Standard Price Month to Month - No Long Term Commitments rent reserve No commitment required. Ground Floor Roll Up Door Drive-Up Access":
+      - cell "10 x 10 storage image Drive Up Access 10' WIDTH x 10' DEPTH What Size Do I Need? Your First Month is 98 Cents! $0.98/month Promo Price $82.00/month Standard Price Month to Month - No Long Term Commitments rent reserve No commitment required. Ground Floor Roll Up Door Drive-Up Access":
+        - link "10 x 10 storage image":
+          - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_591465512.webp
+          - img "10 x 10 storage image"
+        - text: Drive Up Access
+        - heading "10' WIDTH x 10' DEPTH" [level=2]
+        - paragraph:
+          - link "What Size Do I Need?":
+            - /url: "#"
+        - paragraph: Your First Month is 98 Cents!
+        - heading "$0.98/month" [level=3]
+        - text: Promo Price
+        - heading "$82.00/month" [level=3]
+        - text: Standard Price
+        - paragraph: Month to Month - No Long Term Commitments
+        - link "rent":
+          - /url: https://app.storagely.io/allpurposestorage/storage-units/maine/belgrade/manchester-road/step_four?location=0740a300-0a7c-43ae-aa04-bf6f24cdb012&unit=3586040&type=rent&con=a4305969-7800-41fb-a41f-9024d88d0794&is_sitelink=1&site_locations_id=61917
+        - text: reserve No commitment required. Ground Floor Roll Up Door Drive-Up Access
+    - row "10 x 15 storage image Drive Up Access 10' WIDTH x 15' DEPTH What Size Do I Need? Your First Month is 98 Cents! $0.98/month Promo Price $102.00/month Standard Price Month to Month - No Long Term Commitments rent reserve No commitment required. Ground Floor Roll Up Door Drive-Up Access":
+      - cell "10 x 15 storage image Drive Up Access 10' WIDTH x 15' DEPTH What Size Do I Need? Your First Month is 98 Cents! $0.98/month Promo Price $102.00/month Standard Price Month to Month - No Long Term Commitments rent reserve No commitment required. Ground Floor Roll Up Door Drive-Up Access":
+        - link "10 x 15 storage image":
+          - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1832131814.webp
+          - img "10 x 15 storage image"
+        - text: Drive Up Access
+        - heading "10' WIDTH x 15' DEPTH" [level=2]
+        - paragraph:
+          - link "What Size Do I Need?":
+            - /url: "#"
+        - paragraph: Your First Month is 98 Cents!
+        - heading "$0.98/month" [level=3]
+        - text: Promo Price
+        - heading "$102.00/month" [level=3]
+        - text: Standard Price
+        - paragraph: Month to Month - No Long Term Commitments
+        - link "rent":
+          - /url: https://app.storagely.io/allpurposestorage/storage-units/maine/belgrade/manchester-road/step_four?location=0740a300-0a7c-43ae-aa04-bf6f24cdb012&unit=3586039&type=rent&con=a4305969-7800-41fb-a41f-9024d88d0794&is_sitelink=1&site_locations_id=61917
+        - text: reserve No commitment required. Ground Floor Roll Up Door Drive-Up Access
+    - row "10 x 20 storage image Drive Up Access 10' WIDTH x 20' DEPTH What Size Do I Need? Your First Month is 98 Cents! $0.98/month Promo Price $119.00/month Standard Price Month to Month - No Long Term Commitments rent reserve No commitment required. Ground Floor Roll Up Door Drive-Up Access":
+      - cell "10 x 20 storage image Drive Up Access 10' WIDTH x 20' DEPTH What Size Do I Need? Your First Month is 98 Cents! $0.98/month Promo Price $119.00/month Standard Price Month to Month - No Long Term Commitments rent reserve No commitment required. Ground Floor Roll Up Door Drive-Up Access":
+        - link "10 x 20 storage image":
+          - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_50039330.webp
+          - img "10 x 20 storage image"
+        - text: Drive Up Access
+        - heading "10' WIDTH x 20' DEPTH" [level=2]
+        - paragraph:
+          - link "What Size Do I Need?":
+            - /url: "#"
+        - paragraph: Your First Month is 98 Cents!
+        - heading "$0.98/month" [level=3]
+        - text: Promo Price
+        - heading "$119.00/month" [level=3]
+        - text: Standard Price
+        - paragraph: Month to Month - No Long Term Commitments
+        - link "rent":
+          - /url: https://app.storagely.io/allpurposestorage/storage-units/maine/belgrade/manchester-road/step_four?location=0740a300-0a7c-43ae-aa04-bf6f24cdb012&unit=3586058&type=rent&con=a4305969-7800-41fb-a41f-9024d88d0794&is_sitelink=1&site_locations_id=61917
+        - text: reserve No commitment required. Ground Floor Roll Up Door Drive-Up Access
+    - row "10 x 26 storage image Drive Up Access 10' WIDTH x 26' DEPTH What Size Do I Need? Your First Month is 98 Cents! $0.98/month Promo Price $159.00/month Standard Price Month to Month - No Long Term Commitments rent reserve No commitment required. Ground Floor Roll Up Door Drive-Up Access":
+      - cell "10 x 26 storage image Drive Up Access 10' WIDTH x 26' DEPTH What Size Do I Need? Your First Month is 98 Cents! $0.98/month Promo Price $159.00/month Standard Price Month to Month - No Long Term Commitments rent reserve No commitment required. Ground Floor Roll Up Door Drive-Up Access":
+        - link "10 x 26 storage image":
+          - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_123891262.webp
+          - img "10 x 26 storage image"
+        - text: Drive Up Access
+        - heading "10' WIDTH x 26' DEPTH" [level=2]
+        - paragraph:
+          - link "What Size Do I Need?":
+            - /url: "#"
+        - paragraph: Your First Month is 98 Cents!
+        - heading "$0.98/month" [level=3]
+        - text: Promo Price
+        - heading "$159.00/month" [level=3]
+        - text: Standard Price
+        - paragraph: Month to Month - No Long Term Commitments
+        - link "rent":
+          - /url: https://app.storagely.io/allpurposestorage/storage-units/maine/belgrade/manchester-road/step_four?location=0740a300-0a7c-43ae-aa04-bf6f24cdb012&unit=3586030&type=rent&con=a4305969-7800-41fb-a41f-9024d88d0794&is_sitelink=1&site_locations_id=61917
+        - text: reserve No commitment required. Ground Floor Roll Up Door Drive-Up Access
+    - row "10 x 12 storage image Drive Up Access 10' WIDTH x 12' DEPTH What Size Do I Need? Your First Month is 98 Cents! $0.98/month Promo Price $137.00/month Standard Price Month to Month - No Long Term Commitments JOIN THE WAITLIST Join our waitlist to be notified when a unit becomes available. Promotions apply at the time of rental. Ground Floor Roll Up Door Drive-Up Access":
+      - cell "10 x 12 storage image Drive Up Access 10' WIDTH x 12' DEPTH What Size Do I Need? Your First Month is 98 Cents! $0.98/month Promo Price $137.00/month Standard Price Month to Month - No Long Term Commitments JOIN THE WAITLIST Join our waitlist to be notified when a unit becomes available. Promotions apply at the time of rental. Ground Floor Roll Up Door Drive-Up Access":
+        - link "10 x 12 storage image":
+          - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_591465512.webp
+          - img "10 x 12 storage image"
+        - text: Drive Up Access
+        - heading "10' WIDTH x 12' DEPTH" [level=2]
+        - paragraph:
+          - link "What Size Do I Need?":
+            - /url: "#"
+        - paragraph: Your First Month is 98 Cents!
+        - heading "$0.98/month" [level=3]
+        - text: Promo Price
+        - heading "$137.00/month" [level=3]
+        - text: Standard Price
+        - paragraph: Month to Month - No Long Term Commitments
+        - button "JOIN THE WAITLIST"
+        - text: Join our waitlist to be notified when a unit becomes available. Promotions apply at the time of rental. Ground Floor Roll Up Door Drive-Up Access
+    - row "10 x 16 storage image Drive Up Access 10' WIDTH x 16' DEPTH What Size Do I Need? Your First Month is 98 Cents! $0.98/month Promo Price $129.00/month Standard Price Month to Month - No Long Term Commitments JOIN THE WAITLIST Join our waitlist to be notified when a unit becomes available. Promotions apply at the time of rental. Ground Floor Roll Up Door Drive-Up Access":
+      - cell "10 x 16 storage image Drive Up Access 10' WIDTH x 16' DEPTH What Size Do I Need? Your First Month is 98 Cents! $0.98/month Promo Price $129.00/month Standard Price Month to Month - No Long Term Commitments JOIN THE WAITLIST Join our waitlist to be notified when a unit becomes available. Promotions apply at the time of rental. Ground Floor Roll Up Door Drive-Up Access":
+        - link "10 x 16 storage image":
+          - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1832131814.webp
+          - img "10 x 16 storage image"
+        - text: Drive Up Access
+        - heading "10' WIDTH x 16' DEPTH" [level=2]
+        - paragraph:
+          - link "What Size Do I Need?":
+            - /url: "#"
+        - paragraph: Your First Month is 98 Cents!
+        - heading "$0.98/month" [level=3]
+        - text: Promo Price
+        - heading "$129.00/month" [level=3]
+        - text: Standard Price
+        - paragraph: Month to Month - No Long Term Commitments
+        - button "JOIN THE WAITLIST"
+        - text: Join our waitlist to be notified when a unit becomes available. Promotions apply at the time of rental. Ground Floor Roll Up Door Drive-Up Access
+    - row "10 x 30 storage image Drive Up Access 10' WIDTH x 30' DEPTH What Size Do I Need? Your First Month is 98 Cents! $0.98/month Promo Price $249.00/month Standard Price Month to Month - No Long Term Commitments JOIN THE WAITLIST Join our waitlist to be notified when a unit becomes available. Promotions apply at the time of rental. Ground Floor Roll Up Door Drive-Up Access":
+      - cell "10 x 30 storage image Drive Up Access 10' WIDTH x 30' DEPTH What Size Do I Need? Your First Month is 98 Cents! $0.98/month Promo Price $249.00/month Standard Price Month to Month - No Long Term Commitments JOIN THE WAITLIST Join our waitlist to be notified when a unit becomes available. Promotions apply at the time of rental. Ground Floor Roll Up Door Drive-Up Access":
+        - link "10 x 30 storage image":
+          - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_929181277.webp
+          - img "10 x 30 storage image"
+        - text: Drive Up Access
+        - heading "10' WIDTH x 30' DEPTH" [level=2]
+        - paragraph:
+          - link "What Size Do I Need?":
+            - /url: "#"
+        - paragraph: Your First Month is 98 Cents!
+        - heading "$0.98/month" [level=3]
+        - text: Promo Price
+        - heading "$249.00/month" [level=3]
+        - text: Standard Price
+        - paragraph: Month to Month - No Long Term Commitments
+        - button "JOIN THE WAITLIST"
+        - text: Join our waitlist to be notified when a unit becomes available. Promotions apply at the time of rental. Ground Floor Roll Up Door Drive-Up Access
+- heading "Customer Reviews" [level=2]
+- img
+- img
+- img
+- img
+- img
+- strong: "4.8"
+- text: 25 Reviews
+- link "Write a review":
+  - /url: https://www.google.com/maps/place/All+Purpose+Storage/@44.4292986,-69.8543553,17z/data=!4m8!3m7!1s0x4cb1f7895cf64707:0xc43fc089513629ea!8m2!3d44.4292986!4d-69.8543553!9m1!1b1!16s%2Fg%2F11rmv4xj3c?entry=ttu&g_ep=EgoyMDI0MTExOC4wIKXMDSoASAFQAw%3D%3D
+  - button "Write a review"
+- button "Previous": ←Previous
+- tabpanel:
+  - img
+  - img
+  - img
+  - img
+  - img
+  - img
+  - img "google review"
+  - paragraph: heather fletcher
+  - paragraph: Edited a year ago
+  - paragraph: Dianne did a great job and great customer service!
+- tabpanel:
+  - img
+  - img
+  - img
+  - img
+  - img
+  - img
+  - img "google review"
+  - paragraph: Laury Caron
+  - paragraph: Edited a year ago
+  - paragraph
+- img
+- img
+- img
+- img
+- img
+- img
+- img "google review"
+- paragraph: Keith
+- paragraph: 2 weeks ago
+- paragraph: Kathleen was wonderful and a big help getting me into a storage unit. Very helpful and was exceptional. Thanks again
+- button "Next": →Next
+- tablist:
+  - tab "1 of 4": • 1
+  - tab "2 of 4": • 2
+  - tab "3 of 4": • 3
+  - tab "4 of 4": • 4
+  - tab "5 of 4": • 5
+  - tab "6 of 4": • 6
+  - tab "7 of 4": • 7
+  - tab "8 of 4": • 8
+  - tab "9 of 4": • 9
+  - tab "10 of 4": • 10
+  - tab "11 of 4" [selected]: • 11
+  - tab "12 of 4": • 12
+- img "self storage units Belgrade"
+- img "storage facility"
+- img "Belgrade self storage units"
+- heading "About Belgrade | Belgrade" [level=2]
+- paragraph
+- paragraph: Contact us at All-Purpose Storage if you need unparalleled storage solutions in Belgrade, Maine. Our self storage units Belgrade location offer the perfect solution for safeguarding your belongings, whether you're moving, decluttering, or storing business inventory. Enjoy peace of mind with 24/7 security, climate-controlled options, and flexible rental terms tailored to your needs. Ready to reclaim space and simplify your life? Reserve your unit online or contact us today for personalized assistance from our expert storage team.
+- heading "Self Storage Units in Belgrade, ME" [level=3]
+- paragraph: Discover a wide range of self storage units Belgrade residents trust for both personal and commercial use. Located near Wadleigh Way and Wings Mills Road, close to the U.S. Army and Air Force Recruiting office, our Belgrade facility offers ground-floor storage units in multiple sizes, drive-up access, and secure RV, boat, and vehicle storage. Whether you're storing household items, seasonal equipment, business inventory, or personal belongings, All-Purpose Storage has a solution that fits your needs.
+- paragraph: Our self storage units in Belgrade ME are designed for convenience, security, and affordability. With month-to-month leasing options, no long-term commitments, and competitive pricing, storing your valuables has never been easier. Whether you're a homeowner, renter, business owner, or student, All-Purpose Storage delivers dependable storage options that work for every budget and lifestyle.
+- heading "Climate-Controlled Storage Units Belgrade ME" [level=4]
+- paragraph: Protect your sensitive items from Maine's harsh weather with our climate-controlled self storage units Belgrade customers rely on. These units maintain a consistent temperature and humidity level, ideal for storing electronics, documents, wooden furniture, artwork, photos, and other items that could be damaged by extreme heat, cold, or moisture.
+- paragraph: Our climate-controlled storage in Belgrade, ME, gives you peace of mind knowing your belongings are safe year-round, no matter the weather conditions outside. If you're searching for premium protection for your valuables, our temperature-controlled units are the perfect choice.
+- heading "Drive-Up Access Storage in Belgrade, ME" [level=4]
+- paragraph: Access your belongings quickly and easily with our drive-up self storage units Belgrade customers prefer. Park directly next to your storage unit, eliminating long walks and heavy carrying. Whether you're moving, running a business, or making frequent trips, our drive-up access makes storing your items simple and efficient. This is especially convenient for contractors, small businesses, or customers needing regular access to inventory, equipment, or tools.
+- heading "RV Storage and Boat Storage Available Near Waterville, ME" [level=4]
+- paragraph: Returning from an outdoor adventure or road trip? Finding secure RV or boat storage can be a challenge. That’s why All-Purpose Storage offers RV and boat storage near Waterville, ME. Avoid cluttering your driveway and store your extra vehicles safely at our secure facility, conveniently located in Belgrade. Our oversized parking spaces are ideal for RVs, boats, trailers, campers, and other recreational vehicles, offering easy access when you're ready for your next trip.
+- heading "Car Storage Available in Belgrade, ME" [level=4]
+- paragraph: Free up space in your garage or driveway with car storage at our self storage units Belgrade facility. With multiple parking options, you can access your car whenever needed. Our Belgrade location offers flexible and affordable car storage solutions for every situation, whether you need seasonal car storage, long-term parking, or secure vehicle protection during extended travel or deployment.
+- heading "Business Storage Units Belgrade ME" [level=4]
+- paragraph: All-Purpose Storage also provides self storage units Belgrade businesses trust for their commercial storage needs. From excess inventory and equipment to archived files and office furniture, our business storage units offer cost-effective solutions for companies of all sizes. Free up your office space while maintaining easy access to your business essentials, thanks to our 24/7 facility access and secure, well-maintained units.
+- heading "Student Self Storage Options Near Augusta, ME" [level=4]
+- paragraph: College students balancing academics and activities need simple storage solutions. Our self storage units Belgrade location offers student-friendly storage near Augusta, ME, including small lockers for books and electronics, as well as larger units for dorm furniture and personal belongings during semester breaks. Our flexible month-to-month leases and online bill pay make storage hassle-free for students and parents alike.
+- paragraph: Whether you attend Thomas College, University of Maine Center, University College, or the University of Maine, our affordable storage options and 24-hour access make student storage convenient, secure, and budget-friendly.
+- heading "Rent or Reserve Your Storage Unit in Belgrade, ME, Today" [level=5]
+- paragraph:
+  - text: Let All-Purpose Storage help you find extra space for your home or business with our self storage units Belgrade customers depend on. Our friendly and knowledgeable team is here to assist you in choosing the perfect unit size and features to fit your unique storage needs. Explore our
+  - link "blog":
+    - /url: https://www.storeallpurpose.com/blog-archive
+  - text: for more details on leasing a storage unit in Belgrade, ME. Rent or reserve your storage unit online to secure your space today and experience the All-Purpose Storage difference.
+- heading "Browse Self Storage Options Near Belgrade, ME" [level=4]
+- paragraph: "All-Purpose Storage operates multiple self storage units locations throughout Maine, including nearby facilities such as:"
+- list:
+  - listitem:
+    - link "Self storage units in Fairfield, ME":
+      - /url: https://www.storeallpurpose.com/storage-units/maine/fairfield/center-road-lot-b
+  - listitem:
+    - link "Self storage units in Belmont, ME":
+      - /url: https://www.storeallpurpose.com/storage-units/maine/belmont/searsmont-road
+- heading "Why Choose All-Purpose Storage Belgrade ME?" [level=4]
+- list:
+  - listitem: Wide variety of self storage unit sizes
+  - listitem: Climate-controlled and drive-up units available
+  - listitem: RV, boat, car, and vehicle storage options
+  - listitem: 24-hour facility access and state-of-the-art security
+  - listitem: Month-to-month rental agreements with no long-term commitment
+  - listitem: Online bill pay and easy online reservations
+  - listitem: Convenient location near major roadways in Belgrade, ME
+- heading "Driving Directions" [level=4]
+- paragraph:
+  - strong: "From Belgrade, ME:"
+  - text: Head north on ME-11 N/ME-27 N/ME-8 N toward Depot Rd. Turn left onto Depot Rd. Turn left onto Minot Hill Rd. Turn left at the 1st cross street onto ME-135 W. You’ve arrived at All-Purpose Storage Belgrade.
+- paragraph:
+  - strong: "From Sidney, ME:"
+  - text: Head west on Lyons Rd toward Sunset Ridge. Turn left onto Middle Rd. Take Quaker Rd to ME-23 S. Turn right onto Shepherd Rd. Turn left onto Quaker Rd. Take ME-11 N/ME-27 N/ME-8 N to Depot Rd in Belgrade. Turn left onto ME-23 S. Turn right onto ME-11 N/ME-27 N/ME-8 N. Follow Minot Hill Rd to ME-135 W. Turn left onto Depot Rd. Turn left onto Minot Hill Rd. Turn left at the 1st cross street onto ME-135 W. You’ve arrived at All-Purpose Storage Belgrade.
+- paragraph:
+  - strong: "From Readfield, ME:"
+  - text: Head north on ME-41 N toward ME-17 E. Turn right onto ME-17 E. Turn left onto N Rd. Turn right onto Wings Mills Rd. Turn right to stay on Wings Mills Rd. Turn left onto ME-135 E. You’ve arrived at All-Purpose Storage Belgrade.
+- paragraph:
+  - strong: "From Manchester, ME:"
+  - text: Head south toward Western Ave. Turn right toward Western Ave. Turn right toward Western Ave. Turn right onto Western Ave. Turn left onto Puddledock Rd. Turn left onto Prescott Rd. Continue onto ME-135 E. You’ve arrived at All-Purpose Storage Belgrade.
+- paragraph
+- heading [level=3]
+- paragraph
+- heading "Facility Features" [level=3]
+- list:
+  - listitem: Automatic Gate
+  - listitem: Drive Up Units
+  - listitem: Green Initiative
+  - listitem: Motorcycle Storage
+  - listitem: Protection Plan
+  - listitem: Security Fence
+  - listitem: Vehicle Storage
+- link "Footer Logo":
+  - /url: https://app.storagely.io/allpurposestorage
+  - img "Footer Logo"
+- link "Find Storage":
+  - /url: /storage-units-near-me
+  - img
+  - text: Find Storage
+- link "Size Guide":
+  - /url: /storage-unit-size-guide
+  - img
+  - text: Size Guide
+- text: States
+- separator
+- link "Connecticut":
+  - /url: /storage-units-connecticut
+- link "Iowa":
+  - /url: /storage-units-iowa
+- link "Massachusetts":
+  - /url: /storage-units-massachusetts
+- link "Maine":
+  - /url: /storage-units-maine
+- link "New Hampshire":
+  - /url: /storage-units-new-hampshire
+- link "New York":
+  - /url: /storage-units-new-york
+- link "North Carolina":
+  - /url: /storage-units-north-carolina
+- link "Rhode Island":
+  - /url: /storage-units/rhode-island/warwick/meadow-street
+- link "Vermont":
+  - /url: /storage-units-vermont
+- text: Cities
+- separator
+- link "Belfast, ME":
+  - /url: /storage-units-belfast
+- link "Bellows Falls, VT":
+  - /url: /storage-units-bellows-falls
+- link "Bennington, VT":
+  - /url: /storage-units-bennington
+- link "Bernardston, MA":
+  - /url: /storage-units-bernardston
+- link "Brattleboro, NH":
+  - /url: /storage-units-brattleboro
+- link "Brewer, ME":
+  - /url: /storage-units-brewer
+- link "Brookline, NH":
+  - /url: /storage-units-brookline
+- link "Buxton, ME":
+  - /url: /storage-units-buxton
+- link "Canterbury, NH":
+  - /url: /storage-units-canterbury
+- link "Ellsworth, ME":
+  - /url: /storage-units-ellsworth
+- link "Gray, ME":
+  - /url: /storage-units-gray
+- link "Greenfield, MA":
+  - /url: /storage-units-greenfield
+- link "Hillsboro, NH":
+  - /url: /storage-units-hillsboro
+- link "Hillsborough, NH":
+  - /url: https://www.storeallpurpose.com/storage-units-hillsborough
+- link "Jaffrey, NH":
+  - /url: https://www.storeallpurpose.com/storage-units-jaffrey
+- link "Keene, NH":
+  - /url: /storage-units-keene
+- link "Montville, CT":
+  - /url: /storage-units-montville
+- link "Swanzey, NH":
+  - /url: /storage-units-swanzey
+- link "Rutland, VT":
+  - /url: /storage-units-rutland
+- text: Storage Types
+- separator
+- link "Business Storage":
+  - /url: /business-storage
+- link "Boat & RV Storage":
+  - /url: /rv-and-boat-storage
+- link "Drive-Up Storage":
+  - /url: /drive-up-storage
+- link "Military Storage":
+  - /url: /military-storage
+- link "Residential Storage":
+  - /url: /residential-storage
+- link "Student Storage":
+  - /url: /student-storage
+- link "Temperature Controlled Storage":
+  - /url: /temperature-controlled-storage
+- link "Vehicle Storage":
+  - /url: /vehicle-storage
+- text: Storage Resources
+- separator
+- link "FAQs":
+  - /url: /self-storage-faq
+- link "Size Guide":
+  - /url: /storage-unit-size-guide
+- link "Moving Tips":
+  - /url: /moving-tips
+- link "Storage Tips":
+  - /url: /storage-tips
+- link "Blog":
+  - /url: /blog-archive
+- link "About":
+  - /url: /about-our-storage-facility
+- link "My Account":
+  - /url: https://myaccount.storeallpurpose.com
+- text: Contact Us
+- separator
+- link "Contact Us":
+  - /url: /pages/contact
+- link "Find Storage":
+  - /url: /storage-units-near-me
+- text: "Promotion: Subject to change. Offered only on selected units. Subject to availability. Limit one offer per household. This offer applies only to the rental fee. Other restrictions, taxes, and fees, including an administrative fee, apply. See contract for full details. Promotions good for new customers only. Not available on transfers or additional spaces. Pricing subject to change. Reservation required to guarantee price. Actual unit sizes may vary from approximate size estimate and reservations do not guarantee unit availability. Temperature and humidity levels within any storage space including climate-controlled spaces may vary. Please inspect any unit before renting. Online pricing available only for online reservations and rentals. Not sure about the size you need? Don’t worry, online pricing discount will be honored for any rental originating from an online reservation. If the promotion is associated with the 4th of July Sale: the promotional period is for a limited time only and you must move in within 7 days of reservation. © All-Purpose Storage |"
+- link "Privacy Policy":
+  - /url: /privacy-policy
+- text: "|"
+- link "Terms of Use":
+  - /url: /pages/terms
+- text: <-- Pop Up --> <-- End Pop Up -->
+- img
+- text: Feedback
+- img
+- link "-0-Admin-Fee-Pop-V1.png":
+  - /url: /storage-units-near-me
+  - img "-0-Admin-Fee-Pop-V1.png"
+```

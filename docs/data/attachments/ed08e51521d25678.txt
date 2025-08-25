@@ -1,0 +1,5 @@
+Navigating to: https://www.storeallpurpose.com/storage-units/connecticut/jewett-city/north-main-street
+ℹ️ Network still active, proceeding with DOM ready state
+✓ Successfully navigated to storage listing page
+Found 1 banner image(s) on the page
+✓ Banner 1: Banner Desktop - Properly loaded (1280x300)
