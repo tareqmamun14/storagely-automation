@@ -1,0 +1,34 @@
+
+🔍 Testing landing page: https://redrocksstorage.com/
+   Cache-busted URL: https://redrocksstorage.com/?_cache_bust=1756228598926_ywczkyxdbdg
+Verifying: https://redrocksstorage.com/
+- Page loaded for https://redrocksstorage.com/
+- Title verified for https://redrocksstorage.com/: "Colorado Self Storage – Affordable Drive-Up & Climate-Controlled Units in Aurora, Colorado Springs & Golden"
+- Logo verified for https://redrocksstorage.com/
+- Navigation link verified for https://redrocksstorage.com/
+- CTA button verified for https://redrocksstorage.com/
+✅ Successfully verified: https://redrocksstorage.com/
+✅ Landing page verification passed for: https://redrocksstorage.com/
+
+======================================================================
+🌐 LANDING PAGE VERIFICATION RESULTS SUMMARY
+======================================================================
+✅ Total Passed: 6
+❌ Total Failed: 0
+📋 Total Tests: 6
+
+✅ SUCCESSFULLY VERIFIED PAGES:
+   1. https://www.firststorage.com/
+       (Accessed: https://www.firststorage.com/?_cache_bust=1756228561031_duswwl7yxui)
+   2. https://www.storeallpurpose.com/
+       (Accessed: https://www.storeallpurpose.com/?_cache_bust=1756228570011_xirorerh7rp)
+   3. https://www.bestboxstorage.com/
+       (Accessed: https://www.bestboxstorage.com/?_cache_bust=1756228576016_7jm06y7dsbj)
+   4. https://radiantstorage.com/
+       (Accessed: https://radiantstorage.com/?_cache_bust=1756228583125_ynjcsooco2)
+   5. https://yourpremierstorage.com/
+       (Accessed: https://yourpremierstorage.com/?_cache_bust=1756228590529_kfill8p6zlm)
+   6. https://redrocksstorage.com/
+       (Accessed: https://redrocksstorage.com/?_cache_bust=1756228598926_ywczkyxdbdg)
+======================================================================
+

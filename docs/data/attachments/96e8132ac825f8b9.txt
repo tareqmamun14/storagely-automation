@@ -1,0 +1,11 @@
+CRITICAL ERROR: Failed to fill rental details form - locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('heading', { name: 'Summary of Rental' }) to be visible
+
+
+❌ TEST FAILED FOR: radiant Storage
+📍 Failed at step: Rental Details Form
+💥 Error: Rental Details Form failed: CRITICAL ERROR: Failed to fill rental details form - locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('heading', { name: 'Summary of Rental' }) to be visible
+
