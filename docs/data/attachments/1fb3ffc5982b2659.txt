@@ -1,0 +1,32 @@
+
+🔍 Testing landing page: https://ulok.com
+   Cache-busted URL: https://ulok.com?_cache_bust=1756329426686_w9cq306zy0j
+Verifying: https://ulok.com
+- Page loaded for https://ulok.com
+- Title verified for https://ulok.com: "Self Storage Units Vancouver | Downtown U-Lok Storage"
+- Logo verified for https://ulok.com
+- Navigation link verified for https://ulok.com
+- CTA button verified for https://ulok.com
+✅ Successfully verified: https://ulok.com
+✅ Landing page verification passed for: https://ulok.com
+
+======================================================================
+🌐 LANDING PAGE VERIFICATION RESULTS SUMMARY
+======================================================================
+✅ Total Passed: 5
+❌ Total Failed: 0
+📋 Total Tests: 5
+
+✅ SUCCESSFULLY VERIFIED PAGES:
+   1. https://distinctstorage.com/
+       (Accessed: https://distinctstorage.com/?_cache_bust=1756329394650_ndmq8g5wuop)
+   2. https://rhino-storage.com/
+       (Accessed: https://rhino-storage.com/?_cache_bust=1756329404323_xiqazrq6yx)
+   3. https://storagedepotla.com/
+       (Accessed: https://storagedepotla.com/?_cache_bust=1756329410614_k9k3rpbfh3)
+   4. https://modboxstorage.com/
+       (Accessed: https://modboxstorage.com/?_cache_bust=1756329418281_yhrwuhkzojk)
+   5. https://ulok.com
+       (Accessed: https://ulok.com?_cache_bust=1756329426686_w9cq306zy0j)
+======================================================================
+

@@ -1,0 +1,87 @@
+🐛 Debug navigating to: https://app.storagely.io/mini-mall-storage/storage-units/alabama/courtland/highway-33?_cache_bust=1756329889113_ys4rhxkm20m
+Found 17 potential discount elements:
+Element 1:
+  Class: offer_banner
+  Visible: true
+  Text: ""
+---
+Element 2:
+  Class: page_discount offerHolder whitetext
+  Visible: true
+  Text: "First Month Free"
+---
+Element 3:
+  Class: offer__content
+  Visible: true
+  Text: "First Month Free"
+---
+Element 4:
+  Class: offer__sale
+  Visible: false
+  Text: "Sale Ends Aug 31st"
+---
+Element 5:
+  Class: promoText
+  Visible: true
+  Text: "REGULAR RATE STARTING AT"
+---
+Element 6:
+  Class: page_discount offerHolder whitetext
+  Visible: true
+  Text: "First Month Free"
+---
+Element 7:
+  Class: offer__content
+  Visible: true
+  Text: "First Month Free"
+---
+Element 8:
+  Class: offer__sale
+  Visible: false
+  Text: "Sale Ends Aug 31st"
+---
+Element 9:
+  Class: promoText
+  Visible: true
+  Text: "REGULAR RATE STARTING AT"
+---
+Element 10:
+  Class: page_discount offerHolder whitetext
+  Visible: true
+  Text: "First Month Free"
+---
+Element 11:
+  Class: offer__content
+  Visible: true
+  Text: "First Month Free"
+---
+Element 12:
+  Class: offer__sale
+  Visible: false
+  Text: "Sale Ends Aug 31st"
+---
+Element 13:
+  Class: promoText
+  Visible: true
+  Text: "REGULAR RATE STARTING AT"
+---
+Element 14:
+  Class: page_discount offerHolder whitetext
+  Visible: true
+  Text: "First Month Free"
+---
+Element 15:
+  Class: offer__content
+  Visible: true
+  Text: "First Month Free"
+---
+Element 16:
+  Class: offer__sale
+  Visible: false
+  Text: "Sale Ends Aug 31st"
+---
+Element 17:
+  Class: promoText
+  Visible: true
+  Text: "REGULAR RATE STARTING AT"
+---

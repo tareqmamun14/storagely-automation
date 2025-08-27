@@ -1,0 +1,64 @@
+
+================================================================================
+🏢 TESTING: redrocks Storage
+🌐 URL: https://redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue
+⚙️  Platform: storEDGE
+================================================================================
+📍 STEP 1: Navigating to storage listing page...
+Navigating to: https://redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue
+ℹ️ Network still active, proceeding with DOM ready state
+✓ Successfully navigated to storage listing page
+✅ Navigation completed successfully
+📍 STEP 2: Checking for reserve button...
+Found a button with text: "RESERVE"
+✓ Clicked "RESERVE" button
+✓ Closed the modal
+📍 STEP 3: Clicking rent button...
+Attempting to click rent button - CRITICAL STEP
+Found rent button with text: rent
+✓ Rent button clicked successfully
+✅ Rent button clicked successfully
+📍 STEP 4: Filling rental details form...
+Filling rental details form - CRITICAL STEP
+✓ Summary heading found and clicked
+✓ Filled First Name: Test
+✓ Filled Last Name: Testing_Tareq
+✓ Filled Email: tareq@storagely.io
+✓ Filled Phone: 5551234567
+✓ Filled Address: NYC
+✓ Filled City: NYC
+Attempting to select state - OPTIMIZED APPROACH
+✓ Successfully selected Alabama using standard select
+Attempting to fill zip code: 99540
+✓ Successfully filled zip code: 99540
+✓ Clicked the datepicker element
+Attempting to proceed to next step - CRITICAL STEP
+✓ Successfully clicked continue button
+✓ Rental details form completed successfully
+✅ Rental details form completed successfully
+📍 STEP 5: Filling lease details if available...
+Lease Details section not found, skipping
+✅ Lease details form completed (or skipped if not available)
+📍 STEP 6: Filling payment details...
+Filling payment details - CRITICAL STEP
+✓ Payment details filled successfully
+✅ Payment details filled successfully
+📍 STEP 7: Checking agreement checkboxes...
+- I agree to the lease terms checkbox not visible, skipping
+- I agree to the protection checkbox not visible, skipping
+- I agree to the auto pay terms checkbox not visible, skipping
+✅ Agreement checkboxes processed
+📍 STEP 8: Submitting payment and checking for errors...
+Attempting to submit payment - CRITICAL STEP
+Chat iframe not found or an error occurred, proceeding without minimizing.
+✓ Rent Now button clicked successfully
+Starting robust error detection...
+Starting polling error detection...
+Starting extended error detection...
+ℹ️  No error messages detected - payment may have succeeded
+✅ Payment submission completed
+
+✅ TEST COMPLETED SUCCESSFULLY FOR: redrocks Storage
+📊 Result: No error - Payment may have succeeded
+================================================================================
+

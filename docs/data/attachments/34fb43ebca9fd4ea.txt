@@ -1,0 +1,78 @@
+Deleted old screenshot: error-bestbox-storage-1756329593256.png
+
+================================================================================
+🏢 TESTING: radiant Storage
+🌐 URL: https://radiantstorage.com/storage-units/alabama/montgomery/east-south-blvd
+⚙️  Platform: storEDGE
+================================================================================
+📍 STEP 1: Navigating to storage listing page...
+Navigating to: https://radiantstorage.com/storage-units/alabama/montgomery/east-south-blvd
+ℹ️ Network still active, proceeding with DOM ready state
+✓ Successfully navigated to storage listing page
+✅ Navigation completed successfully
+📍 STEP 2: Checking for reserve button...
+Found a button with text: "Reserve"
+✓ Clicked "Reserve" button
+✓ Closed the modal
+📍 STEP 3: Clicking rent button...
+Attempting to click rent button - CRITICAL STEP
+Found rent button with text: rent
+✓ Rent button clicked successfully
+✅ Rent button clicked successfully
+📍 STEP 4: Filling rental details form...
+Filling rental details form - CRITICAL STEP
+✓ Summary heading found and clicked
+✓ Filled First Name: Test
+✓ Filled Last Name: Testing_Tareq
+✓ Filled Email: tareq@storagely.io
+✓ Filled Phone: 5551234567
+✓ Filled Address: NYC
+✓ Filled City: NYC
+Attempting to select state - OPTIMIZED APPROACH
+✓ Successfully selected Alabama using standard select
+Attempting to fill zip code: 99540
+✓ Successfully filled zip code: 99540
+✓ Clicked the datepicker element
+Attempting to proceed to next step - CRITICAL STEP
+✓ Successfully clicked continue button
+✓ Rental details form completed successfully
+✅ Rental details form completed successfully
+📍 STEP 5: Filling lease details if available...
+Lease Details section not found, skipping
+✅ Lease details form completed (or skipped if not available)
+📍 STEP 6: Filling payment details...
+Filling payment details - CRITICAL STEP
+================================================================================
+
+📸 Screenshot saved: error-radiant-storage-1756329675808.png
+
+====================================================================================================
+🏁 PAYMENT VERIFICATION TEST SUMMARY
+====================================================================================================
+
+📊 TEST EXECUTION SUMMARY:
+   Total Tests: 1
+   ✅ Successful: 0
+   ❌ Failed: 1
+   📈 Success Rate: 0.0%
+
+📋 DETAILED RESULTS:
+========================================================================================================================
+Company                   | Platform   | Status   | Error Message                                               
+========================================================================================================================
+radiant Storage           | storEDGE   | ❌ FAIL   | Payment Details Form failed: CRITICAL ERROR: Failed to fi...
+========================================================================================================================
+
+🚨 ALL ERROR MESSAGES:
+====================================================================================================
+
+1. ❌ ERROR - radiant Storage (storEDGE)
+   URL: https://radiantstorage.com/storage-units/alabama/montgomery/east-south-blvd
+   Message: Payment Details Form failed: CRITICAL ERROR: Failed to fill payment details - locator.waitFor: Timeout 10000ms exceeded.
+Call log:
+  - waiting for getByPlaceholder('Card Number') to be visible
+
+   Time: 8/28/2025, 3:21:16 AM
+====================================================================================================
+====================================================================================================
+

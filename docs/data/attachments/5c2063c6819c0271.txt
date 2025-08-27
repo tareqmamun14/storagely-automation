@@ -1,0 +1,11 @@
+CRITICAL ERROR: Failed to fill payment details - locator.waitFor: Timeout 10000ms exceeded.
+Call log:
+  - waiting for getByPlaceholder('Card Number') to be visible
+
+
+❌ TEST FAILED FOR: bestbox Storage
+📍 Failed at step: Payment Details Form
+💥 Error: Payment Details Form failed: CRITICAL ERROR: Failed to fill payment details - locator.waitFor: Timeout 10000ms exceeded.
+Call log:
+  - waiting for getByPlaceholder('Card Number') to be visible
+

@@ -1,0 +1,35 @@
+
+🔍 Testing landing page: https://10federalstorage.com/
+   Cache-busted URL: https://10federalstorage.com/?_cache_bust=1756329441359_eexajqcscap
+Verifying: https://10federalstorage.com/
+- Page loaded for https://10federalstorage.com/
+- Title verified for https://10federalstorage.com/: "10 Federal Storage | Storage Units Near Me"
+- Logo with role 'link' and name 'logo' not found for https://10federalstorage.com/, checking for alternative logo selectors...
+- Fallback logo verified for https://10federalstorage.com/
+- Navigation link verified for https://10federalstorage.com/
+- CTA button verified for https://10federalstorage.com/
+✅ Successfully verified: https://10federalstorage.com/
+✅ Landing page verification passed for: https://10federalstorage.com/
+
+======================================================================
+🌐 LANDING PAGE VERIFICATION RESULTS SUMMARY
+======================================================================
+✅ Total Passed: 6
+❌ Total Failed: 0
+📋 Total Tests: 6
+
+✅ SUCCESSFULLY VERIFIED PAGES:
+   1. https://smartstorageohio.com/
+       (Accessed: https://smartstorageohio.com/?_cache_bust=1756329365392_v9qf4rmu0xj)
+   2. https://storagestar.com/
+       (Accessed: https://storagestar.com/?_cache_bust=1756329371999_cg1yqr3wik8)
+   3. https://sunbirdstorage.com/
+       (Accessed: https://sunbirdstorage.com/?_cache_bust=1756329400444_89txxptrd1u)
+   4. https://bluebirdstorage.ca/
+       (Accessed: https://bluebirdstorage.ca/?_cache_bust=1756329409559_y021cqa1mab)
+   5. https://gatekeeperstoragega.com/
+       (Accessed: https://gatekeeperstoragega.com/?_cache_bust=1756329430588_jwsu81tl43g)
+   6. https://10federalstorage.com/
+       (Accessed: https://10federalstorage.com/?_cache_bust=1756329441359_eexajqcscap)
+======================================================================
+
