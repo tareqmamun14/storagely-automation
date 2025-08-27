@@ -1,0 +1,11 @@
+
+🔍 Testing landing page: https://yourpremierstorage.com/
+   Cache-busted URL: https://yourpremierstorage.com/?_cache_bust=1756303536075_4fsln47cqpp
+Verifying: https://yourpremierstorage.com/
+- Page loaded for https://yourpremierstorage.com/
+- Title verified for https://yourpremierstorage.com/: "Self Storage Units Near Me | Premier Storage"
+- Logo verified for https://yourpremierstorage.com/
+- Navigation link verified for https://yourpremierstorage.com/
+- CTA button verified for https://yourpremierstorage.com/
+✅ Successfully verified: https://yourpremierstorage.com/
+✅ Landing page verification passed for: https://yourpremierstorage.com/

@@ -1,1 +1,1 @@
-{"total":1,"items":[{"uid":"8fb3a91ba5aaf9de24cc8a92edc82b5d","name":"Product defects","statistic":{"failed":2,"broken":0,"skipped":0,"passed":0,"unknown":0,"total":2}}]}
+{"total":2,"items":[{"uid":"8fb3a91ba5aaf9de24cc8a92edc82b5d","name":"Product defects","statistic":{"failed":7,"broken":0,"skipped":0,"passed":0,"unknown":0,"total":7}},{"uid":"16ed7352f9b2859ab772d8268dfec4f5","name":"\uD83C\uDFF7️ Banner Tests","statistic":{"failed":2,"broken":0,"skipped":0,"passed":0,"unknown":0,"total":2}}]}

@@ -1,0 +1,34 @@
+
+🔍 Testing landing page: https://radiantstorage.com/
+   Cache-busted URL: https://radiantstorage.com/?_cache_bust=1756303465674_eoj9yk71ksq
+❌ Landing page verification failed for: https://radiantstorage.com/
+   Error: page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://radiantstorage.com/?_cache_bust=1756303465674_eoj9yk71ksq", waiting until "domcontentloaded"
+
+
+======================================================================
+🌐 LANDING PAGE VERIFICATION RESULTS SUMMARY
+======================================================================
+✅ Total Passed: 3
+❌ Total Failed: 1
+📋 Total Tests: 4
+
+✅ SUCCESSFULLY VERIFIED PAGES:
+   1. https://www.firststorage.com/
+       (Accessed: https://www.firststorage.com/?_cache_bust=1756303432481_cuuftfc38bc)
+   2. https://www.storeallpurpose.com/
+       (Accessed: https://www.storeallpurpose.com/?_cache_bust=1756303442423_we80so7biro)
+   3. https://www.bestboxstorage.com/
+       (Accessed: https://www.bestboxstorage.com/?_cache_bust=1756303456627_dtohvskkrye)
+
+❌ FAILED PAGE VERIFICATIONS:
+   1. https://radiantstorage.com/
+       (Attempted: https://radiantstorage.com/?_cache_bust=1756303465674_eoj9yk71ksq)
+      Error: page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://radiantstorage.com/?_cache_bust=1756303465674_eoj9yk71ksq", waiting until "domcontentloaded"
+
+
+======================================================================
+

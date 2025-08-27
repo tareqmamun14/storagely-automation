@@ -1,0 +1,24 @@
+
+🏠 Starting contact page test for: https://storagedepotla.com/
+📞 Navigating to contact page: https://storagedepotla.com/contact-storage?_cache_bust=1756303340927_ovarfztqszm
+🔍 Verifying contact page elements for: https://storagedepotla.com/
+   ✓ Contact page loaded successfully
+   ✓ Title verified: "Contact Storage Boss | Help and Customer Service"
+   ✓ Found Contact Heading: 1 instances
+   ✓ Found Get In Touch Heading: 1 instances
+   ✓ Found Need Assistance Heading: 1 instances
+   ✓ Found Email Input: 1 instances
+   ✓ Found Message Textarea: 1 instances
+   ✓ Found Submit Button: 1 instances
+   ✓ Found Contact Form: 1 instances
+   ✓ Found Phone Link: 1 instances
+   ✓ Found Email Link: 1 instances
+   ✓ Found Phone Heading: 1 instances
+   ✓ Found Email Heading: 1 instances
+   ✓ Found Social Links Heading: 1 instances
+   ✓ Found Phone Text: 2 instances
+   ✓ Found Map Element: 3 instances
+   ✓ Found Contact Text: 5 instances
+   ✓ Contact page verification complete - found 15 contact element types
+   📋 Elements found: Contact Heading, Get In Touch Heading, Need Assistance Heading, Email Input, Message Textarea, Submit Button, Contact Form, Phone Link, Email Link, Phone Heading, Email Heading, Social Links Heading, Phone Text, Map Element, Contact Text
+✅ Contact page verification passed for: https://storagedepotla.com/

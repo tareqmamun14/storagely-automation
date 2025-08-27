@@ -1,0 +1,295 @@
+# Page snapshot
+
+```yaml
+- banner:
+  - navigation:
+    - link "logo":
+      - /url: https://www.storagestar.com
+      - img "logo"
+    - list:
+      - listitem:
+        - button "Find Storage"
+      - listitem:
+        - button "Storage Types"
+      - listitem:
+        - button "About"
+      - listitem:
+        - button "Resources"
+      - listitem:
+        - link "Contact":
+          - /url: /pages/contact
+      - listitem:
+        - link "Make Payment":
+          - /url: https://storagestar-payment.ssm-erp.com/
+    - link "Rent Online":
+      - /url: /storage-units-near-me
+- heading "Summary of Rental" [level=2]
+- heading "Rental Location" [level=2]
+- link "Change":
+  - /url: https://www.storagestar.com/all-locations?storage-star
+- img "self storage units colorado springs"
+- heading "Colorado - Colorado Springs - Aerotech Drive" [level=2]
+- text: 1935 Aerotech Drive Colorado Springs, colorado, 80916
+- heading "Storage Unit" [level=2]
+- link "Change":
+  - /url: https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive?location=1935aero&storage-star
+- img "yello car parking"
+- heading "Climate Control" [level=4]
+- heading "5' x 5'" [level=3]
+- img "Shield Check Icon"
+- heading "GUARANTEED SAFE CHECKOUT" [level=2]
+- paragraph: Need help finalizing your rental? We are here to help.
+- img "Phoner Icon"
+- link "(719) 204-4829":
+  - /url: tel:(719) 204-4829
+- heading "Tenant Details" [level=2]
+- textbox "First name"
+- img "user icon"
+- textbox "Last name"
+- img "user icon"
+- textbox "Email address"
+- img "email icon"
+- textbox "Cell Phone number"
+- img "phone icon"
+- textbox "Address"
+- textbox "City"
+- combobox:
+  - option "Select State" [selected]
+  - option "Alabama"
+  - option "Alaska"
+  - option "Arizona"
+  - option "Arkansas"
+  - option "California"
+  - option "Colorado"
+  - option "Connecticut"
+  - option "Delaware"
+  - option "District of Columbia (DC)"
+  - option "Florida"
+  - option "Georgia"
+  - option "Hawaii"
+  - option "Idaho"
+  - option "Illinois"
+  - option "Indiana"
+  - option "Iowa"
+  - option "Kansas"
+  - option "Kentucky"
+  - option "Louisiana"
+  - option "Maine"
+  - option "Maryland"
+  - option "Massachusetts"
+  - option "Michigan"
+  - option "Minnesota"
+  - option "Mississippi"
+  - option "Missouri"
+  - option "Montana"
+  - option "Nebraska"
+  - option "Nevada"
+  - option "New Hampshire"
+  - option "New Jersey"
+  - option "New Mexico"
+  - option "New York"
+  - option "North Carolina"
+  - option "North Dakota"
+  - option "Ohio"
+  - option "Oklahoma"
+  - option "Oregon"
+  - option "Pennsylvania"
+  - option "Rhode Island"
+  - option "South Carolina"
+  - option "South Dakota"
+  - option "Tennessee"
+  - option "Texas"
+  - option "Utah"
+  - option "Vermont"
+  - option "Virginia"
+  - option "Washington"
+  - option "West Virginia"
+  - option "Wisconsin"
+  - option "Wyoming"
+- textbox "Zip Code"
+- img "Billing Card Icon"
+- heading "Select Your Move In Date" [level=2]
+- paragraph: You may rent up to 7 days in advance.
+- table:
+  - rowgroup:
+    - row
+    - row "August 2025 »":
+      - cell "August 2025"
+      - cell "»"
+    - row "Su Mo Tu We Th Fr Sa":
+      - cell "Su"
+      - cell "Mo"
+      - cell "Tu"
+      - cell "We"
+      - cell "Th"
+      - cell "Fr"
+      - cell "Sa"
+  - rowgroup:
+    - row "27 28 29 30 31 1 2":
+      - cell "27"
+      - cell "28"
+      - cell "29"
+      - cell "30"
+      - cell "31"
+      - cell "1"
+      - cell "2"
+    - row "3 4 5 6 7 8 9":
+      - cell "3"
+      - cell "4"
+      - cell "5"
+      - cell "6"
+      - cell "7"
+      - cell "8"
+      - cell "9"
+    - row "10 11 12 13 14 15 16":
+      - cell "10"
+      - cell "11"
+      - cell "12"
+      - cell "13"
+      - cell "14"
+      - cell "15"
+      - cell "16"
+    - row "17 18 19 20 21 22 23":
+      - cell "17"
+      - cell "18"
+      - cell "19"
+      - cell "20"
+      - cell "21"
+      - cell "22"
+      - cell "23"
+    - row "24 25 26 27 28 29 30":
+      - cell "24"
+      - cell "25"
+      - cell "26"
+      - cell "27"
+      - cell "28"
+      - cell "29"
+      - cell "30"
+    - row "31 1 2 3 4 5 6":
+      - cell "31"
+      - cell "1"
+      - cell "2"
+      - cell "3"
+      - cell "4"
+      - cell "5"
+      - cell "6"
+  - rowgroup:
+    - row
+    - row
+- heading "Protect Your Belongings" [level=2]
+- paragraph: You may opt to provide proof of your insurance when you move in. At that time, we will remove this fee from your account.
+- text: "Covers up to $2,000 (Rate: $15.00/mo) Covers up to $3,000 (Rate: $20.00/mo) Covers up to $5,000 (Rate: $25.00/mo) Covers up to $10,000 (Rate: $45.00/mo) Covers up to $15,000 (Rate: $60.00/mo)"
+- button "CONTINUE TO NEXT STEP"
+- heading "Facility Features" [level=1]
+- list:
+  - listitem: 24/7 Video Surveillance
+  - listitem: Boat Storage
+  - listitem: Climate-Controlled Units
+  - listitem: Drive Up Units
+  - listitem: Protection Plan
+  - listitem: RV Storage
+  - listitem: Security Fence
+  - listitem: Vehicle Storage
+- link "Footer Logo":
+  - /url: https://www.storagestar.com
+  - img "Footer Logo"
+- link "Find Storage":
+  - /url: /storage-units-near-me
+  - img
+  - text: Find Storage
+- link "Size Guide":
+  - /url: /pages/storage-unit-size-guide
+  - img
+  - text: Size Guide
+- text: States
+- separator
+- link "Alaska":
+  - /url: /storage-units-alaska
+- link "California":
+  - /url: /storage-units-california
+- link "Colorado":
+  - /url: /storage-units-colorado
+- link "Hawaii":
+  - /url: /storage-units-hawaii
+- link "Idaho":
+  - /url: /storage-units-idaho
+- link "Texas":
+  - /url: /storage-units-texas
+- link "Utah":
+  - /url: /storage-units-utah
+- link "Wyoming":
+  - /url: /storage-units-wyoming
+- text: Cities
+- separator
+- link "Anchorage":
+  - /url: /storage-units-anchorage
+- link "Austin":
+  - /url: /storage-units-austin
+- link "Cheyenne":
+  - /url: /storage-units-cheyenne
+- link "Chico":
+  - /url: /storage-units-chico-ca
+- link "Dallas":
+  - /url: /storage-units-dallas
+- link "Modesto":
+  - /url: /storage-units-modesto
+- link "Twin Falls":
+  - /url: /storage-units-twin-falls
+- text: About
+- separator
+- link "About Storage Star":
+  - /url: /pages/about-our-storage-facility
+- link "Storage Solutions":
+  - /url: /storage-solutions
+- link "Careers":
+  - /url: /careers
+- link "Follow on Facebook":
+  - /url: https://www.facebook.com/storagestar
+- text: Storage Types
+- separator
+- link "Boat & RV Storage":
+  - /url: /storage-type/boat-and-rv-storage
+- link "Business Storage":
+  - /url: /storage-type/business-storage
+- link "Climate Controlled Storage":
+  - /url: /storage-type/climate-controlled-storage
+- link "Drive-Up Storage":
+  - /url: /drive-up-storage
+- link "Household Storage":
+  - /url: /storage-type/household-storage
+- link "Student Storage":
+  - /url: /storage-type/student-storage
+- link "Vehicle Storage":
+  - /url: /storage-type/vehicle-storage
+- text: Resources
+- separator
+- link "FAQs":
+  - /url: /pages/self-storage-faq
+- link "Size Guide":
+  - /url: /pages/storage-unit-size-guide
+- link "Moving Guide":
+  - /url: /moving-guide
+- link "Moving & Packing Supplies":
+  - /url: /moving-and-packing-supplies
+- link "Tenant Protection & Insurance":
+  - /url: /tenant-protection-and-insurance
+- link "Blog":
+  - /url: https://www.storagestar.com/blogs
+- link "Accessibility":
+  - /url: /accessibility
+- link "Make Payment":
+  - /url: https://storagestar-payment.ssm-erp.com/
+- link "Contact":
+  - /url: /pages/contact
+- text: © Storage Star |
+- link "Privacy Policy":
+  - /url: /privacy-policy
+- img "Avatar"
+- text: Hi there, have a question? Message us here.
+- button:
+  - img
+- button "Select to open the chat widget":
+  - img
+- img
+- text: Feedback
+```

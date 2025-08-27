@@ -1,5 +1,0 @@
-Navigating to: https://yourpremierstorage.com/storage-units/mississippi/laurel/ms-15
-ℹ️ Network still active, proceeding with DOM ready state
-✓ Successfully navigated to storage listing page
-Found 1 banner image(s) on the page
-✓ Banner 1: Banner Desktop - Properly loaded (2520x600)

@@ -1,0 +1,49 @@
+
+================================================================================
+🏢 TESTING: distinct Storage
+🌐 URL: https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road
+⚙️  Platform: storEDGE
+================================================================================
+📍 STEP 1: Navigating to storage listing page...
+Navigating to: https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road
+================================================================================
+
+📸 Screenshot saved: error-distinct-storage-1756303615542.png
+
+====================================================================================================
+🏁 PAYMENT VERIFICATION TEST SUMMARY
+====================================================================================================
+
+📊 TEST EXECUTION SUMMARY:
+   Total Tests: 2
+   ✅ Successful: 1
+   ❌ Failed: 1
+   📈 Success Rate: 50.0%
+
+📋 DETAILED RESULTS:
+========================================================================================================================
+Company                   | Platform   | Status   | Error Message                                               
+========================================================================================================================
+redrocks Storage          | storEDGE   | ✅ PASS   | Failed to process payment, Lead unit is not available, Co...
+distinct Storage          | storEDGE   | ❌ FAIL   | Navigation failed: CRITICAL ERROR: Failed to navigate to ...
+========================================================================================================================
+
+🚨 ALL ERROR MESSAGES:
+====================================================================================================
+
+1. ⚠️  WARNING - redrocks Storage (storEDGE)
+   URL: https://redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue
+   Message: Failed to process payment, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (Storable Payments): 'Card Number' is not a valid credit card number.
+   Time: 8/27/2025, 8:06:22 PM
+   --------------------------------------------------------------------------------
+
+2. ❌ ERROR - distinct Storage (storEDGE)
+   URL: https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road
+   Message: Navigation failed: CRITICAL ERROR: Failed to navigate to https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road - page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road?cacheBust=1756303585494-hf7sxzgrcc8", waiting until "domcontentloaded"
+
+   Time: 8/27/2025, 8:07:18 PM
+====================================================================================================
+====================================================================================================
+

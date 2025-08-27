@@ -1,0 +1,43 @@
+Deleted old screenshot: error-bestbox-storage-1756303674432.png
+
+================================================================================
+🏢 TESTING: radiant Storage
+🌐 URL: https://radiantstorage.com/storage-units/alabama/montgomery/east-south-blvd
+⚙️  Platform: storEDGE
+================================================================================
+📍 STEP 1: Navigating to storage listing page...
+Navigating to: https://radiantstorage.com/storage-units/alabama/montgomery/east-south-blvd
+================================================================================
+
+📸 Screenshot saved: error-radiant-storage-1756303712473.png
+
+====================================================================================================
+🏁 PAYMENT VERIFICATION TEST SUMMARY
+====================================================================================================
+
+📊 TEST EXECUTION SUMMARY:
+   Total Tests: 1
+   ✅ Successful: 0
+   ❌ Failed: 1
+   📈 Success Rate: 0.0%
+
+📋 DETAILED RESULTS:
+========================================================================================================================
+Company                   | Platform   | Status   | Error Message                                               
+========================================================================================================================
+radiant Storage           | storEDGE   | ❌ FAIL   | Navigation failed: CRITICAL ERROR: Failed to navigate to ...
+========================================================================================================================
+
+🚨 ALL ERROR MESSAGES:
+====================================================================================================
+
+1. ❌ ERROR - radiant Storage (storEDGE)
+   URL: https://radiantstorage.com/storage-units/alabama/montgomery/east-south-blvd
+   Message: Navigation failed: CRITICAL ERROR: Failed to navigate to https://radiantstorage.com/storage-units/alabama/montgomery/east-south-blvd - page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://radiantstorage.com/storage-units/alabama/montgomery/east-south-blvd?cacheBust=1756303682264-iyhfl3irbw", waiting until "domcontentloaded"
+
+   Time: 8/27/2025, 8:08:33 PM
+====================================================================================================
+====================================================================================================
+

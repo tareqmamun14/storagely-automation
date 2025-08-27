@@ -1,0 +1,97 @@
+
+================================================================================
+🏢 TESTING: sunbird Storage
+🌐 URL: https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club
+⚙️  Platform: SiteLink
+================================================================================
+📍 STEP 1: Navigating to storage listing page...
+Navigating to: https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club
+ℹ️ Network still active, proceeding with DOM ready state
+✓ Successfully navigated to storage listing page
+✅ Navigation completed successfully
+📍 STEP 2: Checking for reserve button...
+Found a button with text: "RESERVE"
+✓ Clicked "RESERVE" button
+✓ Closed the modal
+📍 STEP 3: Clicking rent button...
+Attempting to click rent button - CRITICAL STEP
+Found rent button with text: rent
+✓ Rent button clicked successfully
+✅ Rent button clicked successfully
+📍 STEP 4: Filling rental details form...
+Filling rental details form - CRITICAL STEP
+✓ Summary heading found and clicked
+✓ Filled First Name: Test
+✓ Filled Last Name: Testing_Tareq
+✓ Filled Email: tareq@storagely.io
+✓ Filled Phone: 5551234567
+✓ Filled Address: NYC
+✓ Filled City: NYC
+Attempting to select state - OPTIMIZED APPROACH
+✓ Successfully selected Alabama using standard select
+Attempting to fill zip code: 99540
+✓ Successfully filled zip code: 99540
+✓ Clicked the datepicker element
+Attempting to proceed to next step - CRITICAL STEP
+✓ Successfully clicked continue button
+✓ Rental details form completed successfully
+✅ Rental details form completed successfully
+📍 STEP 5: Filling lease details if available...
+Lease Details section not found, skipping
+✅ Lease details form completed (or skipped if not available)
+📍 STEP 6: Filling payment details...
+Filling payment details - CRITICAL STEP
+✓ Payment details filled successfully
+✅ Payment details filled successfully
+📍 STEP 7: Checking agreement checkboxes...
+- I agree to the lease terms checkbox not visible, skipping
+- I agree to the protection checkbox not visible, skipping
+- I agree to the auto pay terms checkbox not visible, skipping
+✅ Agreement checkboxes processed
+📍 STEP 8: Submitting payment and checking for errors...
+Attempting to submit payment - CRITICAL STEP
+Chat iframe not found or an error occurred, proceeding without minimizing.
+✓ Rent Now button clicked successfully
+Starting robust error detection...
+✓ Error detected via quick check
+✅ Payment submission completed
+
+✅ TEST COMPLETED SUCCESSFULLY FOR: sunbird Storage
+📊 Result: (-100) Response Code: -1 Sub Code: -1 Reason Code: -1 Reason Text: Payment failed to process: 'Card Number' is not a valid credit card number.
+================================================================================
+
+
+====================================================================================================
+🏁 PAYMENT VERIFICATION TEST SUMMARY
+====================================================================================================
+
+📊 TEST EXECUTION SUMMARY:
+   Total Tests: 2
+   ✅ Successful: 2
+   ❌ Failed: 0
+   📈 Success Rate: 100.0%
+
+📋 DETAILED RESULTS:
+========================================================================================================================
+Company                   | Platform   | Status   | Error Message                                               
+========================================================================================================================
+bluebird Storage          | SiteLink   | ✅ PASS   | (-100) Response Code: SiteLink Merchant Services CAN:52 -...
+sunbird Storage           | SiteLink   | ✅ PASS   | (-100) Response Code: -1 Sub Code: -1 Reason Code: -1 Rea...
+========================================================================================================================
+
+🚨 ALL ERROR MESSAGES:
+====================================================================================================
+
+1. ⚠️  WARNING - bluebird Storage (SiteLink)
+   URL: https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland
+   Message: (-100) Response Code: SiteLink Merchant Services CAN:52 - Invalid Card Number Sub Code: Reason Code: Invalid Card Number Reason Text:
+   Time: 8/27/2025, 8:10:51 PM
+   --------------------------------------------------------------------------------
+
+2. ⚠️  WARNING - sunbird Storage (SiteLink)
+   URL: https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club
+   Message: (-100) Response Code: -1 Sub Code: -1 Reason Code: -1 Reason Text: Payment failed to process: 'Card Number' is not a valid credit card number.
+   Time: 8/27/2025, 8:12:02 PM
+====================================================================================================
+====================================================================================================
+

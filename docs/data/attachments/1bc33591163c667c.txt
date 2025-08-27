@@ -1,0 +1,500 @@
+# Page snapshot
+
+```yaml
+- banner:
+  - navigation:
+    - link "logo":
+      - /url: https://yourpremierstorage.com
+      - img "logo"
+    - list:
+      - listitem:
+        - button "Find Storage"
+      - listitem:
+        - button "Storage Types"
+      - listitem:
+        - button "Resources"
+      - listitem:
+        - link "About":
+          - /url: /about-our-storage-facility
+      - listitem:
+        - link "Contact":
+          - /url: /contact
+    - link "My Account":
+      - /url: https://myaccount.yourpremierstorage.com/existing-customer
+    - link "Rent Now":
+      - /url: /storage-units-near-me
+- navigation "breadcrumb":
+  - list:
+    - listitem:
+      - link "Home":
+        - /url: https://yourpremierstorage.com/
+    - listitem:
+      - text: /
+      - link "Mississippi":
+        - /url: https://yourpremierstorage.com/storage-units-laurel?search=Laurel, Mississippi, Usa
+    - listitem:
+      - text: /
+      - link "Laurel":
+        - /url: https://yourpremierstorage.com/storage-units-laurel?search=Laurel, Mississippi, Usa
+    - listitem: / MS 15
+- button "Slide 1"
+- button "Slide 2"
+- button "Slide 3"
+- button "Slide 4"
+- button "Slide 5"
+- button "Slide 6"
+- button "Slide 7"
+- button "Slide 8"
+- button "Slide 9"
+- button "Slide 10"
+- button "Slide 11"
+- button "Slide 12"
+- button "Slide 13"
+- button "Slide 14"
+- button "Slide 15"
+- button "Slide 16"
+- button "Slide 17"
+- button "Slide 18"
+- button "Slide 19"
+- img "self storage units laurel"
+- button "Previous"
+- button "Next"
+- heading "Self Storage Units in Laurel MS 39440" [level=1]:
+  - strong: Self Storage Units in Laurel MS 39440
+- heading "Premier Storage | MS 15" [level=2]
+- link "3615 MS-15 Laurel, Mississippi 39440":
+  - /url: https://maps.app.goo.gl/J7rYd2pVKVrB85Ku8
+- link "(601) 281-5924":
+  - /url: tel:(601) 281-5924
+- button "Office View Hours"
+- button "Access View Hours"
+- img
+- img
+- img
+- img
+- img
+- paragraph: 52 Reviews
+- link "Call":
+  - /url: tel:(601) 281-5924
+- link "Email":
+  - /url: mailto:info@yourpremierstorage.com
+- link "Directions":
+  - /url: https://maps.app.goo.gl/J7rYd2pVKVrB85Ku8
+- link "What Size Do I Need?":
+  - /url: "#"
+- button "Sizes"
+- button "Floors"
+- button "Climate"
+- button "Reset filters"
+- text: "Sort by: Size Small to Large"
+- menu
+- img "Banner Desktop"
+- table:
+  - rowgroup:
+    - row "10 x 10 storage image Drive Up Access 10' WIDTH x 10' DEPTH What Size Do I Need? $1 MOVE IN SPECIAL! 💵 $1/month During Promo Period $74/month After Promo Period rent Easily switch sizes. reserve Requires no credit card. Non-Climate Rent Online Drive-Up Access":
+      - cell "10 x 10 storage image Drive Up Access 10' WIDTH x 10' DEPTH What Size Do I Need? $1 MOVE IN SPECIAL! 💵 $1/month During Promo Period $74/month After Promo Period rent Easily switch sizes. reserve Requires no credit card. Non-Climate Rent Online Drive-Up Access":
+        - link "10 x 10 storage image":
+          - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_408700287.webp
+          - img "10 x 10 storage image"
+        - text: Drive Up Access
+        - heading "10' WIDTH x 10' DEPTH" [level=2]
+        - paragraph:
+          - link "What Size Do I Need?":
+            - /url: "#"
+        - paragraph: $1 MOVE IN SPECIAL! 💵
+        - heading "$1/month" [level=3]
+        - text: During Promo Period
+        - heading "$74/month" [level=3]
+        - text: After Promo Period
+        - link "rent":
+          - /url: https://yourpremierstorage.com/storage-units/mississippi/laurel/ms-15/step_four?location=4c37ca58-eff2-4f76-8635-0b5602a83cae&unit=4284896&type=rent&con=7d812bc9-bafd-44f7-a854-f32623e0f736&is_sitelink=1&site_locations_id=130595&premier-storage
+        - text: Easily switch sizes. reserve Requires no credit card. Non-Climate Rent Online Drive-Up Access
+    - row "10 x 10 storage image Climate Controlled 10' WIDTH x 10' DEPTH What Size Do I Need? $1 MOVE IN SPECIAL! 💵 $1/month During Promo Period $87/month After Promo Period rent Easily switch sizes. reserve Requires no credit card. climate controlled Rent Online Indoor Access":
+      - cell "10 x 10 storage image Climate Controlled 10' WIDTH x 10' DEPTH What Size Do I Need? $1 MOVE IN SPECIAL! 💵 $1/month During Promo Period $87/month After Promo Period rent Easily switch sizes. reserve Requires no credit card. climate controlled Rent Online Indoor Access":
+        - link "10 x 10 storage image":
+          - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_944577574.webp
+          - img "10 x 10 storage image"
+        - text: Climate Controlled
+        - heading "10' WIDTH x 10' DEPTH" [level=2]
+        - paragraph:
+          - link "What Size Do I Need?":
+            - /url: "#"
+        - paragraph: $1 MOVE IN SPECIAL! 💵
+        - heading "$1/month" [level=3]
+        - text: During Promo Period
+        - heading "$87/month" [level=3]
+        - text: After Promo Period
+        - link "rent":
+          - /url: https://yourpremierstorage.com/storage-units/mississippi/laurel/ms-15/step_four?location=4c37ca58-eff2-4f76-8635-0b5602a83cae&unit=4285009&type=rent&con=7d812bc9-bafd-44f7-a854-f32623e0f736&is_sitelink=1&site_locations_id=130595&premier-storage
+        - text: Easily switch sizes. reserve Requires no credit card. climate controlled Rent Online Indoor Access
+    - row "10 x 15 storage image Climate Controlled 10' WIDTH x 15' DEPTH What Size Do I Need? $1 MOVE IN SPECIAL! 💵 $1/month During Promo Period $118/month After Promo Period rent Easily switch sizes. reserve Requires no credit card. climate controlled Inside Rent Online":
+      - cell "10 x 15 storage image Climate Controlled 10' WIDTH x 15' DEPTH What Size Do I Need? $1 MOVE IN SPECIAL! 💵 $1/month During Promo Period $118/month After Promo Period rent Easily switch sizes. reserve Requires no credit card. climate controlled Inside Rent Online":
+        - link "10 x 15 storage image":
+          - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1360366711.webp
+          - img "10 x 15 storage image"
+        - text: Climate Controlled
+        - heading "10' WIDTH x 15' DEPTH" [level=2]
+        - paragraph:
+          - link "What Size Do I Need?":
+            - /url: "#"
+        - paragraph: $1 MOVE IN SPECIAL! 💵
+        - heading "$1/month" [level=3]
+        - text: During Promo Period
+        - heading "$118/month" [level=3]
+        - text: After Promo Period
+        - link "rent":
+          - /url: https://yourpremierstorage.com/storage-units/mississippi/laurel/ms-15/step_four?location=4c37ca58-eff2-4f76-8635-0b5602a83cae&unit=4285039&type=rent&con=7d812bc9-bafd-44f7-a854-f32623e0f736&is_sitelink=1&site_locations_id=130595&premier-storage
+        - text: Easily switch sizes. reserve Requires no credit card. climate controlled Inside Rent Online
+    - row "10 x 15 storage image Drive Up Access 10' WIDTH x 15' DEPTH What Size Do I Need? 50% OFF FIRST MONTH’S RENT 🚀 $50/month During Promo Period $99/month After Promo Period rent Easily switch sizes. reserve Requires no credit card. Non-Climate Rent Online Drive-Up Access":
+      - cell "10 x 15 storage image Drive Up Access 10' WIDTH x 15' DEPTH What Size Do I Need? 50% OFF FIRST MONTH’S RENT 🚀 $50/month During Promo Period $99/month After Promo Period rent Easily switch sizes. reserve Requires no credit card. Non-Climate Rent Online Drive-Up Access":
+        - link "10 x 15 storage image":
+          - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1537928481.webp
+          - img "10 x 15 storage image"
+        - text: Drive Up Access
+        - heading "10' WIDTH x 15' DEPTH" [level=2]
+        - paragraph:
+          - link "What Size Do I Need?":
+            - /url: "#"
+        - paragraph: 50% OFF FIRST MONTH’S RENT 🚀
+        - heading "$50/month" [level=3]
+        - text: During Promo Period
+        - heading "$99/month" [level=3]
+        - text: After Promo Period
+        - link "rent":
+          - /url: https://yourpremierstorage.com/storage-units/mississippi/laurel/ms-15/step_four?location=4c37ca58-eff2-4f76-8635-0b5602a83cae&unit=4284940&type=rent&con=cf2d8a4b-6d5b-40bd-9575-95343c7a7caf&is_sitelink=1&site_locations_id=130595&premier-storage
+        - text: Easily switch sizes. reserve Requires no credit card. Non-Climate Rent Online Drive-Up Access
+    - row "10 x 20 storage image Drive Up Access 10' WIDTH x 20' DEPTH What Size Do I Need? $1 MOVE IN SPECIAL! 💵 $1/month During Promo Period $114/month After Promo Period rent Easily switch sizes. reserve Requires no credit card. Non-Climate Rent Online Drive-Up Access":
+      - cell "10 x 20 storage image Drive Up Access 10' WIDTH x 20' DEPTH What Size Do I Need? $1 MOVE IN SPECIAL! 💵 $1/month During Promo Period $114/month After Promo Period rent Easily switch sizes. reserve Requires no credit card. Non-Climate Rent Online Drive-Up Access":
+        - link "10 x 20 storage image":
+          - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_165952784.webp
+          - img "10 x 20 storage image"
+        - text: Drive Up Access
+        - heading "10' WIDTH x 20' DEPTH" [level=2]
+        - paragraph:
+          - link "What Size Do I Need?":
+            - /url: "#"
+        - paragraph: $1 MOVE IN SPECIAL! 💵
+        - heading "$1/month" [level=3]
+        - text: During Promo Period
+        - heading "$114/month" [level=3]
+        - text: After Promo Period
+        - link "rent":
+          - /url: https://yourpremierstorage.com/storage-units/mississippi/laurel/ms-15/step_four?location=4c37ca58-eff2-4f76-8635-0b5602a83cae&unit=4285089&type=rent&con=7d812bc9-bafd-44f7-a854-f32623e0f736&is_sitelink=1&site_locations_id=130595&premier-storage
+        - text: Easily switch sizes. reserve Requires no credit card. Non-Climate Rent Online Drive-Up Access
+    - row "10 x 20 storage image Climate Controlled 10' WIDTH x 20' DEPTH What Size Do I Need? 50% OFF FIRST MONTH’S RENT 🚀 $67/month During Promo Period $134/month After Promo Period rent Easily switch sizes. reserve Requires no credit card. climate controlled Indoor Access Rent Online":
+      - cell "10 x 20 storage image Climate Controlled 10' WIDTH x 20' DEPTH What Size Do I Need? 50% OFF FIRST MONTH’S RENT 🚀 $67/month During Promo Period $134/month After Promo Period rent Easily switch sizes. reserve Requires no credit card. climate controlled Indoor Access Rent Online":
+        - link "10 x 20 storage image":
+          - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_438249633.webp
+          - img "10 x 20 storage image"
+        - text: Climate Controlled
+        - heading "10' WIDTH x 20' DEPTH" [level=2]
+        - paragraph:
+          - link "What Size Do I Need?":
+            - /url: "#"
+        - paragraph: 50% OFF FIRST MONTH’S RENT 🚀
+        - heading "$67/month" [level=3]
+        - text: During Promo Period
+        - heading "$134/month" [level=3]
+        - text: After Promo Period
+        - link "rent":
+          - /url: https://yourpremierstorage.com/storage-units/mississippi/laurel/ms-15/step_four?location=4c37ca58-eff2-4f76-8635-0b5602a83cae&unit=4284935&type=rent&con=cf2d8a4b-6d5b-40bd-9575-95343c7a7caf&is_sitelink=1&site_locations_id=130595&premier-storage
+        - text: Easily switch sizes. reserve Requires no credit card. climate controlled Indoor Access Rent Online
+    - row "5 x 10 storage image Drive Up Access 5' WIDTH x 10' DEPTH What Size Do I Need? $29/month Join the Waitlist! Join the Waitlist! Non-Climate Rent Online Drive-Up Access":
+      - cell "5 x 10 storage image Drive Up Access 5' WIDTH x 10' DEPTH What Size Do I Need? $29/month Join the Waitlist! Join the Waitlist! Non-Climate Rent Online Drive-Up Access":
+        - link "5 x 10 storage image":
+          - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_80583927.webp
+          - img "5 x 10 storage image"
+        - text: Drive Up Access
+        - heading "5' WIDTH x 10' DEPTH" [level=2]
+        - paragraph:
+          - link "What Size Do I Need?":
+            - /url: "#"
+        - heading "$29/month" [level=3]
+        - button "Join the Waitlist!"
+        - text: Join the Waitlist! Non-Climate Rent Online Drive-Up Access
+    - row "5 x 10 storage image Climate Controlled 5' WIDTH x 10' DEPTH What Size Do I Need? $41/month Join the Waitlist! Join the Waitlist! climate controlled Indoor Access Rent Online":
+      - cell "5 x 10 storage image Climate Controlled 5' WIDTH x 10' DEPTH What Size Do I Need? $41/month Join the Waitlist! Join the Waitlist! climate controlled Indoor Access Rent Online":
+        - link "5 x 10 storage image":
+          - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1376336034.webp
+          - img "5 x 10 storage image"
+        - text: Climate Controlled
+        - heading "5' WIDTH x 10' DEPTH" [level=2]
+        - paragraph:
+          - link "What Size Do I Need?":
+            - /url: "#"
+        - heading "$41/month" [level=3]
+        - button "Join the Waitlist!"
+        - text: Join the Waitlist! climate controlled Indoor Access Rent Online
+- heading "Customer Reviews" [level=2]
+- img
+- img
+- img
+- img
+- img
+- strong: "4.9"
+- text: 52 Reviews
+- link "Write a review":
+  - /url: https://www.google.com/maps/place/Premier+Storage+-+Laurel/@31.735351,-89.1455079,3843m/data=!3m1!1e3!4m8!3m7!1s0x888335ca83145889:0xdafc92b13a5e62d9!8m2!3d31.735351!4d-89.1455079!9m1!1b1!16s%2Fg%2F1hc4vyq8s?entry=ttu&g_ep=EgoyMDI1MDYxMS4wIKXMDSoASAFQAw%3D%3D
+  - button "Write a review"
+- button "Previous": ←Previous
+- tabpanel:
+  - img
+  - img
+  - img
+  - img
+  - img
+  - img
+  - img "google review"
+  - paragraph: Nakeia Strong
+  - paragraph: a month ago
+  - paragraph: Easy move in and good space for what I need
+- tabpanel:
+  - img
+  - img
+  - img
+  - img
+  - img
+  - img
+  - img "google review"
+  - paragraph: Mark Horne
+  - paragraph: Edited a month ago
+  - paragraph: Safe, clean, convenient, reasonable cost, and excellent staff. Easy access to my unit. Everything you could want in climate control storage.
+- tabpanel:
+  - img
+  - img
+  - img
+  - img
+  - img
+  - img
+  - img "google review"
+  - paragraph: Amy Walker
+  - paragraph: a month ago
+  - paragraph: Very friendly staff, storage units are in a safe environment, would recommend to others to rent from Premier Storage.
+- button "Next": →Next
+- tablist:
+  - tab "1 of 4": • 1
+  - tab "2 of 4" [selected]: • 2
+  - tab "3 of 4": • 3
+  - tab "4 of 4": • 4
+  - tab "5 of 4": • 5
+  - tab "6 of 4": • 6
+  - tab "7 of 4": • 7
+  - tab "8 of 4": • 8
+  - tab "9 of 4": • 9
+  - tab "10 of 4": • 10
+  - tab "11 of 4": • 11
+  - tab "12 of 4": • 12
+- heading "About Laurel | MS 15" [level=2]
+- paragraph
+- heading "Self Storage in Laurel That Fits Jones County Life" [level=2]
+- paragraph: Looking for dependable self storage in Laurel that understands the needs of Jones County residents? At Premier Storage - Laurel, we’ve got you covered with affordable options right off MS-15. Whether you’re stashing away family heirlooms or clearing out space after a big Pine Belt move, our facility is here to help. Locals know life in Laurel can mean anything from humid summers to sudden storms, so we offer units that keep your belongings safe and sound. With sizes ranging from 50 to 200 square feet, there’s a spot for everyone—big or small. Our convenient location makes it easy to swing by after a day at the Mason Park or a trip down 16th Avenue. Say goodbye to clutter and hello to peace of mind with storage that’s as reliable as a Mississippi sunset. Reserve your unit today!
+- heading "Storage Facility Laurel Locals Trust" [level=2]
+- paragraph: Need a storage facility Laurel folks can count on? Premier Storage - Laurel is your go-to spot at 3615 MS-15, built with Jones County’s unique vibe in mind. We’re not just another storage joint—we’re part of the community, offering low-cost solutions for everyone from downtown shop owners to Lake Bogue Homa boaters. Our security fence and coded gate entry keep your stuff protected, whether it’s a motorcycle or seasonal gear. Easy drive-up access means you’re in and out faster than a trip to the Free State of Jones Farmers Market. Located right where Laurel’s hustle meets its charm, we’re perfect for anyone needing extra room without the headache. With climate-controlled options, your belongings stay fresh through Mississippi’s muggy months. Drop by and see why we’re the storage facility Laurel residents rave about!
+- heading "Storage Unit Types to Match Your Needs" [level=2]
+- list:
+  - listitem:
+    - heading "Climate Controlled Storage" [level=3]:
+      - strong: Climate Controlled Storage
+  - listitem:
+    - heading "Drive Up Storage" [level=3]:
+      - strong: Drive Up Storage
+  - listitem:
+    - heading "Vehicle Storage" [level=3]:
+      - strong: Vehicle Storage
+  - listitem:
+    - heading "Boat Storage" [level=3]:
+      - strong: Boat Storage
+- paragraph:
+  - text: At Premier Storage - Laurel, our storage unit types are designed to fit whatever Jones County throws your way.
+  - link "Climate-controlled storage":
+    - /url: https://yourpremierstorage.com/storage-type/climate-controlled-storage
+  - text: keeps your valuables safe from Laurel’s heat and humidity—perfect for furniture or electronics.
+  - link "Drive-up storage":
+    - /url: https://yourpremierstorage.com/storage-type/drive-up-storage
+  - text: offers quick access for those heavy loads, making move-in day a breeze.
+  - link "Vehicle storage":
+    - /url: https://yourpremierstorage.com/storage-type/vehicle-storage
+  - text: gives your car or motorcycle a secure home, while
+  - link "boat storage":
+    - /url: https://yourpremierstorage.com/storage-type/boat-storage
+  - text: is a lifesaver for Lake Bogue Homa enthusiasts. With sizes from 50 to 200 square feet, we’ve got flexibility for small stashes or big hauls—ideal for
+  - link "household storage":
+    - /url: https://yourpremierstorage.com/storage-type/household-storage
+  - text: or
+  - link "business needs":
+    - /url: https://yourpremierstorage.com/storage-type/business-storage
+  - text: . Moving? Try our
+  - link "moving storage":
+    - /url: https://yourpremierstorage.com/storage-type/moving-storage
+  - text: . Every unit comes with a lock included, so you’re set from day one. Find the right fit with our
+  - link "size guide":
+    - /url: https://yourpremierstorage.com/pages/storage-unit-size-guide
+  - text: "!"
+- heading "Directions to Premier Storage - Laurel 3615 MS-15" [level=3]
+- heading "Laurel Main Street" [level=4]:
+  - link "Laurel Main Street":
+    - /url: https://www.google.com/maps/dir/Laurel+Main+Street,+Laurel,+MS+39440/3615+MS-15,+Laurel,+MS+39440
+- paragraph: Head north on MS-15 from Laurel Main Street. Keep going straight for about 4 miles, passing Central Avenue. We’re on your right just after the industrial stretch—look for our sign!
+- heading "Mason Park" [level=4]:
+  - link "Mason Park":
+    - /url: https://www.google.com/maps/dir/Mason+Park,+Laurel,+MS+39440/3615+MS-15,+Laurel,+MS+39440
+- paragraph: From Mason Park, take N 16th Ave north to MS-15. Turn left onto MS-15 and drive 3 miles. You’ll see us on the right before you hit the county line.
+- heading "Landrum’s Homestead & Village" [level=4]:
+  - link "Landrum’s Homestead & Village":
+    - /url: https://www.google.com/maps/dir/Landrum’s+Homestead+%26+Village,+Laurel,+MS+39440/3615+MS-15,+Laurel,+MS+39440
+- paragraph: Start at Landrum’s, head west on Old Bay Springs Rd, then turn right onto MS-15. Travel 2.5 miles north. We’re on your right, just past the curve.
+- heading "Lauren Rogers Museum of Art" [level=4]:
+  - link "Lauren Rogers Museum of Art":
+    - /url: https://www.google.com/maps/dir/Lauren+Rogers+Museum+of+Art,+565+N+5th+Ave,+Laurel,+MS+39440/3615+MS-15,+Laurel,+MS+39440
+- paragraph: From the museum, go north on N 5th Ave, then left onto MS-15. Drive 4 miles straight. We’re on the right, easy to spot after the railroad tracks.
+- heading "Veterans Memorial Museum" [level=4]:
+  - link "Veterans Memorial Museum":
+    - /url: https://www.google.com/maps/dir/Veterans+Memorial+Museum,+920+Hillcrest+Dr,+Laurel,+MS+39440/3615+MS-15,+Laurel,+MS+39440
+- paragraph: Head north on Hillcrest Dr from the museum, turn left onto MS-15. Go 3.5 miles. You’ll find us on the right, just before the highway widens.
+- heading "FAQ Section" [level=4]
+- paragraph:
+  - strong: What sizes of storage units are available in Laurel?
+  - text: We offer units from 50 to 200 square feet, ideal for everything from small boxes to boats.
+- paragraph:
+  - strong: Do you have climate-controlled storage in Laurel, MS?
+  - text: Yes, our
+  - link "climate-controlled storage":
+    - /url: https://yourpremierstorage.com/storage-type/climate-controlled-storage
+  - text: protects from humidity and heat.
+- paragraph:
+  - strong: Can I store my vehicle or boat at Premier Storage - Laurel?
+  - text: Absolutely, we provide secure
+  - link "vehicle storage":
+    - /url: https://yourpremierstorage.com/storage-type/vehicle-storage
+  - text: and
+  - link "boat storage":
+    - /url: https://yourpremierstorage.com/storage-type/boat-storage
+  - text: .
+- paragraph:
+  - strong: How do I access my storage unit at 3615 MS-15?
+  - text: Use our coded gate entry and
+  - link "drive-up options":
+    - /url: https://yourpremierstorage.com/storage-type/drive-up-storage
+  - text: for easy access anytime.
+- paragraph:
+  - strong: What else can I store here?
+  - text: From RVs to specialty items, check our
+  - link "RV storage":
+    - /url: https://yourpremierstorage.com/storage-type/rv-storage
+  - text: or
+  - link "FAQ page":
+    - /url: https://yourpremierstorage.com/pages/self-storage-faq
+  - text: "!"
+- heading "Nearby Premier Storage - Laurel Facilities" [level=4]
+- paragraph: Not the right spot? Explore our other Pine Belt locations for more storage choices tailored to your needs.
+- list:
+  - listitem:
+    - strong: Premier Storage 308 N 12th Ave Laurel, MS 39440
+    - text: "- See pricing at our other"
+    - link "Laurel, MS":
+      - /url: https://yourpremierstorage.com/storage-units/mississippi/laurel/ms-15
+    - text: facility.
+  - listitem:
+    - strong: Premier Storage 100 Simpson Hwy 149 Magee, MS 39111
+    - text: "- See pricing at our"
+    - link "Magee, MS":
+      - /url: https://yourpremierstorage.com/storage-units/mississippi/magee/simpson-highway-149
+    - text: facility.
+- paragraph: Premier Storage - Laurel at 3615 MS-15 is your affordable solution for self storage in Jones County. From climate-controlled units to boat storage, we’ve got the variety Laurel locals need. Our convenient spot off MS-15 makes us easy to reach from anywhere in town. Whether you’re decluttering or stashing your ride, we’re here with secure, flexible options. Visit us today and see how simple storage can be!
+- paragraph
+- heading "Facility Features" [level=3]
+- list:
+  - listitem: Boat Storage
+  - listitem: Climate-Controlled Units
+  - listitem: Code Gate Entry
+  - listitem: Drive Up Units
+  - listitem: Lock Included
+  - listitem: Motorcycle Storage
+  - listitem: Protection Plan
+  - listitem: Security Fence
+  - listitem: Vehicle Storage
+- link "Footer Logo":
+  - /url: https://yourpremierstorage.com
+  - img "Footer Logo"
+- link "Find Storage":
+  - /url: /storage-units-near-me
+  - img
+  - text: Find Storage
+- link "Size Guide":
+  - /url: /storage-unit-size-guide
+  - img
+  - text: Size Guide
+- text: Find Storage
+- separator
+- link "Rent Now":
+  - /url: /storage-units-near-me
+- link "West Jackman Trail | Benton, AR":
+  - /url: /storage-units/arkansas/benton/west-jackman-trail
+- link "Mill Street | Conway, AR":
+  - /url: /storage-units/arkansas/conway/mill-street
+- link "South Broadview Street | Greenbrier, AR":
+  - /url: /storage-units/arkansas/greenbrier/south-broadview-street
+- link "US 65 N | Greenbrier, AR":
+  - /url: /storage-units/arkansas/greenbrier/us-65-north
+- link "MS-15 | Laurel, MS":
+  - /url: /storage-units/mississippi/laurel/ms-15
+- link "N 12th Avenue | Laurel, MS":
+  - /url: /storage-units/mississippi/laurel/north-12th-avenue
+- link "Simpson Highway 149 | Magee, MS":
+  - /url: /storage-units/mississippi/magee/simpson-highway-149
+- link "Columbus Road | Grantville, OH":
+  - /url: /storage-units/ohio/granville/columbus-road
+- link "Trimble Road | Mansfield, OH":
+  - /url: /storage-units/ohio/mansfield/trimble-road
+- link "Cascade Drive | Marion, OH":
+  - /url: /storage-units/ohio/marion/cascade-drive
+- link "County Road 26 | Marengo, OH":
+  - /url: /storage-units/ohio/marengo/county-road-26
+- link "Lucille Lynd Road | New Albany, OH":
+  - /url: /storage-units/ohio/new-albany/lucille-lynd-road
+- link "Back Massillon Road | Orrville, OH":
+  - /url: /storage-units/ohio/orrville/back-massillon-road
+- link "Newark Road | Zanesville, OH":
+  - /url: /storage-units/ohio/zanesville/newark-road
+- link "Richards Road | Zanesville, OH":
+  - /url: /storage-units/ohio/zanesville/richards-road
+- text: Storage Types
+- separator
+- link "Boat Storage":
+  - /url: /boat-storage
+- link "Business Storage":
+  - /url: /business-storage
+- link "Climate-Controlled Storage":
+  - /url: /climate-controlled-storage
+- link "Commercial Real Estate Storage":
+  - /url: /commercial-real-estate-storage
+- link "Drive Up Storage":
+  - /url: /drive-up-storage
+- link "Household Storage":
+  - /url: /household-storage
+- link "Indoor Storage":
+  - /url: /indoor-storage
+- link "Moving Storage":
+  - /url: /moving-storage
+- link "RV Storage":
+  - /url: /rv-storage
+- link "Vehicle Storage":
+  - /url: /vehicle-storage
+- link "Warehouse Storage":
+  - /url: /warehouse-storage
+- text: Resources
+- separator
+- link "Size Guide":
+  - /url: /pages/storage-unit-size-guide
+- link "FAQs":
+  - /url: /pages/self-storage-faq
+- link "My Account":
+  - /url: https://myaccount.yourpremierstorage.com/existing-customer
+- text: Contact
+- separator
+- link "Contact Us":
+  - /url: /pages/contact
+- text: © Premier Storage |
+- link "Privacy Policy":
+  - /url: /privacy-policy
+```
