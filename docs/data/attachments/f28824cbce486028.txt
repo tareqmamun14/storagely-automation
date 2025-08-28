@@ -1,7 +1,0 @@
-
-🔍 Testing First Storage : StorEDGE
-📋 Expected: "Sale"
-🌐 Navigating to: https://www.firststorage.com/storage-units/north-carolina/north-wilkesboro/d-street?_cache_bust=1756329918909_841pbssjj9s
-📍 Found 17 elements with selector: .page_discount
-✅ First Storage : StorEDGE | Found matching banner: "First Month Free
-Sale Ends Aug 31st"
