@@ -1,13 +1,13 @@
 import { type Page, expect } from '@playwright/test';
+import { BasePage } from './BasePage';
 
-export class StorageSitePage {
-  readonly page: Page;
+export class StorageSitePage extends BasePage {
   readonly logo;
   readonly navLink;
   readonly ctaButton;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     // Updated logo selector to match your implementation
     this.logo = page.getByRole('link', { name: 'logo', exact: true });
     // Broader navigation selector
@@ -27,6 +27,9 @@ export class StorageSitePage {
     console.log(`Verifying: ${url}`);
     
     try {
+      // Handle popup before verification for AllPurpose Storage
+      await this.popupHandler.handleClientSpecificPopups();
+      
       // 1. Verify page loads (check for any content)
       await expect(this.page.locator('body')).toBeVisible({ timeout: 10000 });
       console.log(`- Page loaded for ${url}`);

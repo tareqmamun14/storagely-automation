@@ -49,6 +49,10 @@ export class StorageListingPage extends BasePage {
     try {
       await this.goto(urlWithQuery);
       await this.handleCookieConsent();
+      
+      // Additional popup handling after page load for AllPurpose Storage
+      await this.popupHandler.handleClientSpecificPopups();
+      
       console.log('✓ Successfully navigated to storage listing page');
     } catch (error) {
       const errorMsg = `CRITICAL ERROR: Failed to navigate to ${url} - ${(error as Error).message}`;
@@ -65,6 +69,9 @@ export class StorageListingPage extends BasePage {
     let buttonText: string | null = null;
     
     try {
+      // Handle popup before looking for reserve button
+      await this.popupHandler.handleClientSpecificPopups();
+      
       // Wait longer for reserve button to appear
       await this.reserveButton.waitFor({ state: 'visible', timeout: 10000 });
       
@@ -76,6 +83,9 @@ export class StorageListingPage extends BasePage {
       
       // Wait for a modal to appear (if any)
       await this.wait(2000);
+      
+      // Handle popup after clicking reserve button
+      await this.popupHandler.handleClientSpecificPopups();
       
       // Try closing the modal (if it exists)
       try {

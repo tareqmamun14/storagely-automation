@@ -1,12 +1,15 @@
 // pages/BasePage.ts
 
 import { Page, expect, Locator } from '@playwright/test';
+import { PopupHandler } from '../utils/popup-handler';
 
 export class BasePage {
   readonly page: Page;
+  protected popupHandler: PopupHandler;
 
   constructor(page: Page) {
     this.page = page;
+    this.popupHandler = new PopupHandler(page);
   }
 
   /**
@@ -25,7 +28,7 @@ export class BasePage {
   }
 
   /**
-   * Navigate to a URL with better loading states
+   * Navigate to a URL with better loading states and popup handling
    * @param url URL to navigate to
    */
   async goto(url: string): Promise<void> {
@@ -41,6 +44,9 @@ export class BasePage {
       console.log('ℹ️ Network still active, proceeding with DOM ready state');
       await this.page.waitForLoadState('domcontentloaded', { timeout: 5000 });
     }
+    
+    // Handle client-specific popups after navigation
+    await this.popupHandler.handleClientSpecificPopups();
   }
 
   /**
@@ -51,12 +57,19 @@ export class BasePage {
   }
 
   /**
-   * Safe click with automatic waiting
+   * Safe click with automatic waiting and popup handling
    */
   async safeClick(locator: Locator, timeout: number = 10000): Promise<void> {
+    // Handle popup before clicking
+    await this.popupHandler.handleClientSpecificPopups();
+    
     await expect(locator).toBeVisible({ timeout });
     await expect(locator).toBeEnabled({ timeout: 5000 });
     await locator.click();
+    
+    // Handle popup after clicking (in case clicking triggers a popup)
+    await this.page.waitForTimeout(1000);
+    await this.popupHandler.handleClientSpecificPopups();
   }
 
   /**

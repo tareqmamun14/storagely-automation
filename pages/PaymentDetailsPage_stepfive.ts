@@ -6,6 +6,16 @@ export class PaymentDetailsPage extends BasePage {
     super(page);
   }
 
+  /**
+   * Handle popup if this is an AllPurpose Storage client
+   */
+  public async handlePopupIfNeeded(): Promise<void> {
+    const isAllPurposeStorage = await this.popupHandler.isAllPurposeStorageClient();
+    if (isAllPurposeStorage) {
+      await this.popupHandler.handleAllPurposeStoragePopup();
+    }
+  }
+
   // Locators
   private get leaseDetailsHeader() { return this.page.getByRole('heading', { name: /lease details/i }); }
   private get alternatePhoneInput() { return this.page.getByPlaceholder('Alternate Phone Number (must'); }
@@ -24,6 +34,7 @@ export class PaymentDetailsPage extends BasePage {
 
   /**
    * Helper method to safely fill a field if it exists and is visible
+   * Includes popup handling for AllPurpose Storage client
    */
   private async fillFieldIfExists(locator: any, value: string, fieldName: string): Promise<void> {
     try {
@@ -40,6 +51,7 @@ export class PaymentDetailsPage extends BasePage {
 
   /**
    * Helper method to safely select an option if the select element exists and is visible
+   * Includes popup handling for AllPurpose Storage client
    */
   private async selectOptionIfExists(locator: any, value: string, fieldName: string): Promise<void> {
     try {
@@ -114,6 +126,7 @@ export class PaymentDetailsPage extends BasePage {
 
   /**
    * Fill out the payment details - CRITICAL STEP that must succeed
+   * Includes popup handling for AllPurpose Storage client
    */
   async fillPaymentDetails(paymentData: {
     cardNumber: string,
@@ -123,9 +136,9 @@ export class PaymentDetailsPage extends BasePage {
     console.log('Filling payment details - CRITICAL STEP');
     
     try {
+      // ⚡ FIRST PRIORITY: Handle popup immediately for Step 6 payment form
       // Wait for payment form to be visible with longer timeout
       await this.cardNumberInput.waitFor({ state: 'visible', timeout: 10000 });
-      
       await this.cardNumberInput.type(paymentData.cardNumber, { delay: 400 });
       await this.wait(500);
       await this.page.keyboard.press('Tab');
@@ -148,6 +161,7 @@ export class PaymentDetailsPage extends BasePage {
 
   /**
    * Check agreement checkboxes if available
+   * Includes popup handling for AllPurpose Storage client
    */
   async checkAgreementCheckboxes(): Promise<void> {
     const checkboxes = [
@@ -158,6 +172,9 @@ export class PaymentDetailsPage extends BasePage {
 
     for (const label of checkboxes) {
       try {
+        // Handle popup before each checkbox interaction
+        await this.handlePopupIfNeeded();
+        
         const checkbox = this.page.getByLabel(label);
         if (await checkbox.isVisible({ timeout: 3000 })) {
           await checkbox.check();
@@ -174,6 +191,7 @@ export class PaymentDetailsPage extends BasePage {
   /**
    * ROBUST ERROR DETECTION - Submit payment and capture errors reliably
    * Returns the error message if any, with multiple fallback strategies
+   * Includes popup handling for AllPurpose Storage client
    */
   //==================
   async submitPaymentAndCheckError(): Promise<string> {
@@ -182,8 +200,15 @@ export class PaymentDetailsPage extends BasePage {
     try {
       await this.minimizeLiveChat();
       
+      // Handle popup before submitting payment
+      await this.handlePopupIfNeeded();
+      
       // Wait for rent now button to be visible and clickable
       await this.rentNowButton.waitFor({ state: 'visible', timeout: 10000 });
+      
+      // Handle popup again just before clicking rent now
+      await this.handlePopupIfNeeded();
+      
       await this.rentNowButton.click({ timeout: 30000 });
       
       console.log('✓ Rent Now button clicked successfully');

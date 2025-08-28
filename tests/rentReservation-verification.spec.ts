@@ -71,6 +71,9 @@ test.describe('Payment Verification Tests', () => {
         await storageListingPage.clickRentButton();
         console.log('✅ Rent button clicked successfully');
         
+        // Handle popup immediately after URL transition to step_four
+        await rentalDetailsPage.handlePopupIfNeeded();
+        
         // STEP 4: Fill out rental details form
         testResult.step = 'Rental Details Form';
         console.log('📍 STEP 4: Filling rental details form...');
@@ -85,6 +88,9 @@ test.describe('Payment Verification Tests', () => {
           zipCode: TEST_USER.zipCode
         });
         console.log('✅ Rental details form completed successfully');
+        
+        // Handle popup immediately after URL transition to step_five
+        await paymentDetailsPage.handlePopupIfNeeded();
         
         // STEP 5: Fill lease details if available
         testResult.step = 'Lease Details Form';

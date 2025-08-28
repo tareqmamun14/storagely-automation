@@ -6,6 +6,16 @@ export class RentalDetailsPage extends BasePage {
     super(page);
   }
 
+  /**
+   * Handle popup if this is an AllPurpose Storage client
+   */
+  public async handlePopupIfNeeded(): Promise<void> {
+    const isAllPurposeStorage = await this.popupHandler.isAllPurposeStorageClient();
+    if (isAllPurposeStorage) {
+      await this.popupHandler.handleAllPurposeStoragePopup();
+    }
+  }
+
   // Locators
   private get summaryHeading() { return this.page.getByRole('heading', { name: 'Summary of Rental' }); }
   private get firstNameInput() { return this.page.getByPlaceholder('First name'); }
@@ -90,6 +100,7 @@ export class RentalDetailsPage extends BasePage {
 
   /**
    * Fill zip code with enhanced error handling - CRITICAL FIELD
+   * Includes popup handling for AllPurpose Storage client only for zip code interaction
    */
   private async fillZipCode(zipCode: string): Promise<void> {
     console.log(`Attempting to fill zip code: ${zipCode}`);
@@ -97,6 +108,10 @@ export class RentalDetailsPage extends BasePage {
     try {
       // Wait for zip code input to be available
       await this.zipCodeInput.waitFor({ state: 'visible', timeout: 10000 });
+      await this.wait(500);
+      
+      // Handle popup before critical zip code interaction (popup can reappear during scrolling)
+      await this.handlePopupIfNeeded();
       
       // First try to click the zip code input to ensure it's focused
       await this.zipCodeInput.click({ timeout: 5000 });
@@ -112,6 +127,7 @@ export class RentalDetailsPage extends BasePage {
       try {
         const zipByPlaceholder = this.page.getByPlaceholder(/Zip|Postal/i);
         await zipByPlaceholder.waitFor({ state: 'visible', timeout: 5000 });
+        
         await zipByPlaceholder.first().click();
         await zipByPlaceholder.first().fill(zipCode);
         console.log(`✓ Successfully filled zip code using placeholder approach: ${zipCode}`);
@@ -217,16 +233,26 @@ export class RentalDetailsPage extends BasePage {
 
   /**
    * Click the continue button to proceed to the next step - CRITICAL STEP
+   * Handles popup ONCE at URL transition for AllPurpose Storage client
    */
   private async proceedToNextStep(): Promise<void> {
     console.log('Attempting to proceed to next step - CRITICAL STEP');
     
     try {
-      await this.continueButton.waitFor({ state: 'visible', timeout: 10000 });
+      // Handle popup once at URL transition (only for AllPurpose Storage)
+      await this.handlePopupIfNeeded();
+      await this.wait(500);
+      
+      await this.continueButton.waitFor({ state: 'visible', timeout: 15000 });
       await this.continueButton.scrollIntoViewIfNeeded();
-      await this.continueButton.click();
-      await this.wait(3000); // Wait longer for navigation
+      await this.wait(500);
+      
+      // Single click attempt with proper timeout
+      console.log('Continue button click attempt 1');
+      await this.continueButton.click({ timeout: 15000 });
       console.log('✓ Successfully clicked continue button');
+      
+      await this.wait(3000); // Wait for navigation to next step
     } catch (error) {
       const errorMsg = `CRITICAL ERROR: Could not find or click continue button - ${(error as Error).message}`;
       console.error(errorMsg);

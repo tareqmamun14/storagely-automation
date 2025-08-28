@@ -8,7 +8,7 @@ export enum Environment {
   // Switch between environments
   //export const CURRENT_ENVIRONMENT = Environment.STAGING;
   export const CURRENT_ENVIRONMENT = Environment.PRODUCTION;
-  
+
   // Admin URLs
   export const ADMIN_URLS = {
     [Environment.STAGING]: 'https://test.staging.storagely-api.com/10-federal-storage/admin',
@@ -38,21 +38,21 @@ export enum Environment {
     ],
     [Environment.PRODUCTION]: [
 
-      'https://10federalstorage.com/storage-units/georgia/dahlonega/highway-19-north',
-      'https://www.bestboxstorage.com/storage-units/florida/pensacola/north-palafox',
-      'https://radiantstorage.com/storage-units/alabama/montgomery/east-south-blvd',
-      'https://ww2.radiantstorage.com/storage-units/texas/beaumont/college-street',
-      'https://yourpremierstorage.com/storage-units/mississippi/magee/simpson-highway-149',
-      'https://redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',
-      'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road',
-      'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',
-      'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland',
-      'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club',
-      'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive',
-      'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road',
-      'https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street',
+      //'https://10federalstorage.com/storage-units/georgia/dahlonega/highway-19-north',
+      // 'https://www.bestboxstorage.com/storage-units/florida/pensacola/north-palafox',
+      // 'https://radiantstorage.com/storage-units/alabama/montgomery/east-south-blvd',
+      // 'https://ww2.radiantstorage.com/storage-units/texas/beaumont/college-street',
+      // 'https://yourpremierstorage.com/storage-units/mississippi/magee/simpson-highway-149',
+      // 'https://redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',
+      // 'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road',
+      // 'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',
+      //'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland',
+      // 'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club',
+      //'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive',
+      // 'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road',
+      // 'https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street',
       //'https://app.storagely.io/mini-mall-storage/storage-units/alabama/courtland/highway-33', //mini-mall
-      'https://app.storagely.io/first-storage/storage-units/north-carolina/fayetteville/raeford-road',
+      // 'https://app.storagely.io/first-storage/storage-units/north-carolina/fayetteville/raeford-road',
       'https://app.storagely.io/allpurposestorage/storage-units/maine/belgrade/manchester-road',
       ]
   };
@@ -78,14 +78,14 @@ export const FMS_PLATFORM: Record<string, string> = {
 
   
 export const storageSiteUrls = [
-  'https://smartstorageohio.com/',
+  // 'https://smartstorageohio.com/',
   // 'https://storagestar.com/',
   // 'https://sunbirdstorage.com/',
   // 'https://bluebirdstorage.ca/',
   // 'https://gatekeeperstoragega.com/',
   // 'https://10federalstorage.com/',
-  // 'https://www.firststorage.com/',
-  // 'https://www.storeallpurpose.com/',
+  'https://www.firststorage.com/',
+  'https://www.storeallpurpose.com/',
   // 'https://www.bestboxstorage.com/',
   // 'https://radiantstorage.com/',
   // 'https://yourpremierstorage.com/',
@@ -93,8 +93,8 @@ export const storageSiteUrls = [
   // 'https://distinctstorage.com/',
   // 'https://rhino-storage.com/',
   // 'https://storagedepotla.com/',
-  'https://modboxstorage.com/',
-  'https://ulok.com'
+  // 'https://modboxstorage.com/',
+  // 'https://ulok.com'
 ];
 
 

@@ -278,28 +278,36 @@ const bannerChecks = USE_STAGING ? [
   {
     client: 'Store All Purpose - Jewett City',
     url: 'https://test.staging.storagely-api.com/allpurposestorage/storage-units/connecticut/jewett-city/north-main-street'
+  },
+  {
+    client: 'First Storage - E Market St',
+    url: 'https://test.staging.storagely-api.com/first-storage/storage-units/north-carolina/greensboro/east-market-street'
   }
 ] : [
   // PRODUCTION URLS
-  {
-    client: 'Premier Storage - Laurel',
-    url: 'https://yourpremierstorage.com/storage-units/mississippi/laurel/ms-15'
-  },
-  {
-    client: 'Radiant Storage - Montgomery',
-    url: 'https://radiantstorage.com/storage-units/alabama/montgomery/east-south-blvd'
-  },
-  {
-    client: 'Storage Star - Cloverdale',
-    url: 'https://www.storagestar.com/storage-units/california/cloverdale/industrial-drive'
-  },
-  {
-    client: 'Best Box Storage - Pensacola',
-    url: 'https://www.bestboxstorage.com/storage-units/florida/pensacola/north-palafox'
-  },
+  // {
+  //   client: 'Premier Storage - Laurel',
+  //   url: 'https://yourpremierstorage.com/storage-units/mississippi/laurel/ms-15'
+  // },
+  // {
+  //   client: 'Radiant Storage - Montgomery',
+  //   url: 'https://radiantstorage.com/storage-units/alabama/montgomery/east-south-blvd'
+  // },
+  // {
+  //   client: 'Storage Star - Cloverdale',
+  //   url: 'https://www.storagestar.com/storage-units/california/cloverdale/industrial-drive'
+  // },
+  // {
+  //   client: 'Best Box Storage - Pensacola',
+  //   url: 'https://www.bestboxstorage.com/storage-units/florida/pensacola/north-palafox'
+  // },
   {
     client: 'Store All Purpose - Jewett City',
     url: 'https://www.storeallpurpose.com/storage-units/connecticut/jewett-city/north-main-street'
+  },
+  {
+    client: 'First Storage - E Market St',
+    url: 'https://www.firststorage.com/storage-units/north-carolina/greensboro/east-market-street'
   }
 ];
 
