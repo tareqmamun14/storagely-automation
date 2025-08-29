@@ -1,0 +1,139 @@
+
+================================================================================
+🏢 TESTING: app
+🌐 URL: https://app.storagely.io/mini-mall-storage/storage-units/alabama/courtland/highway-33
+⚙️  Platform: Unknown
+================================================================================
+📍 STEP 1: Navigating to storage listing page...
+Navigating to: https://app.storagely.io/mini-mall-storage/storage-units/alabama/courtland/highway-33
+ℹ️ Network still active, proceeding with DOM ready state
+✓ Successfully navigated to storage listing page
+✅ Navigation completed successfully
+📍 STEP 2: Checking for reserve button...
+Found a button with text: "RESERVE"
+✓ Clicked "RESERVE" button
+✓ Closed the modal
+📍 STEP 3: Clicking rent button...
+Attempting to click rent button - CRITICAL STEP
+Found rent button with text: rent
+✓ Rent button clicked successfully
+✅ Rent button clicked successfully
+📍 STEP 4: Filling rental details form...
+Filling rental details form - CRITICAL STEP
+✓ Summary heading found and clicked
+✓ Filled First Name: Test
+✓ Filled Last Name: Testing_Tareq
+✓ Filled Email: tareq@storagely.io
+✓ Filled Phone: 5551234567
+✓ Filled Address: NYC
+✓ Filled City: NYC
+Attempting to select state - OPTIMIZED APPROACH
+✓ Successfully selected Alabama using textbox + paragraph method
+Attempting to fill zip code: 99540
+✓ Successfully filled zip code: 99540
+- Datepicker did not appear within the timeout, skipping this step.
+Attempting to proceed to next step - CRITICAL STEP
+Continue button click attempt 1
+================================================================================
+
+📸 Screenshot saved: error-app-1756494855776.png
+
+====================================================================================================
+🏁 PAYMENT VERIFICATION TEST SUMMARY
+====================================================================================================
+
+📊 TEST EXECUTION SUMMARY:
+   Total Tests: 2
+   ✅ Successful: 1
+   ❌ Failed: 1
+   📈 Success Rate: 50.0%
+
+📋 DETAILED RESULTS:
+========================================================================================================================
+Company                   | Platform   | Status   | Error Message                                               
+========================================================================================================================
+storagedepotla            | SiteLink   | ✅ PASS   | (-100) Response Code: -1 Sub Code: -1 Reason Code: -1 Rea...
+app                       | Unknown    | ❌ FAIL   | Rental Details Form failed: CRITICAL ERROR: Failed to fil...
+========================================================================================================================
+
+🔧 PLATFORM BREAKDOWN:
+   SiteLink: 1/1 (100.0%)
+   Unknown: 0/1 (0.0%)
+
+🚨 ALL ERROR MESSAGES:
+====================================================================================================
+
+1. ⚠️  WARNING - storagedepotla (SiteLink)
+   URL: https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street
+   Message: (-100) Response Code: -1 Sub Code: -1 Reason Code: -1 Reason Text: Payment failed to process: 'Card Number' is not a valid credit card number.
+   Time: 8/30/2025, 1:13:23 AM
+   --------------------------------------------------------------------------------
+
+2. ❌ ERROR - app (Unknown)
+   URL: https://app.storagely.io/mini-mall-storage/storage-units/alabama/courtland/highway-33
+   Message: Rental Details Form failed: CRITICAL ERROR: Failed to fill rental details form - CRITICAL ERROR: Could not find or click continue button - locator.click: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('button', { name: 'CONTINUE TO NEXT STEP' })
+    - locator resolved to <button class="font-body font-bold cursor-pointer inline-flex w-full gap-x-2 items-center justify-center px-4 py-2 text-base rounded-3xl transition uppercase bg-secondary hover:bg-primary text-white opacity-50 pointer-events-none">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex justify-end mt-5">…</div> intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="flex justify-end mt-5">…</div> intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="container mx-auto px-0 flex items-center justify-between">…</div> from <header class="sticky top-0 py-4 bg-white shadow z-20">…</header> subtree intercepts pointer events
+  6 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex justify-end mt-5">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex justify-end mt-5">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="container mx-auto px-0 flex items-center justify-between">…</div> from <header class="sticky top-0 py-4 bg-white shadow z-20">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="container mx-auto px-0 flex items-center justify-between">…</div> from <header class="sticky top-0 py-4 bg-white shadow z-20">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="flex justify-end mt-5">…</div> intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+   Time: 8/30/2025, 1:14:16 AM
+====================================================================================================
+====================================================================================================
+

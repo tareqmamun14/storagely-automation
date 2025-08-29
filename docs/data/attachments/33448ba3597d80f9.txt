@@ -1,0 +1,189 @@
+CRITICAL ERROR: Could not find or click continue button - locator.click: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('button', { name: 'CONTINUE TO NEXT STEP' })
+    - locator resolved to <button class="font-body font-bold cursor-pointer inline-flex w-full gap-x-2 items-center justify-center px-4 py-2 text-base rounded-3xl transition uppercase bg-secondary hover:bg-primary text-white opacity-50 pointer-events-none">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex justify-end mt-5">…</div> intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="flex justify-end mt-5">…</div> intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="container mx-auto px-0 flex items-center justify-between">…</div> from <header class="sticky top-0 py-4 bg-white shadow z-20">…</header> subtree intercepts pointer events
+  6 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex justify-end mt-5">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex justify-end mt-5">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="container mx-auto px-0 flex items-center justify-between">…</div> from <header class="sticky top-0 py-4 bg-white shadow z-20">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="container mx-auto px-0 flex items-center justify-between">…</div> from <header class="sticky top-0 py-4 bg-white shadow z-20">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="flex justify-end mt-5">…</div> intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+CRITICAL ERROR: Failed to fill rental details form - CRITICAL ERROR: Could not find or click continue button - locator.click: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('button', { name: 'CONTINUE TO NEXT STEP' })
+    - locator resolved to <button class="font-body font-bold cursor-pointer inline-flex w-full gap-x-2 items-center justify-center px-4 py-2 text-base rounded-3xl transition uppercase bg-secondary hover:bg-primary text-white opacity-50 pointer-events-none">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex justify-end mt-5">…</div> intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="flex justify-end mt-5">…</div> intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="container mx-auto px-0 flex items-center justify-between">…</div> from <header class="sticky top-0 py-4 bg-white shadow z-20">…</header> subtree intercepts pointer events
+  6 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex justify-end mt-5">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex justify-end mt-5">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="container mx-auto px-0 flex items-center justify-between">…</div> from <header class="sticky top-0 py-4 bg-white shadow z-20">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="container mx-auto px-0 flex items-center justify-between">…</div> from <header class="sticky top-0 py-4 bg-white shadow z-20">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="flex justify-end mt-5">…</div> intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+
+❌ TEST FAILED FOR: app
+📍 Failed at step: Rental Details Form
+💥 Error: Rental Details Form failed: CRITICAL ERROR: Failed to fill rental details form - CRITICAL ERROR: Could not find or click continue button - locator.click: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('button', { name: 'CONTINUE TO NEXT STEP' })
+    - locator resolved to <button class="font-body font-bold cursor-pointer inline-flex w-full gap-x-2 items-center justify-center px-4 py-2 text-base rounded-3xl transition uppercase bg-secondary hover:bg-primary text-white opacity-50 pointer-events-none">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex justify-end mt-5">…</div> intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="flex justify-end mt-5">…</div> intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="container mx-auto px-0 flex items-center justify-between">…</div> from <header class="sticky top-0 py-4 bg-white shadow z-20">…</header> subtree intercepts pointer events
+  6 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex justify-end mt-5">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex justify-end mt-5">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="container mx-auto px-0 flex items-center justify-between">…</div> from <header class="sticky top-0 py-4 bg-white shadow z-20">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="container mx-auto px-0 flex items-center justify-between">…</div> from <header class="sticky top-0 py-4 bg-white shadow z-20">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="flex justify-end mt-5">…</div> intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+

@@ -1,0 +1,183 @@
+# Page snapshot
+
+```yaml
+- main:
+  - link "Company Logo":
+    - /url: https://app.storagely.io/mini-mall-storage
+    - img "Company Logo"
+  - navigation:
+    - list:
+      - listitem:
+        - link "Find Storage":
+          - /url: https://app.storagely.io/mini-mall-storage#
+      - listitem:
+        - link "Commercial Space":
+          - /url: https://app.storagely.io/mini-mall-storage/commercial
+      - listitem:
+        - link "Getting Started":
+          - /url: https://app.storagely.io/mini-mall-storage#
+      - listitem:
+        - link "Resources":
+          - /url: https://app.storagely.io/mini-mall-storage#
+      - listitem:
+        - link "About":
+          - /url: https://app.storagely.io/mini-mall-storage#
+      - listitem:
+        - link "My Account":
+          - /url: https://app.storagely.io/mini-mall-storage#
+  - link "Pay Online":
+    - /url: https://payments.minimallstorage.com/pay-online/#/login
+  - link "Rent Unit":
+    - /url: /storage-units-near-me
+  - heading "Summary of Rental" [level=1]
+  - heading "Rental Location" [level=2]
+  - link:
+    - /url: https://app.storagely.io/mini-mall-storage/storage-units/alabama/courtland/highway-33
+  - img "self storage units courtland"
+  - heading "Alabama - Courtland - Highway 33" [level=3]
+  - paragraph: 28111 Hwy 33, Courtland, 35618
+  - heading "Storage Unit" [level=2]
+  - link:
+    - /url: https://app.storagely.io/mini-mall-storage/storage-units/alabama/courtland/highway-33
+  - heading "Drive-Up" [level=3]
+  - paragraph: 5' × 10'
+  - heading "Move in Date" [level=3]
+  - paragraph: Aug
+  - heading "30" [level=5]
+  - paragraph: "2025"
+  - heading "Guaranteed Safe Checkout" [level=2]
+  - paragraph: Need help finalizing your rental? We are here to help.
+  - link "(256) 974-3463":
+    - /url: tel:2569743463
+    - paragraph: (256) 974-3463
+  - heading "Tenant Details" [level=2]
+  - textbox "First name": Test
+  - textbox "Last name": Testing_Tareq
+  - textbox "Email address": tareq@storagely.io
+  - textbox "Cell phone number": "5551234567"
+  - textbox "Street address": NYC
+  - textbox "City": NYC
+  - textbox "State": Alabama
+  - textbox "Zip": "99540"
+  - heading "select your move in dates" [level=2]
+  - paragraph: You may rent up to 60 days in advance.
+  - button "<" [disabled]
+  - paragraph: August 2025
+  - button ">"
+  - paragraph: Su
+  - paragraph: Mo
+  - paragraph: Tu
+  - paragraph: We
+  - paragraph: Th
+  - paragraph: Fr
+  - paragraph: Sa
+  - button "1" [disabled]
+  - button "2" [disabled]
+  - button "3" [disabled]
+  - button "4" [disabled]
+  - button "5" [disabled]
+  - button "6" [disabled]
+  - button "7" [disabled]
+  - button "8" [disabled]
+  - button "9" [disabled]
+  - button "10" [disabled]
+  - button "11" [disabled]
+  - button "12" [disabled]
+  - button "13" [disabled]
+  - button "14" [disabled]
+  - button "15" [disabled]
+  - button "16" [disabled]
+  - button "17" [disabled]
+  - button "18" [disabled]
+  - button "19" [disabled]
+  - button "20" [disabled]
+  - button "21" [disabled]
+  - button "22" [disabled]
+  - button "23" [disabled]
+  - button "24" [disabled]
+  - button "25" [disabled]
+  - button "26" [disabled]
+  - button "27" [disabled]
+  - button "28" [disabled]
+  - button "29" [disabled]
+  - button "30"
+  - button "31"
+  - heading "additional information" [level=3]
+  - checkbox
+  - paragraph: You plan to store a vehicle.
+  - checkbox
+  - paragraph: The value of your stored goods will exceed $5,000.
+  - checkbox
+  - paragraph: Are you active duty military?
+  - checkbox
+  - paragraph: Do you have an additional contact that you would like to add?
+  - iframe
+  - button "Continue to next step"
+  - paragraph: "*1-time activation fee of $28.96 applicable to all units. + Applicable Fees and Taxes. 28-day billing (4-week cycles) Intro Rate is applied for the first 8 weeks. 4 Weeks Free is applied to the Intro Rate and does not include taxes or applicable fees. All units have 4 Week Minimum Stay."
+  - img "Brand Light Logo"
+  - paragraph: Find Storage
+  - list:
+    - listitem:
+      - link "United States":
+        - /url: /storage-units-united-states
+    - listitem:
+      - link "Canada":
+        - /url: /storage-units-canada
+  - paragraph: Storage Resources
+  - list:
+    - listitem:
+      - link "Size Guide":
+        - /url: /storage-unit-size-guide
+    - listitem:
+      - link "Self Storage FAQs":
+        - /url: /self-storage-faq
+    - listitem:
+      - link "Storage Tips":
+        - /url: /storage-tips
+    - listitem:
+      - link "Packing Tips":
+        - /url: /packing-tips
+    - listitem:
+      - link "Moving Guide":
+        - /url: /moving-guide
+    - listitem:
+      - link "Storage Features":
+        - /url: /storage-features
+    - listitem:
+      - 'link "Self Storage Process: What to Expect"':
+        - /url: /what-to-expect-when-you-arrive
+    - listitem:
+      - link "Pay Your Bill":
+        - /url: https://payments.minimallstorage.com/pay-online/#/login
+    - listitem:
+      - link "Commercial Space":
+        - /url: /commercial
+  - paragraph: About
+  - list:
+    - listitem:
+      - link "About Mini Mall":
+        - /url: /about-our-storage-facility
+    - listitem:
+      - link "Careers":
+        - /url: /careers
+    - listitem:
+      - link "Contact":
+        - /url: /contact
+    - listitem:
+      - link "Looking to sell?":
+        - /url: /acquisitions
+    - listitem:
+      - link "Our Blog":
+        - /url: https://www.minimallstorage.com/blogs/
+    - listitem:
+      - link "Promotions":
+        - /url: /promotional-offers
+- listbox "Language Switcher":
+  - link "en":
+    - /url: https://minimallstorage.com/mini-mall-storage/storage-units/alabama/courtland/highway-33/step-four?unit_id=4442879
+  - option "fr-ca":
+    - link "fr-ca":
+      - /url: https://fr-ca.minimallstorage.com/mini-mall-storage/storage-units/alabama/courtland/highway-33/step-four?unit_id=4442879
+- img
+- text: Feedback
+```
