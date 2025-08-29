@@ -1,0 +1,713 @@
+# Page snapshot
+
+```yaml
+- link "bluebird image logo":
+  - /url: "#"
+  - img "bluebird image logo"
+- list:
+  - listitem:
+    - link "key icon Rent Now":
+      - /url: https://bluebirdstorage.ca/storage-units-near-me/
+      - img "key icon"
+      - text: Rent Now
+  - listitem:
+    - link "virtual toor icon Virtual Tours":
+      - /url: https://bluebirdstorage.ca/virtual-tour/
+      - img "virtual toor icon"
+      - text: Virtual Tours
+  - listitem:
+    - link "white logo icon Bluebird Difference":
+      - /url: https://bluebirdstorage.ca/the-bluebird-difference/
+      - img "white logo icon"
+      - text: Bluebird Difference
+  - listitem:
+    - link "star reviews icon Reviews":
+      - /url: https://bluebirdstorage.ca/bluebird-reviews/
+      - img "star reviews icon"
+      - text: Reviews
+- img
+- text: Canadian Owned & Operated
+- list:
+  - listitem:
+    - link "Find Storage":
+      - /url: "#nav1"
+  - listitem:
+    - link "Storage Types":
+      - /url: "#nav2"
+  - listitem:
+    - link "Merchandise":
+      - /url: https://bluebirdstorage.ca/bluebird-merchandise-moving-and-storage-supplies/
+      - img
+      - text: Merchandise
+  - listitem:
+    - link "Resources":
+      - /url: "#nav4"
+  - listitem:
+    - link "bluebird image logo About":
+      - /url: "#nav5"
+      - img "bluebird image logo"
+      - text: About
+  - listitem:
+    - link "Contact":
+      - /url: https://bluebirdstorage.ca/contact-bluebird/
+- list:
+  - listitem:
+    - link "Back":
+      - /url: "#"
+  - listitem:
+    - link "Alberta":
+      - /url: "#alberta"
+  - listitem:
+    - link "British Columbia":
+      - /url: "#columbia"
+  - listitem:
+    - link "Nova Scotia":
+      - /url: "#nova"
+  - listitem:
+    - link "Ontario":
+      - /url: "#ontario"
+  - listitem:
+    - link "Quebec":
+      - /url: "#quebec"
+  - listitem:
+    - link "All Locations":
+      - /url: https://bluebirdstorage.ca/storage-units-near-me/
+- list:
+  - listitem:
+    - link "Back":
+      - /url: "#"
+  - listitem:
+    - link "Airdrie | Main St Coming Soon!":
+      - /url: https://bluebirdstorage.ca/storage-units/alberta/airdrie/main-street-south
+      - text: Airdrie | Main St
+      - definition: Coming Soon!
+  - listitem:
+    - link "Calgary | Blackfoot Trail":
+      - /url: https://bluebirdstorage.ca/storage-units/alberta/calgary/blackfoot
+  - listitem:
+    - link "Tsuutina (Calgary) | Buffalo Run Blvd":
+      - /url: https://bluebirdstorage.ca/storage-units/alberta/tsuutina/buffalo-run
+  - listitem:
+    - link "Calgary | Dufferin Blvd":
+      - /url: https://bluebirdstorage.ca/storage-units/alberta/calgary/dufferin
+  - listitem:
+    - link "Calgary | Mahogany St":
+      - /url: https://bluebirdstorage.ca/storage-units/ab/calgary/mahogany
+  - listitem:
+    - link "Calgary | 96 Ave":
+      - /url: https://bluebirdstorage.ca/storage-units/alberta/calgary/4046-96-avenue
+  - listitem:
+    - link "Calgary | Mayland Pl":
+      - /url: https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland
+  - listitem:
+    - link "Calgary | 48 Ave":
+      - /url: https://bluebirdstorage.ca/storage-units/alberta/calgary/2600-48-avenue
+  - listitem:
+    - link "Canmore | Bow Meadows Crescent":
+      - /url: https://bluebirdstorage.ca/storage-units/alberta/canmore/bow-meadows
+  - listitem:
+    - link "Chestermere | Rainbow Rd":
+      - /url: https://bluebirdstorage.ca/storage-units/alberta/chestermere/rainbow
+  - listitem:
+    - link "Cochrane | Griffin Industrial Pt":
+      - /url: https://bluebirdstorage.ca/storage-units/alberta/cochrane/griffin-industrial
+  - listitem:
+    - link "Edmonton | Meridian St":
+      - /url: https://bluebirdstorage.ca/storage-units/alberta/edmonton/meridian
+  - listitem:
+    - link "Edmonton | 143 St NW":
+      - /url: https://bluebirdstorage.ca/storage-units/alberta/edmonton/13432-143-street
+  - listitem:
+    - link "Red Deer | McKenzie Crescent":
+      - /url: https://bluebirdstorage.ca/storage-units/alberta/red-deer-county/mckenzie
+  - listitem:
+    - link "Sherwood Park | Broadway Blvd":
+      - /url: https://bluebirdstorage.ca/storage-units/alberta/sherwood-park/broadway
+- list:
+  - listitem:
+    - link "Back":
+      - /url: "#"
+  - listitem:
+    - link "Victoria | Johnson St Coming Soon!":
+      - /url: https://bluebirdstorage.ca/storage-units/british-columbia/victoria/johnson
+      - text: Victoria | Johnson St
+      - definition: Coming Soon!
+  - listitem:
+    - link "Victoria | Princess Ave":
+      - /url: https://bluebirdstorage.ca/storage-units/british-columbia/victoria/princess
+  - listitem:
+    - link "Victoria | Quadra St Coming Soon!":
+      - /url: https://bluebirdstorage.ca/storage-units/british-columbia/victoria/quadra
+      - text: Victoria | Quadra St
+      - definition: Coming Soon!
+- list:
+  - listitem:
+    - link "Back":
+      - /url: "#"
+  - listitem:
+    - link "Dartmouth | Wright Ave":
+      - /url: https://bluebirdstorage.ca/storage-units/nova-scotia/dartmouth/wright
+  - listitem:
+    - link "Timberlea | St Margarets Bay Coming Soon!":
+      - /url: https://bluebirdstorage.ca/storage-units/nova-scotia/timberlea/st-margarets-bay-road
+      - text: Timberlea | St Margarets Bay
+      - definition: Coming Soon!
+  - listitem:
+    - link "Truro | Parkway Dr":
+      - /url: https://bluebirdstorage.ca/storage-units/nova-scotia/truro-heights/parkway
+- list:
+  - listitem:
+    - link "Back":
+      - /url: "#"
+  - listitem:
+    - link "Mississauga | Derry Rd Coming Soon!":
+      - /url: https://bluebirdstorage.ca/storage-units/ontario/mississauga/derry
+      - text: Mississauga | Derry Rd
+      - definition: Coming Soon!
+  - listitem:
+    - link "Mississauga | Matheson Blvd":
+      - /url: https://bluebirdstorage.ca/storage-units/ontario/mississauga/matheson
+  - listitem:
+    - link "Mississauga | Platinum Dr":
+      - /url: https://bluebirdstorage.ca/storage-units/ontario/mississauga/platinum
+  - listitem:
+    - link "Orangeville | Highway 9":
+      - /url: https://bluebirdstorage.ca/storage-units/ontario/orangeville/207197-on-9
+  - listitem:
+    - link "Toronto | Caledonia Park Rd Coming Soon!":
+      - /url: https://bluebirdstorage.ca/storage-units/ontario/toronto/caledonia-park
+      - text: Toronto | Caledonia Park Rd
+      - definition: Coming Soon!
+  - listitem:
+    - link "Scarborough | Birchmount Rd":
+      - /url: https://bluebirdstorage.ca/storage-units/ontario/scarborough/birchmount
+  - listitem:
+    - link "Whitby | Victoria St":
+      - /url: https://bluebirdstorage.ca/storage-units/ontario/whitby/victoria
+- list:
+  - listitem:
+    - link "Back":
+      - /url: "#"
+  - listitem:
+    - link "Cities":
+      - /url: "#"
+  - listitem:
+    - link "Saint-Laurent | Henri-Bourassa Blvd":
+      - /url: https://bluebirdstorage.ca/storage-units/quebec/saint-laurent/henri-bourassa
+  - listitem:
+    - link "Saint-Nicolas | Chemin Industriel":
+      - /url: https://bluebirdstorage.ca/storage-units/quebec/saint-nicolas/chem
+  - listitem:
+    - link "Saint-Leonard | Boul Metropolitain":
+      - /url: https://bluebirdstorage.ca/storage-units/quebec/saint-leonard/5715-boulevard-metropolitain
+  - listitem:
+    - link "Quebéc | Rue Seigneuriale Coming Soon!":
+      - /url: https://bluebirdstorage.ca/storage-units/quebec/quebec/230-rue-seigneuriale
+      - text: Quebéc | Rue Seigneuriale
+      - definition: Coming Soon!
+  - listitem:
+    - link "Quebéc | Charest Coming Soon!":
+      - /url: https://bluebirdstorage.ca/storage-units/quebec/quebec/charest-o
+      - text: Quebéc | Charest
+      - definition: Coming Soon!
+  - listitem:
+    - link "Laval | Leman Coming Soon!":
+      - /url: https://bluebirdstorage.ca/storage-units/quebec/laval/leman
+      - text: Laval | Leman
+      - definition: Coming Soon!
+- list:
+  - listitem:
+    - link "Back":
+      - /url: "#"
+  - listitem:
+    - link "Household":
+      - /url: https://bluebirdstorage.ca/self-storage-units/household-storage/
+  - listitem:
+    - link "Business":
+      - /url: https://bluebirdstorage.ca/self-storage-units/business-storage/
+  - listitem:
+    - link "Moving":
+      - /url: https://bluebirdstorage.ca/self-storage-units/moving-storage/
+  - listitem:
+    - link "Vehicle & RV":
+      - /url: https://bluebirdstorage.ca/vehicle-storage-rv-storage/
+  - listitem:
+    - link "Boat":
+      - /url: https://bluebirdstorage.ca/self-storage-units/boat-storage-facility/
+- list:
+  - listitem:
+    - link "Back":
+      - /url: "#"
+- list:
+  - listitem:
+    - link "Back":
+      - /url: "#"
+  - listitem:
+    - link "Size Guide":
+      - /url: https://bluebirdstorage.ca/storage-unit-size-guide/
+  - listitem:
+    - link "Virtual Tours":
+      - /url: https://bluebirdstorage.ca/virtual-tour/
+  - listitem:
+    - link "Reviews":
+      - /url: https://bluebirdstorage.ca/bluebird-reviews/
+  - listitem:
+    - link "FAQs":
+      - /url: https://bluebirdstorage.ca/self-storage-frequently-asked-questions/
+  - listitem:
+    - link "Discounts":
+      - /url: https://bluebirdstorage.ca/about-bluebird/bluebird-self-storage-customer-discounts/
+  - listitem:
+    - link "Blog":
+      - /url: https://bluebirdstorage.ca/blog
+- list:
+  - listitem:
+    - link "Back":
+      - /url: "#"
+  - listitem:
+    - link "The Bluebird Difference":
+      - /url: https://bluebirdstorage.ca/the-bluebird-difference/
+  - listitem:
+    - link "Why Choose Bluebird":
+      - /url: https://bluebirdstorage.ca/about-bluebird/why-choose-bluebird/
+  - listitem:
+    - link "Bluebird Full Month Policy":
+      - /url: https://bluebirdstorage.ca/about-bluebird/no-rent-increases-affordable-self-storage/
+  - listitem:
+    - link "Partnerships":
+      - /url: https://bluebirdstorage.ca/bluebird-storage-partnerships/
+  - listitem:
+    - link "Bluebird Cares":
+      - /url: https://bluebirdstorage.ca/bluebird-cares/
+  - listitem:
+    - link "Leadership Team":
+      - /url: https://bluebirdstorage.ca/leadership-team/
+  - listitem:
+    - link "Third-Party Management":
+      - /url: https://management.bluebirdstorage.ca/
+  - listitem:
+    - link "Marketing Services":
+      - /url: https://marketing.bluebirdstorage.ca
+  - listitem:
+    - link "Newsroom":
+      - /url: https://bluebirdstorage.ca/blog/category/newsroom
+  - listitem:
+    - link "Careers":
+      - /url: https://bluebirdstorage.ca/careers/
+  - listitem:
+    - link "About Us":
+      - /url: https://bluebirdstorage.ca/about-bluebird/
+- list:
+  - listitem:
+    - link "Back":
+      - /url: "#"
+- list:
+  - listitem:
+    - link "FR":
+      - /url: https://fr.bluebirdstorage.ca/storage-units/alberta/calgary/mayland/step_four?location=L033&unit=4470567&type=rent&con=13859&is_sitelink=1&site_locations_id=1001&bluebirdstorage
+  - listitem:
+    - link "EN":
+      - /url: https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland/step_four?location=L033&unit=4470567&type=rent&con=13859&is_sitelink=1&site_locations_id=1001&bluebirdstorage
+  - listitem:
+    - img
+    - text: Canadian Owned & Operated
+- list:
+  - listitem:
+    - link "Location Map":
+      - /url: https://bluebirdstorage.ca/storage-units-near-me/
+      - img
+      - text: Location Map
+  - listitem:
+    - link "Virtual Tours":
+      - /url: https://bluebirdstorage.ca/virtual-tour/
+      - img
+      - text: Virtual Tours
+  - listitem:
+    - link "Size Guide":
+      - /url: https://bluebirdstorage.ca/storage-unit-size-guide/
+      - img
+      - text: Size Guide
+  - listitem:
+    - link "Chat":
+      - /url: javascript:void(0)
+      - img
+      - text: Chat
+- listitem:
+  - link "My Account":
+    - /url: https://paymentportal.bluebirdstorage.ca/existing-customer
+    - img
+    - text: My Account
+- listitem:
+  - link "RENT NOW":
+    - /url: https://bluebirdstorage.ca/storage-units-near-me/
+    - img
+    - text: RENT NOW
+- link "image header logo":
+  - /url: /
+  - img "image header logo"
+- list:
+  - listitem:
+    - link "Find Storage":
+      - /url: https://bluebirdstorage.ca/storage-units-near-me/
+  - listitem:
+    - link "Storage Types":
+      - /url: https://bluebirdstorage.ca/storage-units/
+  - listitem:
+    - link "Merchandise":
+      - /url: https://bluebirdstorage.ca/bluebird-merchandise-moving-and-storage-supplies/
+  - listitem:
+    - link "Resources":
+      - /url: https://bluebirdstorage.ca/#
+  - listitem:
+    - link "About":
+      - /url: https://bluebirdstorage.ca/about-bluebird/
+  - listitem:
+    - link "Contact":
+      - /url: https://bluebirdstorage.ca/contact-bluebird/
+- heading "Summary of Rental" [level=2]
+- heading "Rental Location" [level=2]
+- link "Change":
+  - /url: https://bluebirdstorage.ca/all-locations?bluebirdstorage
+- img "self storage building night calgary"
+- heading "Bluebird Self Storage - Calgary - Mayland" [level=2]
+- text: 235 B Mayland Place Calgary, alberta, T2E 8P7
+- heading "Storage Unit" [level=2]
+- link "Change":
+  - /url: https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland?location=L033&bluebirdstorage
+- img "yello car parking"
+- heading "Climate Control Upper Floor" [level=4]
+- heading "5' x 5'" [level=3]
+- img "Blubird Logo"
+- text: NO RENT INCREASE 365 DAYS FULL MONTH’S VALUE 7-DAY RISK-FREE TRIAL
+- img "Shield Check Icon"
+- heading "GUARANTEED SAFE CHECKOUT" [level=2]
+- paragraph: Need help finalizing your rental? We are here to help.
+- img "Chat Icon"
+- text: Chat Live
+- img "Phoner Icon"
+- link "587-797-4911":
+  - /url: tel:587-797-4911
+- heading "Tenant Details" [level=2]
+- textbox "First name"
+- img "user icon"
+- textbox "Last name"
+- img "user icon"
+- textbox "Email address"
+- img "email icon"
+- textbox "Cell Phone number"
+- img "phone icon"
+- textbox "Address"
+- textbox "City"
+- combobox:
+  - option "Select State" [selected]
+  - option "Alberta"
+  - option "British Columbia"
+  - option "Manitoba"
+  - option "New Brunswick"
+  - option "Newfoundland and Labrador"
+  - option "Northwest Territories"
+  - option "Nova Scotia"
+  - option "Nunavut"
+  - option "Ontario"
+  - option "Prince Edward Island"
+  - option "Québec"
+  - option "Saskatchewan"
+  - option "Yukon"
+- textbox "Postal Code"
+- img "Billing Card Icon"
+- heading "Select Your Move In Date" [level=2]
+- paragraph: You may rent up to 16 days in advance.
+- table:
+  - rowgroup:
+    - row
+    - row "August 2025 »":
+      - cell "August 2025"
+      - cell "»"
+    - row "Su Mo Tu We Th Fr Sa":
+      - cell "Su"
+      - cell "Mo"
+      - cell "Tu"
+      - cell "We"
+      - cell "Th"
+      - cell "Fr"
+      - cell "Sa"
+  - rowgroup:
+    - row "27 28 29 30 31 1 2":
+      - cell "27"
+      - cell "28"
+      - cell "29"
+      - cell "30"
+      - cell "31"
+      - cell "1"
+      - cell "2"
+    - row "3 4 5 6 7 8 9":
+      - cell "3"
+      - cell "4"
+      - cell "5"
+      - cell "6"
+      - cell "7"
+      - cell "8"
+      - cell "9"
+    - row "10 11 12 13 14 15 16":
+      - cell "10"
+      - cell "11"
+      - cell "12"
+      - cell "13"
+      - cell "14"
+      - cell "15"
+      - cell "16"
+    - row "17 18 19 20 21 22 23":
+      - cell "17"
+      - cell "18"
+      - cell "19"
+      - cell "20"
+      - cell "21"
+      - cell "22"
+      - cell "23"
+    - row "24 25 26 27 28 29 30":
+      - cell "24"
+      - cell "25"
+      - cell "26"
+      - cell "27"
+      - cell "28"
+      - cell "29"
+      - cell "30"
+    - row "31 1 2 3 4 5 6":
+      - cell "31"
+      - cell "1"
+      - cell "2"
+      - cell "3"
+      - cell "4"
+      - cell "5"
+      - cell "6"
+  - rowgroup:
+    - row
+    - row
+- heading "Protect Your Belongings" [level=2]
+- text: "Covers up to $5,000 (Rate: $17.00/mo)"
+- button "CONTINUE TO NEXT STEP"
+- heading "Facility Features" [level=1]
+- list:
+  - listitem: Climate-Controlled Units
+  - listitem: Code Gate Entry
+  - listitem: Covered Loading Area
+  - listitem: Dollies & Handcarts
+  - listitem: Drive Up Units
+  - listitem: Elevators
+  - listitem: High-Tech Security
+  - listitem: Indoor Unloading Area
+  - listitem: Locally Owned
+- list:
+  - listitem: Lock Checks
+  - listitem: Modern, Clean & Bright
+  - listitem: Moving Supplies
+  - listitem: Package Receiving Service
+  - listitem: Protection Plan
+  - listitem: Solar Powered
+- link "Footer Logo":
+  - /url: https://bluebirdstorage.ca/
+  - img "Footer Logo"
+- link "Find Storage":
+  - /url: https://bluebirdstorage.ca/storage-units-near-me/
+  - img
+  - text: Find Storage
+- link "Size Guide":
+  - /url: https://bluebirdstorage.ca/storage-unit-size-guide/
+  - img
+  - text: Size Guide
+- link "Account":
+  - /url: https://bluebirdstorage.ca/myaccount
+  - img
+  - text: Account
+- paragraph: Provinces
+- list:
+  - listitem:
+    - link "Alberta":
+      - /url: https://bluebirdstorage.ca/storage-units-alberta
+  - listitem:
+    - link "British Columbia":
+      - /url: https://bluebirdstorage.ca/storage-units-british-columbia
+  - listitem:
+    - link "Quebec":
+      - /url: https://bluebirdstorage.ca/storage-units-quebec
+  - listitem:
+    - link "Nova Scotia":
+      - /url: https://bluebirdstorage.ca/storage-units-nova-scotia
+  - listitem:
+    - link "Ontario":
+      - /url: https://bluebirdstorage.ca/storage-units-ontario
+- link "CSSA Badge logo":
+  - /url: "#"
+  - img "CSSA Badge logo"
+- paragraph: Cities
+- list:
+  - listitem:
+    - link "Burlington":
+      - /url: https://bluebirdstorage.ca/storage-units-burlington
+  - listitem:
+    - link "Calgary":
+      - /url: https://bluebirdstorage.ca/storage-units-calgary
+  - listitem:
+    - link "Canmore":
+      - /url: https://bluebirdstorage.ca/storage-units-canmore
+  - listitem:
+    - link "Chestermere":
+      - /url: https://bluebirdstorage.ca/storage-units-chestermere
+  - listitem:
+    - link "Cochrane":
+      - /url: https://bluebirdstorage.ca/storage-units-cochrane
+  - listitem:
+    - link "Dartmouth":
+      - /url: https://bluebirdstorage.ca/storage-units-dartmouth
+  - listitem:
+    - link "Edmonton":
+      - /url: https://bluebirdstorage.ca/storage-units-edmonton
+  - listitem:
+    - link "GTA":
+      - /url: https://bluebirdstorage.ca/storage-units-gta
+  - listitem:
+    - link "Kimberley":
+      - /url: https://bluebirdstorage.ca/storage-units-kimberley
+- list:
+  - listitem:
+    - link "Laval":
+      - /url: https://bluebirdstorage.ca/storage-units-laval
+  - listitem:
+    - link "Mississauga":
+      - /url: https://bluebirdstorage.ca/storage-units-mississauga
+  - listitem:
+    - link "Montreal":
+      - /url: https://bluebirdstorage.ca/storage-units-montreal
+  - listitem:
+    - link "Orangeville":
+      - /url: https://bluebirdstorage.ca/storage-units-orangeville
+  - listitem:
+    - link "Quebec City":
+      - /url: https://bluebirdstorage.ca/storage-units-quebec-city
+  - listitem:
+    - link "Red Deer":
+      - /url: https://bluebirdstorage.ca/storage-units-red-deer
+  - listitem:
+    - link "Saint John":
+      - /url: https://bluebirdstorage.ca/storage-units-saint-john
+  - listitem:
+    - link "Saint-Laurent":
+      - /url: https://bluebirdstorage.ca/storage-units-saint-laurent
+  - listitem:
+    - link "Saint-Nicolas":
+      - /url: https://bluebirdstorage.ca/storage-units-saint-nicolas
+- list:
+  - listitem:
+    - link "Scarborough":
+      - /url: https://bluebirdstorage.ca/storage-units-scarborough
+  - listitem:
+    - link "Sherwood Park":
+      - /url: https://bluebirdstorage.ca/storage-units-sherwood-park
+  - listitem:
+    - link "Toronto":
+      - /url: https://bluebirdstorage.ca/storage-units-toronto
+  - listitem:
+    - link "Truro":
+      - /url: https://bluebirdstorage.ca/storage-units-truro
+  - listitem:
+    - link "Tsuutina":
+      - /url: https://bluebirdstorage.ca/storage-units-tsuutina
+  - listitem:
+    - link "Vaughan":
+      - /url: https://bluebirdstorage.ca/storage-units-vaughan
+  - listitem:
+    - link "Victoria":
+      - /url: https://bluebirdstorage.ca/storage-units-victoria
+  - listitem:
+    - link "Whitby":
+      - /url: https://bluebirdstorage.ca/storage-units-whitby
+- paragraph: Storage Types
+- list:
+  - listitem:
+    - link "Household":
+      - /url: https://bluebirdstorage.ca/self-storage-units/household-storage/
+  - listitem:
+    - link "Business":
+      - /url: https://bluebirdstorage.ca/self-storage-units/business-storage/
+  - listitem:
+    - link "Moving":
+      - /url: https://bluebirdstorage.ca/self-storage-units/moving-storage/
+  - listitem:
+    - link "Vehicle & RV":
+      - /url: https://bluebirdstorage.ca/vehicle-storage-rv-storage/
+  - listitem:
+    - link "Boat":
+      - /url: https://bluebirdstorage.ca/self-storage-units/boat-storage-facility/
+- paragraph: Resources
+- list:
+  - listitem:
+    - link "Storage Unit Size Guide":
+      - /url: https://bluebirdstorage.ca/storage-unit-size-guide/
+  - listitem:
+    - link "Merchandise":
+      - /url: https://bluebirdstorage.ca/bluebird-merchandise-moving-and-storage-supplies/
+  - listitem:
+    - link "VIrtual Tours":
+      - /url: https://bluebirdstorage.ca/virtual-tour/
+  - listitem:
+    - link "Reviews":
+      - /url: https://bluebirdstorage.ca/bluebird-reviews/
+  - listitem:
+    - link "FAQs":
+      - /url: https://bluebirdstorage.ca/self-storage-frequently-asked-questions/
+  - listitem:
+    - link "Discounts":
+      - /url: https://bluebirdstorage.ca/about-bluebird/bluebird-self-storage-customer-discounts/
+  - listitem:
+    - link "Blogs":
+      - /url: https://bluebirdstorage.ca/blog
+- paragraph: About Us
+- list:
+  - listitem:
+    - link "The Bluebird Difference":
+      - /url: https://bluebirdstorage.ca/the-bluebird-difference/
+  - listitem:
+    - link "Why Choose Bluebird":
+      - /url: https://bluebirdstorage.ca/about-bluebird/why-choose-bluebird/
+  - listitem:
+    - link "Bluebird Full Month Policy":
+      - /url: https://bluebirdstorage.ca/about-bluebird/no-rent-increases-affordable-self-storage/
+  - listitem:
+    - link "Bluebird Cares":
+      - /url: https://bluebirdstorage.ca/bluebird-cares/
+  - listitem:
+    - link "Leadership Team":
+      - /url: https://bluebirdstorage.ca/leadership-team/
+  - listitem:
+    - link "COVID-19 Policy":
+      - /url: https://bluebirdstorage.ca/covid-19-precautions/
+  - listitem:
+    - link "Newsroom":
+      - /url: https://bluebirdstorage.ca/newsroom-articles#/media-room
+  - listitem:
+    - link "Careers":
+      - /url: https://bluebirdstorage.ca/careers/
+  - listitem:
+    - link "Third-Party Management":
+      - /url: https://management.bluebirdstorage.ca/
+  - listitem:
+    - link "Marketing Services":
+      - /url: https://marketing.bluebirdstorage.ca/
+  - listitem:
+    - link "Partnerships":
+      - /url: https://bluebirdstorage.ca/bluebird-storage-partnerships/
+  - listitem:
+    - link "Contact Us":
+      - /url: https://bluebirdstorage.ca/contact-bluebird/
+- iframe
+- button "Feedback - Show survey":
+  - img
+  - text: Feedback
+- img
+- text: Feedback
+- button "Open chat":
+  - button
+  - text: Need help? Chat with our storage specialists. Our storage specialists are online.
+  - button "Chat with us"
+  - button "Search"
+```

@@ -1,0 +1,314 @@
+# Page snapshot
+
+```yaml
+- banner:
+  - navigation:
+    - link "logo":
+      - /url: https://app.storagely.io/allpurposestorage
+      - img "logo"
+    - list:
+      - listitem:
+        - button "Find Storage"
+      - listitem:
+        - button "Storage Types"
+      - listitem:
+        - button "Resources"
+      - listitem:
+        - link "About":
+          - /url: https://app.storagely.io/allpurposestorage/about-our-storage-facility
+      - listitem:
+        - link "Contact":
+          - /url: https://app.storagely.io/allpurposestorage/contact
+    - link "My Account":
+      - /url: https://myaccount.storeallpurpose.com/
+    - link "Rent Now":
+      - /url: https://app.storagely.io/allpurposestorage/storage-units-near-me
+- heading "Summary of Rental" [level=2]
+- heading "Rental Location" [level=2]
+- link "Change":
+  - /url: https://app.storagely.io/allpurposestorage/all-locations
+- img "self storage units Belgrade"
+- heading "056 | Maine - Belgrade - Manchester Road" [level=2]
+- text: 688 Manchester Road Belgrade, Maine, 04917
+- heading "Storage Unit" [level=2]
+- link "Change":
+  - /url: https://app.storagely.io/allpurposestorage/storage-units/maine/belgrade/manchester-road?location=0740a300-0a7c-43ae-aa04-bf6f24cdb012
+- img "yello car parking"
+- heading "Drive Up Access" [level=4]
+- heading "10' x 5'" [level=3]
+- img "Shield Check Icon"
+- heading "GUARANTEED SAFE CHECKOUT" [level=2]
+- paragraph: Need help finalizing your rental? We are here to help.
+- img "Phoner Icon"
+- link "(207) 407-9929":
+  - /url: tel:(207) 407-9929
+- heading "Tenant Details" [level=2]
+- textbox "First name"
+- img "user icon"
+- textbox "Last name"
+- img "user icon"
+- textbox "Email address"
+- img "email icon"
+- textbox "Cell Phone number"
+- img "phone icon"
+- textbox "Address"
+- textbox "City"
+- combobox:
+  - option "Select State" [selected]
+  - option "Alabama"
+  - option "Alaska"
+  - option "Arizona"
+  - option "Arkansas"
+  - option "California"
+  - option "Colorado"
+  - option "Connecticut"
+  - option "Delaware"
+  - option "District of Columbia (DC)"
+  - option "Florida"
+  - option "Georgia"
+  - option "Hawaii"
+  - option "Idaho"
+  - option "Illinois"
+  - option "Indiana"
+  - option "Iowa"
+  - option "Kansas"
+  - option "Kentucky"
+  - option "Louisiana"
+  - option "Maine"
+  - option "Maryland"
+  - option "Massachusetts"
+  - option "Michigan"
+  - option "Minnesota"
+  - option "Mississippi"
+  - option "Missouri"
+  - option "Montana"
+  - option "Nebraska"
+  - option "Nevada"
+  - option "New Hampshire"
+  - option "New Jersey"
+  - option "New Mexico"
+  - option "New York"
+  - option "North Carolina"
+  - option "North Dakota"
+  - option "Ohio"
+  - option "Oklahoma"
+  - option "Oregon"
+  - option "Pennsylvania"
+  - option "Rhode Island"
+  - option "South Carolina"
+  - option "South Dakota"
+  - option "Tennessee"
+  - option "Texas"
+  - option "Utah"
+  - option "Vermont"
+  - option "Virginia"
+  - option "Washington"
+  - option "West Virginia"
+  - option "Wisconsin"
+  - option "Wyoming"
+- textbox "Zip Code"
+- img "Billing Card Icon"
+- heading "Select Your Move In Date" [level=2]
+- paragraph: You may rent up to 7 days in advance.
+- table:
+  - rowgroup:
+    - row
+    - row "August 2025 »":
+      - cell "August 2025"
+      - cell "»"
+    - row "Su Mo Tu We Th Fr Sa":
+      - cell "Su"
+      - cell "Mo"
+      - cell "Tu"
+      - cell "We"
+      - cell "Th"
+      - cell "Fr"
+      - cell "Sa"
+  - rowgroup:
+    - row "27 28 29 30 31 1 2":
+      - cell "27"
+      - cell "28"
+      - cell "29"
+      - cell "30"
+      - cell "31"
+      - cell "1"
+      - cell "2"
+    - row "3 4 5 6 7 8 9":
+      - cell "3"
+      - cell "4"
+      - cell "5"
+      - cell "6"
+      - cell "7"
+      - cell "8"
+      - cell "9"
+    - row "10 11 12 13 14 15 16":
+      - cell "10"
+      - cell "11"
+      - cell "12"
+      - cell "13"
+      - cell "14"
+      - cell "15"
+      - cell "16"
+    - row "17 18 19 20 21 22 23":
+      - cell "17"
+      - cell "18"
+      - cell "19"
+      - cell "20"
+      - cell "21"
+      - cell "22"
+      - cell "23"
+    - row "24 25 26 27 28 29 30":
+      - cell "24"
+      - cell "25"
+      - cell "26"
+      - cell "27"
+      - cell "28"
+      - cell "29"
+      - cell "30"
+    - row "31 1 2 3 4 5 6":
+      - cell "31"
+      - cell "1"
+      - cell "2"
+      - cell "3"
+      - cell "4"
+      - cell "5"
+      - cell "6"
+  - rowgroup:
+    - row
+    - row
+- heading "Protect Your Belongings" [level=2]
+- paragraph: You may opt to provide proof of your insurance when you move in. At that time, we will remove this fee from your account.
+- text: "Covers up to $2,000 (Rate: $12.00/mo) Covers up to $3,000 (Rate: $15.00/mo) Covers up to $5,000 (Rate: $21.00/mo)"
+- button "CONTINUE TO NEXT STEP"
+- heading "Facility Features" [level=1]
+- list:
+  - listitem: Automatic Gate
+  - listitem: Drive Up Units
+  - listitem: Green Initiative
+  - listitem: Motorcycle Storage
+  - listitem: Protection Plan
+  - listitem: Security Fence
+  - listitem: Vehicle Storage
+- link "Footer Logo":
+  - /url: https://app.storagely.io/allpurposestorage
+  - img "Footer Logo"
+- link "Find Storage":
+  - /url: /storage-units-near-me
+  - img
+  - text: Find Storage
+- link "Size Guide":
+  - /url: /storage-unit-size-guide
+  - img
+  - text: Size Guide
+- text: States
+- separator
+- link "Connecticut":
+  - /url: /storage-units-connecticut
+- link "Iowa":
+  - /url: /storage-units-iowa
+- link "Massachusetts":
+  - /url: /storage-units-massachusetts
+- link "Maine":
+  - /url: /storage-units-maine
+- link "New Hampshire":
+  - /url: /storage-units-new-hampshire
+- link "New York":
+  - /url: /storage-units-new-york
+- link "North Carolina":
+  - /url: /storage-units-north-carolina
+- link "Rhode Island":
+  - /url: /storage-units/rhode-island/warwick/meadow-street
+- link "Vermont":
+  - /url: /storage-units-vermont
+- text: Cities
+- separator
+- link "Belfast, ME":
+  - /url: /storage-units-belfast
+- link "Bellows Falls, VT":
+  - /url: /storage-units-bellows-falls
+- link "Bennington, VT":
+  - /url: /storage-units-bennington
+- link "Bernardston, MA":
+  - /url: /storage-units-bernardston
+- link "Brattleboro, NH":
+  - /url: /storage-units-brattleboro
+- link "Brewer, ME":
+  - /url: /storage-units-brewer
+- link "Brookline, NH":
+  - /url: /storage-units-brookline
+- link "Buxton, ME":
+  - /url: /storage-units-buxton
+- link "Canterbury, NH":
+  - /url: /storage-units-canterbury
+- link "Ellsworth, ME":
+  - /url: /storage-units-ellsworth
+- link "Gray, ME":
+  - /url: /storage-units-gray
+- link "Greenfield, MA":
+  - /url: /storage-units-greenfield
+- link "Hillsboro, NH":
+  - /url: /storage-units-hillsboro
+- link "Hillsborough, NH":
+  - /url: https://www.storeallpurpose.com/storage-units-hillsborough
+- link "Jaffrey, NH":
+  - /url: https://www.storeallpurpose.com/storage-units-jaffrey
+- link "Keene, NH":
+  - /url: /storage-units-keene
+- link "Montville, CT":
+  - /url: /storage-units-montville
+- link "Swanzey, NH":
+  - /url: /storage-units-swanzey
+- link "Rutland, VT":
+  - /url: /storage-units-rutland
+- text: Storage Types
+- separator
+- link "Business Storage":
+  - /url: /business-storage
+- link "Boat & RV Storage":
+  - /url: /rv-and-boat-storage
+- link "Drive-Up Storage":
+  - /url: /drive-up-storage
+- link "Military Storage":
+  - /url: /military-storage
+- link "Residential Storage":
+  - /url: /residential-storage
+- link "Student Storage":
+  - /url: /student-storage
+- link "Temperature Controlled Storage":
+  - /url: /temperature-controlled-storage
+- link "Vehicle Storage":
+  - /url: /vehicle-storage
+- text: Storage Resources
+- separator
+- link "FAQs":
+  - /url: /self-storage-faq
+- link "Size Guide":
+  - /url: /storage-unit-size-guide
+- link "Moving Tips":
+  - /url: /moving-tips
+- link "Storage Tips":
+  - /url: /storage-tips
+- link "Blog":
+  - /url: /blog-archive
+- link "About":
+  - /url: /about-our-storage-facility
+- link "My Account":
+  - /url: https://myaccount.storeallpurpose.com
+- text: Contact Us
+- separator
+- link "Contact Us":
+  - /url: /pages/contact
+- link "Find Storage":
+  - /url: /storage-units-near-me
+- text: "Promotion: Subject to change. Offered only on selected units. Subject to availability. Limit one offer per household. This offer applies only to the rental fee. Other restrictions, taxes, and fees, including an administrative fee, apply. See contract for full details. Promotions good for new customers only. Not available on transfers or additional spaces. Pricing subject to change. Reservation required to guarantee price. Actual unit sizes may vary from approximate size estimate and reservations do not guarantee unit availability. Temperature and humidity levels within any storage space including climate-controlled spaces may vary. Please inspect any unit before renting. Online pricing available only for online reservations and rentals. Not sure about the size you need? Don’t worry, online pricing discount will be honored for any rental originating from an online reservation. If the promotion is associated with the 4th of July Sale: the promotional period is for a limited time only and you must move in within 7 days of reservation. © All-Purpose Storage |"
+- link "Privacy Policy":
+  - /url: /privacy-policy
+- text: "|"
+- link "Terms of Use":
+  - /url: /pages/terms
+- text: <-- Pop Up --> <-- End Pop Up -->
+- img
+- img "-0-Admin-Fee-Pop-V1.png"
+- img
+- text: Feedback
+```
