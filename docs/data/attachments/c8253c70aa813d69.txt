@@ -1,7 +1,0 @@
-
-🔍 Testing Smart Self Storage : SSM
-📋 Expected: "Off 3 Months"
-🌐 Navigating to: https://app.storagely.io/smart-self-storage-ohio/storage-units/ohio/macedonia/bavaria-road?_cache_bust=1757357510674_myifrhdigij
-📍 Found 22 elements with selector: .page_discount
-✅ Smart Self Storage : SSM | Found matching banner: "50% Off 2 Months
-Sale Ends Sep 30th"

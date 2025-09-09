@@ -1,0 +1,127 @@
+
+================================================================================
+🏢 TESTING: yourpremier Storage
+🌐 URL: https://yourpremierstorage.com/storage-units/mississippi/magee/simpson-highway-149
+⚙️  Platform: storEDGE
+================================================================================
+📍 STEP 1: Navigating to storage listing page...
+Navigating to: https://yourpremierstorage.com/storage-units/mississippi/magee/simpson-highway-149
+ℹ️ Network still active, proceeding with DOM ready state
+✓ Successfully navigated to storage listing page
+✅ Navigation completed successfully
+📍 STEP 2: Checking for reserve button...
+Found a button with text: "RESERVE"
+✓ Clicked "RESERVE" button
+✓ Closed the modal
+📍 STEP 3: Clicking rent button...
+Attempting to click rent button - CRITICAL STEP
+Found rent button with text: rent
+✓ Rent button clicked successfully
+✅ Rent button clicked successfully
+📍 STEP 4: Filling rental details form...
+Filling rental details form - CRITICAL STEP
+✓ Summary heading found and clicked
+✓ Filled First Name: Test
+✓ Filled Last Name: Testing_Tareq
+✓ Filled Email: tareq@storagely.io
+✓ Filled Phone: 5551234567
+✓ Filled Address: NYC
+✓ Filled City: NYC
+Attempting to select state - OPTIMIZED APPROACH
+✓ Successfully selected Alabama using standard select
+Attempting to fill zip code: 99540
+✓ Successfully filled zip code: 99540
+✓ Clicked the datepicker element
+Attempting to proceed to next step - CRITICAL STEP
+Continue button click attempt 1
+✓ Successfully clicked continue button
+✓ Rental details form completed successfully
+✅ Rental details form completed successfully
+📍 STEP 5: Filling lease details if available...
+Lease Details section found, filling available fields...
+✓ Filled Alternate Phone: 01674646008
+✓ Filled Alternate Email: tareqmamun14@gmail.com
+✓ Filled Driver License: 6244114
+✓ Selected Driver License State: Alaska
+✓ Selected Birth Month: 01
+✓ Selected Birth Date: 1
+✓ Filled Birth Year: 1990
+✓ Lease Details form filling completed
+✅ Lease details form completed (or skipped if not available)
+📍 STEP 6: Filling payment details...
+Filling payment details - CRITICAL STEP
+✓ Payment details filled successfully
+✅ Payment details filled successfully
+📍 STEP 7: Checking agreement checkboxes...
+- I agree to the lease terms checkbox not visible, skipping
+- I agree to the protection checkbox not visible, skipping
+- I agree to the auto pay terms checkbox not visible, skipping
+✅ Agreement checkboxes processed
+📍 STEP 8: Submitting payment and checking for errors...
+Attempting to submit payment - CRITICAL STEP
+Chat iframe not found or an error occurred, proceeding without minimizing.
+✓ Rent Now button clicked successfully
+Starting robust error detection...
+✓ Error detected via quick check
+✅ Payment submission completed
+
+✅ TEST COMPLETED SUCCESSFULLY FOR: yourpremier Storage
+📊 Result: Failed to process payment, Tenant ledgers is invalid, Lead unit is not available, Account balances is invalid, Failed to process payment (Storable Payments): 'Card Number' is not a valid credit card number.
+================================================================================
+
+
+====================================================================================================
+🏁 PAYMENT VERIFICATION TEST SUMMARY
+====================================================================================================
+
+📊 TEST EXECUTION SUMMARY:
+   Total Tests: 5
+   ✅ Successful: 5
+   ❌ Failed: 0
+   📈 Success Rate: 100.0%
+
+📋 DETAILED RESULTS:
+========================================================================================================================
+Company                   | Platform   | Status   | Error Message                                               
+========================================================================================================================
+10federal Storage         | storEDGE   | ✅ PASS   | Failed to process payment, Lead unit is not available, Co...
+bestbox Storage           | storEDGE   | ✅ PASS   | Failed to process payment, Lead unit is not available, Co...
+radiant Storage           | storEDGE   | ✅ PASS   | Alternate contact Please enter a valid phone number, Unit...
+ww2                       | storEDGE   | ✅ PASS   | No error - Payment may have succeeded                       
+yourpremier Storage       | storEDGE   | ✅ PASS   | Failed to process payment, Tenant ledgers is invalid, Lea...
+========================================================================================================================
+
+🚨 ALL ERROR MESSAGES:
+====================================================================================================
+
+1. ⚠️  WARNING - 10federal Storage (storEDGE)
+   URL: https://10federalstorage.com/storage-units/georgia/dahlonega/highway-19-north
+   Message: Failed to process payment, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (Sage Payments Solutions): Payment Error: INVALID CARDNUMBER
+   Time: 9/10/2025, 1:17:34 AM
+   --------------------------------------------------------------------------------
+
+2. ⚠️  WARNING - bestbox Storage (storEDGE)
+   URL: https://www.bestboxstorage.com/storage-units/florida/pensacola/north-palafox
+   Message: Failed to process payment, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (Storable Payments): 'Card Number' is not a valid credit card number.
+   Time: 9/10/2025, 1:19:20 AM
+   --------------------------------------------------------------------------------
+
+3. ⚠️  WARNING - radiant Storage (storEDGE)
+   URL: https://radiantstorage.com/storage-units/alabama/montgomery/east-south-blvd
+   Message: Alternate contact Please enter a valid phone number, Unit is not available for move-in, Lead unit is not available, Lead events lead unit is not available, Please enter a valid phone number, Attached invoice Please enter a valid phone number
+   Time: 9/10/2025, 1:20:25 AM
+   --------------------------------------------------------------------------------
+
+4. ⚠️  WARNING - ww2 (storEDGE)
+   URL: https://ww2.radiantstorage.com/storage-units/texas/beaumont/college-street
+   Message: No error - Payment may have succeeded
+   Time: 9/10/2025, 1:21:43 AM
+   --------------------------------------------------------------------------------
+
+5. ⚠️  WARNING - yourpremier Storage (storEDGE)
+   URL: https://yourpremierstorage.com/storage-units/mississippi/magee/simpson-highway-149
+   Message: Failed to process payment, Tenant ledgers is invalid, Lead unit is not available, Account balances is invalid, Failed to process payment (Storable Payments): 'Card Number' is not a valid credit card number.
+   Time: 9/10/2025, 1:22:57 AM
+====================================================================================================
+====================================================================================================
+

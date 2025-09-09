@@ -1,0 +1,69 @@
+
+🏠 Starting contact page test for: https://ulok.com
+📞 Navigating to contact page: https://ulok.com/pages/contact?_cache_bust=1757445295859_oe3dyh0is2h
+🔍 Verifying contact page elements for: https://ulok.com
+   ✓ Contact page loaded successfully
+   ✓ Title verified: "Contact Our Vancouver Storage | Downtown U-Lok Storage"
+   ✓ Found Contact Heading: 1 instances
+   ✓ Found Message Textarea: 1 instances
+   ✓ Found Submit Button: 1 instances
+   ✓ Found Phone Link: 1 instances
+   ✓ Found Email Link: 1 instances
+   ✓ Found Phone Heading: 1 instances
+   ✓ Found Email Heading: 1 instances
+   ✓ Found Corporate Address Heading: 1 instances
+   ✓ Found Phone Text: 1 instances
+   ✓ Found Address Text: 1 instances
+   ✓ Found Hours Text: 1 instances
+   ✓ Found Office Text: 1 instances
+   ✓ Found Map Element: 2 instances
+   ✓ Found Contact Text: 5 instances
+   ✓ Contact page verification complete - found 14 contact element types
+   📋 Elements found: Contact Heading, Message Textarea, Submit Button, Phone Link, Email Link, Phone Heading, Email Heading, Corporate Address Heading, Phone Text, Address Text, Hours Text, Office Text, Map Element, Contact Text
+✅ Contact page verification passed for: https://ulok.com
+
+========================================================================================================================
+📞 CONTACT PAGE VERIFICATION RESULTS SUMMARY
+========================================================================================================================
+✅ Total Passed: 5
+❌ Total Failed: 0
+📋 Total Tests: 5
+========================================================================================================================
+
+📊 DETAILED RESULTS TABLE:
+┌─────┬─────────────────────────────────────────────────────────┬──────────┬─────────────────────────────────────────────┐
+│ No. │ Storage Site                                            │ Status   │ Found Elements / Error                      │
+├─────┼─────────────────────────────────────────────────────────┼──────────┼─────────────────────────────────────────────┤
+│   1 │ distinctstorage.com/                                    │ ✅ PASS  │ Contact Heading, Email Input, Message Textarea +9 more │
+│   2 │ rhino-storage.com/                                      │ ✅ PASS  │ Contact Heading, Get In Touch Heading, Email Input +12 more │
+│   3 │ storagedepotla.com/                                     │ ✅ PASS  │ Contact Heading, Get In Touch Heading, Need Assistance Heading +12 more │
+│   4 │ modboxstorage.com/                                      │ ✅ PASS  │ Contact Heading, Email Input, Message Textarea +6 more │
+│   5 │ ulok.com                                                │ ✅ PASS  │ Contact Heading, Message Textarea, Submit Button +11 more │
+└─────┴─────────────────────────────────────────────────────────┴──────────┴─────────────────────────────────────────────┘
+
+🎉 SUCCESSFUL SITES SUMMARY:
+
+1. ✅ https://distinctstorage.com/
+   Contact URL: https://distinctstorage.com//pages/contact
+   Found Elements (12): Contact Heading, Email Input, Message Textarea, Submit Button, Contact Form, Phone Heading, Corporate Address Heading, Phone Text, Address Text, Hours Text, Map Element, Contact Text
+
+2. ✅ https://rhino-storage.com/
+   Contact URL: https://rhino-storage.com//pages/contact
+   Found Elements (15): Contact Heading, Get In Touch Heading, Email Input, Message Textarea, Submit Button, Contact Form, Phone Link, Email Link, Phone Heading, Email Heading, Corporate Address Heading, Phone Text, Address Text, Map Element, Contact Text
+
+3. ✅ https://storagedepotla.com/
+   Contact URL: https://storagedepotla.com//pages/contact
+   Found Elements (15): Contact Heading, Get In Touch Heading, Need Assistance Heading, Email Input, Message Textarea, Submit Button, Contact Form, Phone Link, Email Link, Phone Heading, Email Heading, Social Links Heading, Phone Text, Map Element, Contact Text
+
+4. ✅ https://modboxstorage.com/
+   Contact URL: https://modboxstorage.com//pages/contact
+   Found Elements (9): Contact Heading, Email Input, Message Textarea, Submit Button, Contact Form, Email Heading, Hours Text, Map Element, Contact Text
+
+5. ✅ https://ulok.com
+   Contact URL: https://ulok.com/pages/contact
+   Found Elements (14): Contact Heading, Message Textarea, Submit Button, Phone Link, Email Link, Phone Heading, Email Heading, Corporate Address Heading, Phone Text, Address Text, Hours Text, Office Text, Map Element, Contact Text
+
+========================================================================================================================
+🏁 CONTACT PAGE VERIFICATION COMPLETE - 5/5 sites passed
+========================================================================================================================
+
