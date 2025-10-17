@@ -1,0 +1,282 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - text:              
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - navigation [ref=e6]:
+        - generic [ref=e7]:
+          - link "logo" [ref=e8] [cursor=pointer]:
+            - /url: https://storagedepotla.com
+            - img "logo" [ref=e9]
+          - generic [ref=e10]:
+            - list [ref=e11]:
+              - listitem [ref=e12]:
+                - link "Home" [ref=e13] [cursor=pointer]:
+                  - /url: /
+              - listitem [ref=e14]:
+                - button "Locations" [ref=e15] [cursor=pointer]
+              - listitem [ref=e16]:
+                - link "About" [ref=e17] [cursor=pointer]:
+                  - /url: /about-storage
+              - listitem [ref=e18]:
+                - button "Resources" [ref=e19] [cursor=pointer]
+              - listitem [ref=e20]:
+                - link "Contact" [ref=e21] [cursor=pointer]:
+                  - /url: /contact-storage
+              - listitem [ref=e22]:
+                - link "My Account" [ref=e23] [cursor=pointer]:
+                  - /url: https://storagedepotla.tenantconnect.com/
+            - link "Find Storage" [ref=e26] [cursor=pointer]:
+              - /url: /storage-units-near-me
+    - generic [ref=e27]:
+      - generic [ref=e30]:
+        - generic [ref=e32]:
+          - heading "Summary of Rental" [level=2] [ref=e34]
+          - generic [ref=e35]:
+            - generic [ref=e36]:
+              - heading "Rental Location" [level=2] [ref=e37]
+              - link "Change" [ref=e38] [cursor=pointer]:
+                - /url: https://storagedepotla.com/all-locations?storage-boss
+            - generic [ref=e39]:
+              - img "self storage ponchatoula" [ref=e41]
+              - generic [ref=e42]:
+                - heading "Storage Boss - Ponchatoula - W Pine St." [level=2] [ref=e43]
+                - generic [ref=e46]:
+                  - text: 223 W Pine St.
+                  - text: Ponchatoula, louisiana, 70454
+          - generic [ref=e47]:
+            - generic [ref=e49]:
+              - generic [ref=e50]:
+                - heading "Storage Unit" [level=2] [ref=e51]
+                - link "Change" [ref=e52] [cursor=pointer]:
+                  - /url: https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street?location=L001&storage-boss
+              - generic [ref=e53]:
+                - img "yello car parking" [ref=e55]
+                - generic [ref=e56]:
+                  - heading "Indoor" [level=4] [ref=e57]
+                  - heading "8' x 12'" [level=3] [ref=e58]
+            - generic [ref=e60]:
+              - generic [ref=e61]:
+                - heading "Move In Date" [level=2] [ref=e62]
+                - link "Change" [ref=e63] [cursor=pointer]:
+                  - /url: https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street/step_four?location=L001&unit=4544229&type=rent&con=10059&is_sitelink=1&site_locations_id=1163&storage-boss
+              - generic [ref=e64]:
+                - heading "Oct" [level=6] [ref=e65]
+                - heading "18" [level=4] [ref=e66]
+                - heading "2025" [level=5] [ref=e67]
+          - generic [ref=e68]:
+            - img "Shield Check Icon" [ref=e70]
+            - heading "GUARANTEED SAFE CHECKOUT" [level=2] [ref=e72]
+          - generic [ref=e73]:
+            - paragraph [ref=e74]:
+              - generic [ref=e75]: Need help finalizing your rental? We are here to help.
+            - generic [ref=e77]:
+              - img "Phoner Icon" [ref=e78]
+              - link "985-284-4139" [ref=e80] [cursor=pointer]:
+                - /url: tel:985-284-4139
+        - generic [ref=e83]:
+          - generic [ref=e84]:
+            - generic [ref=e85]:
+              - heading "Tenant Details" [level=2] [ref=e86]
+              - generic [ref=e87]:
+                - generic [ref=e88]:
+                  - textbox "First name" [ref=e89]: Test
+                  - button [ref=e90] [cursor=pointer]:
+                    - generic [ref=e91]: 
+                  - img "user icon" [ref=e92]
+                - generic [ref=e93]:
+                  - textbox "Last name" [ref=e94]: Testing_Tareq
+                  - button [ref=e95] [cursor=pointer]:
+                    - generic [ref=e96]: 
+                  - img "user icon" [ref=e97]
+                - generic [ref=e98]:
+                  - textbox "Email address" [ref=e99]: tareq@storagely.io
+                  - button [ref=e100] [cursor=pointer]:
+                    - generic [ref=e101]: 
+                  - img "email icon" [ref=e102]
+                - generic [ref=e103]:
+                  - textbox "Cell Phone number" [ref=e104]: "5551234567"
+                  - button [ref=e105] [cursor=pointer]:
+                    - generic [ref=e106]: 
+                  - img "phone icon" [ref=e107]
+            - generic [ref=e108]:
+              - heading "Payment Details" [level=2] [ref=e109]
+              - generic [ref=e111]:
+                - generic [ref=e112]:
+                  - textbox "Card Number" [ref=e113]: 5555 5555 5555 5555
+                  - textbox "MM / YY" [ref=e114]: 05 / 55
+                  - textbox "CVV" [ref=e115]: "555"
+                - generic [ref=e116]:
+                  - textbox "Billing Address" [ref=e117]: NYC
+                  - textbox "City" [ref=e119]: NYC
+                  - generic [ref=e120]:
+                    - combobox [ref=e122]:
+                      - option "Select State"
+                      - option "Alabama" [selected]
+                      - option "Alaska"
+                      - option "Arizona"
+                      - option "Arkansas"
+                      - option "California"
+                      - option "Colorado"
+                      - option "Connecticut"
+                      - option "Delaware"
+                      - option "District of Columbia (DC)"
+                      - option "Florida"
+                      - option "Georgia"
+                      - option "Hawaii"
+                      - option "Idaho"
+                      - option "Illinois"
+                      - option "Indiana"
+                      - option "Iowa"
+                      - option "Kansas"
+                      - option "Kentucky"
+                      - option "Louisiana"
+                      - option "Maine"
+                      - option "Maryland"
+                      - option "Massachusetts"
+                      - option "Michigan"
+                      - option "Minnesota"
+                      - option "Mississippi"
+                      - option "Missouri"
+                      - option "Montana"
+                      - option "Nebraska"
+                      - option "Nevada"
+                      - option "New Hampshire"
+                      - option "New Jersey"
+                      - option "New Mexico"
+                      - option "New York"
+                      - option "North Carolina"
+                      - option "North Dakota"
+                      - option "Ohio"
+                      - option "Oklahoma"
+                      - option "Oregon"
+                      - option "Pennsylvania"
+                      - option "Rhode Island"
+                      - option "South Carolina"
+                      - option "South Dakota"
+                      - option "Tennessee"
+                      - option "Texas"
+                      - option "Utah"
+                      - option "Vermont"
+                      - option "Virginia"
+                      - option "Washington"
+                      - option "West Virginia"
+                      - option "Wisconsin"
+                      - option "Wyoming"
+                    - textbox "Zip Code" [ref=e124]: "99540"
+                  - img "Billing Card Icon" [ref=e125]
+          - generic [ref=e126]:
+            - generic [ref=e127]:
+              - paragraph [ref=e128]: "First Monthly Rent Fee:"
+              - generic [ref=e129]: $70.00
+            - generic [ref=e130]:
+              - paragraph [ref=e131]: "Administrative Fee:"
+              - generic [ref=e132]: $20.00
+            - generic [ref=e133]:
+              - paragraph [ref=e134]: "Second Monthly Rent Fee:"
+              - generic [ref=e135]: $77.50
+            - generic [ref=e136]:
+              - paragraph [ref=e137]: "First Month Insurance:"
+              - generic [ref=e138]: $4.06
+            - generic [ref=e139]:
+              - paragraph [ref=e140]: "Second Month Insurance:"
+              - generic [ref=e141]: $9.00
+            - generic [ref=e142]:
+              - paragraph [ref=e143]:
+                - text: "Total due today:"
+                - generic [ref=e145]: 
+              - generic [ref=e146]: $180.56
+          - button "Rent Now" [ref=e150] [cursor=pointer]
+          - paragraph [ref=e151]: If you rent the wrong size unit online, our team at the facility can help you find the right size.
+          - generic [ref=e153]:
+            - heading "Not ready to commit?" [level=6] [ref=e154]
+            - button "Reserve This Unit Now" [ref=e156] [cursor=pointer]
+      - generic [ref=e157]:
+        - heading "Facility Features" [level=1] [ref=e158]
+        - list [ref=e159]:
+          - listitem [ref=e160]: Indoor Unloading Area
+          - listitem [ref=e161]: Lock Checks
+    - generic [ref=e162]:
+      - generic [ref=e164]:
+        - generic [ref=e165]:
+          - link "Footer Logo" [ref=e167] [cursor=pointer]:
+            - /url: https://storagedepotla.com
+            - img "Footer Logo" [ref=e168]
+          - generic [ref=e169]:
+            - link "Find Storage" [ref=e170] [cursor=pointer]:
+              - /url: /storage-units-near-me
+              - img [ref=e171]
+              - generic [ref=e174]: Find Storage
+            - link "Size Guide" [ref=e175] [cursor=pointer]:
+              - /url: /storage-guide
+              - img [ref=e176]
+              - generic [ref=e179]: Size Guide
+        - generic [ref=e180]:
+          - generic [ref=e181]:
+            - generic [ref=e182]:
+              - text: Locations
+              - separator [ref=e183]
+            - generic [ref=e184]:
+              - link "Storage Boss - Ponchatoula - W Pine St." [ref=e185] [cursor=pointer]:
+                - /url: /storage-units/louisiana/ponchatoula/west-pine-street
+              - link "Storage Boss - Hammond - N. Morrison Blvd." [ref=e186] [cursor=pointer]:
+                - /url: /storage-units/louisiana/hammond/north-morrison-blvd
+              - link "Storage Boss - Hammond - Lamonte Dr." [ref=e187] [cursor=pointer]:
+                - /url: /storage-units/louisiana/hammond/lamonte-drive
+          - generic [ref=e188]:
+            - generic [ref=e189]:
+              - text: Storage Types
+              - separator [ref=e190]
+            - generic [ref=e191]:
+              - link "Boat Storage" [ref=e192] [cursor=pointer]:
+                - /url: /storage-type/boat-storage
+              - link "Business Storage" [ref=e193] [cursor=pointer]:
+                - /url: /storage-type/business-storage
+              - link "Climate Controlled Storage" [ref=e194] [cursor=pointer]:
+                - /url: /storage-type/climate-controlled-storage
+              - link "Drive-Up Storage" [ref=e195] [cursor=pointer]:
+                - /url: /storage-type/drive-up-storage
+              - link "Household Storage" [ref=e196] [cursor=pointer]:
+                - /url: /storage-type/household-storage
+              - link "Moving Storage" [ref=e197] [cursor=pointer]:
+                - /url: /storage-type/moving-storage
+              - link "RV Storage" [ref=e198] [cursor=pointer]:
+                - /url: /storage-type/rv-storage
+              - link "Student Storage" [ref=e199] [cursor=pointer]:
+                - /url: /storage-type/student-storage
+              - link "Vehicle Storage" [ref=e200] [cursor=pointer]:
+                - /url: /storage-type/vehicle-storage
+          - generic [ref=e201]:
+            - generic [ref=e202]:
+              - text: Resources
+              - separator [ref=e203]
+            - generic [ref=e204]:
+              - link "Size Guide" [ref=e205] [cursor=pointer]:
+                - /url: /storage-guide
+              - link "FAQs" [ref=e206] [cursor=pointer]:
+                - /url: /storage-faqs
+              - link "About" [ref=e207] [cursor=pointer]:
+                - /url: /about-storage
+              - link "My Account" [ref=e208] [cursor=pointer]:
+                - /url: https://storagedepotla.tenantconnect.com/
+              - link "Contact" [ref=e209] [cursor=pointer]:
+                - /url: /contact-storage
+          - generic [ref=e210]:
+            - generic [ref=e211]:
+              - text: Contact
+              - separator [ref=e212]
+            - link [ref=e214] [cursor=pointer]:
+              - /url: https://www.facebook.com/TheStorageBoss/
+              - generic [ref=e215]: 
+      - generic [ref=e218]:
+        - text: © Storage Boss
+        - generic [ref=e220]:
+          - text: "|"
+          - link "Privacy Policy" [ref=e221] [cursor=pointer]:
+            - /url: /privacy-policy
+  - generic [ref=e223] [cursor=pointer]:
+    - img [ref=e224]
+    - text: Feedback
+```
