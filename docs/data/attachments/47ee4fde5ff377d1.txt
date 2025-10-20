@@ -1,0 +1,14 @@
+🧹 Cleared browser state for next test
+
+🔍 Testing landing page: https://radiantstorage.com/
+   Cache-busted URL: https://radiantstorage.com/?_cache_bust=1760953150944_xekjfls9g9
+  📡 Attempt 1/3 to load https://radiantstorage.com/?_cache_bust=1760953150944_xekjfls9g9
+  ✅ Page loaded successfully using 'load' strategy
+Verifying: https://radiantstorage.com/
+- Page loaded for https://radiantstorage.com/
+- Title verified for https://radiantstorage.com/: "Self Storage Units Near Me | Radiant Storage"
+- Logo verified for https://radiantstorage.com/
+- Navigation link verified for https://radiantstorage.com/
+- CTA button verified for https://radiantstorage.com/
+✅ Successfully verified: https://radiantstorage.com/
+✅ Landing page verification passed for: https://radiantstorage.com/

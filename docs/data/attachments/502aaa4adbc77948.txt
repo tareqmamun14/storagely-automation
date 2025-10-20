@@ -1,0 +1,15 @@
+🧹 Cleared browser state for next test
+
+🔍 Testing landing page: https://10federalstorage.com/
+   Cache-busted URL: https://10federalstorage.com/?_cache_bust=1760953262411_zxlq9erjrwf
+  📡 Attempt 1/3 to load https://10federalstorage.com/?_cache_bust=1760953262411_zxlq9erjrwf
+  ✅ Page loaded successfully using 'load' strategy
+Verifying: https://10federalstorage.com/
+- Page loaded for https://10federalstorage.com/
+- Title verified for https://10federalstorage.com/: "10 Federal Storage | Self Storage Units For Rent | Rent Today"
+- Logo with role 'link' and name 'logo' not found for https://10federalstorage.com/, checking for alternative logo selectors...
+- Fallback logo verified for https://10federalstorage.com/
+- Navigation link verified for https://10federalstorage.com/
+- CTA button verified for https://10federalstorage.com/
+✅ Successfully verified: https://10federalstorage.com/
+✅ Landing page verification passed for: https://10federalstorage.com/

@@ -1,0 +1,1215 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - text:            
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - navigation [ref=e6]:
+        - generic [ref=e7]:
+          - link "logo" [ref=e8] [cursor=pointer]:
+            - /url: https://test.staging.storagely-api.com/premier-storage
+            - img "logo" [ref=e9]
+          - generic [ref=e10]:
+            - list [ref=e11]:
+              - listitem [ref=e12]:
+                - button "Find Storage" [ref=e13] [cursor=pointer]
+              - listitem [ref=e14]:
+                - button "Storage Types" [ref=e15] [cursor=pointer]
+              - listitem [ref=e16]:
+                - button "Resources" [ref=e17] [cursor=pointer]
+              - listitem [ref=e18]:
+                - link "About" [ref=e19] [cursor=pointer]:
+                  - /url: /premier-storage/about-our-storage-facility
+              - listitem [ref=e20]:
+                - link "Contact" [ref=e21] [cursor=pointer]:
+                  - /url: /premier-storage/contact
+            - generic [ref=e22]:
+              - link "My Account" [ref=e24] [cursor=pointer]:
+                - /url: https://myaccount.yourpremierstorage.com/existing-customer
+              - link "Rent Now" [ref=e26] [cursor=pointer]:
+                - /url: /storage-units-near-me
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - generic [ref=e29]:
+          - navigation "breadcrumb" [ref=e30]:
+            - list [ref=e31]:
+              - listitem [ref=e32]:
+                - link "Home" [ref=e33] [cursor=pointer]:
+                  - /url: https://test.staging.storagely-api.com/
+              - listitem [ref=e34]:
+                - text: /
+                - link "Mississippi" [ref=e35] [cursor=pointer]:
+                  - /url: https://test.staging.storagely-api.com/storage-units-laurel?search=Laurel, Mississippi, Usa
+              - listitem [ref=e36]:
+                - text: /
+                - link "Laurel" [ref=e37] [cursor=pointer]:
+                  - /url: https://test.staging.storagely-api.com/storage-units-laurel?search=Laurel, Mississippi, Usa
+              - listitem [ref=e38]: / MS 15
+          - generic [ref=e39]:
+            - generic [ref=e41]:
+              - generic [ref=e42]:
+                - button "Slide 1" [ref=e43] [cursor=pointer]
+                - button "Slide 2" [ref=e44] [cursor=pointer]
+                - button "Slide 3" [ref=e45] [cursor=pointer]
+                - button "Slide 4" [ref=e46] [cursor=pointer]
+                - button "Slide 5" [ref=e47] [cursor=pointer]
+                - button "Slide 6" [ref=e48] [cursor=pointer]
+                - button "Slide 7" [ref=e49] [cursor=pointer]
+                - button "Slide 8" [ref=e50] [cursor=pointer]
+                - button "Slide 9" [ref=e51] [cursor=pointer]
+                - button "Slide 10" [ref=e52] [cursor=pointer]
+                - button "Slide 11" [ref=e53] [cursor=pointer]
+                - button "Slide 12" [ref=e54] [cursor=pointer]
+                - button "Slide 13" [ref=e55] [cursor=pointer]
+                - button "Slide 14" [ref=e56] [cursor=pointer]
+                - button "Slide 15" [ref=e57] [cursor=pointer]
+                - button "Slide 16" [ref=e58] [cursor=pointer]
+                - button "Slide 17" [ref=e59] [cursor=pointer]
+                - button "Slide 18" [ref=e60] [cursor=pointer]
+                - button "Slide 19" [ref=e61] [cursor=pointer]
+              - img "Mississippi - Laurel - MS-15" [ref=e64]
+              - button "Previous" [ref=e65] [cursor=pointer]:
+                - generic [ref=e67]: Previous
+              - button "Next" [ref=e68] [cursor=pointer]:
+                - generic [ref=e70]: Next
+            - generic [ref=e71]:
+              - heading "Storage Units in Laurel MS 39440" [level=1] [ref=e73]:
+                - strong [ref=e74]: Storage Units in Laurel MS 39440
+              - heading "Premier Storage | MS 15" [level=2] [ref=e75]
+              - link "123 secure street Laurel, Mississippi 39440" [ref=e78] [cursor=pointer]:
+                - /url: https://maps.app.goo.gl/J7rYd2pVKVrB85Ku8
+                - text: 123 secure street
+                - text: Laurel, Mississippi 39440
+              - link "1234567890" [ref=e80] [cursor=pointer]:
+                - /url: tel:1234567890
+              - generic [ref=e81]:
+                - button "Office" [ref=e84] [cursor=pointer]:
+                  - generic [ref=e85]:
+                    - text: 
+                    - generic [ref=e86]: Office
+                - button "Access View Hours" [ref=e89] [cursor=pointer]:
+                  - generic [ref=e90]:
+                    - text: 
+                    - generic [ref=e91]: Access
+                    - generic [ref=e92]: View Hours
+              - generic [ref=e94] [cursor=pointer]:
+                - generic [ref=e95]:
+                  - img [ref=e96]
+                  - img [ref=e98]
+                  - img [ref=e100]
+                  - img [ref=e102]
+                  - img [ref=e104]
+                - paragraph [ref=e107]: 62 Reviews
+              - generic [ref=e108]:
+                - text: 
+                - link "Call" [ref=e110] [cursor=pointer]:
+                  - /url: tel:1234567890
+                  - generic [ref=e111]: 
+                  - text: Call
+                - link "Email" [ref=e113] [cursor=pointer]:
+                  - /url: mailto:954248@localhost.com
+                  - generic [ref=e114]: 
+                  - text: Email
+                - link "Directions" [ref=e116] [cursor=pointer]:
+                  - /url: https://maps.app.goo.gl/J7rYd2pVKVrB85Ku8
+                  - generic [ref=e117]: 
+                  - text: Directions
+                - text: 
+                - link "What Size Do I Need?" [ref=e119] [cursor=pointer]:
+                  - /url: "#"
+                  - generic [ref=e120]: 
+                  - text: What Size Do I Need?
+        - generic [ref=e124]:
+          - button "Sizes" [ref=e127] [cursor=pointer]: Sizes
+          - button "Floors" [ref=e130] [cursor=pointer]: Floors
+          - button "Climate" [ref=e133] [cursor=pointer]: Climate
+          - button "Reset filters" [ref=e135] [cursor=pointer]
+          - generic [ref=e137]:
+            - text: "Sort by: Size Small to Large"
+            - menu
+      - table [ref=e140]:
+        - rowgroup [ref=e141]:
+          - row "10 x 10 storage image Climate Controlled 10' WIDTH x 10' DEPTH What Size Do I Need? 1st MONTH RENT FREE 🚀 $0/month During Promo Period $90/month After Promo Period rent Easily switch sizes. reserve Requires no credit card. climate controlled Indoor Access Rent Online" [ref=e142]:
+            - cell "10 x 10 storage image Climate Controlled 10' WIDTH x 10' DEPTH What Size Do I Need? 1st MONTH RENT FREE 🚀 $0/month During Promo Period $90/month After Promo Period rent Easily switch sizes. reserve Requires no credit card. climate controlled Indoor Access Rent Online" [ref=e143]:
+              - generic [ref=e145]:
+                - generic [ref=e147]:
+                  - link "10 x 10 storage image" [ref=e149]:
+                    - /url: https://test.staging.storagely-api.com/uploads/unit_3d_images/unit_3d_944577574.webp
+                    - img "10 x 10 storage image" [ref=e150]
+                  - generic [ref=e151]:
+                    - generic [ref=e152]: Climate Controlled
+                    - heading "10' WIDTH x 10' DEPTH" [level=2] [ref=e153]:
+                      - generic [ref=e154]:
+                        - text: 10'
+                        - generic [ref=e155]: WIDTH
+                      - text: x
+                      - generic [ref=e156]:
+                        - text: 10'
+                        - generic [ref=e157]: DEPTH
+                    - generic [ref=e158]:
+                      - paragraph [ref=e159]:
+                        - generic [ref=e160]: 
+                        - link "What Size Do I Need?" [ref=e161] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e162]:
+                        - generic [ref=e163]: 1st MONTH RENT FREE 🚀
+                - generic [ref=e164]:
+                  - generic [ref=e165]:
+                    - generic [ref=e166]:
+                      - heading "$0/month" [level=3] [ref=e167]
+                      - generic [ref=e168]: During Promo Period
+                    - generic [ref=e169]:
+                      - heading "$90/month" [level=3] [ref=e170]
+                      - generic [ref=e171]: After Promo Period
+                  - generic [ref=e172]:
+                    - generic [ref=e174]:
+                      - link "rent" [ref=e176] [cursor=pointer]:
+                        - /url: https://test.staging.storagely-api.com/premier-storage/storage-units/mississippi/laurel/ms-15/step_four?location=4c37ca58-eff2-4f76-8635-0b5602a83cae&unit=4285155&type=rent&con=d4a30c07-1830-4dd6-9d34-e7df75521985&is_sitelink=1&site_locations_id=130595
+                      - generic "Save time! Pay and sign lease online in just a few minutes." [ref=e177]:
+                        - generic [ref=e178]: Easily switch sizes.
+                    - generic [ref=e180]:
+                      - generic [ref=e182] [cursor=pointer]: reserve
+                      - generic "Rent or reserve a unit up to 14 days in advance" [ref=e183]:
+                        - generic [ref=e184]: Requires no credit card.
+                - generic [ref=e186]:
+                  - generic "Storage units that are temperature controlled to keep your belongings from freezing." [ref=e189]:
+                    - generic [ref=e190]:
+                      - generic [ref=e192]: 
+                      - generic [ref=e194]: climate controlled
+                  - generic "Indoor access to your unit." [ref=e197]:
+                    - generic [ref=e198]:
+                      - generic [ref=e200]: 
+                      - generic [ref=e202]: Indoor Access
+                  - generic "Rent Online" [ref=e205]:
+                    - generic [ref=e206]:
+                      - generic [ref=e208]: 
+                      - generic [ref=e210]: Rent Online
+          - row "10 x 10 storage image Drive Up Access 10' WIDTH x 10' DEPTH What Size Do I Need? $77/month rent Easily switch sizes. reserve Requires no credit card. Non-Climate Rent Online Drive-Up Access" [ref=e222]:
+            - cell "10 x 10 storage image Drive Up Access 10' WIDTH x 10' DEPTH What Size Do I Need? $77/month rent Easily switch sizes. reserve Requires no credit card. Non-Climate Rent Online Drive-Up Access" [ref=e223]:
+              - generic [ref=e225]:
+                - generic [ref=e227]:
+                  - link "10 x 10 storage image" [ref=e229]:
+                    - /url: https://test.staging.storagely-api.com/uploads/unit_3d_images/unit_3d_2101290601.webp
+                    - img "10 x 10 storage image" [ref=e230]
+                  - generic [ref=e231]:
+                    - generic [ref=e232]: Drive Up Access
+                    - heading "10' WIDTH x 10' DEPTH" [level=2] [ref=e233]:
+                      - generic [ref=e234]:
+                        - text: 10'
+                        - generic [ref=e235]: WIDTH
+                      - text: x
+                      - generic [ref=e236]:
+                        - text: 10'
+                        - generic [ref=e237]: DEPTH
+                    - paragraph [ref=e239]:
+                      - generic [ref=e240]: 
+                      - link "What Size Do I Need?" [ref=e241] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e242]:
+                  - heading "$77/month" [level=3] [ref=e245]
+                  - generic [ref=e246]:
+                    - generic [ref=e248]:
+                      - link "rent" [ref=e250] [cursor=pointer]:
+                        - /url: https://test.staging.storagely-api.com/premier-storage/storage-units/mississippi/laurel/ms-15/step_four?location=4c37ca58-eff2-4f76-8635-0b5602a83cae&unit=4284894&type=rent&con=-999&is_sitelink=1&site_locations_id=130595
+                      - generic "Save time! Pay and sign lease online in just a few minutes." [ref=e251]:
+                        - generic [ref=e252]: Easily switch sizes.
+                    - generic [ref=e254]:
+                      - generic [ref=e256] [cursor=pointer]: reserve
+                      - generic "Rent or reserve a unit up to 14 days in advance" [ref=e257]:
+                        - generic [ref=e258]: Requires no credit card.
+                - generic [ref=e260]:
+                  - generic "Non-Climate controlled unit." [ref=e263]:
+                    - generic [ref=e264]:
+                      - generic [ref=e266]: 
+                      - generic [ref=e268]: Non-Climate
+                  - generic "Rent Online" [ref=e271]:
+                    - generic [ref=e272]:
+                      - generic [ref=e274]: 
+                      - generic [ref=e276]: Rent Online
+                  - generic "Drive Up Access" [ref=e279]:
+                    - generic [ref=e280]:
+                      - generic [ref=e282]: 
+                      - generic [ref=e284]: Drive-Up Access
+          - row "10 x 15 storage image Climate Controlled 10' WIDTH x 15' DEPTH What Size Do I Need? 1st MONTH RENT FREE 🚀 $0/month During Promo Period $128/month After Promo Period rent Easily switch sizes. reserve Requires no credit card. climate controlled Inside Rent Online" [ref=e296]:
+            - cell "10 x 15 storage image Climate Controlled 10' WIDTH x 15' DEPTH What Size Do I Need? 1st MONTH RENT FREE 🚀 $0/month During Promo Period $128/month After Promo Period rent Easily switch sizes. reserve Requires no credit card. climate controlled Inside Rent Online" [ref=e297]:
+              - generic [ref=e299]:
+                - generic [ref=e301]:
+                  - link "10 x 15 storage image" [ref=e303]:
+                    - /url: https://test.staging.storagely-api.com/uploads/unit_3d_images/unit_3d_1360366711.webp
+                    - img "10 x 15 storage image" [ref=e304]
+                  - generic [ref=e305]:
+                    - generic [ref=e306]: Climate Controlled
+                    - heading "10' WIDTH x 15' DEPTH" [level=2] [ref=e307]:
+                      - generic [ref=e308]:
+                        - text: 10'
+                        - generic [ref=e309]: WIDTH
+                      - text: x
+                      - generic [ref=e310]:
+                        - text: 15'
+                        - generic [ref=e311]: DEPTH
+                    - generic [ref=e312]:
+                      - paragraph [ref=e313]:
+                        - generic [ref=e314]: 
+                        - link "What Size Do I Need?" [ref=e315] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e316]:
+                        - generic [ref=e317]: 1st MONTH RENT FREE 🚀
+                - generic [ref=e318]:
+                  - generic [ref=e319]:
+                    - generic [ref=e320]:
+                      - heading "$0/month" [level=3] [ref=e321]
+                      - generic [ref=e322]: During Promo Period
+                    - generic [ref=e323]:
+                      - heading "$128/month" [level=3] [ref=e324]
+                      - generic [ref=e325]: After Promo Period
+                  - generic [ref=e326]:
+                    - generic [ref=e328]:
+                      - link "rent" [ref=e330] [cursor=pointer]:
+                        - /url: https://test.staging.storagely-api.com/premier-storage/storage-units/mississippi/laurel/ms-15/step_four?location=4c37ca58-eff2-4f76-8635-0b5602a83cae&unit=4491797&type=rent&con=d4a30c07-1830-4dd6-9d34-e7df75521985&is_sitelink=1&site_locations_id=130595
+                      - generic "Save time! Pay and sign lease online in just a few minutes." [ref=e331]:
+                        - generic [ref=e332]: Easily switch sizes.
+                    - generic [ref=e334]:
+                      - generic [ref=e336] [cursor=pointer]: reserve
+                      - generic "Rent or reserve a unit up to 14 days in advance" [ref=e337]:
+                        - generic [ref=e338]: Requires no credit card.
+                - generic [ref=e340]:
+                  - generic "Storage units that are temperature controlled to keep your belongings from freezing." [ref=e343]:
+                    - generic [ref=e344]:
+                      - generic [ref=e346]: 
+                      - generic [ref=e348]: climate controlled
+                  - generic "Inside access to your unit." [ref=e351]:
+                    - generic [ref=e352]:
+                      - generic [ref=e354]: 
+                      - generic [ref=e356]: Inside
+                  - generic "Rent Online" [ref=e359]:
+                    - generic [ref=e360]:
+                      - generic [ref=e362]: 
+                      - generic [ref=e364]: Rent Online
+          - row "10 x 15 storage image Drive Up Access 10' WIDTH x 15' DEPTH What Size Do I Need? $99/month rent Easily switch sizes. reserve Requires no credit card. Non-Climate Rent Online Drive-Up Access" [ref=e376]:
+            - cell "10 x 15 storage image Drive Up Access 10' WIDTH x 15' DEPTH What Size Do I Need? $99/month rent Easily switch sizes. reserve Requires no credit card. Non-Climate Rent Online Drive-Up Access" [ref=e377]:
+              - generic [ref=e379]:
+                - generic [ref=e381]:
+                  - link "10 x 15 storage image" [ref=e383]:
+                    - /url: https://test.staging.storagely-api.com/uploads/unit_3d_images/unit_3d_1543842032.webp
+                    - img "10 x 15 storage image" [ref=e384]
+                  - generic [ref=e385]:
+                    - generic [ref=e386]: Drive Up Access
+                    - heading "10' WIDTH x 15' DEPTH" [level=2] [ref=e387]:
+                      - generic [ref=e388]:
+                        - text: 10'
+                        - generic [ref=e389]: WIDTH
+                      - text: x
+                      - generic [ref=e390]:
+                        - text: 15'
+                        - generic [ref=e391]: DEPTH
+                    - paragraph [ref=e393]:
+                      - generic [ref=e394]: 
+                      - link "What Size Do I Need?" [ref=e395] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e396]:
+                  - heading "$99/month" [level=3] [ref=e399]
+                  - generic [ref=e400]:
+                    - generic [ref=e402]:
+                      - link "rent" [ref=e404] [cursor=pointer]:
+                        - /url: https://test.staging.storagely-api.com/premier-storage/storage-units/mississippi/laurel/ms-15/step_four?location=4c37ca58-eff2-4f76-8635-0b5602a83cae&unit=4284943&type=rent&con=-999&is_sitelink=1&site_locations_id=130595
+                      - generic "Save time! Pay and sign lease online in just a few minutes." [ref=e405]:
+                        - generic [ref=e406]: Easily switch sizes.
+                    - generic [ref=e408]:
+                      - generic [ref=e410] [cursor=pointer]: reserve
+                      - generic "Rent or reserve a unit up to 14 days in advance" [ref=e411]:
+                        - generic [ref=e412]: Requires no credit card.
+                - generic [ref=e414]:
+                  - generic "Non-Climate controlled unit." [ref=e417]:
+                    - generic [ref=e418]:
+                      - generic [ref=e420]: 
+                      - generic [ref=e422]: Non-Climate
+                  - generic "Rent Online" [ref=e425]:
+                    - generic [ref=e426]:
+                      - generic [ref=e428]: 
+                      - generic [ref=e430]: Rent Online
+                  - generic "Drive Up Access" [ref=e433]:
+                    - generic [ref=e434]:
+                      - generic [ref=e436]: 
+                      - generic [ref=e438]: Drive-Up Access
+          - row "10 x 20 storage image Drive Up Access 10' WIDTH x 20' DEPTH What Size Do I Need? 1st MONTH RENT FREE 🚀 $0/month During Promo Period $114/month After Promo Period rent Easily switch sizes. reserve Requires no credit card. Non-Climate Rent Online Drive-Up Access" [ref=e450]:
+            - cell "10 x 20 storage image Drive Up Access 10' WIDTH x 20' DEPTH What Size Do I Need? 1st MONTH RENT FREE 🚀 $0/month During Promo Period $114/month After Promo Period rent Easily switch sizes. reserve Requires no credit card. Non-Climate Rent Online Drive-Up Access" [ref=e451]:
+              - generic [ref=e453]:
+                - generic [ref=e455]:
+                  - link "10 x 20 storage image" [ref=e457]:
+                    - /url: https://test.staging.storagely-api.com/uploads/unit_3d_images/unit_3d_56037631.webp
+                    - img "10 x 20 storage image" [ref=e458]
+                  - generic [ref=e459]:
+                    - generic [ref=e460]: Drive Up Access
+                    - heading "10' WIDTH x 20' DEPTH" [level=2] [ref=e461]:
+                      - generic [ref=e462]:
+                        - text: 10'
+                        - generic [ref=e463]: WIDTH
+                      - text: x
+                      - generic [ref=e464]:
+                        - text: 20'
+                        - generic [ref=e465]: DEPTH
+                    - generic [ref=e466]:
+                      - paragraph [ref=e467]:
+                        - generic [ref=e468]: 
+                        - link "What Size Do I Need?" [ref=e469] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e470]:
+                        - generic [ref=e471]: 1st MONTH RENT FREE 🚀
+                - generic [ref=e472]:
+                  - generic [ref=e473]:
+                    - generic [ref=e474]:
+                      - heading "$0/month" [level=3] [ref=e475]
+                      - generic [ref=e476]: During Promo Period
+                    - generic [ref=e477]:
+                      - heading "$114/month" [level=3] [ref=e478]
+                      - generic [ref=e479]: After Promo Period
+                  - generic [ref=e480]:
+                    - generic [ref=e482]:
+                      - link "rent" [ref=e484] [cursor=pointer]:
+                        - /url: https://test.staging.storagely-api.com/premier-storage/storage-units/mississippi/laurel/ms-15/step_four?location=4c37ca58-eff2-4f76-8635-0b5602a83cae&unit=4285095&type=rent&con=d4a30c07-1830-4dd6-9d34-e7df75521985&is_sitelink=1&site_locations_id=130595
+                      - generic "Save time! Pay and sign lease online in just a few minutes." [ref=e485]:
+                        - generic [ref=e486]: Easily switch sizes.
+                    - generic [ref=e488]:
+                      - generic [ref=e490] [cursor=pointer]: reserve
+                      - generic "Rent or reserve a unit up to 14 days in advance" [ref=e491]:
+                        - generic [ref=e492]: Requires no credit card.
+                - generic [ref=e494]:
+                  - generic "Non-Climate controlled unit." [ref=e497]:
+                    - generic [ref=e498]:
+                      - generic [ref=e500]: 
+                      - generic [ref=e502]: Non-Climate
+                  - generic "Rent Online" [ref=e505]:
+                    - generic [ref=e506]:
+                      - generic [ref=e508]: 
+                      - generic [ref=e510]: Rent Online
+                  - generic "Drive Up Access" [ref=e513]:
+                    - generic [ref=e514]:
+                      - generic [ref=e516]: 
+                      - generic [ref=e518]: Drive-Up Access
+          - row "10 x 20 storage image Climate Controlled 10' WIDTH x 20' DEPTH What Size Do I Need? $170/month rent Easily switch sizes. reserve Requires no credit card. climate controlled Indoor Access Rent Online" [ref=e530]:
+            - cell "10 x 20 storage image Climate Controlled 10' WIDTH x 20' DEPTH What Size Do I Need? $170/month rent Easily switch sizes. reserve Requires no credit card. climate controlled Indoor Access Rent Online" [ref=e531]:
+              - generic [ref=e533]:
+                - generic [ref=e535]:
+                  - link "10 x 20 storage image" [ref=e537]:
+                    - /url: https://test.staging.storagely-api.com/uploads/unit_3d_images/unit_3d_438249633.webp
+                    - img "10 x 20 storage image" [ref=e538]
+                  - generic [ref=e539]:
+                    - generic [ref=e540]: Climate Controlled
+                    - heading "10' WIDTH x 20' DEPTH" [level=2] [ref=e541]:
+                      - generic [ref=e542]:
+                        - text: 10'
+                        - generic [ref=e543]: WIDTH
+                      - text: x
+                      - generic [ref=e544]:
+                        - text: 20'
+                        - generic [ref=e545]: DEPTH
+                    - paragraph [ref=e547]:
+                      - generic [ref=e548]: 
+                      - link "What Size Do I Need?" [ref=e549] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e550]:
+                  - heading "$170/month" [level=3] [ref=e553]
+                  - generic [ref=e554]:
+                    - generic [ref=e556]:
+                      - link "rent" [ref=e558] [cursor=pointer]:
+                        - /url: https://test.staging.storagely-api.com/premier-storage/storage-units/mississippi/laurel/ms-15/step_four?location=4c37ca58-eff2-4f76-8635-0b5602a83cae&unit=4555279&type=rent&con=-999&is_sitelink=1&site_locations_id=130595
+                      - generic "Save time! Pay and sign lease online in just a few minutes." [ref=e559]:
+                        - generic [ref=e560]: Easily switch sizes.
+                    - generic [ref=e562]:
+                      - generic [ref=e564] [cursor=pointer]: reserve
+                      - generic "Rent or reserve a unit up to 14 days in advance" [ref=e565]:
+                        - generic [ref=e566]: Requires no credit card.
+                - generic [ref=e568]:
+                  - generic "Storage units that are temperature controlled to keep your belongings from freezing." [ref=e571]:
+                    - generic [ref=e572]:
+                      - generic [ref=e574]: 
+                      - generic [ref=e576]: climate controlled
+                  - generic "Indoor access to your unit." [ref=e579]:
+                    - generic [ref=e580]:
+                      - generic [ref=e582]: 
+                      - generic [ref=e584]: Indoor Access
+                  - generic "Rent Online" [ref=e587]:
+                    - generic [ref=e588]:
+                      - generic [ref=e590]: 
+                      - generic [ref=e592]: Rent Online
+          - row "5 x 10 storage image Drive Up Access 5' WIDTH x 10' DEPTH What Size Do I Need? $38/month Join the Waitlist! Join the Waitlist! Non-Climate Rent Online Drive-Up Access" [ref=e604]:
+            - cell "5 x 10 storage image Drive Up Access 5' WIDTH x 10' DEPTH What Size Do I Need? $38/month Join the Waitlist! Join the Waitlist! Non-Climate Rent Online Drive-Up Access" [ref=e605]:
+              - generic [ref=e607]:
+                - generic [ref=e609]:
+                  - link "5 x 10 storage image" [ref=e611]:
+                    - /url: https://test.staging.storagely-api.com/uploads/unit_3d_images/unit_3d_1431814211.webp
+                    - img "5 x 10 storage image" [ref=e612]
+                  - generic [ref=e613]:
+                    - generic [ref=e614]: Drive Up Access
+                    - heading "5' WIDTH x 10' DEPTH" [level=2] [ref=e615]:
+                      - generic [ref=e616]:
+                        - text: 5'
+                        - generic [ref=e617]: WIDTH
+                      - text: x
+                      - generic [ref=e618]:
+                        - text: 10'
+                        - generic [ref=e619]: DEPTH
+                    - paragraph [ref=e621]:
+                      - generic [ref=e622]: 
+                      - link "What Size Do I Need?" [ref=e623] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e624]:
+                  - heading "$38/month" [level=3] [ref=e627]
+                  - generic [ref=e630]:
+                    - button "Join the Waitlist!" [ref=e631] [cursor=pointer]
+                    - generic [ref=e632]: Join the Waitlist!
+                - generic [ref=e634]:
+                  - generic "Non-Climate controlled unit." [ref=e637]:
+                    - generic [ref=e638]:
+                      - generic [ref=e640]: 
+                      - generic [ref=e642]: Non-Climate
+                  - generic "Rent Online" [ref=e645]:
+                    - generic [ref=e646]:
+                      - generic [ref=e648]: 
+                      - generic [ref=e650]: Rent Online
+                  - generic "Drive Up Access" [ref=e653]:
+                    - generic [ref=e654]:
+                      - generic [ref=e656]: 
+                      - generic [ref=e658]: Drive-Up Access
+          - row "5 x 10 storage image Climate Controlled 5' WIDTH x 10' DEPTH What Size Do I Need? $87/month Join the Waitlist! Join the Waitlist! climate controlled Indoor Access Rent Online" [ref=e670]:
+            - cell "5 x 10 storage image Climate Controlled 5' WIDTH x 10' DEPTH What Size Do I Need? $87/month Join the Waitlist! Join the Waitlist! climate controlled Indoor Access Rent Online" [ref=e671]:
+              - generic [ref=e673]:
+                - generic [ref=e675]:
+                  - link "5 x 10 storage image" [ref=e677]:
+                    - /url: https://test.staging.storagely-api.com/uploads/unit_3d_images/unit_3d_1376336034.webp
+                    - img "5 x 10 storage image" [ref=e678]
+                  - generic [ref=e679]:
+                    - generic [ref=e680]: Climate Controlled
+                    - heading "5' WIDTH x 10' DEPTH" [level=2] [ref=e681]:
+                      - generic [ref=e682]:
+                        - text: 5'
+                        - generic [ref=e683]: WIDTH
+                      - text: x
+                      - generic [ref=e684]:
+                        - text: 10'
+                        - generic [ref=e685]: DEPTH
+                    - paragraph [ref=e687]:
+                      - generic [ref=e688]: 
+                      - link "What Size Do I Need?" [ref=e689] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e690]:
+                  - heading "$87/month" [level=3] [ref=e693]
+                  - generic [ref=e696]:
+                    - button "Join the Waitlist!" [ref=e697] [cursor=pointer]
+                    - generic [ref=e698]: Join the Waitlist!
+                - generic [ref=e700]:
+                  - generic "Storage units that are temperature controlled to keep your belongings from freezing." [ref=e703]:
+                    - generic [ref=e704]:
+                      - generic [ref=e706]: 
+                      - generic [ref=e708]: climate controlled
+                  - generic "Indoor access to your unit." [ref=e711]:
+                    - generic [ref=e712]:
+                      - generic [ref=e714]: 
+                      - generic [ref=e716]: Indoor Access
+                  - generic "Rent Online" [ref=e719]:
+                    - generic [ref=e720]:
+                      - generic [ref=e722]: 
+                      - generic [ref=e724]: Rent Online
+      - generic [ref=e738]:
+        - heading "Customer Reviews" [level=2] [ref=e739]
+        - generic [ref=e741]:
+          - generic [ref=e742]:
+            - generic [ref=e743] [cursor=pointer]:
+              - generic [ref=e744]:
+                - img [ref=e745]
+                - img [ref=e747]
+                - img [ref=e749]
+                - img [ref=e751]
+                - img [ref=e753]
+              - strong [ref=e758]: "5"
+            - text: 62 Reviews
+          - link "Write a review" [ref=e759] [cursor=pointer]:
+            - /url: https://www.google.com/maps/place/Premier+Storage+-+Laurel/@31.735351,-89.1455079,3843m/data=!3m1!1e3!4m8!3m7!1s0x888335ca83145889:0xdafc92b13a5e62d9!8m2!3d31.735351!4d-89.1455079!9m1!1b1!16s%2Fg%2F1hc4vyq8s?entry=ttu&g_ep=EgoyMDI1MDYxMS4wIKXMDSoASAFQAw%3D%3D
+            - button "Write a review" [ref=e760]
+        - generic [ref=e763]:
+          - button "Previous" [ref=e764] [cursor=pointer]: ←Previous
+          - generic [ref=e766]:
+            - generic [ref=e768]:
+              - generic [ref=e769]:
+                - generic [ref=e772] [cursor=pointer]:
+                  - img [ref=e773]
+                  - img [ref=e775]
+                  - img [ref=e777]
+                  - img [ref=e779]
+                  - img [ref=e781]
+                - img [ref=e784]
+              - generic [ref=e790]:
+                - img [ref=e791]
+                - paragraph [ref=e792]: Rhonda Odum
+                - paragraph [ref=e793]: Edited a month ago
+              - generic [ref=e794]:
+                - paragraph [ref=e795]: The experience I've had with Premier Storage has been great. They have assisted with my questions very quickly. I highly recommend using Premier ...
+                - link [ref=e796] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - generic [ref=e798]:
+              - generic [ref=e799]:
+                - generic [ref=e802] [cursor=pointer]:
+                  - img [ref=e803]
+                  - img [ref=e805]
+                  - img [ref=e807]
+                  - img [ref=e809]
+                  - img [ref=e811]
+                - img [ref=e814]
+              - generic [ref=e820]:
+                - img [ref=e821]
+                - paragraph [ref=e822]: Mark Horne
+                - paragraph [ref=e823]: Edited a month ago
+              - paragraph [ref=e825]: Safe, clean, convenient, reasonable cost, and excellent staff. Easy access to my unit. Everything you could want in climate control storage. Excellent experience.
+            - generic [ref=e827]:
+              - generic [ref=e828]:
+                - generic [ref=e831] [cursor=pointer]:
+                  - img [ref=e832]
+                  - img [ref=e834]
+                  - img [ref=e836]
+                  - img [ref=e838]
+                  - img [ref=e840]
+                - img [ref=e843]
+              - generic [ref=e849]:
+                - img [ref=e850]
+                - paragraph [ref=e851]: Shirley Cole
+                - paragraph [ref=e852]: a month ago
+              - paragraph [ref=e854]: Courteous service, great location
+            - tabpanel [ref=e855]:
+              - generic [ref=e856]:
+                - generic [ref=e857]:
+                  - generic [ref=e860] [cursor=pointer]:
+                    - img [ref=e861]
+                    - img [ref=e863]
+                    - img [ref=e865]
+                    - img [ref=e867]
+                    - img [ref=e869]
+                  - img [ref=e872]
+                - generic [ref=e878]:
+                  - img [ref=e879]
+                  - paragraph [ref=e880]: Heather Jenista
+                  - paragraph [ref=e881]: a day ago
+                - paragraph [ref=e883]: Manager is fantastic! I am the second person on my sisters storage unit and I have witnessed nothing but professional and care from manager!!
+            - tabpanel [ref=e884]:
+              - generic [ref=e885]:
+                - generic [ref=e886]:
+                  - generic [ref=e889] [cursor=pointer]:
+                    - img [ref=e890]
+                    - img [ref=e892]
+                    - img [ref=e894]
+                    - img [ref=e896]
+                    - img [ref=e898]
+                  - img [ref=e902]
+                - generic [ref=e908]:
+                  - img [ref=e909]
+                  - paragraph [ref=e910]: victoria ekes
+                  - paragraph [ref=e911]: Edited a week ago
+                - paragraph [ref=e913]: Used them for about 1 year now and have had no issues.
+            - tabpanel [ref=e914]:
+              - generic [ref=e915]:
+                - generic [ref=e916]:
+                  - generic [ref=e919] [cursor=pointer]:
+                    - img [ref=e920]
+                    - img [ref=e922]
+                    - img [ref=e924]
+                    - img [ref=e926]
+                    - img [ref=e928]
+                  - img [ref=e931]
+                - generic [ref=e937]:
+                  - img [ref=e938]
+                  - paragraph [ref=e939]: Sarah Wheaton
+                  - paragraph [ref=e940]: a week ago
+                - paragraph [ref=e942]: Very nice storage units
+            - tabpanel [ref=e943]:
+              - generic [ref=e944]:
+                - generic [ref=e945]:
+                  - generic [ref=e948] [cursor=pointer]:
+                    - img [ref=e949]
+                    - img [ref=e951]
+                    - img [ref=e953]
+                    - img [ref=e955]
+                    - img [ref=e957]
+                  - img [ref=e960]
+                - generic [ref=e966]:
+                  - img "google review" [ref=e967]
+                  - paragraph [ref=e968]: Casey Moody
+                  - paragraph [ref=e969]: Edited 2 weeks ago
+                - generic [ref=e970]:
+                  - paragraph [ref=e971]: Very professional and very easy to work with...The facility is always clean and very well maintained...easy in and out with bigger vehicles... facility secured all ...
+                  - link "Show more" [ref=e972] [cursor=pointer]:
+                    - /url: "#"
+            - tabpanel [ref=e973]:
+              - generic [ref=e974]:
+                - generic [ref=e975]:
+                  - generic [ref=e978] [cursor=pointer]:
+                    - img [ref=e979]
+                    - img [ref=e981]
+                    - img [ref=e983]
+                    - img [ref=e985]
+                    - img [ref=e987]
+                  - img [ref=e990]
+                - generic [ref=e996]:
+                  - img "google review" [ref=e997]
+                  - paragraph [ref=e998]: JD Phillips
+                  - paragraph [ref=e999]: 2 weeks ago
+                - generic:
+                  - paragraph
+            - tabpanel [ref=e1000]:
+              - generic [ref=e1001]:
+                - generic [ref=e1002]:
+                  - generic [ref=e1005] [cursor=pointer]:
+                    - img [ref=e1006]
+                    - img [ref=e1008]
+                    - img [ref=e1010]
+                    - img [ref=e1012]
+                    - img [ref=e1014]
+                  - img [ref=e1017]
+                - generic [ref=e1023]:
+                  - img "google review" [ref=e1024]
+                  - paragraph [ref=e1025]: Brandon Reive
+                  - paragraph [ref=e1026]: 2 weeks ago
+                - paragraph [ref=e1028]: Easy in easy out unit was clean. Haven't had any problems.
+            - tabpanel [ref=e1029]:
+              - generic [ref=e1030]:
+                - generic [ref=e1031]:
+                  - generic [ref=e1034] [cursor=pointer]:
+                    - img [ref=e1035]
+                    - img [ref=e1037]
+                    - img [ref=e1039]
+                    - img [ref=e1041]
+                    - img [ref=e1043]
+                  - img [ref=e1046]
+                - generic [ref=e1052]:
+                  - img [ref=e1053]
+                  - paragraph [ref=e1054]: Bruce Whritenour
+                  - paragraph [ref=e1055]: Edited 2 weeks ago
+                - generic [ref=e1056]:
+                  - paragraph [ref=e1057]: I contacted 1st stop about renting a storage unit and was contacted by Natasha she was extremely helpful and took very good care of me ...
+                  - link [ref=e1058] [cursor=pointer]:
+                    - /url: "#"
+                    - text: Show more
+            - tabpanel [ref=e1059]:
+              - generic [ref=e1060]:
+                - generic [ref=e1061]:
+                  - generic [ref=e1064] [cursor=pointer]:
+                    - img [ref=e1065]
+                    - img [ref=e1067]
+                    - img [ref=e1069]
+                    - img [ref=e1071]
+                    - img [ref=e1073]
+                  - img [ref=e1076]
+                - generic [ref=e1082]:
+                  - img [ref=e1083]
+                  - paragraph [ref=e1084]: Meka
+                  - paragraph [ref=e1085]: 2 weeks ago
+            - tabpanel [ref=e1086]:
+              - generic [ref=e1087]:
+                - generic [ref=e1088]:
+                  - generic [ref=e1091] [cursor=pointer]:
+                    - img [ref=e1092]
+                    - img [ref=e1094]
+                    - img [ref=e1096]
+                    - img [ref=e1098]
+                    - img [ref=e1100]
+                  - img [ref=e1103]
+                - generic [ref=e1109]:
+                  - img [ref=e1110]
+                  - paragraph [ref=e1111]: Diesel Chick
+                  - paragraph [ref=e1112]: 3 weeks ago
+                - paragraph [ref=e1114]: Very nice people and patient and very informative
+            - tabpanel [ref=e1115]:
+              - generic [ref=e1116]:
+                - generic [ref=e1117]:
+                  - generic [ref=e1120] [cursor=pointer]:
+                    - img [ref=e1121]
+                    - img [ref=e1123]
+                    - img [ref=e1125]
+                    - img [ref=e1127]
+                    - img [ref=e1129]
+                  - img [ref=e1132]
+                - generic [ref=e1138]:
+                  - img [ref=e1139]
+                  - paragraph [ref=e1140]: Rhonda Odum
+                  - paragraph [ref=e1141]: Edited a month ago
+                - generic [ref=e1142]:
+                  - paragraph [ref=e1143]: The experience I've had with Premier Storage has been great. They have assisted with my questions very quickly. I highly recommend using Premier ...
+                  - link [ref=e1144] [cursor=pointer]:
+                    - /url: "#"
+                    - text: Show more
+            - tabpanel [ref=e1145]:
+              - generic [ref=e1146]:
+                - generic [ref=e1147]:
+                  - generic [ref=e1150] [cursor=pointer]:
+                    - img [ref=e1151]
+                    - img [ref=e1153]
+                    - img [ref=e1155]
+                    - img [ref=e1157]
+                    - img [ref=e1159]
+                  - img [ref=e1162]
+                - generic [ref=e1168]:
+                  - img [ref=e1169]
+                  - paragraph [ref=e1170]: Mark Horne
+                  - paragraph [ref=e1171]: Edited a month ago
+                - paragraph [ref=e1173]: Safe, clean, convenient, reasonable cost, and excellent staff. Easy access to my unit. Everything you could want in climate control storage. Excellent experience.
+            - tabpanel [ref=e1174]:
+              - generic [ref=e1175]:
+                - generic [ref=e1176]:
+                  - generic [ref=e1179] [cursor=pointer]:
+                    - img [ref=e1180]
+                    - img [ref=e1182]
+                    - img [ref=e1184]
+                    - img [ref=e1186]
+                    - img [ref=e1188]
+                  - img [ref=e1191]
+                - generic [ref=e1197]:
+                  - img [ref=e1198]
+                  - paragraph [ref=e1199]: Shirley Cole
+                  - paragraph [ref=e1200]: a month ago
+                - paragraph [ref=e1202]: Courteous service, great location
+            - generic [ref=e1204]:
+              - generic [ref=e1205]:
+                - generic [ref=e1208] [cursor=pointer]:
+                  - img [ref=e1209]
+                  - img [ref=e1211]
+                  - img [ref=e1213]
+                  - img [ref=e1215]
+                  - img [ref=e1217]
+                - img [ref=e1220]
+              - generic [ref=e1226]:
+                - img [ref=e1227]
+                - paragraph [ref=e1228]: Heather Jenista
+                - paragraph [ref=e1229]: a day ago
+              - paragraph [ref=e1231]: Manager is fantastic! I am the second person on my sisters storage unit and I have witnessed nothing but professional and care from manager!!
+            - generic [ref=e1233]:
+              - generic [ref=e1234]:
+                - generic [ref=e1237] [cursor=pointer]:
+                  - img [ref=e1238]
+                  - img [ref=e1240]
+                  - img [ref=e1242]
+                  - img [ref=e1244]
+                  - img [ref=e1246]
+                - img [ref=e1250]
+              - generic [ref=e1256]:
+                - img [ref=e1257]
+                - paragraph [ref=e1258]: victoria ekes
+                - paragraph [ref=e1259]: Edited a week ago
+              - paragraph [ref=e1261]: Used them for about 1 year now and have had no issues.
+            - generic [ref=e1263]:
+              - generic [ref=e1264]:
+                - generic [ref=e1267] [cursor=pointer]:
+                  - img [ref=e1268]
+                  - img [ref=e1270]
+                  - img [ref=e1272]
+                  - img [ref=e1274]
+                  - img [ref=e1276]
+                - img [ref=e1279]
+              - generic [ref=e1285]:
+                - img [ref=e1286]
+                - paragraph [ref=e1287]: Sarah Wheaton
+                - paragraph [ref=e1288]: a week ago
+              - paragraph [ref=e1290]: Very nice storage units
+            - generic [ref=e1292]:
+              - generic [ref=e1293]:
+                - generic [ref=e1296] [cursor=pointer]:
+                  - img [ref=e1297]
+                  - img [ref=e1299]
+                  - img [ref=e1301]
+                  - img [ref=e1303]
+                  - img [ref=e1305]
+                - img [ref=e1308]
+              - generic [ref=e1314]:
+                - img [ref=e1315]
+                - paragraph [ref=e1316]: Casey Moody
+                - paragraph [ref=e1317]: Edited 2 weeks ago
+              - generic [ref=e1318]:
+                - paragraph [ref=e1319]: Very professional and very easy to work with...The facility is always clean and very well maintained...easy in and out with bigger vehicles... facility secured all ...
+                - link [ref=e1320] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - generic [ref=e1322]:
+              - generic [ref=e1323]:
+                - generic [ref=e1326] [cursor=pointer]:
+                  - img [ref=e1327]
+                  - img [ref=e1329]
+                  - img [ref=e1331]
+                  - img [ref=e1333]
+                  - img [ref=e1335]
+                - img [ref=e1338]
+              - generic [ref=e1344]:
+                - img [ref=e1345]
+                - paragraph [ref=e1346]: JD Phillips
+                - paragraph [ref=e1347]: 2 weeks ago
+            - generic [ref=e1349]:
+              - generic [ref=e1350]:
+                - generic [ref=e1353] [cursor=pointer]:
+                  - img [ref=e1354]
+                  - img [ref=e1356]
+                  - img [ref=e1358]
+                  - img [ref=e1360]
+                  - img [ref=e1362]
+                - img [ref=e1365]
+              - generic [ref=e1371]:
+                - img [ref=e1372]
+                - paragraph [ref=e1373]: Brandon Reive
+                - paragraph [ref=e1374]: 2 weeks ago
+              - paragraph [ref=e1376]: Easy in easy out unit was clean. Haven't had any problems.
+            - generic [ref=e1378]:
+              - generic [ref=e1379]:
+                - generic [ref=e1382] [cursor=pointer]:
+                  - img [ref=e1383]
+                  - img [ref=e1385]
+                  - img [ref=e1387]
+                  - img [ref=e1389]
+                  - img [ref=e1391]
+                - img [ref=e1394]
+              - generic [ref=e1400]:
+                - img [ref=e1401]
+                - paragraph [ref=e1402]: Bruce Whritenour
+                - paragraph [ref=e1403]: Edited 2 weeks ago
+              - generic [ref=e1404]:
+                - paragraph [ref=e1405]: I contacted 1st stop about renting a storage unit and was contacted by Natasha she was extremely helpful and took very good care of me ...
+                - link [ref=e1406] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - generic [ref=e1408]:
+              - generic [ref=e1409]:
+                - generic [ref=e1412] [cursor=pointer]:
+                  - img [ref=e1413]
+                  - img [ref=e1415]
+                  - img [ref=e1417]
+                  - img [ref=e1419]
+                  - img [ref=e1421]
+                - img [ref=e1424]
+              - generic [ref=e1430]:
+                - img [ref=e1431]
+                - paragraph [ref=e1432]: Meka
+                - paragraph [ref=e1433]: 2 weeks ago
+            - generic [ref=e1435]:
+              - generic [ref=e1436]:
+                - generic [ref=e1439] [cursor=pointer]:
+                  - img [ref=e1440]
+                  - img [ref=e1442]
+                  - img [ref=e1444]
+                  - img [ref=e1446]
+                  - img [ref=e1448]
+                - img [ref=e1451]
+              - generic [ref=e1457]:
+                - img [ref=e1458]
+                - paragraph [ref=e1459]: Diesel Chick
+                - paragraph [ref=e1460]: 3 weeks ago
+              - paragraph [ref=e1462]: Very nice people and patient and very informative
+            - generic [ref=e1464]:
+              - generic [ref=e1465]:
+                - generic [ref=e1468] [cursor=pointer]:
+                  - img [ref=e1469]
+                  - img [ref=e1471]
+                  - img [ref=e1473]
+                  - img [ref=e1475]
+                  - img [ref=e1477]
+                - img [ref=e1480]
+              - generic [ref=e1486]:
+                - img [ref=e1487]
+                - paragraph [ref=e1488]: Rhonda Odum
+                - paragraph [ref=e1489]: Edited a month ago
+              - generic [ref=e1490]:
+                - paragraph [ref=e1491]: The experience I've had with Premier Storage has been great. They have assisted with my questions very quickly. I highly recommend using Premier ...
+                - link [ref=e1492] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - generic [ref=e1494]:
+              - generic [ref=e1495]:
+                - generic [ref=e1498] [cursor=pointer]:
+                  - img [ref=e1499]
+                  - img [ref=e1501]
+                  - img [ref=e1503]
+                  - img [ref=e1505]
+                  - img [ref=e1507]
+                - img [ref=e1510]
+              - generic [ref=e1516]:
+                - img [ref=e1517]
+                - paragraph [ref=e1518]: Mark Horne
+                - paragraph [ref=e1519]: Edited a month ago
+              - paragraph [ref=e1521]: Safe, clean, convenient, reasonable cost, and excellent staff. Easy access to my unit. Everything you could want in climate control storage. Excellent experience.
+            - generic [ref=e1523]:
+              - generic [ref=e1524]:
+                - generic [ref=e1527] [cursor=pointer]:
+                  - img [ref=e1528]
+                  - img [ref=e1530]
+                  - img [ref=e1532]
+                  - img [ref=e1534]
+                  - img [ref=e1536]
+                - img [ref=e1539]
+              - generic [ref=e1545]:
+                - img [ref=e1546]
+                - paragraph [ref=e1547]: Shirley Cole
+                - paragraph [ref=e1548]: a month ago
+              - paragraph [ref=e1550]: Courteous service, great location
+          - button "Next" [ref=e1551] [cursor=pointer]: →Next
+          - tablist [ref=e1552]:
+            - tab "1 of 4" [ref=e1553] [cursor=pointer]: • 1
+            - tab "2 of 4" [ref=e1554] [cursor=pointer]: • 2
+            - tab "3 of 4" [selected] [ref=e1555] [cursor=pointer]: • 3
+            - tab "4 of 4" [ref=e1556] [cursor=pointer]: • 4
+            - tab "5 of 4" [ref=e1557] [cursor=pointer]: • 5
+            - tab "6 of 4" [ref=e1558] [cursor=pointer]: • 6
+            - tab "7 of 4" [ref=e1559] [cursor=pointer]: • 7
+            - tab "8 of 4" [ref=e1560] [cursor=pointer]: • 8
+            - tab "9 of 4" [ref=e1561] [cursor=pointer]: • 9
+            - tab "10 of 4" [ref=e1562] [cursor=pointer]: • 10
+            - tab "11 of 4" [ref=e1563] [cursor=pointer]: • 11
+            - tab "12 of 4" [ref=e1564] [cursor=pointer]: • 12
+      - generic [ref=e1567]:
+        - heading "About Laurel | MS 15" [level=2] [ref=e1568]
+        - paragraph
+        - heading "Self Storage in Laurel That Fits Jones County Life" [level=2] [ref=e1569]
+        - paragraph [ref=e1570]: Looking for dependable self storage in Laurel that understands the needs of Jones County residents? At Premier Storage - Laurel, we’ve got you covered with affordable options right off MS-15. Whether you’re stashing away family heirlooms or clearing out space after a big Pine Belt move, our facility is here to help. Locals know life in Laurel can mean anything from humid summers to sudden storms, so we offer units that keep your belongings safe and sound. With sizes ranging from 50 to 200 square feet, there’s a spot for everyone—big or small. Our convenient location makes it easy to swing by after a day at the Mason Park or a trip down 16th Avenue. Say goodbye to clutter and hello to peace of mind with storage that’s as reliable as a Mississippi sunset. Reserve your unit today!
+        - heading "Storage Facility Laurel Locals Trust" [level=2] [ref=e1571]
+        - paragraph [ref=e1572]: Need a storage facility Laurel folks can count on? Premier Storage - Laurel is your go-to spot at 3615 MS-15, built with Jones County’s unique vibe in mind. We’re not just another storage joint—we’re part of the community, offering low-cost solutions for everyone from downtown shop owners to Lake Bogue Homa boaters. Our security fence and coded gate entry keep your stuff protected, whether it’s a motorcycle or seasonal gear. Easy drive-up access means you’re in and out faster than a trip to the Free State of Jones Farmers Market. Located right where Laurel’s hustle meets its charm, we’re perfect for anyone needing extra room without the headache. With climate-controlled options, your belongings stay fresh through Mississippi’s muggy months. Drop by and see why we’re the storage facility Laurel residents rave about!
+        - heading "Storage Unit Types to Match Your Needs" [level=2] [ref=e1573]
+        - list [ref=e1574]:
+          - listitem [ref=e1575]:
+            - heading "Climate Controlled Storage" [level=3] [ref=e1576]:
+              - strong [ref=e1577]: Climate Controlled Storage
+          - listitem [ref=e1578]:
+            - heading "Drive Up Storage" [level=3] [ref=e1579]:
+              - strong [ref=e1580]: Drive Up Storage
+          - listitem [ref=e1581]:
+            - heading "Vehicle Storage" [level=3] [ref=e1582]:
+              - strong [ref=e1583]: Vehicle Storage
+          - listitem [ref=e1584]:
+            - heading "Boat Storage" [level=3] [ref=e1585]:
+              - strong [ref=e1586]: Boat Storage
+        - paragraph [ref=e1587]:
+          - text: At Premier Storage - Laurel, our storage unit types are designed to fit whatever Jones County throws your way.
+          - link "Climate-controlled storage" [ref=e1588] [cursor=pointer]:
+            - /url: https://yourpremierstorage.com/storage-type/climate-controlled-storage
+          - text: keeps your valuables safe from Laurel’s heat and humidity—perfect for furniture or electronics.
+          - link "Drive-up storage" [ref=e1589] [cursor=pointer]:
+            - /url: https://yourpremierstorage.com/storage-type/drive-up-storage
+          - text: offers quick access for those heavy loads, making move-in day a breeze.
+          - link "Vehicle storage" [ref=e1590] [cursor=pointer]:
+            - /url: https://yourpremierstorage.com/storage-type/vehicle-storage
+          - text: gives your car or motorcycle a secure home, while
+          - link "boat storage" [ref=e1591] [cursor=pointer]:
+            - /url: https://yourpremierstorage.com/storage-type/boat-storage
+          - text: is a lifesaver for Lake Bogue Homa enthusiasts. With sizes from 50 to 200 square feet, we’ve got flexibility for small stashes or big hauls—ideal for
+          - link "household storage" [ref=e1592] [cursor=pointer]:
+            - /url: https://yourpremierstorage.com/storage-type/household-storage
+          - text: or
+          - link "business needs" [ref=e1593] [cursor=pointer]:
+            - /url: https://yourpremierstorage.com/storage-type/business-storage
+          - text: . Moving? Try our
+          - link "moving storage" [ref=e1594] [cursor=pointer]:
+            - /url: https://yourpremierstorage.com/storage-type/moving-storage
+          - text: . Every unit comes with a lock included, so you’re set from day one. Find the right fit with our
+          - link "size guide" [ref=e1595] [cursor=pointer]:
+            - /url: https://yourpremierstorage.com/pages/storage-unit-size-guide
+          - text: "!"
+        - heading "Directions to Premier Storage - Laurel 3615 MS-15" [level=3] [ref=e1596]
+        - heading "Laurel Main Street" [level=4] [ref=e1597]:
+          - link "Laurel Main Street" [ref=e1598] [cursor=pointer]:
+            - /url: https://www.google.com/maps/dir/Laurel+Main+Street,+Laurel,+MS+39440/3615+MS-15,+Laurel,+MS+39440
+        - paragraph [ref=e1599]: Head north on MS-15 from Laurel Main Street. Keep going straight for about 4 miles, passing Central Avenue. We’re on your right just after the industrial stretch—look for our sign!
+        - heading "Mason Park" [level=4] [ref=e1600]:
+          - link "Mason Park" [ref=e1601] [cursor=pointer]:
+            - /url: https://www.google.com/maps/dir/Mason+Park,+Laurel,+MS+39440/3615+MS-15,+Laurel,+MS+39440
+        - paragraph [ref=e1602]: From Mason Park, take N 16th Ave north to MS-15. Turn left onto MS-15 and drive 3 miles. You’ll see us on the right before you hit the county line.
+        - heading "Landrum’s Homestead & Village" [level=4] [ref=e1603]:
+          - link "Landrum’s Homestead & Village" [ref=e1604] [cursor=pointer]:
+            - /url: https://www.google.com/maps/dir/Landrum’s+Homestead+%26+Village,+Laurel,+MS+39440/3615+MS-15,+Laurel,+MS+39440
+        - paragraph [ref=e1605]: Start at Landrum’s, head west on Old Bay Springs Rd, then turn right onto MS-15. Travel 2.5 miles north. We’re on your right, just past the curve.
+        - heading "Lauren Rogers Museum of Art" [level=4] [ref=e1606]:
+          - link "Lauren Rogers Museum of Art" [ref=e1607] [cursor=pointer]:
+            - /url: https://www.google.com/maps/dir/Lauren+Rogers+Museum+of+Art,+565+N+5th+Ave,+Laurel,+MS+39440/3615+MS-15,+Laurel,+MS+39440
+        - paragraph [ref=e1608]: From the museum, go north on N 5th Ave, then left onto MS-15. Drive 4 miles straight. We’re on the right, easy to spot after the railroad tracks.
+        - heading "Veterans Memorial Museum" [level=4] [ref=e1609]:
+          - link "Veterans Memorial Museum" [ref=e1610] [cursor=pointer]:
+            - /url: https://www.google.com/maps/dir/Veterans+Memorial+Museum,+920+Hillcrest+Dr,+Laurel,+MS+39440/3615+MS-15,+Laurel,+MS+39440
+        - paragraph [ref=e1611]: Head north on Hillcrest Dr from the museum, turn left onto MS-15. Go 3.5 miles. You’ll find us on the right, just before the highway widens.
+        - heading "FAQ Section" [level=4] [ref=e1612]
+        - paragraph [ref=e1613]:
+          - strong [ref=e1614]: What sizes of storage units are available in Laurel?
+          - text: We offer units from 50 to 200 square feet, ideal for everything from small boxes to boats.
+        - paragraph [ref=e1615]:
+          - strong [ref=e1616]: Do you have climate-controlled storage in Laurel, MS?
+          - text: Yes, our
+          - link "climate-controlled storage" [ref=e1617] [cursor=pointer]:
+            - /url: https://yourpremierstorage.com/storage-type/climate-controlled-storage
+          - text: protects from humidity and heat.
+        - paragraph [ref=e1618]:
+          - strong [ref=e1619]: Can I store my vehicle or boat at Premier Storage - Laurel?
+          - text: Absolutely, we provide secure
+          - link "vehicle storage" [ref=e1620] [cursor=pointer]:
+            - /url: https://yourpremierstorage.com/storage-type/vehicle-storage
+          - text: and
+          - link "boat storage" [ref=e1621] [cursor=pointer]:
+            - /url: https://yourpremierstorage.com/storage-type/boat-storage
+          - text: .
+        - paragraph [ref=e1622]:
+          - strong [ref=e1623]: How do I access my storage unit at 3615 MS-15?
+          - text: Use our coded gate entry and
+          - link "drive-up options" [ref=e1624] [cursor=pointer]:
+            - /url: https://yourpremierstorage.com/storage-type/drive-up-storage
+          - text: for easy access anytime.
+        - paragraph [ref=e1625]:
+          - strong [ref=e1626]: What else can I store here?
+          - text: From RVs to specialty items, check our
+          - link "RV storage" [ref=e1627] [cursor=pointer]:
+            - /url: https://yourpremierstorage.com/storage-type/rv-storage
+          - text: or
+          - link "FAQ page" [ref=e1628] [cursor=pointer]:
+            - /url: https://yourpremierstorage.com/pages/self-storage-faq
+          - text: "!"
+        - heading "Nearby Premier Storage - Laurel Facilities" [level=4] [ref=e1629]
+        - paragraph [ref=e1630]: Not the right spot? Explore our other Pine Belt locations for more storage choices tailored to your needs.
+        - list [ref=e1631]:
+          - listitem [ref=e1632]:
+            - strong [ref=e1633]: Premier Storage 308 N 12th Ave Laurel, MS 39440
+            - text: "- See pricing at our other"
+            - link "Laurel, MS" [ref=e1634] [cursor=pointer]:
+              - /url: https://yourpremierstorage.com/storage-units/mississippi/laurel/north-12th-avenue
+            - text: facility.
+          - listitem [ref=e1635]:
+            - strong [ref=e1636]: Premier Storage 100 Simpson Hwy 149 Magee, MS 39111
+            - text: "- See pricing at our"
+            - link "Magee, MS" [ref=e1637] [cursor=pointer]:
+              - /url: https://yourpremierstorage.com/storage-units/mississippi/magee/simpson-highway-149
+            - text: facility.
+        - paragraph [ref=e1638]: Premier Storage - Laurel at 3615 MS-15 is your affordable solution for self storage in Jones County. From climate-controlled units to boat storage, we’ve got the variety Laurel locals need. Our convenient spot off MS-15 makes us easy to reach from anywhere in town. Whether you’re decluttering or stashing your ride, we’re here with secure, flexible options. Visit us today and see how simple storage can be!
+        - paragraph
+      - generic [ref=e1640]:
+        - heading "Facility Features" [level=3] [ref=e1641]
+        - list [ref=e1643]:
+          - listitem [ref=e1644]: Boat Storage
+          - listitem [ref=e1645]: Climate-Controlled Units
+          - listitem [ref=e1646]: Code Gate Entry
+          - listitem [ref=e1647]: Drive Up Units
+          - listitem [ref=e1648]: Lock Included
+          - listitem [ref=e1649]: Motorcycle Storage
+          - listitem [ref=e1650]: Protection Plan
+          - listitem [ref=e1651]: Security Fence
+          - listitem [ref=e1652]: Vehicle Storage
+    - generic [ref=e1653]:
+      - generic [ref=e1655]:
+        - generic [ref=e1656]:
+          - link "Footer Logo" [ref=e1658] [cursor=pointer]:
+            - /url: https://test.staging.storagely-api.com/premier-storage
+            - img "Footer Logo" [ref=e1659]
+          - generic [ref=e1660]:
+            - link "Find Storage" [ref=e1661] [cursor=pointer]:
+              - /url: /storage-units-near-me
+              - img [ref=e1662]
+              - generic [ref=e1665]: Find Storage
+            - link "Size Guide" [ref=e1666] [cursor=pointer]:
+              - /url: /storage-unit-size-guide
+              - img [ref=e1667]
+              - generic [ref=e1670]: Size Guide
+        - generic [ref=e1671]:
+          - generic [ref=e1672]:
+            - generic [ref=e1673]:
+              - text: Find Storage
+              - separator [ref=e1674]
+            - generic [ref=e1675]:
+              - link "Rent Now" [ref=e1676] [cursor=pointer]:
+                - /url: /storage-units-near-me
+              - link "West Jackman Trail | Benton, AR" [ref=e1677] [cursor=pointer]:
+                - /url: /storage-units/arkansas/benton/west-jackman-trail
+              - link "Mill Street | Conway, AR" [ref=e1678] [cursor=pointer]:
+                - /url: /storage-units/arkansas/conway/mill-street
+              - link "South Broadview Street | Greenbrier, AR" [ref=e1679] [cursor=pointer]:
+                - /url: /storage-units/arkansas/greenbrier/south-broadview-street
+              - link "US 65 N | Greenbrier, AR" [ref=e1680] [cursor=pointer]:
+                - /url: /storage-units/arkansas/greenbrier/us-65-north
+              - link "Colonel Glenn Road | Little Rock, AR" [ref=e1681] [cursor=pointer]:
+                - /url: /storage-units/arkansas/little-rock/colonel-glenn-road
+              - link "MS-15 | Laurel, MS" [ref=e1682] [cursor=pointer]:
+                - /url: /storage-units/mississippi/laurel/ms-15
+              - link "N 12th Avenue | Laurel, MS" [ref=e1683] [cursor=pointer]:
+                - /url: /storage-units/mississippi/laurel/north-12th-avenue
+              - link "Simpson Highway 149 | Magee, MS" [ref=e1684] [cursor=pointer]:
+                - /url: /storage-units/mississippi/magee/simpson-highway-149
+              - link "Columbus Road | Grantville, OH" [ref=e1685] [cursor=pointer]:
+                - /url: /storage-units/ohio/granville/columbus-road
+              - link "Trimble Road | Mansfield, OH" [ref=e1686] [cursor=pointer]:
+                - /url: /storage-units/ohio/mansfield/trimble-road
+              - link "Cascade Drive | Marion, OH" [ref=e1687] [cursor=pointer]:
+                - /url: /storage-units/ohio/marion/cascade-drive
+              - link "County Road 26 | Marengo, OH" [ref=e1688] [cursor=pointer]:
+                - /url: /storage-units/ohio/marengo/county-road-26
+              - link "Lucille Lynd Road | New Albany, OH" [ref=e1689] [cursor=pointer]:
+                - /url: /storage-units/ohio/new-albany/lucille-lynd-road
+              - link "Back Massillon Road | Orrville, OH" [ref=e1690] [cursor=pointer]:
+                - /url: /storage-units/ohio/orrville/back-massillon-road
+              - link "Newark Road | Zanesville, OH" [ref=e1691] [cursor=pointer]:
+                - /url: /storage-units/ohio/zanesville/newark-road
+              - link "Richards Road | Zanesville, OH" [ref=e1692] [cursor=pointer]:
+                - /url: /storage-units/ohio/zanesville/richards-road
+          - generic [ref=e1693]:
+            - generic [ref=e1694]:
+              - text: Storage Types
+              - separator [ref=e1695]
+            - generic [ref=e1696]:
+              - link "Boat Storage" [ref=e1697] [cursor=pointer]:
+                - /url: /boat-storage
+              - link "Business Storage" [ref=e1698] [cursor=pointer]:
+                - /url: /business-storage
+              - link "Climate-Controlled Storage" [ref=e1699] [cursor=pointer]:
+                - /url: /climate-controlled-storage
+              - link "Commercial Real Estate Storage" [ref=e1700] [cursor=pointer]:
+                - /url: /commercial-real-estate-storage
+              - link "Drive Up Storage" [ref=e1701] [cursor=pointer]:
+                - /url: /drive-up-storage
+              - link "Household Storage" [ref=e1702] [cursor=pointer]:
+                - /url: /household-storage
+              - link "Indoor Storage" [ref=e1703] [cursor=pointer]:
+                - /url: /indoor-storage
+              - link "Moving Storage" [ref=e1704] [cursor=pointer]:
+                - /url: /moving-storage
+              - link "RV Storage" [ref=e1705] [cursor=pointer]:
+                - /url: /rv-storage
+              - link "Vehicle Storage" [ref=e1706] [cursor=pointer]:
+                - /url: /vehicle-storage
+              - link "Warehouse Storage" [ref=e1707] [cursor=pointer]:
+                - /url: /warehouse-storage
+          - generic [ref=e1708]:
+            - generic [ref=e1709]:
+              - text: Resources
+              - separator [ref=e1710]
+            - generic [ref=e1711]:
+              - link "Size Guide" [ref=e1712] [cursor=pointer]:
+                - /url: /pages/storage-unit-size-guide
+              - link "Storage Tips" [ref=e1713] [cursor=pointer]:
+                - /url: /storage-tips
+              - link "FAQs" [ref=e1714] [cursor=pointer]:
+                - /url: /pages/self-storage-faq
+              - link "My Account" [ref=e1715] [cursor=pointer]:
+                - /url: https://myaccount.yourpremierstorage.com/existing-customer
+          - generic [ref=e1716]:
+            - generic [ref=e1717]:
+              - text: Contact
+              - separator [ref=e1718]
+            - link "Contact Us" [ref=e1720] [cursor=pointer]:
+              - /url: /pages/contact
+      - generic [ref=e1723]:
+        - text: © Premier Storage
+        - generic [ref=e1725]:
+          - text: "|"
+          - link "Privacy Policy" [ref=e1726] [cursor=pointer]:
+            - /url: /privacy-policy
+  - generic:
+    - generic:
+      - img "Chatbot Avatar" [ref=e1728]
+      - generic [ref=e1729]:
+        - generic [ref=e1730] [cursor=pointer]: X
+        - generic [ref=e1731]: How can we help?
+        - img "How can we help?" [ref=e1733]
+        - generic [ref=e1734]: You can ask us questions about inventory, pricing, amenities and more!
+      - generic [ref=e1736]:
+        - generic [ref=e1737] [cursor=pointer]:
+          - img "Chatbot Avatar" [ref=e1739]
+          - generic [ref=e1740]: Chat with Bumper
+        - generic [ref=e1748]:
+          - textbox "Enter your message..." [ref=e1749]
+          - button "Send" [ref=e1750] [cursor=pointer]
+```

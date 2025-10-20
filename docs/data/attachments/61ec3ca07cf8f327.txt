@@ -1,0 +1,134 @@
+
+================================================================================
+🏢 TESTING: storagedepotla
+🌐 URL: https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street
+⚙️  Platform: SiteLink
+================================================================================
+📍 STEP 1: Navigating to storage listing page...
+Navigating to: https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street
+ℹ️ Network still active, proceeding with DOM ready state
+✓ Successfully navigated to storage listing page
+✅ Navigation completed successfully
+📍 STEP 2: Checking for reserve button...
+Found a button with text: "RESERVE"
+✓ Clicked "RESERVE" button
+✓ Closed the modal
+📍 STEP 3: Clicking rent button...
+Attempting to click rent button - CRITICAL STEP
+Found rent button with text: rent
+✓ Rent button clicked successfully
+✅ Rent button clicked successfully
+🔍 Checking for immediate errors...
+🔍 Checking for immediate error messages...
+✅ No immediate error detected - proceeding with test
+✅ No immediate error detected - proceeding with test
+📍 STEP 4: Filling rental details form...
+Filling rental details form - CRITICAL STEP
+✓ Summary heading found and clicked
+✓ Filled First Name: Test
+✓ Filled Last Name: Testing_Tareq
+✓ Filled Email: tareq@storagely.io
+✓ Filled Phone: 5551234567
+✓ Filled Address: NYC
+✓ Filled City: NYC
+Attempting to select state - OPTIMIZED APPROACH
+✓ Successfully selected Alabama using standard select
+Attempting to fill zip code: 99540
+✓ Successfully filled zip code: 99540
+✓ Clicked the datepicker element
+Attempting to proceed to next step - CRITICAL STEP
+Continue button click attempt 1
+✓ Successfully clicked continue button
+✓ Rental details form completed successfully
+✅ Rental details form completed successfully
+📍 STEP 5: Filling lease details if available...
+Lease Details section not found, skipping
+✅ Lease details form completed (or skipped if not available)
+📍 STEP 6: Filling payment details...
+Filling payment details - CRITICAL STEP
+✓ Payment details filled successfully
+✅ Payment details filled successfully
+📍 STEP 7: Checking agreement checkboxes...
+- I agree to the lease terms checkbox not visible, skipping
+- I agree to the protection checkbox not visible, skipping
+- I agree to the auto pay terms checkbox not visible, skipping
+✅ Agreement checkboxes processed
+📍 STEP 8: Submitting payment and checking for errors...
+Attempting to submit payment - CRITICAL STEP
+Chat iframe not found or an error occurred, proceeding without minimizing.
+✓ Rent Now button clicked successfully
+Starting robust error detection...
+✓ Error detected via quick check
+✅ Payment submission completed
+
+✅ TEST COMPLETED SUCCESSFULLY FOR: storagedepotla
+📊 Final Result: (-100) Response Code: -1 Sub Code: -1 Reason Code: -1 Reason Text: Payment failed to process: 'Card Number' is not a valid credit card number.
+================================================================================
+
+
+====================================================================================================
+🏁 PAYMENT VERIFICATION TEST SUMMARY
+====================================================================================================
+
+📊 TEST EXECUTION SUMMARY:
+   Total Tests: 6
+   ✅ Successful: 6
+   ❌ Failed: 0
+   📈 Success Rate: 100.0%
+
+📋 DETAILED RESULTS:
+========================================================================================================================
+Company                   | Platform   | Status   | Error Message                                               
+========================================================================================================================
+storagestar               | SSM        | ✅ PASS   | The Payment failed. Invalid Account Data: Account number ...
+bluebird Storage          | SiteLink   | ✅ PASS   | (-100) Response Code: SiteLink Merchant Services CAN:52 -...
+sunbird Storage           | SiteLink   | ✅ PASS   | (-100) Response Code: -1 Sub Code: -1 Reason Code: -1 Rea...
+rhino- Storage            | SiteLink   | ✅ PASS   | No error - Join Waitlist option                             
+gatekeeperstoragega       | SiteLink   | ✅ PASS   | (-100) Response Code: -1 Sub Code: -1 Reason Code: -1 Rea...
+storagedepotla            | SiteLink   | ✅ PASS   | (-100) Response Code: -1 Sub Code: -1 Reason Code: -1 Rea...
+========================================================================================================================
+
+🔧 PLATFORM BREAKDOWN:
+   SSM: 1/1 (100.0%)
+   SiteLink: 5/5 (100.0%)
+
+🚨 ALL ERROR MESSAGES:
+====================================================================================================
+
+1. ⚠️  WARNING - storagestar (SSM)
+   URL: https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive
+   Message: The Payment failed. Invalid Account Data: Account number has incorrect check digit
+   Time: 10/20/2025, 3:43:22 PM
+   --------------------------------------------------------------------------------
+
+2. ⚠️  WARNING - bluebird Storage (SiteLink)
+   URL: https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland
+   Message: (-100) Response Code: SiteLink Merchant Services CAN:52 - Invalid Card Number Sub Code: Reason Code: Invalid Card Number Reason Text:
+   Time: 10/20/2025, 3:46:23 PM
+   --------------------------------------------------------------------------------
+
+3. ⚠️  WARNING - sunbird Storage (SiteLink)
+   URL: https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club
+   Message: (-100) Response Code: -1 Sub Code: -1 Reason Code: -1 Reason Text: Payment failed to process: 'Card Number' is not a valid credit card number.
+   Time: 10/20/2025, 3:47:34 PM
+   --------------------------------------------------------------------------------
+
+4. ⚠️  WARNING - rhino- Storage (SiteLink)
+   URL: https://rhino-storage.com/storage-units/louisiana/covington/philip-drive
+   Message: No error - Join Waitlist option
+   Time: 10/20/2025, 3:47:52 PM
+   --------------------------------------------------------------------------------
+
+5. ⚠️  WARNING - gatekeeperstoragega (SiteLink)
+   URL: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road
+   Message: (-100) Response Code: -1 Sub Code: -1 Reason Code: -1 Reason Text: Payment failed to process: 'Card Number' is not a valid credit card number.
+   Time: 10/20/2025, 3:49:03 PM
+   --------------------------------------------------------------------------------
+
+6. ⚠️  WARNING - storagedepotla (SiteLink)
+   URL: https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street
+   Message: (-100) Response Code: -1 Sub Code: -1 Reason Code: -1 Reason Text: Payment failed to process: 'Card Number' is not a valid credit card number.
+   Time: 10/20/2025, 3:50:16 PM
+====================================================================================================
+====================================================================================================
+
