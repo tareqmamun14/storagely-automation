@@ -8,7 +8,6 @@ ASG: The Storage Advantage - 1st Class Boat and RV Storage,1stclassboatandrv.the
 ASG: The Storage Advantage - 1st Class Storage,1stclassstorage.thestorageadvantage.com
 ASG: The Storage Advantage - Add-A-Space Mini Storage,addaspaceministorage.thestorageadvantage.com
 ASG: The Storage Advantage - Akron Self Storage,akronselfstorage.thestorageadvantage.com
-SSUN: z_NOT USED | All Purpose Storage,allpurposestorage.selfstorageunitsnearby.com
 Amazon Storage,amazonstoragellc.com
 Arkansas Storage Centers,arkansasstoragecenters.com
 ASG: The Storage Advantage - Arnold Self Storage,arnoldselfstorage.thestorageadvantage.com
@@ -100,7 +99,6 @@ BestBox Storage,www.bestboxstorage.com
 Hi-Desert Storage,www.hi-desertstorage.com
 mod-STORAGE | REDIRECTS ONLY,www.mod-storage.com
 Storage Star,www.storagestar.com
-All Purpose Storage,www.storeallpurpose.com
 ASG: TriLink Storage,www.trilinkstorage.com
 ASG: Premier Storage,yourpremierstorage.com`;
 

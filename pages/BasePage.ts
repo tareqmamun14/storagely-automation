@@ -1,15 +1,12 @@
 // pages/BasePage.ts
 
 import { Page, expect, Locator } from '@playwright/test';
-import { PopupHandler } from '../utils/popup-handler';
 
 export class BasePage {
   readonly page: Page;
-  protected popupHandler: PopupHandler;
 
   constructor(page: Page) {
     this.page = page;
-    this.popupHandler = new PopupHandler(page);
   }
 
   /**
@@ -34,19 +31,10 @@ export class BasePage {
   async goto(url: string): Promise<void> {
     await this.page.goto(url, { 
       waitUntil: 'domcontentloaded',
-      timeout: 30000 
+      timeout: 30000
     });
-    // Wait for network to be mostly idle - with fallback
-    try {
-      await this.page.waitForLoadState('networkidle', { timeout: 5000 });
-    } catch (error) {
-      // If networkidle times out, just ensure DOM is ready
-      console.log('ℹ️ Network still active, proceeding with DOM ready state');
-      await this.page.waitForLoadState('domcontentloaded', { timeout: 5000 });
-    }
-    
-    // Handle client-specific popups after navigation
-    await this.popupHandler.handleClientSpecificPopups();
+    // Brief wait for critical resources only
+    await this.page.waitForTimeout(1000);
   }
 
   /**
@@ -60,16 +48,9 @@ export class BasePage {
    * Safe click with automatic waiting and popup handling
    */
   async safeClick(locator: Locator, timeout: number = 10000): Promise<void> {
-    // Handle popup before clicking
-    await this.popupHandler.handleClientSpecificPopups();
-    
     await expect(locator).toBeVisible({ timeout });
     await expect(locator).toBeEnabled({ timeout: 5000 });
     await locator.click();
-    
-    // Handle popup after clicking (in case clicking triggers a popup)
-    await this.page.waitForTimeout(1000);
-    await this.popupHandler.handleClientSpecificPopups();
   }
 
   /**
@@ -82,22 +63,70 @@ export class BasePage {
   }
 
   /**
-   * Handle cookie consent if present
+   * Handle cookie consent dialog if present
+   * Attempts to dismiss cookie consent banners to prevent interference
    */
-  async handleCookieConsent(): Promise<void> {
+  async handleCookieConsent(url?: string): Promise<void> {
     try {
-      await this.wait(2000); // Small delay for potential cookie banner
-      const cookieBanner = this.page.getByText('We use essential cookies to');
-      if (await cookieBanner.isVisible()) {
-        await cookieBanner.click();
-        await this.wait(500);
-        const acceptButton = this.page.getByRole('button', { name: 'Accept' });
-        if (await acceptButton.isVisible()) {
-          await acceptButton.click();
+      // Only log if we're actually on a page that might have cookies
+      const currentUrl = this.page.url();
+      if (!currentUrl.includes('step') && !currentUrl.includes('checkout') && !currentUrl.includes('payment')) {
+        console.log('🍪 Checking for cookie consent dialog...');
+      }
+      
+      // First, do a quick check if ANY cookie dialog exists - REDUCED TIMEOUT
+      const quickCheck = this.page.locator('button:has-text("Accept"), [data-termly-accept], [role="dialog"] button').first();
+      const hasDialog = await quickCheck.isVisible({ timeout: 1000 }); // Reduced from 3000ms to 1000ms
+      
+      if (!hasDialog) {
+        console.log('ℹ️ No cookie consent dialog found (this is normal)');
+        return; // Exit early - no cookie dialog present
+      }
+      
+      // Multiple selectors for cookie consent Accept buttons across different platforms
+      const cookieSelectors = [
+        // Termly cookie consent (common on storEDGE sites) - try first
+        '[data-termly-accept]',
+        // Generic cookie consent buttons
+        'button:has-text("Accept")',
+        'button:has-text("Accept All")',
+        'button:has-text("I Accept")',
+        'button:has-text("Agree")',
+        // Specific cookie consent dialogs
+        '[role="dialog"] button:has-text("Accept")',
+        '.cookie-consent button:has-text("Accept")',
+        '#cookie-banner button:has-text("Accept")',
+        'button[id*="cookie-accept"]',
+        'button[class*="cookie-accept"]'
+      ];
+      
+      // Try each selector with a short timeout
+      for (const selector of cookieSelectors) {
+        try {
+          const button = this.page.locator(selector).first();
+          
+          // Check if button is visible with very short timeout
+          const isVisible = await button.isVisible({ timeout: 500 }); // Reduced from 1000ms to 500ms
+          
+          if (isVisible) {
+            console.log(`✅ Found cookie consent button: ${selector}`);
+            await button.click();
+            console.log('✓ Cookie consent accepted');
+            
+            // Wait a moment for dialog to dismiss
+            await this.wait(500);
+            return;
+          }
+        } catch {
+          // Continue to next selector
+          continue;
         }
       }
+      
+      console.log('ℹ️ Cookie dialog detected but could not click (may have auto-dismissed)');
     } catch (error) {
-      console.log('Cookie banner might not be present');
+      // Non-critical error - don't fail the test
+      console.log('ℹ️ Cookie consent handling completed');
     }
   }
 

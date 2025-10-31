@@ -304,20 +304,17 @@ export class RentResultCollector{
     // Print detailed results
     console.log(`\n📋 DETAILED RESULTS:`);
     console.log(`${'='.repeat(120)}`);
-    console.log(`${'Company'.padEnd(25)} | ${'Platform'.padEnd(10)} | ${'Status'.padEnd(8)} | ${'Error Message'.padEnd(60)}`);
+    console.log(`${'Company'.padEnd(25)} | ${'Platform'.padEnd(10)} | ${'Status'.padEnd(8)} | Error Message`);
     console.log(`${'='.repeat(120)}`);
 
     this.results.forEach(result => {
       const statusIcon = result.success ? '✅ PASS' : '❌ FAIL';
-      const truncatedError = result.error.length > 60 
-        ? result.error.substring(0, 57) + '...'
-        : result.error;
       
       console.log(
         `${result.company.padEnd(25)} | ` +
         `${result.platform.padEnd(10)} | ` +
         `${statusIcon.padEnd(8)} | ` +
-        `${truncatedError.padEnd(60)}`
+        `${result.error}`
       );
     });
 

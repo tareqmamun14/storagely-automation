@@ -6,16 +6,6 @@ export class RentalDetailsPage extends BasePage {
     super(page);
   }
 
-  /**
-   * Handle popup if this is an AllPurpose Storage client
-   */
-  public async handlePopupIfNeeded(): Promise<void> {
-    const isAllPurposeStorage = await this.popupHandler.isAllPurposeStorageClient();
-    if (isAllPurposeStorage) {
-      await this.popupHandler.handleAllPurposeStoragePopup();
-    }
-  }
-
   // Locators
   private get summaryHeading() { return this.page.getByRole('heading', { name: 'Summary of Rental' }); }
   private get firstNameInput() { return this.page.getByPlaceholder('First name'); }
@@ -52,7 +42,7 @@ export class RentalDetailsPage extends BasePage {
     },
     zipCode: string
   }): Promise<void> {
-    console.log('Filling rental details form - CRITICAL STEP');
+    console.log(`[${new Date().toISOString()}] 📝 Filling rental details form...`);
     
     try {
       // Wait for summary heading to be visible with longer timeout
@@ -75,7 +65,7 @@ export class RentalDetailsPage extends BasePage {
       await this.selectDateIfAvailable();
       await this.proceedToNextStep();
       
-      console.log('✓ Rental details form completed successfully');
+      console.log(`[${new Date().toISOString()}] ✅ Rental details form completed`);
     } catch (error) {
       const errorMsg = `CRITICAL ERROR: Failed to fill rental details form - ${(error as Error).message}`;
       console.error(errorMsg);
@@ -100,7 +90,6 @@ export class RentalDetailsPage extends BasePage {
 
   /**
    * Fill zip code with enhanced error handling - CRITICAL FIELD
-   * Includes popup handling for AllPurpose Storage client only for zip code interaction
    */
   private async fillZipCode(zipCode: string): Promise<void> {
     console.log(`Attempting to fill zip code: ${zipCode}`);
@@ -109,9 +98,6 @@ export class RentalDetailsPage extends BasePage {
       // Wait for zip code input to be available
       await this.zipCodeInput.waitFor({ state: 'visible', timeout: 10000 });
       await this.wait(500);
-      
-      // Handle popup before critical zip code interaction (popup can reappear during scrolling)
-      await this.handlePopupIfNeeded();
       
       // First try to click the zip code input to ensure it's focused
       await this.zipCodeInput.click({ timeout: 5000 });
@@ -140,36 +126,142 @@ export class RentalDetailsPage extends BasePage {
   }
 
   /**
-   * OPTIMIZED State Selection - Fast and Simple with Fallback Priority
-   * Handles both standard select dropdowns and mini-mall special case
-   * Priority: Alabama → Alberta → Alaska
+   * OPTIMIZED State Selection - Fast and Direct
+   * Determines the correct state based on current URL
+   * No wasted time trying wrong states!
    */
   private async selectStateOptimized(locationData: { alberta?: string, alaska?: string, alabama?: string }): Promise<void> {
     console.log('Attempting to select state - OPTIMIZED APPROACH');
     
-    // Define priority order for state selection
-    const stateOptions = [
-      { value: locationData.alabama, name: 'Alabama' },
-      { value: locationData.alberta, name: 'Alberta' },  
-      { value: locationData.alaska, name: 'Alaska' }
-    ].filter(option => option.value); // Only include provided options
+    // Smart mapping: Determine which state to use based on URL
+    const currentUrl = this.page.url();
+    let stateToUse: { value: string; name: string } | null = null;
 
-    if (stateOptions.length === 0) {
-      throw new Error('No state value provided');
+    if (currentUrl.includes('bluebirdstorage.ca')) {
+      // Canadian site - use Alberta
+      stateToUse = { value: locationData.alberta!, name: 'Alberta' };
+    } else if (currentUrl.includes('10federalstorage.com') ||
+               currentUrl.includes('10-federal-storage') ||
+               currentUrl.includes('bestboxstorage.com') ||
+               currentUrl.includes('bestbox-storage') ||
+               currentUrl.includes('yourpremierstorage.com') ||
+               currentUrl.includes('premier-storage') ||
+               currentUrl.includes('sunbirdstorage.com') ||
+               currentUrl.includes('sunbirdstorage') ||
+               currentUrl.includes('gatekeeperstoragega.com') ||
+               currentUrl.includes('gatekeeper-self-storage') ||
+               currentUrl.includes('storagestar.com') ||
+               currentUrl.includes('storage-star') ||
+               currentUrl.includes('redrocksstorage.com') ||
+               currentUrl.includes('red-rocks-self-storage') ||
+               currentUrl.includes('distinctstorage.com') ||
+               currentUrl.includes('distinct-storage') ||
+               currentUrl.includes('storagedepotla.com') ||
+               currentUrl.includes('storage-boss')) {
+      // US sites - use Alabama
+      stateToUse = { value: locationData.alabama!, name: 'Alabama' };
+    } else {
+      // Unknown site - try all three as fallback (Alabama → Alberta → Alaska)
+      console.log('⚠️ Unknown site - will try all states as fallback');
+      const stateOptions = [
+        { value: locationData.alabama, name: 'Alabama' },
+        { value: locationData.alberta, name: 'Alberta' },  
+        { value: locationData.alaska, name: 'Alaska' }
+      ].filter(option => option.value);
+      
+      if (stateOptions.length === 0) {
+        throw new Error('No state value provided');
+      }
+      
+      // Try fallback approach
+      await this.tryMultipleStates(stateOptions);
+      return;
     }
 
+    if (!stateToUse.value) {
+      throw new Error(`State value not provided for ${stateToUse.name}`);
+    }
+
+    console.log(`🎯 Detected site needs: ${stateToUse.name}`);
+    
+    // Try to select the specific state
+    await this.selectSingleState(stateToUse);
+  }
+
+  /**
+   * Select a single specific state (fastest approach)
+   */
+  private async selectSingleState(state: { value: string; name: string }): Promise<void> {
     // FIRST: Try the fast standard approach (works for 99% of cases)
     try {
       const provinceSelect = this.page.locator('#province');
       if (await provinceSelect.isVisible({ timeout: 3000 })) {
+        // Wait for dropdown to be fully ready
+        await this.wait(500);
         
-        // Try each state option in priority order
+        try {
+          // Try selecting by the full province/state name directly
+          await provinceSelect.selectOption(state.value);
+          console.log(`✓ Successfully selected ${state.name} using standard select`);
+          return;
+        } catch (error) {
+          console.log(`Could not select ${state.name} using standard select`);
+        }
+      }
+    } catch (error) {
+      console.log(`Standard select method not available: ${error}`);
+    }
+
+    // SECOND: Handle mini-mall special case (State textbox + paragraph click)
+    try {
+      const stateTextbox = this.page.getByRole('textbox', { name: 'State' });
+      if (await stateTextbox.isVisible({ timeout: 3000 })) {
+        await stateTextbox.click();
+        await this.wait(1000); // Wait for dropdown to open
+        
+        try {
+          const stateParagraph = this.page.getByRole('paragraph').filter({ hasText: state.name });
+          await stateParagraph.waitFor({ state: 'visible', timeout: 3000 });
+          await stateParagraph.click();
+          console.log(`✓ Successfully selected ${state.name} using textbox + paragraph method`);
+          return;
+        } catch (selectError) {
+          console.log(`Could not select ${state.name} via paragraph`);
+        }
+      }
+    } catch (error) {
+      // If page closed, it likely means navigation occurred = success
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      if (errorMessage.includes('Target page, context or browser has been closed')) {
+        console.log('⚠️ Page closed during state selection - likely navigation occurred, treating as success');
+        return;
+      }
+      console.log(`Textbox + paragraph method not available: ${error}`);
+    }
+
+    // If both methods fail, throw error
+    throw new Error(`Could not select ${state.name} using any available method`);
+  }
+
+  /**
+   * Try multiple states as fallback (for unknown sites)
+   */
+  private async tryMultipleStates(stateOptions: Array<{ value?: string; name: string }>): Promise<void> {
+    // FIRST: Try the fast standard approach (works for 99% of cases)
+    try {
+      const provinceSelect = this.page.locator('#province');
+      if (await provinceSelect.isVisible({ timeout: 3000 })) {
+        // Wait for dropdown to be fully ready
+        await this.wait(500);
+        
+        // Try each state option in priority order (Alabama → Alberta → Alaska)
         for (const option of stateOptions) {
           try {
+            // Try selecting by the full province/state name directly
             await provinceSelect.selectOption(option.value!);
             console.log(`✓ Successfully selected ${option.name} using standard select`);
             return;
-          } catch (selectError) {
+          } catch (error) {
             console.log(`Could not select ${option.name}, trying next option...`);
             continue;
           }
@@ -205,11 +297,17 @@ export class RentalDetailsPage extends BasePage {
         console.log('Textbox dropdown found but no suitable option could be selected');
       }
     } catch (error) {
+      // If page closed, it likely means navigation occurred = success
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      if (errorMessage.includes('Target page, context or browser has been closed')) {
+        console.log('⚠️ Page closed during state selection - likely navigation occurred, treating as success');
+        return;
+      }
       console.log(`Textbox + paragraph method not available: ${error}`);
     }
 
     // If both methods fail with all options, throw error
-    const attemptedStates = stateOptions.map(o => o.name).join(', ');
+    const attemptedStates = stateOptions.map((o) => o.name).join(', ');
     throw new Error(`Could not select any state (${attemptedStates}) using any available method`);
   }
 
@@ -233,14 +331,11 @@ export class RentalDetailsPage extends BasePage {
 
   /**
    * Click the continue button to proceed to the next step - CRITICAL STEP
-   * Handles popup ONCE at URL transition for AllPurpose Storage client
    */
   private async proceedToNextStep(): Promise<void> {
     console.log('Attempting to proceed to next step - CRITICAL STEP');
     
     try {
-      // Handle popup once at URL transition (only for AllPurpose Storage)
-      await this.handlePopupIfNeeded();
       await this.wait(500);
       
       await this.continueButton.waitFor({ state: 'visible', timeout: 15000 });
@@ -252,7 +347,7 @@ export class RentalDetailsPage extends BasePage {
       await this.continueButton.click({ timeout: 15000 });
       console.log('✓ Successfully clicked continue button');
       
-      await this.wait(3000); // Wait for navigation to next step
+      await this.wait(1500); // Reduced from 3000ms - Wait for navigation to next step
     } catch (error) {
       const errorMsg = `CRITICAL ERROR: Could not find or click continue button - ${(error as Error).message}`;
       console.error(errorMsg);

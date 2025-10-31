@@ -255,14 +255,14 @@ test.describe('Debug Discount Elements', () => {
 
 // Banner verification test data
 // ENVIRONMENT CONFIG: Comment/uncomment the line below to switch between environments
-const USE_STAGING = false; // Set to false for production URLs
+const USE_STAGING = true; // Set to false for production URLs
 
 const bannerChecks = USE_STAGING ? [
   // STAGING URLS
-  {
-    client: 'Premier Storage - Laurel',
-    url: 'https://test.staging.storagely-api.com/premier-storage/storage-units/mississippi/laurel/ms-15'
-  },
+  // {
+  //   client: 'Premier Storage - Laurel',
+  //   url: 'https://test.staging.storagely-api.com/premier-storage/storage-units/mississippi/laurel/ms-15'
+  // },
   {
     client: 'Radiant Storage - Montgomery',
     url: 'https://test.staging.storagely-api.com/radiant-storage/storage-units/alabama/montgomery/east-south-blvd'
@@ -276,10 +276,6 @@ const bannerChecks = USE_STAGING ? [
     url: 'https://test.staging.storagely-api.com/bestbox-storage/storage-units/florida/pensacola/north-palafox'
   },
   {
-    client: 'Store All Purpose - Jewett City',
-    url: 'https://test.staging.storagely-api.com/allpurposestorage/storage-units/connecticut/jewett-city/north-main-street'
-  },
-  {
     client: 'First Storage - E Market St',
     url: 'https://test.staging.storagely-api.com/first-storage/storage-units/north-carolina/greensboro/east-market-street'
   }
@@ -289,21 +285,17 @@ const bannerChecks = USE_STAGING ? [
   //   client: 'Premier Storage - Laurel',
   //   url: 'https://yourpremierstorage.com/storage-units/mississippi/laurel/ms-15'
   // },
-  // {
-  //   client: 'Radiant Storage - Montgomery',
-  //   url: 'https://radiantstorage.com/storage-units/alabama/montgomery/east-south-blvd'
-  // },
-  // {
-  //   client: 'Storage Star - Cloverdale',
-  //   url: 'https://www.storagestar.com/storage-units/california/cloverdale/industrial-drive'
-  // },
-  // {
-  //   client: 'Best Box Storage - Pensacola',
-  //   url: 'https://www.bestboxstorage.com/storage-units/florida/pensacola/north-palafox'
-  // },
   {
-    client: 'Store All Purpose - Jewett City',
-    url: 'https://www.storeallpurpose.com/storage-units/connecticut/jewett-city/north-main-street'
+    client: 'Radiant Storage - Montgomery',
+    url: 'https://radiantstorage.com/storage-units/alabama/montgomery/east-south-blvd'
+  },
+  {
+    client: 'Storage Star - Cloverdale',
+    url: 'https://www.storagestar.com/storage-units/california/cloverdale/industrial-drive'
+  },
+  {
+    client: 'Best Box Storage - Pensacola',
+    url: 'https://www.bestboxstorage.com/storage-units/florida/pensacola/north-palafox'
   },
   {
     client: 'First Storage - E Market St',

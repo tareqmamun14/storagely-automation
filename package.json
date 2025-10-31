@@ -9,7 +9,7 @@
     "test:debug": "npx playwright test --debug",
     "test:allure-only": "npx playwright test --reporter=allure-playwright",
     "allure:generate": "npx allure generate allure-results --clean -o docs",
-    "allure:open": "npx allure open docs", 
+    "allure:open": "npx allure open docs",
     "allure:serve": "npx allure serve allure-results",
     "allure:clean": "rmdir /s /q allure-results 2>nul & rmdir /s /q docs 2>nul & echo Cleaned allure directories",
     "deploy:only": "node deploy-only.js",
@@ -22,7 +22,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@playwright/test": "^1.54.2",
+    "@playwright/test": "^1.56.0",
     "@types/node": "^20.17.32",
     "allure-commandline": "^2.25.0",
     "allure-playwright": "^2.10.0"

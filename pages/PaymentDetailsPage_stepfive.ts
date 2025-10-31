@@ -6,16 +6,6 @@ export class PaymentDetailsPage extends BasePage {
     super(page);
   }
 
-  /**
-   * Handle popup if this is an AllPurpose Storage client
-   */
-  public async handlePopupIfNeeded(): Promise<void> {
-    const isAllPurposeStorage = await this.popupHandler.isAllPurposeStorageClient();
-    if (isAllPurposeStorage) {
-      await this.popupHandler.handleAllPurposeStoragePopup();
-    }
-  }
-
   // Locators
   private get leaseDetailsHeader() { return this.page.getByRole('heading', { name: /lease details/i }); }
   private get alternatePhoneInput() { return this.page.getByPlaceholder('Alternate Phone Number (must'); }
@@ -34,7 +24,6 @@ export class PaymentDetailsPage extends BasePage {
 
   /**
    * Helper method to safely fill a field if it exists and is visible
-   * Includes popup handling for AllPurpose Storage client
    */
   private async fillFieldIfExists(locator: any, value: string, fieldName: string): Promise<void> {
     try {
@@ -51,7 +40,6 @@ export class PaymentDetailsPage extends BasePage {
 
   /**
    * Helper method to safely select an option if the select element exists and is visible
-   * Includes popup handling for AllPurpose Storage client
    */
   private async selectOptionIfExists(locator: any, value: string, fieldName: string): Promise<void> {
     try {
@@ -126,32 +114,30 @@ export class PaymentDetailsPage extends BasePage {
 
   /**
    * Fill out the payment details - CRITICAL STEP that must succeed
-   * Includes popup handling for AllPurpose Storage client
    */
   async fillPaymentDetails(paymentData: {
     cardNumber: string,
     expiryDate: string,
     cvv: string
   }): Promise<void> {
-    console.log('Filling payment details - CRITICAL STEP');
+    console.log(`[${new Date().toISOString()}] 💳 Filling payment details...`);
     
     try {
-      // ⚡ FIRST PRIORITY: Handle popup immediately for Step 6 payment form
       // Wait for payment form to be visible with longer timeout
       await this.cardNumberInput.waitFor({ state: 'visible', timeout: 10000 });
-      await this.cardNumberInput.type(paymentData.cardNumber, { delay: 400 });
-      await this.wait(500);
+      await this.cardNumberInput.type(paymentData.cardNumber, { delay: 100 });
+      await this.wait(300);
       await this.page.keyboard.press('Tab');
       
-      await this.cardExpiryInput.type(paymentData.expiryDate, { delay: 400 });
-      await this.wait(500);
+      await this.cardExpiryInput.type(paymentData.expiryDate, { delay: 100 });
+      await this.wait(300);
       await this.page.keyboard.press('Tab');
       
-      await this.cardCvvInput.type(paymentData.cvv, { delay: 400 });
-      await this.wait(500);
+      await this.cardCvvInput.type(paymentData.cvv, { delay: 100 });
+      await this.wait(300);
       await this.page.keyboard.press('Tab');
       
-      console.log('✓ Payment details filled successfully');
+      console.log(`[${new Date().toISOString()}] ✅ Payment details filled`);
     } catch (error) {
       const errorMsg = `CRITICAL ERROR: Failed to fill payment details - ${(error as Error).message}`;
       console.error(errorMsg);
@@ -161,7 +147,6 @@ export class PaymentDetailsPage extends BasePage {
 
   /**
    * Check agreement checkboxes if available
-   * Includes popup handling for AllPurpose Storage client
    */
   async checkAgreementCheckboxes(): Promise<void> {
     const checkboxes = [
@@ -172,9 +157,6 @@ export class PaymentDetailsPage extends BasePage {
 
     for (const label of checkboxes) {
       try {
-        // Handle popup before each checkbox interaction
-        await this.handlePopupIfNeeded();
-        
         const checkbox = this.page.getByLabel(label);
         if (await checkbox.isVisible({ timeout: 3000 })) {
           await checkbox.check();
@@ -191,30 +173,79 @@ export class PaymentDetailsPage extends BasePage {
   /**
    * ROBUST ERROR DETECTION - Submit payment and capture errors reliably
    * Returns the error message if any, with multiple fallback strategies
-   * Includes popup handling for AllPurpose Storage client
+   * 
+   * BULLETPROOF RETRY LOGIC:
+   * 1. Click RENT NOW → Detect error (polls up to 15s)
+   * 2. If error found → return immediately ✅
+   * 3. If NO error → Refill payment form + checkboxes → Click RENT NOW again → Re-detect
+   * 4. Return error or FAILED message
    */
   //==================
-  async submitPaymentAndCheckError(): Promise<string> {
-    console.log('Attempting to submit payment - CRITICAL STEP');
+  async submitPaymentAndCheckError(paymentData?: {
+    cardNumber: string,
+    expiryDate: string,
+    cvv: string
+  }): Promise<string> {
+    console.log(`[${new Date().toISOString()}] 🔘 Clicking RENT NOW button...`);
     
     try {
       await this.minimizeLiveChat();
       
-      // Handle popup before submitting payment
-      await this.handlePopupIfNeeded();
+      // Find and click RENT NOW button (attempt 1)
+      const rentNowButton = this.page.getByRole('button', { name: 'RENT NOW' });
+      await rentNowButton.waitFor({ state: 'visible', timeout: 15000 });
+      await rentNowButton.click({ timeout: 30000 });
       
-      // Wait for rent now button to be visible and clickable
-      await this.rentNowButton.waitFor({ state: 'visible', timeout: 10000 });
+      console.log(`[${new Date().toISOString()}] ✅ RENT NOW clicked - detecting errors...`);
       
-      // Handle popup again just before clicking rent now
-      await this.handlePopupIfNeeded();
+      // Detect error immediately (polls up to 15s internally)
+      let errorMessage = await this.detectErrorMessage();
       
-      await this.rentNowButton.click({ timeout: 30000 });
+      // If error found, return it immediately - NO RETRY NEEDED
+      if (errorMessage && !errorMessage.includes('FAILED to fetch')) {
+        console.log(`[${new Date().toISOString()}] ✅ Error detected on first attempt - returning immediately`);
+        return errorMessage;
+      }
       
-      console.log('✓ Rent Now button clicked successfully');
+      // No error detected after 15s polling - RETRY LOGIC
+      console.log(`[${new Date().toISOString()}] ⚠️ No error detected on first attempt`);
       
-      // ROBUST ERROR DETECTION with multiple strategies
-      return await this.detectErrorMessage();
+      // Only retry if paymentData is provided
+      if (!paymentData) {
+        console.log(`[${new Date().toISOString()}] ℹ️ No payment data provided - cannot retry`);
+        return 'FAILED to fetch Error Message @ Step-5 (Payment Details - After RENT NOW click)';
+      }
+      
+      console.log(`[${new Date().toISOString()}] 🔄 RETRY: Refilling payment form...`);
+      
+      // Wait 2 seconds before retry
+      await this.wait(2000);
+      
+      // Refill payment details
+      await this.fillPaymentDetails(paymentData);
+      
+      // Re-check agreement checkboxes
+      await this.checkAgreementCheckboxes();
+      
+      console.log(`[${new Date().toISOString()}] ✅ Payment form refilled - clicking RENT NOW again...`);
+      
+      // Click RENT NOW again (attempt 2)
+      await rentNowButton.waitFor({ state: 'visible', timeout: 15000 });
+      await rentNowButton.click({ timeout: 30000 });
+      
+      console.log(`[${new Date().toISOString()}] ✅ RENT NOW clicked (retry) - re-detecting errors...`);
+      
+      // Re-detect error
+      errorMessage = await this.detectErrorMessage();
+      
+      if (errorMessage && !errorMessage.includes('FAILED to fetch')) {
+        console.log(`[${new Date().toISOString()}] ✅ Error detected on retry attempt`);
+        return errorMessage;
+      }
+      
+      // Still no error after retry
+      console.log(`[${new Date().toISOString()}] ❌ Still no error after retry - this is unexpected`);
+      return 'FAILED to fetch Error Message @ Step-5 (Payment Details - After RENT NOW click + Retry)';
       
     } catch (error) {
       const errorMsg = `CRITICAL ERROR: Failed to submit payment or find rent now button - ${(error as Error).message}`;
@@ -223,156 +254,125 @@ export class PaymentDetailsPage extends BasePage {
     }
   }
   /**
-   * ROBUST ERROR DETECTION METHOD
-   * Uses multiple strategies to detect errors that might appear at different speeds
+   * ROBUST ERROR DETECTION METHOD - OPTIMIZED
+   * Starts immediately after button click, polls actively for errors
    */
   private async detectErrorMessage(): Promise<string> {
-    console.log('Starting robust error detection...');
+    console.log('🔍 Starting error detection (OPTIMIZED)...');
     
-    // Strategy 1: Quick check first (for fast-appearing errors)
+    // IMMEDIATE first check (0ms delay)
     let errorMessage = await this.quickErrorCheck();
     if (errorMessage) {
-      console.log('✓ Error detected via quick check');
+      console.log('✓ Error detected immediately');
       return errorMessage;
     }
 
-    // Strategy 2: Medium wait with polling (for normal speed errors)
-    errorMessage = await this.pollingErrorCheck();
+    // Active polling for 15 seconds (errors usually appear within 10s)
+    errorMessage = await this.activePollingCheck();
     if (errorMessage) {
-      console.log('✓ Error detected via polling check');
+      console.log('✓ Error detected via polling');
       return errorMessage;
     }
 
-    // Strategy 3: Extended wait (for slow-appearing errors)
-    errorMessage = await this.extendedErrorCheck();
-    if (errorMessage) {
-      console.log('✓ Error detected via extended check');
-      return errorMessage;
-    }
-
-    console.log('ℹ️  No error messages detected - payment may have succeeded');
-    return 'No error - Payment may have succeeded';
+    // If we reach here after clicking RENT NOW, we FAILED to fetch the error
+    console.error('❌ No error message found after RENT NOW click - detection failed');
+    return 'FAILED to fetch Error Message @ Step-5 (Payment Details - After RENT NOW click)';
   }
 
   /**
-   * Quick error check - detects fast-appearing errors
+   * Quick error check - IMMEDIATE check (no delay)
    */
   private async quickErrorCheck(): Promise<string> {
-    try {
-      await this.wait(2000); // Wait 2 seconds
-
-      // Check for toast header
-      const toastHeader = this.page.getByText('Error!!');
-      if (await toastHeader.isVisible({ timeout: 1000 })) {
-        const toastBody = this.page.locator('.toast-container .toast-body');
-        if (await toastBody.isVisible({ timeout: 2000 })) {
-          const message = await toastBody.innerText();
-          if (message.trim()) return message.trim();
+    // Check immediately - no waiting
+    const toastContainer = this.page.locator('.toast-container').first();
+    if (await toastContainer.isVisible({ timeout: 500 })) {
+      const toastText = await toastContainer.innerText();
+      if (toastText && toastText.trim()) {
+        return toastText.trim();
+      }
+    }
+    
+    // Check for Error!! header
+    const toastHeader = this.page.getByText('Error!!');
+    if (await toastHeader.isVisible({ timeout: 500 })) {
+      const toastBody = this.page.locator('.toast-container .toast-body');
+      if (await toastBody.isVisible({ timeout: 500 })) {
+        const message = await toastBody.innerText();
+        if (message.trim()) {
+          return message.trim();
         }
       }
-
-      // Check for detailed error
-      const detailedError = this.page.locator('p.text-sm.text-white').filter({ hasText: 'Response Code' });
-      if (await detailedError.isVisible({ timeout: 1000 })) {
-        const message = await detailedError.innerText();
-        if (message.trim()) return message.trim();
-      }
-
-      return '';
-    } catch (error) {
-      return '';
     }
+
+    return '';
   }
 
   /**
-   * Polling error check - checks every second for up to 8 seconds
+   * Active polling - check every 500ms for up to 15 seconds
    */
-  private async pollingErrorCheck(): Promise<string> {
-    console.log('Starting polling error detection...');
+  private async activePollingCheck(): Promise<string> {
+    console.log('📡 Active polling for errors...');
     
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 30; i++) { // 30 attempts x 500ms = 15 seconds
       try {
-        await this.wait(1000); // Wait 1 second between checks
+        await this.wait(500);
         
-        // Check toast container and body
-        const toastContainer = this.page.locator('.toast-container');
-        const toastBody = toastContainer.locator('.toast-body');
+        // Check toast container FIRST
+        const toastContainer = this.page.locator('.toast-container').first();
+        if (await toastContainer.isVisible({ timeout: 300 })) {
+          const toastText = await toastContainer.innerText();
+          if (toastText && toastText.trim()) {
+            console.log(`✓ Error found at poll ${i + 1}`);
+            return toastText.trim();
+          }
+        }
         
-        if (await toastContainer.isVisible({ timeout: 500 }) && await toastBody.isVisible({ timeout: 500 })) {
+        // Check toast body
+        const toastBody = this.page.locator('.toast-container .toast-body');
+        if (await toastBody.isVisible({ timeout: 300 })) {
           const message = await toastBody.innerText();
           if (message.trim()) {
-            console.log(`Found toast error at polling attempt ${i + 1}`);
+            console.log(`✓ Error found at poll ${i + 1}`);
             return message.trim();
           }
         }
 
-        // Check detailed error
+        // Check detailed error (with Response Code)
         const detailedError = this.page.locator('p.text-sm.text-white').filter({ hasText: 'Response Code' });
-        if (await detailedError.isVisible({ timeout: 500 })) {
+        if (await detailedError.isVisible({ timeout: 300 })) {
           const message = await detailedError.innerText();
           if (message.trim()) {
-            console.log(`Found detailed error at polling attempt ${i + 1}`);
+            console.log(`✓ Detailed error found at poll ${i + 1}`);
             return message.trim();
           }
         }
 
-        // Also check for any visible error text on the page
-        const genericErrors = this.page.locator('text=/error|Error|ERROR|failed|Failed|FAILED/i').first();
-        if (await genericErrors.isVisible({ timeout: 500 })) {
-          const message = await genericErrors.innerText();
-          if (message.trim() && message.length < 200) { // Avoid capturing too much text
-            console.log(`Found generic error at polling attempt ${i + 1}`);
-            return message.trim();
+        // Check common error selectors
+        const errorLocators = [
+          this.page.locator('.alert-danger').first(),
+          this.page.locator('[role="alert"]').first(),
+          this.page.locator('text=/error|Error|invalid|Invalid|declined|Declined/i').first()
+        ];
+        
+        for (const locator of errorLocators) {
+          if (await locator.isVisible({ timeout: 300 })) {
+            const message = await locator.innerText();
+            if (message.trim() && message.length < 500) {
+              console.log(`✓ Error found at poll ${i + 1}`);
+              return message.trim();
+            }
           }
         }
 
       } catch (error) {
         // Continue polling even if individual checks fail
+        console.warn(`⚠️  Check failed at poll ${i + 1}, continuing...`);
         continue;
       }
     }
     
+    // Polling completed - no error found
+    console.log('⚠️  Polling completed - no error message detected');
     return '';
-  }
-
-  /**
-   * Extended error check - waits longer for slow-appearing errors
-   */
-  private async extendedErrorCheck(): Promise<string> {
-    console.log('Starting extended error detection...');
-    
-    try {
-      // Wait longer and then do a comprehensive check
-      await this.wait(5000);
-
-      // Try all possible error locations with longer timeouts
-      const errorSelectors = [
-        { selector: '.toast-container .toast-body', name: 'toast body' },
-        { selector: 'p.text-sm.text-white', name: 'detailed error' },
-        { selector: '.alert-danger', name: 'alert danger' },
-        { selector: '.error-message', name: 'error message' },
-        { selector: '[class*="error"]', name: 'error class' },
-        { selector: 'text=/Response Code/i', name: 'response code' }
-      ];
-
-      for (const { selector, name } of errorSelectors) {
-        try {
-          const element = this.page.locator(selector).first();
-          if (await element.isVisible({ timeout: 3000 })) {
-            const message = await element.innerText();
-            if (message.trim()) {
-              console.log(`Found error via extended check (${name})`);
-              return message.trim();
-            }
-          }
-        } catch (error) {
-          continue;
-        }
-      }
-
-      return '';
-    } catch (error) {
-      return '';
-    }
   }
 }

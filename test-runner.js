@@ -180,7 +180,7 @@ async function main() {
         log('Running rent reservation tests');
         log('Cleaning previous test results...', 'info');
         runCommand('npm run allure:clean');
-        runCommand('npx playwright test --grep "reservation"');
+        runCommand('npx playwright test --grep "Payment verification"');
         startAllureServer();
         break;
 

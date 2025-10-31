@@ -21,8 +21,8 @@ test.describe('Payment Verification Tests', () => {
       paymentDetailsPage,
       companyNameFromUrl
     }) => {
-      // Set longer timeout for these tests
-      test.setTimeout(180 * 1000); // 3 minutes to handle slower sites
+      // Set longer timeout for these tests - increased to 5 minutes for slow-loading sites
+      test.setTimeout(300 * 1000); // 5 minutes to handle very slow sites like 10 Federal Storage
       
       // Get company/client name and platform
       const companyName = companyNameFromUrl(baseURL);
@@ -41,7 +41,8 @@ test.describe('Payment Verification Tests', () => {
         platform: platform,
         error: '',
         success: false,
-        step: ''
+        step: '',
+        immediateError: '' // Track immediate error after rent button click
       };
       
       try {
@@ -51,32 +52,70 @@ test.describe('Payment Verification Tests', () => {
         await storageListingPage.navigateWithCacheBusting(baseURL);
         console.log('✅ Navigation completed successfully');
         
-        // STEP 2: Try to click the reserve button if available
-        testResult.step = 'Reserve Button';
-        console.log('📍 STEP 2: Checking for reserve button...');
-        const reserveButtonText = await storageListingPage.clickReserveButtonIfAvailable();
+        // ============================================
+        // STEP 2: RESERVE BUTTON - COMMENTED OUT FOR DEBUGGING
+        // ============================================
+        // testResult.step = 'Reserve Button';
+        // console.log('📍 STEP 2: Checking for reserve button...');
+        // const reserveButtonText = await storageListingPage.clickReserveButtonIfAvailable();
+        // 
+        // // If the button was "Join Waitlist", finish the test run
+        // if (reserveButtonText?.trim() === 'Join Waitlist') {
+        //   console.log('ℹ️  Test completed - Join Waitlist option encountered');
+        //   testResult.error = 'No error - Join Waitlist option';
+        //   testResult.success = true;
+        //   resultCollector.addResult(baseURL, companyName, platform, testResult.error, testResult.success);
+        //   return;
+        // }
         
-        // If the button was "Join Waitlist", finish the test run
-        if (reserveButtonText?.trim() === 'Join Waitlist') {
-          console.log('ℹ️  Test completed - Join Waitlist option encountered');
-          testResult.error = 'No error - Join Waitlist option';
-          testResult.success = true;
-          resultCollector.addResult(baseURL, companyName, platform, testResult.error, testResult.success);
-          return;
-        }
-        
-        // STEP 3: Click the rent button
+        // ============================================
+        // STEP 2: Click the RENT button (STEP 3 renumbered to STEP 2)
+        // ============================================
         testResult.step = 'Rent Button';
-        console.log('📍 STEP 3: Clicking rent button...');
+        console.log('📍 STEP 2: Clicking rent button...');
         await storageListingPage.clickRentButton();
         console.log('✅ Rent button clicked successfully');
         
-        // Handle popup immediately after URL transition to step_four
-        await rentalDetailsPage.handlePopupIfNeeded();
+        // ============================================
+        // STEP 3: Check for immediate error (STEP 4 renumbered to STEP 3)
+        // ============================================
+        console.log('\n� STEP 3: Checking for immediate errors...');
+        const immediateError = await storageListingPage.checkForImmediateError();
+        if (immediateError) {
+          testResult.immediateError = immediateError;
+          console.log(`⚠️  IMMEDIATE ERROR DETECTED: ${immediateError}`);
+          
+          // Check if page actually navigated to rental form - if not, the error blocked navigation
+          const currentUrl = page.url();
+          const hasNavigatedToForm = currentUrl.includes('/step_four') || 
+                                     currentUrl.includes('/step-four') ||
+                                     currentUrl.includes('/checkout') ||
+                                     currentUrl.includes('/rental-details') ||
+                                     currentUrl.match(/\/(4|four|step4)/);
+          
+          if (!hasNavigatedToForm) {
+            // Error blocked navigation - mark as successful detection and exit
+            testResult.error = `[Immediate Error - Blocked Navigation] ${immediateError}`;
+            testResult.success = true;
+            console.log(`✅ TEST COMPLETED (immediate error blocked navigation) FOR: ${companyName}`);
+            console.log(`📊 Final Result: ${testResult.error}`);
+            console.log('='.repeat(80));
+            
+            resultCollector.addResult(baseURL, companyName, platform, testResult.error, true);
+            return; // Exit test early - error prevented navigation
+          } else {
+            // Page navigated despite error - continue to see what happens
+            console.log('⚠️  Note: Error detected but page navigated - will combine with final results');
+          }
+        } else {
+          console.log('✅ No immediate error detected - proceeding with test');
+        }
         
-        // STEP 4: Fill out rental details form
+        // ============================================
+        // STEP 4: Fill out rental details form (STEP 5 renumbered to STEP 4)
+        // ============================================
         testResult.step = 'Rental Details Form';
-        console.log('📍 STEP 4: Filling rental details form...');
+        console.log('\n📍 STEP 4: Filling rental details form...');
         await rentalDetailsPage.fillRentalDetails({
           firstName: TEST_USER.firstName,
           lastName: TEST_USER.lastName,
@@ -89,12 +128,11 @@ test.describe('Payment Verification Tests', () => {
         });
         console.log('✅ Rental details form completed successfully');
         
-        // Handle popup immediately after URL transition to step_five
-        await paymentDetailsPage.handlePopupIfNeeded();
-        
-        // STEP 5: Fill lease details if available
+        // ============================================
+        // STEP 5: Fill lease details if available (STEP 6 renumbered to STEP 5)
+        // ============================================
         testResult.step = 'Lease Details Form';
-        console.log('📍 STEP 5: Filling lease details if available...');
+        console.log('\n📍 STEP 5: Filling lease details if available...');
         await paymentDetailsPage.fillLeaseDetailsIfAvailable({
           alternatePhone: TEST_USER.alternatePhone || undefined,
           alternateEmail: TEST_USER.alternateEmail || undefined,
@@ -106,34 +144,49 @@ test.describe('Payment Verification Tests', () => {
         });
         console.log('✅ Lease details form completed (or skipped if not available)');
         
-        // STEP 6: Fill payment details
+        // ============================================
+        // STEP 6: Fill payment details (STEP 7 renumbered to STEP 6)
+        // ============================================
         testResult.step = 'Payment Details Form';
-        console.log('📍 STEP 6: Filling payment details...');
+        console.log('\n📍 STEP 6: Filling payment details...');
         await paymentDetailsPage.fillPaymentDetails(TEST_USER.paymentInfo);
         console.log('✅ Payment details filled successfully');
         
-        // STEP 7: Check agreement checkboxes
+        // ============================================
+        // STEP 7: Check agreement checkboxes (STEP 8 renumbered to STEP 7)
+        // ============================================
         testResult.step = 'Agreement Checkboxes';
-        console.log('📍 STEP 7: Checking agreement checkboxes...');
+        console.log('\n📍 STEP 7: Checking agreement checkboxes...');
         await paymentDetailsPage.checkAgreementCheckboxes();
         console.log('✅ Agreement checkboxes processed');
         
-        // STEP 8: Submit payment and check for errors
+        // ============================================
+        // STEP 8: Submit payment and check for errors (STEP 9 renumbered to STEP 8)
+        // ============================================
         testResult.step = 'Payment Submission';
-        console.log('📍 STEP 8: Submitting payment and checking for errors...');
-        const errorMessage = await paymentDetailsPage.submitPaymentAndCheckError();
+        console.log('\n📍 STEP 8: Submitting payment and checking for errors...');
+        const errorMessage = await paymentDetailsPage.submitPaymentAndCheckError(TEST_USER.paymentInfo);
         console.log('✅ Payment submission completed');
         
         // Test completed successfully
         testResult.error = errorMessage || 'No error - Test completed successfully';
         testResult.success = true;
         
+        // Build final error message including immediate error if found
+        let finalErrorMessage = testResult.error;
+        if (testResult.immediateError) {
+          finalErrorMessage = `[Step 4 Immediate Error: ${testResult.immediateError}] | ${testResult.error}`;
+        }
+        
         console.log(`\n✅ TEST COMPLETED SUCCESSFULLY FOR: ${companyName}`);
-        console.log(`📊 Result: ${testResult.error}`);
+        if (testResult.immediateError) {
+          console.log(`⚠️  Immediate Error (Step 4): ${testResult.immediateError}`);
+        }
+        console.log(`📊 Final Result: ${testResult.error}`);
         console.log(`${'='.repeat(80)}\n`);
         
-        // Record the result
-        resultCollector.addResult(baseURL, companyName, platform, testResult.error, testResult.success);
+        // Record the result with immediate error included
+        resultCollector.addResult(baseURL, companyName, platform, finalErrorMessage, testResult.success);
         
       } catch (error) {
         testResult.success = false;

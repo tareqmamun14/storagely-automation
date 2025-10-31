@@ -20,7 +20,14 @@ function addCacheBustingParam(url: string): string {
 
 test.describe('Storage Site Landing Page Verification', () => {
   // Set timeout per test (not total)
-  test.setTimeout(120000); // 2 minutes per test
+  test.setTimeout(180000); // 3 minutes per test to handle slow sites
+
+  // Ensure clean state before each test
+  test.beforeEach(async ({ page }) => {
+    // Clear cookies and cache before each test
+    await page.context().clearCookies();
+    console.log('🧹 Cleared browser state for next test');
+  });
 
   // Print results after all tests complete
   test.afterAll(() => {
