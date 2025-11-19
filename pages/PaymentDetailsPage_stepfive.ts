@@ -125,16 +125,13 @@ export class PaymentDetailsPage extends BasePage {
     try {
       // Wait for payment form to be visible with longer timeout
       await this.cardNumberInput.waitFor({ state: 'visible', timeout: 10000 });
-      await this.cardNumberInput.type(paymentData.cardNumber, { delay: 100 });
-      await this.wait(300);
+      await this.cardNumberInput.fill(paymentData.cardNumber);
       await this.page.keyboard.press('Tab');
       
-      await this.cardExpiryInput.type(paymentData.expiryDate, { delay: 100 });
-      await this.wait(300);
+      await this.cardExpiryInput.fill(paymentData.expiryDate);
       await this.page.keyboard.press('Tab');
       
-      await this.cardCvvInput.type(paymentData.cvv, { delay: 100 });
-      await this.wait(300);
+      await this.cardCvvInput.fill(paymentData.cvv);
       await this.page.keyboard.press('Tab');
       
       console.log(`[${new Date().toISOString()}] ✅ Payment details filled`);

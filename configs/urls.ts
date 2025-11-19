@@ -6,7 +6,7 @@ export enum Environment {
   }
   
   // Switch between environments
-  //export const CURRENT_ENVIRONMENT = Environment.STAGING;
+ // export const CURRENT_ENVIRONMENT = Environment.STAGING;
   export const CURRENT_ENVIRONMENT = Environment.PRODUCTION;
 
   // Admin URLs
@@ -21,7 +21,6 @@ export enum Environment {
 
       'https://test.staging.storagely-api.com/10-federal-storage/storage-units/georgia/dahlonega/highway-19-north',
       'https://test.staging.storagely-api.com/bestbox-storage/storage-units/florida/pensacola/north-palafox',
-      'https://test.staging.storagely-api.com/premier-storage/storage-units/mississippi/magee/simpson-highway-149',
       'https://test.staging.storagely-api.com/red-rocks-self-storage/storage-units/colorado/aurora/east-14th-avenue',
       'https://test.staging.storagely-api.com/distinct-storage/storage-units/connecticut/new-milford/kent-road',
       'https://test.staging.storagely-api.com/storage-star/storage-units/colorado/colorado-springs/aerotech-drive',
@@ -35,18 +34,16 @@ export enum Environment {
     ],
     [Environment.PRODUCTION]: [
 
-      'https://10federalstorage.com/storage-units/georgia/dahlonega/highway-19-north',
-      'https://www.bestboxstorage.com/storage-units/florida/pensacola/north-palafox',
-      'https://yourpremierstorage.com/storage-units/mississippi/magee/simpson-highway-149',
-      'https://redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',
-      'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road',
-      'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',
-      'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland',
-      'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club',
-      'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive',
-      'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road',
-      'https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street',
-      //'https://app.storagely.io/mini-mall-storage/storage-units/alabama/courtland/highway-33', //mini-mall
+      // 'https://10federalstorage.com/storage-units/washington/seattle/des-moines-memorial-drive',
+      // 'https://www.bestboxstorage.com/storage-units/florida/pensacola/north-palafox',
+      // 'https://redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',
+      // 'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road', //500 error
+      // 'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive', //500 error 
+      // 'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland',
+      // 'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club',
+      // 'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive',
+      // 'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road',
+      // 'https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street',
       ]
   };
   

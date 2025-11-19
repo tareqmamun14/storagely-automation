@@ -21,8 +21,8 @@ test.describe('Payment Verification Tests', () => {
       paymentDetailsPage,
       companyNameFromUrl
     }) => {
-      // Set longer timeout for these tests - increased to 5 minutes for slow-loading sites
-      test.setTimeout(300 * 1000); // 5 minutes to handle very slow sites like 10 Federal Storage
+      // Set longer timeout for these tests - 6 minutes for slow-loading sites
+      test.setTimeout(360 * 1000); // 6 minutes to handle slow sites reliably
       
       // Get company/client name and platform
       const companyName = companyNameFromUrl(baseURL);
@@ -73,8 +73,19 @@ test.describe('Payment Verification Tests', () => {
         // ============================================
         testResult.step = 'Rent Button';
         console.log('📍 STEP 2: Clicking rent button...');
-        await storageListingPage.clickRentButton();
+        const rentButtonResult = await storageListingPage.clickRentButton();
         console.log('✅ Rent button clicked successfully');
+        
+        // Check if it's a WAITLIST scenario
+        if (rentButtonResult === 'WAITLIST') {
+          console.log('ℹ️  This site uses JOIN WAITLIST instead of direct rental');
+          testResult.error = 'No error - JOIN WAITLIST option (not direct rental)';
+          testResult.success = true;
+          resultCollector.addResult(baseURL, companyName, platform, testResult.error, testResult.success);
+          console.log(`✅ TEST COMPLETED (Join Waitlist scenario) FOR: ${companyName}`);
+          console.log(`${'='.repeat(80)}\n`);
+          return;
+        }
         
         // ============================================
         // STEP 3: Check for immediate error (STEP 4 renumbered to STEP 3)
@@ -185,6 +196,12 @@ test.describe('Payment Verification Tests', () => {
         console.log(`📊 Final Result: ${testResult.error}`);
         console.log(`${'='.repeat(80)}\n`);
         
+        // Close browser immediately after capturing error message - no need to keep it open
+        if (!page.isClosed()) {
+          await page.close();
+          console.log(`🔒 Browser closed for ${companyName}`);
+        }
+        
         // Record the result with immediate error included
         resultCollector.addResult(baseURL, companyName, platform, finalErrorMessage, testResult.success);
         
@@ -196,6 +213,12 @@ test.describe('Payment Verification Tests', () => {
         console.error(`📍 Failed at step: ${testResult.step}`);
         console.error(`💥 Error: ${testResult.error}`);
         console.log(`${'='.repeat(80)}\n`);
+        
+        // Close browser immediately on failure too
+        if (!page.isClosed()) {
+          await page.close();
+          console.log(`🔒 Browser closed for ${companyName} (failed test)`);
+        }
         
         // Take screenshot on error
         if (!page.isClosed()) {

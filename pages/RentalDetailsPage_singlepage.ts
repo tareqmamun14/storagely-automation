@@ -751,34 +751,82 @@ export class RentalDetailsPageSinglePage extends BasePage {
   private async quickErrorCheck(): Promise<string> {
     // Check immediately - no waiting
     
-    // PRIORITY CHECK: firststorage/columbiaselfstorage error notification structure
-    // Look for paragraph inside toast-notification-error div
-    const toastErrorParagraph = this.page.locator('[data-id*="toast-notification"] p.text-sm, [data-id*="toast-notification"] p.text-white').first();
-    if (await toastErrorParagraph.isVisible({ timeout: 500 })) {
-      const text = await toastErrorParagraph.innerText();
-      if (text.trim() && text.length > 10) {
+    // PRIORITY CHECK 1: Look for error details paragraph INSIDE toast notification
+    // This is the specific error message (not the title)
+    const errorDetailsParagraphs = this.page.locator('[data-id*="toast-notification"], .toast-container').locator('p');
+    const count = await errorDetailsParagraphs.count().catch(() => 0);
+    
+    if (count > 0) {
+      // Get all paragraphs and filter to find the details (skip single-word titles)
+      for (let i = 0; i < count; i++) {
+        const paragraph = errorDetailsParagraphs.nth(i);
+        try {
+          if (await paragraph.isVisible({ timeout: 500 })) {
+            const text = await paragraph.innerText();
+            const cleanText = text.trim();
+            
+            // Skip title-like text (single words or very short)
+            // Keep error details (longer descriptions)
+            if (cleanText.length > 15 && !cleanText.match(/^(Error|Warning|Success|Info|occurred)$/i)) {
+              console.log(`🔍 Found error details: "${cleanText}"`);
+              return cleanText;
+            }
+          }
+        } catch (e) {
+          // Skip if not visible
+        }
+      }
+    }
+    
+    // PRIORITY CHECK 2: Look for response/error code patterns
+    const detailedError = this.page.locator('p').filter({ hasText: /Response Code|error|invalid|declined/i }).first();
+    if (await detailedError.isVisible({ timeout: 500 })) {
+      const text = await detailedError.innerText();
+      if (text.trim() && text.length > 15) {
         return text.trim();
       }
     }
     
-    // CHECK 2: Toast body (get paragraph content, not just heading)
-    const toastBody = this.page.locator('.toast-container .toast-body');
+    // CHECK 3: Toast body (get paragraph content, not just heading)
+    const toastBody = this.page.locator('.toast-container .toast-body, [data-id*="toast-notification"]');
     if (await toastBody.isVisible({ timeout: 500 })) {
       const message = await toastBody.innerText();
-      if (message.trim()) {
-        return message.trim();
-      }
-    }
-    
-    // CHECK 3: Toast container (fallback - might get full text with heading + details)
-    const toastContainer = this.page.locator('.toast-container').first();
-    if (await toastContainer.isVisible({ timeout: 500 })) {
-      const toastText = await toastContainer.innerText();
-      if (toastText && toastText.trim()) {
-        return toastText.trim();
+      const cleanedMsg = this.extractErrorDetailsFromToast(message);
+      if (cleanedMsg) {
+        return cleanedMsg;
       }
     }
 
+    return '';
+  }
+
+  /**
+   * Extract error details from toast text
+   * Removes titles like "Error occurred" and keeps the actual error message
+   */
+  private extractErrorDetailsFromToast(fullText: string): string {
+    if (!fullText) return '';
+    
+    const lines = fullText.split('\n').map(l => l.trim()).filter(l => l);
+    
+    // Remove common titles
+    const titles = ['Error', 'Error occurred', 'Warning', 'Success', 'Info', 'Close'];
+    
+    // Find the longest meaningful line (usually the error details)
+    const details = lines.filter(line => {
+      return line.length > 15 && !titles.includes(line);
+    });
+    
+    if (details.length > 0) {
+      return details.join(' - '); // Join multiple details with separator
+    }
+    
+    // If no details found, return the first non-title line
+    const nonTitleLines = lines.filter(line => !titles.includes(line));
+    if (nonTitleLines.length > 0) {
+      return nonTitleLines.join(' - ');
+    }
+    
     return '';
   }
 
@@ -792,28 +840,55 @@ export class RentalDetailsPageSinglePage extends BasePage {
       try {
         await this.wait(500);
         
-        // PRIORITY CHECK: firststorage/columbiaselfstorage error notification structure
-        // Look for paragraph inside toast-notification-error div
-        const toastErrorParagraph = this.page.locator('[data-id*="toast-notification"] p.text-sm, [data-id*="toast-notification"] p.text-white').first();
-        if (await toastErrorParagraph.isVisible({ timeout: 300 })) {
-          const text = await toastErrorParagraph.innerText();
-          if (text.trim() && text.length > 10) {
+        // PRIORITY CHECK 1: Look for error details paragraph INSIDE toast notification
+        // This is the specific error message (not the title)
+        const errorDetailsParagraphs = this.page.locator('[data-id*="toast-notification"], .toast-container').locator('p');
+        const count = await errorDetailsParagraphs.count().catch(() => 0);
+        
+        if (count > 0) {
+          // Get all paragraphs and filter to find the details (skip single-word titles)
+          for (let j = 0; j < count; j++) {
+            const paragraph = errorDetailsParagraphs.nth(j);
+            try {
+              if (await paragraph.isVisible({ timeout: 300 })) {
+                const text = await paragraph.innerText();
+                const cleanText = text.trim();
+                
+                // Skip title-like text (single words or very short)
+                // Keep error details (longer descriptions)
+                if (cleanText.length > 15 && !cleanText.match(/^(Error|Warning|Success|Info|occurred)$/i)) {
+                  console.log(`✓ Error found at poll ${i + 1}`);
+                  return cleanText;
+                }
+              }
+            } catch (e) {
+              // Skip if not visible
+            }
+          }
+        }
+        
+        // PRIORITY CHECK 2: Look for response/error code patterns
+        const detailedError = this.page.locator('p').filter({ hasText: /Response Code|error|invalid|declined/i }).first();
+        if (await detailedError.isVisible({ timeout: 300 })) {
+          const text = await detailedError.innerText();
+          if (text.trim() && text.length > 15) {
             console.log(`✓ Error found at poll ${i + 1}`);
             return text.trim();
           }
         }
         
-        // CHECK 2: Toast body first (get paragraph content, not just heading)
-        const toastBody = this.page.locator('.toast-container .toast-body');
+        // CHECK 3: Toast body first (get paragraph content, not just heading)
+        const toastBody = this.page.locator('.toast-container .toast-body, [data-id*="toast-notification"]');
         if (await toastBody.isVisible({ timeout: 300 })) {
           const message = await toastBody.innerText();
-          if (message.trim()) {
+          const cleanedMsg = this.extractErrorDetailsFromToast(message);
+          if (cleanedMsg) {
             console.log(`✓ Error found at poll ${i + 1}`);
-            return message.trim();
+            return cleanedMsg;
           }
         }
         
-        // CHECK 3: Toast container (fallback - might get full text with heading + details)
+        // CHECK 4: Toast container (fallback)
         const toastContainer = this.page.locator('.toast-container').first();
         if (await toastContainer.isVisible({ timeout: 300 })) {
           const toastText = await toastContainer.innerText();
@@ -823,17 +898,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
           }
         }
 
-        // CHECK 4: Detailed error (with Response Code)
-        const detailedError = this.page.locator('p').filter({ hasText: 'Response Code' });
-        if (await detailedError.isVisible({ timeout: 300 })) {
-          const message = await detailedError.innerText();
-          if (message.trim()) {
-            console.log(`✓ Detailed error found at poll ${i + 1}`);
-            return message.trim();
-          }
-        }
-
-        // Check common error selectors
+        // CHECK 5: Common error selectors
         const errorLocators = [
           this.page.locator('.alert-danger').first(),
           this.page.locator('[role="alert"]').first(),
