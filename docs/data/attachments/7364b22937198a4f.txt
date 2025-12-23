@@ -1,0 +1,45 @@
+
+🏠 Starting contact page test for: https://distinctstorage.com/
+📞 Navigating to contact page: https://distinctstorage.com/pages/contact?_cache_bust=1766507779318_pyhy1rmrr
+⚠️  Failed to load https://distinctstorage.com/pages/contact, error: page.waitForTimeout: Test ended.
+❌ Contact page verification failed for: https://distinctstorage.com/
+   Error: Could not navigate to contact page: page.waitForTimeout: Test ended.
+⚠️  Continuing with other sites...
+
+========================================================================================================================
+📞 CONTACT PAGE VERIFICATION RESULTS SUMMARY
+========================================================================================================================
+✅ Total Passed: 2
+❌ Total Failed: 1
+📋 Total Tests: 3
+========================================================================================================================
+
+📊 DETAILED RESULTS TABLE:
+┌─────┬─────────────────────────────────────────────────────────┬──────────┬─────────────────────────────────────────────┐
+│ No. │ Storage Site                                            │ Status   │ Found Elements / Error                      │
+├─────┼─────────────────────────────────────────────────────────┼──────────┼─────────────────────────────────────────────┤
+│   1 │ yourpremierstorage.com/                                 │ ✅ PASS  │ Contact Heading, Phone Link, Phone Text +3 more │
+│   2 │ redrocksstorage.com/                                    │ ✅ PASS  │ Get In Touch Heading, Email Input, Message Textarea +11 more │
+│   3 │ distinctstorage.com/                                    │ ❌ FAIL  │ Could not navigate to contact page: page... │
+└─────┴─────────────────────────────────────────────────────────┴──────────┴─────────────────────────────────────────────┘
+
+🔍 FAILED SITES DETAILS:
+
+1. ❌ https://distinctstorage.com/
+   Contact URL: https://distinctstorage.com//pages/contact
+   Error: Could not navigate to contact page: page.waitForTimeout: Test ended.
+
+🎉 SUCCESSFUL SITES SUMMARY:
+
+1. ✅ https://yourpremierstorage.com/
+   Contact URL: https://yourpremierstorage.com//pages/contact
+   Found Elements (6): Contact Heading, Phone Link, Phone Text, Address Text, Map Element, Contact Text
+
+2. ✅ https://redrocksstorage.com/
+   Contact URL: https://redrocksstorage.com//pages/contact
+   Found Elements (14): Get In Touch Heading, Email Input, Message Textarea, Submit Button, Contact Form, Phone Link, Email Link, Phone Heading, Email Heading, Social Links Heading, Phone Text, Hours Text, Map Element, Contact Text
+
+========================================================================================================================
+🏁 CONTACT PAGE VERIFICATION COMPLETE - 2/3 sites passed
+========================================================================================================================
+
