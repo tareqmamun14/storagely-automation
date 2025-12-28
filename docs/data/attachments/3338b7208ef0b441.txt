@@ -1,0 +1,23 @@
+
+🏠 Starting contact page test for: https://distinctstorage.com/
+📞 Navigating to contact page: https://distinctstorage.com/pages/contact?_cache_bust=1766950051953_984b0k2mgmb
+🔍 Verifying contact page elements for: https://distinctstorage.com/
+   ✓ Contact page loaded successfully
+   ✓ Title verified: "Contact Our New Milford Storage Facility | Distinct Storage"
+   ✓ Found Contact Heading: 1 instances
+   ✓ Found Message Textarea: 1 instances
+   ✓ Found Submit Button: 1 instances
+   ✓ Found Contact Form: 2 instances
+   ✓ Found Phone Link: 1 instances
+   ✓ Found Email Link: 1 instances
+   ✓ Found Phone Heading: 1 instances
+   ✓ Found Corporate Address Heading: 1 instances
+   ✓ Found Phone Text: 3 instances
+   ✓ Found Address Text: 1 instances
+   ✓ Found Hours Text: 1 instances
+   ✓ Found Office Text: 1 instances
+   ✓ Found Map Element: 2 instances
+   ✓ Found Contact Text: 5 instances
+   ✓ Contact page verification complete - found 14 contact element types
+   📋 Elements found: Contact Heading, Message Textarea, Submit Button, Contact Form, Phone Link, Email Link, Phone Heading, Corporate Address Heading, Phone Text, Address Text, Hours Text, Office Text, Map Element, Contact Text
+✅ Contact page verification passed for: https://distinctstorage.com/

@@ -1,0 +1,5 @@
+CRITICAL ERROR: No rent, pricing option, reserve, or waitlist buttons found on page
+
+❌ TEST FAILED FOR: storagedepotla
+📍 Failed at step: Rent Button
+💥 Error: Rent Button failed: Could not find or click rent button - No rent, pricing option, reserve, or waitlist buttons found on page

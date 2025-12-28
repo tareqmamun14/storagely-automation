@@ -1,0 +1,161 @@
+
+================================================================================
+🏢 TESTING: storagedepotla
+🌐 URL: https://storagedepotla.com/storage-units/louisiana/hammond/north-morrison-blvd
+⚙️  Platform: Unknown
+================================================================================
+📍 STEP 1: Navigating to storage listing page...
+[2025-12-28T19:32:08.209Z] 🚀 Starting navigation to: https://storagedepotla.com/storage-units/louisiana/hammond/north-morrison-blvd
+💾 Cache busting ENABLED (site supports it) - URL: https://storagedepotla.com/storage-units/louisiana/hammond/north-morrison-blvd?cacheBust=1766950328209-dm1rkn5md4i
+[2025-12-28T19:32:08.209Z] 📡 Attempting page.goto()...
+[2025-12-28T19:32:17.411Z] ✅ Navigation completed in 9202ms
+[2025-12-28T19:32:17.411Z] ✓ Successfully navigated to storage listing page
+✅ Navigation completed successfully
+📍 STEP 2: Clicking rent button...
+
+======================================================================
+[2025-12-28T19:32:17.411Z] 🎯 RENT BUTTON SEARCH START
+📍 Current URL: https://storagedepotla.com/storage-units/louisiana/hammond/north-morrison-blvd?cacheBust=1766950328209-dm1rkn5md4i
+======================================================================
+
+✅ [5ms] DOM loaded
+⏳ [5ms] Looking for RENT buttons...
+✅ [701ms] Strategy 1 (direct step_four rent): Found 10 button(s)
+
+⏳ [702ms] Waiting for button to stabilize...
+🔄 [749ms] Button text changing: "rent"
+✅ [1165ms] Button text stabilized
+
+📋 [1191ms] Button Text: "rent"
+✅ [1246ms] Button scrolled into view
+
+🖱️  [1246ms] CLICKING BUTTON...
+✅ [3114ms] Click executed successfully
+🔄 [3114ms] Checking for new page/popup...
+🔄 [8305ms] No popup detected, waiting for same-page navigation...
+⚠️ [23324ms] No navigation detected on same page after click
+
+🌐 [23325ms] Current URL: https://storagedepotla.com/storage-units/louisiana/hammond/north-morrison-blvd/step_four?location=L002&unit=4724087&type=rent&con=10058&is_sitelink=1&site_locations_id=1164
+======================================================================
+
+✅ Already on step_four - direct rent flow successful
+[2025-12-28T19:32:40.736Z] ✅ Rent button completed (23325ms)
+✅ Rent button clicked successfully
+
+� STEP 3: Checking for immediate errors...
+🔍 Checking for immediate error messages...
+✅ No immediate error detected - proceeding with test
+✅ No immediate error detected - proceeding with test
+
+📍 STEP 4: Filling rental details form...
+[2025-12-28T19:32:42.381Z] 📝 Filling rental details form...
+✓ Summary heading found and clicked
+✓ Filled First Name: Test
+✓ Filled Last Name: Testing_Tareq
+✓ Filled Email: tareq@storagely.io
+✓ Filled Phone: 5551234567
+✓ Filled Address: NYC
+✓ Filled City: NYC
+Attempting to select state - OPTIMIZED APPROACH
+🎯 Detected site needs: Alabama
+✓ Successfully selected Alabama using standard select
+Attempting to fill zip code: 29690
+✓ Successfully filled zip code: 29690
+✓ Clicked the datepicker element
+Attempting to proceed to next step - CRITICAL STEP
+Continue button click attempt 1
+✓ Successfully clicked continue button
+[2025-12-28T19:32:50.163Z] ✅ Rental details form completed
+✅ Rental details form completed successfully
+
+📍 STEP 5: Filling lease details if available...
+Lease Details section not found, skipping
+✅ Lease details form completed (or skipped if not available)
+
+📍 STEP 6: Filling payment details...
+[2025-12-28T19:32:50.319Z] 💳 Filling payment details...
+[2025-12-28T19:32:51.657Z] ✅ Payment details filled
+✅ Payment details filled successfully
+
+📍 STEP 7: Checking agreement checkboxes...
+- I agree to the lease terms checkbox not visible, skipping
+- I agree to the protection checkbox not visible, skipping
+- I agree to the auto pay terms checkbox not visible, skipping
+✅ Agreement checkboxes processed
+
+📍 STEP 8: Submitting payment and checking for errors...
+[2025-12-28T19:32:51.744Z] 🔘 Clicking RENT NOW button...
+Chat iframe not found or an error occurred, proceeding without minimizing.
+[2025-12-28T19:33:01.116Z] ✅ RENT NOW clicked - detecting errors...
+🔍 Starting error detection (OPTIMIZED)...
+📡 Active polling for errors...
+✓ Error found at poll 1
+✓ Error detected via polling
+[2025-12-28T19:33:02.014Z] ✅ Error detected on first attempt - returning immediately
+✅ Payment submission completed
+
+✅ TEST COMPLETED SUCCESSFULLY FOR: storagedepotla
+📊 Final Result: Error!!
+(-100) Response Code: -1 Sub Code: -1 Reason Code: -1 Reason Text: Payment failed to process: 'Card Number' is not a valid credit card number.
+================================================================================
+
+🔒 Browser closed for storagedepotla
+
+====================================================================================================
+🏁 PAYMENT VERIFICATION TEST SUMMARY
+====================================================================================================
+
+📊 TEST EXECUTION SUMMARY:
+   Total Tests: 4
+   ✅ Successful: 4
+   ❌ Failed: 0
+   📈 Success Rate: 100.0%
+
+📋 DETAILED RESULTS:
+========================================================================================================================
+Company                   | Platform   | Status   | Error Message
+========================================================================================================================
+sunbird Storage           | SiteLink   | ✅ PASS   | Error!!
+(-100) Response Code: -1 Sub Code: -1 Reason Code: -1 Reason Text: Payment failed to process: 'Card Number' is not a valid credit card number.
+rhino- Storage            | SiteLink   | ✅ PASS   | No error - JOIN WAITLIST option (not direct rental)
+gatekeeperstoragega       | SiteLink   | ✅ PASS   | Error!!
+(-100) Response Code: -1 Sub Code: -1 Reason Code: -1 Reason Text: Payment failed to process: 'Card Number' is not a valid credit card number.
+storagedepotla            | Unknown    | ✅ PASS   | Error!!
+(-100) Response Code: -1 Sub Code: -1 Reason Code: -1 Reason Text: Payment failed to process: 'Card Number' is not a valid credit card number.
+========================================================================================================================
+
+🔧 PLATFORM BREAKDOWN:
+   SiteLink: 3/3 (100.0%)
+   Unknown: 1/1 (100.0%)
+
+🚨 ALL ERROR MESSAGES:
+====================================================================================================
+
+1. ⚠️  WARNING - sunbird Storage (SiteLink)
+   URL: https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club
+   Message: Error!!
+(-100) Response Code: -1 Sub Code: -1 Reason Code: -1 Reason Text: Payment failed to process: 'Card Number' is not a valid credit card number.
+   Time: 12/29/2025, 1:30:42 AM
+   --------------------------------------------------------------------------------
+
+2. ⚠️  WARNING - rhino- Storage (SiteLink)
+   URL: https://rhino-storage.com/storage-units/louisiana/covington/philip-drive
+   Message: No error - JOIN WAITLIST option (not direct rental)
+   Time: 12/29/2025, 1:30:50 AM
+   --------------------------------------------------------------------------------
+
+3. ⚠️  WARNING - gatekeeperstoragega (SiteLink)
+   URL: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road
+   Message: Error!!
+(-100) Response Code: -1 Sub Code: -1 Reason Code: -1 Reason Text: Payment failed to process: 'Card Number' is not a valid credit card number.
+   Time: 12/29/2025, 1:32:07 AM
+   --------------------------------------------------------------------------------
+
+4. ⚠️  WARNING - storagedepotla (Unknown)
+   URL: https://storagedepotla.com/storage-units/louisiana/hammond/north-morrison-blvd
+   Message: Error!!
+(-100) Response Code: -1 Sub Code: -1 Reason Code: -1 Reason Text: Payment failed to process: 'Card Number' is not a valid credit card number.
+   Time: 12/29/2025, 1:33:02 AM
+====================================================================================================
+====================================================================================================
+

@@ -1,0 +1,16 @@
+🧹 Cleared browser state for next test
+
+🔍 Testing landing page: https://smartstorageohio.com/
+   Cache-busted URL: https://smartstorageohio.com/?_cache_bust=1766950099013_myysoxp7nv
+[2025-12-28T19:28:19.014Z] 🚀 Starting navigation to: https://smartstorageohio.com/?_cache_bust=1766950099013_myysoxp7nv
+[2025-12-28T19:28:19.015Z] 📡 Attempt 1/2 to load https://smartstorageohio.com/?_cache_bust=1766950099013_myysoxp7nv
+[2025-12-28T19:28:23.235Z] ✅ Page loaded successfully in 4220ms
+[2025-12-28T19:28:24.307Z] ✓ Navigation complete (Total: 5293ms, Wait: 1072ms)
+Verifying: https://smartstorageohio.com/
+- Page loaded for https://smartstorageohio.com/
+- Title verified for https://smartstorageohio.com/: "Self Storage Units in Macedonia, OH | Smart Self Storage"
+- Logo verified for https://smartstorageohio.com/
+- Navigation link verified for https://smartstorageohio.com/
+- CTA button verified for https://smartstorageohio.com/
+✅ Successfully verified: https://smartstorageohio.com/
+✅ Landing page verification passed for: https://smartstorageohio.com/

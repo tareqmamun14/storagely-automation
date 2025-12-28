@@ -1,0 +1,41 @@
+🧹 Cleared browser state for next test
+
+🔍 Testing landing page: https://ulok.com
+   Cache-busted URL: https://ulok.com?_cache_bust=1766950176747_rddw2d1nmo
+[2025-12-28T19:29:36.747Z] 🚀 Starting navigation to: https://ulok.com?_cache_bust=1766950176747_rddw2d1nmo
+[2025-12-28T19:29:36.747Z] 📡 Attempt 1/2 to load https://ulok.com?_cache_bust=1766950176747_rddw2d1nmo
+[2025-12-28T19:29:41.296Z] ✅ Page loaded successfully in 4549ms
+[2025-12-28T19:29:42.353Z] ✓ Navigation complete (Total: 5606ms, Wait: 1057ms)
+Verifying: https://ulok.com
+- Page loaded for https://ulok.com
+- Title verified for https://ulok.com: "Self Storage Units Vancouver | Downtown U-Lok Storage"
+- Logo verified for https://ulok.com
+- Navigation link verified for https://ulok.com
+- CTA button verified for https://ulok.com
+✅ Successfully verified: https://ulok.com
+✅ Landing page verification passed for: https://ulok.com
+
+======================================================================
+🌐 LANDING PAGE VERIFICATION RESULTS SUMMARY
+======================================================================
+✅ Total Passed: 7
+❌ Total Failed: 0
+📋 Total Tests: 7
+
+✅ SUCCESSFULLY VERIFIED PAGES:
+   1. https://yourpremierstorage.com/
+       (Accessed: https://yourpremierstorage.com/?_cache_bust=1766950115363_mh46bg3y0cp)
+   2. https://redrocksstorage.com/
+       (Accessed: https://redrocksstorage.com/?_cache_bust=1766950127984_iencsrzuex)
+   3. https://distinctstorage.com/
+       (Accessed: https://distinctstorage.com/?_cache_bust=1766950135205_2kk6s4n9c7w)
+   4. https://rhino-storage.com/
+       (Accessed: https://rhino-storage.com/?_cache_bust=1766950152451_ck3e730t4rf)
+   5. https://storagedepotla.com/
+       (Accessed: https://storagedepotla.com/?_cache_bust=1766950158530_9w4fys5r8g)
+   6. https://modboxstorage.com/
+       (Accessed: https://modboxstorage.com/?_cache_bust=1766950164419_z65gcjqd2r9)
+   7. https://ulok.com
+       (Accessed: https://ulok.com?_cache_bust=1766950176747_rddw2d1nmo)
+======================================================================
+

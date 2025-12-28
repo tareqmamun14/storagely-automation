@@ -1,0 +1,31 @@
+[2025-12-28T19:36:15.503Z] 🚀 Starting navigation to: https://test.staging.storagely-api.com/first-storage/storage-units/north-carolina/greensboro/east-market-street
+💾 Cache busting ENABLED (site supports it) - URL: https://test.staging.storagely-api.com/first-storage/storage-units/north-carolina/greensboro/east-market-street?cacheBust=1766950575504-8k3zcu5aeli
+[2025-12-28T19:36:15.504Z] 📡 Attempting page.goto()...
+[2025-12-28T19:36:32.501Z] ✅ Navigation completed in 16998ms
+[2025-12-28T19:36:32.502Z] ✓ Successfully navigated to storage listing page
+🔍 Found 1 picture element(s) on the page
+
+📸 Picture 1: Found 2 source(s)
+
+📋 EXPECTED SOURCES:
+   1. Desktop: media="(min-width: 768px)" ✅ FOUND
+   2. Mobile:  media="(max-width: 767px)" ✅ FOUND
+
+📋 ACTUAL SOURCES FOUND:
+   1. media="(min-width: 768px)"
+   2. media="(max-width: 767px)"
+
+✅ VALIDATION PASSED for Picture 1
+   ✓ Desktop source: (min-width: 768px)
+   ✓ Mobile source:  (max-width: 767px)
+
+============================================================
+🎯 BANNER LOADING VERIFICATION RESULTS
+============================================================
+
+✅ CLIENTS WITH BANNERS PROPERLY LOADED:
+   1. First Storage - E Market St - PASSED (Banner loaded successfully with both desktop (min-width: 768px) and mobile (max-width: 767px) sources)
+
+📊 Summary: 1 Passed, 0 Failed
+============================================================
+

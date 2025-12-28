@@ -1,0 +1,102 @@
+
+================================================================================
+🏢 TESTING: sunbird Storage
+🌐 URL: https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club
+⚙️  Platform: SiteLink
+================================================================================
+📍 STEP 1: Navigating to storage listing page...
+[2025-12-28T19:29:43.329Z] 🚀 Starting navigation to: https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club
+💾 Cache busting ENABLED (site supports it) - URL: https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club?cacheBust=1766950183329-q9dchbg31t
+[2025-12-28T19:29:43.329Z] 📡 Attempting page.goto()...
+[2025-12-28T19:29:52.410Z] ✅ Navigation completed in 9081ms
+[2025-12-28T19:29:52.411Z] ✓ Successfully navigated to storage listing page
+✅ Navigation completed successfully
+📍 STEP 2: Clicking rent button...
+
+======================================================================
+[2025-12-28T19:29:52.411Z] 🎯 RENT BUTTON SEARCH START
+📍 Current URL: https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club?cacheBust=1766950183329-q9dchbg31t
+======================================================================
+
+✅ [3ms] DOM loaded
+⏳ [3ms] Looking for RENT buttons...
+✅ [1208ms] Strategy 1 (direct step_four rent): Found 12 button(s)
+
+⏳ [1208ms] Waiting for button to stabilize...
+🔄 [1327ms] Button text changing: "rent"
+✅ [2850ms] Button text stabilized
+
+📋 [2890ms] Button Text: "rent"
+✅ [2947ms] Button scrolled into view
+
+🖱️  [2947ms] CLICKING BUTTON...
+✅ [5026ms] Click executed successfully
+🔄 [5026ms] Checking for new page/popup...
+🔄 [10137ms] No popup detected, waiting for same-page navigation...
+⚠️ [25153ms] No navigation detected on same page after click
+
+🌐 [25153ms] Current URL: https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club/step_four?location=L001&unit=4512902&type=rent&con=19071&is_sitelink=1&site_locations_id=1113
+======================================================================
+
+✅ Already on step_four - direct rent flow successful
+[2025-12-28T19:30:17.564Z] ✅ Rent button completed (25153ms)
+✅ Rent button clicked successfully
+
+� STEP 3: Checking for immediate errors...
+🔍 Checking for immediate error messages...
+✅ No immediate error detected - proceeding with test
+✅ No immediate error detected - proceeding with test
+
+📍 STEP 4: Filling rental details form...
+[2025-12-28T19:30:19.216Z] 📝 Filling rental details form...
+✓ Summary heading found and clicked
+✓ Filled First Name: Test
+✓ Filled Last Name: Testing_Tareq
+✓ Filled Email: tareq@storagely.io
+✓ Filled Phone: 5551234567
+✓ Filled Address: NYC
+✓ Filled City: NYC
+Attempting to select state - OPTIMIZED APPROACH
+🎯 Detected site needs: Alabama
+✓ Successfully selected Alabama using standard select
+Attempting to fill zip code: 29690
+✓ Successfully filled zip code: 29690
+✓ Clicked the datepicker element
+Attempting to proceed to next step - CRITICAL STEP
+Continue button click attempt 1
+✓ Successfully clicked continue button
+[2025-12-28T19:30:28.722Z] ✅ Rental details form completed
+✅ Rental details form completed successfully
+
+📍 STEP 5: Filling lease details if available...
+Lease Details section not found, skipping
+✅ Lease details form completed (or skipped if not available)
+
+📍 STEP 6: Filling payment details...
+[2025-12-28T19:30:29.109Z] 💳 Filling payment details...
+[2025-12-28T19:30:30.817Z] ✅ Payment details filled
+✅ Payment details filled successfully
+
+📍 STEP 7: Checking agreement checkboxes...
+- I agree to the lease terms checkbox not visible, skipping
+- I agree to the protection checkbox not visible, skipping
+- I agree to the auto pay terms checkbox not visible, skipping
+✅ Agreement checkboxes processed
+
+📍 STEP 8: Submitting payment and checking for errors...
+[2025-12-28T19:30:30.980Z] 🔘 Clicking RENT NOW button...
+Chat iframe not found or an error occurred, proceeding without minimizing.
+[2025-12-28T19:30:40.978Z] ✅ RENT NOW clicked - detecting errors...
+🔍 Starting error detection (OPTIMIZED)...
+📡 Active polling for errors...
+✓ Error found at poll 2
+✓ Error detected via polling
+[2025-12-28T19:30:42.341Z] ✅ Error detected on first attempt - returning immediately
+✅ Payment submission completed
+
+✅ TEST COMPLETED SUCCESSFULLY FOR: sunbird Storage
+📊 Final Result: Error!!
+(-100) Response Code: -1 Sub Code: -1 Reason Code: -1 Reason Text: Payment failed to process: 'Card Number' is not a valid credit card number.
+================================================================================
+
+🔒 Browser closed for sunbird Storage
