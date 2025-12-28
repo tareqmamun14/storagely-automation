@@ -1,0 +1,14 @@
+
+🏠 Starting contact page test for: https://www.firststorage.com/
+📞 Navigating to contact page: https://www.firststorage.com/pages/contact?_cache_bust=1766951150914_1xhptqlqmg9
+🔍 Verifying contact page elements for: https://www.firststorage.com/
+   ✓ Contact page loaded successfully
+   ✓ Title verified: "Contact Our Self Storage Facilities | First Storage"
+   ✓ Found Contact Heading: 1 instances
+   ✓ Found Phone Link: 8 instances
+   ✓ Found Email Link: 9 instances
+   ✓ Found Map Element: 1 instances
+   ✓ Found Contact Text: 5 instances
+   ✓ Contact page verification complete - found 5 contact element types
+   📋 Elements found: Contact Heading, Phone Link, Email Link, Map Element, Contact Text
+✅ Contact page verification passed for: https://www.firststorage.com/

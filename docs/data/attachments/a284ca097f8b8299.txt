@@ -1,0 +1,16 @@
+🧹 Cleared browser state for next test
+
+🔍 Testing landing page: https://www.firststorage.com/
+   Cache-busted URL: https://www.firststorage.com/?_cache_bust=1766951215050_1u6yi0a3ioq
+[2025-12-28T19:46:55.051Z] 🚀 Starting navigation to: https://www.firststorage.com/?_cache_bust=1766951215050_1u6yi0a3ioq
+[2025-12-28T19:46:55.051Z] 📡 Attempt 1/2 to load https://www.firststorage.com/?_cache_bust=1766951215050_1u6yi0a3ioq
+[2025-12-28T19:46:59.915Z] ✅ Page loaded successfully in 4864ms
+[2025-12-28T19:47:00.957Z] ✓ Navigation complete (Total: 5906ms, Wait: 1042ms)
+Verifying: https://www.firststorage.com/
+- Page loaded for https://www.firststorage.com/
+- Title verified for https://www.firststorage.com/: "Self Storage Units Near Me | First Storage"
+- Logo verified for https://www.firststorage.com/
+- Navigation link verified for https://www.firststorage.com/
+- CTA button verified for https://www.firststorage.com/
+✅ Successfully verified: https://www.firststorage.com/
+✅ Landing page verification passed for: https://www.firststorage.com/

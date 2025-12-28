@@ -1,0 +1,16 @@
+🧹 Cleared browser state for next test
+
+🔍 Testing landing page: https://sunbirdstorage.com/
+   Cache-busted URL: https://sunbirdstorage.com/?_cache_bust=1766951165049_zcw9zd7b4fc
+[2025-12-28T19:46:05.049Z] 🚀 Starting navigation to: https://sunbirdstorage.com/?_cache_bust=1766951165049_zcw9zd7b4fc
+[2025-12-28T19:46:05.050Z] 📡 Attempt 1/2 to load https://sunbirdstorage.com/?_cache_bust=1766951165049_zcw9zd7b4fc
+[2025-12-28T19:46:10.081Z] ✅ Page loaded successfully in 5031ms
+[2025-12-28T19:46:11.190Z] ✓ Navigation complete (Total: 6141ms, Wait: 1108ms)
+Verifying: https://sunbirdstorage.com/
+- Page loaded for https://sunbirdstorage.com/
+- Title verified for https://sunbirdstorage.com/: "Sunbird Storage | Search Self Storage Near You"
+- Logo verified for https://sunbirdstorage.com/
+- Navigation link verified for https://sunbirdstorage.com/
+- CTA button verified for https://sunbirdstorage.com/
+✅ Successfully verified: https://sunbirdstorage.com/
+✅ Landing page verification passed for: https://sunbirdstorage.com/

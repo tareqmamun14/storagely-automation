@@ -1,0 +1,32 @@
+[2025-12-28T19:53:14.050Z] 🚀 Starting navigation to: https://www.firststorage.com/storage-units/north-carolina/greensboro/east-market-street
+💾 Cache busting ENABLED (site supports it) - URL: https://www.firststorage.com/storage-units/north-carolina/greensboro/east-market-street?cacheBust=1766951594050-gybld4r1d
+[2025-12-28T19:53:14.050Z] 📡 Attempting page.goto()...
+[2025-12-28T19:53:33.617Z] ✅ Navigation completed in 19567ms
+[2025-12-28T19:53:33.617Z] ✓ Successfully navigated to storage listing page
+🔍 Found 1 picture element(s) on the page
+
+📸 Picture 1: Found 2 source(s)
+
+📋 EXPECTED SOURCES:
+   1. Desktop: media="(min-width: 768px)" ✅ FOUND
+   2. Mobile:  media="(max-width: 767px)" ✅ FOUND
+
+📋 ACTUAL SOURCES FOUND:
+   1. media="(min-width: 768px)"
+   2. media="(max-width: 767px)"
+
+✅ VALIDATION PASSED for Picture 1
+   ✓ Desktop source: (min-width: 768px)
+   ✓ Mobile source:  (max-width: 767px)
+
+============================================================
+🎯 BANNER LOADING VERIFICATION RESULTS
+============================================================
+
+✅ CLIENTS WITH BANNERS PROPERLY LOADED:
+   1. Storage Star - Cloverdale - PASSED (Banner loaded successfully with both desktop (min-width: 768px) and mobile (max-width: 767px) sources)
+   2. First Storage - E Market St - PASSED (Banner loaded successfully with both desktop (min-width: 768px) and mobile (max-width: 767px) sources)
+
+📊 Summary: 2 Passed, 0 Failed
+============================================================
+

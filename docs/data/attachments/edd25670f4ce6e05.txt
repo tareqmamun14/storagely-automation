@@ -1,0 +1,102 @@
+
+================================================================================
+🏢 TESTING: redrocks Storage
+🌐 URL: https://redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue
+⚙️  Platform: storEDGE
+================================================================================
+📍 STEP 1: Navigating to storage listing page...
+[2025-12-28T19:48:23.283Z] 🚀 Starting navigation to: https://redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue
+💾 Cache busting ENABLED (site supports it) - URL: https://redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue?cacheBust=1766951303287-mx9dnmhjhsr
+[2025-12-28T19:48:23.287Z] 📡 Attempting page.goto()...
+[2025-12-28T19:48:40.260Z] ✅ Navigation completed in 16977ms
+[2025-12-28T19:48:40.260Z] ✓ Successfully navigated to storage listing page
+✅ Navigation completed successfully
+📍 STEP 2: Clicking rent button...
+
+======================================================================
+[2025-12-28T19:48:40.260Z] 🎯 RENT BUTTON SEARCH START
+📍 Current URL: https://redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue?cacheBust=1766951303287-mx9dnmhjhsr
+======================================================================
+
+✅ [4ms] DOM loaded
+⏳ [5ms] Looking for RENT buttons...
+✅ [1723ms] Strategy 1 (direct step_four rent): Found 18 button(s)
+
+⏳ [1723ms] Waiting for button to stabilize...
+🔄 [1863ms] Button text changing: "rent"
+✅ [2461ms] Button text stabilized
+
+📋 [2600ms] Button Text: "rent"
+✅ [2679ms] Button scrolled into view
+
+🖱️  [2679ms] CLICKING BUTTON...
+✅ [4372ms] Click executed successfully
+🔄 [4372ms] Checking for new page/popup...
+🔄 [9562ms] No popup detected, waiting for same-page navigation...
+⚠️ [24569ms] No navigation detected on same page after click
+
+🌐 [24569ms] Current URL: https://redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue/step_four?location=a64e6b06-9c42-4cfa-80f0-92493f44beeb&unit=4840905&type=rent&con=-999&is_sitelink=1&site_locations_id=1083
+======================================================================
+
+✅ Already on step_four - direct rent flow successful
+[2025-12-28T19:49:04.830Z] ✅ Rent button completed (24570ms)
+✅ Rent button clicked successfully
+
+� STEP 3: Checking for immediate errors...
+🔍 Checking for immediate error messages...
+✅ No immediate error detected - proceeding with test
+✅ No immediate error detected - proceeding with test
+
+📍 STEP 4: Filling rental details form...
+[2025-12-28T19:49:06.708Z] 📝 Filling rental details form...
+✓ Summary heading found and clicked
+✓ Filled First Name: Test
+✓ Filled Last Name: Testing_Tareq
+✓ Filled Email: tareq@storagely.io
+✓ Filled Phone: 5551234567
+✓ Filled Address: NYC
+✓ Filled City: NYC
+Attempting to select state - OPTIMIZED APPROACH
+🎯 Detected site needs: Alabama
+✓ Successfully selected Alabama using standard select
+Attempting to fill zip code: 29690
+✓ Successfully filled zip code: 29690
+✓ Clicked the datepicker element
+Attempting to proceed to next step - CRITICAL STEP
+Continue button click attempt 1
+✓ Successfully clicked continue button
+[2025-12-28T19:49:16.297Z] ✅ Rental details form completed
+✅ Rental details form completed successfully
+
+📍 STEP 5: Filling lease details if available...
+Lease Details section not found, skipping
+✅ Lease details form completed (or skipped if not available)
+
+📍 STEP 6: Filling payment details...
+[2025-12-28T19:49:16.905Z] 💳 Filling payment details...
+[2025-12-28T19:49:18.396Z] ✅ Payment details filled
+✅ Payment details filled successfully
+
+📍 STEP 7: Checking agreement checkboxes...
+- I agree to the lease terms checkbox not visible, skipping
+- I agree to the protection checkbox not visible, skipping
+- I agree to the auto pay terms checkbox not visible, skipping
+✅ Agreement checkboxes processed
+
+📍 STEP 8: Submitting payment and checking for errors...
+[2025-12-28T19:49:18.465Z] 🔘 Clicking RENT NOW button...
+Chat iframe not found or an error occurred, proceeding without minimizing.
+[2025-12-28T19:49:29.174Z] ✅ RENT NOW clicked - detecting errors...
+🔍 Starting error detection (OPTIMIZED)...
+📡 Active polling for errors...
+✓ Error found at poll 2
+✓ Error detected via polling
+[2025-12-28T19:49:30.727Z] ✅ Error detected on first attempt - returning immediately
+✅ Payment submission completed
+
+✅ TEST COMPLETED SUCCESSFULLY FOR: redrocks Storage
+📊 Final Result: Error!!
+Failed to process payment, Unit is not available. It is already reserved or occupied, Lead events unit is not available. It is already reserved or occupied, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (Storable Payments): 'Card Number' is not a valid credit card number.
+================================================================================
+
+🔒 Browser closed for redrocks Storage

@@ -1,0 +1,17 @@
+🧹 Cleared browser state for next test
+
+🔍 Testing landing page: https://distinctstorage.com/
+   Cache-busted URL: https://distinctstorage.com/?_cache_bust=1766951183477_gacayxltu0d
+[2025-12-28T19:46:23.477Z] 🚀 Starting navigation to: https://distinctstorage.com/?_cache_bust=1766951183477_gacayxltu0d
+[2025-12-28T19:46:23.477Z] 📡 Attempt 1/2 to load https://distinctstorage.com/?_cache_bust=1766951183477_gacayxltu0d
+[2025-12-28T19:46:29.592Z] ✅ Page loaded successfully in 6115ms
+[2025-12-28T19:46:30.906Z] ✓ Navigation complete (Total: 7429ms, Wait: 1314ms)
+Verifying: https://distinctstorage.com/
+- Page loaded for https://distinctstorage.com/
+- Title verified for https://distinctstorage.com/: "Storage Units in New Milford, CT at 46 Kent Road | Distinct Storage"
+- Logo with role 'link' and name 'logo' not found for https://distinctstorage.com/, checking for alternative logo selectors...
+- Fallback logo verified for https://distinctstorage.com/
+- Navigation link verified for https://distinctstorage.com/
+- CTA button verified for https://distinctstorage.com/
+✅ Successfully verified: https://distinctstorage.com/
+✅ Landing page verification passed for: https://distinctstorage.com/

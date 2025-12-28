@@ -1,0 +1,102 @@
+
+================================================================================
+🏢 TESTING: distinct Storage
+🌐 URL: https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road
+⚙️  Platform: storEDGE
+================================================================================
+📍 STEP 1: Navigating to storage listing page...
+[2025-12-28T19:49:31.036Z] 🚀 Starting navigation to: https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road
+💾 Cache busting ENABLED (site supports it) - URL: https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road?cacheBust=1766951371036-dzkmmdon92
+[2025-12-28T19:49:31.036Z] 📡 Attempting page.goto()...
+[2025-12-28T19:49:46.953Z] ✅ Navigation completed in 15917ms
+[2025-12-28T19:49:46.953Z] ✓ Successfully navigated to storage listing page
+✅ Navigation completed successfully
+📍 STEP 2: Clicking rent button...
+
+======================================================================
+[2025-12-28T19:49:46.953Z] 🎯 RENT BUTTON SEARCH START
+📍 Current URL: https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road?cacheBust=1766951371036-dzkmmdon92
+======================================================================
+
+✅ [3ms] DOM loaded
+⏳ [3ms] Looking for RENT buttons...
+✅ [477ms] Strategy 1 (direct step_four rent): Found 6 button(s)
+
+⏳ [477ms] Waiting for button to stabilize...
+🔄 [561ms] Button text changing: "rent"
+✅ [1113ms] Button text stabilized
+
+📋 [1198ms] Button Text: "rent"
+✅ [1243ms] Button scrolled into view
+
+🖱️  [1243ms] CLICKING BUTTON...
+✅ [3024ms] Click executed successfully
+🔄 [3024ms] Checking for new page/popup...
+🔄 [8121ms] No popup detected, waiting for same-page navigation...
+⚠️ [23127ms] No navigation detected on same page after click
+
+🌐 [23127ms] Current URL: https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road/step_four?location=bdcb5515-201c-448a-9130-4f308b2de2b7&unit=4444511&type=rent&con=c85da468-0142-4bde-9189-80e19a8e5f12&is_sitelink=1&site_locations_id=40043
+======================================================================
+
+✅ Already on step_four - direct rent flow successful
+[2025-12-28T19:50:10.080Z] ✅ Rent button completed (23127ms)
+✅ Rent button clicked successfully
+
+� STEP 3: Checking for immediate errors...
+🔍 Checking for immediate error messages...
+✅ No immediate error detected - proceeding with test
+✅ No immediate error detected - proceeding with test
+
+📍 STEP 4: Filling rental details form...
+[2025-12-28T19:50:12.032Z] 📝 Filling rental details form...
+✓ Summary heading found and clicked
+✓ Filled First Name: Test
+✓ Filled Last Name: Testing_Tareq
+✓ Filled Email: tareq@storagely.io
+✓ Filled Phone: 5551234567
+✓ Filled Address: NYC
+✓ Filled City: NYC
+Attempting to select state - OPTIMIZED APPROACH
+🎯 Detected site needs: Alabama
+✓ Successfully selected Alabama using standard select
+Attempting to fill zip code: 29690
+✓ Successfully filled zip code: 29690
+✓ Clicked the datepicker element
+Attempting to proceed to next step - CRITICAL STEP
+Continue button click attempt 1
+✓ Successfully clicked continue button
+[2025-12-28T19:50:22.964Z] ✅ Rental details form completed
+✅ Rental details form completed successfully
+
+📍 STEP 5: Filling lease details if available...
+Lease Details section not found, skipping
+✅ Lease details form completed (or skipped if not available)
+
+📍 STEP 6: Filling payment details...
+[2025-12-28T19:50:23.372Z] 💳 Filling payment details...
+[2025-12-28T19:50:26.862Z] ✅ Payment details filled
+✅ Payment details filled successfully
+
+📍 STEP 7: Checking agreement checkboxes...
+- I agree to the lease terms checkbox not visible, skipping
+- I agree to the protection checkbox not visible, skipping
+- I agree to the auto pay terms checkbox not visible, skipping
+✅ Agreement checkboxes processed
+
+📍 STEP 8: Submitting payment and checking for errors...
+[2025-12-28T19:50:27.008Z] 🔘 Clicking RENT NOW button...
+Chat iframe not found or an error occurred, proceeding without minimizing.
+[2025-12-28T19:50:38.782Z] ✅ RENT NOW clicked - detecting errors...
+🔍 Starting error detection (OPTIMIZED)...
+📡 Active polling for errors...
+✓ Error found at poll 1
+✓ Error detected via polling
+[2025-12-28T19:50:49.950Z] ✅ Error detected on first attempt - returning immediately
+✅ Payment submission completed
+
+✅ TEST COMPLETED SUCCESSFULLY FOR: distinct Storage
+📊 Final Result: Error!!
+Failed to process payment, Unit is not available. It is already reserved or occupied, Lead events unit is not available. It is already reserved or occupied, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (Storable Payments): 'Card Number' is not a valid credit card number.
+================================================================================
+
+🔒 Browser closed for distinct Storage

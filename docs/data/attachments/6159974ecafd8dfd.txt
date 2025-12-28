@@ -1,0 +1,16 @@
+🧹 Cleared browser state for next test
+
+🔍 Testing landing page: https://redrocksstorage.com/
+   Cache-busted URL: https://redrocksstorage.com/?_cache_bust=1766951177232_3meqa57k2g3
+[2025-12-28T19:46:17.232Z] 🚀 Starting navigation to: https://redrocksstorage.com/?_cache_bust=1766951177232_3meqa57k2g3
+[2025-12-28T19:46:17.232Z] 📡 Attempt 1/2 to load https://redrocksstorage.com/?_cache_bust=1766951177232_3meqa57k2g3
+[2025-12-28T19:46:21.539Z] ✅ Page loaded successfully in 4307ms
+[2025-12-28T19:46:22.658Z] ✓ Navigation complete (Total: 5426ms, Wait: 1118ms)
+Verifying: https://redrocksstorage.com/
+- Page loaded for https://redrocksstorage.com/
+- Title verified for https://redrocksstorage.com/: "Colorado Self Storage – Affordable Drive-Up & Climate-Controlled Units in Aurora, Colorado Springs & Golden"
+- Logo verified for https://redrocksstorage.com/
+- Navigation link verified for https://redrocksstorage.com/
+- CTA button verified for https://redrocksstorage.com/
+✅ Successfully verified: https://redrocksstorage.com/
+✅ Landing page verification passed for: https://redrocksstorage.com/

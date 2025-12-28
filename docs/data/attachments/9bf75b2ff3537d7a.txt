@@ -1,0 +1,16 @@
+🧹 Cleared browser state for next test
+
+🔍 Testing landing page: https://storagedepotla.com/
+   Cache-busted URL: https://storagedepotla.com/?_cache_bust=1766951206130_eid3n8mdzjw
+[2025-12-28T19:46:46.130Z] 🚀 Starting navigation to: https://storagedepotla.com/?_cache_bust=1766951206130_eid3n8mdzjw
+[2025-12-28T19:46:46.132Z] 📡 Attempt 1/2 to load https://storagedepotla.com/?_cache_bust=1766951206130_eid3n8mdzjw
+[2025-12-28T19:46:50.461Z] ✅ Page loaded successfully in 4329ms
+[2025-12-28T19:46:51.518Z] ✓ Navigation complete (Total: 5388ms, Wait: 1057ms)
+Verifying: https://storagedepotla.com/
+- Page loaded for https://storagedepotla.com/
+- Title verified for https://storagedepotla.com/: "Storage Units Hammond | Storage Units Ponchatoula"
+- Logo verified for https://storagedepotla.com/
+- Navigation link verified for https://storagedepotla.com/
+- CTA button verified for https://storagedepotla.com/
+✅ Successfully verified: https://storagedepotla.com/
+✅ Landing page verification passed for: https://storagedepotla.com/

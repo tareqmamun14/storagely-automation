@@ -1,0 +1,17 @@
+🧹 Cleared browser state for next test
+
+🔍 Testing landing page: https://modboxstorage.com/
+   Cache-busted URL: https://modboxstorage.com/?_cache_bust=1766951212365_sgz16xtnaeb
+[2025-12-28T19:46:52.365Z] 🚀 Starting navigation to: https://modboxstorage.com/?_cache_bust=1766951212365_sgz16xtnaeb
+[2025-12-28T19:46:52.365Z] 📡 Attempt 1/2 to load https://modboxstorage.com/?_cache_bust=1766951212365_sgz16xtnaeb
+[2025-12-28T19:46:55.137Z] ✅ Page loaded successfully in 2772ms
+[2025-12-28T19:46:56.169Z] ✓ Navigation complete (Total: 3804ms, Wait: 1032ms)
+Verifying: https://modboxstorage.com/
+- Page loaded for https://modboxstorage.com/
+- Title verified for https://modboxstorage.com/: "ModBox Storage"
+- Logo with role 'link' and name 'logo' not found for https://modboxstorage.com/, checking for alternative logo selectors...
+- Fallback logo verified for https://modboxstorage.com/
+- Navigation link verified for https://modboxstorage.com/
+- CTA button verified for https://modboxstorage.com/
+✅ Successfully verified: https://modboxstorage.com/
+✅ Landing page verification passed for: https://modboxstorage.com/

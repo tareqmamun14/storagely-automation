@@ -1,0 +1,134 @@
+
+================================================================================
+🏢 TESTING: first Storage
+🌐 URL: https://www.firststorage.com/storage-units/alabama/huntsville/memorial-parkway-sw
+⚙️  Platform: storEDGE
+📄 Layout: Single-Page Rent Flow
+================================================================================
+
+📍 STEP 1: Navigating to storage listing page...
+[2025-12-28T19:50:26.414Z] 🚀 Starting navigation to: https://www.firststorage.com/storage-units/alabama/huntsville/memorial-parkway-sw
+💾 Cache busting ENABLED (site supports it) - URL: https://www.firststorage.com/storage-units/alabama/huntsville/memorial-parkway-sw?cacheBust=1766951426415-44fr8fgs40d
+[2025-12-28T19:50:26.415Z] 📡 Attempting page.goto()...
+[2025-12-28T19:50:46.858Z] ✅ Navigation completed in 20444ms
+[2025-12-28T19:50:46.858Z] ✓ Successfully navigated to storage listing page
+✅ Navigation completed successfully
+
+📍 STEP 2: Clicking RENT button...
+
+======================================================================
+[2025-12-28T19:50:46.859Z] 🎯 RENT BUTTON SEARCH START
+📍 Current URL: https://www.firststorage.com/storage-units/alabama/huntsville/memorial-parkway-sw?cacheBust=1766951426415-44fr8fgs40d
+======================================================================
+
+
+🚨 [0ms] SINGLE-PAGE CUSTOMER DETECTED
+   Using dedicated single-page button search strategy
+⏳ [2ms] Searching for single-page RENT button...
+✅ [6ms] DOM loaded
+✅ [3586ms] Single-page strategy (blackBtnStoragely): Found 27 button(s)
+
+📋 [4506ms] Button Text: "RENT NOW"
+✅ [4829ms] Button scrolled into view
+
+🖱️  [4829ms] CLICKING RENT BUTTON...
+✅ [6538ms] Click executed successfully
+⏳ [6538ms] Waiting for single-page form to load...
+
+🌐 [8247ms] Current URL: https://www.firststorage.com/storage-units/alabama/huntsville/memorial-parkway-sw/step-four?first-storage=&unit_id=4361821
+======================================================================
+
+[2025-12-28T19:50:55.106Z] ✅ Single-page rent button completed (8247ms)
+✅ RENT button clicked successfully
+   Navigated to: https://www.firststorage.com/storage-units/alabama/huntsville/memorial-parkway-sw/step-four?first-storage=&unit_id=4361821
+
+📍 STEP 3: Filling single-page rental form...
+   This includes: Tenant Details + Driver's License + Payment + Agreements
+[2025-12-28T19:50:58.208Z] 📝 Starting single-page rental form fill...
+[2025-12-28T19:51:00.418Z] 📋 Filling tenant details...
+
+📍 SECTION 1: Filling Tenant Details...
+  ✓ Filled First Name: Test
+  ✓ Filled Last Name: Testing_Tareq
+  ✓ Filled Email: tareq@storagely.io
+  ✓ Filled Phone: 5551234567
+  ✓ Filled Address: 6255 Towncenter Drive Suite 831
+  ✓ Filled City: Clemmons
+  ✓ Selected State: Alabama
+  ✓ Filled Zip: 27012
+✅ Tenant details section completed
+[2025-12-28T19:51:03.581Z] 🪪 Filling driver's license details...
+
+📍 SECTION 2: Checking for Driver's License Details section...
+  ✓ Driver's License section is enabled, proceeding to fill...
+  ✓ Filled Driver's License Number: 123456789
+  ✓ Selected Issuing State: Alabama
+  ✓ Selected Birth Month: January
+  ✓ Selected Birth Day: 1
+  ✓ Selected Birth Year: 2025
+✅ Driver's license details completed
+[2025-12-28T19:51:09.850Z] 💳 Filling payment details...
+
+📍 SECTION 3: Filling Payment Details...
+  ✓ Filled Card Number: 4482130130935591
+  ✓ Filled Expiry: 04 / 29
+  ✓ Filled CVV: 471
+  ✓ Typed Billing Address: 6255 Towncenter Drive Suite 831
+  ✓ Selected first address from dropdown
+  ✓ Filled Billing City: Clemmons
+  ✓ Selected Billing State: North Carolina
+  ✓ Filled Billing Zip: 27012
+✅ Payment details completed
+[2025-12-28T19:51:13.714Z] ✅ Enabling agreement toggle...
+
+📍 SECTION 4: Enabling Agreement Toggle...
+  ✓ Clicked label for checkbox "lease_disclaimer"
+✅ Agreement toggle completed
+[2025-12-28T19:51:13.958Z] ✅ Single-page rental form completed
+✅ Single-page rental form completed successfully
+
+📍 STEP 4: Submitting payment and checking for errors...
+[2025-12-28T19:51:13.959Z] 📍 FINAL STEP: Clicking RENT NOW button...
+Chat iframe not found or an error occurred, proceeding without minimizing.
+[2025-12-28T19:51:19.588Z] 🖱️ Clicking RENT NOW...
+[2025-12-28T19:51:19.724Z] ✓ RENT NOW button clicked
+[2025-12-28T19:51:19.724Z] 🔍 Detecting error...
+🔍 Starting error detection (OPTIMIZED)...
+📡 Active polling for errors...
+✓ Error found at poll 11
+✓ Error detected via polling
+[2025-12-28T19:51:27.347Z] ✅ Error detected: Failed to process payment, Unit is not available. It is already reserved or occupied, Lead events unit is not available. It is already reserved or occupied, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (Storable Payments): 'Card Number' is not a valid credit card number.
+✅ Payment submission completed
+
+✅ TEST COMPLETED SUCCESSFULLY FOR: first Storage
+📊 Final Result: Failed to process payment, Unit is not available. It is already reserved or occupied, Lead events unit is not available. It is already reserved or occupied, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (Storable Payments): 'Card Number' is not a valid credit card number.
+================================================================================
+
+
+====================================================================================================
+🏁 SINGLE-PAGE RENT VERIFICATION - CONSOLIDATED SUMMARY
+====================================================================================================
+
+📊 TEST EXECUTION SUMMARY:
+   Total Tests: 1
+   ✅ Successful: 1
+   ❌ Failed: 0
+   📈 Success Rate: 100.0%
+
+📋 DETAILED RESULTS:
+====================================================================================================
+Company                   | Platform   | Status   | Error Message
+====================================================================================================
+first Storage             | storEDGE   | ✅ PASS   | Failed to process payment, Unit is not availabl...
+====================================================================================================
+
+🚨 ALL ERROR MESSAGES:
+====================================================================================================
+
+1. ⚠️  WARNING - first Storage (storEDGE)
+   URL: https://www.firststorage.com/storage-units/alabama/huntsville/memorial-parkway-sw
+   Message: Failed to process payment, Unit is not available. It is already reserved or occupied, Lead events unit is not available. It is already reserved or occupied, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (Storable Payments): 'Card Number' is not a valid credit card number.
+   Time: 12/29/2025, 1:51:27 AM
+====================================================================================================
+====================================================================================================
+

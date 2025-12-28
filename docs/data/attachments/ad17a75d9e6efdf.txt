@@ -1,0 +1,36 @@
+
+================================================================================
+🏢 TESTING: rhino- Storage
+🌐 URL: https://rhino-storage.com/storage-units/louisiana/covington/philip-drive
+⚙️  Platform: SiteLink
+================================================================================
+📍 STEP 1: Navigating to storage listing page...
+[2025-12-28T19:48:11.050Z] 🚀 Starting navigation to: https://rhino-storage.com/storage-units/louisiana/covington/philip-drive
+💾 Cache busting ENABLED (site supports it) - URL: https://rhino-storage.com/storage-units/louisiana/covington/philip-drive?cacheBust=1766951291050-4wpn74brpq
+[2025-12-28T19:48:11.050Z] 📡 Attempting page.goto()...
+[2025-12-28T19:48:17.035Z] ✅ Navigation completed in 5985ms
+[2025-12-28T19:48:17.038Z] ✓ Successfully navigated to storage listing page
+✅ Navigation completed successfully
+📍 STEP 2: Clicking rent button...
+
+======================================================================
+[2025-12-28T19:48:17.038Z] 🎯 RENT BUTTON SEARCH START
+📍 Current URL: https://rhino-storage.com/storage-units/louisiana/covington/philip-drive?cacheBust=1766951291050-4wpn74brpq
+======================================================================
+
+
+🚨 [0ms] RHINO STORAGE DETECTED - Using hardcoded Join Waitlist flow
+   This customer does NOT have Rent buttons, only Join Waitlist
+✅ [285ms] Join Waitlist button found
+✅ [1387ms] Join Waitlist button clicked
+⏳ [2436ms] Waiting for Inquiry modal to appear...
+✅ [2464ms] VERIFICATION PASSED: Inquiry modal with correct label found!
+   Modal element: <div class="modal-title ReservePopUp" id="exampleModalLabel">Inquiry</div>
+======================================================================
+
+[2025-12-28T19:48:19.502Z] ✅ Rent button completed (2464ms) - RHINO WAITLIST FLOW
+✅ Rent button clicked successfully
+ℹ️  This site uses JOIN WAITLIST instead of direct rental
+✅ TEST COMPLETED (Join Waitlist scenario) FOR: rhino- Storage
+================================================================================
+

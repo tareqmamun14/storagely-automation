@@ -1,0 +1,16 @@
+🧹 Cleared browser state for next test
+
+🔍 Testing landing page: https://gatekeeperstoragega.com/
+   Cache-busted URL: https://gatekeeperstoragega.com/?_cache_bust=1766951188316_8zk6f6osmz3
+[2025-12-28T19:46:28.316Z] 🚀 Starting navigation to: https://gatekeeperstoragega.com/?_cache_bust=1766951188316_8zk6f6osmz3
+[2025-12-28T19:46:28.325Z] 📡 Attempt 1/2 to load https://gatekeeperstoragega.com/?_cache_bust=1766951188316_8zk6f6osmz3
+[2025-12-28T19:46:32.550Z] ✅ Page loaded successfully in 4224ms
+[2025-12-28T19:46:33.607Z] ✓ Navigation complete (Total: 5291ms, Wait: 1056ms)
+Verifying: https://gatekeeperstoragega.com/
+- Page loaded for https://gatekeeperstoragega.com/
+- Title verified for https://gatekeeperstoragega.com/: "Storage Units Peachtree City | Gatekeeper Self-Storage"
+- Logo verified for https://gatekeeperstoragega.com/
+- Navigation link verified for https://gatekeeperstoragega.com/
+- CTA button verified for https://gatekeeperstoragega.com/
+✅ Successfully verified: https://gatekeeperstoragega.com/
+✅ Landing page verification passed for: https://gatekeeperstoragega.com/

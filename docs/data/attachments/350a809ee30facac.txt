@@ -1,0 +1,129 @@
+
+================================================================================
+🏢 TESTING: columbiaself Storage
+🌐 URL: https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue
+⚙️  Platform: storEDGE
+📄 Layout: Single-Page Rent Flow
+================================================================================
+
+📍 STEP 1: Navigating to storage listing page...
+[2025-12-28T19:51:28.797Z] 🚀 Starting navigation to: https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue
+💾 Cache busting ENABLED (site supports it) - URL: https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue?cacheBust=1766951488797-y8b7x2i8wvm
+[2025-12-28T19:51:28.797Z] 📡 Attempting page.goto()...
+[2025-12-28T19:51:53.690Z] ✅ Navigation completed in 24893ms
+[2025-12-28T19:51:53.691Z] ✓ Successfully navigated to storage listing page
+✅ Navigation completed successfully
+
+📍 STEP 2: Clicking RENT button...
+
+======================================================================
+[2025-12-28T19:51:53.692Z] 🎯 RENT BUTTON SEARCH START
+📍 Current URL: https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue?cacheBust=1766951488797-y8b7x2i8wvm
+======================================================================
+
+
+🚨 [2ms] SINGLE-PAGE CUSTOMER DETECTED
+   Using dedicated single-page button search strategy
+⏳ [2ms] Searching for single-page RENT button...
+✅ [9ms] DOM loaded
+✅ [2938ms] Single-page strategy (blackBtnStoragely): Found 15 button(s)
+
+📋 [3138ms] Button Text: "rent"
+✅ [3396ms] Button scrolled into view
+
+🖱️  [3396ms] CLICKING RENT BUTTON...
+✅ [5331ms] Click executed successfully
+⏳ [5331ms] Waiting for single-page form to load...
+
+🌐 [6980ms] Current URL: https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue/step-four?columbia-self-storage=&unit_id=4467330
+======================================================================
+
+[2025-12-28T19:52:00.671Z] ✅ Single-page rent button completed (6980ms)
+✅ RENT button clicked successfully
+   Navigated to: https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue/step-four?columbia-self-storage=&unit_id=4467330
+
+📍 STEP 3: Filling single-page rental form...
+   This includes: Tenant Details + Driver's License + Payment + Agreements
+[2025-12-28T19:52:03.771Z] 📝 Starting single-page rental form fill...
+[2025-12-28T19:52:05.793Z] 📋 Filling tenant details...
+
+📍 SECTION 1: Filling Tenant Details...
+  ✓ Filled First Name: Test
+  ✓ Filled Last Name: Testing_Tareq
+  ✓ Filled Email: tareq@storagely.io
+  ✓ Filled Phone: 5551234567
+  ✓ Filled Address: 6255 Towncenter Drive Suite 831
+  ✓ Filled City: Clemmons
+  ✓ Selected State: Alabama
+  ✓ Filled Zip: 27012
+✅ Tenant details section completed
+[2025-12-28T19:52:07.937Z] 🪪 Filling driver's license details...
+
+📍 SECTION 2: Checking for Driver's License Details section...
+  ⚠️  Driver's License Number field not found - section not enabled for this platform
+  ✓ Skipping driver's license section
+[2025-12-28T19:52:07.954Z] 💳 Filling payment details...
+
+📍 SECTION 3: Filling Payment Details...
+  ✓ Filled Card Number: 4482130130935591
+  ✓ Filled Expiry: 04 / 29
+  ✓ Filled CVV: 471
+  ✓ Typed Billing Address: 6255 Towncenter Drive Suite 831
+  ✓ Selected first address from dropdown
+  ✓ Filled Billing City: Clemmons
+  ✓ Selected Billing State: North Carolina
+  ✓ Filled Billing Zip: 27012
+✅ Payment details completed
+[2025-12-28T19:52:11.434Z] ✅ Enabling agreement toggle...
+
+📍 SECTION 4: Enabling Agreement Toggle...
+  ✓ Clicked label for checkbox "lease_disclaimer"
+✅ Agreement toggle completed
+[2025-12-28T19:52:11.579Z] ✅ Single-page rental form completed
+✅ Single-page rental form completed successfully
+
+📍 STEP 4: Submitting payment and checking for errors...
+[2025-12-28T19:52:11.579Z] 📍 FINAL STEP: Clicking RENT NOW button...
+Chat iframe not found or an error occurred, proceeding without minimizing.
+[2025-12-28T19:52:17.161Z] 🖱️ Clicking RENT NOW...
+[2025-12-28T19:52:17.217Z] ✓ RENT NOW button clicked
+[2025-12-28T19:52:17.217Z] 🔍 Detecting error...
+🔍 Starting error detection (OPTIMIZED)...
+📡 Active polling for errors...
+✓ Error found at poll 12
+✓ Error detected via polling
+[2025-12-28T19:52:24.747Z] ✅ Error detected: Failed to process payment, Unit is not available. It is already reserved or occupied, Lead events unit is not available. It is already reserved or occupied, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (Sage Payments Solutions): Payment Error: INVALID CARDNUMBER
+✅ Payment submission completed
+
+✅ TEST COMPLETED SUCCESSFULLY FOR: columbiaself Storage
+📊 Final Result: Failed to process payment, Unit is not available. It is already reserved or occupied, Lead events unit is not available. It is already reserved or occupied, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (Sage Payments Solutions): Payment Error: INVALID CARDNUMBER
+================================================================================
+
+
+====================================================================================================
+🏁 SINGLE-PAGE RENT VERIFICATION - CONSOLIDATED SUMMARY
+====================================================================================================
+
+📊 TEST EXECUTION SUMMARY:
+   Total Tests: 1
+   ✅ Successful: 1
+   ❌ Failed: 0
+   📈 Success Rate: 100.0%
+
+📋 DETAILED RESULTS:
+====================================================================================================
+Company                   | Platform   | Status   | Error Message
+====================================================================================================
+columbiaself Storage      | storEDGE   | ✅ PASS   | Failed to process payment, Unit is not availabl...
+====================================================================================================
+
+🚨 ALL ERROR MESSAGES:
+====================================================================================================
+
+1. ⚠️  WARNING - columbiaself Storage (storEDGE)
+   URL: https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue
+   Message: Failed to process payment, Unit is not available. It is already reserved or occupied, Lead events unit is not available. It is already reserved or occupied, Lead unit is not available, Could not initialize transaction, Payment method Could not save payment method (Sage Payments Solutions): Payment Error: INVALID CARDNUMBER
+   Time: 12/29/2025, 1:52:24 AM
+====================================================================================================
+====================================================================================================
+

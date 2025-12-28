@@ -1,0 +1,17 @@
+🧹 Cleared browser state for next test
+
+🔍 Testing landing page: https://bluebirdstorage.ca/
+   Cache-busted URL: https://bluebirdstorage.ca/?_cache_bust=1766951171926_l741bfriavp
+[2025-12-28T19:46:11.926Z] 🚀 Starting navigation to: https://bluebirdstorage.ca/?_cache_bust=1766951171926_l741bfriavp
+[2025-12-28T19:46:11.926Z] 📡 Attempt 1/2 to load https://bluebirdstorage.ca/?_cache_bust=1766951171926_l741bfriavp
+[2025-12-28T19:46:17.824Z] ✅ Page loaded successfully in 5898ms
+[2025-12-28T19:46:19.172Z] ✓ Navigation complete (Total: 7246ms, Wait: 1348ms)
+Verifying: https://bluebirdstorage.ca/
+- Page loaded for https://bluebirdstorage.ca/
+- Title verified for https://bluebirdstorage.ca/: "Self Storage Units | Bluebird Storage"
+- Logo with role 'link' and name 'logo' not found for https://bluebirdstorage.ca/, checking for alternative logo selectors...
+- Fallback logo verified for https://bluebirdstorage.ca/
+- Navigation link verified for https://bluebirdstorage.ca/
+- CTA button verified for https://bluebirdstorage.ca/
+✅ Successfully verified: https://bluebirdstorage.ca/
+✅ Landing page verification passed for: https://bluebirdstorage.ca/

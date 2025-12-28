@@ -1,0 +1,26 @@
+
+🔍 Testing Mini Mall : SiteLink
+📋 Expected: "First Month Free"
+🌐 Navigating to: https://app.storagely.io/mini-mall-storage/storage-units/alabama/courtland/highway-33?_cache_bust=1766951590765_n1wv236jhnt
+📍 Found 4 elements with selector: .page_discount
+✅ Mini Mall : SiteLink | Found matching banner: "First Month Free"
+
+======================================================================
+🏷️  DISCOUNT VERIFICATION RESULTS SUMMARY
+======================================================================
+✅ Total Passed: 2
+❌ Total Failed: 0
+📋 Total Tests: 2
+
+✅ SUCCESSFUL VERIFICATIONS:
+   1. Customer: First Storage : StorEDGE
+      Expected: "Sale"
+      Found: "First Month Free
+Sale Ends Dec 31st"
+
+   2. Customer: Mini Mall : SiteLink
+      Expected: "First Month Free"
+      Found: "First Month Free"
+
+======================================================================
+

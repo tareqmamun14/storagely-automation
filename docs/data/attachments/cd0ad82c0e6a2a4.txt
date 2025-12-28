@@ -1,0 +1,16 @@
+🧹 Cleared browser state for next test
+
+🔍 Testing landing page: https://rhino-storage.com/
+   Cache-busted URL: https://rhino-storage.com/?_cache_bust=1766951200280_di9lzxlfub
+[2025-12-28T19:46:40.280Z] 🚀 Starting navigation to: https://rhino-storage.com/?_cache_bust=1766951200280_di9lzxlfub
+[2025-12-28T19:46:40.280Z] 📡 Attempt 1/2 to load https://rhino-storage.com/?_cache_bust=1766951200280_di9lzxlfub
+[2025-12-28T19:46:44.431Z] ✅ Page loaded successfully in 4151ms
+[2025-12-28T19:46:45.458Z] ✓ Navigation complete (Total: 5178ms, Wait: 1027ms)
+Verifying: https://rhino-storage.com/
+- Page loaded for https://rhino-storage.com/
+- Title verified for https://rhino-storage.com/: "RV, Boat & Vehicle Storage Covington - Secure & Affordable Solutions for Your Needs"
+- Logo verified for https://rhino-storage.com/
+- Navigation link verified for https://rhino-storage.com/
+- CTA button verified for https://rhino-storage.com/
+✅ Successfully verified: https://rhino-storage.com/
+✅ Landing page verification passed for: https://rhino-storage.com/
