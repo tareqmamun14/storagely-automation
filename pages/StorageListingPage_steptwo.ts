@@ -43,15 +43,24 @@ export class StorageListingPage extends BasePage {
     const startTime = Date.now();
     console.log(`[${new Date().toISOString()}] 🚀 Starting navigation to: ${url}`);
     
-    // DISABLED: Cache busting causes ERR_ABORTED on some sites (10federal, bluebird)
-    // const randomQueryParam = `cacheBust=${Date.now()}-${Math.random().toString(36).substring(2)}`;
-    // const urlWithQuery = url.includes('?') 
-    //   ? `${url}&${randomQueryParam}` 
-    //   : `${url}?${randomQueryParam}`;
-    // console.log(`💾 Cache busting ENABLED - URL: ${urlWithQuery}`);
+    // SMART CACHE BUSTING: Sites that have issues with cache busting query params
+    // These sites return ERR_ABORTED when query params are added
+    const sitesWithQueryParamIssues = ['10federal', 'bluebird'];
+    const shouldAddCacheBust = !sitesWithQueryParamIssues.some(site => url.toLowerCase().includes(site));
     
-    const urlWithQuery = url;
-    console.log(`🌐 Direct navigation (no cache bust): ${urlWithQuery}`);
+    let urlWithQuery = url;
+    
+    if (shouldAddCacheBust) {
+      // Add cache busting for sites that support it
+      const randomQueryParam = `cacheBust=${Date.now()}-${Math.random().toString(36).substring(2)}`;
+      urlWithQuery = url.includes('?') 
+        ? `${url}&${randomQueryParam}` 
+        : `${url}?${randomQueryParam}`;
+      console.log(`💾 Cache busting ENABLED (site supports it) - URL: ${urlWithQuery}`);
+    } else {
+      // No cache busting for problematic sites (but browser cache will still be clear by Playwright default)
+      console.log(`🌐 Direct navigation (cache busting disabled for this site) - URL: ${urlWithQuery}`);
+    }
     
     try {
       console.log(`[${new Date().toISOString()}] 📡 Attempting page.goto()...`);
@@ -125,7 +134,7 @@ export class StorageListingPage extends BasePage {
       // SINGLE-PAGE CUSTOMER DETECTION
       // ==========================================
       // List of single-page customer domains
-      const singlePageDomains = ['firststorage.com', 'columbiaselfstorage.com'];
+      const singlePageDomains = ['firststorage.com', 'columbiaselfstorage.com', 'bluebirdstorage.ca'];
       const pageUrl = this.page.url();
       const isSinglePageCustomer = singlePageDomains.some(domain => pageUrl.includes(domain));
       
@@ -184,9 +193,10 @@ export class StorageListingPage extends BasePage {
       
       // STRATEGY 1: Look for direct RENT links on step_four (storEDGE like BestBox, 10Federal, or SiteLink like Gatekeeper)
       // Matches: <a href="/step_four?...">rent</a> or <a class="btn blackBtnStoragely" href="/step_four">rent</a>
-      let rentButtons = this.page.locator('a[href*="step_four"]').filter({
-        hasText: /^rent$/i
-      }).or(this.page.locator('a.blackBtnStoragely[href*="step_four"]'));
+      // Updated to handle text inside child elements (like custom tags) and ensure visibility
+      let rentButtons = this.page.locator('a[href*="step_four"]:has-text("rent"), a[href*="step-four"]:has-text("rent")').filter({
+        has: this.page.locator(':visible')
+      });
       
       let count = await rentButtons.count().catch(() => 0);
       console.log(`✅ [${Date.now() - startTime}ms] Strategy 1 (direct step_four rent): Found ${count} button(s)`);
@@ -194,21 +204,41 @@ export class StorageListingPage extends BasePage {
       // STRATEGY 2: Look for "Inquiry" buttons that will dynamically change to "Rent" (Gatekeeper/SiteLink platforms)
       // GATEKEEPER SPECIFIC: Button shows as "Inquiry" initially, then changes text to "Rent" after page stabilization (lag/timing)
       // Solution: Click the Inquiry button which will transform into Rent button behavior
+      // IMPORTANT: Only match VISIBLE Inquiry buttons to avoid hidden form elements
       if (count === 0) {
         console.log(`⏳ [${Date.now() - startTime}ms] No direct RENT found, checking for INQUIRY buttons (Gatekeeper dynamic)...`);
-        rentButtons = this.page.locator('a[href*="step_four"]:has-text("Inquiry")').or(
-          this.page.locator('button[href*="step_four"]:has-text("Inquiry")')
+        
+        // First check if any Inquiry buttons exist and are visible
+        const inquiryLocator = this.page.locator('a[href*="step_four"]:has-text("Inquiry"), a[href*="step-four"]:has-text("Inquiry")').or(
+          this.page.locator('button[href*="step_four"]:has-text("Inquiry"), button[href*="step-four"]:has-text("Inquiry")')
         ).or(
           this.page.locator('a:has-text("Inquiry")[href*="rental"]')
         ).or(
           this.page.locator('button:has-text("Inquiry")')
         );
-        count = await rentButtons.count().catch(() => 0);
+        
+        count = await inquiryLocator.count().catch(() => 0);
         console.log(`✅ [${Date.now() - startTime}ms] Strategy 2 (inquiry/dynamic buttons): Found ${count} button(s)`);
         
         if (count > 0) {
-          console.log(`⚠️  GATEKEEPER FLOW: INQUIRY buttons found - these will dynamically change to RENT after clicking`);
-          console.log(`   Button will be clicked when stable (waiting for text change to complete)`);
+          // Filter to only visible buttons
+          let visibleCount = 0;
+          for (let i = 0; i < count; i++) {
+            const isVisible = await inquiryLocator.nth(i).isVisible().catch(() => false);
+            if (isVisible) {
+              visibleCount++;
+            }
+          }
+          
+          if (visibleCount > 0) {
+            // Use only visible Inquiry buttons
+            rentButtons = inquiryLocator.locator('visible=true').first();
+            console.log(`⚠️  GATEKEEPER FLOW: ${visibleCount} visible INQUIRY button(s) found - these will dynamically change to RENT after clicking`);
+            console.log(`   Button will be clicked when stable (waiting for text change to complete)`);
+          } else {
+            console.log(`⚠️  Found ${count} Inquiry button(s) but none are visible - skipping to next strategy`);
+            count = 0; // Reset count to trigger next strategy
+          }
         }
       }
       
@@ -480,12 +510,13 @@ export class StorageListingPage extends BasePage {
       console.log(`\n📋 [${Date.now() - startTime}ms] Button Text: "${buttonText?.trim()}"`);
       
       // Scroll button into view - for single-page layouts, buttons should already be visible
-      // but we scroll to ensure it's in viewport
+      // Use shorter timeout and proceed quickly if button is already visible
       try {
-        await rentButtonLocator.scrollIntoViewIfNeeded({ timeout: 5000 });
+        await rentButtonLocator.scrollIntoViewIfNeeded({ timeout: 3000 });
         console.log(`✅ [${Date.now() - startTime}ms] Button scrolled into view`);
       } catch (scrollError) {
-        console.log(`⚠️  [${Date.now() - startTime}ms] Scroll timeout, button might still be clickable`);
+        // Button might already be visible or scroll failed - that's ok, just proceed
+        console.log(`⏳ [${Date.now() - startTime}ms] Scroll check done, button should be clickable`);
       }
       
       // Click the button

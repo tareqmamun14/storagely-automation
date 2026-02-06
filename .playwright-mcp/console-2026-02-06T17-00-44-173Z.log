@@ -1,0 +1,14 @@
+[    1227ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/admin/custom.css?v=1770397243:0
+[    1761ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/favicon2221721936313.ico:0
+[   21112ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/admin/custom.css?v=1770397263:0
+[   21162ms] TypeError: Cannot read properties of null (reading 'addEventListener')
+    at https://test.staging.storagely-api.com/assets/plugins/sidemenu/sidemenu.js:272:11
+[   21174ms] Error: no element is specified to initialize PerfectScrollbar
+    at new PerfectScrollbar (https://test.staging.storagely-api.com/assets/plugins/p-scroll/perfect-scrollbar.js:1127:11)
+    at https://test.staging.storagely-api.com/assets/plugins/p-scroll/pscroll.js:4:13
+    at https://test.staging.storagely-api.com/assets/plugins/p-scroll/pscroll.js:12:3
+[   21174ms] Error: no element is specified to initialize PerfectScrollbar
+    at new PerfectScrollbar (https://test.staging.storagely-api.com/assets/plugins/p-scroll/perfect-scrollbar.js:1127:11)
+    at https://test.staging.storagely-api.com/assets/plugins/p-scroll/pscroll-1.js:4:15
+    at https://test.staging.storagely-api.com/assets/plugins/p-scroll/pscroll-1.js:10:3
+[   21511ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/admin_logo2221721936313.png:0

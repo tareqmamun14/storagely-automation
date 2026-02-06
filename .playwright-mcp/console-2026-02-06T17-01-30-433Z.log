@@ -1,0 +1,20 @@
+[     884ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/admin/custom.css?v=1770397290:0
+[    1425ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/favicon3461756315076.ico:0
+[   22393ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/admin/custom.css?v=1770397309:0
+[   22401ms] ReferenceError: defaultShow is not defined
+    at showWidgetOnStart (https://test.staging.storagely-api.com/storagelyselfstorage/admin:330:9)
+    at initWidget (https://test.staging.storagely-api.com/storagelyselfstorage/admin:230:17)
+    at https://test.staging.storagely-api.com/storagelyselfstorage/admin:235:5
+[   22881ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/admin_logo3461756315029.webp:0
+[   23385ms] TypeError: Cannot read properties of null (reading 'addEventListener')
+    at https://test.staging.storagely-api.com/assets/plugins/sidemenu/sidemenu.js:272:11
+[   23401ms] Error: no element is specified to initialize PerfectScrollbar
+    at new PerfectScrollbar (https://test.staging.storagely-api.com/assets/plugins/p-scroll/perfect-scrollbar.js:1127:11)
+    at https://test.staging.storagely-api.com/assets/plugins/p-scroll/pscroll.js:4:13
+    at https://test.staging.storagely-api.com/assets/plugins/p-scroll/pscroll.js:12:3
+[   23402ms] Error: no element is specified to initialize PerfectScrollbar
+    at new PerfectScrollbar (https://test.staging.storagely-api.com/assets/plugins/p-scroll/perfect-scrollbar.js:1127:11)
+    at https://test.staging.storagely-api.com/assets/plugins/p-scroll/pscroll-1.js:4:15
+    at https://test.staging.storagely-api.com/assets/plugins/p-scroll/pscroll-1.js:10:3
+[   54617ms] TypeError: Cannot read properties of null (reading 'id')
+    at document.onclick (https://test.staging.storagely-api.com/storagelyselfstorage/admin:1194:39)

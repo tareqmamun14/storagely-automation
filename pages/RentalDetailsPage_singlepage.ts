@@ -56,7 +56,9 @@ export class RentalDetailsPageSinglePage extends BasePage {
   
   private get stateField() {
     return this.page.getByRole('textbox', { name: 'State', exact: true })
-      .or(this.page.locator('input[name="state"]'));
+      .or(this.page.getByRole('textbox', { name: 'Province', exact: true }))
+      .or(this.page.locator('input[name="state"]'))
+      .or(this.page.locator('input[name="province"]'));
   }
   
   private get zipField() {
@@ -282,15 +284,31 @@ export class RentalDetailsPageSinglePage extends BasePage {
       console.log('  - City field not found, skipping');
     }
     
-    // State dropdown - click field, then click Alabama option
+    // State/Province dropdown - select appropriate value based on location
     try {
+      let stateValue = 'Alabama'; // Default
+      let fieldLabel = 'State';
+      
+      // Determine which province/state to use based on current URL
+      const currentUrl = this.page.url();
+      if (currentUrl.includes('bluebirdstorage.ca')) {
+        stateValue = userData.province.alberta;
+        fieldLabel = 'Province';
+      } else if (currentUrl.includes('columbiaselfstorage.com')) {
+        stateValue = userData.province.newJersey;
+      } else if (currentUrl.includes('firststorage.com')) {
+        stateValue = userData.province.alabama;
+      } else if (userData.province.alabama) {
+        stateValue = userData.province.alabama;
+      }
+      
       await this.selectDropdownOption(
         this.stateField,
-        'Alabama',
-        'State'
+        stateValue,
+        fieldLabel
       );
     } catch {
-      console.log('  - State field not found, skipping');
+      console.log('  - State/Province field not found, skipping');
     }
     
     try {
@@ -380,15 +398,26 @@ export class RentalDetailsPageSinglePage extends BasePage {
   ): Promise<void> {
     await field.scrollIntoViewIfNeeded();
     await field.click();
-    await this.wait(1000);
     
-    // Try paragraph filter first (most common pattern)
+    // Strategy 1: Use data-id attribute (most reliable and fast)
+    try {
+      await this.page.locator('[data-id="dropdown-list-container"]').waitFor({ state: 'visible', timeout: 1500 });
+      const option = this.page.locator('[data-id="dropdown-list-item"]').filter({ hasText: optionText });
+      await option.first().click({ timeout: 1000 });
+      console.log(`  ✓ Selected ${fieldName}: ${optionText}`);
+      return;
+    } catch (error) {
+      // Fallback to original method
+    }
+    
+    // Strategy 2: Original paragraph filter method
     try {
       const option = exactMatch
         ? this.page.getByText(optionText, { exact: true })
         : this.page.getByRole('paragraph').filter({ hasText: optionText });
       
-      await option.click();
+      await option.first().waitFor({ state: 'visible', timeout: 2000 });
+      await option.first().click({ timeout: 2000 });
       console.log(`  ✓ Selected ${fieldName}: ${optionText}`);
     } catch (error) {
       // Fallback: try direct text match
@@ -492,16 +521,24 @@ export class RentalDetailsPageSinglePage extends BasePage {
     
     // Billing State - click field, then select appropriate state
     try {
-      // Determine which state to use based on province object
+      // Determine which state to use based on current URL
       let stateName = 'North Carolina'; // Default for Clemmons address
-      if (province.northCarolina) stateName = province.northCarolina;
-      else if (province.alabama) stateName = province.alabama;
-      else if (province.southCarolina) stateName = province.southCarolina;
+      let fieldLabel = 'Billing State';
+      const currentUrl = this.page.url();
+      
+      if (currentUrl.includes('bluebirdstorage.ca')) {
+        stateName = province.alberta;
+        fieldLabel = 'Billing Province';
+      } else if (currentUrl.includes('columbiaselfstorage.com')) {
+        stateName = province.newJersey;
+      } else if (currentUrl.includes('firststorage.com')) {
+        stateName = province.alabama;
+      }
       
       await this.selectDropdownOption(
         this.billingStateField,
         stateName,
-        'Billing State'
+        fieldLabel
       );
     } catch {
       console.log('  - Billing state not found, skipping');
@@ -529,7 +566,31 @@ export class RentalDetailsPageSinglePage extends BasePage {
   private async enableAgreementToggle(): Promise<void> {
     console.log('\n📍 SECTION 4: Enabling Agreement Toggle...');
     
-    // Strategy 1: Fast check for common checkbox IDs (most common in single-page)
+    // Strategy 1: SiteLink format (Bluebird) - Fast path for "I understand" text
+    try {
+      const checkbox = this.page.locator('input[type="checkbox"]').filter({
+        has: this.page.locator('text=/I understand.*failure to complete.*required agreements/i')
+      }).first();
+      
+      const checkboxCount = await checkbox.count().catch(() => 0);
+      if (checkboxCount > 0) {
+        const isChecked = await checkbox.isChecked().catch(() => false);
+        if (!isChecked) {
+          await checkbox.check({ force: true, timeout: 1000 });
+          console.log('  ✓ Checked agreement checkbox (SiteLink)');
+          console.log('✅ Agreement toggle completed');
+          return;
+        } else {
+          console.log('  ✓ Agreement checkbox already checked');
+          console.log('✅ Agreement toggle completed');
+          return;
+        }
+      }
+    } catch (error) {
+      // Continue to next strategy
+    }
+    
+    // Strategy 2: Fast check for common checkbox IDs (storEDGE and others)
     try {
       const commonIds = ['lease_disclaimer', 'agreement', 'terms_checkbox', 'lease_agreement'];
       
@@ -564,24 +625,30 @@ export class RentalDetailsPageSinglePage extends BasePage {
     
     // Strategy 2: SiteLink format - Find checkbox near "I understand" text
     try {
-      const agreementText = this.page.locator('text=/I understand.*failure to complete.*required agreements/i');
+      const agreementText = this.page.locator('text=/I understand.*failure to complete.*required agreements/i').first();
+      const textCount = await agreementText.count().catch(() => 0);
       
-      if (await agreementText.count() > 0) {
-        const container = agreementText.locator('xpath=ancestor::div[.//input[@type="checkbox"]][1]').first()
-          .or(agreementText.locator('xpath=..'));
-        
+      if (textCount > 0) {
+        const container = agreementText.locator('xpath=ancestor::div[.//input[@type="checkbox"]][1]').first();
         const checkbox = container.locator('input[type="checkbox"]').first();
         
-        if (await checkbox.count() > 0) {
-          const isChecked = await checkbox.isChecked();
-          const checkboxId = await checkbox.getAttribute('id').catch(() => null);
+        // Wait for checkbox to be available
+        await checkbox.waitFor({ state: 'attached', timeout: 1000 }).catch(() => {});
+        const checkboxCount = await checkbox.count().catch(() => 0);
+        
+        if (checkboxCount > 0) {
+          const isChecked = await checkbox.isChecked().catch(() => false);
           
           if (!isChecked) {
+            const checkboxId = await checkbox.getAttribute('id').catch(() => null);
+            
             if (checkboxId) {
-              const label = this.page.locator(`label[for="${checkboxId}"]`);
-              if (await label.count() > 0) {
+              const label = this.page.locator(`label[for="${checkboxId}"]`).first();
+              await label.waitFor({ state: 'visible', timeout: 1000 }).catch(() => {});
+              const labelCount = await label.count().catch(() => 0);
+              if (labelCount > 0) {
                 await label.scrollIntoViewIfNeeded();
-                await label.click();
+                await label.click({ timeout: 2000 });
                 console.log(`  ✓ Clicked label for checkbox "${checkboxId}"`);
                 console.log('✅ Agreement toggle completed');
                 return;
@@ -589,7 +656,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
             }
             
             await checkbox.scrollIntoViewIfNeeded();
-            await checkbox.check({ force: true });
+            await checkbox.check({ force: true, timeout: 2000 });
             console.log('  ✓ Checked agreement checkbox');
           } else {
             console.log('  ✓ Agreement checkbox already checked');

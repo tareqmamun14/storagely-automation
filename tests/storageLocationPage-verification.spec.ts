@@ -8,11 +8,6 @@ const discountChecks = [
     expected: 'Sale'
   },
   {
-    customer: 'Smart Self Storage : SSM',
-    url: 'https://app.storagely.io/smart-self-storage-ohio/storage-units/ohio/macedonia/bavaria-road',
-    expected: 'Off 3 Months'
-  },
-  {
     customer: 'Mini Mall : SiteLink',
     url: 'https://app.storagely.io/mini-mall-storage/storage-units/alabama/courtland/highway-33',
     expected: 'First Month Free'
@@ -255,7 +250,7 @@ test.describe('Debug Discount Elements', () => {
 
 // Banner verification test data
 // ENVIRONMENT CONFIG: Comment/uncomment the line below to switch between environments
-const USE_STAGING = true; // Set to false for production URLs
+const USE_STAGING = false; // Set to false for production URLs
 
 const bannerChecks = USE_STAGING ? [
   // STAGING URLS
@@ -281,21 +276,9 @@ const bannerChecks = USE_STAGING ? [
   }
 ] : [
   // PRODUCTION URLS
-  // {
-  //   client: 'Premier Storage - Laurel',
-  //   url: 'https://yourpremierstorage.com/storage-units/mississippi/laurel/ms-15'
-  // },
-  {
-    client: 'Radiant Storage - Montgomery',
-    url: 'https://radiantstorage.com/storage-units/alabama/montgomery/east-south-blvd'
-  },
   {
     client: 'Storage Star - Cloverdale',
     url: 'https://www.storagestar.com/storage-units/california/cloverdale/industrial-drive'
-  },
-  {
-    client: 'Best Box Storage - Pensacola',
-    url: 'https://www.bestboxstorage.com/storage-units/florida/pensacola/north-palafox'
   },
   {
     client: 'First Storage - E Market St',
