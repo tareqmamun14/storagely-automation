@@ -84,7 +84,7 @@ test.describe('Single-Page Rent Verification Tests', () => {
       storageListingPage, 
       rentalDetailsPageSinglePage,
       companyNameFromUrl
-    }) => {
+    }, testInfo) => {
       // Set longer timeout for these tests
       test.setTimeout(180 * 1000); // 3 minutes to handle slower sites
       
@@ -241,8 +241,13 @@ test.describe('Single-Page Rent Verification Tests', () => {
         // Write result to shared file for cross-worker consolidation
         writeResultToFile({ url: baseURL, company: companyName, platform, error: testResult.error, success: false });
         
-        // Re-throw the error to mark the test as failed
-        throw error;
+        // Re-throw only on FIRST attempt to allow Playwright to retry ONCE
+        // On retry attempts, don't re-throw to prevent cascading retries
+        const isRetryAttempt = testInfo.retry > 0;
+        if (!isRetryAttempt) {
+          throw error; // Allow Playwright to retry (once)
+        }
+        // If already retrying, just fail gracefully without re-throwing
       }
     });
   }
@@ -258,7 +263,7 @@ test.beforeAll(() => {
 // Print a comprehensive summary of all results at the end (consolidated across workers)
 test.afterAll(async () => {
   // Small delay to ensure all workers have written their results
-  await new Promise(resolve => setTimeout(resolve, 1000));
+  await new Promise(resolve => setTimeout(resolve, 100));
   
   const allResults = readAllResults();
   

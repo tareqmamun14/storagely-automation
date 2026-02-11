@@ -782,6 +782,8 @@ export class RentalDetailsPageSinglePage extends BasePage {
     } catch (error) {
       const errorMsg = `❌ Failed to click RENT NOW button - ${(error as Error).message}`;
       console.error(errorMsg);
+      // Throw to allow Playwright to retry ONCE if something breaks
+      // The test.afterAll will suppress the error and log it properly
       throw new Error(errorMsg);
     }
   }
