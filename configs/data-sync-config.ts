@@ -18,8 +18,8 @@ export interface DataSyncClient {
 }
 
 // ─── Switch between environments (comment/uncomment) ─────────────────
-export const CURRENT_ENV: 'stage' | 'prod' = 'stage';
-//export const CURRENT_ENV: 'stage' | 'prod' = 'prod';
+//export const CURRENT_ENV: 'stage' | 'prod' = 'stage';
+export const CURRENT_ENV: 'stage' | 'prod' = 'prod';
 
 // ─── Client Definitions ─────────────────────────────────────────────
 export const SITELINK_CLIENT: DataSyncClient = {
@@ -47,6 +47,7 @@ export const SSM_CLIENT: DataSyncClient = {
 export const DATA_SYNC_CLIENTS: DataSyncClient[] = [
 
   SITELINK_CLIENT,       // SiteLink  (gate-5)
+
   STOREDGE_CLIENT,       // storEDGE  (storagelyselfstorage)
   SSM_CLIENT,            // SSM       (smart-self-storage-ohio)
 
