@@ -28,11 +28,11 @@ export enum Environment {
 
     ],
     [Environment.PRODUCTION]: [
-       'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road'
-      // 'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive', 
-      // 'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive',
-      // 'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road',
-      // 'https://storagedepotla.com/storage-units/louisiana/hammond/north-morrison-blvd',
+       'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road',
+       'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive', 
+       'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive',
+       'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road',
+       'https://storagedepotla.com/storage-units/louisiana/hammond/north-morrison-blvd',
        ]
   };
   

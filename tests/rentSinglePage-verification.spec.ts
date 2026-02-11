@@ -84,7 +84,7 @@ test.describe('Single-Page Rent Verification Tests', () => {
       storageListingPage, 
       rentalDetailsPageSinglePage,
       companyNameFromUrl
-    }, testInfo) => {
+    }) => {
       // Set longer timeout for these tests
       test.setTimeout(180 * 1000); // 3 minutes to handle slower sites
       
@@ -189,6 +189,11 @@ test.describe('Single-Page Rent Verification Tests', () => {
         
         const errorMessage = await rentalDetailsPageSinglePage.clickRentNowAndCaptureError();
         
+        // If failed to capture error message, throw so Playwright retries once
+        if (errorMessage && errorMessage.startsWith('FAILED to fetch')) {
+          throw new Error(errorMessage);
+        }
+        
         console.log('✅ Payment submission completed');
         
         // ============================================
@@ -241,13 +246,8 @@ test.describe('Single-Page Rent Verification Tests', () => {
         // Write result to shared file for cross-worker consolidation
         writeResultToFile({ url: baseURL, company: companyName, platform, error: testResult.error, success: false });
         
-        // Re-throw only on FIRST attempt to allow Playwright to retry ONCE
-        // On retry attempts, don't re-throw to prevent cascading retries
-        const isRetryAttempt = testInfo.retry > 0;
-        if (!isRetryAttempt) {
-          throw error; // Allow Playwright to retry (once)
-        }
-        // If already retrying, just fail gracefully without re-throwing
+        // Re-throw the error to mark the test as failed
+        throw error;
       }
     });
   }

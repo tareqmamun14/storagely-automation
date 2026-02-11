@@ -6,7 +6,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: 1, // Retry once (total 2 attempts) for all tests, even when failed or interrupted
   workers: process.env.CI ? 2 : 2, // (reduced to 2 workers) Increased to 3 workers locally for faster execution (8 cores available)
-  timeout: 0, // No global timeout - let individual tests control their timeouts
+  timeout: 300_000, // 5 minute global safety timeout - individual tests override with test.setTimeout()
   expect: { timeout: 20000 }, // 20 seconds for element checks
   
   reporter: process.env.CI ? [
