@@ -129,11 +129,13 @@ export class RentalDetailsPageSinglePage extends BasePage {
   
   private get billingStateField() {
     return this.page.getByRole('textbox', { name: 'State', exact: true }).last()
+      .or(this.page.getByRole('textbox', { name: 'Province', exact: true }).last())
       .or(this.page.locator('input[name="billing_state"]'));
   }
   
   private get billingZipField() {
     return this.page.getByRole('textbox', { name: 'Zip' }).last()
+      .or(this.page.getByRole('textbox', { name: 'Postal Code' }).last())
       .or(this.page.locator('input[name="billing_zip"]'));
   }
 
@@ -165,6 +167,37 @@ export class RentalDetailsPageSinglePage extends BasePage {
   // ============================================
 
   /**
+   * Check if the page/browser is still alive and responsive
+   */
+  private isPageAlive(): boolean {
+    try {
+      return !this.page.isClosed();
+    } catch {
+      return false;
+    }
+  }
+
+  /**
+   * Guard that throws if page is closed — prevents cascading errors
+   */
+  private ensurePageAlive(context: string): void {
+    if (!this.isPageAlive()) {
+      throw new Error(`Page/browser closed during ${context} — likely caused by a site crash or third-party script`);
+    }
+  }
+
+  /**
+   * Safe scrollIntoViewIfNeeded with short timeout
+   */
+  private async safeScroll(locator: any, timeout: number = 3000): Promise<void> {
+    try {
+      await locator.scrollIntoViewIfNeeded({ timeout });
+    } catch {
+      // Scroll failure is non-critical — element might already be in view
+    }
+  }
+
+  /**
    * Fill complete single-page rental form using exact Playwright codegen selectors
    */
   async fillCompleteSinglePageForm(userData: {
@@ -179,7 +212,11 @@ export class RentalDetailsPageSinglePage extends BasePage {
       newJersey?: string,
       alberta?: string,
       alaska?: string,
-      alabama?: string
+      alabama?: string,
+      northCarolina?: string,
+      georgia?: string,
+      arizona?: string,
+      colorado?: string
     },
     zipCode: string,
     driversLicense?: string,
@@ -198,16 +235,20 @@ export class RentalDetailsPageSinglePage extends BasePage {
     try {
       // Wait for form to be ready
       await this.wait(2000);
+      this.ensurePageAlive('form initialization');
       
-      // Fill all sections
+      // Fill all sections with page-alive guards between each
       console.log(`[${new Date().toISOString()}] 📋 Filling tenant details...`);
       await this.fillTenantDetails(userData);
+      this.ensurePageAlive('after tenant details');
       
       console.log(`[${new Date().toISOString()}] 🪪 Filling driver's license details...`);
       await this.fillDriversLicenseDetails();
+      this.ensurePageAlive('after driver\'s license');
       
       console.log(`[${new Date().toISOString()}] 💳 Filling payment details...`);
       await this.fillPaymentDetails(userData.paymentInfo, userData.address, userData.city, userData.zipCode, userData.province);
+      this.ensurePageAlive('after payment details');
       
       console.log(`[${new Date().toISOString()}] ✅ Enabling agreement toggle...`);
       await this.enableAgreementToggle();
@@ -242,46 +283,63 @@ export class RentalDetailsPageSinglePage extends BasePage {
     console.log('\n📍 SECTION 1: Filling Tenant Details...');
     
     // First Name - click then fill
-    await this.firstNameField.scrollIntoViewIfNeeded();
+    await this.safeScroll(this.firstNameField);
     await this.firstNameField.click();
     await this.firstNameField.fill(userData.firstName);
     console.log(`  ✓ Filled First Name: ${userData.firstName}`);
     
     // Last Name - click then fill
-    await this.lastNameField.scrollIntoViewIfNeeded();
+    await this.safeScroll(this.lastNameField);
     await this.lastNameField.click();
     await this.lastNameField.fill(userData.lastName);
     console.log(`  ✓ Filled Last Name: ${userData.lastName}`);
     
     // Email - click then fill
-    await this.emailField.scrollIntoViewIfNeeded();
+    await this.safeScroll(this.emailField);
     await this.emailField.click();
     await this.emailField.fill(userData.email);
     console.log(`  ✓ Filled Email: ${userData.email}`);
     
     // Phone - click then fill
-    await this.phoneField.scrollIntoViewIfNeeded();
+    await this.safeScroll(this.phoneField);
     await this.phoneField.click();
     await this.phoneField.fill(userData.phone);
     console.log(`  ✓ Filled Phone: ${userData.phone}`);
     
-    // Address, City, State, Zip - optional fields, skip if not present
+    // Address, City, State, Zip - optional fields in tenant section
+    // NOTE: Many SSM platform sites (yourway, purely) don't have these here — only in Payment section
     try {
-      await this.addressField.scrollIntoViewIfNeeded();
-      await this.addressField.click();
-      await this.addressField.fill(userData.address);
-      console.log(`  ✓ Filled Address: ${userData.address}`);
+      const addressVisible = await this.addressField.isVisible({ timeout: 2000 }).catch(() => false);
+      if (addressVisible) {
+        await this.safeScroll(this.addressField);
+        await this.addressField.click();
+        await this.addressField.fill(userData.address);
+        console.log(`  ✓ Filled Address: ${userData.address}`);
+        
+        // Click elsewhere on the page to dismiss any autocomplete/suggestion overlays
+        await this.wait(500);
+        await this.page.locator('body').click({ position: { x: 0, y: 0 }, force: true });
+        await this.wait(300);
+        console.log('  ✓ Clicked away to dismiss address suggestions');
+      } else {
+        console.log('  - Address field not in tenant section, will fill in payment section');
+      }
     } catch {
-      console.log('  - Address field not found, skipping');
+      console.log('  - Address field not found in tenant section, skipping');
     }
     
     try {
-      await this.cityField.scrollIntoViewIfNeeded();
-      await this.cityField.click();
-      await this.cityField.fill(userData.city);
-      console.log(`  ✓ Filled City: ${userData.city}`);
+      const cityVisible = await this.cityField.isVisible({ timeout: 2000 }).catch(() => false);
+      if (cityVisible) {
+        await this.safeScroll(this.cityField);
+        await this.cityField.click();
+        await this.cityField.fill(userData.city);
+        console.log(`  ✓ Filled City: ${userData.city}`);
+      } else {
+        console.log('  - City field not in tenant section, will fill in payment section');
+      }
     } catch {
-      console.log('  - City field not found, skipping');
+      console.log('  - City field not found in tenant section, skipping');
     }
     
     // State/Province dropdown - select appropriate value based on location
@@ -292,12 +350,20 @@ export class RentalDetailsPageSinglePage extends BasePage {
       // Determine which province/state to use based on current URL
       const currentUrl = this.page.url();
       if (currentUrl.includes('bluebirdstorage.ca')) {
-        stateValue = userData.province.alberta;
+        stateValue = userData.province.alberta || 'Alberta';
         fieldLabel = 'Province';
       } else if (currentUrl.includes('columbiaselfstorage.com')) {
-        stateValue = userData.province.newJersey;
+        stateValue = userData.province.newJersey || 'New Jersey';
       } else if (currentUrl.includes('firststorage.com')) {
-        stateValue = userData.province.alabama;
+        stateValue = userData.province.alabama || 'Alabama';
+      } else if (currentUrl.includes('yourwaystorage.com')) {
+        stateValue = userData.province.georgia || 'Georgia';
+      } else if (currentUrl.includes('purelystorage.com')) {
+        stateValue = userData.province.arizona || 'Arizona';
+      } else if (currentUrl.includes('redrocksstorage.com')) {
+        stateValue = userData.province.colorado || 'Colorado';
+      } else if (currentUrl.includes('sunbirdstorage.com')) {
+        stateValue = userData.province.northCarolina || 'North Carolina';
       } else if (userData.province.alabama) {
         stateValue = userData.province.alabama;
       }
@@ -312,7 +378,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
     }
     
     try {
-      await this.zipField.scrollIntoViewIfNeeded();
+      await this.safeScroll(this.zipField);
       await this.zipField.click();
       await this.zipField.fill(userData.zipCode);
       console.log(`  ✓ Filled Zip: ${userData.zipCode}`);
@@ -344,7 +410,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
       console.log('  ✓ Driver\'s License section is enabled, proceeding to fill...');
       
       // License Number - click then fill
-      await this.driversLicenseField.scrollIntoViewIfNeeded();
+      await this.safeScroll(this.driversLicenseField);
       await this.driversLicenseField.click();
       await this.driversLicenseField.fill('123456789');
       console.log('  ✓ Filled Driver\'s License Number: 123456789');
@@ -396,8 +462,8 @@ export class RentalDetailsPageSinglePage extends BasePage {
     fieldName: string,
     exactMatch: boolean = false
   ): Promise<void> {
-    await field.scrollIntoViewIfNeeded();
-    await field.click();
+    await this.safeScroll(field);
+    await field.click({ timeout: 5000 });
     
     // Strategy 1: Use data-id attribute (most reliable and fast)
     try {
@@ -407,27 +473,80 @@ export class RentalDetailsPageSinglePage extends BasePage {
       console.log(`  ✓ Selected ${fieldName}: ${optionText}`);
       return;
     } catch (error) {
-      // Fallback to original method
+      // Fallback to type-to-filter approach
     }
     
-    // Strategy 2: Original paragraph filter method
+    // Strategy 2: Type-to-filter — clear field, type the value, then pick from filtered dropdown
+    // This is more reliable for multi-word states like "North Carolina"
     try {
-      const option = exactMatch
+      // Clear any existing value and type the option text to filter the dropdown
+      await field.fill('');
+      await this.wait(200);
+      await field.pressSequentially(optionText, { delay: 30 });
+      await this.wait(600);
+      
+      // Try data-id dropdown items first (filtered list)
+      const dataIdOption = this.page.locator('[data-id="dropdown-list-item"]').filter({ hasText: optionText });
+      if (await dataIdOption.first().isVisible({ timeout: 1000 }).catch(() => false)) {
+        await dataIdOption.first().click({ timeout: 1500 });
+        console.log(`  ✓ Selected ${fieldName}: ${optionText} (type-to-filter)`);
+        return;
+      }
+      
+      // Try clicking the matching option from any visible dropdown/listbox
+      const listboxOption = this.page.getByRole('option', { name: optionText });
+      if (await listboxOption.first().isVisible({ timeout: 800 }).catch(() => false)) {
+        await listboxOption.first().click({ timeout: 1500 });
+        console.log(`  ✓ Selected ${fieldName}: ${optionText} (listbox option)`);
+        return;
+      }
+      
+      // Try paragraph filter on the visible dropdown
+      const paragraphOption = exactMatch
         ? this.page.getByText(optionText, { exact: true })
         : this.page.getByRole('paragraph').filter({ hasText: optionText });
       
-      await option.first().waitFor({ state: 'visible', timeout: 2000 });
-      await option.first().click({ timeout: 2000 });
-      console.log(`  ✓ Selected ${fieldName}: ${optionText}`);
-    } catch (error) {
-      // Fallback: try direct text match
-      try {
-        const option = this.page.getByText(optionText, { exact: exactMatch });
-        await option.click();
-        console.log(`  ✓ Selected ${fieldName}: ${optionText} (fallback)`);
-      } catch (fallbackError) {
-        console.log(`  - ${fieldName} option not found, skipping`);
+      if (await paragraphOption.first().isVisible({ timeout: 800 }).catch(() => false)) {
+        await paragraphOption.first().click({ timeout: 1500 });
+        console.log(`  ✓ Selected ${fieldName}: ${optionText} (paragraph match)`);
+        return;
       }
+    } catch (error) {
+      // Continue to keyboard fallback
+    }
+    
+    // Strategy 3: Keyboard-based selection — ArrowDown + Enter
+    try {
+      // Re-click field to ensure dropdown is open
+      await field.click({ timeout: 3000 });
+      await field.fill('');
+      await this.wait(200);
+      await field.pressSequentially(optionText, { delay: 30 });
+      await this.wait(500);
+      
+      // Use keyboard to select the first matching item
+      await this.page.keyboard.press('ArrowDown');
+      await this.wait(200);
+      await this.page.keyboard.press('Enter');
+      await this.wait(300);
+      
+      // Verify the field has the expected value
+      const fieldValue = await field.inputValue().catch(() => '');
+      if (fieldValue.toLowerCase().includes(optionText.toLowerCase().substring(0, 4))) {
+        console.log(`  ✓ Selected ${fieldName}: ${optionText} (keyboard)`);
+        return;
+      }
+    } catch (error) {
+      // Continue to final fallback
+    }
+    
+    // Strategy 4: Direct text click fallback
+    try {
+      const option = this.page.getByText(optionText, { exact: exactMatch });
+      await option.first().click({ timeout: 2000 });
+      console.log(`  ✓ Selected ${fieldName}: ${optionText} (text fallback)`);
+    } catch (fallbackError) {
+      console.log(`  - ${fieldName} option not found, skipping`);
     }
   }
 
@@ -442,7 +561,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
     required: boolean = false
   ): Promise<void> {
     try {
-      await field.scrollIntoViewIfNeeded();
+      await this.safeScroll(field);
       await field.click();
       await field.fill(value);
       console.log(`  ✓ Filled ${fieldName}: ${value}`);
@@ -474,27 +593,27 @@ export class RentalDetailsPageSinglePage extends BasePage {
   ): Promise<void> {
     console.log('\n📍 SECTION 3: Filling Payment Details...');
     
-    // Card Number - click only (recording shows click without fill)
-    await this.cardNumberField.scrollIntoViewIfNeeded();
+    // Card Number
+    await this.safeScroll(this.cardNumberField);
     await this.cardNumberField.click();
     await this.cardNumberField.fill(paymentData.cardNumber);
     console.log(`  ✓ Filled Card Number: ${paymentData.cardNumber}`);
     
-    // Expiry - click only
-    await this.expiryField.scrollIntoViewIfNeeded();
+    // Expiry
+    await this.safeScroll(this.expiryField);
     await this.expiryField.click();
     await this.expiryField.fill(paymentData.expiryDate);
     console.log(`  ✓ Filled Expiry: ${paymentData.expiryDate}`);
     
-    // CVV - click only
-    await this.cvvField.scrollIntoViewIfNeeded();
+    // CVV
+    await this.safeScroll(this.cvvField);
     await this.cvvField.click();
     await this.cvvField.fill(paymentData.cvv);
     console.log(`  ✓ Filled CVV: ${paymentData.cvv}`);
     
     // Billing Address - click, type, then select first dropdown option
     try {
-      await this.billingAddressField.scrollIntoViewIfNeeded();
+      await this.safeScroll(this.billingAddressField);
       await this.billingAddressField.click();
       await this.billingAddressField.fill(billingAddress);
       console.log(`  ✓ Typed Billing Address: ${billingAddress}`);
@@ -511,7 +630,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
     
     // Billing City - click only
     try {
-      await this.billingCityField.scrollIntoViewIfNeeded();
+      await this.safeScroll(this.billingCityField);
       await this.billingCityField.click();
       await this.billingCityField.fill(billingCity);
       console.log(`  ✓ Filled Billing City: ${billingCity}`);
@@ -520,19 +639,31 @@ export class RentalDetailsPageSinglePage extends BasePage {
     }
     
     // Billing State - click field, then select appropriate state
-    try {
+    // Guard: check visibility first to avoid 60s actionTimeout on missing fields
+    const billingStateVisible = await this.billingStateField.isVisible({ timeout: 3000 }).catch(() => false);
+    if (!billingStateVisible) {
+      console.log('  - Billing State/Province field not visible, skipping');
+    } else try {
       // Determine which state to use based on current URL
       let stateName = 'North Carolina'; // Default for Clemmons address
       let fieldLabel = 'Billing State';
       const currentUrl = this.page.url();
       
       if (currentUrl.includes('bluebirdstorage.ca')) {
-        stateName = province.alberta;
+        stateName = province.alberta || 'Alberta';
         fieldLabel = 'Billing Province';
       } else if (currentUrl.includes('columbiaselfstorage.com')) {
-        stateName = province.newJersey;
+        stateName = province.newJersey || 'New Jersey';
       } else if (currentUrl.includes('firststorage.com')) {
-        stateName = province.alabama;
+        stateName = province.alabama || 'Alabama';
+      } else if (currentUrl.includes('yourwaystorage.com')) {
+        stateName = province.georgia || 'Georgia';
+      } else if (currentUrl.includes('purelystorage.com')) {
+        stateName = province.arizona || 'Arizona';
+      } else if (currentUrl.includes('redrocksstorage.com')) {
+        stateName = province.colorado || 'Colorado';
+      } else if (currentUrl.includes('sunbirdstorage.com')) {
+        stateName = province.northCarolina || 'North Carolina';
       }
       
       await this.selectDropdownOption(
@@ -544,10 +675,14 @@ export class RentalDetailsPageSinglePage extends BasePage {
       console.log('  - Billing state not found, skipping');
     }
     
-    // Billing Zip - click only
-    try {
-      await this.billingZipField.scrollIntoViewIfNeeded();
-      await this.billingZipField.click();
+    // Billing Zip/Postal Code
+    // Guard: check visibility first to avoid 60s actionTimeout on missing fields
+    const billingZipVisible = await this.billingZipField.isVisible({ timeout: 3000 }).catch(() => false);
+    if (!billingZipVisible) {
+      console.log('  - Billing Zip/Postal Code field not visible, skipping');
+    } else try {
+      await this.safeScroll(this.billingZipField);
+      await this.billingZipField.click({ timeout: 5000 });
       await this.billingZipField.fill(billingZip);
       console.log(`  ✓ Filled Billing Zip: ${billingZip}`);
     } catch {
@@ -738,13 +873,13 @@ export class RentalDetailsPageSinglePage extends BasePage {
       await this.minimizeLiveChat();
       
       // Wait for rent now button
-      await this.rentNowButton.scrollIntoViewIfNeeded();
-      await this.rentNowButton.waitFor({ state: 'visible', timeout: 10000 });
+      await this.safeScroll(this.rentNowButton);
+      await this.rentNowButton.waitFor({ state: 'visible', timeout: 5000 });
       await this.wait(500);
       
       // Click the button
       console.log(`[${new Date().toISOString()}] 🖱️ Clicking RENT NOW...`);
-      await this.rentNowButton.click({ timeout: 30000 });
+      await this.rentNowButton.click({ timeout: 10000 });
       console.log(`[${new Date().toISOString()}] ✓ RENT NOW button clicked`);
       
       // Detect error message (polls up to 15s internally)
@@ -759,11 +894,11 @@ export class RentalDetailsPageSinglePage extends BasePage {
       
       // No error detected - retry once
       console.log(`[${new Date().toISOString()}] ⚠️ No error detected on first attempt, retrying...`);
-      await this.wait(2000);
+      await this.wait(1000);
       
       // Click RENT NOW again
       console.log(`[${new Date().toISOString()}] 🖱️ Clicking RENT NOW again (retry)...`);
-      await this.rentNowButton.click({ timeout: 30000 });
+      await this.rentNowButton.click({ timeout: 10000 });
       console.log(`[${new Date().toISOString()}] ✓ RENT NOW button clicked (retry)`);
       
       // Re-detect error
@@ -903,7 +1038,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
   private async pollingErrorCheck(): Promise<string> {
     console.log('📡 Active polling for errors...');
     
-    for (let i = 0; i < 30; i++) { // 30 attempts x 500ms = 15 seconds
+    for (let i = 0; i < 20; i++) { // 20 attempts x 500ms = 10 seconds
       try {
         await this.wait(500);
         

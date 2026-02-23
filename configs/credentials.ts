@@ -56,7 +56,10 @@ export const SINGLE_PAGE_USER = {
     alberta: 'Alberta',
     alaska: 'Alaska',
     alabama: 'Alabama',
-    northCarolina: 'North Carolina'
+    northCarolina: 'North Carolina',
+    georgia: 'Georgia',
+    arizona: 'Arizona',
+    colorado: 'Colorado'
   },
   zipCode: '27012', // NC zip for Clemmons
   alternatePhone: '01674646008',

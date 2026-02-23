@@ -134,7 +134,7 @@ export class StorageListingPage extends BasePage {
       // SINGLE-PAGE CUSTOMER DETECTION
       // ==========================================
       // List of single-page customer domains
-      const singlePageDomains = ['firststorage.com', 'columbiaselfstorage.com', 'bluebirdstorage.ca'];
+      const singlePageDomains = ['firststorage.com', 'columbiaselfstorage.com', 'bluebirdstorage.ca', 'sunbirdstorage.com', 'purelystorage.com', 'yourwaystorage.com', 'redrocksstorage.com'];
       const pageUrl = this.page.url();
       const isSinglePageCustomer = singlePageDomains.some(domain => pageUrl.includes(domain));
       
@@ -364,7 +364,7 @@ export class StorageListingPage extends BasePage {
       const context = this.page.context();
       const pagesBefore = context.pages();
 
-      await rentButtonLocator.click({ timeout: 5000 });
+      await rentButtonLocator.click({ timeout: 5000, noWaitAfter: true });
       console.log(`✅ [${Date.now() - startTime}ms] Click executed successfully`);
 
       // Give a short window for a popup/new page to appear
@@ -420,7 +420,7 @@ export class StorageListingPage extends BasePage {
           console.log(`✅ [${Date.now() - startTime}ms] VBP RENT button found!`);
           
           // Click the VBP RENT button
-          await vbpButton.click({ timeout: 5000 });
+          await vbpButton.click({ timeout: 5000, noWaitAfter: true });
           console.log(`✅ [${Date.now() - startTime}ms] VBP RENT button clicked`);
           
           // Wait for navigation
@@ -519,9 +519,14 @@ export class StorageListingPage extends BasePage {
         console.log(`⏳ [${Date.now() - startTime}ms] Scroll check done, button should be clickable`);
       }
       
-      // Click the button
+      // Click the button — try normal click first, fallback to force:true if overlay intercepts
       console.log(`\n🖱️  [${Date.now() - startTime}ms] CLICKING RENT BUTTON...`);
-      await rentButtonLocator.click({ timeout: 5000 });
+      try {
+        await rentButtonLocator.click({ timeout: 8000, noWaitAfter: true });
+      } catch (clickError) {
+        console.log(`⚠️  [${Date.now() - startTime}ms] Normal click blocked (likely overlay), retrying with force...`);
+        await rentButtonLocator.click({ timeout: 5000, force: true, noWaitAfter: true });
+      }
       console.log(`✅ [${Date.now() - startTime}ms] Click executed successfully`);
       
       // Wait for navigation to step-four (single page)

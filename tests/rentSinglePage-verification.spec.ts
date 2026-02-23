@@ -58,7 +58,14 @@ function writeResultToFile(result: { url: string; company: string; platform: str
     }
   }
 
-  results.push({ ...result, timestamp: new Date().toISOString() });
+  // Upsert: if a result for this URL already exists (e.g. from a failed first attempt),
+  // replace it so a successful retry overwrites the previous failure
+  const existingIndex = results.findIndex((r: any) => r.url === result.url);
+  if (existingIndex !== -1) {
+    results[existingIndex] = { ...result, timestamp: new Date().toISOString() };
+  } else {
+    results.push({ ...result, timestamp: new Date().toISOString() });
+  }
   fs.writeFileSync(RESULTS_FILE, JSON.stringify(results, null, 2));
 }
 
@@ -86,7 +93,7 @@ test.describe('Single-Page Rent Verification Tests', () => {
       companyNameFromUrl
     }) => {
       // Set longer timeout for these tests
-      test.setTimeout(180 * 1000); // 3 minutes to handle slower sites
+      test.setTimeout(240 * 1000); // 4 minutes to handle slower sites (navigation can take 40s+)
       
       // Get company/client name and platform
       const companyName = companyNameFromUrl(baseURL);

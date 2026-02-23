@@ -135,7 +135,7 @@ export class BasePage {
    */
   async minimizeLiveChat(): Promise<void> {
     try {
-      const chatIframeElement = await this.page.waitForSelector('iframe[title="LiveChat chat widget"]', { timeout: 5000 });
+      const chatIframeElement = await this.page.waitForSelector('iframe[title="LiveChat chat widget"]', { timeout: 2000 });
       
       if (chatIframeElement) {
         const chatIframe = await chatIframeElement.contentFrame();
