@@ -362,6 +362,8 @@ export class RentalDetailsPageSinglePage extends BasePage {
         stateValue = userData.province.arizona || 'Arizona';
       } else if (currentUrl.includes('redrocksstorage.com')) {
         stateValue = userData.province.colorado || 'Colorado';
+      } else if (currentUrl.includes('storagestar.com')) {
+        stateValue = userData.province.colorado || 'Colorado';
       } else if (currentUrl.includes('sunbirdstorage.com')) {
         stateValue = userData.province.northCarolina || 'North Carolina';
       } else if (userData.province.alabama) {
@@ -662,6 +664,8 @@ export class RentalDetailsPageSinglePage extends BasePage {
         stateName = province.arizona || 'Arizona';
       } else if (currentUrl.includes('redrocksstorage.com')) {
         stateName = province.colorado || 'Colorado';
+      } else if (currentUrl.includes('storagestar.com')) {
+        stateName = province.colorado || 'Colorado';
       } else if (currentUrl.includes('sunbirdstorage.com')) {
         stateName = province.northCarolina || 'North Carolina';
       }
@@ -863,12 +867,55 @@ export class RentalDetailsPageSinglePage extends BasePage {
   }
 
   /**
+   * Wait for the user to manually solve hCaptcha.
+   * Prints a visible prompt in the terminal, then polls every 2 s until
+   * the hCaptcha response textarea has a token value (captcha solved).
+   * There is NO time limit — it waits as long as you need.
+   */
+  async waitForManualCaptcha(): Promise<void> {
+    const currentUrl = this.page.url();
+    console.log('\n🛑 ═══════════════════════════════════════════════════════════');
+    console.log('🛑  hCaptcha DETECTED — Manual step required!');
+    console.log(`🛑  URL: ${currentUrl}`);
+    console.log('🛑  1. Switch to the BROWSER WINDOW for the URL above');
+    console.log('🛑  2. Solve the hCaptcha checkbox / challenge');
+    console.log('🛑  3. Automation will continue AUTOMATICALLY once solved');
+    console.log('🛑  (No time limit — take as long as you need)');
+    console.log('🛑 ═══════════════════════════════════════════════════════════\n');
+
+    const pollInterval = 2000;
+
+    // Poll indefinitely until hCaptcha token appears
+    while (true) {
+      try {
+        // The hCaptcha iframe writes a token into a hidden textarea when solved
+        const token = await this.page.evaluate(() => {
+          const ta = document.querySelector('textarea[name="h-captcha-response"]') as HTMLTextAreaElement | null;
+          return ta ? ta.value : '';
+        });
+        if (token && token.length > 0) {
+          console.log('✅ hCaptcha solved! Continuing automation...\n');
+          return;
+        }
+      } catch {
+        // page might be navigating — ignore
+      }
+      await new Promise(resolve => setTimeout(resolve, pollInterval));
+    }
+  }
+
+  /**
    * Click RENT NOW button and capture error message
    */
-  async clickRentNowAndCaptureError(): Promise<string> {
+  async clickRentNowAndCaptureError(hasCaptcha: boolean = false): Promise<string> {
     console.log(`[${new Date().toISOString()}] 📍 FINAL STEP: Clicking RENT NOW button...`);
     
     try {
+      // If this customer has hCaptcha, wait for user to solve it first
+      if (hasCaptcha) {
+        await this.waitForManualCaptcha();
+      }
+
       // Minimize live chat if present
       await this.minimizeLiveChat();
       

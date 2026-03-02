@@ -66,13 +66,13 @@ export const SINGLE_PAGE_RENT_URLS = {
     // Add staging URLs here if needed
   ],
   [Environment.PRODUCTION]: [
-    'https://www.firststorage.com/storage-units/alabama/huntsville/memorial-parkway-sw',
-    'https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue',
-    'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland',
-    'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club',
+    // 'https://www.firststorage.com/storage-units/alabama/huntsville/memorial-parkway-sw',
+    // 'https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue',
+    // 'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland',
+    // 'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club',
     'https://purelystorage.com/storage-units/arizona/buckeye/west-yuma-road',
-    'https://www.yourwaystorage.com/storage-units/georgia/augusta/walton-way-ext',
-    'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',
+    // 'https://www.yourwaystorage.com/storage-units/georgia/augusta/walton-way-ext',
+    // 'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',
     'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive'
   ]
 };
@@ -88,6 +88,19 @@ export const SINGLE_PAGE_FMS_PLATFORM: Record<string, string> = {
   'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue': 'SiteLink',
   'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive': 'SSM'
 };
+
+// ============================================
+// CAPTCHA CUSTOMER URLS
+// ============================================
+// URLs where hCaptcha appears before the RENT NOW button.
+// The test will pause and prompt the user to solve the captcha manually,
+// then continue clicking RENT NOW and capturing the error.
+// To add a new captcha customer: just add the URL string to this array.
+// ============================================
+export const CAPTCHA_CUSTOMER_URLS: string[] = [
+  'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',
+  'https://purelystorage.com/storage-units/arizona/buckeye/west-yuma-road',
+];
 
 // Helper function to get single-page URLs based on environment
 export function getSinglePageUrls() {

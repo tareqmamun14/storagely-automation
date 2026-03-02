@@ -1,5 +1,5 @@
 import { test } from '../fixtures/singlepage-fixture';
-import { getSinglePageUrls, SINGLE_PAGE_FMS_PLATFORM } from '../configs/urls';
+import { getSinglePageUrls, SINGLE_PAGE_FMS_PLATFORM, CAPTCHA_CUSTOMER_URLS } from '../configs/urls';
 import { cleanupOldErrorScreenshots, takeErrorScreenshot } from '../utils/screenshot';
 import { SINGLE_PAGE_USER } from '../configs/credentials';
 import { RentResultCollector } from '../utils/RentResultCollector';
@@ -92,8 +92,9 @@ test.describe('Single-Page Rent Verification Tests', () => {
       rentalDetailsPageSinglePage,
       companyNameFromUrl
     }) => {
-      // Set longer timeout for these tests
-      test.setTimeout(240 * 1000); // 4 minutes to handle slower sites (navigation can take 40s+)
+      // Set timeout — captcha customers get NO timeout (user solves manually)
+      const hasCaptchaUrl = CAPTCHA_CUSTOMER_URLS.includes(baseURL);
+      test.setTimeout(hasCaptchaUrl ? 0 : 240 * 1000); // 0 = no timeout for captcha, 4 min for others
       
       // Get company/client name and platform
       const companyName = companyNameFromUrl(baseURL);
@@ -194,7 +195,7 @@ test.describe('Single-Page Rent Verification Tests', () => {
         testResult.step = 'Payment Submission';
         console.log('\n📍 STEP 4: Submitting payment and checking for errors...');
         
-        const errorMessage = await rentalDetailsPageSinglePage.clickRentNowAndCaptureError();
+        const errorMessage = await rentalDetailsPageSinglePage.clickRentNowAndCaptureError(hasCaptchaUrl);
         
         // If failed to capture error message, throw so Playwright retries once
         if (errorMessage && errorMessage.startsWith('FAILED to fetch')) {
