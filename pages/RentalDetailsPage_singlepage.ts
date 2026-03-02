@@ -233,8 +233,24 @@ export class RentalDetailsPageSinglePage extends BasePage {
     console.log(`[${new Date().toISOString()}] 📝 Starting single-page rental form fill...`);
     
     try {
-      // Wait for form to be ready
-      await this.wait(2000);
+      // Wait for form to be ready using lightweight JS polling (avoids CDP congestion in headed mode)
+      // CDP-based waitFor() can take 70-130s during heavy page loads due to message queueing
+      let formReady = false;
+      for (let i = 0; i < 30; i++) {
+        try {
+          formReady = await this.page.evaluate(() => {
+            const el = document.querySelector('input[name="first_name"], input[name="firstName"]') 
+                     || document.querySelector('[role="textbox"][name*="irst"]');
+            return el !== null && (el as HTMLElement).offsetParent !== null;
+          });
+          if (formReady) break;
+        } catch { /* page not ready yet */ }
+        await new Promise(r => setTimeout(r, 500));
+      }
+      if (!formReady) {
+        // Fallback: try the Playwright waitFor if JS polling didn't find it
+        await this.firstNameField.waitFor({ state: 'visible', timeout: 10000 });
+      }
       this.ensurePageAlive('form initialization');
       
       // Fill all sections with page-alive guards between each
@@ -282,28 +298,24 @@ export class RentalDetailsPageSinglePage extends BasePage {
   }): Promise<void> {
     console.log('\n📍 SECTION 1: Filling Tenant Details...');
     
-    // First Name - click then fill
+    // First Name - fill() auto-focuses the field, no separate click needed
     await this.safeScroll(this.firstNameField);
-    await this.firstNameField.click();
-    await this.firstNameField.fill(userData.firstName);
+    await this.firstNameField.fill(userData.firstName, { timeout: 5000 });
     console.log(`  ✓ Filled First Name: ${userData.firstName}`);
     
-    // Last Name - click then fill
+    // Last Name
     await this.safeScroll(this.lastNameField);
-    await this.lastNameField.click();
-    await this.lastNameField.fill(userData.lastName);
+    await this.lastNameField.fill(userData.lastName, { timeout: 5000 });
     console.log(`  ✓ Filled Last Name: ${userData.lastName}`);
     
-    // Email - click then fill
+    // Email
     await this.safeScroll(this.emailField);
-    await this.emailField.click();
-    await this.emailField.fill(userData.email);
+    await this.emailField.fill(userData.email, { timeout: 5000 });
     console.log(`  ✓ Filled Email: ${userData.email}`);
     
-    // Phone - click then fill
+    // Phone
     await this.safeScroll(this.phoneField);
-    await this.phoneField.click();
-    await this.phoneField.fill(userData.phone);
+    await this.phoneField.fill(userData.phone, { timeout: 5000 });
     console.log(`  ✓ Filled Phone: ${userData.phone}`);
     
     // Address, City, State, Zip - optional fields in tenant section
@@ -312,14 +324,13 @@ export class RentalDetailsPageSinglePage extends BasePage {
       const addressVisible = await this.addressField.isVisible({ timeout: 2000 }).catch(() => false);
       if (addressVisible) {
         await this.safeScroll(this.addressField);
-        await this.addressField.click();
-        await this.addressField.fill(userData.address);
+        await this.addressField.fill(userData.address, { timeout: 5000 });
         console.log(`  ✓ Filled Address: ${userData.address}`);
         
         // Click elsewhere on the page to dismiss any autocomplete/suggestion overlays
-        await this.wait(500);
-        await this.page.locator('body').click({ position: { x: 0, y: 0 }, force: true });
         await this.wait(300);
+        await this.page.locator('body').click({ position: { x: 0, y: 0 }, force: true });
+        await this.wait(200);
         console.log('  ✓ Clicked away to dismiss address suggestions');
       } else {
         console.log('  - Address field not in tenant section, will fill in payment section');
@@ -332,8 +343,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
       const cityVisible = await this.cityField.isVisible({ timeout: 2000 }).catch(() => false);
       if (cityVisible) {
         await this.safeScroll(this.cityField);
-        await this.cityField.click();
-        await this.cityField.fill(userData.city);
+        await this.cityField.fill(userData.city, { timeout: 5000 });
         console.log(`  ✓ Filled City: ${userData.city}`);
       } else {
         console.log('  - City field not in tenant section, will fill in payment section');
@@ -379,8 +389,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
     
     try {
       await this.safeScroll(this.zipField);
-      await this.zipField.click();
-      await this.zipField.fill(userData.zipCode);
+      await this.zipField.fill(userData.zipCode, { timeout: 5000 });
       console.log(`  ✓ Filled Zip: ${userData.zipCode}`);
     } catch {
       console.log('  - Zip field not found, skipping');
@@ -409,10 +418,9 @@ export class RentalDetailsPageSinglePage extends BasePage {
       
       console.log('  ✓ Driver\'s License section is enabled, proceeding to fill...');
       
-      // License Number - click then fill
+      // License Number - fill() auto-focuses the field
       await this.safeScroll(this.driversLicenseField);
-      await this.driversLicenseField.click();
-      await this.driversLicenseField.fill('123456789');
+      await this.driversLicenseField.fill('123456789', { timeout: 5000 });
       console.log('  ✓ Filled Driver\'s License Number: 123456789');
       
       // Issuing State - click field, then click Alabama option
@@ -454,7 +462,8 @@ export class RentalDetailsPageSinglePage extends BasePage {
 
   /**
    * Helper method to select dropdown options
-   * Handles both text-based and exact matching
+   * OPTIMIZED: Uses JS evaluate to open dropdown (bypasses overlay interception),
+   * then clicks data-id items directly. Keyboard fallback as last resort.
    */
   private async selectDropdownOption(
     field: any,
@@ -463,91 +472,86 @@ export class RentalDetailsPageSinglePage extends BasePage {
     exactMatch: boolean = false
   ): Promise<void> {
     await this.safeScroll(field);
-    await field.click({ timeout: 5000 });
     
-    // Strategy 1: Use data-id attribute (most reliable and fast)
+    // Strategy 1 (FAST): JS-click to open dropdown → click data-id item
+    // evaluate .click() always reaches the element regardless of overlays
     try {
-      await this.page.locator('[data-id="dropdown-list-container"]').waitFor({ state: 'visible', timeout: 1500 });
-      const option = this.page.locator('[data-id="dropdown-list-item"]').filter({ hasText: optionText });
-      await option.first().click({ timeout: 1000 });
-      console.log(`  ✓ Selected ${fieldName}: ${optionText}`);
-      return;
-    } catch (error) {
-      // Fallback to type-to-filter approach
-    }
-    
-    // Strategy 2: Type-to-filter — clear field, type the value, then pick from filtered dropdown
-    // This is more reliable for multi-word states like "North Carolina"
-    try {
-      // Clear any existing value and type the option text to filter the dropdown
-      await field.fill('');
-      await this.wait(200);
-      await field.pressSequentially(optionText, { delay: 30 });
-      await this.wait(600);
+      await field.evaluate((el: HTMLElement) => { el.focus(); el.click(); });
+      await this.wait(400);
       
-      // Try data-id dropdown items first (filtered list)
+      // Look for visible dropdown-list-item matching the text
       const dataIdOption = this.page.locator('[data-id="dropdown-list-item"]').filter({ hasText: optionText });
-      if (await dataIdOption.first().isVisible({ timeout: 1000 }).catch(() => false)) {
-        await dataIdOption.first().click({ timeout: 1500 });
-        console.log(`  ✓ Selected ${fieldName}: ${optionText} (type-to-filter)`);
+      if (await dataIdOption.first().isVisible({ timeout: 1200 }).catch(() => false)) {
+        await dataIdOption.first().evaluate((el: HTMLElement) => el.click());
+        console.log(`  ✓ Selected ${fieldName}: ${optionText}`);
         return;
       }
       
-      // Try clicking the matching option from any visible dropdown/listbox
-      const listboxOption = this.page.getByRole('option', { name: optionText });
-      if (await listboxOption.first().isVisible({ timeout: 800 }).catch(() => false)) {
-        await listboxOption.first().click({ timeout: 1500 });
-        console.log(`  ✓ Selected ${fieldName}: ${optionText} (listbox option)`);
-        return;
-      }
-      
-      // Try paragraph filter on the visible dropdown
-      const paragraphOption = exactMatch
-        ? this.page.getByText(optionText, { exact: true })
-        : this.page.getByRole('paragraph').filter({ hasText: optionText });
-      
-      if (await paragraphOption.first().isVisible({ timeout: 800 }).catch(() => false)) {
-        await paragraphOption.first().click({ timeout: 1500 });
-        console.log(`  ✓ Selected ${fieldName}: ${optionText} (paragraph match)`);
+      // Items might not use data-id — try visible paragraph in dropdown
+      const paragraphOption = this.page.getByRole('paragraph').filter({ hasText: optionText });
+      if (await paragraphOption.first().isVisible({ timeout: 600 }).catch(() => false)) {
+        await paragraphOption.first().evaluate((el: HTMLElement) => el.click());
+        console.log(`  ✓ Selected ${fieldName}: ${optionText} (paragraph)`);
         return;
       }
     } catch (error) {
-      // Continue to keyboard fallback
+      // Continue to fallback
     }
     
-    // Strategy 3: Keyboard-based selection — ArrowDown + Enter
+    // Strategy 2: Type-to-filter → click filtered data-id item
+    // Useful when there are many items (50 states) — typing narrows the list
     try {
-      // Re-click field to ensure dropdown is open
-      await field.click({ timeout: 3000 });
-      await field.fill('');
-      await this.wait(200);
-      await field.pressSequentially(optionText, { delay: 30 });
-      await this.wait(500);
+      await field.evaluate((el: HTMLElement) => { el.focus(); el.click(); });
+      // Use keyboard to clear and type (avoids fill() which can close dropdown)
+      await this.page.keyboard.press('Control+A');
+      await this.page.keyboard.press('Backspace');
+      await this.wait(150);
+      await field.pressSequentially(optionText.substring(0, 4), { delay: 30 });
+      await this.wait(400);
       
-      // Use keyboard to select the first matching item
-      await this.page.keyboard.press('ArrowDown');
-      await this.wait(200);
-      await this.page.keyboard.press('Enter');
-      await this.wait(300);
+      const dataIdOption = this.page.locator('[data-id="dropdown-list-item"]').filter({ hasText: optionText });
+      if (await dataIdOption.first().isVisible({ timeout: 800 }).catch(() => false)) {
+        await dataIdOption.first().evaluate((el: HTMLElement) => el.click());
+        console.log(`  ✓ Selected ${fieldName}: ${optionText} (filtered)`);
+        return;
+      }
       
-      // Verify the field has the expected value
-      const fieldValue = await field.inputValue().catch(() => '');
-      if (fieldValue.toLowerCase().includes(optionText.toLowerCase().substring(0, 4))) {
-        console.log(`  ✓ Selected ${fieldName}: ${optionText} (keyboard)`);
+      // Try paragraph match on filtered list
+      const paragraphOption = this.page.getByRole('paragraph').filter({ hasText: optionText });
+      if (await paragraphOption.first().isVisible({ timeout: 500 }).catch(() => false)) {
+        await paragraphOption.first().evaluate((el: HTMLElement) => el.click());
+        console.log(`  ✓ Selected ${fieldName}: ${optionText} (filtered paragraph)`);
         return;
       }
     } catch (error) {
       // Continue to final fallback
     }
     
-    // Strategy 4: Direct text click fallback
+    // Strategy 3: role=option or direct text click (non-Storagely dropdowns)
     try {
-      const option = this.page.getByText(optionText, { exact: exactMatch });
-      await option.first().click({ timeout: 2000 });
-      console.log(`  ✓ Selected ${fieldName}: ${optionText} (text fallback)`);
-    } catch (fallbackError) {
-      console.log(`  - ${fieldName} option not found, skipping`);
+      await field.click({ force: true, timeout: 2000 });
+      await this.wait(300);
+      
+      const listboxOption = this.page.getByRole('option', { name: optionText });
+      if (await listboxOption.first().isVisible({ timeout: 800 }).catch(() => false)) {
+        await listboxOption.first().click({ force: true, timeout: 1500 });
+        console.log(`  ✓ Selected ${fieldName}: ${optionText} (listbox)`);
+        return;
+      }
+      
+      const textOption = exactMatch
+        ? this.page.getByText(optionText, { exact: true })
+        : this.page.getByText(optionText);
+      if (await textOption.first().isVisible({ timeout: 600 }).catch(() => false)) {
+        await textOption.first().click({ force: true, timeout: 1500 });
+        console.log(`  ✓ Selected ${fieldName}: ${optionText} (text)`);
+        return;
+      }
+    } catch (error) {
+      // Continue
     }
+    
+    console.log(`  ⚠ ${fieldName}: could not select "${optionText}"`);
   }
 
   /**
@@ -562,8 +566,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
   ): Promise<void> {
     try {
       await this.safeScroll(field);
-      await field.click();
-      await field.fill(value);
+      await field.fill(value, { timeout: 5000 });
       console.log(`  ✓ Filled ${fieldName}: ${value}`);
     } catch (error) {
       if (required) {
@@ -593,46 +596,47 @@ export class RentalDetailsPageSinglePage extends BasePage {
   ): Promise<void> {
     console.log('\n📍 SECTION 3: Filling Payment Details...');
     
-    // Card Number
+    // Card Number - fill() auto-focuses
     await this.safeScroll(this.cardNumberField);
-    await this.cardNumberField.click();
-    await this.cardNumberField.fill(paymentData.cardNumber);
+    await this.cardNumberField.fill(paymentData.cardNumber, { timeout: 5000 });
     console.log(`  ✓ Filled Card Number: ${paymentData.cardNumber}`);
     
     // Expiry
     await this.safeScroll(this.expiryField);
-    await this.expiryField.click();
-    await this.expiryField.fill(paymentData.expiryDate);
+    await this.expiryField.fill(paymentData.expiryDate, { timeout: 5000 });
     console.log(`  ✓ Filled Expiry: ${paymentData.expiryDate}`);
     
     // CVV
     await this.safeScroll(this.cvvField);
-    await this.cvvField.click();
-    await this.cvvField.fill(paymentData.cvv);
+    await this.cvvField.fill(paymentData.cvv, { timeout: 5000 });
     console.log(`  ✓ Filled CVV: ${paymentData.cvv}`);
     
-    // Billing Address - click, type, then select first dropdown option
+    // Billing Address - type, then select first dropdown option
     try {
       await this.safeScroll(this.billingAddressField);
-      await this.billingAddressField.click();
-      await this.billingAddressField.fill(billingAddress);
+      await this.billingAddressField.fill(billingAddress, { timeout: 5000 });
       console.log(`  ✓ Typed Billing Address: ${billingAddress}`);
       
       // Wait for dropdown to appear and select first option
-      await this.wait(1000);
+      await this.wait(700);
       await this.page.keyboard.press('ArrowDown');
-      await this.wait(500);
+      await this.wait(300);
       await this.page.keyboard.press('Enter');
       console.log('  ✓ Selected first address from dropdown');
+
+      // Click elsewhere to dismiss any address autocomplete/suggestion overlays
+      await this.wait(300);
+      await this.page.locator('body').click({ position: { x: 0, y: 0 }, force: true });
+      await this.wait(200);
+      console.log('  ✓ Clicked away to dismiss address suggestions');
     } catch {
       console.log('  - Billing address not found, skipping');
     }
     
-    // Billing City - click only
+    // Billing City
     try {
       await this.safeScroll(this.billingCityField);
-      await this.billingCityField.click();
-      await this.billingCityField.fill(billingCity);
+      await this.billingCityField.fill(billingCity, { timeout: 5000 });
       console.log(`  ✓ Filled Billing City: ${billingCity}`);
     } catch {
       console.log('  - Billing city not found, skipping');
@@ -682,8 +686,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
       console.log('  - Billing Zip/Postal Code field not visible, skipping');
     } else try {
       await this.safeScroll(this.billingZipField);
-      await this.billingZipField.click({ timeout: 5000 });
-      await this.billingZipField.fill(billingZip);
+      await this.billingZipField.fill(billingZip, { timeout: 5000 });
       console.log(`  ✓ Filled Billing Zip: ${billingZip}`);
     } catch {
       console.log('  - Billing zip not found, skipping');
@@ -736,13 +739,13 @@ export class RentalDetailsPageSinglePage extends BasePage {
           if (!isChecked) {
             const label = this.page.locator(`label[for="${id}"]`);
             if (await label.count() > 0) {
-              await label.scrollIntoViewIfNeeded();
-              await label.click();
+              await this.safeScroll(label);
+              await label.click({ force: true, timeout: 3000 });
               console.log(`  ✓ Clicked label for checkbox "${id}"`);
               console.log('✅ Agreement toggle completed');
               return;
             } else {
-              await checkbox.check({ force: true });
+              await checkbox.check({ force: true, timeout: 3000 });
               console.log(`  ✓ Checked checkbox "${id}"`);
               console.log('✅ Agreement toggle completed');
               return;
@@ -806,12 +809,12 @@ export class RentalDetailsPageSinglePage extends BasePage {
     
     // Strategy 3: Original toggle method (storEDGE format)
     try {
-      await this.agreementText.scrollIntoViewIfNeeded();
-      await this.agreementText.click();
-      await this.wait(500);
+      await this.safeScroll(this.agreementText);
+      await this.agreementText.click({ force: true, timeout: 3000 });
+      await this.wait(300);
       
-      await this.agreementToggle.scrollIntoViewIfNeeded();
-      await this.agreementToggle.click();
+      await this.safeScroll(this.agreementToggle);
+      await this.agreementToggle.click({ force: true, timeout: 3000 });
       console.log('  ✓ Enabled Agreement Toggle (storEDGE format)');
       console.log('✅ Agreement toggle completed');
       return;
@@ -829,8 +832,8 @@ export class RentalDetailsPageSinglePage extends BasePage {
         const checkbox = container.locator('input[type="checkbox"]').first();
         
         if (await checkbox.count() > 0) {
-          await checkbox.scrollIntoViewIfNeeded();
-          await checkbox.check();
+          await this.safeScroll(checkbox);
+          await checkbox.check({ force: true, timeout: 3000 });
           console.log('  ✓ Checked agreement checkbox (storEDGE)');
           console.log('✅ Agreement toggle completed');
           return;
@@ -850,8 +853,8 @@ export class RentalDetailsPageSinglePage extends BasePage {
         const isChecked = await cb.isChecked();
         
         if (!isChecked) {
-          await cb.scrollIntoViewIfNeeded();
-          await cb.check();
+          await this.safeScroll(cb);
+          await cb.check({ force: true, timeout: 3000 });
           console.log(`  ✓ Checked checkbox ${i + 1} (generic fallback)`);
           console.log('✅ Agreement toggle completed');
           return;
@@ -875,11 +878,11 @@ export class RentalDetailsPageSinglePage extends BasePage {
       // Wait for rent now button
       await this.safeScroll(this.rentNowButton);
       await this.rentNowButton.waitFor({ state: 'visible', timeout: 5000 });
-      await this.wait(500);
+      await this.wait(300);
       
       // Click the button
       console.log(`[${new Date().toISOString()}] 🖱️ Clicking RENT NOW...`);
-      await this.rentNowButton.click({ timeout: 10000 });
+      await this.rentNowButton.click({ force: true, timeout: 5000 });
       console.log(`[${new Date().toISOString()}] ✓ RENT NOW button clicked`);
       
       // Detect error message (polls up to 15s internally)
@@ -898,7 +901,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
       
       // Click RENT NOW again
       console.log(`[${new Date().toISOString()}] 🖱️ Clicking RENT NOW again (retry)...`);
-      await this.rentNowButton.click({ timeout: 10000 });
+      await this.rentNowButton.click({ force: true, timeout: 5000 });
       console.log(`[${new Date().toISOString()}] ✓ RENT NOW button clicked (retry)`);
       
       // Re-detect error

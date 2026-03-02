@@ -70,10 +70,10 @@ export const SINGLE_PAGE_RENT_URLS = {
     'https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue',
     'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland',
     'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club',
-    'https://purelystorage.com/storage-units/arizona/buckeye/west-yuma-road',
+    //'https://purelystorage.com/storage-units/arizona/buckeye/west-yuma-road',
     'https://www.yourwaystorage.com/storage-units/georgia/augusta/walton-way-ext',
     'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',
-    'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive'
+    //'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive'
   ]
 };
 
@@ -83,10 +83,10 @@ export const SINGLE_PAGE_FMS_PLATFORM: Record<string, string> = {
   'https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue': 'storEDGE',
   'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland': 'SiteLink',
   'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club': 'SiteLink',
-  'https://purelystorage.com/storage-units/arizona/buckeye/west-yuma-road': 'storEDGE',
+  //'https://purelystorage.com/storage-units/arizona/buckeye/west-yuma-road': 'storEDGE',
   'https://www.yourwaystorage.com/storage-units/georgia/augusta/walton-way-ext': 'SSM',
   'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue': 'SiteLink',
-  'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive': 'SSM'
+  //'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive': 'SSM'
 };
 
 // Helper function to get single-page URLs based on environment

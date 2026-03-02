@@ -11,10 +11,11 @@ export class BasePage {
 
   /**
    * Wait for a short period to allow elements to render (use sparingly)
+   * Uses pure Node.js timer to avoid CDP congestion delays during heavy page loads
    * @param ms Milliseconds to wait
    */
   async wait(ms: number = 1000): Promise<void> {
-    await this.page.waitForTimeout(ms);
+    await new Promise(resolve => setTimeout(resolve, ms));
   }
 
   /**
@@ -34,7 +35,7 @@ export class BasePage {
       timeout: 30000
     });
     // Brief wait for critical resources only
-    await this.page.waitForTimeout(1000);
+    await new Promise(resolve => setTimeout(resolve, 1000));
   }
 
   /**

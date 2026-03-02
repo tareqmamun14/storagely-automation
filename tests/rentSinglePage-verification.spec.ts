@@ -82,6 +82,10 @@ function readAllResults(): any[] {
   }
 }
 
+// Disable video (biggest CDP overhead); trace only on retry (no recording on first pass = fast)
+// retain-on-failure still records the entire time — causes same CDP congestion
+test.use({ video: 'off', trace: 'on-first-retry' });
+
 test.describe('Single-Page Rent Verification Tests', () => {
   const singlePageUrls = getSinglePageUrls().customer;
   
@@ -93,7 +97,7 @@ test.describe('Single-Page Rent Verification Tests', () => {
       companyNameFromUrl
     }) => {
       // Set longer timeout for these tests
-      test.setTimeout(240 * 1000); // 4 minutes to handle slower sites (navigation can take 40s+)
+      test.setTimeout(300 * 1000); // 5 minutes — step-four page load alone takes ~76s due to heavy resources
       
       // Get company/client name and platform
       const companyName = companyNameFromUrl(baseURL);
@@ -153,14 +157,19 @@ test.describe('Single-Page Rent Verification Tests', () => {
         testResult.step = 'Rent Button';
         console.log('\n📍 STEP 2: Clicking RENT button...');
         await storageListingPage.clickRentButton();
-        console.log('✅ RENT button clicked successfully');
+        console.log(`[${new Date().toISOString()}] ✅ RENT button clicked successfully`);
         
-        // Wait for page to load
-        await page.waitForTimeout(3000);
+        // Wait for step-four page DOM to be ready
+        console.log(`[${new Date().toISOString()}] ⏳ Waiting for page to settle...`);
+        await page.waitForLoadState('domcontentloaded').catch(() => {});
+        // Pure Node.js timer: let the heavy page finish loading without CDP interference
+        // This avoids the 57s+ CDP congestion delay that page.waitForTimeout(3000) caused
+        await new Promise(resolve => setTimeout(resolve, 8000));
+        console.log(`[${new Date().toISOString()}] ✅ Page settled`);
         
         // Verify we landed on the single-page form
         const currentUrl = page.url();
-        console.log(`   Navigated to: ${currentUrl}`);
+        console.log(`[${new Date().toISOString()}]    Navigated to: ${currentUrl}`);
         
         // ============================================
         // STEP 3: Fill complete single-page form (STEP 4 renumbered to STEP 3)
