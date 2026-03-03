@@ -869,11 +869,22 @@ export class RentalDetailsPageSinglePage extends BasePage {
   /**
    * Wait for the user to manually solve hCaptcha.
    * Prints a visible prompt in the terminal, then polls every 2 s until
-   * the hCaptcha response textarea has a token value (captcha solved).
+   * a solved-captcha signal is detected. Checks multiple indicators:
+   *   1. textarea[name="h-captcha-response"] has a token value
+   *   2. textarea[name="g-recaptcha-response"] has a token value
+   *   3. Any element with a non-empty [data-hcaptcha-response] attribute
    * There is NO time limit — it waits as long as you need.
    */
   async waitForManualCaptcha(): Promise<void> {
     const currentUrl = this.page.url();
+    // Play audible alert — fire-and-forget so it never blocks Node exit
+    try {
+      const child = require('child_process').spawn(
+        'powershell', ['-NoProfile', '-Command', '[Console]::Beep(1000,600); [Console]::Beep(1500,400)'],
+        { stdio: 'ignore', detached: true }
+      );
+      child.unref();
+    } catch { /* ignore if beep fails */ }
     console.log('\n🛑 ═══════════════════════════════════════════════════════════');
     console.log('🛑  hCaptcha DETECTED — Manual step required!');
     console.log(`🛑  URL: ${currentUrl}`);
@@ -883,23 +894,52 @@ export class RentalDetailsPageSinglePage extends BasePage {
     console.log('🛑  (No time limit — take as long as you need)');
     console.log('🛑 ═══════════════════════════════════════════════════════════\n');
 
-    const pollInterval = 2000;
+    const pollInterval = 500; // Check every 500ms for fast detection
+    let pollCount = 0;
 
-    // Poll indefinitely until hCaptcha token appears
+    // Poll indefinitely until hCaptcha solved signal is found
     while (true) {
       try {
-        // The hCaptcha iframe writes a token into a hidden textarea when solved
-        const token = await this.page.evaluate(() => {
-          const ta = document.querySelector('textarea[name="h-captcha-response"]') as HTMLTextAreaElement | null;
-          return ta ? ta.value : '';
+        const solved = await this.page.evaluate(() => {
+          // Check 1: textarea[name="h-captcha-response"]
+          const hTa = document.querySelector('textarea[name="h-captcha-response"]') as HTMLTextAreaElement | null;
+          if (hTa && hTa.value && hTa.value.length > 0) return 'h-captcha-response textarea';
+
+          // Check 2: textarea[name="g-recaptcha-response"] (hCaptcha backwards-compat)
+          const gTa = document.querySelector('textarea[name="g-recaptcha-response"]') as HTMLTextAreaElement | null;
+          if (gTa && gTa.value && gTa.value.length > 0) return 'g-recaptcha-response textarea';
+
+          // Check 3: [data-hcaptcha-response] attribute on any wrapper element
+          const wrapper = document.querySelector('[data-hcaptcha-response]') as HTMLElement | null;
+          if (wrapper) {
+            const resp = wrapper.getAttribute('data-hcaptcha-response');
+            if (resp && resp.length > 0) return 'data-hcaptcha-response attribute';
+          }
+
+          // Check 4: iframe with title containing "hCaptcha" that has data-hcaptcha-response
+          const iframes = document.querySelectorAll('iframe');
+          for (const iframe of iframes) {
+            const resp = iframe.getAttribute('data-hcaptcha-response');
+            if (resp && resp.length > 0) return 'iframe data-hcaptcha-response';
+          }
+
+          return '';
         });
-        if (token && token.length > 0) {
-          console.log('✅ hCaptcha solved! Continuing automation...\n');
+
+        if (solved) {
+          console.log(`✅ hCaptcha solved! (detected via: ${solved}) Continuing automation...\n`);
           return;
         }
       } catch {
         // page might be navigating — ignore
       }
+
+      pollCount++;
+      // Log a reminder every 30 seconds (60 polls × 500ms)
+      if (pollCount % 60 === 0) {
+        console.log(`⏳ Still waiting for hCaptcha solve... (${Math.round(pollCount * 0.5)}s elapsed)`);
+      }
+
       await new Promise(resolve => setTimeout(resolve, pollInterval));
     }
   }
@@ -996,182 +1036,108 @@ export class RentalDetailsPageSinglePage extends BasePage {
 
   /**
    * Quick error check - IMMEDIATE check (no delay)
+   * Grabs the FULL visible text from any toast/alert — never filters out parts.
    */
   private async quickErrorCheck(): Promise<string> {
-    // Check immediately - no waiting
-    
-    // PRIORITY CHECK 1: Look for error details paragraph INSIDE toast notification
-    // This is the specific error message (not the title)
-    const errorDetailsParagraphs = this.page.locator('[data-id*="toast-notification"], .toast-container').locator('p');
-    const count = await errorDetailsParagraphs.count().catch(() => 0);
-    
-    if (count > 0) {
-      // Get all paragraphs and filter to find the details (skip single-word titles)
-      for (let i = 0; i < count; i++) {
-        const paragraph = errorDetailsParagraphs.nth(i);
-        try {
-          if (await paragraph.isVisible({ timeout: 500 })) {
-            const text = await paragraph.innerText();
-            const cleanText = text.trim();
-            
-            // Skip title-like text (single words or very short)
-            // Keep error details (longer descriptions)
-            if (cleanText.length > 15 && !cleanText.match(/^(Error|Warning|Success|Info|occurred)$/i)) {
-              console.log(`🔍 Found error details: "${cleanText}"`);
-              return cleanText;
-            }
+    // CHECK 1: Full toast notification text (title + body, everything visible)
+    const toastLocators = [
+      this.page.locator('[data-id*="toast-notification"]').first(),
+      this.page.locator('.toast-container').first(),
+    ];
+
+    for (const toast of toastLocators) {
+      try {
+        if (await toast.isVisible({ timeout: 500 })) {
+          const fullText = (await toast.innerText()).trim();
+          const cleaned = this.cleanToastText(fullText);
+          if (cleaned) {
+            console.log(`🔍 Found toast text: "${cleaned}"`);
+            return cleaned;
           }
-        } catch (e) {
-          // Skip if not visible
         }
-      }
+      } catch { /* not visible yet */ }
     }
-    
-    // PRIORITY CHECK 2: Look for response/error code patterns
-    const detailedError = this.page.locator('p').filter({ hasText: /Response Code|error|invalid|declined/i }).first();
-    if (await detailedError.isVisible({ timeout: 500 })) {
-      const text = await detailedError.innerText();
-      if (text.trim() && text.length > 15) {
-        return text.trim();
-      }
-    }
-    
-    // CHECK 3: Toast body (get paragraph content, not just heading)
-    const toastBody = this.page.locator('.toast-container .toast-body, [data-id*="toast-notification"]');
-    if (await toastBody.isVisible({ timeout: 500 })) {
-      const message = await toastBody.innerText();
-      const cleanedMsg = this.extractErrorDetailsFromToast(message);
-      if (cleanedMsg) {
-        return cleanedMsg;
-      }
+
+    // CHECK 2: alert-danger or role=alert
+    const alertLocators = [
+      this.page.locator('.alert-danger').first(),
+      this.page.locator('[role="alert"]').first(),
+    ];
+    for (const alert of alertLocators) {
+      try {
+        if (await alert.isVisible({ timeout: 500 })) {
+          const text = (await alert.innerText()).trim();
+          if (text && text.length < 500) return text;
+        }
+      } catch { /* not visible */ }
     }
 
     return '';
   }
 
   /**
-   * Extract error details from toast text
-   * Removes titles like "Error occurred" and keeps the actual error message
+   * Clean toast text: strip only the "Close" / "×" button text, keep everything else.
    */
-  private extractErrorDetailsFromToast(fullText: string): string {
+  private cleanToastText(fullText: string): string {
     if (!fullText) return '';
-    
-    const lines = fullText.split('\n').map(l => l.trim()).filter(l => l);
-    
-    // Remove common titles
-    const titles = ['Error', 'Error occurred', 'Warning', 'Success', 'Info', 'Close'];
-    
-    // Find the longest meaningful line (usually the error details)
-    const details = lines.filter(line => {
-      return line.length > 15 && !titles.includes(line);
-    });
-    
-    if (details.length > 0) {
-      return details.join(' - '); // Join multiple details with separator
-    }
-    
-    // If no details found, return the first non-title line
-    const nonTitleLines = lines.filter(line => !titles.includes(line));
-    if (nonTitleLines.length > 0) {
-      return nonTitleLines.join(' - ');
-    }
-    
-    return '';
+    const lines = fullText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+    // Remove only close-button artefacts
+    const meaningful = lines.filter(l => !['Close', '×', 'X', '✕'].includes(l));
+    return meaningful.join(' — ');
   }
 
   /**
-   * Active polling - check every 500ms for up to 15 seconds
+   * Active polling - check every 500ms for up to 15 seconds.
+   * Uses the same full-text approach as quickErrorCheck.
    */
   private async pollingErrorCheck(): Promise<string> {
     console.log('📡 Active polling for errors...');
     
-    for (let i = 0; i < 20; i++) { // 20 attempts x 500ms = 10 seconds
+    for (let i = 0; i < 30; i++) { // 30 attempts × 500ms = 15 seconds
       try {
         await this.wait(500);
-        
-        // PRIORITY CHECK 1: Look for error details paragraph INSIDE toast notification
-        // This is the specific error message (not the title)
-        const errorDetailsParagraphs = this.page.locator('[data-id*="toast-notification"], .toast-container').locator('p');
-        const count = await errorDetailsParagraphs.count().catch(() => 0);
-        
-        if (count > 0) {
-          // Get all paragraphs and filter to find the details (skip single-word titles)
-          for (let j = 0; j < count; j++) {
-            const paragraph = errorDetailsParagraphs.nth(j);
-            try {
-              if (await paragraph.isVisible({ timeout: 300 })) {
-                const text = await paragraph.innerText();
-                const cleanText = text.trim();
-                
-                // Skip title-like text (single words or very short)
-                // Keep error details (longer descriptions)
-                if (cleanText.length > 15 && !cleanText.match(/^(Error|Warning|Success|Info|occurred)$/i)) {
-                  console.log(`✓ Error found at poll ${i + 1}`);
-                  return cleanText;
-                }
+
+        // CHECK 1: Full toast text
+        const toastLocators = [
+          this.page.locator('[data-id*="toast-notification"]').first(),
+          this.page.locator('.toast-container').first(),
+        ];
+        for (const toast of toastLocators) {
+          try {
+            if (await toast.isVisible({ timeout: 300 })) {
+              const fullText = (await toast.innerText()).trim();
+              const cleaned = this.cleanToastText(fullText);
+              if (cleaned) {
+                console.log(`✓ Error found at poll ${i + 1}`);
+                return cleaned;
               }
-            } catch (e) {
-              // Skip if not visible
             }
-          }
-        }
-        
-        // PRIORITY CHECK 2: Look for response/error code patterns
-        const detailedError = this.page.locator('p').filter({ hasText: /Response Code|error|invalid|declined/i }).first();
-        if (await detailedError.isVisible({ timeout: 300 })) {
-          const text = await detailedError.innerText();
-          if (text.trim() && text.length > 15) {
-            console.log(`✓ Error found at poll ${i + 1}`);
-            return text.trim();
-          }
-        }
-        
-        // CHECK 3: Toast body first (get paragraph content, not just heading)
-        const toastBody = this.page.locator('.toast-container .toast-body, [data-id*="toast-notification"]');
-        if (await toastBody.isVisible({ timeout: 300 })) {
-          const message = await toastBody.innerText();
-          const cleanedMsg = this.extractErrorDetailsFromToast(message);
-          if (cleanedMsg) {
-            console.log(`✓ Error found at poll ${i + 1}`);
-            return cleanedMsg;
-          }
-        }
-        
-        // CHECK 4: Toast container (fallback)
-        const toastContainer = this.page.locator('.toast-container').first();
-        if (await toastContainer.isVisible({ timeout: 300 })) {
-          const toastText = await toastContainer.innerText();
-          if (toastText && toastText.trim()) {
-            console.log(`✓ Error found at poll ${i + 1}`);
-            return toastText.trim();
-          }
+          } catch { /* not visible yet */ }
         }
 
-        // CHECK 5: Common error selectors
-        const errorLocators = [
+        // CHECK 2: alert-danger / role=alert
+        const alertLocators = [
           this.page.locator('.alert-danger').first(),
           this.page.locator('[role="alert"]').first(),
-          this.page.locator('text=/error|Error|invalid|Invalid|declined|Declined/i').first()
         ];
-        
-        for (const locator of errorLocators) {
-          if (await locator.isVisible({ timeout: 300 })) {
-            const message = await locator.innerText();
-            if (message.trim() && message.length < 500) {
-              console.log(`✓ Error found at poll ${i + 1}`);
-              return message.trim();
+        for (const alert of alertLocators) {
+          try {
+            if (await alert.isVisible({ timeout: 300 })) {
+              const text = (await alert.innerText()).trim();
+              if (text && text.length < 500) {
+                console.log(`✓ Error found at poll ${i + 1}`);
+                return text;
+              }
             }
-          }
+          } catch { /* not visible */ }
         }
 
       } catch (error) {
-        // Continue polling even if individual checks fail
         console.warn(`⚠️  Check failed at poll ${i + 1}, continuing...`);
         continue;
       }
     }
     
-    // Polling completed - no error found
     console.log('⚠️  Polling completed - no error message detected');
     return '';
   }

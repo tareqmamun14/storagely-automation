@@ -66,13 +66,13 @@ export const SINGLE_PAGE_RENT_URLS = {
     // Add staging URLs here if needed
   ],
   [Environment.PRODUCTION]: [
-    // 'https://www.firststorage.com/storage-units/alabama/huntsville/memorial-parkway-sw',
-    // 'https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue',
-    // 'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland',
-    // 'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club',
+    'https://www.firststorage.com/storage-units/alabama/huntsville/memorial-parkway-sw',
+    'https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue',
+    'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland',
+    'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club',
     'https://purelystorage.com/storage-units/arizona/buckeye/west-yuma-road',
-    // 'https://www.yourwaystorage.com/storage-units/georgia/augusta/walton-way-ext',
-    // 'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',
+    'https://www.yourwaystorage.com/storage-units/georgia/augusta/walton-way-ext',
+    'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',
     'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive'
   ]
 };

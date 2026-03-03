@@ -270,9 +270,6 @@ test.beforeAll(() => {
 
 // Print a comprehensive summary of all results at the end (consolidated across workers)
 test.afterAll(async () => {
-  // Small delay to ensure all workers have written their results
-  await new Promise(resolve => setTimeout(resolve, 100));
-  
   const allResults = readAllResults();
   
   if (allResults.length === 0) {

@@ -7,6 +7,7 @@ export default defineConfig({
   retries: 1, // Retry once (total 2 attempts) for all tests, even when failed or interrupted
   workers: process.env.CI ? 2 : 2, // (reduced to 2 workers) Increased to 3 workers locally for faster execution (8 cores available)
   timeout: 300_000, // 5 minute global safety timeout - individual tests override with test.setTimeout()
+  reportSlowTests: null, // Suppress "Slow test file" warning (captcha tests are expected to be slow)
   expect: { timeout: 20000 }, // 20 seconds for element checks
   
   reporter: process.env.CI ? [
@@ -37,44 +38,7 @@ export default defineConfig({
     }],
     ['junit', { outputFile: 'test-results/junit.xml' }]
   ] : [
-    ['html', { open: 'never' }],
-    ['allure-playwright', {
-      outputFolder: 'allure-results',
-      suiteTitle: '🏢 Storagely Automation Test Suite',
-      detail: true,
-      environmentInfo: {
-        framework: 'Playwright',
-        node_version: process.version,
-        os: process.platform,
-        test_environment: 'Local Development',
-        browser: 'Chrome',
-        base_url: 'Multiple Storage Sites',
-        tester: 'QA Team',
-        build_version: '1.0.0'
-      },
-      categories: [
-        {
-          name: '🏠 Homepage Tests',
-          messageRegex: '.*landing page.*',
-          traceRegex: '.*homepage.*'
-        },
-        {
-          name: '📧 Contact Tests',
-          messageRegex: '.*contact.*',
-          traceRegex: '.*contact.*'
-        },
-        {
-          name: '🏷️ Banner Tests',
-          messageRegex: '.*banner.*',
-          traceRegex: '.*banner.*'
-        },
-        {
-          name: '💰 Discount Tests',
-          messageRegex: '.*discount.*|.*offer.*',
-          traceRegex: '.*discount.*'
-        }
-      ]
-    }]
+    ['line'],  // Fast, lightweight reporter for local runs (no HTML/artifact generation delay)
   ],
   
   use: {
