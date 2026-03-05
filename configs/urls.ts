@@ -21,6 +21,7 @@ export enum Environment {
       'https://test.staging.storagely-api.com/rhino-storage/storage-units/louisiana/covington/philip-drive',
       'https://test.staging.storagely-api.com/gatekeeper-self-storage/storage-units/georgia/peachtree-city/senoia-road',
       'https://test.staging.storagely-api.com/storage-boss/storage-units/louisiana/ponchatoula/west-pine-street',
+      'https://test.staging.storagely-api.com/smart-self-storage-ohio/storage-units/ohio/macedonia/bavaria-road',
 
     ],
     [Environment.PRODUCTION]: [
@@ -28,16 +29,17 @@ export enum Environment {
        'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive',
        'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road',
        'https://storagedepotla.com/storage-units/louisiana/hammond/north-morrison-blvd',
+       'https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road',
        ]
   };
   
   // FMS Platform information
 export const FMS_PLATFORM: Record<string, string> = {
-  'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue': 'storEDGE',
   'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road': 'storEDGE',
   'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive': 'SiteLink',
   'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road': 'SiteLink',
   'https://storagedepotla.com/storage-units/louisiana/ponchatoula/west-pine-street': 'SiteLink',
+  'https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road' : 'SSM',
 };
  
 export const storageSiteUrls = [
@@ -73,7 +75,7 @@ export const SINGLE_PAGE_RENT_URLS = {
     'https://purelystorage.com/storage-units/arizona/buckeye/west-yuma-road',
     'https://www.yourwaystorage.com/storage-units/georgia/augusta/walton-way-ext',
     'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',
-    'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive'
+    'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',
   ]
 };
 

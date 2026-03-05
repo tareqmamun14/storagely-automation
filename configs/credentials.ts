@@ -15,7 +15,7 @@ export const ADMIN_CREDENTIALS = {
 
 export const TEST_USER = {
   firstName: 'Test',
-  lastName: 'Testing_Tareq',
+  lastName: 'TestingTareq',
   email: 'tareq@storagely.io',
   phone: '5551234567',
   address: 'NYC',
@@ -45,7 +45,7 @@ export const TEST_USER = {
 // Single-page layout specific credentials (for Huntsville and similar)
 export const SINGLE_PAGE_USER = {
   firstName: 'Test',
-  lastName: 'Testing_Tareq',
+  lastName: 'TestingTareq',
   email: 'tareq@storagely.io',
   phone: '5551234567',
   address: '6255 Towncenter Drive Suite 831',
