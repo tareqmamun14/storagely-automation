@@ -65,7 +65,14 @@ export const storageSiteUrls = [
 // ============================================
 export const SINGLE_PAGE_RENT_URLS = {
   [Environment.STAGING]: [
-    // Add staging URLs here if needed
+    'https://test.staging.storagely-api.com/first-storage/storage-units/alabama/huntsville/memorial-parkway-sw',
+    'https://test.staging.storagely-api.com/columbia-self-storage/storage-units/new-jersey/south-plainfield/park-avenue',
+    'https://test.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/mayland',
+    'https://test.staging.storagely-api.com/sunbirdstorage/storage-units/nc/winston-salem/country-club',   
+    'https://test.staging.storagely-api.com/purely-storage/storage-units/arizona/buckeye/west-yuma-road',
+    'https://test.staging.storagely-api.com/yourway-storage/storage-units/georgia/augusta/walton-way-ext',
+    'https://test.staging.storagely-api.com/red-rocks-self-storage/storage-units/colorado/aurora/east-14th-avenuee',  
+    'https://test.staging.storagely-api.com/storage-star/storage-units/colorado/colorado-springs/aerotech-drive',
   ],
   [Environment.PRODUCTION]: [
     'https://www.firststorage.com/storage-units/alabama/huntsville/memorial-parkway-sw',
