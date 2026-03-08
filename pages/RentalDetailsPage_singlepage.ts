@@ -43,9 +43,14 @@ export class RentalDetailsPageSinglePage extends BasePage {
   }
   
   private get addressField() {
-    return this.page.getByRole('textbox', { name: 'Street address' })
+    // IMPORTANT: Do NOT use getByPlaceholder('Address') without exact:true —
+    // it matches "Email address" too, causing a strict mode violation that
+    // silently fails the whole .or() chain.
+    return this.page.locator('#tenant-address-input')
+      .or(this.page.getByPlaceholder('Street address', { exact: true }))
+      .or(this.page.getByRole('textbox', { name: 'Street address' }))
       .or(this.page.locator('input[name="address"]'))
-      .or(this.page.getByPlaceholder('Address'));
+      .or(this.page.getByPlaceholder('Address', { exact: true }));
   }
   
   private get cityField() {
@@ -197,8 +202,48 @@ export class RentalDetailsPageSinglePage extends BasePage {
     }
   }
 
+  // ============================================
+  // TWO-STEP LAYOUT DETECTION & HELPERS
+  // ============================================
+
   /**
-   * Fill complete single-page rental form using exact Playwright codegen selectors
+   * Detect if the current page is a two-step layout (e.g. Minimall Storage).
+   * Step 4 has tenant details + captcha + "CONTINUE TO NEXT STEP";
+   * Step 5 (step=2) has payment details + "Rent Now".
+   */
+  private async isTwoStepLayout(): Promise<boolean> {
+    try {
+      // Same button element used in rentReservation step-four flow
+      const continueBtn = this.page.getByRole('button', { name: 'CONTINUE TO NEXT STEP' });
+      return await continueBtn.isVisible({ timeout: 3000 });
+    } catch {
+      return false;
+    }
+  }
+
+  /**
+   * Click "CONTINUE TO NEXT STEP" button (same element as rentReservation step-four).
+   * Used in two-step layouts like Minimall Storage.
+   */
+  private async clickContinueToNextStep(): Promise<void> {
+    console.log(`[${new Date().toISOString()}] 📍 Clicking "CONTINUE TO NEXT STEP"...`);
+    const continueBtn = this.page.getByRole('button', { name: 'CONTINUE TO NEXT STEP' });
+    await this.safeScroll(continueBtn);
+    await continueBtn.waitFor({ state: 'visible', timeout: 10000 });
+    await continueBtn.click({ timeout: 10000 });
+    console.log(`[${new Date().toISOString()}] ✅ "CONTINUE TO NEXT STEP" clicked`);
+    // Wait for step=2 page to load
+    await this.page.waitForLoadState('domcontentloaded', { timeout: 30000 });
+    await this.wait(3000);
+    console.log(`[${new Date().toISOString()}] ✅ Step 5 (step=2) page loaded: ${this.page.url()}`);
+  }
+
+  /**
+   * Fill complete single-page rental form using exact Playwright codegen selectors.
+   * Supports both true single-page layouts AND two-step layouts (like Minimall Storage).
+   *
+   * @param userData - user/test data for all form fields
+   * @param hasStepFourCaptcha - true if hCaptcha appears on Step 4 (before "Continue to next step")
    */
   async fillCompleteSinglePageForm(userData: {
     firstName: string,
@@ -229,31 +274,74 @@ export class RentalDetailsPageSinglePage extends BasePage {
       expiryDate: string,
       cvv: string
     }
-  }): Promise<void> {
+  }, hasStepFourCaptcha: boolean = false): Promise<void> {
     console.log(`[${new Date().toISOString()}] 📝 Starting single-page rental form fill...`);
     
     try {
       // Wait for form to be ready
       await this.wait(2000);
       this.ensurePageAlive('form initialization');
-      
-      // Fill all sections with page-alive guards between each
-      console.log(`[${new Date().toISOString()}] 📋 Filling tenant details...`);
-      await this.fillTenantDetails(userData);
-      this.ensurePageAlive('after tenant details');
-      
-      console.log(`[${new Date().toISOString()}] 🪪 Filling driver's license details...`);
-      await this.fillDriversLicenseDetails();
-      this.ensurePageAlive('after driver\'s license');
-      
-      console.log(`[${new Date().toISOString()}] 💳 Filling payment details...`);
-      await this.fillPaymentDetails(userData.paymentInfo, userData.address, userData.city, userData.zipCode, userData.province);
-      this.ensurePageAlive('after payment details');
-      
-      console.log(`[${new Date().toISOString()}] ✅ Enabling agreement toggle...`);
-      await this.enableAgreementToggle();
-      
-      console.log(`[${new Date().toISOString()}] ✅ Single-page rental form completed`);
+
+      // Detect two-step layout (e.g. Minimall Storage)
+      const twoStep = await this.isTwoStepLayout();
+
+      if (twoStep) {
+        // ══════════════════════════════════════════════
+        // TWO-STEP FLOW (Step 4 → Step 5)
+        // e.g. Minimall Storage: Tenant + Captcha → Payment + RENT NOW
+        // Step 4: Tenant details + hCaptcha + "Continue to next step"
+        // Step 5 (step=2): Payment details only → "Rent Now"
+        // ══════════════════════════════════════════════
+        console.log(`[${new Date().toISOString()}] 🔀 Two-step layout detected — Step 4 → Step 5 flow`);
+
+        // STEP 4: Tenant Details
+        console.log(`[${new Date().toISOString()}] 📋 [Step 4] Filling tenant details...`);
+        await this.fillTenantDetails(userData);
+        this.ensurePageAlive('after tenant details (step 4)');
+
+        // STEP 4: hCaptcha — wait for manual solve before continuing
+        if (hasStepFourCaptcha) {
+          console.log(`[${new Date().toISOString()}] 🛑 [Step 4] hCaptcha detected — waiting for manual solve...`);
+          await this.waitForManualCaptcha();
+          this.ensurePageAlive('after captcha solve (step 4)');
+        }
+
+        // STEP 4 → STEP 5: Click "CONTINUE TO NEXT STEP"
+        // Same button element used in rentReservation step-four flow
+        await this.clickContinueToNextStep();
+        this.ensurePageAlive('after continue to step 5');
+
+        // STEP 5 (step=2): Card details ONLY — billing address/city/state/zip already carried over from step 4
+        console.log(`[${new Date().toISOString()}] 💳 [Step 5] Filling card details only (billing fields pre-filled from step 4)...`);
+        await this.fillCardDetailsOnly(userData.paymentInfo);
+        this.ensurePageAlive('after card details (step 5)');
+
+        console.log(`[${new Date().toISOString()}] ✅ Two-step rental form completed (Step 4 + Step 5)`);
+
+      } else {
+        // ══════════════════════════════════════════════
+        // SINGLE-PAGE FLOW (original — all on one page)
+        // ══════════════════════════════════════════════
+        console.log(`[${new Date().toISOString()}] 📄 Single-page layout — filling all sections on one page`);
+
+        // Fill all sections with page-alive guards between each
+        console.log(`[${new Date().toISOString()}] 📋 Filling tenant details...`);
+        await this.fillTenantDetails(userData);
+        this.ensurePageAlive('after tenant details');
+
+        console.log(`[${new Date().toISOString()}] 🪪 Filling driver's license details...`);
+        await this.fillDriversLicenseDetails();
+        this.ensurePageAlive('after driver\'s license');
+
+        console.log(`[${new Date().toISOString()}] 💳 Filling payment details...`);
+        await this.fillPaymentDetails(userData.paymentInfo, userData.address, userData.city, userData.zipCode, userData.province);
+        this.ensurePageAlive('after payment details');
+
+        console.log(`[${new Date().toISOString()}] ✅ Enabling agreement toggle...`);
+        await this.enableAgreementToggle();
+
+        console.log(`[${new Date().toISOString()}] ✅ Single-page rental form completed`);
+      }
       
     } catch (error) {
       const errorMsg = `❌ CRITICAL ERROR: Failed to fill single-page rental form - ${(error as Error).message}`;
@@ -306,21 +394,32 @@ export class RentalDetailsPageSinglePage extends BasePage {
     await this.phoneField.fill(userData.phone);
     console.log(`  ✓ Filled Phone: ${userData.phone}`);
     
+    // Small wait to let the page settle after phone fill (Vue.js reactivity / Google Places init)
+    await this.wait(500);
+
     // Address, City, State, Zip - optional fields in tenant section
     // NOTE: Many SSM platform sites (yourway, purely) don't have these here — only in Payment section
     try {
-      const addressVisible = await this.addressField.isVisible({ timeout: 2000 }).catch(() => false);
+      const addressVisible = await this.addressField.waitFor({ state: 'visible', timeout: 5000 }).then(() => true).catch(() => false);
       if (addressVisible) {
         await this.safeScroll(this.addressField);
         await this.addressField.click();
         await this.addressField.fill(userData.address);
         console.log(`  ✓ Filled Address: ${userData.address}`);
         
-        // Click elsewhere on the page to dismiss any autocomplete/suggestion overlays
+        // Blank click on a heading to dismiss Google Places autocomplete suggestions
+        // Same pattern as RentalDetailsPage_stepfour summaryHeading.click()
         await this.wait(500);
-        await this.page.locator('body').click({ position: { x: 0, y: 0 }, force: true });
+        try {
+          const heading = this.page.getByRole('heading', { name: 'Tenant Details' })
+            .or(this.page.getByRole('heading', { name: 'Summary of Rental' }));
+          await heading.first().click({ timeout: 2000 });
+        } catch {
+          // Fallback: click body if no heading found
+          await this.page.locator('body').click({ position: { x: 0, y: 0 }, force: true });
+        }
         await this.wait(300);
-        console.log('  ✓ Clicked away to dismiss address suggestions');
+        console.log('  ✓ Clicked heading to dismiss address suggestions');
       } else {
         console.log('  - Address field not in tenant section, will fill in payment section');
       }
@@ -329,7 +428,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
     }
     
     try {
-      const cityVisible = await this.cityField.isVisible({ timeout: 2000 }).catch(() => false);
+      const cityVisible = await this.cityField.waitFor({ state: 'visible', timeout: 3000 }).then(() => true).catch(() => false);
       if (cityVisible) {
         await this.safeScroll(this.cityField);
         await this.cityField.click();
@@ -366,6 +465,8 @@ export class RentalDetailsPageSinglePage extends BasePage {
         stateValue = userData.province.colorado || 'Colorado';
       } else if (currentUrl.includes('sunbirdstorage.com')) {
         stateValue = userData.province.northCarolina || 'North Carolina';
+      } else if (currentUrl.includes('minimallstorage.com') || currentUrl.includes('mini-mall-storage')) {
+        stateValue = userData.province.alabama || 'Alabama';
       } else if (userData.province.alabama) {
         stateValue = userData.province.alabama;
       }
@@ -579,6 +680,40 @@ export class RentalDetailsPageSinglePage extends BasePage {
   }
 
   /**
+   * Fill ONLY card details (Card Number, Expiry, CVV).
+   * Used exclusively for Minimall Storage's step=2 page where billing
+   * address/city/state/zip are already pre-filled from step 4.
+   * Does NOT touch billing fields — Minimall only.
+   */
+  private async fillCardDetailsOnly(paymentData: {
+    cardNumber: string,
+    expiryDate: string,
+    cvv: string
+  }): Promise<void> {
+    console.log('\n📍 Filling Card Details Only (Minimall step=2)...');
+
+    // Card Number
+    await this.safeScroll(this.cardNumberField);
+    await this.cardNumberField.click();
+    await this.cardNumberField.fill(paymentData.cardNumber);
+    console.log(`  ✓ Filled Card Number: ${paymentData.cardNumber}`);
+
+    // Expiry
+    await this.safeScroll(this.expiryField);
+    await this.expiryField.click();
+    await this.expiryField.fill(paymentData.expiryDate);
+    console.log(`  ✓ Filled Expiry: ${paymentData.expiryDate}`);
+
+    // CVV
+    await this.safeScroll(this.cvvField);
+    await this.cvvField.click();
+    await this.cvvField.fill(paymentData.cvv);
+    console.log(`  ✓ Filled CVV: ${paymentData.cvv}`);
+
+    console.log('✅ Card details completed (billing fields skipped — pre-filled from step 4)');
+  }
+
+  /**
    * Fill Payment Details Section
    * Uses exact sequence from Playwright recording
    */
@@ -668,6 +803,8 @@ export class RentalDetailsPageSinglePage extends BasePage {
         stateName = province.colorado || 'Colorado';
       } else if (currentUrl.includes('sunbirdstorage.com')) {
         stateName = province.northCarolina || 'North Carolina';
+      } else if (currentUrl.includes('minimallstorage.com') || currentUrl.includes('mini-mall-storage')) {
+        stateName = province.alabama || 'Alabama';
       }
       
       await this.selectDropdownOption(

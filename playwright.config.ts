@@ -38,7 +38,7 @@ export default defineConfig({
     }],
     ['junit', { outputFile: 'test-results/junit.xml' }]
   ] : [
-    ['line'],  // Fast, lightweight reporter for local runs (no HTML/artifact generation delay)
+    ['list'],  // Shows full console output for every test in real-time (line reporter suppresses passing test logs)
   ],
   
   use: {

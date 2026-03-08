@@ -69,20 +69,22 @@ export const SINGLE_PAGE_RENT_URLS = {
     'https://test.staging.storagely-api.com/columbia-self-storage/storage-units/new-jersey/south-plainfield/park-avenue',
     'https://test.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/mayland',
     'https://test.staging.storagely-api.com/sunbirdstorage/storage-units/nc/winston-salem/country-club',   
-    'https://test.staging.storagely-api.com/purely-storage/storage-units/arizona/buckeye/west-yuma-road',
+    'https://test.staging.storagely-api.com/purely-storage/storage-units/washington/pasco/north-road-44',
     'https://test.staging.storagely-api.com/yourway-storage/storage-units/georgia/augusta/walton-way-ext',
     'https://test.staging.storagely-api.com/red-rocks-self-storage/storage-units/colorado/aurora/east-14th-avenuee',  
     'https://test.staging.storagely-api.com/storage-star/storage-units/colorado/colorado-springs/aerotech-drive',
+    'https://test.staging.storagely-api.com/mini-mall-storage/storage-units/alabama/courtland/highway-33',
   ],
   [Environment.PRODUCTION]: [
     'https://www.firststorage.com/storage-units/alabama/huntsville/memorial-parkway-sw',
     'https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue',
     'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland',
     'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club',
-    'https://purelystorage.com/storage-units/arizona/buckeye/west-yuma-road',
+    'https://purelystorage.com/storage-units/washington/pasco/north-road-44',
     'https://www.yourwaystorage.com/storage-units/georgia/augusta/walton-way-ext',
     'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',
     'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',
+    'https://minimallstorage.com/storage-units/alabama/courtland/highway-33',
   ]
 };
 
@@ -92,10 +94,11 @@ export const SINGLE_PAGE_FMS_PLATFORM: Record<string, string> = {
   'https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue': 'storEDGE',
   'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland': 'SiteLink',
   'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club': 'SiteLink',
-  'https://purelystorage.com/storage-units/arizona/buckeye/west-yuma-road': 'storEDGE',
+  'https://purelystorage.com/storage-units/washington/pasco/north-road-44': 'storEDGE',
   'https://www.yourwaystorage.com/storage-units/georgia/augusta/walton-way-ext': 'SSM',
   'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue': 'SiteLink',
-  'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive': 'SSM'
+  'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive': 'SSM',
+  'https://minimallstorage.com/storage-units/alabama/courtland/highway-33': 'SiteLink',
 };
 
 // ============================================
@@ -108,7 +111,20 @@ export const SINGLE_PAGE_FMS_PLATFORM: Record<string, string> = {
 // ============================================
 export const CAPTCHA_CUSTOMER_URLS: string[] = [
   'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',
-  'https://purelystorage.com/storage-units/arizona/buckeye/west-yuma-road',
+  'https://purelystorage.com/storage-units/washington/pasco/north-road-44',
+];
+
+// ============================================
+// STEP-FOUR CAPTCHA URLS
+// ============================================
+// URLs where hCaptcha appears on Step 4 (before "Continue to next step"),
+// NOT before the final RENT NOW button. These customers have a two-step
+// flow (Step 4 → Step 5) within the single-page test suite.
+// The captcha is handled during form fill, not at RENT NOW time.
+// To mute a customer: just comment out or remove their URL.
+// ============================================
+export const STEP_FOUR_CAPTCHA_URLS: string[] = [
+  'https://minimallstorage.com/storage-units/alabama/courtland/highway-33',
 ];
 
 // Helper function to get single-page URLs based on environment

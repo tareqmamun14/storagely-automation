@@ -1,5 +1,5 @@
 import { test } from '../fixtures/singlepage-fixture';
-import { getSinglePageUrls, SINGLE_PAGE_FMS_PLATFORM, CAPTCHA_CUSTOMER_URLS } from '../configs/urls';
+import { getSinglePageUrls, SINGLE_PAGE_FMS_PLATFORM, CAPTCHA_CUSTOMER_URLS, STEP_FOUR_CAPTCHA_URLS } from '../configs/urls';
 import { cleanupOldErrorScreenshots, takeErrorScreenshot } from '../utils/screenshot';
 import { SINGLE_PAGE_USER } from '../configs/credentials';
 import { RentResultCollector } from '../utils/RentResultCollector';
@@ -94,7 +94,8 @@ test.describe('Single-Page Rent Verification Tests', () => {
     }) => {
       // Set timeout — captcha customers get NO timeout (user solves manually)
       const hasCaptchaUrl = CAPTCHA_CUSTOMER_URLS.includes(baseURL);
-      test.setTimeout(hasCaptchaUrl ? 0 : 240 * 1000); // 0 = no timeout for captcha, 4 min for others
+      const hasStepFourCaptcha = STEP_FOUR_CAPTCHA_URLS.includes(baseURL);
+      test.setTimeout((hasCaptchaUrl || hasStepFourCaptcha) ? 0 : 240 * 1000); // 0 = no timeout for captcha, 4 min for others
       
       // Get company/client name and platform
       const companyName = companyNameFromUrl(baseURL);
@@ -105,7 +106,7 @@ test.describe('Single-Page Rent Verification Tests', () => {
       console.log(`🏢 TESTING: ${companyName}`);
       console.log(`🌐 URL: ${baseURL}`);
       console.log(`⚙️  Platform: ${platform}`);
-      console.log(`📄 Layout: Single-Page Rent Flow`);
+      console.log(`📄 Layout: ${hasStepFourCaptcha ? 'Two-Step Flow (Step 4 → Step 5) + hCaptcha at Step 4' : hasCaptchaUrl ? 'Single-Page Rent Flow + hCaptcha at RENT NOW' : 'Single-Page Rent Flow'}`);
       console.log(`${'='.repeat(80)}`);
       
       let testResult = {
@@ -185,7 +186,7 @@ test.describe('Single-Page Rent Verification Tests', () => {
           birthDate: SINGLE_PAGE_USER.birthDate,
           birthYear: SINGLE_PAGE_USER.birthYear,
           paymentInfo: SINGLE_PAGE_USER.paymentInfo
-        });
+        }, hasStepFourCaptcha);
         
         console.log('✅ Single-page rental form completed successfully');
         
@@ -195,6 +196,8 @@ test.describe('Single-Page Rent Verification Tests', () => {
         testResult.step = 'Payment Submission';
         console.log('\n📍 STEP 4: Submitting payment and checking for errors...');
         
+        // For step-four captcha customers (e.g. Minimall), captcha was already handled during form fill
+        // Only pass hasCaptcha for RENT NOW-level captcha customers (e.g. Purely, StorageStar)
         const errorMessage = await rentalDetailsPageSinglePage.clickRentNowAndCaptureError(hasCaptchaUrl);
         
         // If failed to capture error message, throw so Playwright retries once
@@ -298,12 +301,16 @@ test.afterAll(async () => {
   console.log(`Company                   | Platform   | Status   | Error Message`);
   console.log(`${'='.repeat(100)}`);
   
+  // Helper to strip "Error Occurred — Dismiss — " prefix from error messages
+  const cleanError = (msg: string) => msg.replace(/^Error Occurred\s*[—–-]+\s*Dismiss\s*[—–-]+\s*/i, '');
+
   allResults.forEach(result => {
     const companyName = result.company.padEnd(25);
     const platform = result.platform.padEnd(10);
     const status = result.success ? '✅ PASS' : '❌ FAIL';
     const statusPadded = status.padEnd(8);
-    const errorPreview = result.error.length > 50 ? result.error.substring(0, 47) + '...' : result.error;
+    const cleaned = cleanError(result.error);
+    const errorPreview = cleaned.length > 50 ? cleaned.substring(0, 47) + '...' : cleaned;
     console.log(`${companyName} | ${platform} | ${statusPadded} | ${errorPreview}`);
   });
   
@@ -317,7 +324,7 @@ test.afterAll(async () => {
     const icon = result.success ? '⚠️  WARNING' : '❌ ERROR';
     console.log(`${index + 1}. ${icon} - ${result.company} (${result.platform})`);
     console.log(`   URL: ${result.url}`);
-    console.log(`   Message: ${result.error}`);
+    console.log(`   Message: ${cleanError(result.error)}`);
     console.log(`   Time: ${new Date(result.timestamp).toLocaleString()}`);
     if (index < allResults.length - 1) {
       console.log(`   ${'-'.repeat(80)}\n`);
