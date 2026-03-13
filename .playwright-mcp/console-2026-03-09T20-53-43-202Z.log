@@ -1,0 +1,16 @@
+[    3324ms] Uncaught Error: Syntax error, unrecognized expression: nth-child(2
+    at se.error (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:13638)
+    at se.tokenize (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21649)
+    at se.compile (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21752)
+    at <anonymous> (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:16987)
+    at PSEUDO (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:16751)
+    at Ee (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:20888)
+    at se.compile (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21782)
+    at se.select (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:22997)
+    at se (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:7115)
+    at find (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:25046)
+    at S.fn.init (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:25535)
+    at S (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:1050)
+    at <anonymous> (https://cdn2.hubspot.net/hub/8821504/hub_generated/template_assets/65922726656/1644828231829/Bluebird_Storage_Febraury2022/js/main.js:0:1173)
+[    4093ms] [ERROR] A bad HTTP response code (404) was received when fetching the script. @ :0
+[    4330ms] [ERROR] TypeError: Failed to register a ServiceWorker for scope ('https://distinctstorage.com/~partytown/') with script ('https://distinctstorage.com/~partytown/partytown-sw.js'): A bad HTTP response code (404) was received when fetching the script. @ :0

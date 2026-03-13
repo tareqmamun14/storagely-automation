@@ -1,5 +1,6 @@
 import { Page } from '@playwright/test';
 import { BasePage } from './BasePage';
+import { CURRENT_ENVIRONMENT, Environment } from '../configs/urls';
 
 /**
  * RentalDetailsPage_singlepage - Single Page Layout
@@ -755,12 +756,35 @@ export class RentalDetailsPageSinglePage extends BasePage {
       await this.billingAddressField.fill(billingAddress);
       console.log(`  ✓ Typed Billing Address: ${billingAddress}`);
       
-      // Wait for dropdown to appear and select first option
-      await this.wait(1000);
-      await this.page.keyboard.press('ArrowDown');
-      await this.wait(500);
-      await this.page.keyboard.press('Enter');
-      console.log('  ✓ Selected first address from dropdown');
+      // Wait for pac-container / dropdown to appear
+      await this.wait(1500);
+
+      // STAGING ONLY: Check for "This page can't load Google Maps correctly." error
+      // Must happen BEFORE ArrowDown/Enter — those keys scroll the page when the
+      // pac-container shows an error dialog instead of address suggestions.
+      let googleMapsErrorDismissed = false;
+      if (CURRENT_ENVIRONMENT === Environment.STAGING) {
+        try {
+          const dismissBtn = this.page.locator('.pac-container button.dismissButton');
+          const btnVisible = await dismissBtn.isVisible({ timeout: 2000 }).catch(() => false);
+          if (btnVisible) {
+            await dismissBtn.click({ force: true, timeout: 5000 });
+            googleMapsErrorDismissed = true;
+            console.log('  ✓ Dismissed Google Maps error dialog (staging)');
+            await this.wait(500);
+          }
+        } catch {
+          // No Google Maps error dialog — nothing to dismiss
+        }
+      }
+
+      // Only do ArrowDown+Enter if we did NOT just dismiss the Maps error
+      if (!googleMapsErrorDismissed) {
+        await this.page.keyboard.press('ArrowDown');
+        await this.wait(500);
+        await this.page.keyboard.press('Enter');
+        console.log('  ✓ Selected first address from dropdown');
+      }
     } catch {
       console.log('  - Billing address not found, skipping');
     }

@@ -1,0 +1,41 @@
+[    1866ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://wlopvjbfzdmjzhqftzte.supabase.co/functions/v1/tracker-script:0
+[    3985ms] TypeError: Cannot read properties of null (reading 'style')
+    at https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland:16536:28
+[    3987ms] TypeError: window.trackEvent is not a function
+    at https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland:18095:16
+    at https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland:18102:9
+[    3990ms] Uncaught Error: Syntax error, unrecognized expression: nth-child(2
+    at se.error (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:13638)
+    at se.tokenize (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21649)
+    at se.compile (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21752)
+    at <anonymous> (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:16987)
+    at PSEUDO (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:16751)
+    at Ee (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:20888)
+    at se.compile (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21782)
+    at se.select (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:22997)
+    at se (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:7115)
+    at find (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:25046)
+    at S.fn.init (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:25535)
+    at S (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:1050)
+    at <anonymous> (https://cdn2.hubspot.net/hub/8821504/hub_generated/template_assets/65922726656/1644828231829/Bluebird_Storage_Febraury2022/js/main.js:0:1173)
+[    4594ms] [ERROR] A bad HTTP response code (404) was received when fetching the script. @ :0
+[    4853ms] [ERROR] TypeError: Failed to register a ServiceWorker for scope ('https://bluebirdstorage.ca/~partytown/') with script ('https://bluebirdstorage.ca/~partytown/partytown-sw.js'): A bad HTTP response code (404) was received when fetching the script. @ :0
+[    5049ms] [ERROR] Access to font at 'https://web.storagely.io/public/lp2/webfonts/fa-light-300.woff2' from origin 'https://bluebirdstorage.ca' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland:0
+[    5050ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://web.storagely.io/public/lp2/webfonts/fa-light-300.woff2:0
+[    5600ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://api.linguise.com/api/config/pk_1WJlfrEvcWXPzL1j4gclvQjO0KJuq21C:0
+[    5881ms] [ERROR] Access to font at 'https://web.storagely.io/public/lp2/webfonts/fa-solid-900.woff2' from origin 'https://bluebirdstorage.ca' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland:0
+[    5882ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://web.storagely.io/public/lp2/webfonts/fa-solid-900.woff2:0
+[    5887ms] [ERROR] Access to font at 'https://web.storagely.io/public/lp2/webfonts/fa-regular-400.woff2' from origin 'https://bluebirdstorage.ca' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland:0
+[    5888ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://web.storagely.io/public/lp2/webfonts/fa-regular-400.woff2:0
+[    5888ms] [ERROR] Access to font at 'https://web.storagely.io/public/lp2/webfonts/fa-light-300.woff' from origin 'https://bluebirdstorage.ca' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland:0
+[    5888ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://web.storagely.io/public/lp2/webfonts/fa-light-300.woff:0
+[    6508ms] [ERROR] Access to font at 'https://web.storagely.io/public/lp2/webfonts/fa-solid-900.woff' from origin 'https://bluebirdstorage.ca' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland:0
+[    6509ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://web.storagely.io/public/lp2/webfonts/fa-solid-900.woff:0
+[    6515ms] [ERROR] Access to font at 'https://web.storagely.io/public/lp2/webfonts/fa-regular-400.woff' from origin 'https://bluebirdstorage.ca' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland:0
+[    6515ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://web.storagely.io/public/lp2/webfonts/fa-regular-400.woff:0
+[    7471ms] [ERROR] Access to font at 'https://web.storagely.io/public/lp2/webfonts/fa-light-300.ttf' from origin 'https://bluebirdstorage.ca' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland:0
+[    7471ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://web.storagely.io/public/lp2/webfonts/fa-light-300.ttf:0
+[    7479ms] [ERROR] Access to font at 'https://web.storagely.io/public/lp2/webfonts/fa-solid-900.ttf' from origin 'https://bluebirdstorage.ca' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland:0
+[    7479ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://web.storagely.io/public/lp2/webfonts/fa-solid-900.ttf:0
+[    7479ms] [ERROR] Access to font at 'https://web.storagely.io/public/lp2/webfonts/fa-regular-400.ttf' from origin 'https://bluebirdstorage.ca' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland:0
+[    7480ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://web.storagely.io/public/lp2/webfonts/fa-regular-400.ttf:0
