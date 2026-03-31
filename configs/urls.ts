@@ -73,7 +73,7 @@ export const SINGLE_PAGE_RENT_URLS = {
     'https://test.staging.storagely-api.com/yourway-storage/storage-units/georgia/augusta/walton-way-ext',
     'https://test.staging.storagely-api.com/red-rocks-self-storage/storage-units/colorado/aurora/east-14th-avenuee',  
     'https://test.staging.storagely-api.com/storage-star/storage-units/colorado/colorado-springs/aerotech-drive',
-    'https://test.staging.storagely-api.com/mini-mall-storage/storage-units/alabama/courtland/highway-33',
+    //'https://test.staging.storagely-api.com/mini-mall-storage/storage-units/alabama/courtland/highway-33',
   ],
   [Environment.PRODUCTION]: [
     'https://www.firststorage.com/storage-units/alabama/huntsville/memorial-parkway-sw',
@@ -84,7 +84,7 @@ export const SINGLE_PAGE_RENT_URLS = {
     'https://www.yourwaystorage.com/storage-units/georgia/augusta/walton-way-ext',
     'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',
     'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',
-    'https://minimallstorage.com/storage-units/alabama/courtland/highway-33',
+    //'https://minimallstorage.com/storage-units/arkansas/batesville/batesville-blvd',
   ]
 };
 
@@ -98,7 +98,7 @@ export const SINGLE_PAGE_FMS_PLATFORM: Record<string, string> = {
   'https://www.yourwaystorage.com/storage-units/georgia/augusta/walton-way-ext': 'SSM',
   'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue': 'SiteLink',
   'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive': 'SSM',
-  'https://minimallstorage.com/storage-units/alabama/courtland/highway-33': 'SiteLink',
+  //'https://minimallstorage.com/storage-units/arkansas/batesville/batesville-blvd': 'SiteLink',
 };
 
 // ============================================
@@ -124,7 +124,7 @@ export const CAPTCHA_CUSTOMER_URLS: string[] = [
 // To mute a customer: just comment out or remove their URL.
 // ============================================
 export const STEP_FOUR_CAPTCHA_URLS: string[] = [
-  'https://minimallstorage.com/storage-units/alabama/courtland/highway-33',
+  //'https://minimallstorage.com/storage-units/arkansas/batesville/batesville-blvd',
 ];
 
 // Helper function to get single-page URLs based on environment

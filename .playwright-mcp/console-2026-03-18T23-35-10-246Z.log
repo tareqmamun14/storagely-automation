@@ -1,0 +1,13 @@
+[    1044ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://infallible-diffie.staging.storagely-api.com/admin/custom.css?v=1773876910:0
+[   28779ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://infallible-diffie.staging.storagely-api.com/uploads/admin_logo3381744230616.png:0
+[   28790ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://infallible-diffie.staging.storagely-api.com/admin/custom.css?v=1773876937:0
+[   28958ms] TypeError: Cannot read properties of null (reading 'addEventListener')
+    at https://infallible-diffie.staging.storagely-api.com/assets/plugins/sidemenu/sidemenu.js:272:11
+[   29141ms] Error: no element is specified to initialize PerfectScrollbar
+    at new PerfectScrollbar (https://infallible-diffie.staging.storagely-api.com/assets/plugins/p-scroll/perfect-scrollbar.js:1127:11)
+    at https://infallible-diffie.staging.storagely-api.com/assets/plugins/p-scroll/pscroll.js:4:13
+    at https://infallible-diffie.staging.storagely-api.com/assets/plugins/p-scroll/pscroll.js:12:3
+[   29143ms] Error: no element is specified to initialize PerfectScrollbar
+    at new PerfectScrollbar (https://infallible-diffie.staging.storagely-api.com/assets/plugins/p-scroll/perfect-scrollbar.js:1127:11)
+    at https://infallible-diffie.staging.storagely-api.com/assets/plugins/p-scroll/pscroll-1.js:4:15
+    at https://infallible-diffie.staging.storagely-api.com/assets/plugins/p-scroll/pscroll-1.js:10:3
