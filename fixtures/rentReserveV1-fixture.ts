@@ -1,10 +1,10 @@
-// fixtures/payment-fixture.ts
+// fixtures/rentReserveV1-fixture.ts
 
 import { test as base } from '@playwright/test';
 import { AdminLoginPage } from '../pages/AdminLoginPage';
-import { StorageListingPage } from '../pages/StorageListingPage_steptwo';
-import { RentalDetailsPage } from '../pages/RentalDetailsPage_stepfour';
-import { PaymentDetailsPage } from '../pages/PaymentDetailsPage_stepfive';
+import { StorageListingPage } from '../pages/StorageListingPage';
+import { RentalDetailsPage } from '../pages/RentalDetailsPage_V1';
+import { PaymentDetailsPage } from '../pages/PaymentDetailsPage_V1';
 import { getCompanyNameFromUrl } from '../configs/urls';
 
 // Define the fixture type

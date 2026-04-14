@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const filePath = './pages/StorageListingPage_steptwo.ts';
+const filePath = './pages/StorageListingPage.ts';
 let content = fs.readFileSync(filePath, 'utf8');
 
 // Find and replace the clickRentButton method with optimized version

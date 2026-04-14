@@ -1,8 +1,9 @@
-import { test } from '../fixtures/singlepage-fixture';
+import { test } from '../fixtures/rentReserveSPC-fixture';
 import { getSinglePageUrls, SINGLE_PAGE_FMS_PLATFORM, CAPTCHA_CUSTOMER_URLS, STEP_FOUR_CAPTCHA_URLS } from '../configs/urls';
 import { cleanupOldErrorScreenshots, takeErrorScreenshot } from '../utils/screenshot';
 import { SINGLE_PAGE_USER } from '../configs/credentials';
 import { RentResultCollector } from '../utils/RentResultCollector';
+import { setupCorpCodeIfNeeded } from '../utils/corpCodeSetup';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -120,6 +121,14 @@ test.describe('Single-Page Rent Verification Tests', () => {
       
       try {
         // ============================================
+        // PRE-STEP: Corp Code Setup (staging only)
+        // ============================================
+        const browser = page.context().browser();
+        if (browser) {
+          await setupCorpCodeIfNeeded(browser, baseURL);
+        }
+
+        // ============================================
         // STEP 1: Navigate to the storage listing page
         // ============================================
         testResult.step = 'Navigation';
@@ -186,7 +195,7 @@ test.describe('Single-Page Rent Verification Tests', () => {
           birthDate: SINGLE_PAGE_USER.birthDate,
           birthYear: SINGLE_PAGE_USER.birthYear,
           paymentInfo: SINGLE_PAGE_USER.paymentInfo
-        }, hasStepFourCaptcha);
+        }, hasStepFourCaptcha, companyName);
         
         console.log('✅ Single-page rental form completed successfully');
         
@@ -197,8 +206,8 @@ test.describe('Single-Page Rent Verification Tests', () => {
         console.log('\n📍 STEP 4: Submitting payment and checking for errors...');
         
         // For step-four captcha customers (e.g. Minimall), captcha was already handled during form fill
-        // Only pass hasCaptcha for RENT NOW-level captcha customers (e.g. Purely, StorageStar)
-        const errorMessage = await rentalDetailsPageSinglePage.clickRentNowAndCaptureError(hasCaptchaUrl);
+        // Only pass hasCaptcha for RENT NOW-level captcha customers
+        const errorMessage = await rentalDetailsPageSinglePage.clickRentNowAndCaptureError(hasCaptchaUrl, companyName);
         
         // If failed to capture error message, throw so Playwright retries once
         if (errorMessage && errorMessage.startsWith('FAILED to fetch')) {

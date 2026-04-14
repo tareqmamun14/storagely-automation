@@ -1,8 +1,9 @@
-import { test } from '../fixtures/payment-fixture';
+import { test } from '../fixtures/rentReserveV1-fixture';
 import { getCurrentUrls, FMS_PLATFORM } from '../configs/urls';
 import { cleanupOldErrorScreenshots, takeErrorScreenshot } from '../utils/screenshot';
 import { TEST_USER } from '../configs/credentials';
 import { RentResultCollector } from '../utils/RentResultCollector';
+import { setupCorpCodeIfNeeded } from '../utils/corpCodeSetup';
 
 // Clean up old error screenshots before starting tests
 cleanupOldErrorScreenshots();
@@ -46,6 +47,14 @@ test.describe('Payment Verification Tests', () => {
       };
       
       try {
+        // ============================================
+        // PRE-STEP: Corp Code Setup (staging only)
+        // ============================================
+        const browser = page.context().browser();
+        if (browser) {
+          await setupCorpCodeIfNeeded(browser, baseURL);
+        }
+
         // STEP 1: Navigate to the storage listing page
         testResult.step = 'Navigation';
         console.log('📍 STEP 1: Navigating to storage listing page...');

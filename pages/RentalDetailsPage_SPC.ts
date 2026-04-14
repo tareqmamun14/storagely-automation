@@ -203,6 +203,22 @@ export class RentalDetailsPageSinglePage extends BasePage {
     }
   }
 
+  /**
+   * Dismiss Google Maps "This page can't load Google Maps correctly" modal if present.
+   * Common in staging where API keys may not be configured. Clicks the .dismissButton to close.
+   */
+  private async dismissGoogleMapsModal(): Promise<void> {
+    try {
+      const dismissBtn = this.page.locator('button.dismissButton');
+      await dismissBtn.waitFor({ state: 'visible', timeout: 3000 });
+      await dismissBtn.click();
+      await this.wait(300);
+      console.log('  ✓ Dismissed Google Maps modal (clicked OK)');
+    } catch {
+      // No modal appeared — normal in production
+    }
+  }
+
   // ============================================
   // TWO-STEP LAYOUT DETECTION & HELPERS
   // ============================================
@@ -245,6 +261,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
    *
    * @param userData - user/test data for all form fields
    * @param hasStepFourCaptcha - true if hCaptcha appears on Step 4 (before "Continue to next step")
+   * @param clientName - optional client name to display in captcha prompt
    */
   async fillCompleteSinglePageForm(userData: {
     firstName: string,
@@ -275,7 +292,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
       expiryDate: string,
       cvv: string
     }
-  }, hasStepFourCaptcha: boolean = false): Promise<void> {
+  }, hasStepFourCaptcha: boolean = false, clientName?: string): Promise<void> {
     console.log(`[${new Date().toISOString()}] 📝 Starting single-page rental form fill...`);
     
     try {
@@ -303,7 +320,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
         // STEP 4: hCaptcha — wait for manual solve before continuing
         if (hasStepFourCaptcha) {
           console.log(`[${new Date().toISOString()}] 🛑 [Step 4] hCaptcha detected — waiting for manual solve...`);
-          await this.waitForManualCaptcha();
+          await this.waitForManualCaptcha(clientName);
           this.ensurePageAlive('after captcha solve (step 4)');
         }
 
@@ -408,8 +425,11 @@ export class RentalDetailsPageSinglePage extends BasePage {
         await this.addressField.fill(userData.address);
         console.log(`  ✓ Filled Address: ${userData.address}`);
         
+        // Dismiss Google Maps "can't load correctly" modal if it appears (common in staging)
+        await this.dismissGoogleMapsModal();
+
         // Blank click on a heading to dismiss Google Places autocomplete suggestions
-        // Same pattern as RentalDetailsPage_stepfour summaryHeading.click()
+        // Same pattern as RentalDetailsPage_V1 summaryHeading.click()
         await this.wait(500);
         try {
           const heading = this.page.getByRole('heading', { name: 'Tenant Details' })
@@ -1036,18 +1056,20 @@ export class RentalDetailsPageSinglePage extends BasePage {
    *   3. Any element with a non-empty [data-hcaptcha-response] attribute
    * There is NO time limit — it waits as long as you need.
    */
-  async waitForManualCaptcha(): Promise<void> {
+  async waitForManualCaptcha(clientName?: string): Promise<void> {
     const currentUrl = this.page.url();
+    const displayName = clientName || currentUrl;
     // Play audible alert — fire-and-forget so it never blocks Node exit
     try {
-      const child = require('child_process').spawn(
-        'powershell', ['-NoProfile', '-Command', '[Console]::Beep(1000,600); [Console]::Beep(1500,400)'],
-        { stdio: 'ignore', detached: true }
+      const child = require('child_process').exec(
+        'powershell -NoProfile -Command "[System.Media.SystemSounds]::Exclamation.Play()"',
+        { windowsHide: true }
       );
       child.unref();
     } catch { /* ignore if beep fails */ }
     console.log('\n🛑 ═══════════════════════════════════════════════════════════');
-    console.log('🛑  hCaptcha DETECTED — Manual step required!');
+    console.log(`🛑  hCaptcha DETECTED — Manual step required!`);
+    console.log(`🛑  CLIENT: ${displayName}`);
     console.log(`🛑  URL: ${currentUrl}`);
     console.log('🛑  1. Switch to the BROWSER WINDOW for the URL above');
     console.log('🛑  2. Solve the hCaptcha checkbox / challenge');
@@ -1098,7 +1120,15 @@ export class RentalDetailsPageSinglePage extends BasePage {
       pollCount++;
       // Log a reminder every 30 seconds (60 polls × 500ms)
       if (pollCount % 60 === 0) {
-        console.log(`⏳ Still waiting for hCaptcha solve... (${Math.round(pollCount * 0.5)}s elapsed)`);
+        // Play a single beep reminder
+        try {
+          const reminder = require('child_process').exec(
+            'powershell -NoProfile -Command "[System.Media.SystemSounds]::Exclamation.Play()"',
+            { windowsHide: true }
+          );
+          reminder.unref();
+        } catch { /* ignore if beep fails */ }
+        console.log(`⏳ Still waiting for hCaptcha solve for ${displayName}... (${Math.round(pollCount * 0.5)}s elapsed)`);
       }
 
       await new Promise(resolve => setTimeout(resolve, pollInterval));
@@ -1108,13 +1138,13 @@ export class RentalDetailsPageSinglePage extends BasePage {
   /**
    * Click RENT NOW button and capture error message
    */
-  async clickRentNowAndCaptureError(hasCaptcha: boolean = false): Promise<string> {
+  async clickRentNowAndCaptureError(hasCaptcha: boolean = false, clientName?: string): Promise<string> {
     console.log(`[${new Date().toISOString()}] 📍 FINAL STEP: Clicking RENT NOW button...`);
     
     try {
       // If this customer has hCaptcha, wait for user to solve it first
       if (hasCaptcha) {
-        await this.waitForManualCaptcha();
+        await this.waitForManualCaptcha(clientName);
       }
 
       // Minimize live chat if present

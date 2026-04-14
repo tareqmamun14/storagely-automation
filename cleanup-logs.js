@@ -2,9 +2,9 @@ const fs = require('fs');
 const path = require('path');
 
 const filesToClean = [
-  './pages/StorageListingPage_steptwo.ts',
-  './pages/RentalDetailsPage_stepfour.ts',
-  './pages/PaymentDetailsPage_stepfive.ts'
+  './pages/StorageListingPage.ts',
+  './pages/RentalDetailsPage_V1.ts',
+  './pages/PaymentDetailsPage_V1.ts'
 ];
 
 for (const filePath of filesToClean) {

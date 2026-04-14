@@ -1,5 +1,6 @@
 import { Page, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
+import { CURRENT_ENVIRONMENT, Environment } from '../configs/urls';
 
 export class ContactPage extends BasePage {
   constructor(page: Page) {
@@ -236,24 +237,29 @@ export class ContactPage extends BasePage {
   private constructContactPageUrl(baseUrl: string): string {
     // Remove trailing slash if present
     const cleanUrl = baseUrl.replace(/\/+$/, ''); // Remove one or more trailing slashes
-    
-    // Handle specific site contact URL patterns
-    if (cleanUrl.includes('sunbirdstorage.com')) {
-      return `${cleanUrl}/contact-sunbird`;
-    } else if (cleanUrl.includes('bluebirdstorage.ca')) {
-      return `${cleanUrl}/contact-bluebird`;
-    } else if (cleanUrl.includes('storagedepotla.com')) {
-      return `${cleanUrl}/contact-storage`;
-    } else {
-      // Default pattern for most sites
+
+    // Sites with custom contact paths (production)
+    if (cleanUrl.includes('storagedepotla.com')) return `${cleanUrl}/contact-storage`;
+
+    // Sites that use /pages/contact in production
+    const pagesContactSites = ['gatekeeperstoragega.com', 'redrocksstorage.com', 'rhino-storage.com'];
+    const usesPagesContact = pagesContactSites.some(s => cleanUrl.includes(s));
+
+    // Staging always uses /pages/contact; production defaults to /contact unless overridden
+    if (CURRENT_ENVIRONMENT === Environment.STAGING || usesPagesContact) {
       return `${cleanUrl}/pages/contact`;
     }
+    return `${cleanUrl}/contact`;
   }
 
   /**
    * Add cache busting parameters to URL
    */
   private addCacheBustingParam(url: string): string {
+    const skipCacheBust = ['minimallstorage.com', 'mini-mall-storage', '10federal', 'bluebird'];
+    if (skipCacheBust.some(site => url.toLowerCase().includes(site))) {
+      return url;
+    }
     const timestamp = Date.now();
     const randomString = Math.random().toString(36).substring(2);
     const separator = url.includes('?') ? '&' : '?';

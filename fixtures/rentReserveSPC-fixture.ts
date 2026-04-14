@@ -1,8 +1,8 @@
-// fixtures/singlepage-fixture.ts
+// fixtures/rentReserveSPC-fixture.ts
 
 import { test as base } from '@playwright/test';
-import { StorageListingPage } from '../pages/StorageListingPage_steptwo';
-import { RentalDetailsPageSinglePage } from '../pages/RentalDetailsPage_singlepage';
+import { StorageListingPage } from '../pages/StorageListingPage';
+import { RentalDetailsPageSinglePage } from '../pages/RentalDetailsPage_SPC';
 import { getCompanyNameFromUrl } from '../configs/urls';
 
 // Define the fixture type for single-page rent flow
