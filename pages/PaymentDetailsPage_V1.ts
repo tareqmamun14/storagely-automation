@@ -187,6 +187,35 @@ export class PaymentDetailsPage extends BasePage {
     
     try {
       await this.minimizeLiveChat();
+
+      // Set up network response listener BEFORE clicking RENT NOW
+      // This captures the API error even if the toast doesn't display it
+      let apiErrorMessage = '';
+      const responseHandler = async (response: any) => {
+        try {
+          const url = response.url();
+          const status = response.status();
+          if (status >= 400 || (url.includes('/rent') || url.includes('/move-in') || url.includes('/payment') || url.includes('/checkout') || url.includes('/lease'))) {
+            const body = await response.text().catch(() => '');
+            if (body && (body.includes('error') || body.includes('Error') || body.includes('message') || status >= 400)) {
+              try {
+                const json = JSON.parse(body);
+                const msg = json.message || json.error || json.msg || json.errors || json.detail || '';
+                const extracted = typeof msg === 'string' ? msg : JSON.stringify(msg);
+                if (extracted && extracted.length > 5) {
+                  apiErrorMessage = extracted;
+                  console.log(`🌐 API error captured from ${url}: ${apiErrorMessage.substring(0, 200)}`);
+                }
+              } catch {
+                if (body.length < 500 && body.length > 5) {
+                  apiErrorMessage = body;
+                }
+              }
+            }
+          }
+        } catch { /* response already disposed */ }
+      };
+      this.page.on('response', responseHandler);
       
       // Find and click RENT NOW button (attempt 1)
       const rentNowButton = this.page.getByRole('button', { name: 'RENT NOW' });
@@ -198,10 +227,18 @@ export class PaymentDetailsPage extends BasePage {
       // Detect error immediately (polls up to 15s internally)
       let errorMessage = await this.detectErrorMessage();
       
-      // If error found, return it immediately - NO RETRY NEEDED
-      if (errorMessage && !errorMessage.includes('FAILED to fetch')) {
+      // If error found and meaningful, return it immediately
+      if (errorMessage && !errorMessage.includes('FAILED to fetch') && !errorMessage.includes('toast body not captured')) {
         console.log(`[${new Date().toISOString()}] ✅ Error detected on first attempt - returning immediately`);
+        this.page.removeListener('response', responseHandler);
         return errorMessage;
+      }
+
+      // If only generic toast was found but we have an API error, use the API error
+      if ((errorMessage.includes('toast body not captured') || errorMessage === '') && apiErrorMessage) {
+        console.log(`[${new Date().toISOString()}] ✅ Error captured via API response: ${apiErrorMessage}`);
+        this.page.removeListener('response', responseHandler);
+        return `Error Occurred — ${apiErrorMessage}`;
       }
       
       // No error detected after 15s polling - RETRY LOGIC
@@ -210,6 +247,7 @@ export class PaymentDetailsPage extends BasePage {
       // Only retry if paymentData is provided
       if (!paymentData) {
         console.log(`[${new Date().toISOString()}] ℹ️ No payment data provided - cannot retry`);
+        this.page.removeListener('response', responseHandler);
         return 'FAILED to fetch Error Message @ Step-5 (Payment Details - After RENT NOW click)';
       }
       
@@ -235,9 +273,18 @@ export class PaymentDetailsPage extends BasePage {
       // Re-detect error
       errorMessage = await this.detectErrorMessage();
       
-      if (errorMessage && !errorMessage.includes('FAILED to fetch')) {
+      // Clean up listener
+      this.page.removeListener('response', responseHandler);
+
+      if (errorMessage && !errorMessage.includes('FAILED to fetch') && !errorMessage.includes('toast body not captured')) {
         console.log(`[${new Date().toISOString()}] ✅ Error detected on retry attempt`);
         return errorMessage;
+      }
+
+      // Fallback to API error if toast still didn't show the body
+      if (apiErrorMessage) {
+        console.log(`[${new Date().toISOString()}] ✅ Using API error fallback: ${apiErrorMessage}`);
+        return `Error Occurred — ${apiErrorMessage}`;
       }
       
       // Still no error after retry
@@ -280,16 +327,42 @@ export class PaymentDetailsPage extends BasePage {
    * Quick error check - IMMEDIATE check (no delay)
    */
   private async quickErrorCheck(): Promise<string> {
-    // Check immediately - no waiting
+    // CHECK 1: Toast body specifically (most reliable for full error message)
+    const toastBodyLocators = [
+      this.page.locator('.toast-container .toast-body').first(),
+      this.page.locator('.toast-body').first(),
+    ];
+    for (const body of toastBodyLocators) {
+      try {
+        if (await body.isVisible({ timeout: 500 })) {
+          const text = (await body.innerText()).trim();
+          if (text && text.length > 0) {
+            console.log(`🔍 Found toast body: "${text}"`);
+            return text;
+          }
+        }
+      } catch { /* not visible yet */ }
+    }
+
+    // CHECK 2: Detailed error with Response Code
+    try {
+      const detailedError = this.page.locator('p.text-sm.text-white').filter({ hasText: 'Response Code' });
+      if (await detailedError.isVisible({ timeout: 500 })) {
+        const text = (await detailedError.innerText()).trim();
+        if (text) return text;
+      }
+    } catch { /* not visible */ }
+
+    // CHECK 3: Full toast container text (fallback)
     const toastContainer = this.page.locator('.toast-container').first();
     if (await toastContainer.isVisible({ timeout: 500 })) {
-      const toastText = await toastContainer.innerText();
-      if (toastText && toastText.trim()) {
-        return toastText.trim();
+      const toastText = (await toastContainer.innerText()).trim();
+      if (toastText && !this.isGenericToastHeader(toastText)) {
+        return toastText;
       }
     }
     
-    // Check for Error!! header
+    // CHECK 4: Error!! header → try to get body
     const toastHeader = this.page.getByText('Error!!');
     if (await toastHeader.isVisible({ timeout: 500 })) {
       const toastBody = this.page.locator('.toast-container .toast-body');
@@ -305,36 +378,44 @@ export class PaymentDetailsPage extends BasePage {
   }
 
   /**
+   * Check if the captured text is just a generic toast header without real error detail.
+   */
+  private isGenericToastHeader(text: string): boolean {
+    const cleaned = text.replace(/[\n\r]+/g, ' ').replace(/\s+/g, ' ').toLowerCase().trim();
+    const generic = ['error occurred', 'error occurred dismiss', 'error occurred — dismiss'];
+    return generic.includes(cleaned);
+  }
+
+  /**
    * Active polling - check every 500ms for up to 15 seconds
+   * Prioritises toast-body over container text to get the full error message.
    */
   private async activePollingCheck(): Promise<string> {
     console.log('📡 Active polling for errors...');
+    let sawGenericHeader = false;
     
     for (let i = 0; i < 30; i++) { // 30 attempts x 500ms = 15 seconds
       try {
         await this.wait(500);
         
-        // Check toast container FIRST
-        const toastContainer = this.page.locator('.toast-container').first();
-        if (await toastContainer.isVisible({ timeout: 300 })) {
-          const toastText = await toastContainer.innerText();
-          if (toastText && toastText.trim()) {
-            console.log(`✓ Error found at poll ${i + 1}`);
-            return toastText.trim();
-          }
-        }
-        
-        // Check toast body
-        const toastBody = this.page.locator('.toast-container .toast-body');
-        if (await toastBody.isVisible({ timeout: 300 })) {
-          const message = await toastBody.innerText();
-          if (message.trim()) {
-            console.log(`✓ Error found at poll ${i + 1}`);
-            return message.trim();
-          }
+        // CHECK 1: Toast body specifically (highest priority)
+        const toastBodyLocators = [
+          this.page.locator('.toast-container .toast-body').first(),
+          this.page.locator('.toast-body').first(),
+        ];
+        for (const body of toastBodyLocators) {
+          try {
+            if (await body.isVisible({ timeout: 300 })) {
+              const text = (await body.innerText()).trim();
+              if (text && text.length > 0) {
+                console.log(`✓ Toast body found at poll ${i + 1}`);
+                return text;
+              }
+            }
+          } catch { /* not visible yet */ }
         }
 
-        // Check detailed error (with Response Code)
+        // CHECK 2: Detailed error (with Response Code)
         const detailedError = this.page.locator('p.text-sm.text-white').filter({ hasText: 'Response Code' });
         if (await detailedError.isVisible({ timeout: 300 })) {
           const message = await detailedError.innerText();
@@ -344,11 +425,24 @@ export class PaymentDetailsPage extends BasePage {
           }
         }
 
-        // Check common error selectors
+        // CHECK 3: Full toast container (fallback)
+        const toastContainer = this.page.locator('.toast-container').first();
+        if (await toastContainer.isVisible({ timeout: 300 })) {
+          const toastText = (await toastContainer.innerText()).trim();
+          if (toastText && !this.isGenericToastHeader(toastText)) {
+            console.log(`✓ Error found at poll ${i + 1}`);
+            return toastText;
+          }
+          if (toastText && this.isGenericToastHeader(toastText)) {
+            sawGenericHeader = true;
+            // Don't return — keep polling for the body to appear
+          }
+        }
+
+        // CHECK 4: Common error selectors
         const errorLocators = [
           this.page.locator('.alert-danger').first(),
           this.page.locator('[role="alert"]').first(),
-          this.page.locator('text=/error|Error|invalid|Invalid|declined|Declined/i').first()
         ];
         
         for (const locator of errorLocators) {
@@ -367,7 +461,13 @@ export class PaymentDetailsPage extends BasePage {
         continue;
       }
     }
-    
+
+    // If we saw a generic header but never got the body, return it rather than nothing
+    if (sawGenericHeader) {
+      console.log('⚠️  Only generic toast header captured — body never appeared');
+      return 'Error Occurred (toast body not captured — check site manually)';
+    }
+
     // Polling completed - no error found
     console.log('⚠️  Polling completed - no error message detected');
     return '';

@@ -360,6 +360,9 @@ export class RentResultCollector{
         console.log(`\n${index + 1}. ${status} - ${result.company} (${result.platform})`);
         console.log(`   URL: ${result.url}`);
         console.log(`   Message: ${result.error}`);
+        if (result.error.includes('Alternate contact must have a first name')) {
+          console.log(`   🚩 ATTENTION: This error is UNEXPECTED — alternate contact address may need to be provided!`);
+        }
         console.log(`   Time: ${new Date(result.timestamp).toLocaleString()}`);
         
         if (index < errorResults.length - 1) {

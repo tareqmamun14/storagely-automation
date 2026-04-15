@@ -222,6 +222,12 @@ test.describe('Single-Page Rent Verification Tests', () => {
         testResult.error = errorMessage || 'No error - Test completed successfully';
         testResult.success = true;
         
+        // Flag unexpected "Alternate contact" error — this means the site requires alternate contact address
+        if (testResult.error.includes('Alternate contact must have a first name')) {
+          console.log(`\n🚩 UNEXPECTED ERROR for ${companyName}: "Alternate contact must have a first name, last name, and address" — needs attention!`);
+          testResult.error = `🚩 [NEEDS ATTENTION] ${testResult.error}`;
+        }
+        
         console.log(`\n✅ TEST COMPLETED SUCCESSFULLY FOR: ${companyName}`);
         console.log(`📊 Final Result: ${testResult.error}`);
         console.log(`${'='.repeat(80)}\n`);
@@ -334,6 +340,9 @@ test.afterAll(async () => {
     console.log(`${index + 1}. ${icon} - ${result.company} (${result.platform})`);
     console.log(`   URL: ${result.url}`);
     console.log(`   Message: ${cleanError(result.error)}`);
+    if (result.error.includes('Alternate contact must have a first name')) {
+      console.log(`   🚩 ATTENTION: This error is UNEXPECTED — alternate contact address may need to be provided!`);
+    }
     console.log(`   Time: ${new Date(result.timestamp).toLocaleString()}`);
     if (index < allResults.length - 1) {
       console.log(`   ${'-'.repeat(80)}\n`);

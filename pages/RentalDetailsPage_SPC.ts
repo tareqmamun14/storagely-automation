@@ -136,7 +136,8 @@ export class RentalDetailsPageSinglePage extends BasePage {
   private get billingStateField() {
     return this.page.getByRole('textbox', { name: 'State', exact: true }).last()
       .or(this.page.getByRole('textbox', { name: 'Province', exact: true }).last())
-      .or(this.page.locator('input[name="billing_state"]'));
+      .or(this.page.locator('input[name="billing_state"]'))
+      .or(this.page.locator('input[name="state"]').last());
   }
   
   private get billingZipField() {
@@ -469,9 +470,14 @@ export class RentalDetailsPageSinglePage extends BasePage {
       
       // Determine which province/state to use based on current URL
       const currentUrl = this.page.url();
-      if (currentUrl.includes('bluebirdstorage.ca')) {
-        stateValue = userData.province.alberta || 'Alberta';
-        fieldLabel = 'Province';
+      if (currentUrl.includes('bluebirdstorage')) {
+        // Bluebird has both CA and US locations — detect from URL path
+        if (currentUrl.includes('/alberta/') || currentUrl.includes('bluebirdstorage.ca')) {
+          stateValue = userData.province.alberta || 'Alberta';
+          fieldLabel = 'Province';
+        } else {
+          stateValue = userData.province.alabama || 'Alabama';
+        }
       } else if (currentUrl.includes('columbiaselfstorage.com')) {
         stateValue = userData.province.newJersey || 'New Jersey';
       } else if (currentUrl.includes('firststorage.com')) {
@@ -830,9 +836,15 @@ export class RentalDetailsPageSinglePage extends BasePage {
       let fieldLabel = 'Billing State';
       const currentUrl = this.page.url();
       
-      if (currentUrl.includes('bluebirdstorage.ca')) {
-        stateName = province.alberta || 'Alberta';
-        fieldLabel = 'Billing Province';
+      if (currentUrl.includes('bluebirdstorage')) {
+        // Bluebird has both CA and US locations — detect from URL path
+        if (currentUrl.includes('/alberta/') || currentUrl.includes('bluebirdstorage.ca')) {
+          stateName = province.alberta || 'Alberta';
+          fieldLabel = 'Billing Province';
+        } else {
+          stateName = province.alabama || 'Alabama';
+          fieldLabel = 'Billing State';
+        }
       } else if (currentUrl.includes('columbiaselfstorage.com')) {
         stateName = province.newJersey || 'New Jersey';
       } else if (currentUrl.includes('firststorage.com')) {
@@ -1149,6 +1161,37 @@ export class RentalDetailsPageSinglePage extends BasePage {
 
       // Minimize live chat if present
       await this.minimizeLiveChat();
+
+      // Set up network response listener BEFORE clicking RENT NOW
+      // This captures the API error even if the toast doesn't display it
+      let apiErrorMessage = '';
+      const responseHandler = async (response: any) => {
+        try {
+          const url = response.url();
+          const status = response.status();
+          // Capture error responses from rent/payment/move-in API calls
+          if (status >= 400 || (url.includes('/rent') || url.includes('/move-in') || url.includes('/payment') || url.includes('/checkout') || url.includes('/lease'))) {
+            const body = await response.text().catch(() => '');
+            if (body && (body.includes('error') || body.includes('Error') || body.includes('message') || status >= 400)) {
+              try {
+                const json = JSON.parse(body);
+                const msg = json.message || json.error || json.msg || json.errors || json.detail || '';
+                const extracted = typeof msg === 'string' ? msg : JSON.stringify(msg);
+                if (extracted && extracted.length > 5) {
+                  apiErrorMessage = extracted;
+                  console.log(`🌐 API error captured from ${url}: ${apiErrorMessage.substring(0, 200)}`);
+                }
+              } catch {
+                // Not JSON — check if body itself is an error message
+                if (body.length < 500 && body.length > 5) {
+                  apiErrorMessage = body;
+                }
+              }
+            }
+          }
+        } catch { /* response already disposed */ }
+      };
+      this.page.on('response', responseHandler);
       
       // Wait for rent now button
       await this.safeScroll(this.rentNowButton);
@@ -1164,10 +1207,18 @@ export class RentalDetailsPageSinglePage extends BasePage {
       console.log(`[${new Date().toISOString()}] 🔍 Detecting error...`);
       let errorMessage = await this.detectErrorMessage();
       
-      // If error found, return it immediately
-      if (errorMessage && !errorMessage.startsWith('FAILED to fetch')) {
+      // If error found and it's not just a generic header, return it immediately
+      if (errorMessage && !errorMessage.startsWith('FAILED to fetch') && !errorMessage.includes('toast body not captured')) {
         console.log(`[${new Date().toISOString()}] ✅ Error detected: ${errorMessage}`);
+        this.page.removeListener('response', responseHandler);
         return errorMessage;
+      }
+
+      // If only generic toast was found but we have an API error, use the API error
+      if ((errorMessage.includes('toast body not captured') || errorMessage === '') && apiErrorMessage) {
+        console.log(`[${new Date().toISOString()}] ✅ Error captured via API response: ${apiErrorMessage}`);
+        this.page.removeListener('response', responseHandler);
+        return `Error Occurred — ${apiErrorMessage}`;
       }
       
       // No error detected - retry once
@@ -1183,9 +1234,18 @@ export class RentalDetailsPageSinglePage extends BasePage {
       console.log(`[${new Date().toISOString()}] 🔍 Re-detecting error...`);
       errorMessage = await this.detectErrorMessage();
       
-      if (errorMessage && !errorMessage.startsWith('FAILED to fetch')) {
+      // Clean up listener
+      this.page.removeListener('response', responseHandler);
+
+      if (errorMessage && !errorMessage.startsWith('FAILED to fetch') && !errorMessage.includes('toast body not captured')) {
         console.log(`[${new Date().toISOString()}] ✅ Error detected on retry: ${errorMessage}`);
         return errorMessage;
+      }
+
+      // Fallback to API error if toast still didn't show the body
+      if (apiErrorMessage) {
+        console.log(`[${new Date().toISOString()}] ✅ Using API error fallback: ${apiErrorMessage}`);
+        return `Error Occurred — ${apiErrorMessage}`;
       }
       
       // Still no error after retry
@@ -1230,7 +1290,37 @@ export class RentalDetailsPageSinglePage extends BasePage {
    * Grabs the FULL visible text from any toast/alert — never filters out parts.
    */
   private async quickErrorCheck(): Promise<string> {
-    // CHECK 1: Full toast notification text (title + body, everything visible)
+    // CHECK 1: Toast body specifically (most reliable for full error message)
+    const toastBodyLocators = [
+      this.page.locator('.toast-container .toast-body').first(),
+      this.page.locator('[data-id*="toast-notification"] .toast-body').first(),
+      this.page.locator('.toast-body').first(),
+    ];
+    for (const body of toastBodyLocators) {
+      try {
+        if (await body.isVisible({ timeout: 500 })) {
+          const text = (await body.innerText()).trim();
+          if (text && text.length > 0) {
+            console.log(`🔍 Found toast body: "${text}"`);
+            return text;
+          }
+        }
+      } catch { /* not visible yet */ }
+    }
+
+    // CHECK 2: Detailed error with Response Code (p.text-sm.text-white)
+    try {
+      const detailedError = this.page.locator('p.text-sm.text-white').filter({ hasText: 'Response Code' });
+      if (await detailedError.isVisible({ timeout: 500 })) {
+        const text = (await detailedError.innerText()).trim();
+        if (text) {
+          console.log(`🔍 Found detailed error: "${text}"`);
+          return text;
+        }
+      }
+    } catch { /* not visible */ }
+
+    // CHECK 3: Full toast notification text (title + body, everything visible)
     const toastLocators = [
       this.page.locator('[data-id*="toast-notification"]').first(),
       this.page.locator('.toast-container').first(),
@@ -1241,15 +1331,19 @@ export class RentalDetailsPageSinglePage extends BasePage {
         if (await toast.isVisible({ timeout: 500 })) {
           const fullText = (await toast.innerText()).trim();
           const cleaned = this.cleanToastText(fullText);
-          if (cleaned) {
+          if (cleaned && !this.isGenericToastHeader(cleaned)) {
             console.log(`🔍 Found toast text: "${cleaned}"`);
             return cleaned;
+          }
+          // If only generic header found, try to get body separately
+          if (cleaned && this.isGenericToastHeader(cleaned)) {
+            console.log(`🔍 Generic toast header detected ("${cleaned}"), waiting for body...`);
           }
         }
       } catch { /* not visible yet */ }
     }
 
-    // CHECK 2: alert-danger or role=alert
+    // CHECK 4: alert-danger or role=alert
     const alertLocators = [
       this.page.locator('.alert-danger').first(),
       this.page.locator('[role="alert"]').first(),
@@ -1267,6 +1361,14 @@ export class RentalDetailsPageSinglePage extends BasePage {
   }
 
   /**
+   * Check if the captured text is just a generic toast header without real error detail.
+   */
+  private isGenericToastHeader(text: string): boolean {
+    const generic = ['error occurred', 'error occurred — dismiss', 'error occurred dismiss'];
+    return generic.includes(text.toLowerCase().trim());
+  }
+
+  /**
    * Clean toast text: strip only the "Close" / "×" button text, keep everything else.
    */
   private cleanToastText(fullText: string): string {
@@ -1279,16 +1381,47 @@ export class RentalDetailsPageSinglePage extends BasePage {
 
   /**
    * Active polling - check every 500ms for up to 15 seconds.
-   * Uses the same full-text approach as quickErrorCheck.
+   * Prioritises toast-body (the real error message) over the full container text.
    */
   private async pollingErrorCheck(): Promise<string> {
     console.log('📡 Active polling for errors...');
+    let sawGenericHeader = false;
     
     for (let i = 0; i < 30; i++) { // 30 attempts × 500ms = 15 seconds
       try {
         await this.wait(500);
 
-        // CHECK 1: Full toast text
+        // CHECK 1: Toast body specifically (highest priority)
+        const toastBodyLocators = [
+          this.page.locator('.toast-container .toast-body').first(),
+          this.page.locator('[data-id*="toast-notification"] .toast-body').first(),
+          this.page.locator('.toast-body').first(),
+        ];
+        for (const body of toastBodyLocators) {
+          try {
+            if (await body.isVisible({ timeout: 300 })) {
+              const text = (await body.innerText()).trim();
+              if (text && text.length > 0) {
+                console.log(`✓ Toast body found at poll ${i + 1}`);
+                return text;
+              }
+            }
+          } catch { /* not visible yet */ }
+        }
+
+        // CHECK 2: Detailed error with Response Code
+        try {
+          const detailedError = this.page.locator('p.text-sm.text-white').filter({ hasText: 'Response Code' });
+          if (await detailedError.isVisible({ timeout: 300 })) {
+            const text = (await detailedError.innerText()).trim();
+            if (text) {
+              console.log(`✓ Detailed error found at poll ${i + 1}`);
+              return text;
+            }
+          }
+        } catch { /* not visible */ }
+
+        // CHECK 3: Full toast text (fallback)
         const toastLocators = [
           this.page.locator('[data-id*="toast-notification"]').first(),
           this.page.locator('.toast-container').first(),
@@ -1298,15 +1431,19 @@ export class RentalDetailsPageSinglePage extends BasePage {
             if (await toast.isVisible({ timeout: 300 })) {
               const fullText = (await toast.innerText()).trim();
               const cleaned = this.cleanToastText(fullText);
-              if (cleaned) {
+              if (cleaned && !this.isGenericToastHeader(cleaned)) {
                 console.log(`✓ Error found at poll ${i + 1}`);
                 return cleaned;
+              }
+              if (cleaned && this.isGenericToastHeader(cleaned)) {
+                sawGenericHeader = true;
+                // Don't return — keep polling for the body to appear
               }
             }
           } catch { /* not visible yet */ }
         }
 
-        // CHECK 2: alert-danger / role=alert
+        // CHECK 4: alert-danger / role=alert
         const alertLocators = [
           this.page.locator('.alert-danger').first(),
           this.page.locator('[role="alert"]').first(),
@@ -1327,6 +1464,12 @@ export class RentalDetailsPageSinglePage extends BasePage {
         console.warn(`⚠️  Check failed at poll ${i + 1}, continuing...`);
         continue;
       }
+    }
+
+    // If we saw a generic header but never got the body, return it rather than nothing
+    if (sawGenericHeader) {
+      console.log('⚠️  Only generic toast header captured — body never appeared');
+      return 'Error Occurred (toast body not captured — check site manually)';
     }
     
     console.log('⚠️  Polling completed - no error message detected');

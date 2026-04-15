@@ -5,8 +5,8 @@ export enum Environment {
     PRODUCTION = 'production'
   }
   // Switch between environments
-  //export const CURRENT_ENVIRONMENT: Environment = Environment.STAGING;
-  export const CURRENT_ENVIRONMENT: Environment = Environment.PRODUCTION;
+  //export const CURRENT_ENVIRONMENT = Environment.STAGING as Environment;
+  export const CURRENT_ENVIRONMENT = Environment.PRODUCTION as Environment;
 
   // Admin URLs
   export const ADMIN_URLS = {
@@ -102,6 +102,7 @@ export const STAGING_CONTACT_SKIP = ['sunbirdstorage', 'bluebirdstorage', 'stora
 // ============================================
 export const STAGING_CORP_CODE_CLIENTS: Record<string, string> = {
   'bluebirdstorage': '7ou5@H@W9bdM$i',
+  'sunbirdstorage': '7ou5@H@W9bdM$i',
   // Add more clients here:
   // 'sunbirdstorage': 'their-corp-code',
 };

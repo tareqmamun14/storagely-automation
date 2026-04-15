@@ -192,6 +192,12 @@ test.describe('Payment Verification Tests', () => {
         testResult.error = errorMessage || 'No error - Test completed successfully';
         testResult.success = true;
         
+        // Flag unexpected "Alternate contact" error — this means the site requires alternate contact address
+        if (testResult.error.includes('Alternate contact must have a first name')) {
+          console.log(`\n🚩 UNEXPECTED ERROR for ${companyName}: "Alternate contact must have a first name, last name, and address" — needs attention!`);
+          testResult.error = `🚩 [NEEDS ATTENTION] ${testResult.error}`;
+        }
+        
         // Build final error message including immediate error if found
         let finalErrorMessage = testResult.error;
         if (testResult.immediateError) {
