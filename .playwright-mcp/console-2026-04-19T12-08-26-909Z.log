@@ -1,0 +1,39 @@
+[    4290ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/distinct-storage/project_30/var/assets/svg/icon/22474356/glyph/circle-02.svg from frame with URL https://distinctstorage.com/contact. Domains, protocols and ports must match.
+ @ https://distinctstorage.com/contact:5673
+[    4294ms] Unexpected identifier 'element'
+[    4291ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/distinct-storage/project_30/var/assets/svg/icon/22474356/editor/close-popup.svg from frame with URL https://distinctstorage.com/contact. Domains, protocols and ports must match.
+ @ https://distinctstorage.com/contact:5673
+[    4291ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/distinct-storage/project_30/var/assets/svg/icon/22474356/glyph/tail-right.svg from frame with URL https://distinctstorage.com/contact. Domains, protocols and ports must match.
+ @ https://distinctstorage.com/contact:5673
+[    4291ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/distinct-storage/project_30/var/assets/svg/icon/22474356/glyph/circle-02.svg from frame with URL https://distinctstorage.com/contact. Domains, protocols and ports must match.
+ @ https://distinctstorage.com/contact:5673
+[    4407ms] [LOG] Doesn't exist @ https://distinctstorage.com/contact:6426
+[    4718ms] Uncaught Error: Syntax error, unrecognized expression: nth-child(2
+    at se.error (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:13638)
+    at se.tokenize (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21649)
+    at se.compile (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21752)
+    at <anonymous> (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:16987)
+    at PSEUDO (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:16751)
+    at Ee (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:20888)
+    at se.compile (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21782)
+    at se.select (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:22997)
+    at se (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:7115)
+    at find (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:25046)
+    at S.fn.init (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:25535)
+    at S (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:1050)
+    at <anonymous> (https://cdn2.hubspot.net/hub/8821504/hub_generated/template_assets/65922726656/1644828231829/Bluebird_Storage_Febraury2022/js/main.js:0:1173)
+[    4725ms] [LOG] [widgets.ts] Script loaded @ https://static.storagely.link/public/build/js/widgets-CZyLJK9l.js:1
+[    4725ms] [LOG] [widgets.ts] Available components: [./components/widgets/LocationMap/index.vue] @ https://static.storagely.link/public/build/js/widgets-CZyLJK9l.js:1
+[    4726ms] [LOG] [widgets.ts] mountComponents called @ https://static.storagely.link/public/build/js/widgets-CZyLJK9l.js:1
+[    4726ms] [LOG] [widgets.ts] Found elements: 0 @ https://static.storagely.link/public/build/js/widgets-CZyLJK9l.js:1
+[    4798ms] [ERROR] A bad HTTP response code (404) was received when fetching the script. @ :0
+[    4828ms] [ERROR] TypeError: Failed to register a ServiceWorker for scope ('https://distinctstorage.com/~partytown/') with script ('https://distinctstorage.com/~partytown/partytown-sw.js'): A bad HTTP response code (404) was received when fetching the script. @ :0
+[    5179ms] [LOG] Asia/Dhaka @ https://distinctstorage.com/contact:6161
+[    5705ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/distinct-storage/project_30/var/assets/svg/icon/22474356/glyph/circle-02.svg from frame with URL https://distinctstorage.com/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/129425.js:0
+[    5705ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/distinct-storage/project_30/var/assets/svg/icon/22474356/editor/close-popup.svg from frame with URL https://distinctstorage.com/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/129425.js:0
+[    5706ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/distinct-storage/project_30/var/assets/svg/icon/22474356/glyph/tail-right.svg from frame with URL https://distinctstorage.com/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/129425.js:0
+[    5706ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/distinct-storage/project_30/var/assets/svg/icon/22474356/glyph/circle-02.svg from frame with URL https://distinctstorage.com/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/129425.js:0

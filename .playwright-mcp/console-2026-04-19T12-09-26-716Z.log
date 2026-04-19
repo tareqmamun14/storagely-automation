@@ -1,0 +1,112 @@
+[    2683ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://wlopvjbfzdmjzhqftzte.supabase.co/functions/v1/tracker-script:0
+[    4069ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/editor/arrow-down.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://bluebirdstorage.ca/contact:5723
+[    4069ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/glyph/circle-02.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://bluebirdstorage.ca/contact:5723
+[    4606ms] [LOG] Doesn't exist @ https://bluebirdstorage.ca/contact:6988
+[    4811ms] Uncaught Error: Syntax error, unrecognized expression: nth-child(2
+    at se.error (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:13638)
+    at se.tokenize (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21649)
+    at se.compile (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21752)
+    at <anonymous> (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:16987)
+    at PSEUDO (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:16751)
+    at Ee (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:20888)
+    at se.compile (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21782)
+    at se.select (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:22997)
+    at se (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:7115)
+    at find (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:25046)
+    at S.fn.init (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:25535)
+    at S (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:1050)
+    at <anonymous> (https://cdn2.hubspot.net/hub/8821504/hub_generated/template_assets/65922726656/1644828231829/Bluebird_Storage_Febraury2022/js/main.js:0:1173)
+[    4666ms] [LOG] [widgets.ts] Script loaded @ https://static.storagely.link/public/build/js/widgets-CZyLJK9l.js:1
+[    4666ms] [LOG] [widgets.ts] Available components: [./components/widgets/LocationMap/index.vue] @ https://static.storagely.link/public/build/js/widgets-CZyLJK9l.js:1
+[    4666ms] [LOG] [widgets.ts] mountComponents called @ https://static.storagely.link/public/build/js/widgets-CZyLJK9l.js:1
+[    4667ms] [LOG] [widgets.ts] Found elements: 0 @ https://static.storagely.link/public/build/js/widgets-CZyLJK9l.js:1
+[    5056ms] [LOG] Asia/Dhaka @ https://bluebirdstorage.ca/contact:6656
+[    5151ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://api.linguise.com/api/config/pk_1WJlfrEvcWXPzL1j4gclvQjO0KJuq21C:0
+[    5382ms] [ERROR] A bad HTTP response code (404) was received when fetching the script. @ :0
+[    5383ms] [ERROR] TypeError: Failed to register a ServiceWorker for scope ('https://bluebirdstorage.ca/~partytown/') with script ('https://bluebirdstorage.ca/~partytown/partytown-sw.js'): A bad HTTP response code (404) was received when fetching the script. @ :0
+[    5602ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/editor/arrow-down.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5602ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/glyph/circle-02.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5605ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/editor/arrow-down.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5605ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/glyph/circle-02.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5607ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/editor/arrow-down.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5607ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/glyph/circle-02.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5609ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/editor/arrow-down.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5609ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/glyph/circle-02.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5612ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/editor/arrow-down.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5612ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/glyph/circle-02.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5615ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/editor/arrow-down.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5615ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/glyph/circle-02.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5618ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/editor/arrow-down.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5618ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/glyph/circle-02.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5620ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/editor/arrow-down.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5621ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/glyph/circle-02.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5623ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/editor/arrow-down.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5623ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/glyph/circle-02.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5625ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/editor/arrow-down.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5625ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/glyph/circle-02.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5628ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/editor/arrow-down.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5628ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/glyph/circle-02.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5631ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/editor/arrow-down.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5631ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/glyph/circle-02.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5634ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/editor/arrow-down.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5634ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/glyph/circle-02.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5636ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/editor/arrow-down.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5636ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/glyph/circle-02.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5640ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/editor/arrow-down.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5640ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/glyph/circle-02.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5644ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/editor/arrow-down.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5644ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/glyph/circle-02.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5647ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/editor/arrow-down.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5648ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/glyph/circle-02.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5650ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/editor/arrow-down.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5650ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/glyph/circle-02.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5653ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/editor/arrow-down.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5653ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/glyph/circle-02.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5656ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/editor/arrow-down.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5657ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/glyph/circle-02.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5659ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/editor/arrow-down.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0
+[    5659ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/bluebirdstorage/project_88/var/assets/svg/icon/22847415/glyph/circle-02.svg from frame with URL https://bluebirdstorage.ca/contact. Domains, protocols and ports must match.
+ @ https://s.ksrndkehqnwntyxlhgto.com/101593.js:0

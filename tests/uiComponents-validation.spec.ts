@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 import { StorageSitePage } from '../pages/HomePage';
-import { ContactPage } from '../pages/ContactPage';
+import { ContactPage, ContactFormResult } from '../pages/ContactPage';
 import { StorageListingPage } from '../pages/StorageListingPage';
-import { getStorageSiteUrls, CURRENT_ENVIRONMENT, Environment, STOREROCKET_SITES, STAGING_CONTACT_SKIP } from '../configs/urls';
+import { getStorageSiteUrls, CURRENT_ENVIRONMENT, Environment, STOREROCKET_SITES, STAGING_CONTACT_SKIP, CONTACT_CAPTCHA_SITES } from '../configs/urls';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -36,6 +36,10 @@ function isStorerocket(url: string): boolean {
 
 function isStagingContactSkip(url: string): boolean {
   return isStaging && STAGING_CONTACT_SKIP.some(s => url.toLowerCase().includes(s));
+}
+
+function isContactCaptchaSite(url: string): boolean {
+  return CONTACT_CAPTCHA_SITES.some(s => url.toLowerCase().includes(s));
 }
 
 const siteUrls = getStorageSiteUrls();
@@ -158,17 +162,20 @@ test.describe('[Home Page] Landing Page Verification', () => {
 });
 
 // ============================================
-// 2. CONTACT PAGE VERIFICATION
+// 2. CONTACT PAGE — FULL VERIFICATION + FORM SUBMISSION (Prod only)
 // ============================================
-test.describe('[Contact Page] Contact Page Verification', () => {
+test.describe('[Contact Page] Full Verification', () => {
   test.setTimeout(180000);
 
   for (const url of siteUrls) {
-    test(`[Contact Page] Verify contact page for ${clientLabel(url)}`, async ({ page }) => {
+    test(`[Contact Page] Verify & submit contact form for ${clientLabel(url)}`, async ({ page }) => {
+      // Unlimited timeout for CAPTCHA sites (user needs to solve manually)
+      if (isContactCaptchaSite(url)) test.setTimeout(0);
+
       console.log(`\n📦 MODULE: Contact Page ${envTag}`);
       if (isStorerocket(url)) {
         console.log(`⚠️  SKIPPED — Storerocket required (no staging equivalent)`);
-        pushResult('Contact Page', clientLabel(url), 'PASSED', 'Storerocket — skipped in staging');
+        pushResult('Contact Page', clientLabel(url), 'PASSED', 'Storerocket — skipped');
         test.skip();
         return;
       }
@@ -182,6 +189,10 @@ test.describe('[Contact Page] Contact Page Verification', () => {
       console.log(`🔍 Testing contact page: ${url}`);
       const contactPage = new ContactPage(page);
 
+      let verificationPassed = false;
+      let formResult: ContactFormResult | null = null;
+
+      // --- STEP 1: Navigate & verify contact page elements ---
       try {
         await contactPage.navigateToContactPage(url);
         const verificationResult = await contactPage.verifyContactPageContent(url);
@@ -189,16 +200,72 @@ test.describe('[Contact Page] Contact Page Verification', () => {
         if (!verificationResult.found) {
           throw new Error('No contact page elements found.');
         }
-
-        console.log(`✅ Contact page verification passed for: ${url}`);
-        pushResult('Contact Page', clientLabel(url), 'PASSED', verificationResult.foundElements?.join(', '));
+        verificationPassed = true;
+        console.log(`✅ Contact page element verification passed`);
+        console.log(`   Elements found: ${verificationResult.foundElements?.join(', ')}`);
       } catch (error) {
         const msg = (error as Error).message || 'Unknown error';
         console.log(`❌ Contact page verification failed for: ${url}`);
         console.log(`   Error: ${msg}`);
-        pushResult('Contact Page', clientLabel(url), 'FAILED', msg);
-        // Allow other tests to continue
-        console.log(`⚠️  Continuing with other sites...`);
+        pushResult('Contact Page', clientLabel(url), 'FAILED', `Element verification failed: ${msg}`);
+        return; // No point trying form submission if verification fails
+      }
+
+      // --- STEP 2: Fill & submit contact form (PROD only) ---
+      if (!isStaging) {
+        try {
+          console.log(`\n   📝 Attempting contact form fill & submit...`);
+          formResult = await contactPage.verifyAndSubmitContactForm(url, isContactCaptchaSite(url));
+
+          // Build detail string
+          const detailParts: string[] = [];
+          detailParts.push(`Elements: OK`);
+
+          if (!formResult.hasForm) {
+            detailParts.push(`Form: not present (info-only page)`);
+          } else {
+            detailParts.push(`Fields: ${formResult.fieldsFilled.join(', ') || 'none filled'}`);
+            detailParts.push(`Submit: ${formResult.submitOutcome}`);
+            if (formResult.successMessage) detailParts.push(`Msg: ${formResult.successMessage.substring(0, 60)}`);
+            if (formResult.errorMessage) detailParts.push(`Err: ${formResult.errorMessage.substring(0, 60)}`);
+            if (formResult.fieldsWithIssues.length > 0) detailParts.push(`Issues: ${formResult.fieldsWithIssues.join('; ')}`);
+          }
+          const detail = detailParts.join(' | ');
+
+          // Determine overall status
+          // The goal of the contact page is to SEND. If submission didn't succeed, it's a FAIL.
+          if (!formResult.hasForm) {
+            // No form on the page — can't send contact = FAIL
+            console.log(`❌ No contact form found — cannot send contact: ${url}`);
+            pushResult('Contact Page', clientLabel(url), 'FAILED', detail);
+          } else if (formResult.submitOutcome === 'SUCCESS') {
+            console.log(`✅ Contact form submitted successfully for: ${url}`);
+            pushResult('Contact Page', clientLabel(url), 'PASSED', detail);
+          } else {
+            console.log(`❌ Contact form submission FAILED for: ${url}`);
+            pushResult('Contact Page', clientLabel(url), 'FAILED', detail);
+          }
+
+          // --- Submitted data summary ---
+          if (formResult.hasForm && Object.keys(formResult.submittedData).length > 0) {
+            console.log(`\n   📋 SUBMITTED DATA:`);
+            for (const [field, value] of Object.entries(formResult.submittedData)) {
+              console.log(`      ${field}: ${value}`);
+            }
+            console.log(`   📋 OUTCOME: ${formResult.submitOutcome}`);
+            if (formResult.successMessage) console.log(`   ✅ CONFIRMATION: ${formResult.successMessage}`);
+            if (formResult.errorMessage) console.log(`   ❌ ERROR: ${formResult.errorMessage}`);
+          }
+        } catch (error) {
+          const msg = (error as Error).message || 'Unknown error';
+          console.log(`❌ Contact form submission error for: ${url}`);
+          console.log(`   Error: ${msg}`);
+          pushResult('Contact Page', clientLabel(url), 'FAILED', `Elements: OK | Form submission error: ${msg}`);
+        }
+      } else {
+        // Staging — only element verification
+        pushResult('Contact Page', clientLabel(url), 'PASSED', 'Elements: OK (staging — form submission skipped)');
+        console.log(`✅ Contact page verification passed for: ${url} (staging — form submission skipped)`);
       }
     });
   }
@@ -472,7 +539,7 @@ test.afterAll(() => {
   console.log('\n' + '='.repeat(80));
 
   // --- Failures call-out section ---
-  const allFailed = modules.flatMap(m => m.tests.filter(t => t.status === 'FAILED').map(t => ({ module: m.module, ...t })));
+  const allFailed = modules.flatMap(m => m.tests.filter(t => t.status === 'FAILED').map(t => ({ ...t, module: m.module })));
 
   if (allFailed.length > 0) {
     console.log('\n\n');
@@ -492,7 +559,7 @@ test.afterAll(() => {
 
   // --- Mini Mall consolidated section ---
   const allMiniMall = modules.flatMap(m =>
-    m.tests.filter(t => isMiniMall(t.name)).map(t => ({ module: m.module, ...t }))
+    m.tests.filter(t => isMiniMall(t.name)).map(t => ({ ...t, module: m.module }))
   );
 
   if (allMiniMall.length > 0) {

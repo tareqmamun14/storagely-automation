@@ -1221,18 +1221,31 @@ export class RentalDetailsPageSinglePage extends BasePage {
         return `Error Occurred — ${apiErrorMessage}`;
       }
       
-      // No error detected - retry once
+      // No error detected - retry once (only if RENT NOW button is still available)
       console.log(`[${new Date().toISOString()}] ⚠️ No error detected on first attempt, retrying...`);
       await this.wait(1000);
       
-      // Click RENT NOW again
-      console.log(`[${new Date().toISOString()}] 🖱️ Clicking RENT NOW again (retry)...`);
-      await this.rentNowButton.click({ timeout: 10000 });
-      console.log(`[${new Date().toISOString()}] ✓ RENT NOW button clicked (retry)`);
+      // Check if page navigated away or button is gone — if so, the first click worked
+      let retryClickSucceeded = false;
+      try {
+        const buttonStillVisible = await this.rentNowButton.isVisible({ timeout: 3000 }).catch(() => false);
+        if (!buttonStillVisible) {
+          console.log(`[${new Date().toISOString()}] ℹ️ RENT NOW button no longer visible — first click likely succeeded, skipping retry`);
+        } else {
+          console.log(`[${new Date().toISOString()}] 🖱️ Clicking RENT NOW again (retry)...`);
+          await this.rentNowButton.click({ timeout: 10000 });
+          console.log(`[${new Date().toISOString()}] ✓ RENT NOW button clicked (retry)`);
+          retryClickSucceeded = true;
+        }
+      } catch (retryClickError) {
+        console.log(`[${new Date().toISOString()}] ℹ️ Retry click failed (button may be gone after first submit) — continuing`);
+      }
       
-      // Re-detect error
-      console.log(`[${new Date().toISOString()}] 🔍 Re-detecting error...`);
-      errorMessage = await this.detectErrorMessage();
+      // Re-detect error only if retry click succeeded
+      if (retryClickSucceeded) {
+        console.log(`[${new Date().toISOString()}] 🔍 Re-detecting error...`);
+        errorMessage = await this.detectErrorMessage();
+      }
       
       // Clean up listener
       this.page.removeListener('response', responseHandler);

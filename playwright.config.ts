@@ -65,6 +65,6 @@ export default defineConfig({
     },
   ],
 
-  // REMOVED: globalTeardown that was auto-opening browser
-  // globalTeardown: require.resolve('./global-teardown'),
+  // Global teardown prints the consolidated test summary after ALL workers finish
+  globalTeardown: require.resolve('./global-teardown'),
 });

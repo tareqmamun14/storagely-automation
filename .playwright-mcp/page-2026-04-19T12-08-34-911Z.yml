@@ -1,0 +1,388 @@
+- generic [active] [ref=e1]:
+  - text:           
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - generic [ref=e7]:
+            - link "Call Now" [ref=e9] [cursor=pointer]:
+              - /url: tel:8602227527
+            - link "Rent Now" [ref=e11] [cursor=pointer]:
+              - /url: /storage-units/connecticut/new-milford/kent-road
+          - generic [ref=e13]: 
+        - list [ref=e15]:
+          - listitem [ref=e16]:
+            - link " Unit Features" [ref=e17] [cursor=pointer]:
+              - /url: /features
+              - generic [ref=e18]: 
+              - generic [ref=e19]: Unit Features
+          - listitem [ref=e20]:
+            - link " Virtual Tour" [ref=e21] [cursor=pointer]:
+              - /url: /virtual-tour/
+              - generic [ref=e22]: 
+              - generic [ref=e23]: Virtual Tour
+          - listitem [ref=e24]:
+            - link " Size Guide" [ref=e25] [cursor=pointer]:
+              - /url: /storage-unit-size-guide
+              - generic [ref=e26]: 
+              - generic [ref=e27]: Size Guide
+          - listitem [ref=e28]:
+            - link " Reviews" [ref=e29] [cursor=pointer]:
+              - /url: /storage-units/connecticut/new-milford/kent-road
+              - generic [ref=e30]: 
+              - generic [ref=e31]: Reviews
+        - list [ref=e33]:
+          - text: 
+          - listitem [ref=e34]:
+            - link "Find Storage" [ref=e35] [cursor=pointer]:
+              - /url: /storage-units/connecticut/new-milford/kent-road
+          - listitem [ref=e36]:
+            - link "Storage Types" [ref=e37] [cursor=pointer]:
+              - /url: "#"
+              - text: Storage Types
+              - generic [ref=e38]: 
+          - listitem [ref=e39]:
+            - link "Our Storage Service Areas" [ref=e40] [cursor=pointer]:
+              - /url: /service-areas
+              - text: Our Storage Service Areas
+              - generic [ref=e41]: 
+          - listitem [ref=e42]:
+            - link "Resources" [ref=e43] [cursor=pointer]:
+              - /url: "#"
+              - text: Resources
+              - generic [ref=e44]: 
+          - listitem [ref=e45]:
+            - link "About" [ref=e46] [cursor=pointer]:
+              - /url: /our-company
+              - text: About
+              - generic [ref=e47]: 
+          - listitem [ref=e48]:
+            - link "Contact" [ref=e49] [cursor=pointer]:
+              - /url: /contact
+      - generic [ref=e52]:
+        - list [ref=e56]:
+          - listitem [ref=e57]: Locally Owned and Operated
+        - generic [ref=e59]:
+          - list [ref=e61]:
+            - listitem [ref=e62]:
+              - link " Unit Features" [ref=e63] [cursor=pointer]:
+                - /url: /features
+                - generic [ref=e64]: 
+                - generic [ref=e65]: Unit Features
+            - listitem [ref=e66]:
+              - link " Virtual Tour" [ref=e67] [cursor=pointer]:
+                - /url: /storage-units/connecticut/new-milford/kent-road
+                - generic [ref=e68]: 
+                - generic [ref=e69]: Virtual Tour
+            - listitem [ref=e70]:
+              - link " Size Guide" [ref=e71] [cursor=pointer]:
+                - /url: /storage-unit-size-guide/
+                - generic [ref=e72]: 
+                - generic [ref=e73]: Size Guide
+            - listitem [ref=e74]:
+              - link " FAQ" [ref=e75] [cursor=pointer]:
+                - /url: /self-storage-faq
+                - generic [ref=e76]: 
+                - generic [ref=e77]: FAQ
+          - generic [ref=e78]:
+            - listitem [ref=e79]:
+              - link " RENT NOW" [ref=e81] [cursor=pointer]:
+                - /url: /storage-units/connecticut/new-milford/kent-road
+                - generic [ref=e82]: 
+                - text: RENT NOW
+            - listitem [ref=e83]:
+              - link " Call Now" [ref=e84] [cursor=pointer]:
+                - /url: tel:8602227527
+                - generic [ref=e85]: 
+                - text: Call Now
+      - generic [ref=e88]:
+        - generic [ref=e90]:
+          - link "image header logo" [ref=e91] [cursor=pointer]:
+            - /url: /
+            - img "image header logo" [ref=e92]
+          - text:  
+        - list [ref=e96]:
+          - listitem [ref=e97]:
+            - link "Find Storage" [ref=e98] [cursor=pointer]:
+              - /url: /storage-units/connecticut/new-milford/kent-road
+          - listitem [ref=e99]:
+            - link "Storage Types" [ref=e100] [cursor=pointer]:
+              - /url: "#"
+              - text: Storage Types
+              - generic [ref=e101]: 
+          - listitem [ref=e102]:
+            - link "Our Storage Service Areas" [ref=e103] [cursor=pointer]:
+              - /url: /service-areas
+              - text: Our Storage Service Areas
+              - generic [ref=e104]: 
+          - listitem [ref=e105]:
+            - link "Resources" [ref=e106] [cursor=pointer]:
+              - /url: "#"
+              - text: Resources
+              - generic [ref=e107]: 
+          - listitem [ref=e108]:
+            - link "About" [ref=e109] [cursor=pointer]:
+              - /url: /our-company
+              - text: About
+              - generic [ref=e110]: 
+          - listitem [ref=e111]:
+            - link "Contact" [ref=e112] [cursor=pointer]:
+              - /url: /contact
+    - generic [ref=e114]:
+      - generic [ref=e121]:
+        - generic [ref=e123]:
+          - heading "Contact Distinct Storage in New Milford, CT" [level=1] [ref=e127]
+          - generic [ref=e130]:
+            - paragraph [ref=e131]: At Distinct Storage, your experience matters long before move-in day. For all things related to self-storage in New Milford, CT, whether you're comparing unit sizes, checking availability, or need advice on what will fit, we're here to help. Call, email, or stop by —our family-friendly team is local, responsive, and always ready to make storage simple.
+            - paragraph [ref=e132]
+            - paragraph [ref=e133]:
+              - link "Learn more about what makes our storage distinct." [ref=e134] [cursor=pointer]:
+                - /url: /features
+          - heading "Get A Storage Quote or Reserve Your Unit" [level=2] [ref=e138]
+          - paragraph [ref=e142]: Looking for the right space? We can help you find the perfect storage unit for your needs. From short-term storage rentals to long-term climate-controlled options, our team will guide you through pricing, promotions, and available sizes.
+          - generic [ref=e156]:
+            - heading "ADDRESS" [level=5] [ref=e157]
+            - heading "46 Kent Rd" [level=5] [ref=e158]
+            - heading "New Milford, CT 06776" [level=5] [ref=e159]
+          - generic [ref=e165]:
+            - generic [ref=e173]:
+              - heading "PHONE" [level=5] [ref=e174]
+              - heading "(860) 222-7527" [level=6] [ref=e175]:
+                - link "(860) 222-7527" [ref=e176] [cursor=pointer]:
+                  - /url: tel:8602227527
+            - paragraph [ref=e180]: Ask about our 50% off for 2 months promotion and our 9-month rate guarantee when you call!
+            - heading "Visit Us in New Milford, CT" [level=2] [ref=e184]
+            - paragraph [ref=e188]:
+              - text: You'll find us conveniently located on Route 7 — just minutes from Kent, Washington, and Bridgewater. Stop by for a tour of our facility, grab a coffee and a snack, and see firsthand why Distinct Storage is Connecticut's most comfortable and secure storage option. Learn more about our family's story and how we got started
+              - link "here" [ref=e189] [cursor=pointer]:
+                - /url: /our-company
+              - text: .
+          - img "hero-image-2161724424291.jpg" [ref=e195]
+          - heading "Serving Western Connecticut" [level=3] [ref=e199]
+          - list [ref=e203]:
+            - listitem [ref=e204]:
+              - text: •
+              - link "New Milford, CT Storage Units" [ref=e205] [cursor=pointer]:
+                - /url: /storage-units-new-milford
+            - listitem [ref=e206]:
+              - text: •
+              - link "Sherman, CT Storage Units" [ref=e207] [cursor=pointer]:
+                - /url: /storage-units-sherman
+            - listitem [ref=e208]:
+              - text: •
+              - link "Kent, CT Storage Units" [ref=e209] [cursor=pointer]:
+                - /url: /storage-units-kent
+            - listitem [ref=e210]:
+              - text: •
+              - link "Bridgewater, CT Storage Units" [ref=e211] [cursor=pointer]:
+                - /url: /storage-units-bridgewater-ct
+            - listitem [ref=e212]:
+              - text: •
+              - link "Washington, CT Storage Units" [ref=e213] [cursor=pointer]:
+                - /url: /storage-units-washington
+            - listitem [ref=e214]:
+              - text: •
+              - link "Roxbury, CT Storage Units" [ref=e215] [cursor=pointer]:
+                - /url: /storage-units-roxbury
+            - listitem [ref=e216]:
+              - text: •
+              - link "Litchfield, CT Storage Units" [ref=e217] [cursor=pointer]:
+                - /url: /storage-units-in-litchfield-ct
+            - listitem [ref=e218]:
+              - text: •
+              - link "Fairfield County, CT Storage Units" [ref=e219] [cursor=pointer]:
+                - /url: /fairfield-county-ct
+          - heading "Directions to Our Facility" [level=3] [ref=e223]
+          - generic [ref=e226]:
+            - paragraph [ref=e227]: "Whether you're coming from Litchfield County or Fairfield County, we're easy to find:"
+            - list [ref=e228]:
+              - listitem [ref=e229]: "• From downtown New Milford, CT: Head south on Kent Rd (Route 7), we're on the right next to Housatonic River Brewing and just past Big Y."
+              - listitem [ref=e230]: "• From Sherman and Kent: Follow Route 55 to Route 7 South toward New Milford and we are on the left just past Main Moon Chinese Restaurant."
+              - listitem [ref=e231]: "• From Washington or Bridgewater: Take Route 202 West, then turn right onto Kent Rd."
+            - paragraph [ref=e232]
+            - paragraph [ref=e233]: Need help finding us? Just call when you're nearby, and we'll guide you right in.
+          - heading "Why Customers Love Using Our Storage Units" [level=2] [ref=e237]
+          - list [ref=e241]:
+            - listitem [ref=e242]: • Locally owned and operated, real people, real service.
+            - listitem [ref=e243]: • Quick and easy rental process, call or click to rent instantly
+            - listitem [ref=e244]: • Stress-free support with free snacks, Wi-Fi, and on-site coffee.
+            - listitem [ref=e245]: • True climate-controlled units and top-tier security with 54+ cameras
+        - generic [ref=e247]:
+          - heading "We Make Reaching Us Stress-Free, Too" [level=2] [ref=e251]
+          - generic [ref=e254]:
+            - generic [ref=e255]:
+              - generic [ref=e256]: Name
+              - textbox "Name" [ref=e257]:
+                - /placeholder: ""
+            - generic [ref=e258]:
+              - generic [ref=e259]: E-Mail
+              - textbox "E-Mail" [ref=e260]:
+                - /placeholder: ""
+            - generic [ref=e261]:
+              - generic [ref=e262]: Phone Number
+              - spinbutton "Phone Number" [ref=e263]
+            - generic [ref=e264]:
+              - generic [ref=e265]: Message
+              - textbox "Message" [ref=e266]:
+                - /placeholder: ""
+            - button "Submit" [ref=e268] [cursor=pointer]:
+              - generic [ref=e269]: Submit
+          - generic [ref=e273]: "---"
+      - generic [ref=e278]:
+        - heading "Quick Links" [level=2] [ref=e282]
+        - generic [ref=e286]:
+          - generic [ref=e290]:
+            - heading "Pricing & Reservations" [level=4] [ref=e298]
+            - paragraph [ref=e302]: The Price Is Right (and the Snacks Are Free). Reserve or Rent Now.
+            - link "Rent Now!" [ref=e304] [cursor=pointer]:
+              - /url: /storage-units/connecticut/new-milford/kent-road
+              - generic [ref=e305]: Rent Now!
+          - generic [ref=e309]:
+            - heading "My Account" [level=4] [ref=e317]
+            - paragraph [ref=e321]: Already One of the Cool Kids? Log Into Your Account Here
+            - link "Access Account" [ref=e323] [cursor=pointer]:
+              - /url: https://distinctstorage.tenantconnect.com
+              - generic [ref=e324]: Access Account
+          - generic [ref=e328]:
+            - heading "FAQs" [level=4] [ref=e336]
+            - paragraph [ref=e340]: Ask Us Anything (Well, Almost). We’re Storage Pros, Not Psychics.
+            - link "Learn More" [ref=e342] [cursor=pointer]:
+              - /url: /self-storage-faq
+              - generic [ref=e343]: Learn More
+      - generic [ref=e348]:
+        - heading "Ready to Get Started?" [level=2] [ref=e352]:
+          - strong [ref=e353]: Ready to Get Started?
+        - heading "Click below to reserve your storage unit, or give us a quick call to talk through your options." [level=5] [ref=e357]:
+          - strong [ref=e358]: Click below to reserve your storage unit, or give us a quick call to talk through your options.
+        - link "Get A Storage Quote" [ref=e360] [cursor=pointer]:
+          - /url: /storage-units/connecticut/new-milford/kent-road
+          - generic [ref=e361]: Get A Storage Quote
+    - generic [ref=e362]:
+      - generic [ref=e364]:
+        - generic [ref=e365]:
+          - link "Footer Logo" [ref=e367] [cursor=pointer]:
+            - /url: https://distinctstorage.com
+            - img "Footer Logo" [ref=e368]
+          - generic [ref=e369]:
+            - link "Find Storage" [ref=e370] [cursor=pointer]:
+              - /url: /storage-units/connecticut/new-milford/kent-road
+              - img [ref=e371]
+              - generic [ref=e374]: Find Storage
+            - link "Size Guide" [ref=e375] [cursor=pointer]:
+              - /url: /storage-unit-size-guide
+              - img [ref=e376]
+              - generic [ref=e379]: Size Guide
+        - generic [ref=e380]:
+          - generic [ref=e381]:
+            - generic [ref=e382]:
+              - text: Storage Unit Service Areas
+              - separator [ref=e383]
+            - generic [ref=e384]:
+              - link "New Milford, CT" [ref=e385] [cursor=pointer]:
+                - /url: /storage-units-new-milford
+              - link "Sherman, CT" [ref=e386] [cursor=pointer]:
+                - /url: /storage-units-sherman
+              - link "Kent, CT" [ref=e387] [cursor=pointer]:
+                - /url: /storage-units-kent
+              - link "Washington, CT" [ref=e388] [cursor=pointer]:
+                - /url: /storage-units-washington
+              - link "Roxbury, CT" [ref=e389] [cursor=pointer]:
+                - /url: /storage-units-roxbury
+              - link "Bridgewater, CT" [ref=e390] [cursor=pointer]:
+                - /url: /storage-units-bridgewater-ct
+              - link "View All Service Areas" [ref=e391] [cursor=pointer]:
+                - /url: /service-areas
+          - generic [ref=e392]:
+            - generic [ref=e393]:
+              - text: Our Storage Unit Services
+              - separator [ref=e394]
+            - generic [ref=e395]:
+              - link "Home Storage" [ref=e396] [cursor=pointer]:
+                - /url: /home-storage
+              - link "Business Storage" [ref=e397] [cursor=pointer]:
+                - /url: /business-storage
+              - link "Renter Storage" [ref=e398] [cursor=pointer]:
+                - /url: /renter-storage
+              - link "Valet Storage" [ref=e399] [cursor=pointer]:
+                - /url: /valet-storage
+              - link "Student Storage" [ref=e400] [cursor=pointer]:
+                - /url: /student-storage
+              - link "Military Storage" [ref=e401] [cursor=pointer]:
+                - /url: /military-storage
+              - link "Climate Controlled Storage" [ref=e402] [cursor=pointer]:
+                - /url: /climate-controlled-storage
+              - link "Empty Nester Storage" [ref=e403] [cursor=pointer]:
+                - /url: /empty-nester-storage
+              - link "Relocation Storage" [ref=e404] [cursor=pointer]:
+                - /url: /relocation-storage
+          - generic [ref=e405]:
+            - generic [ref=e406]:
+              - text: Resources
+              - separator [ref=e407]
+            - generic [ref=e408]:
+              - link "FREE Move-in Truck" [ref=e409] [cursor=pointer]:
+                - /url: /free-moving-truck
+              - link "Our Units" [ref=e410] [cursor=pointer]:
+                - /url: /our-units
+              - link "Unit Features" [ref=e411] [cursor=pointer]:
+                - /url: /features
+              - link "Size Guide" [ref=e412] [cursor=pointer]:
+                - /url: /storage-unit-size-guide
+              - link "FAQs" [ref=e413] [cursor=pointer]:
+                - /url: /self-storage-faq
+              - link "Moving Supplies" [ref=e414] [cursor=pointer]:
+                - /url: /moving-supplies
+              - link "Pay Online" [ref=e415] [cursor=pointer]:
+                - /url: https://distinctstorage.tenantconnect.com/
+              - link "Contact" [ref=e416] [cursor=pointer]:
+                - /url: /contact
+          - generic [ref=e417]:
+            - generic [ref=e418]:
+              - text: About Distinct
+              - separator [ref=e419]
+            - generic [ref=e420]:
+              - link "Distinct Storage" [ref=e421] [cursor=pointer]:
+                - /url: "#"
+              - link "46 Kent Road, New Milford, CT 06776" [ref=e422] [cursor=pointer]:
+                - /url: "#"
+              - link "info@distinctstorage.com" [ref=e423] [cursor=pointer]:
+                - /url: "#"
+              - 'link "Phone: (860) 222-7527" [ref=e424] [cursor=pointer]':
+                - /url: "#"
+              - 'link "Office: Monday 6 AM - 7 PM - 7 Days A Week" [ref=e425] [cursor=pointer]':
+                - /url: "#"
+              - 'link "Access: Monday 6 AM - 10 PM - 7 Days A Week" [ref=e426] [cursor=pointer]':
+                - /url: "#"
+              - link "Facebook" [ref=e427] [cursor=pointer]:
+                - /url: https://www.facebook.com/p/Distinct-Storage-100089860923506/
+              - link "Instagram" [ref=e428] [cursor=pointer]:
+                - /url: https://www.instagram.com/distinct_storage/
+      - generic [ref=e431]:
+        - text: © Distinct Storage
+        - generic [ref=e433]:
+          - text: "|"
+          - link "Privacy Policy" [ref=e434] [cursor=pointer]:
+            - /url: /privacy-policy
+          - text: "|"
+          - link "Terms of Use" [ref=e435] [cursor=pointer]:
+            - /url: /terms-and-conditions
+  - button "Report An Issue" [ref=e436] [cursor=pointer]
+  - generic [ref=e438]:
+    - generic [ref=e439] [cursor=pointer]: ×
+    - iframe [ref=e440]:
+      - generic [active] [ref=f1e1]:
+        - link "Skip to form" [ref=f1e2] [cursor=pointer]:
+          - /url: "#main"
+        - main "Main Content Area" [ref=f1e3]:
+          - form "HubSpot Form" [ref=f1e7]:
+            - generic [ref=f1e9]:
+              - heading "Contact Our Support Team" [level=1] [ref=f1e11]
+              - generic [ref=f1e13]:
+                - paragraph [ref=f1e14]: 👋 Need help or running into an issue?
+                - paragraph [ref=f1e15]: Fill out the form below and our support team will get back to you as soon as possible.
+              - generic [ref=f1e17]:
+                - generic [ref=f1e19]: Email*
+                - generic [ref=f1e20]: Please use the email associated with your Storagely account.
+                - textbox "Email*" [ref=f1e21]:
+                  - /placeholder: ""
+              - button "Submit" [disabled] [ref=f1e24]
