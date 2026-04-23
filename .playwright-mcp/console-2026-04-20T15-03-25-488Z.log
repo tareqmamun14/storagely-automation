@@ -1,0 +1,28 @@
+[    5360ms] ReferenceError: bootstrap is not defined
+    at https://www.storagestar.com/storage-units/california/napa/devlin-road:19424:9
+    at Array.map (<anonymous>)
+    at https://www.storagestar.com/storage-units/california/napa/devlin-road:19423:42
+[    5474ms] [LOG] Doesn't exist @ https://www.storagestar.com/storage-units/california/napa/devlin-road:21669
+[    6704ms] Uncaught Error: Syntax error, unrecognized expression: nth-child(2
+    at se.error (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:13638)
+    at se.tokenize (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21649)
+    at se.compile (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21752)
+    at <anonymous> (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:16987)
+    at PSEUDO (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:16751)
+    at Ee (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:20888)
+    at se.compile (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21782)
+    at se.select (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:22997)
+    at se (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:7115)
+    at find (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:25046)
+    at S.fn.init (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:25535)
+    at S (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:1050)
+    at <anonymous> (https://cdn2.hubspot.net/hub/8821504/hub_generated/template_assets/65922726656/1644828231829/Bluebird_Storage_Febraury2022/js/main.js:0:1173)
+[    5760ms] [LOG] [widgets.ts] Script loaded @ https://static.storagely.link/public/build/js/widgets-CZyLJK9l.js:1
+[    5760ms] [LOG] [widgets.ts] Available components: [./components/widgets/LocationMap/index.vue] @ https://static.storagely.link/public/build/js/widgets-CZyLJK9l.js:1
+[    5761ms] [LOG] [widgets.ts] mountComponents called @ https://static.storagely.link/public/build/js/widgets-CZyLJK9l.js:1
+[    5762ms] [LOG] [widgets.ts] Found elements: 0 @ https://static.storagely.link/public/build/js/widgets-CZyLJK9l.js:1
+[    6906ms] [ERROR] eapps.Platform throws: "Widget "b96d2fb9-9f8e-487b-9593-d542f3b12633" can`t be initialized because WIDGET_NOT_FOUND" with 
+	 -> JSHandle@node @ https://static.elfsight.com/platform/platform.js:15
+[    8425ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://cdn.acsbapp.com/config/storagestar.com/config.json:0
+[    9003ms] [LOG] acsb: This website is not registered or its license is expired. @ https://acsbapp.com/apps/app/dist/js/app.js:21
+[    9119ms] [WARNING] @import rules are not allowed here. See https://github.com/WICG/construct-stylesheets/issues/119#issuecomment-588352418. @ https://beta.leadconnectorhq.com/chat-widget/p-DtHhXbDc.js:8

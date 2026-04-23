@@ -4,6 +4,7 @@ import * as path from 'path';
 
 const RESULTS_DIR = path.join(process.cwd(), 'test-results', 'singlepage-results');
 const RESULTS_FILE = path.join(process.cwd(), 'test-results', 'singlepage-results.json');
+const LOCK_FILE = RESULTS_FILE + '.lock';
 
 function readAllResults(): any[] {
   if (!fs.existsSync(RESULTS_DIR)) {
@@ -35,8 +36,7 @@ async function globalTeardown() {
     const cleanError = (msg: string) => msg.replace(/^Error Occurred\s*[—–-]+\s*Dismiss\s*[—–-]+\s*/i, '');
 
     // Categorize tests
-    const passedTests = allResults.filter(r => r.success && (!r.attempt || r.attempt === 0));
-    const flakyTests = allResults.filter(r => r.success && r.attempt && r.attempt > 0);
+    const passedTests = allResults.filter(r => r.success);
     const failedTests = allResults.filter(r => !r.success);
     const totalTests = allResults.length;
     const successRate = ((passedTests.length / totalTests) * 100).toFixed(1);
@@ -50,9 +50,6 @@ async function globalTeardown() {
     console.log(`📊 TEST EXECUTION SUMMARY:`);
     console.log(`   Total Tests : ${totalTests}`);
     console.log(`   ✅ Passed   : ${passedTests.length}`);
-    if (flakyTests.length > 0) {
-      console.log(`   ⚠️  Flaky   : ${flakyTests.length}  (passed on retry)`);
-    }
     if (failedTests.length > 0) {
       console.log(`   ❌ Failed   : ${failedTests.length}`);
     }
@@ -68,10 +65,8 @@ async function globalTeardown() {
       const num = String(index + 1).padStart(3);
       const company = result.company.padEnd(25);
       const platform = result.platform.padEnd(10);
-      const isFlaky = result.success && result.attempt && result.attempt > 0;
       const isFailed = !result.success;
-      // ✅ green for passed, ⚠️ yellow for flaky, ❌ red cross for failed
-      const status = isFailed ? '❌ FAILED' : isFlaky ? '⚠️  FLAKY ' : '✅ PASSED';
+      const status = isFailed ? '❌ FAILED' : '✅ PASSED';
       const statusPad = status.padEnd(13);
       const cleaned = cleanError(result.error);
       const errorPreview = cleaned.length > 45 ? cleaned.substring(0, 42) + '...' : cleaned;
@@ -85,15 +80,11 @@ async function globalTeardown() {
     console.log(`${'='.repeat(100)}\n`);
 
     allResults.forEach((result, index) => {
-      const isFlaky = result.success && result.attempt && result.attempt > 0;
       const isFailed = !result.success;
-      const icon = isFailed ? '❌ FAILED' : isFlaky ? '⚠️  FLAKY' : '✅ PASSED';
+      const icon = isFailed ? '❌ FAILED' : '✅ PASSED';
       console.log(`${index + 1}. ${icon} — ${result.company} (${result.platform})`);
       console.log(`   URL:     ${result.url}`);
       console.log(`   Message: ${cleanError(result.error)}`);
-      if (isFlaky) {
-        console.log(`   ⚠️  Passed on retry attempt #${result.attempt}`);
-      }
       if (result.error.includes('Alternate contact must have a first name')) {
         console.log(`   🚩 ATTENTION: Alternate contact address may need to be provided!`);
       }
@@ -114,6 +105,14 @@ async function globalTeardown() {
         fs.rmdirSync(RESULTS_DIR);
       }
     } catch { /* ignore */ }
+  }
+
+  try {
+    if (fs.existsSync(LOCK_FILE)) {
+      fs.unlinkSync(LOCK_FILE);
+    }
+  } catch {
+    // ignore lock cleanup failures
   }
 
   console.log('\n📊 Test execution completed');

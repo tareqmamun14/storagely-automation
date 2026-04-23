@@ -1,0 +1,1877 @@
+- generic [active] [ref=e1]:
+  - text:           
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - navigation [ref=e6]:
+        - generic:
+          - link "logo" [ref=e7] [cursor=pointer]:
+            - /url: https://smartstorageohio.com
+            - img "logo" [ref=e8]
+          - button "Toggle navigation" [ref=e9] [cursor=pointer]
+      - generic [ref=e12] [cursor=pointer]:
+        - generic [ref=e13]: 50% OFF 6 Months
+        - text: on 5x10 Climate-Controlled Units
+    - generic [ref=e14]:
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - navigation "breadcrumb" [ref=e17]:
+            - list [ref=e18]:
+              - listitem [ref=e19]:
+                - link "Home" [ref=e20] [cursor=pointer]:
+                  - /url: https://smartstorageohio.com/
+              - listitem [ref=e21]:
+                - text: /
+                - link "Ohio" [ref=e22] [cursor=pointer]:
+                  - /url: https://smartstorageohio.com/storage-units-macedonia?search=Macedonia, Ohio, Usa
+              - listitem [ref=e23]:
+                - text: /
+                - link "Macedonia" [ref=e24] [cursor=pointer]:
+                  - /url: https://smartstorageohio.com/storage-units-macedonia?search=Macedonia, Ohio, Usa
+              - listitem [ref=e25]: / Macedonia, Ohio
+          - generic [ref=e26]:
+            - generic [ref=e27]:
+              - generic [ref=e28]:
+                - generic [ref=e29]:
+                  - button "Slide 1" [ref=e30] [cursor=pointer]
+                  - button "Slide 2" [ref=e31] [cursor=pointer]
+                  - button "Slide 3" [ref=e32] [cursor=pointer]
+                  - button "Slide 4" [ref=e33] [cursor=pointer]
+                  - button "Slide 5" [ref=e34] [cursor=pointer]
+                  - button "Slide 6" [ref=e35] [cursor=pointer]
+                  - button "Slide 7" [ref=e36] [cursor=pointer]
+                  - button "Slide 8" [ref=e37] [cursor=pointer]
+                  - button "Slide 9" [ref=e38] [cursor=pointer]
+                  - button "Slide 10" [ref=e39] [cursor=pointer]
+                  - button "Slide 11" [ref=e40] [cursor=pointer]
+                  - button "Slide 12" [ref=e41] [cursor=pointer]
+                  - button "Slide 13" [ref=e42] [cursor=pointer]
+                  - button "Slide 14" [ref=e43] [cursor=pointer]
+                - img "self storage units macedonia" [ref=e46]
+                - button "Previous" [ref=e47] [cursor=pointer]:
+                  - generic [ref=e49]: Previous
+                - button "Next" [ref=e50] [cursor=pointer]:
+                  - generic [ref=e52]: Next
+              - generic [ref=e54]:
+                - generic [ref=e56]: Online Move-In Special!
+                - generic [ref=e58]: 50% OFF
+                - list [ref=e59]:
+                  - listitem [ref=e60]:
+                    - generic [ref=e61]: 3 months
+                    - generic [ref=e62]: small/medium indoor units
+                  - listitem [ref=e63]:
+                    - generic [ref=e64]: 1 month
+                    - generic [ref=e65]: large indoor + all drive-up units
+                - generic [ref=e66]: Discount applied when you rent online. New customers only.
+              - generic [ref=e67]:
+                - generic [ref=e68]: "Serving nearby communities from our Macedonia location:"
+                - list [ref=e69]:
+                  - listitem [ref=e70]:
+                    - link "Twinsburg" [ref=e71] [cursor=pointer]:
+                      - /url: https://smartstorageohio.com/storage-units-twinsburg
+                    - text: ·
+                  - listitem [ref=e72]:
+                    - link "Hudson" [ref=e73] [cursor=pointer]:
+                      - /url: https://smartstorageohio.com/storage-units-hudson
+                    - text: ·
+                  - listitem [ref=e74]:
+                    - link "Northfield" [ref=e75] [cursor=pointer]:
+                      - /url: https://smartstorageohio.com/storage-units-northfield
+            - generic [ref=e76]:
+              - heading "Self Storage Units Near You" [level=1] [ref=e78]:
+                - strong [ref=e79]: Self Storage Units Near You
+              - heading "Smart Self Storage | Macedonia, Ohio" [level=2] [ref=e80]
+              - generic [ref=e81]:
+                - paragraph [ref=e82]:
+                  - text: Looking for
+                  - link "climate-controlled" [ref=e83] [cursor=pointer]:
+                    - /url: https://smartstorageohio.com/climate-controlled-storage
+                  - text: or
+                  - link "drive-up" [ref=e84] [cursor=pointer]:
+                    - /url: https://smartstorageohio.com/drive-up-storage
+                  - text: storage near you in Macedonia, OH? Smart Self Storage offers clean, secure indoor storage in a modern, family-owned facility.
+                - paragraph [ref=e85]: Facility Highlights
+                - list [ref=e86]:
+                  - listitem [ref=e87]:
+                    - text: Indoor climate-controlled storage for
+                    - link "household" [ref=e88] [cursor=pointer]:
+                      - /url: https://smartstorageohio.com/household-storage
+                    - text: "&"
+                    - link "business" [ref=e89] [cursor=pointer]:
+                      - /url: https://smartstorageohio.com/business-storage
+                    - text: items
+                  - listitem [ref=e90]: Secure, well-lit facility with keypad access & 24/7 HD cameras
+                  - listitem [ref=e91]: Brand-new modern layout designed for easy access and smooth traffic flow
+                  - listitem [ref=e92]: Family-owned with month-to-month rentals and a lock included
+              - generic [ref=e93]:
+                - generic [ref=e94]: ⚡
+                - strong [ref=e95]: Electric outlets available in select units
+                - generic [ref=e96]:
+                  - text: —
+                  - link "See details" [ref=e97] [cursor=pointer]:
+                    - /url: /storage-units-with-electric-outlets
+              - link "8231 Bavaria Dr. E. Macedonia, Ohio 44056" [ref=e100] [cursor=pointer]:
+                - /url: https://maps.app.goo.gl/hwzanQ5m3TnWBtpx6
+                - text: 8231 Bavaria Dr. E.
+                - text: Macedonia, Ohio 44056
+              - 'link "Call: (234) 200-8227" [ref=e102] [cursor=pointer]':
+                - /url: "tel:Call: (234) 200-8227"
+              - generic [ref=e103]:
+                - button "Phone Hours View Hours" [ref=e106] [cursor=pointer]:
+                  - generic [ref=e107]:
+                    - text: 
+                    - generic [ref=e108]: Phone Hours
+                    - generic [ref=e109]: View Hours
+                - button "Gate Access View Hours" [ref=e112] [cursor=pointer]:
+                  - generic [ref=e113]:
+                    - text: 
+                    - generic [ref=e114]: Gate Access
+                    - generic [ref=e115]: View Hours
+              - generic [ref=e117] [cursor=pointer]:
+                - generic [ref=e118]:
+                  - img [ref=e119]
+                  - img [ref=e121]
+                  - img [ref=e123]
+                  - img [ref=e125]
+                  - img [ref=e127]
+                - paragraph [ref=e130]: 55 Reviews
+              - text:      
+        - generic [ref=e134]:
+          - button "Sizes" [ref=e137] [cursor=pointer]: Sizes
+          - button "Type" [ref=e140] [cursor=pointer]: Type
+          - button "Reset filters" [ref=e142] [cursor=pointer]
+      - generic [ref=e143]:
+        - note "Move-in fee notice" [ref=e145]:
+          - strong [ref=e146]: "Note:"
+          - text: A
+          - strong [ref=e147]: $25
+          - text: one-time move-in (administrative) fee applies to all new rentals.
+        - table [ref=e149]:
+          - rowgroup [ref=e150]:
+            - row "5 x 5 storage image Indoor - Climate Controlled - Near Entry Door 5' WIDTH x 5' DEPTH  What Size Do I Need? 50% OFF 3 Months $35/month During Promo Period $70/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Dehumidified  4ft Wide Door  Near Entry Door Convenient Access  Indoor Climate Controlled" [ref=e151]:
+              - cell "5 x 5 storage image Indoor - Climate Controlled - Near Entry Door 5' WIDTH x 5' DEPTH  What Size Do I Need? 50% OFF 3 Months $35/month During Promo Period $70/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Dehumidified  4ft Wide Door  Near Entry Door Convenient Access  Indoor Climate Controlled" [ref=e152]:
+                - generic [ref=e154]:
+                  - generic [ref=e156]:
+                    - link "5 x 5 storage image" [ref=e158]:
+                      - /url: https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/unit_3d_images/smart-self-storage-ohio/unit_3d_222_696d9df96dc70.webp
+                      - img "5 x 5 storage image" [ref=e160]
+                    - generic [ref=e161]:
+                      - generic [ref=e162]: Indoor - Climate Controlled - Near Entry Door
+                      - heading "5' WIDTH x 5' DEPTH" [level=2] [ref=e163]:
+                        - generic [ref=e164]:
+                          - text: 5'
+                          - generic [ref=e165]: WIDTH
+                        - text: x
+                        - generic [ref=e166]:
+                          - text: 5'
+                          - generic [ref=e167]: DEPTH
+                      - generic [ref=e168]:
+                        - paragraph [ref=e169]:
+                          - generic [ref=e170]: 
+                          - link "What Size Do I Need?" [ref=e171] [cursor=pointer]:
+                            - /url: "#"
+                        - paragraph [ref=e172]:
+                          - generic [ref=e173]: 50% OFF 3 Months
+                  - generic [ref=e174]:
+                    - generic [ref=e175]:
+                      - generic [ref=e176]:
+                        - heading "$35/month" [level=3] [ref=e177]
+                        - generic [ref=e178]: During Promo Period
+                      - generic [ref=e179]:
+                        - heading "$70/month" [level=3] [ref=e180]
+                        - generic [ref=e181]: After Promo Period
+                      - paragraph [ref=e183]: Month to Month - No Long Term Commitments
+                    - generic [ref=e184]:
+                      - generic [ref=e186]:
+                        - link "rent" [ref=e188] [cursor=pointer]:
+                          - /url: https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road/step_four?location=1&unit=5464745&type=rent&con=5&is_sitelink=1&site_locations_id=61859&smart-self-storage-ohio
+                        - generic "Complete your rental now by signing the lease and making payment online today. Your unit will be secured for your selected move-in date." [ref=e189]:
+                          - generic [ref=e190]: Complete your rental today.
+                      - generic [ref=e192]:
+                        - generic [ref=e194] [cursor=pointer]: reserve
+                        - generic "We’ll hold this unit for you so you can finish the rental later online or in person. No payment is due today." [ref=e195]:
+                          - generic [ref=e196]: Hold this unit for later.
+                  - generic [ref=e198]:
+                    - generic [ref=e202]:
+                      - generic [ref=e204]: 
+                      - generic [ref=e206]: Dehumidified
+                    - generic [ref=e210]:
+                      - generic [ref=e212]: 
+                      - generic [ref=e214]: 4ft Wide Door
+                    - generic [ref=e218]:
+                      - generic [ref=e220]: 
+                      - generic [ref=e222]: Near Entry Door Convenient Access
+                    - generic [ref=e226]:
+                      - generic [ref=e228]: 
+                      - generic [ref=e230]: Indoor Climate Controlled
+            - row "10 x 4 storage image Indoor - Climate Controlled 10' WIDTH x 4' DEPTH  What Size Do I Need? 50% OFF 3 Months $40/month During Promo Period $80/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Dehumidified  Indoor Climate Controlled" [ref=e231]:
+              - cell "10 x 4 storage image Indoor - Climate Controlled 10' WIDTH x 4' DEPTH  What Size Do I Need? 50% OFF 3 Months $40/month During Promo Period $80/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Dehumidified  Indoor Climate Controlled" [ref=e232]:
+                - generic [ref=e234]:
+                  - generic [ref=e236]:
+                    - link "10 x 4 storage image" [ref=e238]:
+                      - /url: https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/unit_3d_images/smart-self-storage-ohio/unit_3d_222_69757fe01cb0b.webp
+                      - img "10 x 4 storage image" [ref=e240]
+                    - generic [ref=e241]:
+                      - generic [ref=e242]: Indoor - Climate Controlled
+                      - heading "10' WIDTH x 4' DEPTH" [level=2] [ref=e243]:
+                        - generic [ref=e244]:
+                          - text: 10'
+                          - generic [ref=e245]: WIDTH
+                        - text: x
+                        - generic [ref=e246]:
+                          - text: 4'
+                          - generic [ref=e247]: DEPTH
+                      - generic [ref=e248]:
+                        - paragraph [ref=e249]:
+                          - generic [ref=e250]: 
+                          - link "What Size Do I Need?" [ref=e251] [cursor=pointer]:
+                            - /url: "#"
+                        - paragraph [ref=e252]:
+                          - generic [ref=e253]: 50% OFF 3 Months
+                  - generic [ref=e254]:
+                    - generic [ref=e255]:
+                      - generic [ref=e256]:
+                        - heading "$40/month" [level=3] [ref=e257]
+                        - generic [ref=e258]: During Promo Period
+                      - generic [ref=e259]:
+                        - heading "$80/month" [level=3] [ref=e260]
+                        - generic [ref=e261]: After Promo Period
+                      - paragraph [ref=e263]: Month to Month - No Long Term Commitments
+                    - generic [ref=e264]:
+                      - generic [ref=e266]:
+                        - link "rent" [ref=e268] [cursor=pointer]:
+                          - /url: https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road/step_four?location=1&unit=5464825&type=rent&con=5&is_sitelink=1&site_locations_id=61859&smart-self-storage-ohio
+                        - generic "Complete your rental now by signing the lease and making payment online today. Your unit will be secured for your selected move-in date." [ref=e269]:
+                          - generic [ref=e270]: Complete your rental today.
+                      - generic [ref=e272]:
+                        - generic [ref=e274] [cursor=pointer]: reserve
+                        - generic "We’ll hold this unit for you so you can finish the rental later online or in person. No payment is due today." [ref=e275]:
+                          - generic [ref=e276]: Hold this unit for later.
+                  - generic [ref=e278]:
+                    - generic [ref=e282]:
+                      - generic [ref=e284]: 
+                      - generic [ref=e286]: Dehumidified
+                    - generic [ref=e290]:
+                      - generic [ref=e292]: 
+                      - generic [ref=e294]: Indoor Climate Controlled
+            - row "5 x 10 storage image Indoor - Climate Controlled 5' WIDTH x 10' DEPTH  What Size Do I Need? 50% OFF 6 Months $43/month During Promo Period $85/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Dehumidified  4ft Wide Door  Indoor Climate Controlled" [ref=e295]:
+              - cell "5 x 10 storage image Indoor - Climate Controlled 5' WIDTH x 10' DEPTH  What Size Do I Need? 50% OFF 6 Months $43/month During Promo Period $85/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Dehumidified  4ft Wide Door  Indoor Climate Controlled" [ref=e296]:
+                - generic [ref=e298]:
+                  - generic [ref=e300]:
+                    - link "5 x 10 storage image" [ref=e302]:
+                      - /url: https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/unit_3d_images/smart-self-storage-ohio/unit_3d_222_69757fe01cb0b.webp
+                      - img "5 x 10 storage image" [ref=e304]
+                    - generic [ref=e305]:
+                      - generic [ref=e306]: Indoor - Climate Controlled
+                      - heading "5' WIDTH x 10' DEPTH" [level=2] [ref=e307]:
+                        - generic [ref=e308]:
+                          - text: 5'
+                          - generic [ref=e309]: WIDTH
+                        - text: x
+                        - generic [ref=e310]:
+                          - text: 10'
+                          - generic [ref=e311]: DEPTH
+                      - generic [ref=e312]:
+                        - paragraph [ref=e313]:
+                          - generic [ref=e314]: 
+                          - link "What Size Do I Need?" [ref=e315] [cursor=pointer]:
+                            - /url: "#"
+                        - paragraph [ref=e316]:
+                          - generic [ref=e317]: 50% OFF 6 Months
+                  - generic [ref=e318]:
+                    - generic [ref=e319]:
+                      - generic [ref=e320]:
+                        - heading "$43/month" [level=3] [ref=e321]
+                        - generic [ref=e322]: During Promo Period
+                      - generic [ref=e323]:
+                        - heading "$85/month" [level=3] [ref=e324]
+                        - generic [ref=e325]: After Promo Period
+                      - paragraph [ref=e327]: Month to Month - No Long Term Commitments
+                    - generic [ref=e328]:
+                      - generic [ref=e330]:
+                        - link "rent" [ref=e332] [cursor=pointer]:
+                          - /url: https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road/step_four?location=1&unit=5464775&type=rent&con=16&is_sitelink=1&site_locations_id=61859&smart-self-storage-ohio
+                        - generic "Complete your rental now by signing the lease and making payment online today. Your unit will be secured for your selected move-in date." [ref=e333]:
+                          - generic [ref=e334]: Complete your rental today.
+                      - generic [ref=e336]:
+                        - generic [ref=e338] [cursor=pointer]: reserve
+                        - generic "We’ll hold this unit for you so you can finish the rental later online or in person. No payment is due today." [ref=e339]:
+                          - generic [ref=e340]: Hold this unit for later.
+                  - generic [ref=e342]:
+                    - generic [ref=e346]:
+                      - generic [ref=e348]: 
+                      - generic [ref=e350]: Dehumidified
+                    - generic [ref=e354]:
+                      - generic [ref=e356]: 
+                      - generic [ref=e358]: 4ft Wide Door
+                    - generic [ref=e362]:
+                      - generic [ref=e364]: 
+                      - generic [ref=e366]: Indoor Climate Controlled
+            - row "10 x 5 storage image Indoor - Climate Controlled 10' WIDTH x 5' DEPTH  What Size Do I Need? 50% OFF 3 Months $45/month During Promo Period $90/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Dehumidified  Indoor Climate Controlled  9ft Wide Door" [ref=e367]:
+              - cell "10 x 5 storage image Indoor - Climate Controlled 10' WIDTH x 5' DEPTH  What Size Do I Need? 50% OFF 3 Months $45/month During Promo Period $90/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Dehumidified  Indoor Climate Controlled  9ft Wide Door" [ref=e368]:
+                - generic [ref=e370]:
+                  - generic [ref=e372]:
+                    - link "10 x 5 storage image" [ref=e374]:
+                      - /url: https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/unit_3d_images/smart-self-storage-ohio/unit_3d_222_69757fe01cb0b.webp
+                      - img "10 x 5 storage image" [ref=e376]
+                    - generic [ref=e377]:
+                      - generic [ref=e378]: Indoor - Climate Controlled
+                      - heading "10' WIDTH x 5' DEPTH" [level=2] [ref=e379]:
+                        - generic [ref=e380]:
+                          - text: 10'
+                          - generic [ref=e381]: WIDTH
+                        - text: x
+                        - generic [ref=e382]:
+                          - text: 5'
+                          - generic [ref=e383]: DEPTH
+                      - generic [ref=e384]:
+                        - paragraph [ref=e385]:
+                          - generic [ref=e386]: 
+                          - link "What Size Do I Need?" [ref=e387] [cursor=pointer]:
+                            - /url: "#"
+                        - paragraph [ref=e388]:
+                          - generic [ref=e389]: 50% OFF 3 Months
+                  - generic [ref=e390]:
+                    - generic [ref=e391]:
+                      - generic [ref=e392]:
+                        - heading "$45/month" [level=3] [ref=e393]
+                        - generic [ref=e394]: During Promo Period
+                      - generic [ref=e395]:
+                        - heading "$90/month" [level=3] [ref=e396]
+                        - generic [ref=e397]: After Promo Period
+                      - paragraph [ref=e399]: Month to Month - No Long Term Commitments
+                    - generic [ref=e400]:
+                      - generic [ref=e402]:
+                        - link "rent" [ref=e404] [cursor=pointer]:
+                          - /url: https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road/step_four?location=1&unit=5464765&type=rent&con=5&is_sitelink=1&site_locations_id=61859&smart-self-storage-ohio
+                        - generic "Complete your rental now by signing the lease and making payment online today. Your unit will be secured for your selected move-in date." [ref=e405]:
+                          - generic [ref=e406]: Complete your rental today.
+                      - generic [ref=e408]:
+                        - generic [ref=e410] [cursor=pointer]: reserve
+                        - generic "We’ll hold this unit for you so you can finish the rental later online or in person. No payment is due today." [ref=e411]:
+                          - generic [ref=e412]: Hold this unit for later.
+                  - generic [ref=e414]:
+                    - generic [ref=e418]:
+                      - generic [ref=e420]: 
+                      - generic [ref=e422]: Dehumidified
+                    - generic [ref=e426]:
+                      - generic [ref=e428]: 
+                      - generic [ref=e430]: Indoor Climate Controlled
+                    - generic [ref=e434]:
+                      - generic [ref=e436]: 
+                      - generic [ref=e438]: 9ft Wide Door
+            - row "5 x 10 storage image Indoor - Climate Controlled - SMART UNIT 5' WIDTH x 10' DEPTH  What Size Do I Need? 50% OFF 6 Months $48/month During Promo Period $95/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Dehumidified  24/7 Motion Detection Alerts - SMART UNIT  4ft Wide Door  Indoor Climate Controlled" [ref=e439]:
+              - cell "5 x 10 storage image Indoor - Climate Controlled - SMART UNIT 5' WIDTH x 10' DEPTH  What Size Do I Need? 50% OFF 6 Months $48/month During Promo Period $95/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Dehumidified  24/7 Motion Detection Alerts - SMART UNIT  4ft Wide Door  Indoor Climate Controlled" [ref=e440]:
+                - generic [ref=e442]:
+                  - generic [ref=e444]:
+                    - link "5 x 10 storage image" [ref=e446]:
+                      - /url: https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/unit_3d_images/smart-self-storage-ohio/unit_3d_222_69757fe01cb0b.webp
+                      - img "5 x 10 storage image" [ref=e448]
+                    - generic [ref=e449]:
+                      - generic [ref=e450]:
+                        - text: Indoor - Climate Controlled -
+                        - link "SMART UNIT" [ref=e451] [cursor=pointer]:
+                          - /url: https://smartstorageohio.com/smart-storage-units
+                      - heading "5' WIDTH x 10' DEPTH" [level=2] [ref=e452]:
+                        - generic [ref=e453]:
+                          - text: 5'
+                          - generic [ref=e454]: WIDTH
+                        - text: x
+                        - generic [ref=e455]:
+                          - text: 10'
+                          - generic [ref=e456]: DEPTH
+                      - generic [ref=e457]:
+                        - paragraph [ref=e458]:
+                          - generic [ref=e459]: 
+                          - link "What Size Do I Need?" [ref=e460] [cursor=pointer]:
+                            - /url: "#"
+                        - paragraph [ref=e461]:
+                          - generic [ref=e462]: 50% OFF 6 Months
+                  - generic [ref=e463]:
+                    - generic [ref=e464]:
+                      - generic [ref=e465]:
+                        - heading "$48/month" [level=3] [ref=e466]
+                        - generic [ref=e467]: During Promo Period
+                      - generic [ref=e468]:
+                        - heading "$95/month" [level=3] [ref=e469]
+                        - generic [ref=e470]: After Promo Period
+                      - paragraph [ref=e472]: Month to Month - No Long Term Commitments
+                    - generic [ref=e473]:
+                      - generic [ref=e475]:
+                        - link "rent" [ref=e477] [cursor=pointer]:
+                          - /url: https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road/step_four?location=1&unit=5464769&type=rent&con=16&is_sitelink=1&site_locations_id=61859&smart-self-storage-ohio
+                        - generic "Complete your rental now by signing the lease and making payment online today. Your unit will be secured for your selected move-in date." [ref=e478]:
+                          - generic [ref=e479]: Complete your rental today.
+                      - generic [ref=e481]:
+                        - generic [ref=e483] [cursor=pointer]: reserve
+                        - generic "We’ll hold this unit for you so you can finish the rental later online or in person. No payment is due today." [ref=e484]:
+                          - generic [ref=e485]: Hold this unit for later.
+                  - generic [ref=e487]:
+                    - generic [ref=e491]:
+                      - generic [ref=e493]: 
+                      - generic [ref=e495]: Dehumidified
+                    - generic [ref=e499]:
+                      - generic [ref=e501]: 
+                      - generic [ref=e503]:
+                        - text: 24/7 Motion Detection Alerts -
+                        - link "SMART UNIT" [ref=e504] [cursor=pointer]:
+                          - /url: https://smartstorageohio.com/smart-storage-units
+                    - generic [ref=e508]:
+                      - generic [ref=e510]: 
+                      - generic [ref=e512]: 4ft Wide Door
+                    - generic [ref=e516]:
+                      - generic [ref=e518]: 
+                      - generic [ref=e520]: Indoor Climate Controlled
+            - row "10 x 5 storage image Indoor - Climate Controlled - Near Entry Door 10' WIDTH x 5' DEPTH  What Size Do I Need? 50% OFF 3 Months $48/month During Promo Period $95/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Dehumidified  Near Entry Door Convenient Access  Indoor Climate Controlled  9ft Wide Door" [ref=e521]:
+              - cell "10 x 5 storage image Indoor - Climate Controlled - Near Entry Door 10' WIDTH x 5' DEPTH  What Size Do I Need? 50% OFF 3 Months $48/month During Promo Period $95/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Dehumidified  Near Entry Door Convenient Access  Indoor Climate Controlled  9ft Wide Door" [ref=e522]:
+                - generic [ref=e524]:
+                  - generic [ref=e526]:
+                    - link "10 x 5 storage image" [ref=e528]:
+                      - /url: https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/unit_3d_images/smart-self-storage-ohio/unit_3d_222_69757fe01cb0b.webp
+                      - img "10 x 5 storage image" [ref=e530]
+                    - generic [ref=e531]:
+                      - generic [ref=e532]: Indoor - Climate Controlled - Near Entry Door
+                      - heading "10' WIDTH x 5' DEPTH" [level=2] [ref=e533]:
+                        - generic [ref=e534]:
+                          - text: 10'
+                          - generic [ref=e535]: WIDTH
+                        - text: x
+                        - generic [ref=e536]:
+                          - text: 5'
+                          - generic [ref=e537]: DEPTH
+                      - generic [ref=e538]:
+                        - paragraph [ref=e539]:
+                          - generic [ref=e540]: 
+                          - link "What Size Do I Need?" [ref=e541] [cursor=pointer]:
+                            - /url: "#"
+                        - paragraph [ref=e542]:
+                          - generic [ref=e543]: 50% OFF 3 Months
+                  - generic [ref=e544]:
+                    - generic [ref=e545]:
+                      - generic [ref=e546]:
+                        - heading "$48/month" [level=3] [ref=e547]
+                        - generic [ref=e548]: During Promo Period
+                      - generic [ref=e549]:
+                        - heading "$95/month" [level=3] [ref=e550]
+                        - generic [ref=e551]: After Promo Period
+                      - paragraph [ref=e553]: Month to Month - No Long Term Commitments
+                    - generic [ref=e554]:
+                      - generic [ref=e556]:
+                        - link "rent" [ref=e558] [cursor=pointer]:
+                          - /url: https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road/step_four?location=1&unit=5464748&type=rent&con=5&is_sitelink=1&site_locations_id=61859&smart-self-storage-ohio
+                        - generic "Complete your rental now by signing the lease and making payment online today. Your unit will be secured for your selected move-in date." [ref=e559]:
+                          - generic [ref=e560]: Complete your rental today.
+                      - generic [ref=e562]:
+                        - generic [ref=e564] [cursor=pointer]: reserve
+                        - generic "We’ll hold this unit for you so you can finish the rental later online or in person. No payment is due today." [ref=e565]:
+                          - generic [ref=e566]: Hold this unit for later.
+                  - generic [ref=e568]:
+                    - generic [ref=e572]:
+                      - generic [ref=e574]: 
+                      - generic [ref=e576]: Dehumidified
+                    - generic [ref=e580]:
+                      - generic [ref=e582]: 
+                      - generic [ref=e584]: Near Entry Door Convenient Access
+                    - generic [ref=e588]:
+                      - generic [ref=e590]: 
+                      - generic [ref=e592]: Indoor Climate Controlled
+                    - generic [ref=e596]:
+                      - generic [ref=e598]: 
+                      - generic [ref=e600]: 9ft Wide Door
+            - row "10 x 10 storage image Drive Up - Non-Climate Controlled 10' WIDTH x 10' DEPTH  What Size Do I Need? 50% OFF 1st Month $63/month During Promo Period $125/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Drive Up Access  9ft Wide Door" [ref=e601]:
+              - cell "10 x 10 storage image Drive Up - Non-Climate Controlled 10' WIDTH x 10' DEPTH  What Size Do I Need? 50% OFF 1st Month $63/month During Promo Period $125/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Drive Up Access  9ft Wide Door" [ref=e602]:
+                - generic [ref=e604]:
+                  - generic [ref=e606]:
+                    - link "10 x 10 storage image" [ref=e608]:
+                      - /url: https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/unit_3d_images/smart-self-storage-ohio/unit_3d_222_696d9dea4bade.webp
+                      - img "10 x 10 storage image" [ref=e610]
+                    - generic [ref=e611]:
+                      - generic [ref=e612]: Drive Up - Non-Climate Controlled
+                      - heading "10' WIDTH x 10' DEPTH" [level=2] [ref=e613]:
+                        - generic [ref=e614]:
+                          - text: 10'
+                          - generic [ref=e615]: WIDTH
+                        - text: x
+                        - generic [ref=e616]:
+                          - text: 10'
+                          - generic [ref=e617]: DEPTH
+                      - generic [ref=e618]:
+                        - paragraph [ref=e619]:
+                          - generic [ref=e620]: 
+                          - link "What Size Do I Need?" [ref=e621] [cursor=pointer]:
+                            - /url: "#"
+                        - paragraph [ref=e622]:
+                          - generic [ref=e623]: 50% OFF 1st Month
+                  - generic [ref=e624]:
+                    - generic [ref=e625]:
+                      - generic [ref=e626]:
+                        - heading "$63/month" [level=3] [ref=e627]
+                        - generic [ref=e628]: During Promo Period
+                      - generic [ref=e629]:
+                        - heading "$125/month" [level=3] [ref=e630]
+                        - generic [ref=e631]: After Promo Period
+                      - paragraph [ref=e633]: Month to Month - No Long Term Commitments
+                    - generic [ref=e634]:
+                      - generic [ref=e636]:
+                        - link "rent" [ref=e638] [cursor=pointer]:
+                          - /url: https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road/step_four?location=1&unit=5526585&type=rent&con=12&is_sitelink=1&site_locations_id=61859&smart-self-storage-ohio
+                        - generic "Complete your rental now by signing the lease and making payment online today. Your unit will be secured for your selected move-in date." [ref=e639]:
+                          - generic [ref=e640]: Complete your rental today.
+                      - generic [ref=e642]:
+                        - generic [ref=e644] [cursor=pointer]: reserve
+                        - generic "We’ll hold this unit for you so you can finish the rental later online or in person. No payment is due today." [ref=e645]:
+                          - generic [ref=e646]: Hold this unit for later.
+                  - generic [ref=e648]:
+                    - generic [ref=e652]:
+                      - generic [ref=e654]: 
+                      - generic [ref=e656]: Drive Up Access
+                    - generic [ref=e660]:
+                      - generic [ref=e662]: 
+                      - generic [ref=e664]: 9ft Wide Door
+            - row "10 x 10 storage image Indoor - Climate Controlled 10' WIDTH x 10' DEPTH  What Size Do I Need? 50% OFF 3 Months $70/month During Promo Period $140/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Dehumidified  Indoor Climate Controlled  9ft Wide Door" [ref=e665]:
+              - cell "10 x 10 storage image Indoor - Climate Controlled 10' WIDTH x 10' DEPTH  What Size Do I Need? 50% OFF 3 Months $70/month During Promo Period $140/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Dehumidified  Indoor Climate Controlled  9ft Wide Door" [ref=e666]:
+                - generic [ref=e668]:
+                  - generic [ref=e670]:
+                    - link "10 x 10 storage image" [ref=e672]:
+                      - /url: https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/unit_3d_images/smart-self-storage-ohio/unit_3d_222_696d9dea4bade.webp
+                      - img "10 x 10 storage image" [ref=e674]
+                    - generic [ref=e675]:
+                      - generic [ref=e676]: Indoor - Climate Controlled
+                      - heading "10' WIDTH x 10' DEPTH" [level=2] [ref=e677]:
+                        - generic [ref=e678]:
+                          - text: 10'
+                          - generic [ref=e679]: WIDTH
+                        - text: x
+                        - generic [ref=e680]:
+                          - text: 10'
+                          - generic [ref=e681]: DEPTH
+                      - generic [ref=e682]:
+                        - paragraph [ref=e683]:
+                          - generic [ref=e684]: 
+                          - link "What Size Do I Need?" [ref=e685] [cursor=pointer]:
+                            - /url: "#"
+                        - paragraph [ref=e686]:
+                          - generic [ref=e687]: 50% OFF 3 Months
+                  - generic [ref=e688]:
+                    - generic [ref=e689]:
+                      - generic [ref=e690]:
+                        - heading "$70/month" [level=3] [ref=e691]
+                        - generic [ref=e692]: During Promo Period
+                      - generic [ref=e693]:
+                        - heading "$140/month" [level=3] [ref=e694]
+                        - generic [ref=e695]: After Promo Period
+                      - paragraph [ref=e697]: Month to Month - No Long Term Commitments
+                    - generic [ref=e698]:
+                      - generic [ref=e700]:
+                        - link "rent" [ref=e702] [cursor=pointer]:
+                          - /url: https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road/step_four?location=1&unit=5464728&type=rent&con=5&is_sitelink=1&site_locations_id=61859&smart-self-storage-ohio
+                        - generic "Complete your rental now by signing the lease and making payment online today. Your unit will be secured for your selected move-in date." [ref=e703]:
+                          - generic [ref=e704]: Complete your rental today.
+                      - generic [ref=e706]:
+                        - generic [ref=e708] [cursor=pointer]: reserve
+                        - generic "We’ll hold this unit for you so you can finish the rental later online or in person. No payment is due today." [ref=e709]:
+                          - generic [ref=e710]: Hold this unit for later.
+                  - generic [ref=e712]:
+                    - generic [ref=e716]:
+                      - generic [ref=e718]: 
+                      - generic [ref=e720]: Dehumidified
+                    - generic [ref=e724]:
+                      - generic [ref=e726]: 
+                      - generic [ref=e728]: Indoor Climate Controlled
+                    - generic [ref=e732]:
+                      - generic [ref=e734]: 
+                      - generic [ref=e736]: 9ft Wide Door
+            - row "10 x 10 storage image Indoor - Climate Controlled - SMART UNIT 10' WIDTH x 10' DEPTH  What Size Do I Need? 50% OFF 3 Months $76/month During Promo Period $152/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Dehumidified  24/7 Motion Detection Alerts - SMART UNIT  Near Entry Door Convenient Access  Indoor Climate Controlled  9ft Wide Door" [ref=e737]:
+              - cell "10 x 10 storage image Indoor - Climate Controlled - SMART UNIT 10' WIDTH x 10' DEPTH  What Size Do I Need? 50% OFF 3 Months $76/month During Promo Period $152/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Dehumidified  24/7 Motion Detection Alerts - SMART UNIT  Near Entry Door Convenient Access  Indoor Climate Controlled  9ft Wide Door" [ref=e738]:
+                - generic [ref=e740]:
+                  - generic [ref=e742]:
+                    - link "10 x 10 storage image" [ref=e744]:
+                      - /url: https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/unit_3d_images/smart-self-storage-ohio/unit_3d_222_69bed97e4ce35.webp
+                      - img "10 x 10 storage image" [ref=e746]
+                    - generic [ref=e747]:
+                      - generic [ref=e748]:
+                        - text: Indoor - Climate Controlled -
+                        - link "SMART UNIT" [ref=e749] [cursor=pointer]:
+                          - /url: https://smartstorageohio.com/smart-storage-units
+                      - heading "10' WIDTH x 10' DEPTH" [level=2] [ref=e750]:
+                        - generic [ref=e751]:
+                          - text: 10'
+                          - generic [ref=e752]: WIDTH
+                        - text: x
+                        - generic [ref=e753]:
+                          - text: 10'
+                          - generic [ref=e754]: DEPTH
+                      - generic [ref=e755]:
+                        - paragraph [ref=e756]:
+                          - generic [ref=e757]: 
+                          - link "What Size Do I Need?" [ref=e758] [cursor=pointer]:
+                            - /url: "#"
+                        - paragraph [ref=e759]:
+                          - generic [ref=e760]: 50% OFF 3 Months
+                  - generic [ref=e761]:
+                    - generic [ref=e762]:
+                      - generic [ref=e763]:
+                        - heading "$76/month" [level=3] [ref=e764]
+                        - generic [ref=e765]: During Promo Period
+                      - generic [ref=e766]:
+                        - heading "$152/month" [level=3] [ref=e767]
+                        - generic [ref=e768]: After Promo Period
+                      - paragraph [ref=e770]: Month to Month - No Long Term Commitments
+                    - generic [ref=e771]:
+                      - generic [ref=e773]:
+                        - link "rent" [ref=e775] [cursor=pointer]:
+                          - /url: https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road/step_four?location=1&unit=5464812&type=rent&con=5&is_sitelink=1&site_locations_id=61859&smart-self-storage-ohio
+                        - generic "Complete your rental now by signing the lease and making payment online today. Your unit will be secured for your selected move-in date." [ref=e776]:
+                          - generic [ref=e777]: Complete your rental today.
+                      - generic [ref=e779]:
+                        - generic [ref=e781] [cursor=pointer]: reserve
+                        - generic "We’ll hold this unit for you so you can finish the rental later online or in person. No payment is due today." [ref=e782]:
+                          - generic [ref=e783]: Hold this unit for later.
+                  - generic [ref=e785]:
+                    - generic [ref=e789]:
+                      - generic [ref=e791]: 
+                      - generic [ref=e793]: Dehumidified
+                    - generic [ref=e797]:
+                      - generic [ref=e799]: 
+                      - generic [ref=e801]:
+                        - text: 24/7 Motion Detection Alerts -
+                        - link "SMART UNIT" [ref=e802] [cursor=pointer]:
+                          - /url: https://smartstorageohio.com/smart-storage-units
+                    - generic [ref=e806]:
+                      - generic [ref=e808]: 
+                      - generic [ref=e810]: Near Entry Door Convenient Access
+                    - generic [ref=e814]:
+                      - generic [ref=e816]: 
+                      - generic [ref=e818]: Indoor Climate Controlled
+                    - generic [ref=e822]:
+                      - generic [ref=e824]: 
+                      - generic [ref=e826]: 9ft Wide Door
+            - row "10 x 15 storage image Indoor - Climate Controlled Corner Unit 4ft Door 10' WIDTH x 15' DEPTH  What Size Do I Need? 50% OFF 1st Month $80/month During Promo Period $160/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Dehumidified  4ft Wide Door  Indoor Climate Controlled" [ref=e827]:
+              - cell "10 x 15 storage image Indoor - Climate Controlled Corner Unit 4ft Door 10' WIDTH x 15' DEPTH  What Size Do I Need? 50% OFF 1st Month $80/month During Promo Period $160/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Dehumidified  4ft Wide Door  Indoor Climate Controlled" [ref=e828]:
+                - generic [ref=e830]:
+                  - generic [ref=e832]:
+                    - link "10 x 15 storage image" [ref=e834]:
+                      - /url: https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/unit_3d_images/smart-self-storage-ohio/unit_3d_222_696d9dcdaa562.webp
+                      - img "10 x 15 storage image" [ref=e836]
+                    - generic [ref=e837]:
+                      - generic [ref=e838]: Indoor - Climate Controlled Corner Unit 4ft Door
+                      - heading "10' WIDTH x 15' DEPTH" [level=2] [ref=e839]:
+                        - generic [ref=e840]:
+                          - text: 10'
+                          - generic [ref=e841]: WIDTH
+                        - text: x
+                        - generic [ref=e842]:
+                          - text: 15'
+                          - generic [ref=e843]: DEPTH
+                      - generic [ref=e844]:
+                        - paragraph [ref=e845]:
+                          - generic [ref=e846]: 
+                          - link "What Size Do I Need?" [ref=e847] [cursor=pointer]:
+                            - /url: "#"
+                        - paragraph [ref=e848]:
+                          - generic [ref=e849]: 50% OFF 1st Month
+                  - generic [ref=e850]:
+                    - generic [ref=e851]:
+                      - generic [ref=e852]:
+                        - heading "$80/month" [level=3] [ref=e853]
+                        - generic [ref=e854]: During Promo Period
+                      - generic [ref=e855]:
+                        - heading "$160/month" [level=3] [ref=e856]
+                        - generic [ref=e857]: After Promo Period
+                      - paragraph [ref=e859]: Month to Month - No Long Term Commitments
+                    - generic [ref=e860]:
+                      - generic [ref=e862]:
+                        - link "rent" [ref=e864] [cursor=pointer]:
+                          - /url: https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road/step_four?location=1&unit=5639107&type=rent&con=12&is_sitelink=1&site_locations_id=61859&smart-self-storage-ohio
+                        - generic "Complete your rental now by signing the lease and making payment online today. Your unit will be secured for your selected move-in date." [ref=e865]:
+                          - generic [ref=e866]: Complete your rental today.
+                      - generic [ref=e868]:
+                        - generic [ref=e870] [cursor=pointer]: reserve
+                        - generic "We’ll hold this unit for you so you can finish the rental later online or in person. No payment is due today." [ref=e871]:
+                          - generic [ref=e872]: Hold this unit for later.
+                  - generic [ref=e874]:
+                    - generic [ref=e878]:
+                      - generic [ref=e880]: 
+                      - generic [ref=e882]: Dehumidified
+                    - generic [ref=e886]:
+                      - generic [ref=e888]: 
+                      - generic [ref=e890]: 4ft Wide Door
+                    - generic [ref=e894]:
+                      - generic [ref=e896]: 
+                      - generic [ref=e898]: Indoor Climate Controlled
+            - row "10 x 15 storage image Indoor - Climate Controlled - Near Entry Door 10' WIDTH x 15' DEPTH  What Size Do I Need? 50% OFF 1st Month $89/month During Promo Period $178/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Dehumidified  Near Entry Door Convenient Access  Indoor Climate Controlled  9ft Wide Door" [ref=e899]:
+              - cell "10 x 15 storage image Indoor - Climate Controlled - Near Entry Door 10' WIDTH x 15' DEPTH  What Size Do I Need? 50% OFF 1st Month $89/month During Promo Period $178/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Dehumidified  Near Entry Door Convenient Access  Indoor Climate Controlled  9ft Wide Door" [ref=e900]:
+                - generic [ref=e902]:
+                  - generic [ref=e904]:
+                    - link "10 x 15 storage image" [ref=e906]:
+                      - /url: https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/unit_3d_images/smart-self-storage-ohio/unit_3d_222_696d9dcdaa562.webp
+                      - img "10 x 15 storage image" [ref=e908]
+                    - generic [ref=e909]:
+                      - generic [ref=e910]: Indoor - Climate Controlled - Near Entry Door
+                      - heading "10' WIDTH x 15' DEPTH" [level=2] [ref=e911]:
+                        - generic [ref=e912]:
+                          - text: 10'
+                          - generic [ref=e913]: WIDTH
+                        - text: x
+                        - generic [ref=e914]:
+                          - text: 15'
+                          - generic [ref=e915]: DEPTH
+                      - generic [ref=e916]:
+                        - paragraph [ref=e917]:
+                          - generic [ref=e918]: 
+                          - link "What Size Do I Need?" [ref=e919] [cursor=pointer]:
+                            - /url: "#"
+                        - paragraph [ref=e920]:
+                          - generic [ref=e921]: 50% OFF 1st Month
+                  - generic [ref=e922]:
+                    - generic [ref=e923]:
+                      - generic [ref=e924]:
+                        - heading "$89/month" [level=3] [ref=e925]
+                        - generic [ref=e926]: During Promo Period
+                      - generic [ref=e927]:
+                        - heading "$178/month" [level=3] [ref=e928]
+                        - generic [ref=e929]: After Promo Period
+                      - paragraph [ref=e931]: Month to Month - No Long Term Commitments
+                    - generic [ref=e932]:
+                      - generic [ref=e934]:
+                        - link "rent" [ref=e936] [cursor=pointer]:
+                          - /url: https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road/step_four?location=1&unit=5639108&type=rent&con=12&is_sitelink=1&site_locations_id=61859&smart-self-storage-ohio
+                        - generic "Complete your rental now by signing the lease and making payment online today. Your unit will be secured for your selected move-in date." [ref=e937]:
+                          - generic [ref=e938]: Complete your rental today.
+                      - generic [ref=e940]:
+                        - generic [ref=e942] [cursor=pointer]: reserve
+                        - generic "We’ll hold this unit for you so you can finish the rental later online or in person. No payment is due today." [ref=e943]:
+                          - generic [ref=e944]: Hold this unit for later.
+                  - generic [ref=e946]:
+                    - generic [ref=e950]:
+                      - generic [ref=e952]: 
+                      - generic [ref=e954]: Dehumidified
+                    - generic [ref=e958]:
+                      - generic [ref=e960]: 
+                      - generic [ref=e962]: Near Entry Door Convenient Access
+                    - generic [ref=e966]:
+                      - generic [ref=e968]: 
+                      - generic [ref=e970]: Indoor Climate Controlled
+                    - generic [ref=e974]:
+                      - generic [ref=e976]: 
+                      - generic [ref=e978]: 9ft Wide Door
+            - row "10 x 20 storage image Drive Up - Non-Climate Controlled 10' WIDTH x 20' DEPTH  What Size Do I Need? 50% OFF 1st Month $85/month During Promo Period $170/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Drive Up Access  9ft Wide Door" [ref=e979]:
+              - cell "10 x 20 storage image Drive Up - Non-Climate Controlled 10' WIDTH x 20' DEPTH  What Size Do I Need? 50% OFF 1st Month $85/month During Promo Period $170/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Drive Up Access  9ft Wide Door" [ref=e980]:
+                - generic [ref=e982]:
+                  - generic [ref=e984]:
+                    - link "10 x 20 storage image" [ref=e986]:
+                      - /url: https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/unit_3d_images/smart-self-storage-ohio/unit_3d_222_696d9d9b5af65.webp
+                      - img "10 x 20 storage image" [ref=e988]
+                    - generic [ref=e989]:
+                      - generic [ref=e990]: Drive Up - Non-Climate Controlled
+                      - heading "10' WIDTH x 20' DEPTH" [level=2] [ref=e991]:
+                        - generic [ref=e992]:
+                          - text: 10'
+                          - generic [ref=e993]: WIDTH
+                        - text: x
+                        - generic [ref=e994]:
+                          - text: 20'
+                          - generic [ref=e995]: DEPTH
+                      - generic [ref=e996]:
+                        - paragraph [ref=e997]:
+                          - generic [ref=e998]: 
+                          - link "What Size Do I Need?" [ref=e999] [cursor=pointer]:
+                            - /url: "#"
+                        - paragraph [ref=e1000]:
+                          - generic [ref=e1001]: 50% OFF 1st Month
+                  - generic [ref=e1002]:
+                    - generic [ref=e1003]:
+                      - generic [ref=e1004]:
+                        - heading "$85/month" [level=3] [ref=e1005]
+                        - generic [ref=e1006]: During Promo Period
+                      - generic [ref=e1007]:
+                        - heading "$170/month" [level=3] [ref=e1008]
+                        - generic [ref=e1009]: After Promo Period
+                      - paragraph [ref=e1011]: Month to Month - No Long Term Commitments
+                    - generic [ref=e1012]:
+                      - generic [ref=e1014]:
+                        - link "rent" [ref=e1016] [cursor=pointer]:
+                          - /url: https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road/step_four?location=1&unit=5464655&type=rent&con=12&is_sitelink=1&site_locations_id=61859&smart-self-storage-ohio
+                        - generic "Complete your rental now by signing the lease and making payment online today. Your unit will be secured for your selected move-in date." [ref=e1017]:
+                          - generic [ref=e1018]: Complete your rental today.
+                      - generic [ref=e1020]:
+                        - generic [ref=e1022] [cursor=pointer]: reserve
+                        - generic "We’ll hold this unit for you so you can finish the rental later online or in person. No payment is due today." [ref=e1023]:
+                          - generic [ref=e1024]: Hold this unit for later.
+                  - generic [ref=e1026]:
+                    - generic [ref=e1030]:
+                      - generic [ref=e1032]: 
+                      - generic [ref=e1034]: Drive Up Access
+                    - generic [ref=e1038]:
+                      - generic [ref=e1040]: 
+                      - generic [ref=e1042]: 9ft Wide Door
+            - row "10 x 20 storage image Drive Up - Non-Climate Controlled - SMART UNIT 10' WIDTH x 20' DEPTH  What Size Do I Need? 50% OFF 1st Month $91/month During Promo Period $182/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Drive Up Access  9ft Wide Door  24/7 Motion Detection Alerts - SMART UNIT" [ref=e1043]:
+              - cell "10 x 20 storage image Drive Up - Non-Climate Controlled - SMART UNIT 10' WIDTH x 20' DEPTH  What Size Do I Need? 50% OFF 1st Month $91/month During Promo Period $182/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Drive Up Access  9ft Wide Door  24/7 Motion Detection Alerts - SMART UNIT" [ref=e1044]:
+                - generic [ref=e1046]:
+                  - generic [ref=e1048]:
+                    - link "10 x 20 storage image" [ref=e1050]:
+                      - /url: https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/unit_3d_images/smart-self-storage-ohio/unit_3d_222_696d9d9b5af65.webp
+                      - img "10 x 20 storage image" [ref=e1052]
+                    - generic [ref=e1053]:
+                      - generic [ref=e1054]:
+                        - text: Drive Up - Non-Climate Controlled -
+                        - link "SMART UNIT" [ref=e1055] [cursor=pointer]:
+                          - /url: https://smartstorageohio.com/smart-storage-units
+                      - heading "10' WIDTH x 20' DEPTH" [level=2] [ref=e1056]:
+                        - generic [ref=e1057]:
+                          - text: 10'
+                          - generic [ref=e1058]: WIDTH
+                        - text: x
+                        - generic [ref=e1059]:
+                          - text: 20'
+                          - generic [ref=e1060]: DEPTH
+                      - generic [ref=e1061]:
+                        - paragraph [ref=e1062]:
+                          - generic [ref=e1063]: 
+                          - link "What Size Do I Need?" [ref=e1064] [cursor=pointer]:
+                            - /url: "#"
+                        - paragraph [ref=e1065]:
+                          - generic [ref=e1066]: 50% OFF 1st Month
+                  - generic [ref=e1067]:
+                    - generic [ref=e1068]:
+                      - generic [ref=e1069]:
+                        - heading "$91/month" [level=3] [ref=e1070]
+                        - generic [ref=e1071]: During Promo Period
+                      - generic [ref=e1072]:
+                        - heading "$182/month" [level=3] [ref=e1073]
+                        - generic [ref=e1074]: After Promo Period
+                      - paragraph [ref=e1076]: Month to Month - No Long Term Commitments
+                    - generic [ref=e1077]:
+                      - generic [ref=e1079]:
+                        - link "rent" [ref=e1081] [cursor=pointer]:
+                          - /url: https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road/step_four?location=1&unit=5464645&type=rent&con=12&is_sitelink=1&site_locations_id=61859&smart-self-storage-ohio
+                        - generic "Complete your rental now by signing the lease and making payment online today. Your unit will be secured for your selected move-in date." [ref=e1082]:
+                          - generic [ref=e1083]: Complete your rental today.
+                      - generic [ref=e1085]:
+                        - generic [ref=e1087] [cursor=pointer]: reserve
+                        - generic "We’ll hold this unit for you so you can finish the rental later online or in person. No payment is due today." [ref=e1088]:
+                          - generic [ref=e1089]: Hold this unit for later.
+                  - generic [ref=e1091]:
+                    - generic [ref=e1095]:
+                      - generic [ref=e1097]: 
+                      - generic [ref=e1099]: Drive Up Access
+                    - generic [ref=e1103]:
+                      - generic [ref=e1105]: 
+                      - generic [ref=e1107]: 9ft Wide Door
+                    - generic [ref=e1111]:
+                      - generic [ref=e1113]: 
+                      - generic [ref=e1115]:
+                        - text: 24/7 Motion Detection Alerts -
+                        - link "SMART UNIT" [ref=e1116] [cursor=pointer]:
+                          - /url: https://smartstorageohio.com/smart-storage-units
+            - row "10 x 30 storage image Drive Up - Non-Climate Controlled 10' WIDTH x 30' DEPTH  What Size Do I Need? 50% OFF 1st Month $120/month During Promo Period $240/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Lighted Unit  Drive Up Access  9ft Wide Door" [ref=e1117]:
+              - cell "10 x 30 storage image Drive Up - Non-Climate Controlled 10' WIDTH x 30' DEPTH  What Size Do I Need? 50% OFF 1st Month $120/month During Promo Period $240/month After Promo Period Month to Month - No Long Term Commitments rent Complete your rental today. reserve Hold this unit for later.  Lighted Unit  Drive Up Access  9ft Wide Door" [ref=e1118]:
+                - generic [ref=e1120]:
+                  - generic [ref=e1122]:
+                    - link "10 x 30 storage image" [ref=e1124]:
+                      - /url: https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/unit_3d_images/smart-self-storage-ohio/unit_3d_222_696d9d89d8c31.webp
+                      - img "10 x 30 storage image" [ref=e1126]
+                    - generic [ref=e1127]:
+                      - generic [ref=e1128]: Drive Up - Non-Climate Controlled
+                      - heading "10' WIDTH x 30' DEPTH" [level=2] [ref=e1129]:
+                        - generic [ref=e1130]:
+                          - text: 10'
+                          - generic [ref=e1131]: WIDTH
+                        - text: x
+                        - generic [ref=e1132]:
+                          - text: 30'
+                          - generic [ref=e1133]: DEPTH
+                      - generic [ref=e1134]:
+                        - paragraph [ref=e1135]:
+                          - generic [ref=e1136]: 
+                          - link "What Size Do I Need?" [ref=e1137] [cursor=pointer]:
+                            - /url: "#"
+                        - paragraph [ref=e1138]:
+                          - generic [ref=e1139]: 50% OFF 1st Month
+                  - generic [ref=e1140]:
+                    - generic [ref=e1141]:
+                      - generic [ref=e1142]:
+                        - heading "$120/month" [level=3] [ref=e1143]
+                        - generic [ref=e1144]: During Promo Period
+                      - generic [ref=e1145]:
+                        - heading "$240/month" [level=3] [ref=e1146]
+                        - generic [ref=e1147]: After Promo Period
+                      - paragraph [ref=e1149]: Month to Month - No Long Term Commitments
+                    - generic [ref=e1150]:
+                      - generic [ref=e1152]:
+                        - link "rent" [ref=e1154] [cursor=pointer]:
+                          - /url: https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road/step_four?location=1&unit=5464613&type=rent&con=12&is_sitelink=1&site_locations_id=61859&smart-self-storage-ohio
+                        - generic "Complete your rental now by signing the lease and making payment online today. Your unit will be secured for your selected move-in date." [ref=e1155]:
+                          - generic [ref=e1156]: Complete your rental today.
+                      - generic [ref=e1158]:
+                        - generic [ref=e1160] [cursor=pointer]: reserve
+                        - generic "We’ll hold this unit for you so you can finish the rental later online or in person. No payment is due today." [ref=e1161]:
+                          - generic [ref=e1162]: Hold this unit for later.
+                  - generic [ref=e1164]:
+                    - generic [ref=e1168]:
+                      - generic [ref=e1170]: 
+                      - generic [ref=e1172]: Lighted Unit
+                    - generic [ref=e1176]:
+                      - generic [ref=e1178]: 
+                      - generic [ref=e1180]: Drive Up Access
+                    - generic [ref=e1184]:
+                      - generic [ref=e1186]: 
+                      - generic [ref=e1188]: 9ft Wide Door
+            - row "5 x 5 storage image Indoor - Climate Controlled 5' WIDTH x 5' DEPTH  What Size Do I Need? 50% OFF 3 Months $33/month During Promo Period $65/month After Promo Period Month to Month - No Long Term Commitments Notify Me When Available We’ll contact you when the next unit is available.  Dehumidified  4ft Wide Door  Indoor Climate Controlled" [ref=e1189]:
+              - cell "5 x 5 storage image Indoor - Climate Controlled 5' WIDTH x 5' DEPTH  What Size Do I Need? 50% OFF 3 Months $33/month During Promo Period $65/month After Promo Period Month to Month - No Long Term Commitments Notify Me When Available We’ll contact you when the next unit is available.  Dehumidified  4ft Wide Door  Indoor Climate Controlled" [ref=e1190]:
+                - generic [ref=e1192]:
+                  - generic [ref=e1194]:
+                    - link "5 x 5 storage image" [ref=e1196]:
+                      - /url: https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/unit_3d_images/smart-self-storage-ohio/unit_3d_222_696d9df96dc70.webp
+                      - img "5 x 5 storage image" [ref=e1198]
+                    - generic [ref=e1199]:
+                      - generic [ref=e1200]: Indoor - Climate Controlled
+                      - heading "5' WIDTH x 5' DEPTH" [level=2] [ref=e1201]:
+                        - generic [ref=e1202]:
+                          - text: 5'
+                          - generic [ref=e1203]: WIDTH
+                        - text: x
+                        - generic [ref=e1204]:
+                          - text: 5'
+                          - generic [ref=e1205]: DEPTH
+                      - generic [ref=e1206]:
+                        - paragraph [ref=e1207]:
+                          - generic [ref=e1208]: 
+                          - link "What Size Do I Need?" [ref=e1209] [cursor=pointer]:
+                            - /url: "#"
+                        - paragraph [ref=e1210]:
+                          - generic [ref=e1211]: 50% OFF 3 Months
+                  - generic [ref=e1212]:
+                    - generic [ref=e1213]:
+                      - generic [ref=e1214]:
+                        - heading "$33/month" [level=3] [ref=e1215]
+                        - generic [ref=e1216]: During Promo Period
+                      - generic [ref=e1217]:
+                        - heading "$65/month" [level=3] [ref=e1218]
+                        - generic [ref=e1219]: After Promo Period
+                      - paragraph [ref=e1221]: Month to Month - No Long Term Commitments
+                    - generic [ref=e1224]:
+                      - button "Notify Me When Available" [ref=e1225] [cursor=pointer]
+                      - generic [ref=e1226]: We’ll contact you when the next unit is available.
+                  - generic [ref=e1228]:
+                    - generic [ref=e1232]:
+                      - generic [ref=e1234]: 
+                      - generic [ref=e1236]: Dehumidified
+                    - generic [ref=e1240]:
+                      - generic [ref=e1242]: 
+                      - generic [ref=e1244]: 4ft Wide Door
+                    - generic [ref=e1248]:
+                      - generic [ref=e1250]: 
+                      - generic [ref=e1252]: Indoor Climate Controlled
+            - row "10 x 10 storage image Indoor - Climate Controlled - Near Entry Door 10' WIDTH x 10' DEPTH  What Size Do I Need? 50% OFF 3 Months $74/month During Promo Period $148/month After Promo Period Month to Month - No Long Term Commitments Notify Me When Available We’ll contact you when the next unit is available.  Dehumidified  Near Entry Door Convenient Access  Indoor Climate Controlled  9ft Wide Door" [ref=e1253]:
+              - cell "10 x 10 storage image Indoor - Climate Controlled - Near Entry Door 10' WIDTH x 10' DEPTH  What Size Do I Need? 50% OFF 3 Months $74/month During Promo Period $148/month After Promo Period Month to Month - No Long Term Commitments Notify Me When Available We’ll contact you when the next unit is available.  Dehumidified  Near Entry Door Convenient Access  Indoor Climate Controlled  9ft Wide Door" [ref=e1254]:
+                - generic [ref=e1256]:
+                  - generic [ref=e1258]:
+                    - link "10 x 10 storage image" [ref=e1260]:
+                      - /url: https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/unit_3d_images/smart-self-storage-ohio/unit_3d_222_696d9dea4bade.webp
+                      - img "10 x 10 storage image" [ref=e1262]
+                    - generic [ref=e1263]:
+                      - generic [ref=e1264]: Indoor - Climate Controlled - Near Entry Door
+                      - heading "10' WIDTH x 10' DEPTH" [level=2] [ref=e1265]:
+                        - generic [ref=e1266]:
+                          - text: 10'
+                          - generic [ref=e1267]: WIDTH
+                        - text: x
+                        - generic [ref=e1268]:
+                          - text: 10'
+                          - generic [ref=e1269]: DEPTH
+                      - generic [ref=e1270]:
+                        - paragraph [ref=e1271]:
+                          - generic [ref=e1272]: 
+                          - link "What Size Do I Need?" [ref=e1273] [cursor=pointer]:
+                            - /url: "#"
+                        - paragraph [ref=e1274]:
+                          - generic [ref=e1275]: 50% OFF 3 Months
+                  - generic [ref=e1276]:
+                    - generic [ref=e1277]:
+                      - generic [ref=e1278]:
+                        - heading "$74/month" [level=3] [ref=e1279]
+                        - generic [ref=e1280]: During Promo Period
+                      - generic [ref=e1281]:
+                        - heading "$148/month" [level=3] [ref=e1282]
+                        - generic [ref=e1283]: After Promo Period
+                      - paragraph [ref=e1285]: Month to Month - No Long Term Commitments
+                    - generic [ref=e1288]:
+                      - button "Notify Me When Available" [ref=e1289] [cursor=pointer]
+                      - generic [ref=e1290]: We’ll contact you when the next unit is available.
+                  - generic [ref=e1292]:
+                    - generic [ref=e1296]:
+                      - generic [ref=e1298]: 
+                      - generic [ref=e1300]: Dehumidified
+                    - generic [ref=e1304]:
+                      - generic [ref=e1306]: 
+                      - generic [ref=e1308]: Near Entry Door Convenient Access
+                    - generic [ref=e1312]:
+                      - generic [ref=e1314]: 
+                      - generic [ref=e1316]: Indoor Climate Controlled
+                    - generic [ref=e1320]:
+                      - generic [ref=e1322]: 
+                      - generic [ref=e1324]: 9ft Wide Door
+            - row "10 x 15 storage image Drive Up - Non-Climate Controlled 10' WIDTH x 15' DEPTH  What Size Do I Need? 50% OFF 1st Month $75/month During Promo Period $150/month After Promo Period Month to Month - No Long Term Commitments Notify Me When Available We’ll contact you when the next unit is available.  Drive Up Access  9ft Wide Door" [ref=e1325]:
+              - cell "10 x 15 storage image Drive Up - Non-Climate Controlled 10' WIDTH x 15' DEPTH  What Size Do I Need? 50% OFF 1st Month $75/month During Promo Period $150/month After Promo Period Month to Month - No Long Term Commitments Notify Me When Available We’ll contact you when the next unit is available.  Drive Up Access  9ft Wide Door" [ref=e1326]:
+                - generic [ref=e1328]:
+                  - generic [ref=e1330]:
+                    - link "10 x 15 storage image" [ref=e1332]:
+                      - /url: https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/unit_3d_images/smart-self-storage-ohio/unit_3d_222_696d9dcdaa562.webp
+                      - img "10 x 15 storage image" [ref=e1334]
+                    - generic [ref=e1335]:
+                      - generic [ref=e1336]: Drive Up - Non-Climate Controlled
+                      - heading "10' WIDTH x 15' DEPTH" [level=2] [ref=e1337]:
+                        - generic [ref=e1338]:
+                          - text: 10'
+                          - generic [ref=e1339]: WIDTH
+                        - text: x
+                        - generic [ref=e1340]:
+                          - text: 15'
+                          - generic [ref=e1341]: DEPTH
+                      - generic [ref=e1342]:
+                        - paragraph [ref=e1343]:
+                          - generic [ref=e1344]: 
+                          - link "What Size Do I Need?" [ref=e1345] [cursor=pointer]:
+                            - /url: "#"
+                        - paragraph [ref=e1346]:
+                          - generic [ref=e1347]: 50% OFF 1st Month
+                  - generic [ref=e1348]:
+                    - generic [ref=e1349]:
+                      - generic [ref=e1350]:
+                        - heading "$75/month" [level=3] [ref=e1351]
+                        - generic [ref=e1352]: During Promo Period
+                      - generic [ref=e1353]:
+                        - heading "$150/month" [level=3] [ref=e1354]
+                        - generic [ref=e1355]: After Promo Period
+                      - paragraph [ref=e1357]: Month to Month - No Long Term Commitments
+                    - generic [ref=e1360]:
+                      - button "Notify Me When Available" [ref=e1361] [cursor=pointer]
+                      - generic [ref=e1362]: We’ll contact you when the next unit is available.
+                  - generic [ref=e1364]:
+                    - generic [ref=e1368]:
+                      - generic [ref=e1370]: 
+                      - generic [ref=e1372]: Drive Up Access
+                    - generic [ref=e1376]:
+                      - generic [ref=e1378]: 
+                      - generic [ref=e1380]: 9ft Wide Door
+            - row "10 x 15 storage image Indoor - Climate Controlled 10' WIDTH x 15' DEPTH  What Size Do I Need? 50% OFF 1st Month $85/month During Promo Period $170/month After Promo Period Month to Month - No Long Term Commitments Notify Me When Available We’ll contact you when the next unit is available.  Dehumidified  Indoor Climate Controlled  9ft Wide Door" [ref=e1381]:
+              - cell "10 x 15 storage image Indoor - Climate Controlled 10' WIDTH x 15' DEPTH  What Size Do I Need? 50% OFF 1st Month $85/month During Promo Period $170/month After Promo Period Month to Month - No Long Term Commitments Notify Me When Available We’ll contact you when the next unit is available.  Dehumidified  Indoor Climate Controlled  9ft Wide Door" [ref=e1382]:
+                - generic [ref=e1384]:
+                  - generic [ref=e1386]:
+                    - link "10 x 15 storage image" [ref=e1388]:
+                      - /url: https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/unit_3d_images/smart-self-storage-ohio/unit_3d_222_696d9dcdaa562.webp
+                      - img "10 x 15 storage image" [ref=e1390]
+                    - generic [ref=e1391]:
+                      - generic [ref=e1392]: Indoor - Climate Controlled
+                      - heading "10' WIDTH x 15' DEPTH" [level=2] [ref=e1393]:
+                        - generic [ref=e1394]:
+                          - text: 10'
+                          - generic [ref=e1395]: WIDTH
+                        - text: x
+                        - generic [ref=e1396]:
+                          - text: 15'
+                          - generic [ref=e1397]: DEPTH
+                      - generic [ref=e1398]:
+                        - paragraph [ref=e1399]:
+                          - generic [ref=e1400]: 
+                          - link "What Size Do I Need?" [ref=e1401] [cursor=pointer]:
+                            - /url: "#"
+                        - paragraph [ref=e1402]:
+                          - generic [ref=e1403]: 50% OFF 1st Month
+                  - generic [ref=e1404]:
+                    - generic [ref=e1405]:
+                      - generic [ref=e1406]:
+                        - heading "$85/month" [level=3] [ref=e1407]
+                        - generic [ref=e1408]: During Promo Period
+                      - generic [ref=e1409]:
+                        - heading "$170/month" [level=3] [ref=e1410]
+                        - generic [ref=e1411]: After Promo Period
+                      - paragraph [ref=e1413]: Month to Month - No Long Term Commitments
+                    - generic [ref=e1416]:
+                      - button "Notify Me When Available" [ref=e1417] [cursor=pointer]
+                      - generic [ref=e1418]: We’ll contact you when the next unit is available.
+                  - generic [ref=e1420]:
+                    - generic [ref=e1424]:
+                      - generic [ref=e1426]: 
+                      - generic [ref=e1428]: Dehumidified
+                    - generic [ref=e1432]:
+                      - generic [ref=e1434]: 
+                      - generic [ref=e1436]: Indoor Climate Controlled
+                    - generic [ref=e1440]:
+                      - generic [ref=e1442]: 
+                      - generic [ref=e1444]: 9ft Wide Door
+            - row "10 x 20 storage image Indoor - Climate Controlled 10' WIDTH x 20' DEPTH  What Size Do I Need? 50% OFF 1st Month $103/month During Promo Period $205/month After Promo Period Month to Month - No Long Term Commitments Notify Me When Available We’ll contact you when the next unit is available.  Dehumidified  Indoor Climate Controlled  9ft Wide Door  Two Doors - One on each end" [ref=e1445]:
+              - cell "10 x 20 storage image Indoor - Climate Controlled 10' WIDTH x 20' DEPTH  What Size Do I Need? 50% OFF 1st Month $103/month During Promo Period $205/month After Promo Period Month to Month - No Long Term Commitments Notify Me When Available We’ll contact you when the next unit is available.  Dehumidified  Indoor Climate Controlled  9ft Wide Door  Two Doors - One on each end" [ref=e1446]:
+                - generic [ref=e1448]:
+                  - generic [ref=e1450]:
+                    - link "10 x 20 storage image" [ref=e1452]:
+                      - /url: https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/unit_3d_images/smart-self-storage-ohio/unit_3d_222_696d9d9b5af65.webp
+                      - img "10 x 20 storage image" [ref=e1454]
+                    - generic [ref=e1455]:
+                      - generic [ref=e1456]: Indoor - Climate Controlled
+                      - heading "10' WIDTH x 20' DEPTH" [level=2] [ref=e1457]:
+                        - generic [ref=e1458]:
+                          - text: 10'
+                          - generic [ref=e1459]: WIDTH
+                        - text: x
+                        - generic [ref=e1460]:
+                          - text: 20'
+                          - generic [ref=e1461]: DEPTH
+                      - generic [ref=e1462]:
+                        - paragraph [ref=e1463]:
+                          - generic [ref=e1464]: 
+                          - link "What Size Do I Need?" [ref=e1465] [cursor=pointer]:
+                            - /url: "#"
+                        - paragraph [ref=e1466]:
+                          - generic [ref=e1467]: 50% OFF 1st Month
+                  - generic [ref=e1468]:
+                    - generic [ref=e1469]:
+                      - generic [ref=e1470]:
+                        - heading "$103/month" [level=3] [ref=e1471]
+                        - generic [ref=e1472]: During Promo Period
+                      - generic [ref=e1473]:
+                        - heading "$205/month" [level=3] [ref=e1474]
+                        - generic [ref=e1475]: After Promo Period
+                      - paragraph [ref=e1477]: Month to Month - No Long Term Commitments
+                    - generic [ref=e1480]:
+                      - button "Notify Me When Available" [ref=e1481] [cursor=pointer]
+                      - generic [ref=e1482]: We’ll contact you when the next unit is available.
+                  - generic [ref=e1484]:
+                    - generic [ref=e1488]:
+                      - generic [ref=e1490]: 
+                      - generic [ref=e1492]: Dehumidified
+                    - generic [ref=e1496]:
+                      - generic [ref=e1498]: 
+                      - generic [ref=e1500]: Indoor Climate Controlled
+                    - generic [ref=e1504]:
+                      - generic [ref=e1506]: 
+                      - generic [ref=e1508]: 9ft Wide Door
+                    - generic [ref=e1512]:
+                      - generic [ref=e1514]: 
+                      - generic [ref=e1516]: Two Doors - One on each end
+            - row "10 x 20 storage image Drive Up - Climate Controlled 10' WIDTH x 20' DEPTH  What Size Do I Need? 50% OFF 1st Month $113/month During Promo Period $225/month After Promo Period Month to Month - No Long Term Commitments Notify Me When Available We’ll contact you when the next unit is available.  Dehumidified  Drive Up Access  Climate Controlled  9ft Wide Door" [ref=e1517]:
+              - cell "10 x 20 storage image Drive Up - Climate Controlled 10' WIDTH x 20' DEPTH  What Size Do I Need? 50% OFF 1st Month $113/month During Promo Period $225/month After Promo Period Month to Month - No Long Term Commitments Notify Me When Available We’ll contact you when the next unit is available.  Dehumidified  Drive Up Access  Climate Controlled  9ft Wide Door" [ref=e1518]:
+                - generic [ref=e1520]:
+                  - generic [ref=e1522]:
+                    - link "10 x 20 storage image" [ref=e1524]:
+                      - /url: https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/unit_3d_images/smart-self-storage-ohio/unit_3d_222_696d9d9b5af65.webp
+                      - img "10 x 20 storage image" [ref=e1526]
+                    - generic [ref=e1527]:
+                      - generic [ref=e1528]: Drive Up - Climate Controlled
+                      - heading "10' WIDTH x 20' DEPTH" [level=2] [ref=e1529]:
+                        - generic [ref=e1530]:
+                          - text: 10'
+                          - generic [ref=e1531]: WIDTH
+                        - text: x
+                        - generic [ref=e1532]:
+                          - text: 20'
+                          - generic [ref=e1533]: DEPTH
+                      - generic [ref=e1534]:
+                        - paragraph [ref=e1535]:
+                          - generic [ref=e1536]: 
+                          - link "What Size Do I Need?" [ref=e1537] [cursor=pointer]:
+                            - /url: "#"
+                        - paragraph [ref=e1538]:
+                          - generic [ref=e1539]: 50% OFF 1st Month
+                  - generic [ref=e1540]:
+                    - generic [ref=e1541]:
+                      - generic [ref=e1542]:
+                        - heading "$113/month" [level=3] [ref=e1543]
+                        - generic [ref=e1544]: During Promo Period
+                      - generic [ref=e1545]:
+                        - heading "$225/month" [level=3] [ref=e1546]
+                        - generic [ref=e1547]: After Promo Period
+                      - paragraph [ref=e1549]: Month to Month - No Long Term Commitments
+                    - generic [ref=e1552]:
+                      - button "Notify Me When Available" [ref=e1553] [cursor=pointer]
+                      - generic [ref=e1554]: We’ll contact you when the next unit is available.
+                  - generic [ref=e1556]:
+                    - generic [ref=e1560]:
+                      - generic [ref=e1562]: 
+                      - generic [ref=e1564]: Dehumidified
+                    - generic [ref=e1568]:
+                      - generic [ref=e1570]: 
+                      - generic [ref=e1572]: Drive Up Access
+                    - generic [ref=e1576]:
+                      - generic [ref=e1578]: 
+                      - generic [ref=e1580]: Climate Controlled
+                    - generic [ref=e1584]:
+                      - generic [ref=e1586]: 
+                      - generic [ref=e1588]: 9ft Wide Door
+            - row "10 x 30 storage image Drive Up - Climate Controlled 10' WIDTH x 30' DEPTH  What Size Do I Need? 50% OFF 1st Month $148/month During Promo Period $295/month After Promo Period Month to Month - No Long Term Commitments Notify Me When Available We’ll contact you when the next unit is available.  Dehumidified  Lighted Unit  Drive Up Access  Climate Controlled  9ft Wide Door" [ref=e1589]:
+              - cell "10 x 30 storage image Drive Up - Climate Controlled 10' WIDTH x 30' DEPTH  What Size Do I Need? 50% OFF 1st Month $148/month During Promo Period $295/month After Promo Period Month to Month - No Long Term Commitments Notify Me When Available We’ll contact you when the next unit is available.  Dehumidified  Lighted Unit  Drive Up Access  Climate Controlled  9ft Wide Door" [ref=e1590]:
+                - generic [ref=e1592]:
+                  - generic [ref=e1594]:
+                    - link "10 x 30 storage image" [ref=e1596]:
+                      - /url: https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/unit_3d_images/smart-self-storage-ohio/unit_3d_222_696d9d89d8c31.webp
+                      - img "10 x 30 storage image" [ref=e1598]
+                    - generic [ref=e1599]:
+                      - generic [ref=e1600]: Drive Up - Climate Controlled
+                      - heading "10' WIDTH x 30' DEPTH" [level=2] [ref=e1601]:
+                        - generic [ref=e1602]:
+                          - text: 10'
+                          - generic [ref=e1603]: WIDTH
+                        - text: x
+                        - generic [ref=e1604]:
+                          - text: 30'
+                          - generic [ref=e1605]: DEPTH
+                      - generic [ref=e1606]:
+                        - paragraph [ref=e1607]:
+                          - generic [ref=e1608]: 
+                          - link "What Size Do I Need?" [ref=e1609] [cursor=pointer]:
+                            - /url: "#"
+                        - paragraph [ref=e1610]:
+                          - generic [ref=e1611]: 50% OFF 1st Month
+                  - generic [ref=e1612]:
+                    - generic [ref=e1613]:
+                      - generic [ref=e1614]:
+                        - heading "$148/month" [level=3] [ref=e1615]
+                        - generic [ref=e1616]: During Promo Period
+                      - generic [ref=e1617]:
+                        - heading "$295/month" [level=3] [ref=e1618]
+                        - generic [ref=e1619]: After Promo Period
+                      - paragraph [ref=e1621]: Month to Month - No Long Term Commitments
+                    - generic [ref=e1624]:
+                      - button "Notify Me When Available" [ref=e1625] [cursor=pointer]
+                      - generic [ref=e1626]: We’ll contact you when the next unit is available.
+                  - generic [ref=e1628]:
+                    - generic [ref=e1632]:
+                      - generic [ref=e1634]: 
+                      - generic [ref=e1636]: Dehumidified
+                    - generic [ref=e1640]:
+                      - generic [ref=e1642]: 
+                      - generic [ref=e1644]: Lighted Unit
+                    - generic [ref=e1648]:
+                      - generic [ref=e1650]: 
+                      - generic [ref=e1652]: Drive Up Access
+                    - generic [ref=e1656]:
+                      - generic [ref=e1658]: 
+                      - generic [ref=e1660]: Climate Controlled
+                    - generic [ref=e1664]:
+                      - generic [ref=e1666]: 
+                      - generic [ref=e1668]: 9ft Wide Door
+            - row "10 x 40 storage image Drive Up - Non-Climate Controlled 10' WIDTH x 40' DEPTH  What Size Do I Need? 50% OFF 1st Month $155/month During Promo Period $310/month After Promo Period Month to Month - No Long Term Commitments Notify Me When Available We’ll contact you when the next unit is available.  Drive Up Access  9ft Wide Door  Two Doors - One on each end" [ref=e1669]:
+              - cell "10 x 40 storage image Drive Up - Non-Climate Controlled 10' WIDTH x 40' DEPTH  What Size Do I Need? 50% OFF 1st Month $155/month During Promo Period $310/month After Promo Period Month to Month - No Long Term Commitments Notify Me When Available We’ll contact you when the next unit is available.  Drive Up Access  9ft Wide Door  Two Doors - One on each end" [ref=e1670]:
+                - generic [ref=e1672]:
+                  - generic [ref=e1674]:
+                    - link "10 x 40 storage image" [ref=e1676]:
+                      - /url: https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/unit_3d_images/smart-self-storage-ohio/unit_3d_222_6972963b8fb33.webp
+                      - img "10 x 40 storage image" [ref=e1678]
+                    - generic [ref=e1679]:
+                      - generic [ref=e1680]: Drive Up - Non-Climate Controlled
+                      - heading "10' WIDTH x 40' DEPTH" [level=2] [ref=e1681]:
+                        - generic [ref=e1682]:
+                          - text: 10'
+                          - generic [ref=e1683]: WIDTH
+                        - text: x
+                        - generic [ref=e1684]:
+                          - text: 40'
+                          - generic [ref=e1685]: DEPTH
+                      - generic [ref=e1686]:
+                        - paragraph [ref=e1687]:
+                          - generic [ref=e1688]: 
+                          - link "What Size Do I Need?" [ref=e1689] [cursor=pointer]:
+                            - /url: "#"
+                        - paragraph [ref=e1690]:
+                          - generic [ref=e1691]: 50% OFF 1st Month
+                  - generic [ref=e1692]:
+                    - generic [ref=e1693]:
+                      - generic [ref=e1694]:
+                        - heading "$155/month" [level=3] [ref=e1695]
+                        - generic [ref=e1696]: During Promo Period
+                      - generic [ref=e1697]:
+                        - heading "$310/month" [level=3] [ref=e1698]
+                        - generic [ref=e1699]: After Promo Period
+                      - paragraph [ref=e1701]: Month to Month - No Long Term Commitments
+                    - generic [ref=e1704]:
+                      - button "Notify Me When Available" [ref=e1705] [cursor=pointer]
+                      - generic [ref=e1706]: We’ll contact you when the next unit is available.
+                  - generic [ref=e1708]:
+                    - generic [ref=e1712]:
+                      - generic [ref=e1714]: 
+                      - generic [ref=e1716]: Drive Up Access
+                    - generic [ref=e1720]:
+                      - generic [ref=e1722]: 
+                      - generic [ref=e1724]: 9ft Wide Door
+                    - generic [ref=e1728]:
+                      - generic [ref=e1730]: 
+                      - generic [ref=e1732]: Two Doors - One on each end
+        - generic [ref=e1733]:
+          - strong [ref=e1734]: "Size Disclaimer:"
+          - text: Unit sizes are approximate and may vary slightly in shape or usable space. We recommend viewing the unit in person to make sure it’s the right fit for your needs.
+      - generic [ref=e1737]:
+        - heading "Customer Reviews" [level=2] [ref=e1738]
+        - generic [ref=e1740]:
+          - generic [ref=e1741]:
+            - generic [ref=e1742] [cursor=pointer]:
+              - generic [ref=e1743]:
+                - img [ref=e1744]
+                - img [ref=e1746]
+                - img [ref=e1748]
+                - img [ref=e1750]
+                - img [ref=e1752]
+              - strong [ref=e1757]: "5"
+            - text: 55 Reviews
+          - link "Write a review" [ref=e1758] [cursor=pointer]:
+            - /url: https://www.google.com/maps/place/Smart+Self+Storage/@41.2866403,-81.4741718,849m/data=!3m2!1e3!4b1!4m6!3m5!1s0x88311fb9ff70a595:0x56184e2b0a97dc50!8m2!3d41.2866363!4d-81.4715969!16s%2Fg%2F11wy00_w8z?entry=ttu&g_ep=EgoyMDI1MDIyMy4xIKXMDSoASAFQAw%3D%3D
+            - button "Write a review" [ref=e1759]
+        - generic [ref=e1762]:
+          - button "Previous" [ref=e1763] [cursor=pointer]: ←Previous
+          - generic [ref=e1765]:
+            - generic [ref=e1767]:
+              - generic [ref=e1768]:
+                - generic [ref=e1771] [cursor=pointer]:
+                  - img [ref=e1772]
+                  - img [ref=e1774]
+                  - img [ref=e1776]
+                  - img [ref=e1778]
+                  - img [ref=e1780]
+                - img [ref=e1783]
+              - generic [ref=e1789]:
+                - img [ref=e1790]
+                - paragraph [ref=e1791]: Robert Kamen
+                - paragraph [ref=e1792]: 4 weeks ago
+              - paragraph [ref=e1794]: Very good place. Easy to set up storage facility. And then secure all items
+            - generic [ref=e1796]:
+              - generic [ref=e1797]:
+                - generic [ref=e1800] [cursor=pointer]:
+                  - img [ref=e1801]
+                  - img [ref=e1803]
+                  - img [ref=e1805]
+                  - img [ref=e1807]
+                  - img [ref=e1809]
+                - img [ref=e1812]
+              - generic [ref=e1818]:
+                - img [ref=e1819]
+                - paragraph [ref=e1820]: Calvin Clements
+                - paragraph [ref=e1821]: a month ago
+            - generic [ref=e1823]:
+              - generic [ref=e1824]:
+                - generic [ref=e1827] [cursor=pointer]:
+                  - img [ref=e1828]
+                  - img [ref=e1830]
+                  - img [ref=e1832]
+                  - img [ref=e1834]
+                  - img [ref=e1836]
+                - img [ref=e1839]
+              - generic [ref=e1845]:
+                - img [ref=e1846]
+                - paragraph [ref=e1847]: Jasmine Kelly
+                - paragraph [ref=e1848]: a month ago
+              - generic [ref=e1849]:
+                - paragraph [ref=e1850]: I love the cleanliness and professionalism of this location. The environment was so inviting and I feel comfortable with the security of my business items ...
+                - link [ref=e1851] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - tabpanel [ref=e1852]:
+              - generic [ref=e1853]:
+                - generic [ref=e1854]:
+                  - generic [ref=e1857] [cursor=pointer]:
+                    - img [ref=e1858]
+                    - img [ref=e1860]
+                    - img [ref=e1862]
+                    - img [ref=e1864]
+                    - img [ref=e1866]
+                  - img [ref=e1869]
+                - generic [ref=e1875]:
+                  - img [ref=e1876]
+                  - paragraph [ref=e1877]: Ant Wil
+                  - paragraph [ref=e1878]: 4 days ago
+                - paragraph [ref=e1880]: Stored my car for the winter months! Everything was great. Easy 24/7 access through app. Quick and seamless process.
+            - tabpanel [ref=e1881]:
+              - generic [ref=e1882]:
+                - generic [ref=e1883]:
+                  - generic [ref=e1886] [cursor=pointer]:
+                    - img [ref=e1887]
+                    - img [ref=e1889]
+                    - img [ref=e1891]
+                    - img [ref=e1893]
+                    - img [ref=e1895]
+                  - img [ref=e1898]
+                - generic [ref=e1904]:
+                  - img [ref=e1905]
+                  - paragraph [ref=e1906]: John Kazimer
+                  - paragraph [ref=e1907]: 4 days ago
+                - generic [ref=e1908]:
+                  - paragraph [ref=e1909]: I’ve had a great experience with Smart Self Storage. The facility is completely indoors with climate‑controlled units, and the cleanliness stands out immediately — everything ...
+                  - link [ref=e1910] [cursor=pointer]:
+                    - /url: "#"
+                    - text: Show more
+            - tabpanel [ref=e1911]:
+              - generic [ref=e1912]:
+                - generic [ref=e1913]:
+                  - generic [ref=e1916] [cursor=pointer]:
+                    - img [ref=e1917]
+                    - img [ref=e1919]
+                    - img [ref=e1921]
+                    - img [ref=e1923]
+                    - img [ref=e1925]
+                  - img [ref=e1928]
+                - generic [ref=e1934]:
+                  - img "google review" [ref=e1935]
+                  - paragraph [ref=e1936]: Mike Johnson
+                  - paragraph [ref=e1937]: 2 weeks ago
+                - paragraph [ref=e1939]: Simple, quick and personable. It was great working with someone who knows the business and is professional.
+            - tabpanel [ref=e1940]:
+              - generic [ref=e1941]:
+                - generic [ref=e1942]:
+                  - generic [ref=e1945] [cursor=pointer]:
+                    - img [ref=e1946]
+                    - img [ref=e1948]
+                    - img [ref=e1950]
+                    - img [ref=e1952]
+                    - img [ref=e1954]
+                  - img [ref=e1957]
+                - generic [ref=e1963]:
+                  - img "google review" [ref=e1964]
+                  - paragraph [ref=e1965]: Ryan
+                  - paragraph [ref=e1966]: 2 weeks ago
+                - generic [ref=e1967]:
+                  - paragraph [ref=e1968]: Smart Self Storage in Macedonia Ohio is a very professionally run business. It was extremely easy to store my car there. Scheduling was a breeze ...
+                  - link "Show more" [ref=e1969] [cursor=pointer]:
+                    - /url: "#"
+            - tabpanel [ref=e1970]:
+              - generic [ref=e1971]:
+                - generic [ref=e1972]:
+                  - generic [ref=e1975] [cursor=pointer]:
+                    - img [ref=e1976]
+                    - img [ref=e1978]
+                    - img [ref=e1980]
+                    - img [ref=e1982]
+                    - img [ref=e1984]
+                  - img [ref=e1987]
+                - generic [ref=e1993]:
+                  - img "google review" [ref=e1994]
+                  - paragraph [ref=e1995]: Dan Van Order
+                  - paragraph [ref=e1996]: 3 weeks ago
+                - paragraph [ref=e1998]: Great place. Clean, private, well-lit, secure. Good prices. All gates are code entry. Use along with Storage Genie for touchless access. Bathroom on-site, also code-locked.
+            - tabpanel [ref=e1999]:
+              - generic [ref=e2000]:
+                - generic [ref=e2001]:
+                  - generic [ref=e2004] [cursor=pointer]:
+                    - img [ref=e2005]
+                    - img [ref=e2007]
+                    - img [ref=e2009]
+                    - img [ref=e2011]
+                    - img [ref=e2013]
+                  - img [ref=e2016]
+                - generic [ref=e2022]:
+                  - img [ref=e2023]
+                  - paragraph [ref=e2024]: Ken Hawley
+                  - paragraph [ref=e2025]: 4 weeks ago
+                - paragraph [ref=e2027]: Extremely clean and the security is very good . Steve is awesome to work with.
+            - tabpanel [ref=e2028]:
+              - generic [ref=e2029]:
+                - generic [ref=e2030]:
+                  - generic [ref=e2033] [cursor=pointer]:
+                    - img [ref=e2034]
+                    - img [ref=e2036]
+                    - img [ref=e2038]
+                    - img [ref=e2040]
+                    - img [ref=e2042]
+                  - img [ref=e2045]
+                - generic [ref=e2051]:
+                  - img [ref=e2052]
+                  - paragraph [ref=e2053]: william coverley
+                  - paragraph [ref=e2054]: 4 weeks ago
+                - generic [ref=e2055]:
+                  - paragraph [ref=e2056]: Most of the local storage sites are older and have zero maintenance upgrades. This site is brand new with extra security with a gate that ...
+                  - link [ref=e2057] [cursor=pointer]:
+                    - /url: "#"
+                    - text: Show more
+            - tabpanel [ref=e2058]:
+              - generic [ref=e2059]:
+                - generic [ref=e2060]:
+                  - generic [ref=e2063] [cursor=pointer]:
+                    - img [ref=e2064]
+                    - img [ref=e2066]
+                    - img [ref=e2068]
+                    - img [ref=e2070]
+                    - img [ref=e2072]
+                  - img [ref=e2075]
+                - generic [ref=e2081]:
+                  - img [ref=e2082]
+                  - paragraph [ref=e2083]: Michael S
+                  - paragraph [ref=e2084]: 4 weeks ago
+                - paragraph [ref=e2086]: The place is clean every time I on go there. The owner is very friendly. Best place to use storage on the area
+            - tabpanel [ref=e2087]:
+              - generic [ref=e2088]:
+                - generic [ref=e2089]:
+                  - generic [ref=e2092] [cursor=pointer]:
+                    - img [ref=e2093]
+                    - img [ref=e2095]
+                    - img [ref=e2097]
+                    - img [ref=e2099]
+                    - img [ref=e2101]
+                  - img [ref=e2104]
+                - generic [ref=e2110]:
+                  - img [ref=e2111]
+                  - paragraph [ref=e2112]: Amanda Roetman
+                  - paragraph [ref=e2113]: 4 weeks ago
+                - paragraph [ref=e2115]: Very helpful and professional
+            - tabpanel [ref=e2116]:
+              - generic [ref=e2117]:
+                - generic [ref=e2118]:
+                  - generic [ref=e2121] [cursor=pointer]:
+                    - img [ref=e2122]
+                    - img [ref=e2124]
+                    - img [ref=e2126]
+                    - img [ref=e2128]
+                    - img [ref=e2130]
+                  - img [ref=e2133]
+                - generic [ref=e2139]:
+                  - img [ref=e2140]
+                  - paragraph [ref=e2141]: Robert Kamen
+                  - paragraph [ref=e2142]: 4 weeks ago
+                - paragraph [ref=e2144]: Very good place. Easy to set up storage facility. And then secure all items
+            - tabpanel [ref=e2145]:
+              - generic [ref=e2146]:
+                - generic [ref=e2147]:
+                  - generic [ref=e2150] [cursor=pointer]:
+                    - img [ref=e2151]
+                    - img [ref=e2153]
+                    - img [ref=e2155]
+                    - img [ref=e2157]
+                    - img [ref=e2159]
+                  - img [ref=e2162]
+                - generic [ref=e2168]:
+                  - img [ref=e2169]
+                  - paragraph [ref=e2170]: Calvin Clements
+                  - paragraph [ref=e2171]: a month ago
+            - tabpanel [ref=e2172]:
+              - generic [ref=e2173]:
+                - generic [ref=e2174]:
+                  - generic [ref=e2177] [cursor=pointer]:
+                    - img [ref=e2178]
+                    - img [ref=e2180]
+                    - img [ref=e2182]
+                    - img [ref=e2184]
+                    - img [ref=e2186]
+                  - img [ref=e2189]
+                - generic [ref=e2195]:
+                  - img [ref=e2196]
+                  - paragraph [ref=e2197]: Jasmine Kelly
+                  - paragraph [ref=e2198]: a month ago
+                - generic [ref=e2199]:
+                  - paragraph [ref=e2200]: I love the cleanliness and professionalism of this location. The environment was so inviting and I feel comfortable with the security of my business items ...
+                  - link [ref=e2201] [cursor=pointer]:
+                    - /url: "#"
+                    - text: Show more
+            - generic [ref=e2203]:
+              - generic [ref=e2204]:
+                - generic [ref=e2207] [cursor=pointer]:
+                  - img [ref=e2208]
+                  - img [ref=e2210]
+                  - img [ref=e2212]
+                  - img [ref=e2214]
+                  - img [ref=e2216]
+                - img [ref=e2219]
+              - generic [ref=e2225]:
+                - img [ref=e2226]
+                - paragraph [ref=e2227]: Ant Wil
+                - paragraph [ref=e2228]: 4 days ago
+              - paragraph [ref=e2230]: Stored my car for the winter months! Everything was great. Easy 24/7 access through app. Quick and seamless process.
+            - generic [ref=e2232]:
+              - generic [ref=e2233]:
+                - generic [ref=e2236] [cursor=pointer]:
+                  - img [ref=e2237]
+                  - img [ref=e2239]
+                  - img [ref=e2241]
+                  - img [ref=e2243]
+                  - img [ref=e2245]
+                - img [ref=e2248]
+              - generic [ref=e2254]:
+                - img [ref=e2255]
+                - paragraph [ref=e2256]: John Kazimer
+                - paragraph [ref=e2257]: 4 days ago
+              - generic [ref=e2258]:
+                - paragraph [ref=e2259]: I’ve had a great experience with Smart Self Storage. The facility is completely indoors with climate‑controlled units, and the cleanliness stands out immediately — everything ...
+                - link [ref=e2260] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - generic [ref=e2262]:
+              - generic [ref=e2263]:
+                - generic [ref=e2266] [cursor=pointer]:
+                  - img [ref=e2267]
+                  - img [ref=e2269]
+                  - img [ref=e2271]
+                  - img [ref=e2273]
+                  - img [ref=e2275]
+                - img [ref=e2278]
+              - generic [ref=e2284]:
+                - img [ref=e2285]
+                - paragraph [ref=e2286]: Mike Johnson
+                - paragraph [ref=e2287]: 2 weeks ago
+              - paragraph [ref=e2289]: Simple, quick and personable. It was great working with someone who knows the business and is professional.
+            - generic [ref=e2291]:
+              - generic [ref=e2292]:
+                - generic [ref=e2295] [cursor=pointer]:
+                  - img [ref=e2296]
+                  - img [ref=e2298]
+                  - img [ref=e2300]
+                  - img [ref=e2302]
+                  - img [ref=e2304]
+                - img [ref=e2307]
+              - generic [ref=e2313]:
+                - img [ref=e2314]
+                - paragraph [ref=e2315]: Ryan
+                - paragraph [ref=e2316]: 2 weeks ago
+              - generic [ref=e2317]:
+                - paragraph [ref=e2318]: Smart Self Storage in Macedonia Ohio is a very professionally run business. It was extremely easy to store my car there. Scheduling was a breeze ...
+                - link [ref=e2319] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - generic [ref=e2321]:
+              - generic [ref=e2322]:
+                - generic [ref=e2325] [cursor=pointer]:
+                  - img [ref=e2326]
+                  - img [ref=e2328]
+                  - img [ref=e2330]
+                  - img [ref=e2332]
+                  - img [ref=e2334]
+                - img [ref=e2337]
+              - generic [ref=e2343]:
+                - img [ref=e2344]
+                - paragraph [ref=e2345]: Dan Van Order
+                - paragraph [ref=e2346]: 3 weeks ago
+              - paragraph [ref=e2348]: Great place. Clean, private, well-lit, secure. Good prices. All gates are code entry. Use along with Storage Genie for touchless access. Bathroom on-site, also code-locked.
+            - generic [ref=e2350]:
+              - generic [ref=e2351]:
+                - generic [ref=e2354] [cursor=pointer]:
+                  - img [ref=e2355]
+                  - img [ref=e2357]
+                  - img [ref=e2359]
+                  - img [ref=e2361]
+                  - img [ref=e2363]
+                - img [ref=e2366]
+              - generic [ref=e2372]:
+                - img [ref=e2373]
+                - paragraph [ref=e2374]: Ken Hawley
+                - paragraph [ref=e2375]: 4 weeks ago
+              - paragraph [ref=e2377]: Extremely clean and the security is very good . Steve is awesome to work with.
+            - generic [ref=e2379]:
+              - generic [ref=e2380]:
+                - generic [ref=e2383] [cursor=pointer]:
+                  - img [ref=e2384]
+                  - img [ref=e2386]
+                  - img [ref=e2388]
+                  - img [ref=e2390]
+                  - img [ref=e2392]
+                - img [ref=e2395]
+              - generic [ref=e2401]:
+                - img [ref=e2402]
+                - paragraph [ref=e2403]: william coverley
+                - paragraph [ref=e2404]: 4 weeks ago
+              - generic [ref=e2405]:
+                - paragraph [ref=e2406]: Most of the local storage sites are older and have zero maintenance upgrades. This site is brand new with extra security with a gate that ...
+                - link [ref=e2407] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - generic [ref=e2409]:
+              - generic [ref=e2410]:
+                - generic [ref=e2413] [cursor=pointer]:
+                  - img [ref=e2414]
+                  - img [ref=e2416]
+                  - img [ref=e2418]
+                  - img [ref=e2420]
+                  - img [ref=e2422]
+                - img [ref=e2425]
+              - generic [ref=e2431]:
+                - img [ref=e2432]
+                - paragraph [ref=e2433]: Michael S
+                - paragraph [ref=e2434]: 4 weeks ago
+              - paragraph [ref=e2436]: The place is clean every time I on go there. The owner is very friendly. Best place to use storage on the area
+            - generic [ref=e2438]:
+              - generic [ref=e2439]:
+                - generic [ref=e2442] [cursor=pointer]:
+                  - img [ref=e2443]
+                  - img [ref=e2445]
+                  - img [ref=e2447]
+                  - img [ref=e2449]
+                  - img [ref=e2451]
+                - img [ref=e2454]
+              - generic [ref=e2460]:
+                - img [ref=e2461]
+                - paragraph [ref=e2462]: Amanda Roetman
+                - paragraph [ref=e2463]: 4 weeks ago
+              - paragraph [ref=e2465]: Very helpful and professional
+            - generic [ref=e2467]:
+              - generic [ref=e2468]:
+                - generic [ref=e2471] [cursor=pointer]:
+                  - img [ref=e2472]
+                  - img [ref=e2474]
+                  - img [ref=e2476]
+                  - img [ref=e2478]
+                  - img [ref=e2480]
+                - img [ref=e2483]
+              - generic [ref=e2489]:
+                - img [ref=e2490]
+                - paragraph [ref=e2491]: Robert Kamen
+                - paragraph [ref=e2492]: 4 weeks ago
+              - paragraph [ref=e2494]: Very good place. Easy to set up storage facility. And then secure all items
+            - generic [ref=e2496]:
+              - generic [ref=e2497]:
+                - generic [ref=e2500] [cursor=pointer]:
+                  - img [ref=e2501]
+                  - img [ref=e2503]
+                  - img [ref=e2505]
+                  - img [ref=e2507]
+                  - img [ref=e2509]
+                - img [ref=e2512]
+              - generic [ref=e2518]:
+                - img [ref=e2519]
+                - paragraph [ref=e2520]: Calvin Clements
+                - paragraph [ref=e2521]: a month ago
+            - generic [ref=e2523]:
+              - generic [ref=e2524]:
+                - generic [ref=e2527] [cursor=pointer]:
+                  - img [ref=e2528]
+                  - img [ref=e2530]
+                  - img [ref=e2532]
+                  - img [ref=e2534]
+                  - img [ref=e2536]
+                - img [ref=e2539]
+              - generic [ref=e2545]:
+                - img [ref=e2546]
+                - paragraph [ref=e2547]: Jasmine Kelly
+                - paragraph [ref=e2548]: a month ago
+              - generic [ref=e2549]:
+                - paragraph [ref=e2550]: I love the cleanliness and professionalism of this location. The environment was so inviting and I feel comfortable with the security of my business items ...
+                - link [ref=e2551] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+          - button "Next" [ref=e2552] [cursor=pointer]: →Next
+          - tablist [ref=e2553]:
+            - tab "1 of 4" [ref=e2554] [cursor=pointer]: • 1
+            - tab "2 of 4" [selected] [ref=e2555] [cursor=pointer]: • 2
+            - tab "3 of 4" [ref=e2556] [cursor=pointer]: • 3
+            - tab "4 of 4" [ref=e2557] [cursor=pointer]: • 4
+            - tab "5 of 4" [ref=e2558] [cursor=pointer]: • 5
+            - tab "6 of 4" [ref=e2559] [cursor=pointer]: • 6
+            - tab "7 of 4" [ref=e2560] [cursor=pointer]: • 7
+            - tab "8 of 4" [ref=e2561] [cursor=pointer]: • 8
+            - tab "9 of 4" [ref=e2562] [cursor=pointer]: • 9
+            - tab "10 of 4" [ref=e2563] [cursor=pointer]: • 10
+            - tab "11 of 4" [ref=e2564] [cursor=pointer]: • 11
+            - tab "12 of 4" [ref=e2565] [cursor=pointer]: • 12
+      - generic [ref=e2566]:
+        - generic [ref=e2567]:
+          - img "self storage units macedonia" [ref=e2569]
+          - generic [ref=e2571]:
+            - img "climate controlled storage" [ref=e2573]
+            - img "storage units near me" [ref=e2575]
+        - generic [ref=e2577]:
+          - text: About Smart Self Storage
+          - paragraph [ref=e2578]:
+            - text: Need extra space near you? Smart Self Storage on Bavaria Drive in Macedonia, OH is a modern, family-owned self storage facility offering indoor climate-controlled storage units, convenient drive-up units, and vehicle storage for cars, trailers, and more. We’re close to Macedonia Commons and serve customers from Twinsburg, Northfield, Sagamore Hills, and Hudson.
+            - text: Security and convenience are our top priorities. Our Macedonia storage facility features 24/7 video surveillance, keypad gate entry, well-lit indoor hallways, and lock included with every unit, so your belongings stay protected. With month-to-month rentals, easy online reservations, and 50% off up to 3 months on select units, it’s simple to rent a storage unit near you on your schedule—whether you need short-term storage for a move or a long-term solution for your home or business.
+            - text: If you’re searching for self storage in Macedonia, OH or “storage units near me,” Smart Self Storage on Bavaria Drive is here to help. Reserve your storage unit online today or stop by—we’d love to help you find the perfect space!
+      - generic [ref=e2581]:
+        - heading [level=3]
+        - paragraph
+    - generic [ref=e2582]:
+      - generic [ref=e2585]:
+        - generic [ref=e2586]:
+          - link "SSA" [ref=e2588] [cursor=pointer]:
+            - /url: "#"
+            - img "SSA" [ref=e2589]
+          - link "NCSSA" [ref=e2591] [cursor=pointer]:
+            - /url: "#"
+            - img "NCSSA" [ref=e2592]
+        - generic [ref=e2593]:
+          - generic [ref=e2594]:
+            - text: Find Storage
+            - separator [ref=e2595]
+          - generic [ref=e2596]:
+            - link "Find Your Unit" [ref=e2597] [cursor=pointer]:
+              - /url: /storage-units/ohio/macedonia/bavaria-road
+            - link "Hudson" [ref=e2598] [cursor=pointer]:
+              - /url: /storage-units-hudson
+            - link "Macedonia" [ref=e2599] [cursor=pointer]:
+              - /url: /storage-units-macedonia
+            - link "Northfield" [ref=e2600] [cursor=pointer]:
+              - /url: /storage-units-northfield
+            - link "Twinsburg" [ref=e2601] [cursor=pointer]:
+              - /url: /storage-units-twinsburg
+        - generic [ref=e2602]:
+          - generic [ref=e2603]:
+            - text: Storage Types
+            - separator [ref=e2604]
+          - generic [ref=e2605]:
+            - link "Business Storage" [ref=e2606] [cursor=pointer]:
+              - /url: /business-storage
+            - link "Climate Controlled Storage" [ref=e2607] [cursor=pointer]:
+              - /url: /climate-controlled-storage
+            - link "Drive-Up Storage" [ref=e2608] [cursor=pointer]:
+              - /url: /drive-up-storage
+            - link "Household Storage" [ref=e2609] [cursor=pointer]:
+              - /url: /household-storage
+            - link "Moving Storage" [ref=e2610] [cursor=pointer]:
+              - /url: /moving-storage
+            - link "Smart Storage Units" [ref=e2611] [cursor=pointer]:
+              - /url: /smart-storage-units
+            - link "Vehicle Storage" [ref=e2612] [cursor=pointer]:
+              - /url: /vehicle-storage
+        - generic [ref=e2613]:
+          - generic [ref=e2614]:
+            - text: Resources
+            - separator [ref=e2615]
+          - generic [ref=e2616]:
+            - link "Size Guide" [ref=e2617] [cursor=pointer]:
+              - /url: /storage-unit-size-guide
+            - link "FAQs" [ref=e2618] [cursor=pointer]:
+              - /url: /self-storage-faq
+            - link "About" [ref=e2619] [cursor=pointer]:
+              - /url: /about-our-storage-facility
+            - link "My Account" [ref=e2620] [cursor=pointer]:
+              - /url: https://smartselfstorage-payment.ssm-erp.com/
+            - link "Privacy Policy" [ref=e2621] [cursor=pointer]:
+              - /url: /privacy
+            - link "Terms and Conditions" [ref=e2622] [cursor=pointer]:
+              - /url: /terms
+            - link "Cookie Policy" [ref=e2623] [cursor=pointer]:
+              - /url: /cookies
+            - link "Contact Us" [ref=e2624] [cursor=pointer]:
+              - /url: /contact
+        - generic [ref=e2625]:
+          - generic [ref=e2626]:
+            - text: Contact
+            - separator [ref=e2627]
+          - generic [ref=e2628]:
+            - link "" [ref=e2629] [cursor=pointer]:
+              - /url: https://www.facebook.com/SmartStorageOhio
+              - generic [ref=e2630]: 
+            - link "" [ref=e2631] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/smart-self-storage-macedonia/about/
+              - generic [ref=e2632]: 
+            - link "" [ref=e2633] [cursor=pointer]:
+              - /url: https://www.yelp.com/biz/smart-self-storage-macedonia?osq=smart+self+storage
+              - generic [ref=e2634]: 
+      - generic [ref=e2637]:
+        - text: © Smart Self Storage
+        - generic [ref=e2639]:
+          - text: "|"
+          - link "Privacy Policy" [ref=e2640] [cursor=pointer]:
+            - /url: /privacy
+          - text: "|"
+          - link "Terms of Use" [ref=e2641] [cursor=pointer]:
+            - /url: /terms
+  - generic [ref=e2643]:
+    - generic [ref=e2644] [cursor=pointer]: ×
+    - iframe [ref=e2645]:
+      - generic [active] [ref=f16e1]:
+        - link "Skip to form" [ref=f16e2] [cursor=pointer]:
+          - /url: "#main"
+        - main "Main Content Area" [ref=f16e3]:
+          - form "HubSpot Form" [ref=f16e7]:
+            - generic [ref=f16e9]:
+              - heading "Contact Our Support Team" [level=1] [ref=f16e11]
+              - generic [ref=f16e13]:
+                - paragraph [ref=f16e14]: 👋 Need help or running into an issue?
+                - paragraph [ref=f16e15]: Fill out the form below and our support team will get back to you as soon as possible.
+              - generic [ref=f16e17]:
+                - generic [ref=f16e19]: Email*
+                - generic [ref=f16e20]: Please use the email associated with your Storagely account.
+                - textbox "Email*" [ref=f16e21]:
+                  - /placeholder: ""
+              - button "Submit" [disabled] [ref=f16e24]

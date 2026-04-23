@@ -76,6 +76,7 @@ function readAllResults(): any[] {
 }
 
 test.describe('Single-Page Rent Verification Tests', () => {
+  test.describe.configure({ retries: 0 });
   const singlePageUrls = getSinglePageUrls().customer;
   
   for (const baseURL of singlePageUrls) {
@@ -294,8 +295,4 @@ test.beforeAll(() => {
 });
 
 // Summary printing moved to global-teardown.ts so it runs ONCE after ALL workers finish.
-// This avoids partial/duplicate summaries from each worker's afterAll.
-test.afterAll(async () => {
-  // Clean up lock file only — leave result files for global teardown to read
-  try { if (fs.existsSync(LOCK_FILE)) fs.unlinkSync(LOCK_FILE); } catch { /* ignore */ }
-});
+// The lock file must survive until teardown so later workers do not reopen cleanup races.

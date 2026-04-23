@@ -1,0 +1,1945 @@
+- generic [active] [ref=e1]:
+  - text:           
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - navigation [ref=e6]:
+        - generic:
+          - link "logo" [ref=e7] [cursor=pointer]:
+            - /url: https://www.storagestar.com
+            - img "logo" [ref=e8]
+          - button "Toggle navigation" [ref=e9] [cursor=pointer]
+    - generic [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e14]:
+          - generic [ref=e16]:
+            - generic [ref=e17]:
+              - button "Slide 1" [ref=e18] [cursor=pointer]
+              - button "Slide 2" [ref=e19] [cursor=pointer]
+              - button "Slide 3" [ref=e20] [cursor=pointer]
+              - button "Slide 4" [ref=e21] [cursor=pointer]
+              - button "Slide 5" [ref=e22] [cursor=pointer]
+              - button "Slide 6" [ref=e23] [cursor=pointer]
+              - button "Slide 7" [ref=e24] [cursor=pointer]
+              - button "Slide 8" [ref=e25] [cursor=pointer]
+            - img "self storage units napa" [ref=e28]
+            - button "Previous" [ref=e29] [cursor=pointer]:
+              - generic [ref=e31]: Previous
+            - button "Next" [ref=e32] [cursor=pointer]:
+              - generic [ref=e34]: Next
+          - generic [ref=e35]:
+            - heading "Storage Units in Napa on Devlin Rd" [level=1] [ref=e37]:
+              - strong [ref=e38]: Storage Units in Napa on Devlin Rd
+            - heading "Storage Star | Devlin Road" [level=2] [ref=e39]
+            - link "400 Devlin Road Napa, California 94558" [ref=e42] [cursor=pointer]:
+              - /url: https://www.google.com/maps/place/Storage+Star+Napa/@38.2280695,-122.261385,15z/data=!4m2!3m1!1s0x0:0xacc4cbcb7c73dc36?sa=X&ved=1t:2428&ictx=111
+              - text: 400 Devlin Road
+              - text: Napa, California 94558
+            - link "(707) 361-7690" [ref=e44] [cursor=pointer]:
+              - /url: tel:(707) 361-7690
+            - generic [ref=e45]:
+              - button "Office View Hours" [ref=e48] [cursor=pointer]:
+                - generic [ref=e49]:
+                  - text: 
+                  - generic [ref=e50]: Office
+                  - generic [ref=e51]: View Hours
+              - button "Access View Hours" [ref=e54] [cursor=pointer]:
+                - generic [ref=e55]:
+                  - text: 
+                  - generic [ref=e56]: Access
+                  - generic [ref=e57]: View Hours
+            - generic [ref=e59] [cursor=pointer]:
+              - generic [ref=e60]:
+                - img [ref=e61]
+                - img [ref=e63]
+                - img [ref=e65]
+                - img [ref=e67]
+                - img [ref=e69]
+              - paragraph [ref=e73]: 172 Reviews
+            - generic [ref=e74]:
+              - link " Call" [ref=e76] [cursor=pointer]:
+                - /url: tel:(707) 361-7690
+                - generic [ref=e77]: 
+                - text: Call
+              - link " Email" [ref=e79] [cursor=pointer]:
+                - /url: mailto:ssdevlinroad@storagestar.com
+                - generic [ref=e80]: 
+                - text: Email
+              - link " Directions" [ref=e82] [cursor=pointer]:
+                - /url: https://www.google.com/maps/place/Storage+Star+Napa/@38.2280695,-122.261385,15z/data=!4m2!3m1!1s0x0:0xacc4cbcb7c73dc36?sa=X&ved=1t:2428&ictx=111
+                - generic [ref=e83]: 
+                - text: Directions
+              - text: 
+              - link " What Size Do I Need?" [ref=e85] [cursor=pointer]:
+                - /url: "#"
+                - generic [ref=e86]: 
+                - text: What Size Do I Need?
+        - generic [ref=e90]:
+          - button "Sizes" [ref=e93] [cursor=pointer]: Sizes
+          - button "Type" [ref=e96] [cursor=pointer]: Type
+          - button "Reset filters" [ref=e98] [cursor=pointer]
+          - generic [ref=e100]:
+            - text: "Sort by: Size Small to Large"
+            - menu
+      - img "Promo Banner" [ref=e104]
+      - table [ref=e107]:
+        - rowgroup [ref=e108]:
+          - row "3 x 3 storage image Wine Storage 3' WIDTH x 3' DEPTH  What Size Do I Need? 2nd MONTH FREE $34/month Web Rate Only $57/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Climate-Controlled  Ground Floor  Wine Storage  Locker  Vehicle Parking  Motorcycle Parking  Truck Parking  Trailer Parking" [ref=e109]:
+            - cell "3 x 3 storage image Wine Storage 3' WIDTH x 3' DEPTH  What Size Do I Need? 2nd MONTH FREE $34/month Web Rate Only $57/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Climate-Controlled  Ground Floor  Wine Storage  Locker  Vehicle Parking  Motorcycle Parking  Truck Parking  Trailer Parking" [ref=e110]:
+              - generic [ref=e112]:
+                - generic [ref=e114]:
+                  - link "3 x 3 storage image" [ref=e116]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_898295813.webp
+                    - img "3 x 3 storage image" [ref=e117]
+                  - generic [ref=e118]:
+                    - generic [ref=e119]: Wine Storage
+                    - heading "3' WIDTH x 3' DEPTH" [level=2] [ref=e120]:
+                      - generic [ref=e121]:
+                        - text: 3'
+                        - generic [ref=e122]: WIDTH
+                      - text: x
+                      - generic [ref=e123]:
+                        - text: 3'
+                        - generic [ref=e124]: DEPTH
+                    - generic [ref=e125]:
+                      - paragraph [ref=e126]:
+                        - generic [ref=e127]: 
+                        - link "What Size Do I Need?" [ref=e128] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e129]:
+                        - generic [ref=e130]: 2nd MONTH FREE
+                - generic [ref=e131]:
+                  - generic [ref=e132]:
+                    - generic [ref=e133]:
+                      - heading "$34/month" [level=3] [ref=e134]
+                      - generic [ref=e135]: Web Rate Only
+                    - generic [ref=e136]:
+                      - heading "$57/month" [level=3] [ref=e137]
+                      - generic [ref=e138]: Standard Rate
+                    - paragraph [ref=e140]: Month to Month - No Long Term Commitments
+                  - generic [ref=e141]:
+                    - generic [ref=e143]:
+                      - link "Rent" [ref=e145] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/california/napa/devlin-road/step-four?unit_id=3596783&storage-star
+                      - generic [ref=e147]: Easily switch sizes.
+                    - generic [ref=e149]:
+                      - generic [ref=e151] [cursor=pointer]: reserve
+                      - generic [ref=e153]: No credit card required.
+                - generic [ref=e155]:
+                  - generic [ref=e159]:
+                    - generic [ref=e161]: 
+                    - generic [ref=e163]: Climate-Controlled
+                  - generic [ref=e167]:
+                    - generic [ref=e169]: 
+                    - generic [ref=e171]: Ground Floor
+                  - generic [ref=e175]:
+                    - generic [ref=e177]: 
+                    - generic [ref=e179]: Wine Storage
+                  - generic [ref=e183]:
+                    - generic [ref=e185]: 
+                    - generic [ref=e187]: Locker
+                  - generic [ref=e188]:
+                    - generic [ref=e191]:
+                      - generic [ref=e192]: 
+                      - text: Vehicle Parking
+                    - generic [ref=e195]:
+                      - generic [ref=e196]: 
+                      - text: Motorcycle Parking
+                    - generic [ref=e199]:
+                      - generic [ref=e200]: 
+                      - text: Truck Parking
+                    - generic [ref=e203]:
+                      - generic [ref=e204]: 
+                      - text: Trailer Parking
+          - row "3 x 3 storage image Wine Storage 3' WIDTH x 3' DEPTH  What Size Do I Need? 2nd MONTH FREE $41/month Web Rate Only $68/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Climate-Controlled  Ground Floor  Wine Storage  Locker  Vehicle Parking  Motorcycle Parking  Truck Parking  Trailer Parking" [ref=e215]:
+            - cell "3 x 3 storage image Wine Storage 3' WIDTH x 3' DEPTH  What Size Do I Need? 2nd MONTH FREE $41/month Web Rate Only $68/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Climate-Controlled  Ground Floor  Wine Storage  Locker  Vehicle Parking  Motorcycle Parking  Truck Parking  Trailer Parking" [ref=e216]:
+              - generic [ref=e218]:
+                - generic [ref=e220]:
+                  - link "3 x 3 storage image" [ref=e222]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_898295813.webp
+                    - img "3 x 3 storage image" [ref=e223]
+                  - generic [ref=e224]:
+                    - generic [ref=e225]: Wine Storage
+                    - heading "3' WIDTH x 3' DEPTH" [level=2] [ref=e226]:
+                      - generic [ref=e227]:
+                        - text: 3'
+                        - generic [ref=e228]: WIDTH
+                      - text: x
+                      - generic [ref=e229]:
+                        - text: 3'
+                        - generic [ref=e230]: DEPTH
+                    - generic [ref=e231]:
+                      - paragraph [ref=e232]:
+                        - generic [ref=e233]: 
+                        - link "What Size Do I Need?" [ref=e234] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e235]:
+                        - generic [ref=e236]: 2nd MONTH FREE
+                - generic [ref=e237]:
+                  - generic [ref=e238]:
+                    - generic [ref=e239]:
+                      - heading "$41/month" [level=3] [ref=e240]
+                      - generic [ref=e241]: Web Rate Only
+                    - generic [ref=e242]:
+                      - heading "$68/month" [level=3] [ref=e243]
+                      - generic [ref=e244]: Standard Rate
+                    - paragraph [ref=e246]: Month to Month - No Long Term Commitments
+                  - generic [ref=e247]:
+                    - generic [ref=e249]:
+                      - link "Rent" [ref=e251] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/california/napa/devlin-road/step-four?unit_id=3596787&storage-star
+                      - generic [ref=e253]: Easily switch sizes.
+                    - generic [ref=e255]:
+                      - generic [ref=e257] [cursor=pointer]: reserve
+                      - generic [ref=e259]: No credit card required.
+                - generic [ref=e261]:
+                  - generic [ref=e265]:
+                    - generic [ref=e267]: 
+                    - generic [ref=e269]: Climate-Controlled
+                  - generic [ref=e273]:
+                    - generic [ref=e275]: 
+                    - generic [ref=e277]: Ground Floor
+                  - generic [ref=e281]:
+                    - generic [ref=e283]: 
+                    - generic [ref=e285]: Wine Storage
+                  - generic [ref=e289]:
+                    - generic [ref=e291]: 
+                    - generic [ref=e293]: Locker
+                  - generic [ref=e294]:
+                    - generic [ref=e297]:
+                      - generic [ref=e298]: 
+                      - text: Vehicle Parking
+                    - generic [ref=e301]:
+                      - generic [ref=e302]: 
+                      - text: Motorcycle Parking
+                    - generic [ref=e305]:
+                      - generic [ref=e306]: 
+                      - text: Truck Parking
+                    - generic [ref=e309]:
+                      - generic [ref=e310]: 
+                      - text: Trailer Parking
+          - row "3 x 4 storage image Wine Storage 3' WIDTH x 4' DEPTH  What Size Do I Need? 2nd MONTH FREE $48/month Web Rate Only $80/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Climate-Controlled  Ground Floor  Wine Storage  Locker  Vehicle Parking  Motorcycle Parking  Truck Parking  Trailer Parking" [ref=e321]:
+            - cell "3 x 4 storage image Wine Storage 3' WIDTH x 4' DEPTH  What Size Do I Need? 2nd MONTH FREE $48/month Web Rate Only $80/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Climate-Controlled  Ground Floor  Wine Storage  Locker  Vehicle Parking  Motorcycle Parking  Truck Parking  Trailer Parking" [ref=e322]:
+              - generic [ref=e324]:
+                - generic [ref=e326]:
+                  - link "3 x 4 storage image" [ref=e328]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_2033390387.webp
+                    - img "3 x 4 storage image" [ref=e329]
+                  - generic [ref=e330]:
+                    - generic [ref=e331]: Wine Storage
+                    - heading "3' WIDTH x 4' DEPTH" [level=2] [ref=e332]:
+                      - generic [ref=e333]:
+                        - text: 3'
+                        - generic [ref=e334]: WIDTH
+                      - text: x
+                      - generic [ref=e335]:
+                        - text: 4'
+                        - generic [ref=e336]: DEPTH
+                    - generic [ref=e337]:
+                      - paragraph [ref=e338]:
+                        - generic [ref=e339]: 
+                        - link "What Size Do I Need?" [ref=e340] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e341]:
+                        - generic [ref=e342]: 2nd MONTH FREE
+                - generic [ref=e343]:
+                  - generic [ref=e344]:
+                    - generic [ref=e345]:
+                      - heading "$48/month" [level=3] [ref=e346]
+                      - generic [ref=e347]: Web Rate Only
+                    - generic [ref=e348]:
+                      - heading "$80/month" [level=3] [ref=e349]
+                      - generic [ref=e350]: Standard Rate
+                    - paragraph [ref=e352]: Month to Month - No Long Term Commitments
+                  - generic [ref=e353]:
+                    - generic [ref=e355]:
+                      - link "Rent" [ref=e357] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/california/napa/devlin-road/step-four?unit_id=4158592&storage-star
+                      - generic [ref=e359]: Easily switch sizes.
+                    - generic [ref=e361]:
+                      - generic [ref=e363] [cursor=pointer]: reserve
+                      - generic [ref=e365]: No credit card required.
+                - generic [ref=e367]:
+                  - generic [ref=e371]:
+                    - generic [ref=e373]: 
+                    - generic [ref=e375]: Climate-Controlled
+                  - generic [ref=e379]:
+                    - generic [ref=e381]: 
+                    - generic [ref=e383]: Ground Floor
+                  - generic [ref=e387]:
+                    - generic [ref=e389]: 
+                    - generic [ref=e391]: Wine Storage
+                  - generic [ref=e395]:
+                    - generic [ref=e397]: 
+                    - generic [ref=e399]: Locker
+                  - generic [ref=e400]:
+                    - generic [ref=e403]:
+                      - generic [ref=e404]: 
+                      - text: Vehicle Parking
+                    - generic [ref=e407]:
+                      - generic [ref=e408]: 
+                      - text: Motorcycle Parking
+                    - generic [ref=e411]:
+                      - generic [ref=e412]: 
+                      - text: Truck Parking
+                    - generic [ref=e415]:
+                      - generic [ref=e416]: 
+                      - text: Trailer Parking
+          - row "5 x 5 storage image Hallway 5' WIDTH x 5' DEPTH  What Size Do I Need? 2nd MONTH FREE $30/month Web Rate Only $50/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor" [ref=e427]:
+            - cell "5 x 5 storage image Hallway 5' WIDTH x 5' DEPTH  What Size Do I Need? 2nd MONTH FREE $30/month Web Rate Only $50/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor" [ref=e428]:
+              - generic [ref=e430]:
+                - generic [ref=e432]:
+                  - link "5 x 5 storage image" [ref=e434]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1912608125.webp
+                    - img "5 x 5 storage image" [ref=e435]
+                  - generic [ref=e436]:
+                    - generic [ref=e437]: Hallway
+                    - heading "5' WIDTH x 5' DEPTH" [level=2] [ref=e438]:
+                      - generic [ref=e439]:
+                        - text: 5'
+                        - generic [ref=e440]: WIDTH
+                      - text: x
+                      - generic [ref=e441]:
+                        - text: 5'
+                        - generic [ref=e442]: DEPTH
+                    - generic [ref=e443]:
+                      - paragraph [ref=e444]:
+                        - generic [ref=e445]: 
+                        - link "What Size Do I Need?" [ref=e446] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e447]:
+                        - generic [ref=e448]: 2nd MONTH FREE
+                - generic [ref=e449]:
+                  - generic [ref=e450]:
+                    - generic [ref=e451]:
+                      - heading "$30/month" [level=3] [ref=e452]
+                      - generic [ref=e453]: Web Rate Only
+                    - generic [ref=e454]:
+                      - heading "$50/month" [level=3] [ref=e455]
+                      - generic [ref=e456]: Standard Rate
+                    - paragraph [ref=e458]: Month to Month - No Long Term Commitments
+                  - generic [ref=e459]:
+                    - generic [ref=e461]:
+                      - link "Rent" [ref=e463] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/california/napa/devlin-road/step-four?unit_id=3596690&storage-star
+                      - generic [ref=e465]: Easily switch sizes.
+                    - generic [ref=e467]:
+                      - generic [ref=e469] [cursor=pointer]: reserve
+                      - generic [ref=e471]: No credit card required.
+                - generic [ref=e473]:
+                  - generic [ref=e477]:
+                    - generic [ref=e479]: 
+                    - generic [ref=e481]: Non-Climate Controlled
+                  - generic [ref=e485]:
+                    - generic [ref=e487]: 
+                    - generic [ref=e489]: Ground Floor
+          - row "8 x 10 storage image Hallway 8' WIDTH x 10' DEPTH  What Size Do I Need? $1 MOVE-IN $77/month Web Rate Only $128/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor" [ref=e501]:
+            - cell "8 x 10 storage image Hallway 8' WIDTH x 10' DEPTH  What Size Do I Need? $1 MOVE-IN $77/month Web Rate Only $128/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor" [ref=e502]:
+              - generic [ref=e504]:
+                - generic [ref=e506]:
+                  - link "8 x 10 storage image" [ref=e508]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_333517220.webp
+                    - img "8 x 10 storage image" [ref=e509]
+                  - generic [ref=e510]:
+                    - generic [ref=e511]: Hallway
+                    - heading "8' WIDTH x 10' DEPTH" [level=2] [ref=e512]:
+                      - generic [ref=e513]:
+                        - text: 8'
+                        - generic [ref=e514]: WIDTH
+                      - text: x
+                      - generic [ref=e515]:
+                        - text: 10'
+                        - generic [ref=e516]: DEPTH
+                    - generic [ref=e517]:
+                      - paragraph [ref=e518]:
+                        - generic [ref=e519]: 
+                        - link "What Size Do I Need?" [ref=e520] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e521]:
+                        - generic [ref=e522]: $1 MOVE-IN
+                - generic [ref=e523]:
+                  - generic [ref=e524]:
+                    - generic [ref=e525]:
+                      - heading "$77/month" [level=3] [ref=e526]
+                      - generic [ref=e527]: Web Rate Only
+                    - generic [ref=e528]:
+                      - heading "$128/month" [level=3] [ref=e529]
+                      - generic [ref=e530]: Standard Rate
+                    - paragraph [ref=e532]: Month to Month - No Long Term Commitments
+                  - generic [ref=e533]:
+                    - generic [ref=e535]:
+                      - link "Rent" [ref=e537] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/california/napa/devlin-road/step-four?unit_id=3596721&storage-star
+                      - generic [ref=e539]: Easily switch sizes.
+                    - generic [ref=e541]:
+                      - generic [ref=e543] [cursor=pointer]: reserve
+                      - generic [ref=e545]: No credit card required.
+                - generic [ref=e547]:
+                  - generic [ref=e551]:
+                    - generic [ref=e553]: 
+                    - generic [ref=e555]: Non-Climate Controlled
+                  - generic [ref=e559]:
+                    - generic [ref=e561]: 
+                    - generic [ref=e563]: Ground Floor
+          - row "10 x 10 storage image Hallway 10' WIDTH x 10' DEPTH  What Size Do I Need? 2nd MONTH FREE $96/month Web Rate Only $160/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor" [ref=e575]:
+            - cell "10 x 10 storage image Hallway 10' WIDTH x 10' DEPTH  What Size Do I Need? 2nd MONTH FREE $96/month Web Rate Only $160/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor" [ref=e576]:
+              - generic [ref=e578]:
+                - generic [ref=e580]:
+                  - link "10 x 10 storage image" [ref=e582]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_2012748801.webp
+                    - img "10 x 10 storage image" [ref=e583]
+                  - generic [ref=e584]:
+                    - generic [ref=e585]: Hallway
+                    - heading "10' WIDTH x 10' DEPTH" [level=2] [ref=e586]:
+                      - generic [ref=e587]:
+                        - text: 10'
+                        - generic [ref=e588]: WIDTH
+                      - text: x
+                      - generic [ref=e589]:
+                        - text: 10'
+                        - generic [ref=e590]: DEPTH
+                    - generic [ref=e591]:
+                      - paragraph [ref=e592]:
+                        - generic [ref=e593]: 
+                        - link "What Size Do I Need?" [ref=e594] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e595]:
+                        - generic [ref=e596]: 2nd MONTH FREE
+                - generic [ref=e597]:
+                  - generic [ref=e598]:
+                    - generic [ref=e599]:
+                      - heading "$96/month" [level=3] [ref=e600]
+                      - generic [ref=e601]: Web Rate Only
+                    - generic [ref=e602]:
+                      - heading "$160/month" [level=3] [ref=e603]
+                      - generic [ref=e604]: Standard Rate
+                    - paragraph [ref=e606]: Month to Month - No Long Term Commitments
+                  - generic [ref=e607]:
+                    - generic [ref=e609]:
+                      - link "Rent" [ref=e611] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/california/napa/devlin-road/step-four?unit_id=3596670&storage-star
+                      - generic [ref=e613]: Easily switch sizes.
+                    - generic [ref=e615]:
+                      - generic [ref=e617] [cursor=pointer]: reserve
+                      - generic [ref=e619]: No credit card required.
+                - generic [ref=e621]:
+                  - generic [ref=e625]:
+                    - generic [ref=e627]: 
+                    - generic [ref=e629]: Non-Climate Controlled
+                  - generic [ref=e633]:
+                    - generic [ref=e635]: 
+                    - generic [ref=e637]: Ground Floor
+          - row "5 x 20 storage image Hallway 5' WIDTH x 20' DEPTH  What Size Do I Need? 2nd MONTH FREE $96/month Web Rate Only $160/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor" [ref=e649]:
+            - cell "5 x 20 storage image Hallway 5' WIDTH x 20' DEPTH  What Size Do I Need? 2nd MONTH FREE $96/month Web Rate Only $160/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor" [ref=e650]:
+              - generic [ref=e652]:
+                - generic [ref=e654]:
+                  - link "5 x 20 storage image" [ref=e656]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1651266775.webp
+                    - img "5 x 20 storage image" [ref=e657]
+                  - generic [ref=e658]:
+                    - generic [ref=e659]: Hallway
+                    - heading "5' WIDTH x 20' DEPTH" [level=2] [ref=e660]:
+                      - generic [ref=e661]:
+                        - text: 5'
+                        - generic [ref=e662]: WIDTH
+                      - text: x
+                      - generic [ref=e663]:
+                        - text: 20'
+                        - generic [ref=e664]: DEPTH
+                    - generic [ref=e665]:
+                      - paragraph [ref=e666]:
+                        - generic [ref=e667]: 
+                        - link "What Size Do I Need?" [ref=e668] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e669]:
+                        - generic [ref=e670]: 2nd MONTH FREE
+                - generic [ref=e671]:
+                  - generic [ref=e672]:
+                    - generic [ref=e673]:
+                      - heading "$96/month" [level=3] [ref=e674]
+                      - generic [ref=e675]: Web Rate Only
+                    - generic [ref=e676]:
+                      - heading "$160/month" [level=3] [ref=e677]
+                      - generic [ref=e678]: Standard Rate
+                    - paragraph [ref=e680]: Month to Month - No Long Term Commitments
+                  - generic [ref=e681]:
+                    - generic [ref=e683]:
+                      - link "Rent" [ref=e685] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/california/napa/devlin-road/step-four?unit_id=4856578&storage-star
+                      - generic [ref=e687]: Easily switch sizes.
+                    - generic [ref=e689]:
+                      - generic [ref=e691] [cursor=pointer]: reserve
+                      - generic [ref=e693]: No credit card required.
+                - generic [ref=e695]:
+                  - generic [ref=e699]:
+                    - generic [ref=e701]: 
+                    - generic [ref=e703]: Non-Climate Controlled
+                  - generic [ref=e707]:
+                    - generic [ref=e709]: 
+                    - generic [ref=e711]: Ground Floor
+          - row "10 x 15 storage image Hallway 10' WIDTH x 15' DEPTH  What Size Do I Need? 2nd MONTH FREE $139/month Web Rate Only $232/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor" [ref=e723]:
+            - cell "10 x 15 storage image Hallway 10' WIDTH x 15' DEPTH  What Size Do I Need? 2nd MONTH FREE $139/month Web Rate Only $232/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor" [ref=e724]:
+              - generic [ref=e726]:
+                - generic [ref=e728]:
+                  - link "10 x 15 storage image" [ref=e730]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_700422589.webp
+                    - img "10 x 15 storage image" [ref=e731]
+                  - generic [ref=e732]:
+                    - generic [ref=e733]: Hallway
+                    - heading "10' WIDTH x 15' DEPTH" [level=2] [ref=e734]:
+                      - generic [ref=e735]:
+                        - text: 10'
+                        - generic [ref=e736]: WIDTH
+                      - text: x
+                      - generic [ref=e737]:
+                        - text: 15'
+                        - generic [ref=e738]: DEPTH
+                    - generic [ref=e739]:
+                      - paragraph [ref=e740]:
+                        - generic [ref=e741]: 
+                        - link "What Size Do I Need?" [ref=e742] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e743]:
+                        - generic [ref=e744]: 2nd MONTH FREE
+                - generic [ref=e745]:
+                  - generic [ref=e746]:
+                    - generic [ref=e747]:
+                      - heading "$139/month" [level=3] [ref=e748]
+                      - generic [ref=e749]: Web Rate Only
+                    - generic [ref=e750]:
+                      - heading "$232/month" [level=3] [ref=e751]
+                      - generic [ref=e752]: Standard Rate
+                    - paragraph [ref=e754]: Month to Month - No Long Term Commitments
+                  - generic [ref=e755]:
+                    - generic [ref=e757]:
+                      - link "Rent" [ref=e759] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/california/napa/devlin-road/step-four?unit_id=3596665&storage-star
+                      - generic [ref=e761]: Easily switch sizes.
+                    - generic [ref=e763]:
+                      - generic [ref=e765] [cursor=pointer]: reserve
+                      - generic [ref=e767]: No credit card required.
+                - generic [ref=e769]:
+                  - generic [ref=e773]:
+                    - generic [ref=e775]: 
+                    - generic [ref=e777]: Non-Climate Controlled
+                  - generic [ref=e781]:
+                    - generic [ref=e783]: 
+                    - generic [ref=e785]: Ground Floor
+          - row "10 x 15 storage image Drive-Up 10' WIDTH x 15' DEPTH  What Size Do I Need? 50% OFF 1 MONTH DISCOUNT $184/month Web Rate Only $307/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Drive-Up" [ref=e797]:
+            - cell "10 x 15 storage image Drive-Up 10' WIDTH x 15' DEPTH  What Size Do I Need? 50% OFF 1 MONTH DISCOUNT $184/month Web Rate Only $307/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Drive-Up" [ref=e798]:
+              - generic [ref=e800]:
+                - generic [ref=e802]:
+                  - link "10 x 15 storage image" [ref=e804]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_700422589.webp
+                    - img "10 x 15 storage image" [ref=e805]
+                  - generic [ref=e806]:
+                    - generic [ref=e807]: Drive-Up
+                    - heading "10' WIDTH x 15' DEPTH" [level=2] [ref=e808]:
+                      - generic [ref=e809]:
+                        - text: 10'
+                        - generic [ref=e810]: WIDTH
+                      - text: x
+                      - generic [ref=e811]:
+                        - text: 15'
+                        - generic [ref=e812]: DEPTH
+                    - generic [ref=e813]:
+                      - paragraph [ref=e814]:
+                        - generic [ref=e815]: 
+                        - link "What Size Do I Need?" [ref=e816] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e817]:
+                        - generic [ref=e818]: 50% OFF 1 MONTH DISCOUNT
+                - generic [ref=e819]:
+                  - generic [ref=e820]:
+                    - generic [ref=e821]:
+                      - heading "$184/month" [level=3] [ref=e822]
+                      - generic [ref=e823]: Web Rate Only
+                    - generic [ref=e824]:
+                      - heading "$307/month" [level=3] [ref=e825]
+                      - generic [ref=e826]: Standard Rate
+                    - paragraph [ref=e828]: Month to Month - No Long Term Commitments
+                  - generic [ref=e829]:
+                    - generic [ref=e831]:
+                      - link "Rent" [ref=e833] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/california/napa/devlin-road/step-four?unit_id=4134686&storage-star
+                      - generic [ref=e835]: Easily switch sizes.
+                    - generic [ref=e837]:
+                      - generic [ref=e839] [cursor=pointer]: reserve
+                      - generic [ref=e841]: No credit card required.
+                - generic [ref=e843]:
+                  - generic [ref=e847]:
+                    - generic [ref=e849]: 
+                    - generic [ref=e851]: Non-Climate Controlled
+                  - generic [ref=e855]:
+                    - generic [ref=e857]: 
+                    - generic [ref=e859]: Drive-Up
+          - row "10 x 20 storage image Hallway 10' WIDTH x 20' DEPTH  What Size Do I Need? $1 MOVE-IN $152/month Web Rate Only $253/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor  Premium" [ref=e871]:
+            - cell "10 x 20 storage image Hallway 10' WIDTH x 20' DEPTH  What Size Do I Need? $1 MOVE-IN $152/month Web Rate Only $253/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor  Premium" [ref=e872]:
+              - generic [ref=e874]:
+                - generic [ref=e876]:
+                  - link "10 x 20 storage image" [ref=e878]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1808486142.webp
+                    - img "10 x 20 storage image" [ref=e879]
+                  - generic [ref=e880]:
+                    - generic [ref=e881]: Hallway
+                    - heading "10' WIDTH x 20' DEPTH" [level=2] [ref=e882]:
+                      - generic [ref=e883]:
+                        - text: 10'
+                        - generic [ref=e884]: WIDTH
+                      - text: x
+                      - generic [ref=e885]:
+                        - text: 20'
+                        - generic [ref=e886]: DEPTH
+                    - generic [ref=e887]:
+                      - paragraph [ref=e888]:
+                        - generic [ref=e889]: 
+                        - link "What Size Do I Need?" [ref=e890] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e891]:
+                        - generic [ref=e892]: $1 MOVE-IN
+                - generic [ref=e893]:
+                  - generic [ref=e894]:
+                    - generic [ref=e895]:
+                      - heading "$152/month" [level=3] [ref=e896]
+                      - generic [ref=e897]: Web Rate Only
+                    - generic [ref=e898]:
+                      - heading "$253/month" [level=3] [ref=e899]
+                      - generic [ref=e900]: Standard Rate
+                    - paragraph [ref=e902]: Month to Month - No Long Term Commitments
+                  - generic [ref=e903]:
+                    - generic [ref=e905]:
+                      - link "Rent" [ref=e907] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/california/napa/devlin-road/step-four?unit_id=4659751&storage-star
+                      - generic [ref=e909]: Easily switch sizes.
+                    - generic [ref=e911]:
+                      - generic [ref=e913] [cursor=pointer]: reserve
+                      - generic [ref=e915]: No credit card required.
+                - generic [ref=e917]:
+                  - generic [ref=e921]:
+                    - generic [ref=e923]: 
+                    - generic [ref=e925]: Non-Climate Controlled
+                  - generic [ref=e929]:
+                    - generic [ref=e931]: 
+                    - generic [ref=e933]: Ground Floor
+                  - generic [ref=e937]:
+                    - generic [ref=e939]: 
+                    - generic [ref=e941]: Premium
+          - row "10 x 20 storage image Non-Climate 10' WIDTH x 20' DEPTH  What Size Do I Need? 2nd MONTH FREE $165/month Web Rate Only $275/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor" [ref=e953]:
+            - cell "10 x 20 storage image Non-Climate 10' WIDTH x 20' DEPTH  What Size Do I Need? 2nd MONTH FREE $165/month Web Rate Only $275/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor" [ref=e954]:
+              - generic [ref=e956]:
+                - generic [ref=e958]:
+                  - link "10 x 20 storage image" [ref=e960]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_2089132715.webp
+                    - img "10 x 20 storage image" [ref=e961]
+                  - generic [ref=e962]:
+                    - generic [ref=e963]: Non-Climate
+                    - heading "10' WIDTH x 20' DEPTH" [level=2] [ref=e964]:
+                      - generic [ref=e965]:
+                        - text: 10'
+                        - generic [ref=e966]: WIDTH
+                      - text: x
+                      - generic [ref=e967]:
+                        - text: 20'
+                        - generic [ref=e968]: DEPTH
+                    - generic [ref=e969]:
+                      - paragraph [ref=e970]:
+                        - generic [ref=e971]: 
+                        - link "What Size Do I Need?" [ref=e972] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e973]:
+                        - generic [ref=e974]: 2nd MONTH FREE
+                - generic [ref=e975]:
+                  - generic [ref=e976]:
+                    - generic [ref=e977]:
+                      - heading "$165/month" [level=3] [ref=e978]
+                      - generic [ref=e979]: Web Rate Only
+                    - generic [ref=e980]:
+                      - heading "$275/month" [level=3] [ref=e981]
+                      - generic [ref=e982]: Standard Rate
+                    - paragraph [ref=e984]: Month to Month - No Long Term Commitments
+                  - generic [ref=e985]:
+                    - generic [ref=e987]:
+                      - link "Rent" [ref=e989] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/california/napa/devlin-road/step-four?unit_id=3596702&storage-star
+                      - generic [ref=e991]: Easily switch sizes.
+                    - generic [ref=e993]:
+                      - generic [ref=e995] [cursor=pointer]: reserve
+                      - generic [ref=e997]: No credit card required.
+                - generic [ref=e999]:
+                  - generic [ref=e1003]:
+                    - generic [ref=e1005]: 
+                    - generic [ref=e1007]: Non-Climate Controlled
+                  - generic [ref=e1011]:
+                    - generic [ref=e1013]: 
+                    - generic [ref=e1015]: Ground Floor
+          - row "10 x 20 storage image Hallway 10' WIDTH x 20' DEPTH  What Size Do I Need? 2nd MONTH FREE $165/month Web Rate Only $275/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor" [ref=e1027]:
+            - cell "10 x 20 storage image Hallway 10' WIDTH x 20' DEPTH  What Size Do I Need? 2nd MONTH FREE $165/month Web Rate Only $275/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor" [ref=e1028]:
+              - generic [ref=e1030]:
+                - generic [ref=e1032]:
+                  - link "10 x 20 storage image" [ref=e1034]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1808486142.webp
+                    - img "10 x 20 storage image" [ref=e1035]
+                  - generic [ref=e1036]:
+                    - generic [ref=e1037]: Hallway
+                    - heading "10' WIDTH x 20' DEPTH" [level=2] [ref=e1038]:
+                      - generic [ref=e1039]:
+                        - text: 10'
+                        - generic [ref=e1040]: WIDTH
+                      - text: x
+                      - generic [ref=e1041]:
+                        - text: 20'
+                        - generic [ref=e1042]: DEPTH
+                    - generic [ref=e1043]:
+                      - paragraph [ref=e1044]:
+                        - generic [ref=e1045]: 
+                        - link "What Size Do I Need?" [ref=e1046] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e1047]:
+                        - generic [ref=e1048]: 2nd MONTH FREE
+                - generic [ref=e1049]:
+                  - generic [ref=e1050]:
+                    - generic [ref=e1051]:
+                      - heading "$165/month" [level=3] [ref=e1052]
+                      - generic [ref=e1053]: Web Rate Only
+                    - generic [ref=e1054]:
+                      - heading "$275/month" [level=3] [ref=e1055]
+                      - generic [ref=e1056]: Standard Rate
+                    - paragraph [ref=e1058]: Month to Month - No Long Term Commitments
+                  - generic [ref=e1059]:
+                    - generic [ref=e1061]:
+                      - link "Rent" [ref=e1063] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/california/napa/devlin-road/step-four?unit_id=4659744&storage-star
+                      - generic [ref=e1065]: Easily switch sizes.
+                    - generic [ref=e1067]:
+                      - generic [ref=e1069] [cursor=pointer]: reserve
+                      - generic [ref=e1071]: No credit card required.
+                - generic [ref=e1073]:
+                  - generic [ref=e1077]:
+                    - generic [ref=e1079]: 
+                    - generic [ref=e1081]: Non-Climate Controlled
+                  - generic [ref=e1085]:
+                    - generic [ref=e1087]: 
+                    - generic [ref=e1089]: Ground Floor
+          - row "10 x 20 storage image Drive-Up 10' WIDTH x 20' DEPTH  What Size Do I Need? $1 MOVE-IN $197/month Web Rate Only $328/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Drive-Up" [ref=e1101]:
+            - cell "10 x 20 storage image Drive-Up 10' WIDTH x 20' DEPTH  What Size Do I Need? $1 MOVE-IN $197/month Web Rate Only $328/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Drive-Up" [ref=e1102]:
+              - generic [ref=e1104]:
+                - generic [ref=e1106]:
+                  - link "10 x 20 storage image" [ref=e1108]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1675668420.webp
+                    - img "10 x 20 storage image" [ref=e1109]
+                  - generic [ref=e1110]:
+                    - generic [ref=e1111]: Drive-Up
+                    - heading "10' WIDTH x 20' DEPTH" [level=2] [ref=e1112]:
+                      - generic [ref=e1113]:
+                        - text: 10'
+                        - generic [ref=e1114]: WIDTH
+                      - text: x
+                      - generic [ref=e1115]:
+                        - text: 20'
+                        - generic [ref=e1116]: DEPTH
+                    - generic [ref=e1117]:
+                      - paragraph [ref=e1118]:
+                        - generic [ref=e1119]: 
+                        - link "What Size Do I Need?" [ref=e1120] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e1121]:
+                        - generic [ref=e1122]: $1 MOVE-IN
+                - generic [ref=e1123]:
+                  - generic [ref=e1124]:
+                    - generic [ref=e1125]:
+                      - heading "$197/month" [level=3] [ref=e1126]
+                      - generic [ref=e1127]: Web Rate Only
+                    - generic [ref=e1128]:
+                      - heading "$328/month" [level=3] [ref=e1129]
+                      - generic [ref=e1130]: Standard Rate
+                    - paragraph [ref=e1132]: Month to Month - No Long Term Commitments
+                  - generic [ref=e1133]:
+                    - generic [ref=e1135]:
+                      - link "Rent" [ref=e1137] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/california/napa/devlin-road/step-four?unit_id=5147540&storage-star
+                      - generic [ref=e1139]: Easily switch sizes.
+                    - generic [ref=e1141]:
+                      - generic [ref=e1143] [cursor=pointer]: reserve
+                      - generic [ref=e1145]: No credit card required.
+                - generic [ref=e1147]:
+                  - generic [ref=e1151]:
+                    - generic [ref=e1153]: 
+                    - generic [ref=e1155]: Non-Climate Controlled
+                  - generic [ref=e1159]:
+                    - generic [ref=e1161]: 
+                    - generic [ref=e1163]: Drive-Up
+          - row "10 x 25 storage image Drive Up 10' WIDTH x 25' DEPTH  What Size Do I Need? 2nd MONTH FREE $224/month Web Rate Only $373/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Drive-Up" [ref=e1175]:
+            - cell "10 x 25 storage image Drive Up 10' WIDTH x 25' DEPTH  What Size Do I Need? 2nd MONTH FREE $224/month Web Rate Only $373/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Drive-Up" [ref=e1176]:
+              - generic [ref=e1178]:
+                - generic [ref=e1180]:
+                  - link "10 x 25 storage image" [ref=e1182]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1015928333.webp
+                    - img "10 x 25 storage image" [ref=e1183]
+                  - generic [ref=e1184]:
+                    - generic [ref=e1185]: Drive Up
+                    - heading "10' WIDTH x 25' DEPTH" [level=2] [ref=e1186]:
+                      - generic [ref=e1187]:
+                        - text: 10'
+                        - generic [ref=e1188]: WIDTH
+                      - text: x
+                      - generic [ref=e1189]:
+                        - text: 25'
+                        - generic [ref=e1190]: DEPTH
+                    - generic [ref=e1191]:
+                      - paragraph [ref=e1192]:
+                        - generic [ref=e1193]: 
+                        - link "What Size Do I Need?" [ref=e1194] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e1195]:
+                        - generic [ref=e1196]: 2nd MONTH FREE
+                - generic [ref=e1197]:
+                  - generic [ref=e1198]:
+                    - generic [ref=e1199]:
+                      - heading "$224/month" [level=3] [ref=e1200]
+                      - generic [ref=e1201]: Web Rate Only
+                    - generic [ref=e1202]:
+                      - heading "$373/month" [level=3] [ref=e1203]
+                      - generic [ref=e1204]: Standard Rate
+                    - paragraph [ref=e1206]: Month to Month - No Long Term Commitments
+                  - generic [ref=e1207]:
+                    - generic [ref=e1209]:
+                      - link "Rent" [ref=e1211] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/california/napa/devlin-road/step-four?unit_id=3747973&storage-star
+                      - generic [ref=e1213]: Easily switch sizes.
+                    - generic [ref=e1215]:
+                      - generic [ref=e1217] [cursor=pointer]: reserve
+                      - generic [ref=e1219]: No credit card required.
+                - generic [ref=e1221]:
+                  - generic [ref=e1225]:
+                    - generic [ref=e1227]: 
+                    - generic [ref=e1229]: Non-Climate Controlled
+                  - generic [ref=e1233]:
+                    - generic [ref=e1235]: 
+                    - generic [ref=e1237]: Drive-Up
+          - row "10 x 30 storage image Hallway 10' WIDTH x 30' DEPTH  What Size Do I Need? $1 MOVE-IN $242/month Web Rate Only $403/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor  Multi-Door  Premium" [ref=e1249]:
+            - cell "10 x 30 storage image Hallway 10' WIDTH x 30' DEPTH  What Size Do I Need? $1 MOVE-IN $242/month Web Rate Only $403/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor  Multi-Door  Premium" [ref=e1250]:
+              - generic [ref=e1252]:
+                - generic [ref=e1254]:
+                  - link "10 x 30 storage image" [ref=e1256]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_989393435.webp
+                    - img "10 x 30 storage image" [ref=e1257]
+                  - generic [ref=e1258]:
+                    - generic [ref=e1259]: Hallway
+                    - heading "10' WIDTH x 30' DEPTH" [level=2] [ref=e1260]:
+                      - generic [ref=e1261]:
+                        - text: 10'
+                        - generic [ref=e1262]: WIDTH
+                      - text: x
+                      - generic [ref=e1263]:
+                        - text: 30'
+                        - generic [ref=e1264]: DEPTH
+                    - generic [ref=e1265]:
+                      - paragraph [ref=e1266]:
+                        - generic [ref=e1267]: 
+                        - link "What Size Do I Need?" [ref=e1268] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e1269]:
+                        - generic [ref=e1270]: $1 MOVE-IN
+                - generic [ref=e1271]:
+                  - generic [ref=e1272]:
+                    - generic [ref=e1273]:
+                      - heading "$242/month" [level=3] [ref=e1274]
+                      - generic [ref=e1275]: Web Rate Only
+                    - generic [ref=e1276]:
+                      - heading "$403/month" [level=3] [ref=e1277]
+                      - generic [ref=e1278]: Standard Rate
+                    - paragraph [ref=e1280]: Month to Month - No Long Term Commitments
+                  - generic [ref=e1281]:
+                    - generic [ref=e1283]:
+                      - link "Rent" [ref=e1285] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/california/napa/devlin-road/step-four?unit_id=4216921&storage-star
+                      - generic [ref=e1287]: Easily switch sizes.
+                    - generic [ref=e1289]:
+                      - generic [ref=e1291] [cursor=pointer]: reserve
+                      - generic [ref=e1293]: No credit card required.
+                - generic [ref=e1295]:
+                  - generic [ref=e1299]:
+                    - generic [ref=e1301]: 
+                    - generic [ref=e1303]: Non-Climate Controlled
+                  - generic [ref=e1307]:
+                    - generic [ref=e1309]: 
+                    - generic [ref=e1311]: Ground Floor
+                  - generic [ref=e1315]:
+                    - generic [ref=e1317]: 
+                    - generic [ref=e1319]: Multi-Door
+                  - generic [ref=e1323]:
+                    - generic [ref=e1325]: 
+                    - generic [ref=e1327]: Premium
+          - row "10 x 30 storage image Hallway 10' WIDTH x 30' DEPTH  What Size Do I Need? 2nd MONTH FREE $252/month Web Rate Only $420/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor  Multi-Door" [ref=e1339]:
+            - cell "10 x 30 storage image Hallway 10' WIDTH x 30' DEPTH  What Size Do I Need? 2nd MONTH FREE $252/month Web Rate Only $420/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor  Multi-Door" [ref=e1340]:
+              - generic [ref=e1342]:
+                - generic [ref=e1344]:
+                  - link "10 x 30 storage image" [ref=e1346]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_989393435.webp
+                    - img "10 x 30 storage image" [ref=e1347]
+                  - generic [ref=e1348]:
+                    - generic [ref=e1349]: Hallway
+                    - heading "10' WIDTH x 30' DEPTH" [level=2] [ref=e1350]:
+                      - generic [ref=e1351]:
+                        - text: 10'
+                        - generic [ref=e1352]: WIDTH
+                      - text: x
+                      - generic [ref=e1353]:
+                        - text: 30'
+                        - generic [ref=e1354]: DEPTH
+                    - generic [ref=e1355]:
+                      - paragraph [ref=e1356]:
+                        - generic [ref=e1357]: 
+                        - link "What Size Do I Need?" [ref=e1358] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e1359]:
+                        - generic [ref=e1360]: 2nd MONTH FREE
+                - generic [ref=e1361]:
+                  - generic [ref=e1362]:
+                    - generic [ref=e1363]:
+                      - heading "$252/month" [level=3] [ref=e1364]
+                      - generic [ref=e1365]: Web Rate Only
+                    - generic [ref=e1366]:
+                      - heading "$420/month" [level=3] [ref=e1367]
+                      - generic [ref=e1368]: Standard Rate
+                    - paragraph [ref=e1370]: Month to Month - No Long Term Commitments
+                  - generic [ref=e1371]:
+                    - generic [ref=e1373]:
+                      - link "Rent" [ref=e1375] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/california/napa/devlin-road/step-four?unit_id=4144220&storage-star
+                      - generic [ref=e1377]: Easily switch sizes.
+                    - generic [ref=e1379]:
+                      - generic [ref=e1381] [cursor=pointer]: reserve
+                      - generic [ref=e1383]: No credit card required.
+                - generic [ref=e1385]:
+                  - generic [ref=e1389]:
+                    - generic [ref=e1391]: 
+                    - generic [ref=e1393]: Non-Climate Controlled
+                  - generic [ref=e1397]:
+                    - generic [ref=e1399]: 
+                    - generic [ref=e1401]: Ground Floor
+                  - generic [ref=e1405]:
+                    - generic [ref=e1407]: 
+                    - generic [ref=e1409]: Multi-Door
+          - row "15 x 20 storage image Hallway 15' WIDTH x 20' DEPTH  What Size Do I Need? 2nd MONTH FREE $252/month Web Rate Only $420/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor" [ref=e1421]:
+            - cell "15 x 20 storage image Hallway 15' WIDTH x 20' DEPTH  What Size Do I Need? 2nd MONTH FREE $252/month Web Rate Only $420/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor" [ref=e1422]:
+              - generic [ref=e1424]:
+                - generic [ref=e1426]:
+                  - link "15 x 20 storage image" [ref=e1428]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1670440290.webp
+                    - img "15 x 20 storage image" [ref=e1429]
+                  - generic [ref=e1430]:
+                    - generic [ref=e1431]: Hallway
+                    - heading "15' WIDTH x 20' DEPTH" [level=2] [ref=e1432]:
+                      - generic [ref=e1433]:
+                        - text: 15'
+                        - generic [ref=e1434]: WIDTH
+                      - text: x
+                      - generic [ref=e1435]:
+                        - text: 20'
+                        - generic [ref=e1436]: DEPTH
+                    - generic [ref=e1437]:
+                      - paragraph [ref=e1438]:
+                        - generic [ref=e1439]: 
+                        - link "What Size Do I Need?" [ref=e1440] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e1441]:
+                        - generic [ref=e1442]: 2nd MONTH FREE
+                - generic [ref=e1443]:
+                  - generic [ref=e1444]:
+                    - generic [ref=e1445]:
+                      - heading "$252/month" [level=3] [ref=e1446]
+                      - generic [ref=e1447]: Web Rate Only
+                    - generic [ref=e1448]:
+                      - heading "$420/month" [level=3] [ref=e1449]
+                      - generic [ref=e1450]: Standard Rate
+                    - paragraph [ref=e1452]: Month to Month - No Long Term Commitments
+                  - generic [ref=e1453]:
+                    - generic [ref=e1455]:
+                      - link "Rent" [ref=e1457] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/california/napa/devlin-road/step-four?unit_id=4492885&storage-star
+                      - generic [ref=e1459]: Easily switch sizes.
+                    - generic [ref=e1461]:
+                      - generic [ref=e1463] [cursor=pointer]: reserve
+                      - generic [ref=e1465]: No credit card required.
+                - generic [ref=e1467]:
+                  - generic [ref=e1471]:
+                    - generic [ref=e1473]: 
+                    - generic [ref=e1475]: Non-Climate Controlled
+                  - generic [ref=e1479]:
+                    - generic [ref=e1481]: 
+                    - generic [ref=e1483]: Ground Floor
+          - row "10 x 30 storage image Interior 10' WIDTH x 30' DEPTH  What Size Do I Need? 2nd MONTH FREE $252/month Web Rate Only $420/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor" [ref=e1495]:
+            - cell "10 x 30 storage image Interior 10' WIDTH x 30' DEPTH  What Size Do I Need? 2nd MONTH FREE $252/month Web Rate Only $420/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor" [ref=e1496]:
+              - generic [ref=e1498]:
+                - generic [ref=e1500]:
+                  - link "10 x 30 storage image" [ref=e1502]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_989393435.webp
+                    - img "10 x 30 storage image" [ref=e1503]
+                  - generic [ref=e1504]:
+                    - generic [ref=e1505]: Interior
+                    - heading "10' WIDTH x 30' DEPTH" [level=2] [ref=e1506]:
+                      - generic [ref=e1507]:
+                        - text: 10'
+                        - generic [ref=e1508]: WIDTH
+                      - text: x
+                      - generic [ref=e1509]:
+                        - text: 30'
+                        - generic [ref=e1510]: DEPTH
+                    - generic [ref=e1511]:
+                      - paragraph [ref=e1512]:
+                        - generic [ref=e1513]: 
+                        - link "What Size Do I Need?" [ref=e1514] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e1515]:
+                        - generic [ref=e1516]: 2nd MONTH FREE
+                - generic [ref=e1517]:
+                  - generic [ref=e1518]:
+                    - generic [ref=e1519]:
+                      - heading "$252/month" [level=3] [ref=e1520]
+                      - generic [ref=e1521]: Web Rate Only
+                    - generic [ref=e1522]:
+                      - heading "$420/month" [level=3] [ref=e1523]
+                      - generic [ref=e1524]: Standard Rate
+                    - paragraph [ref=e1526]: Month to Month - No Long Term Commitments
+                  - generic [ref=e1527]:
+                    - generic [ref=e1529]:
+                      - link "Rent" [ref=e1531] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/california/napa/devlin-road/step-four?unit_id=4879338&storage-star
+                      - generic [ref=e1533]: Easily switch sizes.
+                    - generic [ref=e1535]:
+                      - generic [ref=e1537] [cursor=pointer]: reserve
+                      - generic [ref=e1539]: No credit card required.
+                - generic [ref=e1541]:
+                  - generic [ref=e1545]:
+                    - generic [ref=e1547]: 
+                    - generic [ref=e1549]: Non-Climate Controlled
+                  - generic [ref=e1553]:
+                    - generic [ref=e1555]: 
+                    - generic [ref=e1557]: Ground Floor
+          - row "10 x 30 storage image Drive-Up 10' WIDTH x 30' DEPTH  What Size Do I Need? 2nd MONTH FREE $277/month Web Rate Only $462/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Drive-Up" [ref=e1569]:
+            - cell "10 x 30 storage image Drive-Up 10' WIDTH x 30' DEPTH  What Size Do I Need? 2nd MONTH FREE $277/month Web Rate Only $462/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Drive-Up" [ref=e1570]:
+              - generic [ref=e1572]:
+                - generic [ref=e1574]:
+                  - link "10 x 30 storage image" [ref=e1576]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1829839348.webp
+                    - img "10 x 30 storage image" [ref=e1577]
+                  - generic [ref=e1578]:
+                    - generic [ref=e1579]: Drive-Up
+                    - heading "10' WIDTH x 30' DEPTH" [level=2] [ref=e1580]:
+                      - generic [ref=e1581]:
+                        - text: 10'
+                        - generic [ref=e1582]: WIDTH
+                      - text: x
+                      - generic [ref=e1583]:
+                        - text: 30'
+                        - generic [ref=e1584]: DEPTH
+                    - generic [ref=e1585]:
+                      - paragraph [ref=e1586]:
+                        - generic [ref=e1587]: 
+                        - link "What Size Do I Need?" [ref=e1588] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e1589]:
+                        - generic [ref=e1590]: 2nd MONTH FREE
+                - generic [ref=e1591]:
+                  - generic [ref=e1592]:
+                    - generic [ref=e1593]:
+                      - heading "$277/month" [level=3] [ref=e1594]
+                      - generic [ref=e1595]: Web Rate Only
+                    - generic [ref=e1596]:
+                      - heading "$462/month" [level=3] [ref=e1597]
+                      - generic [ref=e1598]: Standard Rate
+                    - paragraph [ref=e1600]: Month to Month - No Long Term Commitments
+                  - generic [ref=e1601]:
+                    - generic [ref=e1603]:
+                      - link "Rent" [ref=e1605] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/california/napa/devlin-road/step-four?unit_id=4247556&storage-star
+                      - generic [ref=e1607]: Easily switch sizes.
+                    - generic [ref=e1609]:
+                      - generic [ref=e1611] [cursor=pointer]: reserve
+                      - generic [ref=e1613]: No credit card required.
+                - generic [ref=e1615]:
+                  - generic [ref=e1619]:
+                    - generic [ref=e1621]: 
+                    - generic [ref=e1623]: Non-Climate Controlled
+                  - generic [ref=e1627]:
+                    - generic [ref=e1629]: 
+                    - generic [ref=e1631]: Drive-Up
+          - row "10 x 35 storage image Drive-Up 10' WIDTH x 35' DEPTH  What Size Do I Need? $1 MOVE-IN $324/month Web Rate Only $540/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Drive-Up" [ref=e1643]:
+            - cell "10 x 35 storage image Drive-Up 10' WIDTH x 35' DEPTH  What Size Do I Need? $1 MOVE-IN $324/month Web Rate Only $540/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Drive-Up" [ref=e1644]:
+              - generic [ref=e1646]:
+                - generic [ref=e1648]:
+                  - link "10 x 35 storage image" [ref=e1650]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1603556943.webp
+                    - img "10 x 35 storage image" [ref=e1651]
+                  - generic [ref=e1652]:
+                    - generic [ref=e1653]: Drive-Up
+                    - heading "10' WIDTH x 35' DEPTH" [level=2] [ref=e1654]:
+                      - generic [ref=e1655]:
+                        - text: 10'
+                        - generic [ref=e1656]: WIDTH
+                      - text: x
+                      - generic [ref=e1657]:
+                        - text: 35'
+                        - generic [ref=e1658]: DEPTH
+                    - generic [ref=e1659]:
+                      - paragraph [ref=e1660]:
+                        - generic [ref=e1661]: 
+                        - link "What Size Do I Need?" [ref=e1662] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e1663]:
+                        - generic [ref=e1664]: $1 MOVE-IN
+                - generic [ref=e1665]:
+                  - generic [ref=e1666]:
+                    - generic [ref=e1667]:
+                      - heading "$324/month" [level=3] [ref=e1668]
+                      - generic [ref=e1669]: Web Rate Only
+                    - generic [ref=e1670]:
+                      - heading "$540/month" [level=3] [ref=e1671]
+                      - generic [ref=e1672]: Standard Rate
+                    - paragraph [ref=e1674]: Month to Month - No Long Term Commitments
+                  - generic [ref=e1675]:
+                    - generic [ref=e1677]:
+                      - link "Rent" [ref=e1679] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/california/napa/devlin-road/step-four?unit_id=5186395&storage-star
+                      - generic [ref=e1681]: Easily switch sizes.
+                    - generic [ref=e1683]:
+                      - generic [ref=e1685] [cursor=pointer]: reserve
+                      - generic [ref=e1687]: No credit card required.
+                - generic [ref=e1689]:
+                  - generic [ref=e1693]:
+                    - generic [ref=e1695]: 
+                    - generic [ref=e1697]: Non-Climate Controlled
+                  - generic [ref=e1701]:
+                    - generic [ref=e1703]: 
+                    - generic [ref=e1705]: Drive-Up
+      - generic [ref=e1719]:
+        - heading "Customer Reviews" [level=2] [ref=e1720]
+        - generic [ref=e1722]:
+          - generic [ref=e1723]:
+            - generic [ref=e1724] [cursor=pointer]:
+              - generic [ref=e1725]:
+                - img [ref=e1726]
+                - img [ref=e1728]
+                - img [ref=e1730]
+                - img [ref=e1732]
+                - img [ref=e1734]
+              - strong [ref=e1740]: "4.9"
+            - text: 172 Reviews
+          - link "Write a review" [ref=e1741] [cursor=pointer]:
+            - /url: https://www.google.com/search?newwindow=1&sca_esv=b76e5b87cda5eeaa&sca_upv=1&q=Storage+Star+Napa&ludocid=12449299344785660982&lsig=AB86z5W_r2jxhaU5fMONBvAYOWXr&sa=X&ved=2ahUKEwjJp664_ZWGAxVCRDABHUzTCPwQoAJ6BAgLEAc&biw=1700&bih=951&dpr=2#lrd=0x80850ecde7c2d65b:0xacc4cbcb7c73dc36,1,,,,
+            - button "Write a review" [ref=e1742]
+        - generic [ref=e1745]:
+          - button "Previous" [ref=e1746] [cursor=pointer]: ←Previous
+          - generic [ref=e1748]:
+            - generic [ref=e1750]:
+              - generic [ref=e1751]:
+                - generic [ref=e1754] [cursor=pointer]:
+                  - img [ref=e1755]
+                  - img [ref=e1757]
+                  - img [ref=e1759]
+                  - img [ref=e1761]
+                  - img [ref=e1763]
+                - img [ref=e1766]
+              - generic [ref=e1772]:
+                - img [ref=e1773]
+                - paragraph [ref=e1774]: Liz 122
+                - paragraph [ref=e1775]: a month ago
+              - generic [ref=e1776]:
+                - paragraph [ref=e1777]: Jessica helped my husband and I select the best storage at the Rate we can Afford! She also was very helpful with the purchase process! ...
+                - link [ref=e1778] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - generic [ref=e1780]:
+              - generic [ref=e1781]:
+                - generic [ref=e1784] [cursor=pointer]:
+                  - img [ref=e1785]
+                  - img [ref=e1787]
+                  - img [ref=e1789]
+                  - img [ref=e1791]
+                  - img [ref=e1793]
+                - img [ref=e1796]
+              - generic [ref=e1802]:
+                - img [ref=e1803]
+                - paragraph [ref=e1804]: Emanuel Macias Fernandez
+                - paragraph [ref=e1805]: a month ago
+              - generic [ref=e1806]:
+                - paragraph [ref=e1807]: Great storage. Clean. Not to mention Jessica’s at the front desk was awesome she helped me get my storage super easy, convenient. She super nice ...
+                - link [ref=e1808] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - generic [ref=e1810]:
+              - generic [ref=e1811]:
+                - generic [ref=e1814] [cursor=pointer]:
+                  - img [ref=e1815]
+                  - img [ref=e1817]
+                  - img [ref=e1819]
+                  - img [ref=e1821]
+                  - img [ref=e1823]
+                - img [ref=e1826]
+              - generic [ref=e1832]:
+                - img [ref=e1833]
+                - paragraph [ref=e1834]: Emanuel Macias
+                - paragraph [ref=e1835]: a month ago
+              - generic [ref=e1836]:
+                - paragraph [ref=e1837]: Jessica was very professional and efficient! She was friendly and knew exactly what we wanted . Best storage unit check out process very easy ...
+                - link [ref=e1838] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - tabpanel [ref=e1839]:
+              - generic [ref=e1840]:
+                - generic [ref=e1841]:
+                  - generic [ref=e1844] [cursor=pointer]:
+                    - img [ref=e1845]
+                    - img [ref=e1847]
+                    - img [ref=e1849]
+                    - img [ref=e1851]
+                    - img [ref=e1853]
+                  - img [ref=e1856]
+                - generic [ref=e1862]:
+                  - img [ref=e1863]
+                  - paragraph [ref=e1864]: Ronnie Cabral
+                  - paragraph [ref=e1865]: a week ago
+                - paragraph [ref=e1867]: Jessica was awesome and super helpful! Great customer service, she found me the best deal on such short notice! Space looks really clean and secure.
+            - tabpanel [ref=e1868]:
+              - generic [ref=e1869]:
+                - generic [ref=e1870]:
+                  - generic [ref=e1873] [cursor=pointer]:
+                    - img [ref=e1874]
+                    - img [ref=e1876]
+                    - img [ref=e1878]
+                    - img [ref=e1880]
+                    - img [ref=e1882]
+                  - img [ref=e1885]
+                - generic [ref=e1891]:
+                  - img [ref=e1892]
+                  - paragraph [ref=e1893]: Kimberlee Foerder
+                  - paragraph [ref=e1894]: 2 weeks ago
+                - paragraph [ref=e1896]: Awesome customer service
+            - tabpanel [ref=e1897]:
+              - generic [ref=e1898]:
+                - generic [ref=e1899]:
+                  - generic [ref=e1902] [cursor=pointer]:
+                    - img [ref=e1903]
+                    - img [ref=e1905]
+                    - img [ref=e1907]
+                    - img [ref=e1909]
+                    - img [ref=e1911]
+                  - img [ref=e1914]
+                - generic [ref=e1920]:
+                  - img "google review" [ref=e1921]
+                  - paragraph [ref=e1922]: Elisa Van Der Heyden
+                  - paragraph [ref=e1923]: 2 weeks ago
+                - paragraph [ref=e1925]: Jessica is super friendly and very helpful in fitting my needs
+            - tabpanel [ref=e1926]:
+              - generic [ref=e1927]:
+                - generic [ref=e1928]:
+                  - generic [ref=e1931] [cursor=pointer]:
+                    - img [ref=e1932]
+                    - img [ref=e1934]
+                    - img [ref=e1936]
+                    - img [ref=e1938]
+                    - img [ref=e1940]
+                  - img [ref=e1943]
+                - generic [ref=e1949]:
+                  - img "google review" [ref=e1950]
+                  - paragraph [ref=e1951]: MICHAEL KIRSTINE
+                  - paragraph [ref=e1952]: 3 weeks ago
+                - paragraph [ref=e1954]: Five stars, as they stand…. Name for a reason best service in town ….. +rates A+ on all parts!!!
+            - tabpanel [ref=e1955]:
+              - generic [ref=e1956]:
+                - generic [ref=e1957]:
+                  - generic [ref=e1960] [cursor=pointer]:
+                    - img [ref=e1961]
+                    - img [ref=e1963]
+                    - img [ref=e1965]
+                    - img [ref=e1967]
+                    - img [ref=e1969]
+                  - img [ref=e1972]
+                - generic [ref=e1978]:
+                  - img "google review" [ref=e1979]
+                  - paragraph [ref=e1980]: Jose Rodriguez
+                  - paragraph [ref=e1981]: 4 weeks ago
+                - generic:
+                  - paragraph
+            - tabpanel [ref=e1982]:
+              - generic [ref=e1983]:
+                - generic [ref=e1984]:
+                  - generic [ref=e1987] [cursor=pointer]:
+                    - img [ref=e1988]
+                    - img [ref=e1990]
+                    - img [ref=e1992]
+                    - img [ref=e1994]
+                    - img [ref=e1996]
+                  - img [ref=e1999]
+                - generic [ref=e2005]:
+                  - img [ref=e2006]
+                  - paragraph [ref=e2007]: Cathy Abney
+                  - paragraph [ref=e2008]: 4 weeks ago
+                - paragraph [ref=e2010]: Jessica was amazing and made the transaction so easy, she explained everything, so I didnt have any questions. Go see her shes the best. Cathy
+            - tabpanel [ref=e2011]:
+              - generic [ref=e2012]:
+                - generic [ref=e2013]:
+                  - generic [ref=e2016] [cursor=pointer]:
+                    - img [ref=e2017]
+                    - img [ref=e2019]
+                    - img [ref=e2021]
+                    - img [ref=e2023]
+                    - img [ref=e2025]
+                  - img [ref=e2028]
+                - generic [ref=e2034]:
+                  - img [ref=e2035]
+                  - paragraph [ref=e2036]: Robert McBlair
+                  - paragraph [ref=e2037]: a month ago
+                - generic [ref=e2038]:
+                  - paragraph [ref=e2039]: Jessica rolled out the red carpet for us! Jessica made the process of renting a storage unit quick and easy. She clearly cares about her ...
+                  - link [ref=e2040] [cursor=pointer]:
+                    - /url: "#"
+                    - text: Show more
+            - tabpanel [ref=e2041]:
+              - generic [ref=e2042]:
+                - generic [ref=e2043]:
+                  - generic [ref=e2046] [cursor=pointer]:
+                    - img [ref=e2047]
+                    - img [ref=e2049]
+                    - img [ref=e2051]
+                    - img [ref=e2053]
+                    - img [ref=e2055]
+                  - img [ref=e2058]
+                - generic [ref=e2064]:
+                  - img [ref=e2065]
+                  - paragraph [ref=e2066]: Jamilet Solano
+                  - paragraph [ref=e2067]: a month ago
+                - generic [ref=e2068]:
+                  - paragraph [ref=e2069]: It’s my first time here and Jessica is amazing! She’s so kind and funny and explained everything really well. She made my whole experience a ...
+                  - link [ref=e2070] [cursor=pointer]:
+                    - /url: "#"
+                    - text: Show more
+            - tabpanel [ref=e2071]:
+              - generic [ref=e2072]:
+                - generic [ref=e2073]:
+                  - generic [ref=e2076] [cursor=pointer]:
+                    - img [ref=e2077]
+                    - img [ref=e2079]
+                    - img [ref=e2081]
+                    - img [ref=e2083]
+                    - img [ref=e2085]
+                  - img [ref=e2088]
+                - generic [ref=e2094]:
+                  - img [ref=e2095]
+                  - paragraph [ref=e2096]: ERIC
+                  - paragraph [ref=e2097]: a month ago
+                - paragraph [ref=e2099]: Very welcoming. I'm Good Hands. Thank you Storage Star.
+            - tabpanel [ref=e2100]:
+              - generic [ref=e2101]:
+                - generic [ref=e2102]:
+                  - generic [ref=e2105] [cursor=pointer]:
+                    - img [ref=e2106]
+                    - img [ref=e2108]
+                    - img [ref=e2110]
+                    - img [ref=e2112]
+                    - img [ref=e2114]
+                  - img [ref=e2117]
+                - generic [ref=e2123]:
+                  - img [ref=e2124]
+                  - paragraph [ref=e2125]: Liz 122
+                  - paragraph [ref=e2126]: a month ago
+                - generic [ref=e2127]:
+                  - paragraph [ref=e2128]: Jessica helped my husband and I select the best storage at the Rate we can Afford! She also was very helpful with the purchase process! ...
+                  - link [ref=e2129] [cursor=pointer]:
+                    - /url: "#"
+                    - text: Show more
+            - tabpanel [ref=e2130]:
+              - generic [ref=e2131]:
+                - generic [ref=e2132]:
+                  - generic [ref=e2135] [cursor=pointer]:
+                    - img [ref=e2136]
+                    - img [ref=e2138]
+                    - img [ref=e2140]
+                    - img [ref=e2142]
+                    - img [ref=e2144]
+                  - img [ref=e2147]
+                - generic [ref=e2153]:
+                  - img [ref=e2154]
+                  - paragraph [ref=e2155]: Emanuel Macias Fernandez
+                  - paragraph [ref=e2156]: a month ago
+                - generic [ref=e2157]:
+                  - paragraph [ref=e2158]: Great storage. Clean. Not to mention Jessica’s at the front desk was awesome she helped me get my storage super easy, convenient. She super nice ...
+                  - link [ref=e2159] [cursor=pointer]:
+                    - /url: "#"
+                    - text: Show more
+            - tabpanel [ref=e2160]:
+              - generic [ref=e2161]:
+                - generic [ref=e2162]:
+                  - generic [ref=e2165] [cursor=pointer]:
+                    - img [ref=e2166]
+                    - img [ref=e2168]
+                    - img [ref=e2170]
+                    - img [ref=e2172]
+                    - img [ref=e2174]
+                  - img [ref=e2177]
+                - generic [ref=e2183]:
+                  - img [ref=e2184]
+                  - paragraph [ref=e2185]: Emanuel Macias
+                  - paragraph [ref=e2186]: a month ago
+                - generic [ref=e2187]:
+                  - paragraph [ref=e2188]: Jessica was very professional and efficient! She was friendly and knew exactly what we wanted . Best storage unit check out process very easy ...
+                  - link [ref=e2189] [cursor=pointer]:
+                    - /url: "#"
+                    - text: Show more
+            - generic [ref=e2191]:
+              - generic [ref=e2192]:
+                - generic [ref=e2195] [cursor=pointer]:
+                  - img [ref=e2196]
+                  - img [ref=e2198]
+                  - img [ref=e2200]
+                  - img [ref=e2202]
+                  - img [ref=e2204]
+                - img [ref=e2207]
+              - generic [ref=e2213]:
+                - img [ref=e2214]
+                - paragraph [ref=e2215]: Ronnie Cabral
+                - paragraph [ref=e2216]: a week ago
+              - paragraph [ref=e2218]: Jessica was awesome and super helpful! Great customer service, she found me the best deal on such short notice! Space looks really clean and secure.
+            - generic [ref=e2220]:
+              - generic [ref=e2221]:
+                - generic [ref=e2224] [cursor=pointer]:
+                  - img [ref=e2225]
+                  - img [ref=e2227]
+                  - img [ref=e2229]
+                  - img [ref=e2231]
+                  - img [ref=e2233]
+                - img [ref=e2236]
+              - generic [ref=e2242]:
+                - img [ref=e2243]
+                - paragraph [ref=e2244]: Kimberlee Foerder
+                - paragraph [ref=e2245]: 2 weeks ago
+              - paragraph [ref=e2247]: Awesome customer service
+            - generic [ref=e2249]:
+              - generic [ref=e2250]:
+                - generic [ref=e2253] [cursor=pointer]:
+                  - img [ref=e2254]
+                  - img [ref=e2256]
+                  - img [ref=e2258]
+                  - img [ref=e2260]
+                  - img [ref=e2262]
+                - img [ref=e2265]
+              - generic [ref=e2271]:
+                - img [ref=e2272]
+                - paragraph [ref=e2273]: Elisa Van Der Heyden
+                - paragraph [ref=e2274]: 2 weeks ago
+              - paragraph [ref=e2276]: Jessica is super friendly and very helpful in fitting my needs
+            - generic [ref=e2278]:
+              - generic [ref=e2279]:
+                - generic [ref=e2282] [cursor=pointer]:
+                  - img [ref=e2283]
+                  - img [ref=e2285]
+                  - img [ref=e2287]
+                  - img [ref=e2289]
+                  - img [ref=e2291]
+                - img [ref=e2294]
+              - generic [ref=e2300]:
+                - img [ref=e2301]
+                - paragraph [ref=e2302]: MICHAEL KIRSTINE
+                - paragraph [ref=e2303]: 3 weeks ago
+              - paragraph [ref=e2305]: Five stars, as they stand…. Name for a reason best service in town ….. +rates A+ on all parts!!!
+            - generic [ref=e2307]:
+              - generic [ref=e2308]:
+                - generic [ref=e2311] [cursor=pointer]:
+                  - img [ref=e2312]
+                  - img [ref=e2314]
+                  - img [ref=e2316]
+                  - img [ref=e2318]
+                  - img [ref=e2320]
+                - img [ref=e2323]
+              - generic [ref=e2329]:
+                - img [ref=e2330]
+                - paragraph [ref=e2331]: Jose Rodriguez
+                - paragraph [ref=e2332]: 4 weeks ago
+            - generic [ref=e2334]:
+              - generic [ref=e2335]:
+                - generic [ref=e2338] [cursor=pointer]:
+                  - img [ref=e2339]
+                  - img [ref=e2341]
+                  - img [ref=e2343]
+                  - img [ref=e2345]
+                  - img [ref=e2347]
+                - img [ref=e2350]
+              - generic [ref=e2356]:
+                - img [ref=e2357]
+                - paragraph [ref=e2358]: Cathy Abney
+                - paragraph [ref=e2359]: 4 weeks ago
+              - paragraph [ref=e2361]: Jessica was amazing and made the transaction so easy, she explained everything, so I didnt have any questions. Go see her shes the best. Cathy
+            - generic [ref=e2363]:
+              - generic [ref=e2364]:
+                - generic [ref=e2367] [cursor=pointer]:
+                  - img [ref=e2368]
+                  - img [ref=e2370]
+                  - img [ref=e2372]
+                  - img [ref=e2374]
+                  - img [ref=e2376]
+                - img [ref=e2379]
+              - generic [ref=e2385]:
+                - img [ref=e2386]
+                - paragraph [ref=e2387]: Robert McBlair
+                - paragraph [ref=e2388]: a month ago
+              - generic [ref=e2389]:
+                - paragraph [ref=e2390]: Jessica rolled out the red carpet for us! Jessica made the process of renting a storage unit quick and easy. She clearly cares about her ...
+                - link [ref=e2391] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - generic [ref=e2393]:
+              - generic [ref=e2394]:
+                - generic [ref=e2397] [cursor=pointer]:
+                  - img [ref=e2398]
+                  - img [ref=e2400]
+                  - img [ref=e2402]
+                  - img [ref=e2404]
+                  - img [ref=e2406]
+                - img [ref=e2409]
+              - generic [ref=e2415]:
+                - img [ref=e2416]
+                - paragraph [ref=e2417]: Jamilet Solano
+                - paragraph [ref=e2418]: a month ago
+              - generic [ref=e2419]:
+                - paragraph [ref=e2420]: It’s my first time here and Jessica is amazing! She’s so kind and funny and explained everything really well. She made my whole experience a ...
+                - link [ref=e2421] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - generic [ref=e2423]:
+              - generic [ref=e2424]:
+                - generic [ref=e2427] [cursor=pointer]:
+                  - img [ref=e2428]
+                  - img [ref=e2430]
+                  - img [ref=e2432]
+                  - img [ref=e2434]
+                  - img [ref=e2436]
+                - img [ref=e2439]
+              - generic [ref=e2445]:
+                - img [ref=e2446]
+                - paragraph [ref=e2447]: ERIC
+                - paragraph [ref=e2448]: a month ago
+              - paragraph [ref=e2450]: Very welcoming. I'm Good Hands. Thank you Storage Star.
+            - generic [ref=e2452]:
+              - generic [ref=e2453]:
+                - generic [ref=e2456] [cursor=pointer]:
+                  - img [ref=e2457]
+                  - img [ref=e2459]
+                  - img [ref=e2461]
+                  - img [ref=e2463]
+                  - img [ref=e2465]
+                - img [ref=e2468]
+              - generic [ref=e2474]:
+                - img [ref=e2475]
+                - paragraph [ref=e2476]: Liz 122
+                - paragraph [ref=e2477]: a month ago
+              - generic [ref=e2478]:
+                - paragraph [ref=e2479]: Jessica helped my husband and I select the best storage at the Rate we can Afford! She also was very helpful with the purchase process! ...
+                - link [ref=e2480] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - generic [ref=e2482]:
+              - generic [ref=e2483]:
+                - generic [ref=e2486] [cursor=pointer]:
+                  - img [ref=e2487]
+                  - img [ref=e2489]
+                  - img [ref=e2491]
+                  - img [ref=e2493]
+                  - img [ref=e2495]
+                - img [ref=e2498]
+              - generic [ref=e2504]:
+                - img [ref=e2505]
+                - paragraph [ref=e2506]: Emanuel Macias Fernandez
+                - paragraph [ref=e2507]: a month ago
+              - generic [ref=e2508]:
+                - paragraph [ref=e2509]: Great storage. Clean. Not to mention Jessica’s at the front desk was awesome she helped me get my storage super easy, convenient. She super nice ...
+                - link [ref=e2510] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - generic [ref=e2512]:
+              - generic [ref=e2513]:
+                - generic [ref=e2516] [cursor=pointer]:
+                  - img [ref=e2517]
+                  - img [ref=e2519]
+                  - img [ref=e2521]
+                  - img [ref=e2523]
+                  - img [ref=e2525]
+                - img [ref=e2528]
+              - generic [ref=e2534]:
+                - img [ref=e2535]
+                - paragraph [ref=e2536]: Emanuel Macias
+                - paragraph [ref=e2537]: a month ago
+              - generic [ref=e2538]:
+                - paragraph [ref=e2539]: Jessica was very professional and efficient! She was friendly and knew exactly what we wanted . Best storage unit check out process very easy ...
+                - link [ref=e2540] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+          - button "Next" [ref=e2541] [cursor=pointer]: →Next
+          - tablist [ref=e2542]:
+            - tab "1 of 4" [ref=e2543] [cursor=pointer]: • 1
+            - tab "2 of 4" [ref=e2544] [cursor=pointer]: • 2
+            - tab "3 of 4" [selected] [ref=e2545] [cursor=pointer]: • 3
+            - tab "4 of 4" [ref=e2546] [cursor=pointer]: • 4
+            - tab "5 of 4" [ref=e2547] [cursor=pointer]: • 5
+            - tab "6 of 4" [ref=e2548] [cursor=pointer]: • 6
+            - tab "7 of 4" [ref=e2549] [cursor=pointer]: • 7
+            - tab "8 of 4" [ref=e2550] [cursor=pointer]: • 8
+            - tab "9 of 4" [ref=e2551] [cursor=pointer]: • 9
+            - tab "10 of 4" [ref=e2552] [cursor=pointer]: • 10
+            - tab "11 of 4" [ref=e2553] [cursor=pointer]: • 11
+            - tab "12 of 4" [ref=e2554] [cursor=pointer]: • 12
+      - generic [ref=e2555]:
+        - generic [ref=e2556]:
+          - img "self storage units napa" [ref=e2558]
+          - generic [ref=e2560]:
+            - img "storage units near me" [ref=e2562]
+            - img "self storage units" [ref=e2564]
+        - generic [ref=e2566]:
+          - heading "About Napa | Devlin Road" [level=2] [ref=e2567]
+          - paragraph
+          - heading "Self-Storage in Napa, CA, Near Highway 29 on Devlin Road" [level=2] [ref=e2568]
+          - paragraph [ref=e2569]: Looking for secure, convenient self storage in Napa, CA? Storage Star at 400 Devlin Road provides premium self-storage solutions in the heart of Napa Valley, just off Highway 29. Our Napa self-storage facility serves residents, wineries, and businesses throughout Napa, American Canyon, and Vallejo with flexible month-to-month rentals and modern storage amenities.
+          - paragraph [ref=e2570]: Whether you need climate-controlled wine storage, drive-up storage units, RV and boat storage, or short-term business storage, Storage Star offers clean, secure storage units in Napa designed to fit your space, schedule, and budget. With easy online rentals, ground-level access, and a convenient South Napa location, storing with us is simple from day one.
+          - heading "Modern Features at Storage Star in Napa" [level=2] [ref=e2571]
+          - paragraph [ref=e2572]: "At Storage Star in Napa, we make self-storage simple and stress-free with a wide variety of high-end amenities. Our Napa storage includes:"
+          - list [ref=e2573]:
+            - listitem [ref=e2574]:
+              - link "Drive-up accessibility" [ref=e2575] [cursor=pointer]:
+                - /url: https://www.storagestar.com/drive-up-storage
+            - listitem [ref=e2576]: Ground-level storage units
+            - listitem [ref=e2577]:
+              - link "Wine storage unit" [ref=e2578] [cursor=pointer]:
+                - /url: https://www.storagestar.com/wine-storage-units
+              - text: s
+            - listitem [ref=e2579]: Car, boat, and RV storage
+            - listitem [ref=e2580]: Contactless online rentals
+            - listitem [ref=e2581]: Month-to-month leasing
+            - listitem [ref=e2582]: Online bill pay
+            - listitem [ref=e2583]: Military discounts
+            - listitem [ref=e2584]: Outstanding customer service
+            - listitem [ref=e2585]: And more!
+          - heading "Secure & Convenient Storage Near Napa, American Canyon, and Vallejo" [level=2] [ref=e2586]
+          - paragraph [ref=e2587]: Your belongings are important. That's why we prioritize security and accessibility. With 24-hour digital surveillance, gated access, and well-lit grounds, you can store with confidence.
+          - paragraph [ref=e2588]: "Located at 400 Devlin Road, our Napa storage facility is easily accessible from surrounding neighborhoods, including:"
+          - list [ref=e2589]:
+            - listitem [ref=e2590]: Napa Junction
+            - listitem [ref=e2591]: American Canyon
+            - listitem [ref=e2592]: South Napa County
+            - listitem [ref=e2593]: Middleton
+            - listitem [ref=e2594]: Cuttings Wharf
+            - listitem [ref=e2595]: Thompson
+            - listitem [ref=e2596]: Rocktram
+            - listitem [ref=e2597]: Green Valley
+            - listitem [ref=e2598]: Imola
+          - heading "Directions to Storage Star" [level=3] [ref=e2599]
+          - list [ref=e2600]:
+            - listitem [ref=e2601]: "From Vallejo: Take I-80 East to CA-29 North. Drive 14 miles (~ 25 minutes) and turn right onto Devlin Road"
+            - listitem [ref=e2602]: "From American Canyon: Head north on CA-29 for about 9 miles (~12 minutes), then turn right on Devlin Road."
+          - paragraph [ref=e2603]: Our facility is located near SpringHill Suites Napa Valley, RD Winery, and the Napa County Airport. We're also minutes away from Eagle Vines Golf Club and Chardonnay Golf Club (our 5x5 storage units are great for storing your clubs between tee times!).
+          - heading "Vehicle, Car, Boat & RV Storage in Napa, CA" [level=2] [ref=e2604]
+          - paragraph [ref=e2605]:
+            - text: Need a safe place to store your vehicle? We’ve got you covered. Our Napa
+            - link "vehicle storage units" [ref=e2606] [cursor=pointer]:
+              - /url: https://www.storagestar.com/storage-type/vehicle-storage
+            - text: are perfect for cars, motorcycles, RVs, and boats. With wide driveways, easy maneuvering, and 24-hour access, we make vehicle storage easy.
+          - paragraph [ref=e2607]:
+            - text: Explore our boat and
+            - link "RV storage options" [ref=e2608] [cursor=pointer]:
+              - /url: https://www.storagestar.com/rv-storage
+            - text: for secure parking and flexible lease terms, ideal for off-season or long-term needs. Our self-storage facility near local outdoor destinations like Skyline Wilderness Park and Newell Open Space Preserve makes pickup and drop-off fast and hassle-free.
+          - heading "Flexible Self-Storage for Napa Residents, Wineries & Businesses" [level=2] [ref=e2609]
+          - paragraph [ref=e2610]: Storage needs in Napa often go beyond seasonal décor and spare furniture. From wineries managing overflow inventory during harvest season to local businesses storing equipment and supplies, flexible self-storage in Napa plays an important role in keeping operations running smoothly.
+          - paragraph [ref=e2611]: "Storage Star on Devlin Road supports a wide range of storage needs, including:"
+          - list [ref=e2612]:
+            - listitem [ref=e2613]: Winery overflow storage during crush season
+            - listitem [ref=e2614]: Wine inventory storage for tasting rooms
+            - listitem [ref=e2615]: Business storage for retail inventory and equipment
+            - listitem [ref=e2616]: Contractor storage for tools and materials
+            - listitem [ref=e2617]: Student storage between semesters
+            - listitem [ref=e2618]: Temporary storage during moves or renovations
+            - paragraph [ref=e2619]: Our month-to-month lease options make it easy to scale up or down as your needs change. Whether you’re a small business owner near Napa County Airport, a vintner managing seasonal inventory, or a family transitioning between homes, our Napa self-storage facility provides reliable, accessible space when you need it most.
+          - heading "Climate-Controlled Wine Storage Lockers in Napa Valley" [level=3] [ref=e2620]
+          - paragraph [ref=e2621]: In the heart of Napa Valley, proper wine storage matters. Storage Star offers dedicated climate-controlled wine storage lockers in Napa designed to help protect bottles from temperature fluctuations that can impact quality and aging.
+          - paragraph [ref=e2622]: "Our wine storage units are ideal for:"
+          - list [ref=e2623]:
+            - listitem [ref=e2624]: Local wineries needing short-term overflow storage
+            - listitem [ref=e2625]: Tasting rooms managing rotating inventory
+            - listitem [ref=e2626]: Collectors protecting personal vintages
+            - listitem [ref=e2627]: Businesses storing cases in a secure, temperature-moderated environment
+          - paragraph [ref=e2628]: Unlike standard storage units, our wine lockers are designed to help reduce exposure to extreme heat, humidity swings, and environmental changes that can damage labels, corks, and contents. Locker sizes range from 3x3 to 4x4, providing a compact, practical alternative to large off-site wine vaults.
+          - paragraph [ref=e2629]: If you're searching for wine storage in Napa or climate-controlled storage in Napa Valley, Storage Star on Devlin Road offers a flexible, accessible solution close to Highway 29.
+          - heading "Business Storage Solutions in Napa" [level=3] [ref=e2630]:
+            - link "Business Storage Solutions" [ref=e2631] [cursor=pointer]:
+              - /url: https://www.storagestar.com/business-storage
+            - text: in Napa
+          - paragraph [ref=e2632]: We also support local businesses with extra space for inventory, supplies, or seasonal items. If you’re in the wine industry or running another growing Napa business, our flexible storage plans are here to help.
+          - heading "Student Storage Near Pacific Union College in Napa Valley" [level=3] [ref=e2633]:
+            - link "Student Storage" [ref=e2634] [cursor=pointer]:
+              - /url: https://www.storagestar.com/storage-type/student-storage
+            - text: Near Pacific Union College in Napa Valley
+          - paragraph [ref=e2635]: Pacific Union College in Angwin, CA, is just 12 miles away from Storage Star in Napa. The drive only takes about 20 to 25 minutes on CA-29. This makes Storage Star a great choice for student storage.
+          - paragraph [ref=e2636]: Our 5x5 and 5x10 cheap storage units are a great choice for your dorm furniture and other items during summer break. Studying abroad? These small storage units are a great place to leave your belongings while you travel! Our month-to-month leases allow you to rent a short-term storage unit between semesters.
+          - heading "Eco-Friendly, Solar-Powered Self-Storage in Napa, CA" [level=2] [ref=e2637]
+          - paragraph [ref=e2638]: Storage Star in Napa is proud to be a solar-powered facility, using renewable energy to reduce our environmental impact. You can feel good knowing that your storage choice supports sustainability while maintaining top-tier performance, rain or shine.
+          - heading "Why Choose Storage Star in Napa?" [level=2] [ref=e2639]
+          - paragraph [ref=e2640]: With several storage facilities throughout Napa County, choosing the right self-storage provider matters. Storage Star stands out for our combination of security, convenience, and flexibility.
+          - paragraph [ref=e2641]: "Customers choose our Napa storage facility because we offer:"
+          - list [ref=e2642]:
+            - listitem [ref=e2643]: Flexible month-to-month rentals
+            - listitem [ref=e2644]: Drive-up storage units for easy loading
+            - listitem [ref=e2645]: Dedicated wine storage lockers
+            - listitem [ref=e2646]: Car, boat, and RV storage options
+            - listitem [ref=e2647]: Solar-powered, eco-conscious operations
+            - listitem [ref=e2648]: 24-hour digital surveillance and gated access
+            - listitem [ref=e2649]: Convenient access near Highway 29
+          - paragraph [ref=e2650]: Whether you're comparing Napa storage facilities or searching for the best self storage in Napa, Storage Star delivers dependable service and modern amenities in a prime South Napa location.
+          - heading "Rent Your Storage Unit in Napa, California Today" [level=2] [ref=e2651]
+          - paragraph [ref=e2652]: With our long-standing expertise in the storage industry, you can have confidence in Storage Star's ability to deliver reliable and convenient storage options for your precious possessions.
+          - paragraph [ref=e2653]: Discover why Storage Star is the preferred choice for self storage in Napa, CA. With flexible month-to-month leases, exceptional security, and a wide range of unit sizes, we’re here to make storage simple.
+          - paragraph [ref=e2654]: Rent or reserve your storage space online now! For additional information and support, give us a call or contact one of our storage specialists.
+          - heading "Can’t Find the Storage Unit You’re Looking For?" [level=2] [ref=e2655]
+          - paragraph [ref=e2656]:
+            - text: Looking for
+            - link "California self-storage" [ref=e2657] [cursor=pointer]:
+              - /url: https://www.storagestar.com/storage-units-california
+            - text: that wasn’t available at this Napa storage facility? Check out our other
+            - link "storage facilities in California's Wine Country!" [ref=e2658] [cursor=pointer]:
+              - /url: https://www.storagestar.com/california-wine-country-storage-units
+          - list [ref=e2659]:
+            - listitem [ref=e2660]:
+              - link "Car, boat, and RV storage (14 miles away)" [ref=e2661] [cursor=pointer]:
+                - /url: https://www.storagestar.com/storage-units/california/sonoma/arnold-drive
+            - listitem [ref=e2662]:
+              - link "Vehicle, boat, and RV storage (19 miles)" [ref=e2663] [cursor=pointer]:
+                - /url: https://www.storagestar.com/storage-units/california/fairfield/lopes-road
+            - listitem [ref=e2664]:
+              - link "Accessible and convenient self storage (29 miles away)" [ref=e2665] [cursor=pointer]:
+                - /url: https://www.storagestar.com/storage-units/california/novato/deer-island-lane
+          - paragraph
+          - region "Storage Star Napa FAQs" [ref=e2666]:
+            - heading "Frequently Asked Questions About Storage Star on Devlin Road" [level=2] [ref=e2667]
+            - button "What storage unit sizes are available in Napa? +" [ref=e2669] [cursor=pointer]
+            - button "Can I store wine in a Napa storage unit? +" [ref=e2671] [cursor=pointer]
+            - button "Can I store a car, boat, or RV in Napa? +" [ref=e2673] [cursor=pointer]
+            - button "How much does storage cost in Napa, CA? +" [ref=e2675] [cursor=pointer]
+            - button "Are rentals month-to-month? +" [ref=e2677] [cursor=pointer]
+            - button "How secure are your Napa storage units? +" [ref=e2679] [cursor=pointer]
+            - button "What nearby areas do you serve? +" [ref=e2681] [cursor=pointer]
+            - button "Do you offer business storage in Napa? +" [ref=e2683] [cursor=pointer]
+            - button "How fast can I move in? +" [ref=e2685] [cursor=pointer]
+          - paragraph [ref=e2686]: First Month Promotions valid at select locations, subject to unit availability. First month promotions only apply to the monthly rent charge for the first month; regular monthly charges will apply after. Administrative fees, taxes, insurance, or other charges may apply. Cannot be combined with other discounts or on transfers and is subject to change. See store for complete details.
+          - paragraph [ref=e2687]: Multi-month promotions valid at select locations, subject to unit availability. Two-month rate promotions only apply to the monthly rent charge for the first two months; three-month rate promotions only apply to the monthly rent charge for the first three months; regular monthly charges will apply after. Administrative fees, taxes, insurance, or other charges may apply. Cannot be combined with other discounts or on transfers and is subject to change. See store for complete details.
+          - paragraph [ref=e2688]: Unit sizes are approximate and may vary by location. Square footage is based on exterior measurements. Images and descriptions are for illustrative purposes only. Unit size availability may be limited and is subject to change without notice.
+          - paragraph
+      - generic [ref=e2690]:
+        - heading "Facility Features" [level=3] [ref=e2691]
+        - list [ref=e2693]:
+          - listitem [ref=e2694]: 24/7 Video Surveillance
+          - listitem [ref=e2695]: Automatic Gate
+          - listitem [ref=e2696]: Climate-Controlled Units
+          - listitem [ref=e2697]: Dollies & Handcarts
+          - listitem [ref=e2698]: Drive Up Units
+          - listitem [ref=e2699]: Green Initiative
+          - listitem [ref=e2700]: Lock Checks
+          - listitem [ref=e2701]: Motion Lighting
+          - listitem [ref=e2702]: Motorcycle Storage
+          - listitem [ref=e2703]: Moving Supplies
+          - listitem [ref=e2704]: Protection Plan
+          - listitem [ref=e2705]: Security Fence
+          - listitem [ref=e2706]: Vehicle Storage
+    - generic [ref=e2707]:
+      - generic [ref=e2709]:
+        - generic [ref=e2710]:
+          - link "Footer Logo" [ref=e2712] [cursor=pointer]:
+            - /url: https://www.storagestar.com
+            - img "Footer Logo" [ref=e2713]
+          - generic [ref=e2714]:
+            - link "Find Storage" [ref=e2715] [cursor=pointer]:
+              - /url: /storage-units-near-me
+              - img [ref=e2716]
+              - generic [ref=e2719]: Find Storage
+            - link "Size Guide" [ref=e2720] [cursor=pointer]:
+              - /url: /pages/storage-unit-size-guide
+              - img [ref=e2721]
+              - generic [ref=e2724]: Size Guide
+        - generic [ref=e2725]:
+          - generic [ref=e2726]:
+            - generic [ref=e2727]:
+              - text: Featured States
+              - separator [ref=e2728]
+            - generic [ref=e2729]:
+              - link "Alaska" [ref=e2730] [cursor=pointer]:
+                - /url: /storage-units-alaska
+              - link "California" [ref=e2731] [cursor=pointer]:
+                - /url: /storage-units-california
+              - link "Colorado" [ref=e2732] [cursor=pointer]:
+                - /url: /storage-units-colorado
+              - link "Idaho" [ref=e2733] [cursor=pointer]:
+                - /url: /storage-units-idaho
+              - link "Illinois" [ref=e2734] [cursor=pointer]:
+                - /url: /storage-units-illinois
+              - link "Texas" [ref=e2735] [cursor=pointer]:
+                - /url: /storage-units-texas
+              - link "Utah" [ref=e2736] [cursor=pointer]:
+                - /url: /storage-units-utah
+              - link "Wyoming" [ref=e2737] [cursor=pointer]:
+                - /url: /storage-units-wyoming
+          - generic [ref=e2738]:
+            - generic [ref=e2739]:
+              - text: Featured Cities
+              - separator [ref=e2740]
+            - generic [ref=e2741]:
+              - link "Anchorage" [ref=e2742] [cursor=pointer]:
+                - /url: /storage-units-anchorage
+              - link "Austin" [ref=e2743] [cursor=pointer]:
+                - /url: /storage-units-austin
+              - link "Boise" [ref=e2744] [cursor=pointer]:
+                - /url: /storage-units-boise
+              - link "Cheyenne" [ref=e2745] [cursor=pointer]:
+                - /url: /storage-units-cheyenne
+              - link "Chicago" [ref=e2746] [cursor=pointer]:
+                - /url: /storage-units-chicago
+              - link "Chico" [ref=e2747] [cursor=pointer]:
+                - /url: /storage-units-chico-ca
+              - link "Cloverdale" [ref=e2748] [cursor=pointer]:
+                - /url: /storage-units-cloverdale
+              - link "Coeur D’Alene" [ref=e2749] [cursor=pointer]:
+                - /url: https://rent.storagestar.com/storage-units/idaho/coeur-d-alene/
+              - link "Colorado Springs" [ref=e2750] [cursor=pointer]:
+                - /url: /storage-units-colorado-springs
+              - link "Dallas" [ref=e2751] [cursor=pointer]:
+                - /url: /storage-units-dallas
+              - link "Denver" [ref=e2752] [cursor=pointer]:
+                - /url: /storage-units-denver
+              - link "El Paso" [ref=e2753] [cursor=pointer]:
+                - /url: /storage-units-el-paso
+              - link "Fort Collins" [ref=e2754] [cursor=pointer]:
+                - /url: /storage-units-fort-collins
+              - link "Laredo" [ref=e2755] [cursor=pointer]:
+                - /url: /storage-units-laredo
+              - link "Laramie" [ref=e2756] [cursor=pointer]:
+                - /url: /storage-units-laramie
+              - link "Modesto" [ref=e2757] [cursor=pointer]:
+                - /url: /storage-units-modesto
+              - link "Nampa" [ref=e2758] [cursor=pointer]:
+                - /url: https://rent.storagestar.com/storage-units/idaho/nampa/
+              - link "Sonoma" [ref=e2759] [cursor=pointer]:
+                - /url: /storage-units-sonoma
+              - link "Rio Vista" [ref=e2760] [cursor=pointer]:
+                - /url: /storage-units-rio-vista
+              - link "Twin Falls" [ref=e2761] [cursor=pointer]:
+                - /url: /storage-units-twin-falls
+              - link "Vacaville" [ref=e2762] [cursor=pointer]:
+                - /url: /storage-units-vacaville
+              - link "Yuba City" [ref=e2763] [cursor=pointer]:
+                - /url: /storage-units-yuba-city
+          - generic [ref=e2764]:
+            - generic [ref=e2765]:
+              - text: About
+              - separator [ref=e2766]
+            - generic [ref=e2767]:
+              - link "About Storage Star" [ref=e2768] [cursor=pointer]:
+                - /url: /about-our-storage-facility
+              - link "Storage Solutions" [ref=e2769] [cursor=pointer]:
+                - /url: /storage-solutions
+              - link "Careers" [ref=e2770] [cursor=pointer]:
+                - /url: /careers
+              - link "Follow on Facebook" [ref=e2771] [cursor=pointer]:
+                - /url: https://www.facebook.com/storagestar
+              - link "Follow on Instagram" [ref=e2772] [cursor=pointer]:
+                - /url: https://www.instagram.com/storagestarselfstorage/
+              - link "Follow on LinkedIn" [ref=e2773] [cursor=pointer]:
+                - /url: https://www.linkedin.com/company/storagestar
+              - link "Follow on YouTube" [ref=e2774] [cursor=pointer]:
+                - /url: https://www.youtube.com/@storagestarselfstorage
+          - generic [ref=e2775]:
+            - generic [ref=e2776]:
+              - text: Storage Types
+              - separator [ref=e2777]
+            - generic [ref=e2778]:
+              - link "ATV Storage" [ref=e2779] [cursor=pointer]:
+                - /url: /atv-storage
+              - link "Boat Storage" [ref=e2780] [cursor=pointer]:
+                - /url: /boat-storage
+              - link "Business Storage" [ref=e2781] [cursor=pointer]:
+                - /url: /business-storage
+              - link "Car Storage" [ref=e2782] [cursor=pointer]:
+                - /url: /car-storage-units
+              - link "Climate Controlled Storage" [ref=e2783] [cursor=pointer]:
+                - /url: /climate-controlled-storage
+              - link "Drive-Up Storage" [ref=e2784] [cursor=pointer]:
+                - /url: /drive-up-storage
+              - link "Furniture Storage" [ref=e2785] [cursor=pointer]:
+                - /url: /furniture-storage-units
+              - link "Household Storage" [ref=e2786] [cursor=pointer]:
+                - /url: /household-storage
+              - link "Jet Ski Storage" [ref=e2787] [cursor=pointer]:
+                - /url: /jet-ski-storage
+              - link "Motorcycle Storage" [ref=e2788] [cursor=pointer]:
+                - /url: /motorcycle-storage
+              - link "RV Storage" [ref=e2789] [cursor=pointer]:
+                - /url: /rv-storage
+              - link "Student Storage" [ref=e2790] [cursor=pointer]:
+                - /url: /student-storage
+              - link "Vehicle Storage" [ref=e2791] [cursor=pointer]:
+                - /url: /vehicle-storage
+              - link "Wine Storage" [ref=e2792] [cursor=pointer]:
+                - /url: /wine-storage-units
+          - generic [ref=e2793]:
+            - generic [ref=e2794]:
+              - text: Resources
+              - separator [ref=e2795]
+            - generic [ref=e2796]:
+              - link "FAQs" [ref=e2797] [cursor=pointer]:
+                - /url: /self-storage-faq
+              - link "Size Guide" [ref=e2798] [cursor=pointer]:
+                - /url: /storage-unit-size-guide
+              - link "Moving Guide" [ref=e2799] [cursor=pointer]:
+                - /url: /moving-guide
+              - link "Moving & Packing Supplies" [ref=e2800] [cursor=pointer]:
+                - /url: /moving-and-packing-supplies
+              - link "Tenant Protection & Insurance" [ref=e2801] [cursor=pointer]:
+                - /url: /tenant-protection-and-insurance
+              - link "Blog" [ref=e2802] [cursor=pointer]:
+                - /url: https://www.storagestar.com/blogs
+              - link "Accessibility" [ref=e2803] [cursor=pointer]:
+                - /url: /accessibility
+              - link "Make Payment" [ref=e2804] [cursor=pointer]:
+                - /url: https://storagestar-payment.ssm-erp.com/
+              - link "Investor Portal Login" [ref=e2805] [cursor=pointer]:
+                - /url: https://storagestar.investorcafe.app/content/login#/appaccess/login
+              - link "Contact" [ref=e2806] [cursor=pointer]:
+                - /url: /contact
+      - generic [ref=e2809]:
+        - text: © Storage Star
+        - generic [ref=e2811]:
+          - text: "|"
+          - link "Privacy Policy" [ref=e2812] [cursor=pointer]:
+            - /url: /privacy-policy
+  - button "Report An Issue" [ref=e2813] [cursor=pointer]
+  - generic [ref=e2815]:
+    - generic [ref=e2816] [cursor=pointer]: ×
+    - iframe [ref=e2817]:
+      - generic [active] [ref=f2e1]:
+        - link "Skip to form" [ref=f2e2] [cursor=pointer]:
+          - /url: "#main"
+        - main "Main Content Area" [ref=f2e3]:
+          - form "HubSpot Form" [ref=f2e7]:
+            - generic [ref=f2e9]:
+              - heading "Contact Our Support Team" [level=1] [ref=f2e11]
+              - generic [ref=f2e13]:
+                - paragraph [ref=f2e14]: 👋 Need help or running into an issue?
+                - paragraph [ref=f2e15]: Fill out the form below and our support team will get back to you as soon as possible.
+              - generic [ref=f2e17]:
+                - generic [ref=f2e19]: Email*
+                - generic [ref=f2e20]: Please use the email associated with your Storagely account.
+                - textbox "Email*" [ref=f2e21]:
+                  - /placeholder: ""
+              - button "Submit" [disabled] [ref=f2e24]
+  - generic [ref=e2818]:
+    - generic [ref=e2820] [cursor=pointer]:
+      - img "Avatar" [ref=e2821]
+      - generic [ref=e2822]: Hi there, have a question? Message us here.
+      - button "Close prompt" [ref=e2823]:
+        - img [ref=e2824]
+    - button "Select to open the chat widget" [ref=e2826] [cursor=pointer]:
+      - img [ref=e2828]

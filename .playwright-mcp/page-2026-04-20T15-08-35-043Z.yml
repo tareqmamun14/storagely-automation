@@ -1,0 +1,354 @@
+- generic [active] [ref=e1]:
+  - text:            
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - navigation [ref=e6]:
+        - generic:
+          - link "logo" [ref=e7] [cursor=pointer]:
+            - /url: https://minimallstorage.com
+            - img "logo" [ref=e8]
+          - button "Toggle navigation" [ref=e9] [cursor=pointer]
+          - text: 
+    - generic [ref=e12]:
+      - generic [ref=e29]:
+        - link "Find Storage Now" [ref=e30] [cursor=pointer]:
+          - /url: /storage-units-near-me
+          - generic [ref=e31]: Find Storage Now
+        - link "More About us" [ref=e32] [cursor=pointer]:
+          - /url: /about-our-storage-facility
+          - generic [ref=e33]: More About us
+      - generic [ref=e44]:
+        - generic [ref=e52]:
+          - heading "Find Storage" [level=5] [ref=e60]
+          - generic [ref=e63]:
+            - paragraph [ref=e64]: Find the perfect unit for your storage needs! Explore all available self storage unit options now.
+            - paragraph [ref=e65]
+          - link "REnt now" [ref=e67] [cursor=pointer]:
+            - /url: /storage-units-near-me
+            - generic [ref=e69]: REnt now
+        - generic [ref=e79]:
+          - heading "Size Guide" [level=5] [ref=e87]:
+            - strong [ref=e88]: Size Guide
+          - generic [ref=e91]:
+            - paragraph [ref=e92]: Trying to get the right size unit? Explore our storage unit size guide to find your ideal space!
+            - paragraph [ref=e93]
+          - link "view size guide" [ref=e95] [cursor=pointer]:
+            - /url: /storage-unit-size-guide
+            - generic [ref=e97]: view size guide
+        - generic [ref=e107]:
+          - heading "Commercial Space" [level=5] [ref=e115]:
+            - strong [ref=e116]: Commercial Space
+          - paragraph [ref=e120]: Looking for retail, office, warehouse, or industrial space? Discover flexible commercial locations available for lease and rent today.
+          - link "Rent Now" [ref=e122] [cursor=pointer]:
+            - /url: /commercial
+            - generic [ref=e124]: Rent Now
+      - generic [ref=e129]:
+        - heading "Our Online Storage Unit Rental Process Is as Easy as 1-2-3!" [level=2] [ref=e133]
+        - generic [ref=e135]:
+          - generic [ref=e137]:
+            - heading "Find a Unit" [level=5] [ref=e145]:
+              - strong [ref=e146]: Find a Unit
+            - paragraph [ref=e150]: Check out our self storage unit sizes and options to find the perfect storage unit.
+          - generic [ref=e152]:
+            - heading "Sign Your Lease" [level=5] [ref=e160]:
+              - strong [ref=e161]: Sign Your Lease
+            - paragraph [ref=e165]: Click “Rent” or “Reserve,” sign your lease, and you’ll soon have access to your self storage unit.
+          - generic [ref=e167]:
+            - heading "Move Your Stuff" [level=5] [ref=e175]:
+              - strong [ref=e176]: Move Your Stuff
+            - paragraph [ref=e180]: Grab those boxes - it’s time to kick off your move!
+        - link "Find Your Unit Now" [ref=e184] [cursor=pointer]:
+          - /url: /storage-units-near-me
+          - generic [ref=e185]: Find Your Unit Now
+      - generic [ref=e190]:
+        - heading "Our Self Storage Unit Features" [level=2] [ref=e194]
+        - paragraph [ref=e198]: At Mini Mall Storage, security and convenience come standard. Our facilities feature 24/7 video surveillance, gated access, and climate-controlled storage units to help protect your belongings year-round.
+        - paragraph [ref=e202]: With a wide range of unit sizes and options like drive-up access, storing with us is simple and stress-free. Whether moving, downsizing, or needing extra space, Mini Mall Storage is here to make it easy.
+        - generic [ref=e206]:
+          - heading "24/7 Video Surveillance" [level=5] [ref=e224]:
+            - strong [ref=e225]: 24/7 Video Surveillance
+          - heading "Climate-Controlled Storage Units" [level=5] [ref=e243]:
+            - strong [ref=e244]: Climate-Controlled Storage Units
+          - heading "Drive-Up Storage Units" [level=5] [ref=e262]:
+            - strong [ref=e263]: Drive-Up Storage Units
+          - heading "Boat & RV Storage" [level=5] [ref=e281]:
+            - strong [ref=e282]: Boat & RV Storage
+        - link "View All Facilities" [ref=e286] [cursor=pointer]:
+          - /url: /storage-units-near-me
+          - generic [ref=e287]: View All Facilities
+      - generic [ref=e292]:
+        - heading "Find a Mini Mall Storage Facility Near You" [level=2] [ref=e296]
+        - paragraph [ref=e300]: Mini Mall Storage offers dependable self storage across the United States and Canada. From homeowners to students and small businesses, we provide a wide range of clean, secure units to match your needs. With user-friendly features, flexible rental options, and local teams who care, we make storing your stuff feel simple and stress-free—just the way it should be.
+        - generic [ref=e304]:
+          - generic [ref=e312]:
+            - heading "United States" [level=4] [ref=e320]:
+              - link "United States" [ref=e321] [cursor=pointer]:
+                - /url: /storage-units-united-states
+            - separator [ref=e324]
+            - heading "Alabama | Arkansas | Florida | Georgia | Illinois | Indiana | Kansas | Kentucky | Louisiana | Minnesota | Mississippi | North Carolina | Ohio | South Carolina | Tennessee | Texas | Virginia | West Virginia" [level=6] [ref=e328]:
+              - link "Alabama" [ref=e329] [cursor=pointer]:
+                - /url: /storage-units-alabama
+              - link "|" [ref=e330] [cursor=pointer]:
+                - /url: /storage-units-alabama
+              - link "Arkansas |" [ref=e331] [cursor=pointer]:
+                - /url: /storage-units-arkansas
+              - link "Florida" [ref=e332] [cursor=pointer]:
+                - /url: /storage-units-florida
+              - text: "|"
+              - link "Georgia" [ref=e333] [cursor=pointer]:
+                - /url: /storage-units-georgia
+              - link "|" [ref=e334] [cursor=pointer]:
+                - /url: /storage-units-alabama
+              - link "Illinois" [ref=e335] [cursor=pointer]:
+                - /url: /storage-units-illinois
+              - link "|" [ref=e336] [cursor=pointer]:
+                - /url: /storage-units-alabama
+              - link "Indiana |" [ref=e337] [cursor=pointer]:
+                - /url: /storage-units-indiana
+              - link "Kansas" [ref=e338] [cursor=pointer]:
+                - /url: /storage-units-kansas
+              - link "|" [ref=e339] [cursor=pointer]:
+                - /url: /storage-units-alabama
+              - link "Kentucky" [ref=e340] [cursor=pointer]:
+                - /url: /storage-units-kentucky
+              - link "|" [ref=e341] [cursor=pointer]:
+                - /url: /storage-units-alabama
+              - link "Louisiana" [ref=e342] [cursor=pointer]:
+                - /url: /storage-units-louisiana
+              - link "|" [ref=e343] [cursor=pointer]:
+                - /url: /storage-units-alabama
+              - link "Minnesota" [ref=e344] [cursor=pointer]:
+                - /url: /storage-units-minnesota
+              - link "|" [ref=e345] [cursor=pointer]:
+                - /url: /storage-units-alabama
+              - link "Mississippi" [ref=e346] [cursor=pointer]:
+                - /url: /storage-units-Mississippi
+              - link "|" [ref=e347] [cursor=pointer]:
+                - /url: /storage-units-alabama
+              - link "North Carolina" [ref=e348] [cursor=pointer]:
+                - /url: /storage-units-north-carolina
+              - link "|" [ref=e349] [cursor=pointer]:
+                - /url: /storage-units-alabama
+              - link "Ohio" [ref=e350] [cursor=pointer]:
+                - /url: /storage-units-ohio
+              - link "|" [ref=e351] [cursor=pointer]:
+                - /url: /storage-units-alabama
+              - link "South Carolina" [ref=e352] [cursor=pointer]:
+                - /url: /storage-units-south-carolina
+              - link "|" [ref=e353] [cursor=pointer]:
+                - /url: /storage-units-alabama
+              - link "Tennessee" [ref=e354] [cursor=pointer]:
+                - /url: /storage-units-tennessee
+              - link "|" [ref=e355] [cursor=pointer]:
+                - /url: /storage-units-alabama
+              - link "Texas" [ref=e356] [cursor=pointer]:
+                - /url: /storage-units-texas
+              - link "|" [ref=e357] [cursor=pointer]:
+                - /url: /storage-units-alabama
+              - link "Virginia" [ref=e358] [cursor=pointer]:
+                - /url: /storage-units-virginia
+              - link "|" [ref=e359] [cursor=pointer]:
+                - /url: /storage-units-alabama
+              - link "West Virginia" [ref=e360] [cursor=pointer]:
+                - /url: /storage-units-west-virginia
+            - link "All u.s. Facilities" [ref=e364] [cursor=pointer]:
+              - /url: /storage-units-united-states
+              - generic [ref=e366]: All u.s. Facilities
+          - generic [ref=e374]:
+            - heading "Canada" [level=4] [ref=e382]:
+              - link "Canada" [ref=e383] [cursor=pointer]:
+                - /url: /storage-units-canada
+            - separator [ref=e386]
+            - generic [ref=e389]:
+              - heading "Alberta | British Columbia | Manitoba | New Brunswick | Ontario | Quebec | Saskatchewan" [level=6] [ref=e390]:
+                - link "Alberta" [ref=e391] [cursor=pointer]:
+                  - /url: /storage-units-alberta
+                - link "|" [ref=e392] [cursor=pointer]:
+                  - /url: /storage-units-alabama
+                - link "British Columbia" [ref=e393] [cursor=pointer]:
+                  - /url: /storage-units-british-columbia
+                - link "|" [ref=e394] [cursor=pointer]:
+                  - /url: /storage-units-alabama
+                - link "Manitoba" [ref=e395] [cursor=pointer]:
+                  - /url: /storage-units-manitoba
+                - link "|" [ref=e396] [cursor=pointer]:
+                  - /url: /storage-units-alabama
+                - link "New Brunswick" [ref=e397] [cursor=pointer]:
+                  - /url: /storage-units-new-brunswick
+                - link "|" [ref=e398] [cursor=pointer]:
+                  - /url: /storage-units-alabama
+                - link "Ontario" [ref=e399] [cursor=pointer]:
+                  - /url: /storage-units-ontario
+                - link "|" [ref=e400] [cursor=pointer]:
+                  - /url: /storage-units-alabama
+                - link "Quebec" [ref=e401] [cursor=pointer]:
+                  - /url: /storage-units-quebec
+                - link "|" [ref=e402] [cursor=pointer]:
+                  - /url: /storage-units-alabama
+                - link "Saskatchewan" [ref=e403] [cursor=pointer]:
+                  - /url: /storage-units-saskatchewan
+              - heading [level=6] [ref=e404]
+            - link "All Canadian Facilities" [ref=e409] [cursor=pointer]:
+              - /url: /storage-units-canada
+              - generic [ref=e411]: All Canadian Facilities
+        - link "View All Facilities" [ref=e415] [cursor=pointer]:
+          - /url: /storage-units-near-me
+          - generic [ref=e416]: View All Facilities
+      - generic [ref=e421]:
+        - heading "Self Storage Frequently Asked Questions" [level=2] [ref=e425]
+        - generic [ref=e429]:
+          - generic [ref=e433]:
+            - generic [ref=e434]:
+              - button "How do I rent a storage unit?" [disabled] [expanded] [ref=e435] [cursor=pointer]:
+                - heading "How do I rent a storage unit?" [level=6] [ref=e436]
+                - img [ref=e437]
+              - region "How do I rent a storage unit?" [ref=e438]:
+                - paragraph [ref=e443]: You can rent a storage unit online. Look for the best location for you and go through the rental process. You can also call or stop by the facility of your choice to rent a space with a storage expert.
+            - generic [ref=e444]:
+              - button "What documentation do I need to rent a storage unit?" [ref=e445] [cursor=pointer]:
+                - heading "What documentation do I need to rent a storage unit?" [level=6] [ref=e446]
+                - img [ref=e447]
+              - paragraph [ref=e452]: To rent a storage unit with Mini Mall Storage, you’ll need a valid form of government-issued ID, such as a driver’s license, passport, or provincial ID.
+            - generic [ref=e453]:
+              - button "Do I have to sign a long-term rental agreement?" [ref=e454] [cursor=pointer]:
+                - heading "Do I have to sign a long-term rental agreement?" [level=6] [ref=e455]
+                - img [ref=e456]
+              - paragraph [ref=e461]: Nope! You’re never required to sign a long-term contract. We offer flexible month-to-month leases that let you store your belongings with us however long you need to.
+          - generic [ref=e465]:
+            - generic [ref=e466]:
+              - button "How can I pay for my storage unit?" [disabled] [expanded] [ref=e467] [cursor=pointer]:
+                - heading "How can I pay for my storage unit?" [level=6] [ref=e468]
+                - img [ref=e469]
+              - region "How can I pay for my storage unit?" [ref=e470]:
+                - paragraph [ref=e475]: You can pay for your storage unit with a check, credit, or debit card. We also accept e-transfers to pay your second and subsequent bills. Ask us about autopay to set up simple recurring payments so you’ll never miss a bill.
+            - generic [ref=e476]:
+              - button "What type of security do you offer?" [ref=e477] [cursor=pointer]:
+                - heading "What type of security do you offer?" [level=6] [ref=e478]
+                - img [ref=e479]
+              - paragraph [ref=e484]: Every storage facility has a slightly different array of security features, but common features include perimeter fencing, electronic access gates, 24/7 video recording, and more. Mini Mall Storage is committed to providing security and peace of mind. Contact your local Mini Mall Storage facility to learn more about what security features it offers.
+            - generic [ref=e485]:
+              - button "What items am I not allowed to store?" [ref=e486] [cursor=pointer]:
+                - heading "What items am I not allowed to store?" [level=6] [ref=e487]
+                - img [ref=e488]
+              - paragraph [ref=e493]:
+                - text: We do not allow tenants to store stolen or illegal goods in our storage units. We also disallow flammable or hazardous items, combustible items or liquids, plants, perishable goods, or animals. Please
+                - link [ref=e494] [cursor=pointer]:
+                  - /url: /pages/contact
+                  - text: contact us
+                - text: for more specific information about what you cannot store.
+        - link "VIEW Our FAQs" [ref=e498] [cursor=pointer]:
+          - /url: /self-storage-faq
+          - generic [ref=e499]: VIEW Our FAQs
+      - generic [ref=e506]:
+        - generic [ref=e508]:
+          - heading "We’re Here to Help" [level=2] [ref=e512]
+          - paragraph [ref=e516]: Whether you call, chat, or rent online, we’ve got you covered. Contact us online or in person. We are here to help you choose a storage unit and help you through life’s transitions.
+          - link "contact us" [ref=e520] [cursor=pointer]:
+            - /url: /contact
+            - generic [ref=e521]: contact us
+        - img "DJI-0297.webp" [ref=e527]
+      - generic [ref=e533]:
+        - heading "Customer Reviews" [level=2] [ref=e537]
+        - link "Rent Now" [ref=e545] [cursor=pointer]:
+          - /url: /storage-units-near-me
+          - generic [ref=e546]: Rent Now
+    - generic [ref=e547]:
+      - generic [ref=e549]:
+        - generic [ref=e550]:
+          - link "Footer Logo" [ref=e552] [cursor=pointer]:
+            - /url: https://minimallstorage.com
+            - img "Footer Logo" [ref=e553]
+          - generic [ref=e554]:
+            - link "Find Storage" [ref=e555] [cursor=pointer]:
+              - /url: /storage-units-near-me
+              - img [ref=e556]
+              - generic [ref=e559]: Find Storage
+            - link "Size Guide" [ref=e560] [cursor=pointer]:
+              - /url: /storage-unit-size-guide
+              - img [ref=e561]
+              - generic [ref=e564]: Size Guide
+        - generic [ref=e565]:
+          - generic [ref=e566]:
+            - generic [ref=e567]:
+              - text: Find Storage
+              - separator [ref=e568]
+            - generic [ref=e569]:
+              - link "United States" [ref=e570] [cursor=pointer]:
+                - /url: /storage-units-united-states
+              - link "Canada" [ref=e571] [cursor=pointer]:
+                - /url: /storage-units-canada
+          - generic [ref=e572]:
+            - generic [ref=e573]:
+              - text: Storage Resources
+              - separator [ref=e574]
+            - generic [ref=e575]:
+              - link "Size Guide" [ref=e576] [cursor=pointer]:
+                - /url: /storage-unit-size-guide
+              - link "Self Storage FAQs" [ref=e577] [cursor=pointer]:
+                - /url: /self-storage-faq
+              - link "Storage Tips" [ref=e578] [cursor=pointer]:
+                - /url: /storage-tips
+              - link "Packing Tips" [ref=e579] [cursor=pointer]:
+                - /url: /packing-tips
+              - link "Moving Guide" [ref=e580] [cursor=pointer]:
+                - /url: /moving-guide
+              - link "Storage Features" [ref=e581] [cursor=pointer]:
+                - /url: /storage-features
+              - 'link "Self Storage Process: What to Expect" [ref=e582] [cursor=pointer]':
+                - /url: /what-to-expect-when-you-arrive
+              - link "Pay Your Bill" [ref=e583] [cursor=pointer]:
+                - /url: https://minimallstorage.securecafe.com/residentservices/apartmentsforrent/userlogin.aspx
+              - link "Commercial Space" [ref=e584] [cursor=pointer]:
+                - /url: /commercial
+              - link "Our Blog" [ref=e585] [cursor=pointer]:
+                - /url: https://www.minimallstorage.com/blogs/
+              - link "Promotions" [ref=e586] [cursor=pointer]:
+                - /url: /promotional-offers
+          - generic [ref=e587]:
+            - generic [ref=e588]:
+              - text: About
+              - separator [ref=e589]
+            - generic [ref=e590]:
+              - link "About Mini Mall" [ref=e591] [cursor=pointer]:
+                - /url: /about-our-storage-facility
+              - link "Careers" [ref=e592] [cursor=pointer]:
+                - /url: /careers
+              - link "Looking to sell?" [ref=e593] [cursor=pointer]:
+                - /url: /acquisitions
+          - generic [ref=e594]:
+            - generic [ref=e595]:
+              - text: Contact Us
+              - separator [ref=e596]
+            - generic [ref=e597]:
+              - link "1-833-621-0762" [ref=e598] [cursor=pointer]:
+                - /url: tel:18336210762
+              - link "Send Us A Message" [ref=e599] [cursor=pointer]:
+                - /url: /contact
+          - generic [ref=e600]:
+            - generic [ref=e601]:
+              - text: Contact
+              - separator [ref=e602]
+            - generic [ref=e603]:
+              - link "" [ref=e604] [cursor=pointer]:
+                - /url: https://www.facebook.com/minimallstorage/
+                - generic [ref=e605]: 
+              - link "" [ref=e606] [cursor=pointer]:
+                - /url: https://instagram.com/minimallstorage/
+                - generic [ref=e607]: 
+              - link "" [ref=e608] [cursor=pointer]:
+                - /url: https://www.linkedin.com/company/mini-mall-storage-properties/
+                - generic [ref=e609]: 
+      - generic [ref=e612]:
+        - text: © Mini Mall Storage
+        - generic [ref=e614]:
+          - text: "|"
+          - link "Privacy Policy" [ref=e615] [cursor=pointer]:
+            - /url: /privacy-policy
+          - text: "|"
+          - link "Terms of Use" [ref=e616] [cursor=pointer]:
+            - /url: /terms-and-conditions
+  - button "Report An Issue" [ref=e617] [cursor=pointer]
+  - generic [ref=e619]:
+    - button [ref=e620] [cursor=pointer]: ×
+    - iframe [ref=e621]:
+      

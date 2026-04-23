@@ -1,0 +1,1904 @@
+- generic [active] [ref=e1]:
+  - text: r           
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - navigation [ref=e6]:
+        - generic:
+          - link "logo" [ref=e7] [cursor=pointer]:
+            - /url: https://gatekeeperstoragega.com
+            - img "logo" [ref=e8]
+          - button "Toggle navigation" [ref=e9] [cursor=pointer]
+    - generic [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - navigation "breadcrumb" [ref=e14]:
+            - list [ref=e15]:
+              - listitem [ref=e16]:
+                - link "Home" [ref=e17] [cursor=pointer]:
+                  - /url: https://gatekeeperstoragega.com/
+              - listitem [ref=e18]:
+                - text: /
+                - link "Georgia" [ref=e19] [cursor=pointer]:
+                  - /url: https://gatekeeperstoragega.com/storage-units-peachtree-city?search=Peachtree City, Georgia, Usa
+              - listitem [ref=e20]:
+                - text: /
+                - link "Peachtree City" [ref=e21] [cursor=pointer]:
+                  - /url: https://gatekeeperstoragega.com/storage-units-peachtree-city?search=Peachtree City, Georgia, Usa
+              - listitem [ref=e22]: / Senoia Road
+          - generic [ref=e23]:
+            - generic [ref=e25]:
+              - generic [ref=e26]:
+                - button "Slide 1" [ref=e27] [cursor=pointer]
+                - button "Slide 2" [ref=e28] [cursor=pointer]
+                - button "Slide 3" [ref=e29] [cursor=pointer]
+                - button "Slide 4" [ref=e30] [cursor=pointer]
+                - button "Slide 5" [ref=e31] [cursor=pointer]
+                - button "Slide 6" [ref=e32] [cursor=pointer]
+                - button "Slide 7" [ref=e33] [cursor=pointer]
+                - button "Slide 8" [ref=e34] [cursor=pointer]
+                - button "Slide 9" [ref=e35] [cursor=pointer]
+                - button "Slide 10" [ref=e36] [cursor=pointer]
+                - button "Slide 11" [ref=e37] [cursor=pointer]
+                - button "Slide 12" [ref=e38] [cursor=pointer]
+                - button "Slide 13" [ref=e39] [cursor=pointer]
+                - button "Slide 14" [ref=e40] [cursor=pointer]
+                - button "Slide 15" [ref=e41] [cursor=pointer]
+              - img "secure self storage units peachtree city" [ref=e44]
+              - button "Previous" [ref=e45] [cursor=pointer]:
+                - generic [ref=e47]: Previous
+              - button "Next" [ref=e48] [cursor=pointer]:
+                - generic [ref=e50]: Next
+            - generic [ref=e51]:
+              - heading "Self Storage Units Peachtree City" [level=1] [ref=e53]:
+                - strong [ref=e54]: Self Storage Units Peachtree City
+              - heading "Gatekeeper Self Storage | Senoia Road" [level=2] [ref=e55]
+              - link "354 Senoia Rd, Ste 1 Peachtree City, Georgia 30269" [ref=e58] [cursor=pointer]:
+                - /url: https://www.google.com/maps/place/Gatekeeper+Self+Storage+Units/@33.4415009,-84.6090287,17z/data=!3m1!4b1!4m6!3m5!1s0x88f4c3164f1fb37f:0x4bd6cf767cd8e51d!8m2!3d33.4415009!4d-84.6064538!16s%2Fg%2F11jtzbjysj?entry=ttu
+                - text: 354 Senoia Rd, Ste 1
+                - text: Peachtree City, Georgia 30269
+              - link "(770) 288-0586" [ref=e60] [cursor=pointer]:
+                - /url: tel:(770) 288-0586
+              - generic [ref=e61]:
+                - button "Office View Hours" [ref=e64] [cursor=pointer]:
+                  - generic [ref=e65]:
+                    - text: 
+                    - generic [ref=e66]: Office
+                    - generic [ref=e67]: View Hours
+                - button "Access View Hours" [ref=e70] [cursor=pointer]:
+                  - generic [ref=e71]:
+                    - text: 
+                    - generic [ref=e72]: Access
+                    - generic [ref=e73]: View Hours
+              - generic [ref=e75] [cursor=pointer]:
+                - generic [ref=e76]:
+                  - img [ref=e77]
+                  - img [ref=e79]
+                  - img [ref=e81]
+                  - img [ref=e83]
+                  - img [ref=e85]
+                - paragraph [ref=e89]: 201 Reviews
+              - generic [ref=e90]:
+                - link " Call" [ref=e92] [cursor=pointer]:
+                  - /url: tel:7702880586
+                  - generic [ref=e93]: 
+                  - text: Call
+                - link " Email" [ref=e95] [cursor=pointer]:
+                  - /url: mailto:showings@gatekeeperproperties.com
+                  - generic [ref=e96]: 
+                  - text: Email
+                - link " Directions" [ref=e98] [cursor=pointer]:
+                  - /url: https://www.google.com/maps/place/Gatekeeper+Self+Storage+Units/@33.4415009,-84.6090287,17z/data=!3m1!4b1!4m6!3m5!1s0x88f4c3164f1fb37f:0x4bd6cf767cd8e51d!8m2!3d33.4415009!4d-84.6064538!16s%2Fg%2F11jtzbjysj?entry=ttu
+                  - generic [ref=e99]: 
+                  - text: Directions
+                - link " Facility Features" [ref=e101] [cursor=pointer]:
+                  - /url: "#FacilityFeatures"
+                  - generic [ref=e102]: 
+                  - text: Facility Features
+                - link " What Size Do I Need?" [ref=e104] [cursor=pointer]:
+                  - /url: "#"
+                  - generic [ref=e105]: 
+                  - text: What Size Do I Need?
+        - list [ref=e108]:
+          - listitem [ref=e109]: Automatic Gate
+          - listitem [ref=e110]: Boardroom
+          - listitem [ref=e111]: Boat Parking
+          - listitem [ref=e112]: Code Gate Entry
+          - listitem [ref=e113]: Covered Loading Area
+          - listitem [ref=e114]: Dollies & Handcarts
+          - listitem [ref=e115]: Elevators
+          - listitem [ref=e116]: High-Tech Security
+          - listitem [ref=e117]: Live Monitoring
+          - listitem [ref=e118]: Locally Owned
+          - listitem [ref=e119]: Lock Checks
+          - listitem [ref=e120]: Modern, Clean & Bright
+          - listitem [ref=e121]: Motion Alarm
+          - listitem [ref=e122]: Motorcycle Storage
+          - listitem [ref=e123]: Moving Supplies
+          - listitem [ref=e124]: Office Space
+          - listitem [ref=e125]: Protection Plan
+          - listitem [ref=e126]: RV Parking
+          - listitem [ref=e127]: Security Fence
+          - listitem [ref=e128]: Temperature-Controlled Units
+          - listitem [ref=e129]: Vehicle Parking
+        - generic [ref=e133]:
+          - button "Sizes" [ref=e136] [cursor=pointer]: Sizes
+          - button "Floors" [ref=e139] [cursor=pointer]: Floors
+          - button "Type" [ref=e142] [cursor=pointer]: Type
+          - button "Reset filters" [ref=e144] [cursor=pointer]
+          - generic [ref=e146]:
+            - text: "Sort by: Size Small to Large"
+            - menu
+      - table [ref=e149]:
+        - rowgroup [ref=e150]:
+          - row "5 x 5 storage image Temp Control 2nd Flr 5' WIDTH x 5' DEPTH  What Size Do I Need? $45/month Standard Rate Only 2 left rent Easily switch sizes. reserve No credit card required.  Upper Floor See All Facility Features" [ref=e151]:
+            - cell "5 x 5 storage image Temp Control 2nd Flr 5' WIDTH x 5' DEPTH  What Size Do I Need? $45/month Standard Rate Only 2 left rent Easily switch sizes. reserve No credit card required.  Upper Floor See All Facility Features" [ref=e152]:
+              - generic [ref=e154]:
+                - generic [ref=e156]:
+                  - link "5 x 5 storage image" [ref=e158]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1368953091.png
+                    - img "5 x 5 storage image" [ref=e159]
+                  - generic [ref=e160]:
+                    - generic [ref=e161]: Temp Control 2nd Flr
+                    - heading "5' WIDTH x 5' DEPTH" [level=2] [ref=e162]:
+                      - generic [ref=e163]:
+                        - text: 5'
+                        - generic [ref=e164]: WIDTH
+                      - text: x
+                      - generic [ref=e165]:
+                        - text: 5'
+                        - generic [ref=e166]: DEPTH
+                    - paragraph [ref=e168]:
+                      - generic [ref=e169]: 
+                      - link "What Size Do I Need?" [ref=e170] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e171]:
+                  - generic [ref=e173]:
+                    - heading "$45/month" [level=3] [ref=e174]
+                    - generic [ref=e175]: Standard Rate
+                  - generic [ref=e176]:
+                    - paragraph [ref=e178]: Only 2 left
+                    - generic [ref=e180]:
+                      - link "rent" [ref=e182] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=5251058&type=rent&con=-999&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e183]:
+                        - generic [ref=e184]: Easily switch sizes.
+                    - generic [ref=e186]:
+                      - generic [ref=e188] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e189]:
+                        - generic [ref=e190]: No credit card required.
+                - generic [ref=e192]:
+                  - generic "Unload at ground level and use our large cargo elevators to move your belongings to your floor." [ref=e194]:
+                    - generic [ref=e196]:
+                      - generic [ref=e197]: 
+                      - text: Upper Floor
+                  - link "See All Facility Features" [ref=e209] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "5 x 5 storage image Temp Control 2nd Flr Premium 5' WIDTH x 5' DEPTH  What Size Do I Need? $49/month Standard Rate Only 1 left rent Easily switch sizes. reserve No credit card required.  Upper Floor See All Facility Features" [ref=e210]:
+            - cell "5 x 5 storage image Temp Control 2nd Flr Premium 5' WIDTH x 5' DEPTH  What Size Do I Need? $49/month Standard Rate Only 1 left rent Easily switch sizes. reserve No credit card required.  Upper Floor See All Facility Features" [ref=e211]:
+              - generic [ref=e213]:
+                - generic [ref=e215]:
+                  - link "5 x 5 storage image" [ref=e217]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1368953091.png
+                    - img "5 x 5 storage image" [ref=e218]
+                  - generic [ref=e219]:
+                    - generic [ref=e220]: Temp Control 2nd Flr Premium
+                    - heading "5' WIDTH x 5' DEPTH" [level=2] [ref=e221]:
+                      - generic [ref=e222]:
+                        - text: 5'
+                        - generic [ref=e223]: WIDTH
+                      - text: x
+                      - generic [ref=e224]:
+                        - text: 5'
+                        - generic [ref=e225]: DEPTH
+                    - paragraph [ref=e227]:
+                      - generic [ref=e228]: 
+                      - link "What Size Do I Need?" [ref=e229] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e230]:
+                  - generic [ref=e232]:
+                    - heading "$49/month" [level=3] [ref=e233]
+                    - generic [ref=e234]: Standard Rate
+                  - generic [ref=e235]:
+                    - paragraph [ref=e237]: Only 1 left
+                    - generic [ref=e239]:
+                      - link "rent" [ref=e241] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=4548448&type=rent&con=-999&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e242]:
+                        - generic [ref=e243]: Easily switch sizes.
+                    - generic [ref=e245]:
+                      - generic [ref=e247] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e248]:
+                        - generic [ref=e249]: No credit card required.
+                - generic [ref=e251]:
+                  - generic "Unload at ground level and use our large cargo elevators to move your belongings to your floor." [ref=e253]:
+                    - generic [ref=e255]:
+                      - generic [ref=e256]: 
+                      - text: Upper Floor
+                  - link "See All Facility Features" [ref=e268] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "5 x 5 storage image Temp Control 1st Flr 5' WIDTH x 5' DEPTH  What Size Do I Need? $55/month Standard Rate Only 1 left rent Easily switch sizes. reserve No credit card required.  Ground Floor See All Facility Features" [ref=e269]:
+            - cell "5 x 5 storage image Temp Control 1st Flr 5' WIDTH x 5' DEPTH  What Size Do I Need? $55/month Standard Rate Only 1 left rent Easily switch sizes. reserve No credit card required.  Ground Floor See All Facility Features" [ref=e270]:
+              - generic [ref=e272]:
+                - generic [ref=e274]:
+                  - link "5 x 5 storage image" [ref=e276]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1368953091.png
+                    - img "5 x 5 storage image" [ref=e277]
+                  - generic [ref=e278]:
+                    - generic [ref=e279]: Temp Control 1st Flr
+                    - heading "5' WIDTH x 5' DEPTH" [level=2] [ref=e280]:
+                      - generic [ref=e281]:
+                        - text: 5'
+                        - generic [ref=e282]: WIDTH
+                      - text: x
+                      - generic [ref=e283]:
+                        - text: 5'
+                        - generic [ref=e284]: DEPTH
+                    - paragraph [ref=e286]:
+                      - generic [ref=e287]: 
+                      - link "What Size Do I Need?" [ref=e288] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e289]:
+                  - generic [ref=e291]:
+                    - heading "$55/month" [level=3] [ref=e292]
+                    - generic [ref=e293]: Standard Rate
+                  - generic [ref=e294]:
+                    - paragraph [ref=e296]: Only 1 left
+                    - generic [ref=e298]:
+                      - link "rent" [ref=e300] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=5629068&type=rent&con=-999&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e301]:
+                        - generic [ref=e302]: Easily switch sizes.
+                    - generic [ref=e304]:
+                      - generic [ref=e306] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e307]:
+                        - generic [ref=e308]: No credit card required.
+                - generic [ref=e310]:
+                  - generic "Unload at ground level. No elevators or stairs are needed!" [ref=e312]:
+                    - generic [ref=e314]:
+                      - generic [ref=e315]: 
+                      - text: Ground Floor
+                  - link "See All Facility Features" [ref=e327] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "5 x 5 storage image Temp Control 1st Flr Premium 5' WIDTH x 5' DEPTH  What Size Do I Need? $59/month Standard Rate Only 2 left rent Easily switch sizes. reserve No credit card required.  Ground Floor See All Facility Features" [ref=e328]:
+            - cell "5 x 5 storage image Temp Control 1st Flr Premium 5' WIDTH x 5' DEPTH  What Size Do I Need? $59/month Standard Rate Only 2 left rent Easily switch sizes. reserve No credit card required.  Ground Floor See All Facility Features" [ref=e329]:
+              - generic [ref=e331]:
+                - generic [ref=e333]:
+                  - link "5 x 5 storage image" [ref=e335]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1368953091.png
+                    - img "5 x 5 storage image" [ref=e336]
+                  - generic [ref=e337]:
+                    - generic [ref=e338]: Temp Control 1st Flr Premium
+                    - heading "5' WIDTH x 5' DEPTH" [level=2] [ref=e339]:
+                      - generic [ref=e340]:
+                        - text: 5'
+                        - generic [ref=e341]: WIDTH
+                      - text: x
+                      - generic [ref=e342]:
+                        - text: 5'
+                        - generic [ref=e343]: DEPTH
+                    - paragraph [ref=e345]:
+                      - generic [ref=e346]: 
+                      - link "What Size Do I Need?" [ref=e347] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e348]:
+                  - generic [ref=e350]:
+                    - heading "$59/month" [level=3] [ref=e351]
+                    - generic [ref=e352]: Standard Rate
+                  - generic [ref=e353]:
+                    - paragraph [ref=e355]: Only 2 left
+                    - generic [ref=e357]:
+                      - link "rent" [ref=e359] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=4737339&type=rent&con=-999&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e360]:
+                        - generic [ref=e361]: Easily switch sizes.
+                    - generic [ref=e363]:
+                      - generic [ref=e365] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e366]:
+                        - generic [ref=e367]: No credit card required.
+                - generic [ref=e369]:
+                  - generic "Unload at ground level. No elevators or stairs are needed!" [ref=e371]:
+                    - generic [ref=e373]:
+                      - generic [ref=e374]: 
+                      - text: Ground Floor
+                  - link "See All Facility Features" [ref=e386] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "5 x 6 storage image Temp Control 2nd Flr 5' WIDTH x 6' DEPTH  What Size Do I Need? $54/month Standard Rate Only 1 left rent Easily switch sizes. reserve No credit card required.  Upper Floor See All Facility Features" [ref=e387]:
+            - cell "5 x 6 storage image Temp Control 2nd Flr 5' WIDTH x 6' DEPTH  What Size Do I Need? $54/month Standard Rate Only 1 left rent Easily switch sizes. reserve No credit card required.  Upper Floor See All Facility Features" [ref=e388]:
+              - generic [ref=e390]:
+                - generic [ref=e392]:
+                  - link "5 x 6 storage image" [ref=e394]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1368953091.png
+                    - img "5 x 6 storage image" [ref=e395]
+                  - generic [ref=e396]:
+                    - generic [ref=e397]: Temp Control 2nd Flr
+                    - heading "5' WIDTH x 6' DEPTH" [level=2] [ref=e398]:
+                      - generic [ref=e399]:
+                        - text: 5'
+                        - generic [ref=e400]: WIDTH
+                      - text: x
+                      - generic [ref=e401]:
+                        - text: 6'
+                        - generic [ref=e402]: DEPTH
+                    - paragraph [ref=e404]:
+                      - generic [ref=e405]: 
+                      - link "What Size Do I Need?" [ref=e406] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e407]:
+                  - generic [ref=e409]:
+                    - heading "$54/month" [level=3] [ref=e410]
+                    - generic [ref=e411]: Standard Rate
+                  - generic [ref=e412]:
+                    - paragraph [ref=e414]: Only 1 left
+                    - generic [ref=e416]:
+                      - link "rent" [ref=e418] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=3255525&type=rent&con=-999&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e419]:
+                        - generic [ref=e420]: Easily switch sizes.
+                    - generic [ref=e422]:
+                      - generic [ref=e424] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e425]:
+                        - generic [ref=e426]: No credit card required.
+                - generic [ref=e428]:
+                  - generic "Unload at ground level and use our large cargo elevators to move your belongings to your floor." [ref=e430]:
+                    - generic [ref=e432]:
+                      - generic [ref=e433]: 
+                      - text: Upper Floor
+                  - link "See All Facility Features" [ref=e445] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "5 x 6 storage image Temp Control 1st Flr 5' WIDTH x 6' DEPTH  What Size Do I Need? $65/month Standard Rate Corner Unit Only 1 left rent Easily switch sizes. reserve No credit card required.  Access 6a – 11p  24/7 Monitoring  Unload Indoors  Heated Units  Air Cooled  Ground Floor See All Facility Features" [ref=e446]:
+            - cell "5 x 6 storage image Temp Control 1st Flr 5' WIDTH x 6' DEPTH  What Size Do I Need? $65/month Standard Rate Corner Unit Only 1 left rent Easily switch sizes. reserve No credit card required.  Access 6a – 11p  24/7 Monitoring  Unload Indoors  Heated Units  Air Cooled  Ground Floor See All Facility Features" [ref=e447]:
+              - generic [ref=e449]:
+                - generic [ref=e451]:
+                  - link "5 x 6 storage image" [ref=e453]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1368953091.png
+                    - img "5 x 6 storage image" [ref=e454]
+                  - generic [ref=e455]:
+                    - generic [ref=e456]: Temp Control 1st Flr
+                    - heading "5' WIDTH x 6' DEPTH" [level=2] [ref=e457]:
+                      - generic [ref=e458]:
+                        - text: 5'
+                        - generic [ref=e459]: WIDTH
+                      - text: x
+                      - generic [ref=e460]:
+                        - text: 6'
+                        - generic [ref=e461]: DEPTH
+                    - paragraph [ref=e463]:
+                      - generic [ref=e464]: 
+                      - link "What Size Do I Need?" [ref=e465] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e466]:
+                  - generic [ref=e468]:
+                    - heading "$65/month" [level=3] [ref=e469]
+                    - generic [ref=e470]: Standard Rate
+                    - paragraph [ref=e471]: Corner Unit
+                  - generic [ref=e472]:
+                    - paragraph [ref=e474]: Only 1 left
+                    - generic [ref=e476]:
+                      - link "rent" [ref=e478] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=158541&type=rent&con=-999&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e479]:
+                        - generic [ref=e480]: Easily switch sizes.
+                    - generic [ref=e482]:
+                      - generic [ref=e484] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e485]:
+                        - generic [ref=e486]: No credit card required.
+                - generic [ref=e488]:
+                  - generic "Get to your belongings 7 days a week. Even when our office is closed." [ref=e489]:
+                    - generic [ref=e492]:
+                      - generic [ref=e494]: 
+                      - generic [ref=e496]: Access 6a – 11p
+                  - generic "Round-the-clock video recording of on-site activity." [ref=e497]:
+                    - generic [ref=e500]:
+                      - generic [ref=e502]: 
+                      - generic [ref=e504]: 24/7 Monitoring
+                  - generic "Covered loading area to keep you warm and dry while moving your belongings." [ref=e505]:
+                    - generic [ref=e508]:
+                      - generic [ref=e510]: 
+                      - generic [ref=e512]: Unload Indoors
+                  - generic "Temperature controlled to keep your belongings from freezing." [ref=e513]:
+                    - generic [ref=e516]:
+                      - generic [ref=e518]: 
+                      - generic [ref=e520]: Heated Units
+                  - generic "Temperature controlled to keep your belongings from getting super hot and reduces the humidity." [ref=e521]:
+                    - generic [ref=e524]:
+                      - generic [ref=e526]: 
+                      - generic [ref=e528]: Air Cooled
+                  - generic "Unload at ground level. No elevators or stairs are needed!" [ref=e530]:
+                    - generic [ref=e532]:
+                      - generic [ref=e533]: 
+                      - text: Ground Floor
+                  - link "See All Facility Features" [ref=e545] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "5 x 6 storage image Temp Control 1st Flr Premium 5' WIDTH x 6' DEPTH  What Size Do I Need? $70/month Standard Rate Only 1 left rent Easily switch sizes. reserve No credit card required.  Ground Floor See All Facility Features" [ref=e546]:
+            - cell "5 x 6 storage image Temp Control 1st Flr Premium 5' WIDTH x 6' DEPTH  What Size Do I Need? $70/month Standard Rate Only 1 left rent Easily switch sizes. reserve No credit card required.  Ground Floor See All Facility Features" [ref=e547]:
+              - generic [ref=e549]:
+                - generic [ref=e551]:
+                  - link "5 x 6 storage image" [ref=e553]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1368953091.png
+                    - img "5 x 6 storage image" [ref=e554]
+                  - generic [ref=e555]:
+                    - generic [ref=e556]: Temp Control 1st Flr Premium
+                    - heading "5' WIDTH x 6' DEPTH" [level=2] [ref=e557]:
+                      - generic [ref=e558]:
+                        - text: 5'
+                        - generic [ref=e559]: WIDTH
+                      - text: x
+                      - generic [ref=e560]:
+                        - text: 6'
+                        - generic [ref=e561]: DEPTH
+                    - paragraph [ref=e563]:
+                      - generic [ref=e564]: 
+                      - link "What Size Do I Need?" [ref=e565] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e566]:
+                  - generic [ref=e568]:
+                    - heading "$70/month" [level=3] [ref=e569]
+                    - generic [ref=e570]: Standard Rate
+                  - generic [ref=e571]:
+                    - paragraph [ref=e573]: Only 1 left
+                    - generic [ref=e575]:
+                      - link "rent" [ref=e577] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=5708818&type=rent&con=-999&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e578]:
+                        - generic [ref=e579]: Easily switch sizes.
+                    - generic [ref=e581]:
+                      - generic [ref=e583] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e584]:
+                        - generic [ref=e585]: No credit card required.
+                - generic [ref=e587]:
+                  - generic "Unload at ground level. No elevators or stairs are needed!" [ref=e589]:
+                    - generic [ref=e591]:
+                      - generic [ref=e592]: 
+                      - text: Ground Floor
+                  - link "See All Facility Features" [ref=e604] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "6 x 6 storage image Temp Control 2nd Flr 6' WIDTH x 6' DEPTH  What Size Do I Need? $61/month Standard Rate Only 1 left rent Easily switch sizes. reserve No credit card required.  Access 6a – 11p  24/7 Monitoring  Unload Indoors  Heated Units  Air Cooled  Upper Floor See All Facility Features" [ref=e605]:
+            - cell "6 x 6 storage image Temp Control 2nd Flr 6' WIDTH x 6' DEPTH  What Size Do I Need? $61/month Standard Rate Only 1 left rent Easily switch sizes. reserve No credit card required.  Access 6a – 11p  24/7 Monitoring  Unload Indoors  Heated Units  Air Cooled  Upper Floor See All Facility Features" [ref=e606]:
+              - generic [ref=e608]:
+                - generic [ref=e610]:
+                  - link "6 x 6 storage image" [ref=e612]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1396367958.png
+                    - img "6 x 6 storage image" [ref=e613]
+                  - generic [ref=e614]:
+                    - generic [ref=e615]: Temp Control 2nd Flr
+                    - heading "6' WIDTH x 6' DEPTH" [level=2] [ref=e616]:
+                      - generic [ref=e617]:
+                        - text: 6'
+                        - generic [ref=e618]: WIDTH
+                      - text: x
+                      - generic [ref=e619]:
+                        - text: 6'
+                        - generic [ref=e620]: DEPTH
+                    - paragraph [ref=e622]:
+                      - generic [ref=e623]: 
+                      - link "What Size Do I Need?" [ref=e624] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e625]:
+                  - generic [ref=e627]:
+                    - heading "$61/month" [level=3] [ref=e628]
+                    - generic [ref=e629]: Standard Rate
+                  - generic [ref=e630]:
+                    - paragraph [ref=e632]: Only 1 left
+                    - generic [ref=e634]:
+                      - link "rent" [ref=e636] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=158565&type=rent&con=-999&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e637]:
+                        - generic [ref=e638]: Easily switch sizes.
+                    - generic [ref=e640]:
+                      - generic [ref=e642] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e643]:
+                        - generic [ref=e644]: No credit card required.
+                - generic [ref=e646]:
+                  - generic "Get to your belongings 7 days a week. Even when our office is closed." [ref=e647]:
+                    - generic [ref=e650]:
+                      - generic [ref=e652]: 
+                      - generic [ref=e654]: Access 6a – 11p
+                  - generic "Round-the-clock video recording of on-site activity." [ref=e655]:
+                    - generic [ref=e658]:
+                      - generic [ref=e660]: 
+                      - generic [ref=e662]: 24/7 Monitoring
+                  - generic "Covered loading area to keep you warm and dry while moving your belongings." [ref=e663]:
+                    - generic [ref=e666]:
+                      - generic [ref=e668]: 
+                      - generic [ref=e670]: Unload Indoors
+                  - generic "Temperature controlled to keep your belongings from freezing." [ref=e671]:
+                    - generic [ref=e674]:
+                      - generic [ref=e676]: 
+                      - generic [ref=e678]: Heated Units
+                  - generic "Temperature controlled to keep your belongings from getting super hot and reduces the humidity." [ref=e679]:
+                    - generic [ref=e682]:
+                      - generic [ref=e684]: 
+                      - generic [ref=e686]: Air Cooled
+                  - generic "Unload at ground level and use our large cargo elevators to move your belongings to your floor." [ref=e688]:
+                    - generic [ref=e690]:
+                      - generic [ref=e691]: 
+                      - text: Upper Floor
+                  - link "See All Facility Features" [ref=e703] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "5 x 10 storage image Temp Control 2nd Flr 5' WIDTH x 10' DEPTH  What Size Do I Need? $69/month Standard Rate Only 1 left rent Easily switch sizes. reserve No credit card required.  Upper Floor See All Facility Features" [ref=e704]:
+            - cell "5 x 10 storage image Temp Control 2nd Flr 5' WIDTH x 10' DEPTH  What Size Do I Need? $69/month Standard Rate Only 1 left rent Easily switch sizes. reserve No credit card required.  Upper Floor See All Facility Features" [ref=e705]:
+              - generic [ref=e707]:
+                - generic [ref=e709]:
+                  - link "5 x 10 storage image" [ref=e711]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1672664100.webp
+                    - img "5 x 10 storage image" [ref=e712]
+                  - generic [ref=e713]:
+                    - generic [ref=e714]: Temp Control 2nd Flr
+                    - heading "5' WIDTH x 10' DEPTH" [level=2] [ref=e715]:
+                      - generic [ref=e716]:
+                        - text: 5'
+                        - generic [ref=e717]: WIDTH
+                      - text: x
+                      - generic [ref=e718]:
+                        - text: 10'
+                        - generic [ref=e719]: DEPTH
+                    - paragraph [ref=e721]:
+                      - generic [ref=e722]: 
+                      - link "What Size Do I Need?" [ref=e723] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e724]:
+                  - generic [ref=e726]:
+                    - heading "$69/month" [level=3] [ref=e727]
+                    - generic [ref=e728]: Standard Rate
+                  - generic [ref=e729]:
+                    - paragraph [ref=e731]: Only 1 left
+                    - generic [ref=e733]:
+                      - link "rent" [ref=e735] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=5676155&type=rent&con=-999&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e736]:
+                        - generic [ref=e737]: Easily switch sizes.
+                    - generic [ref=e739]:
+                      - generic [ref=e741] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e742]:
+                        - generic [ref=e743]: No credit card required.
+                - generic [ref=e745]:
+                  - generic "Unload at ground level and use our large cargo elevators to move your belongings to your floor." [ref=e747]:
+                    - generic [ref=e749]:
+                      - generic [ref=e750]: 
+                      - text: Upper Floor
+                  - link "See All Facility Features" [ref=e762] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "10 x 10 storage image Temp Control 2nd Flr Premium 10' WIDTH x 10' DEPTH  What Size Do I Need? $110/month Standard Rate Only 1 left rent Easily switch sizes. reserve No credit card required.  Upper Floor See All Facility Features" [ref=e763]:
+            - cell "10 x 10 storage image Temp Control 2nd Flr Premium 10' WIDTH x 10' DEPTH  What Size Do I Need? $110/month Standard Rate Only 1 left rent Easily switch sizes. reserve No credit card required.  Upper Floor See All Facility Features" [ref=e764]:
+              - generic [ref=e766]:
+                - generic [ref=e768]:
+                  - link "10 x 10 storage image" [ref=e770]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1354065140.webp
+                    - img "10 x 10 storage image" [ref=e771]
+                  - generic [ref=e772]:
+                    - generic [ref=e773]: Temp Control 2nd Flr Premium
+                    - heading "10' WIDTH x 10' DEPTH" [level=2] [ref=e774]:
+                      - generic [ref=e775]:
+                        - text: 10'
+                        - generic [ref=e776]: WIDTH
+                      - text: x
+                      - generic [ref=e777]:
+                        - text: 10'
+                        - generic [ref=e778]: DEPTH
+                    - paragraph [ref=e780]:
+                      - generic [ref=e781]: 
+                      - link "What Size Do I Need?" [ref=e782] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e783]:
+                  - generic [ref=e785]:
+                    - heading "$110/month" [level=3] [ref=e786]
+                    - generic [ref=e787]: Standard Rate
+                  - generic [ref=e788]:
+                    - paragraph [ref=e790]: Only 1 left
+                    - generic [ref=e792]:
+                      - link "rent" [ref=e794] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=4941999&type=rent&con=-999&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e795]:
+                        - generic [ref=e796]: Easily switch sizes.
+                    - generic [ref=e798]:
+                      - generic [ref=e800] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e801]:
+                        - generic [ref=e802]: No credit card required.
+                - generic [ref=e804]:
+                  - generic "Unload at ground level and use our large cargo elevators to move your belongings to your floor." [ref=e806]:
+                    - generic [ref=e808]:
+                      - generic [ref=e809]: 
+                      - text: Upper Floor
+                  - link "See All Facility Features" [ref=e821] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "10 x 10 storage image Temp Control 2nd Flr 10' WIDTH x 10' DEPTH  What Size Do I Need? 50% Off First 3 Full Mths Sale Ends Apr 30th $60/month During Promo Period $120/month After Promo Period Month to Month - No Long Term Commitments Only 1 left rent Easily switch sizes. reserve No credit card required.  Upper Floor See All Facility Features" [ref=e822]:
+            - cell "10 x 10 storage image Temp Control 2nd Flr 10' WIDTH x 10' DEPTH  What Size Do I Need? 50% Off First 3 Full Mths Sale Ends Apr 30th $60/month During Promo Period $120/month After Promo Period Month to Month - No Long Term Commitments Only 1 left rent Easily switch sizes. reserve No credit card required.  Upper Floor See All Facility Features" [ref=e823]:
+              - generic [ref=e825]:
+                - generic [ref=e827]:
+                  - link "10 x 10 storage image" [ref=e829]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1354065140.webp
+                    - img "10 x 10 storage image" [ref=e830]
+                  - generic [ref=e831]:
+                    - generic [ref=e832]: Temp Control 2nd Flr
+                    - heading "10' WIDTH x 10' DEPTH" [level=2] [ref=e833]:
+                      - generic [ref=e834]:
+                        - text: 10'
+                        - generic [ref=e835]: WIDTH
+                      - text: x
+                      - generic [ref=e836]:
+                        - text: 10'
+                        - generic [ref=e837]: DEPTH
+                    - generic [ref=e838]:
+                      - paragraph [ref=e839]:
+                        - generic [ref=e840]: 
+                        - link "What Size Do I Need?" [ref=e841] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e842]:
+                        - generic [ref=e843]: 50% Off First 3 Full Mths
+                        - generic [ref=e844]: Sale Ends Apr 30th
+                - generic [ref=e845]:
+                  - generic [ref=e846]:
+                    - generic [ref=e847]:
+                      - heading "$60/month" [level=3] [ref=e848]
+                      - generic [ref=e849]: During Promo Period
+                    - generic [ref=e850]:
+                      - heading "$120/month" [level=3] [ref=e851]
+                      - generic [ref=e852]: After Promo Period
+                    - paragraph [ref=e854]: Month to Month - No Long Term Commitments
+                  - generic [ref=e855]:
+                    - paragraph [ref=e857]: Only 1 left
+                    - generic [ref=e859]:
+                      - link "rent" [ref=e861] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=4882125&type=rent&con=3156&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e862]:
+                        - generic [ref=e863]: Easily switch sizes.
+                    - generic [ref=e865]:
+                      - generic [ref=e867] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e868]:
+                        - generic [ref=e869]: No credit card required.
+                - generic [ref=e871]:
+                  - generic "Unload at ground level and use our large cargo elevators to move your belongings to your floor." [ref=e873]:
+                    - generic [ref=e875]:
+                      - generic [ref=e876]: 
+                      - text: Upper Floor
+                  - link "See All Facility Features" [ref=e888] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "10 x 10 storage image Temp Control 1st Flr 10' WIDTH x 10' DEPTH  What Size Do I Need? $145/month Standard Rate Only 3 left rent Easily switch sizes. reserve No credit card required.  Ground Floor See All Facility Features" [ref=e889]:
+            - cell "10 x 10 storage image Temp Control 1st Flr 10' WIDTH x 10' DEPTH  What Size Do I Need? $145/month Standard Rate Only 3 left rent Easily switch sizes. reserve No credit card required.  Ground Floor See All Facility Features" [ref=e890]:
+              - generic [ref=e892]:
+                - generic [ref=e894]:
+                  - link "10 x 10 storage image" [ref=e896]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1354065140.webp
+                    - img "10 x 10 storage image" [ref=e897]
+                  - generic [ref=e898]:
+                    - generic [ref=e899]: Temp Control 1st Flr
+                    - heading "10' WIDTH x 10' DEPTH" [level=2] [ref=e900]:
+                      - generic [ref=e901]:
+                        - text: 10'
+                        - generic [ref=e902]: WIDTH
+                      - text: x
+                      - generic [ref=e903]:
+                        - text: 10'
+                        - generic [ref=e904]: DEPTH
+                    - paragraph [ref=e906]:
+                      - generic [ref=e907]: 
+                      - link "What Size Do I Need?" [ref=e908] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e909]:
+                  - generic [ref=e911]:
+                    - heading "$145/month" [level=3] [ref=e912]
+                    - generic [ref=e913]: Standard Rate
+                  - generic [ref=e914]:
+                    - paragraph [ref=e916]: Only 3 left
+                    - generic [ref=e918]:
+                      - link "rent" [ref=e920] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=5229205&type=rent&con=-999&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e921]:
+                        - generic [ref=e922]: Easily switch sizes.
+                    - generic [ref=e924]:
+                      - generic [ref=e926] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e927]:
+                        - generic [ref=e928]: No credit card required.
+                - generic [ref=e930]:
+                  - generic "Unload at ground level. No elevators or stairs are needed!" [ref=e932]:
+                    - generic [ref=e934]:
+                      - generic [ref=e935]: 
+                      - text: Ground Floor
+                  - link "See All Facility Features" [ref=e947] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "10 x 10 storage image Temp Control 1st Flr Premium 10' WIDTH x 10' DEPTH  What Size Do I Need? $155/month Standard Rate Only 1 left rent Easily switch sizes. reserve No credit card required.  Ground Floor See All Facility Features" [ref=e948]:
+            - cell "10 x 10 storage image Temp Control 1st Flr Premium 10' WIDTH x 10' DEPTH  What Size Do I Need? $155/month Standard Rate Only 1 left rent Easily switch sizes. reserve No credit card required.  Ground Floor See All Facility Features" [ref=e949]:
+              - generic [ref=e951]:
+                - generic [ref=e953]:
+                  - link "10 x 10 storage image" [ref=e955]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1354065140.webp
+                    - img "10 x 10 storage image" [ref=e956]
+                  - generic [ref=e957]:
+                    - generic [ref=e958]: Temp Control 1st Flr Premium
+                    - heading "10' WIDTH x 10' DEPTH" [level=2] [ref=e959]:
+                      - generic [ref=e960]:
+                        - text: 10'
+                        - generic [ref=e961]: WIDTH
+                      - text: x
+                      - generic [ref=e962]:
+                        - text: 10'
+                        - generic [ref=e963]: DEPTH
+                    - paragraph [ref=e965]:
+                      - generic [ref=e966]: 
+                      - link "What Size Do I Need?" [ref=e967] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e968]:
+                  - generic [ref=e970]:
+                    - heading "$155/month" [level=3] [ref=e971]
+                    - generic [ref=e972]: Standard Rate
+                  - generic [ref=e973]:
+                    - paragraph [ref=e975]: Only 1 left
+                    - generic [ref=e977]:
+                      - link "rent" [ref=e979] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=5285195&type=rent&con=-999&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e980]:
+                        - generic [ref=e981]: Easily switch sizes.
+                    - generic [ref=e983]:
+                      - generic [ref=e985] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e986]:
+                        - generic [ref=e987]: No credit card required.
+                - generic [ref=e989]:
+                  - generic "Unload at ground level. No elevators or stairs are needed!" [ref=e991]:
+                    - generic [ref=e993]:
+                      - generic [ref=e994]: 
+                      - text: Ground Floor
+                  - link "See All Facility Features" [ref=e1006] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "10 x 11 storage image Temp Control 2nd Flr 10' WIDTH x 11' DEPTH  What Size Do I Need? $130/month Standard Rate Only 1 left rent Easily switch sizes. reserve No credit card required.  Access 6a – 11p  24/7 Monitoring  Unload Indoors  Heated Units  Air Cooled  Upper Floor See All Facility Features" [ref=e1007]:
+            - cell "10 x 11 storage image Temp Control 2nd Flr 10' WIDTH x 11' DEPTH  What Size Do I Need? $130/month Standard Rate Only 1 left rent Easily switch sizes. reserve No credit card required.  Access 6a – 11p  24/7 Monitoring  Unload Indoors  Heated Units  Air Cooled  Upper Floor See All Facility Features" [ref=e1008]:
+              - generic [ref=e1010]:
+                - generic [ref=e1012]:
+                  - link "10 x 11 storage image" [ref=e1014]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1354065140.webp
+                    - img "10 x 11 storage image" [ref=e1015]
+                  - generic [ref=e1016]:
+                    - generic [ref=e1017]: Temp Control 2nd Flr
+                    - heading "10' WIDTH x 11' DEPTH" [level=2] [ref=e1018]:
+                      - generic [ref=e1019]:
+                        - text: 10'
+                        - generic [ref=e1020]: WIDTH
+                      - text: x
+                      - generic [ref=e1021]:
+                        - text: 11'
+                        - generic [ref=e1022]: DEPTH
+                    - paragraph [ref=e1024]:
+                      - generic [ref=e1025]: 
+                      - link "What Size Do I Need?" [ref=e1026] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e1027]:
+                  - generic [ref=e1029]:
+                    - heading "$130/month" [level=3] [ref=e1030]
+                    - generic [ref=e1031]: Standard Rate
+                  - generic [ref=e1032]:
+                    - paragraph [ref=e1034]: Only 1 left
+                    - generic [ref=e1036]:
+                      - link "rent" [ref=e1038] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=158559&type=rent&con=-999&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e1039]:
+                        - generic [ref=e1040]: Easily switch sizes.
+                    - generic [ref=e1042]:
+                      - generic [ref=e1044] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e1045]:
+                        - generic [ref=e1046]: No credit card required.
+                - generic [ref=e1048]:
+                  - generic "Get to your belongings 7 days a week. Even when our office is closed." [ref=e1049]:
+                    - generic [ref=e1052]:
+                      - generic [ref=e1054]: 
+                      - generic [ref=e1056]: Access 6a – 11p
+                  - generic "Round-the-clock video recording of on-site activity." [ref=e1057]:
+                    - generic [ref=e1060]:
+                      - generic [ref=e1062]: 
+                      - generic [ref=e1064]: 24/7 Monitoring
+                  - generic "Covered loading area to keep you warm and dry while moving your belongings." [ref=e1065]:
+                    - generic [ref=e1068]:
+                      - generic [ref=e1070]: 
+                      - generic [ref=e1072]: Unload Indoors
+                  - generic "Temperature controlled to keep your belongings from freezing." [ref=e1073]:
+                    - generic [ref=e1076]:
+                      - generic [ref=e1078]: 
+                      - generic [ref=e1080]: Heated Units
+                  - generic "Temperature controlled to keep your belongings from getting super hot and reduces the humidity." [ref=e1081]:
+                    - generic [ref=e1084]:
+                      - generic [ref=e1086]: 
+                      - generic [ref=e1088]: Air Cooled
+                  - generic "Unload at ground level and use our large cargo elevators to move your belongings to your floor." [ref=e1090]:
+                    - generic [ref=e1092]:
+                      - generic [ref=e1093]: 
+                      - text: Upper Floor
+                  - link "See All Facility Features" [ref=e1105] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "10 x 11 storage image Temp Control 1st Flr 10' WIDTH x 11' DEPTH  What Size Do I Need? $155/month Standard Rate Corner Unit Only 1 left rent Easily switch sizes. reserve No credit card required.  Access 6a – 11p  24/7 Monitoring  Unload Indoors  Heated Units  Air Cooled  Ground Floor See All Facility Features" [ref=e1106]:
+            - cell "10 x 11 storage image Temp Control 1st Flr 10' WIDTH x 11' DEPTH  What Size Do I Need? $155/month Standard Rate Corner Unit Only 1 left rent Easily switch sizes. reserve No credit card required.  Access 6a – 11p  24/7 Monitoring  Unload Indoors  Heated Units  Air Cooled  Ground Floor See All Facility Features" [ref=e1107]:
+              - generic [ref=e1109]:
+                - generic [ref=e1111]:
+                  - link "10 x 11 storage image" [ref=e1113]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1354065140.webp
+                    - img "10 x 11 storage image" [ref=e1114]
+                  - generic [ref=e1115]:
+                    - generic [ref=e1116]: Temp Control 1st Flr
+                    - heading "10' WIDTH x 11' DEPTH" [level=2] [ref=e1117]:
+                      - generic [ref=e1118]:
+                        - text: 10'
+                        - generic [ref=e1119]: WIDTH
+                      - text: x
+                      - generic [ref=e1120]:
+                        - text: 11'
+                        - generic [ref=e1121]: DEPTH
+                    - paragraph [ref=e1123]:
+                      - generic [ref=e1124]: 
+                      - link "What Size Do I Need?" [ref=e1125] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e1126]:
+                  - generic [ref=e1128]:
+                    - heading "$155/month" [level=3] [ref=e1129]
+                    - generic [ref=e1130]: Standard Rate
+                    - paragraph [ref=e1131]: Corner Unit
+                  - generic [ref=e1132]:
+                    - paragraph [ref=e1134]: Only 1 left
+                    - generic [ref=e1136]:
+                      - link "rent" [ref=e1138] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=158535&type=rent&con=-999&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e1139]:
+                        - generic [ref=e1140]: Easily switch sizes.
+                    - generic [ref=e1142]:
+                      - generic [ref=e1144] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e1145]:
+                        - generic [ref=e1146]: No credit card required.
+                - generic [ref=e1148]:
+                  - generic "Get to your belongings 7 days a week. Even when our office is closed." [ref=e1149]:
+                    - generic [ref=e1152]:
+                      - generic [ref=e1154]: 
+                      - generic [ref=e1156]: Access 6a – 11p
+                  - generic "Round-the-clock video recording of on-site activity." [ref=e1157]:
+                    - generic [ref=e1160]:
+                      - generic [ref=e1162]: 
+                      - generic [ref=e1164]: 24/7 Monitoring
+                  - generic "Covered loading area to keep you warm and dry while moving your belongings." [ref=e1165]:
+                    - generic [ref=e1168]:
+                      - generic [ref=e1170]: 
+                      - generic [ref=e1172]: Unload Indoors
+                  - generic "Temperature controlled to keep your belongings from freezing." [ref=e1173]:
+                    - generic [ref=e1176]:
+                      - generic [ref=e1178]: 
+                      - generic [ref=e1180]: Heated Units
+                  - generic "Temperature controlled to keep your belongings from getting super hot and reduces the humidity." [ref=e1181]:
+                    - generic [ref=e1184]:
+                      - generic [ref=e1186]: 
+                      - generic [ref=e1188]: Air Cooled
+                  - generic "Unload at ground level. No elevators or stairs are needed!" [ref=e1190]:
+                    - generic [ref=e1192]:
+                      - generic [ref=e1193]: 
+                      - text: Ground Floor
+                  - link "See All Facility Features" [ref=e1205] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "10 x 13 storage image Temp Control 1st Flr 10' WIDTH x 13' DEPTH  What Size Do I Need? $195/month Standard Rate Only 1 left rent Easily switch sizes. reserve No credit card required.  Ground Floor See All Facility Features" [ref=e1206]:
+            - cell "10 x 13 storage image Temp Control 1st Flr 10' WIDTH x 13' DEPTH  What Size Do I Need? $195/month Standard Rate Only 1 left rent Easily switch sizes. reserve No credit card required.  Ground Floor See All Facility Features" [ref=e1207]:
+              - generic [ref=e1209]:
+                - generic [ref=e1211]:
+                  - link "10 x 13 storage image" [ref=e1213]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_492379688.webp
+                    - img "10 x 13 storage image" [ref=e1214]
+                  - generic [ref=e1215]:
+                    - generic [ref=e1216]: Temp Control 1st Flr
+                    - heading "10' WIDTH x 13' DEPTH" [level=2] [ref=e1217]:
+                      - generic [ref=e1218]:
+                        - text: 10'
+                        - generic [ref=e1219]: WIDTH
+                      - text: x
+                      - generic [ref=e1220]:
+                        - text: 13'
+                        - generic [ref=e1221]: DEPTH
+                    - paragraph [ref=e1223]:
+                      - generic [ref=e1224]: 
+                      - link "What Size Do I Need?" [ref=e1225] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e1226]:
+                  - generic [ref=e1228]:
+                    - heading "$195/month" [level=3] [ref=e1229]
+                    - generic [ref=e1230]: Standard Rate
+                  - generic [ref=e1231]:
+                    - paragraph [ref=e1233]: Only 1 left
+                    - generic [ref=e1235]:
+                      - link "rent" [ref=e1237] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=5463111&type=rent&con=-999&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e1238]:
+                        - generic [ref=e1239]: Easily switch sizes.
+                    - generic [ref=e1241]:
+                      - generic [ref=e1243] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e1244]:
+                        - generic [ref=e1245]: No credit card required.
+                - generic [ref=e1247]:
+                  - generic "Unload at ground level. No elevators or stairs are needed!" [ref=e1249]:
+                    - generic [ref=e1251]:
+                      - generic [ref=e1252]: 
+                      - text: Ground Floor
+                  - link "See All Facility Features" [ref=e1264] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "10 x 15 storage image Temp Control 2nd Flr 10' WIDTH x 15' DEPTH  What Size Do I Need? 50% Off First 3 Full Mths Sale Ends Apr 30th $70/month During Promo Period $140/month After Promo Period Month to Month - No Long Term Commitments rent Easily switch sizes. reserve No credit card required.  Upper Floor See All Facility Features" [ref=e1265]:
+            - cell "10 x 15 storage image Temp Control 2nd Flr 10' WIDTH x 15' DEPTH  What Size Do I Need? 50% Off First 3 Full Mths Sale Ends Apr 30th $70/month During Promo Period $140/month After Promo Period Month to Month - No Long Term Commitments rent Easily switch sizes. reserve No credit card required.  Upper Floor See All Facility Features" [ref=e1266]:
+              - generic [ref=e1268]:
+                - generic [ref=e1270]:
+                  - link "10 x 15 storage image" [ref=e1272]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_492379688.webp
+                    - img "10 x 15 storage image" [ref=e1273]
+                  - generic [ref=e1274]:
+                    - generic [ref=e1275]: Temp Control 2nd Flr
+                    - heading "10' WIDTH x 15' DEPTH" [level=2] [ref=e1276]:
+                      - generic [ref=e1277]:
+                        - text: 10'
+                        - generic [ref=e1278]: WIDTH
+                      - text: x
+                      - generic [ref=e1279]:
+                        - text: 15'
+                        - generic [ref=e1280]: DEPTH
+                    - generic [ref=e1281]:
+                      - paragraph [ref=e1282]:
+                        - generic [ref=e1283]: 
+                        - link "What Size Do I Need?" [ref=e1284] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e1285]:
+                        - generic [ref=e1286]: 50% Off First 3 Full Mths
+                        - generic [ref=e1287]: Sale Ends Apr 30th
+                - generic [ref=e1288]:
+                  - generic [ref=e1289]:
+                    - generic [ref=e1290]:
+                      - heading "$70/month" [level=3] [ref=e1291]
+                      - generic [ref=e1292]: During Promo Period
+                    - generic [ref=e1293]:
+                      - heading "$140/month" [level=3] [ref=e1294]
+                      - generic [ref=e1295]: After Promo Period
+                    - paragraph [ref=e1297]: Month to Month - No Long Term Commitments
+                  - generic [ref=e1298]:
+                    - generic [ref=e1300]:
+                      - link "rent" [ref=e1302] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=5711788&type=rent&con=3156&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e1303]:
+                        - generic [ref=e1304]: Easily switch sizes.
+                    - generic [ref=e1306]:
+                      - generic [ref=e1308] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e1309]:
+                        - generic [ref=e1310]: No credit card required.
+                - generic [ref=e1312]:
+                  - generic "Unload at ground level and use our large cargo elevators to move your belongings to your floor." [ref=e1314]:
+                    - generic [ref=e1316]:
+                      - generic [ref=e1317]: 
+                      - text: Upper Floor
+                  - link "See All Facility Features" [ref=e1329] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "10 x 15 storage image Temp Control 1st Flr 10' WIDTH x 15' DEPTH  What Size Do I Need? $205/month Standard Rate Only 1 left rent Easily switch sizes. reserve No credit card required.  Ground Floor See All Facility Features" [ref=e1330]:
+            - cell "10 x 15 storage image Temp Control 1st Flr 10' WIDTH x 15' DEPTH  What Size Do I Need? $205/month Standard Rate Only 1 left rent Easily switch sizes. reserve No credit card required.  Ground Floor See All Facility Features" [ref=e1331]:
+              - generic [ref=e1333]:
+                - generic [ref=e1335]:
+                  - link "10 x 15 storage image" [ref=e1337]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_492379688.webp
+                    - img "10 x 15 storage image" [ref=e1338]
+                  - generic [ref=e1339]:
+                    - generic [ref=e1340]: Temp Control 1st Flr
+                    - heading "10' WIDTH x 15' DEPTH" [level=2] [ref=e1341]:
+                      - generic [ref=e1342]:
+                        - text: 10'
+                        - generic [ref=e1343]: WIDTH
+                      - text: x
+                      - generic [ref=e1344]:
+                        - text: 15'
+                        - generic [ref=e1345]: DEPTH
+                    - paragraph [ref=e1347]:
+                      - generic [ref=e1348]: 
+                      - link "What Size Do I Need?" [ref=e1349] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e1350]:
+                  - generic [ref=e1352]:
+                    - heading "$205/month" [level=3] [ref=e1353]
+                    - generic [ref=e1354]: Standard Rate
+                  - generic [ref=e1355]:
+                    - paragraph [ref=e1357]: Only 1 left
+                    - generic [ref=e1359]:
+                      - link "rent" [ref=e1361] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=5532213&type=rent&con=-999&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e1362]:
+                        - generic [ref=e1363]: Easily switch sizes.
+                    - generic [ref=e1365]:
+                      - generic [ref=e1367] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e1368]:
+                        - generic [ref=e1369]: No credit card required.
+                - generic [ref=e1371]:
+                  - generic "Unload at ground level. No elevators or stairs are needed!" [ref=e1373]:
+                    - generic [ref=e1375]:
+                      - generic [ref=e1376]: 
+                      - text: Ground Floor
+                  - link "See All Facility Features" [ref=e1388] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "10 x 15 storage image Temp Control 2nd Flr Premium 10' WIDTH x 15' DEPTH  What Size Do I Need? 50% Off 2 Full Mths Sale Ends Apr 30th $103/month During Promo Period $205/month After Promo Period Month to Month - No Long Term Commitments Only 1 left rent Easily switch sizes. reserve No credit card required.  Upper Floor See All Facility Features" [ref=e1389]:
+            - cell "10 x 15 storage image Temp Control 2nd Flr Premium 10' WIDTH x 15' DEPTH  What Size Do I Need? 50% Off 2 Full Mths Sale Ends Apr 30th $103/month During Promo Period $205/month After Promo Period Month to Month - No Long Term Commitments Only 1 left rent Easily switch sizes. reserve No credit card required.  Upper Floor See All Facility Features" [ref=e1390]:
+              - generic [ref=e1392]:
+                - generic [ref=e1394]:
+                  - link "10 x 15 storage image" [ref=e1396]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_492379688.webp
+                    - img "10 x 15 storage image" [ref=e1397]
+                  - generic [ref=e1398]:
+                    - generic [ref=e1399]: Temp Control 2nd Flr Premium
+                    - heading "10' WIDTH x 15' DEPTH" [level=2] [ref=e1400]:
+                      - generic [ref=e1401]:
+                        - text: 10'
+                        - generic [ref=e1402]: WIDTH
+                      - text: x
+                      - generic [ref=e1403]:
+                        - text: 15'
+                        - generic [ref=e1404]: DEPTH
+                    - generic [ref=e1405]:
+                      - paragraph [ref=e1406]:
+                        - generic [ref=e1407]: 
+                        - link "What Size Do I Need?" [ref=e1408] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e1409]:
+                        - generic [ref=e1410]: 50% Off 2 Full Mths
+                        - generic [ref=e1411]: Sale Ends Apr 30th
+                - generic [ref=e1412]:
+                  - generic [ref=e1413]:
+                    - generic [ref=e1414]:
+                      - heading "$103/month" [level=3] [ref=e1415]
+                      - generic [ref=e1416]: During Promo Period
+                    - generic [ref=e1417]:
+                      - heading "$205/month" [level=3] [ref=e1418]
+                      - generic [ref=e1419]: After Promo Period
+                    - paragraph [ref=e1421]: Month to Month - No Long Term Commitments
+                  - generic [ref=e1422]:
+                    - paragraph [ref=e1424]: Only 1 left
+                    - generic [ref=e1426]:
+                      - link "rent" [ref=e1428] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=5480758&type=rent&con=3157&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e1429]:
+                        - generic [ref=e1430]: Easily switch sizes.
+                    - generic [ref=e1432]:
+                      - generic [ref=e1434] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e1435]:
+                        - generic [ref=e1436]: No credit card required.
+                - generic [ref=e1438]:
+                  - generic "Unload at ground level and use our large cargo elevators to move your belongings to your floor." [ref=e1440]:
+                    - generic [ref=e1442]:
+                      - generic [ref=e1443]: 
+                      - text: Upper Floor
+                  - link "See All Facility Features" [ref=e1455] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "13 x 13 storage image Temp Control 2nd Flr 13' WIDTH x 13' DEPTH  What Size Do I Need? 50% Off 2 Full Mths Sale Ends Apr 30th $93/month During Promo Period $185/month After Promo Period Month to Month - No Long Term Commitments Only 1 left rent Easily switch sizes. reserve No credit card required.  Access 6a – 11p  24/7 Monitoring  Unload Indoors  Heated Units  Air Cooled  Upper Floor See All Facility Features" [ref=e1456]:
+            - cell "13 x 13 storage image Temp Control 2nd Flr 13' WIDTH x 13' DEPTH  What Size Do I Need? 50% Off 2 Full Mths Sale Ends Apr 30th $93/month During Promo Period $185/month After Promo Period Month to Month - No Long Term Commitments Only 1 left rent Easily switch sizes. reserve No credit card required.  Access 6a – 11p  24/7 Monitoring  Unload Indoors  Heated Units  Air Cooled  Upper Floor See All Facility Features" [ref=e1457]:
+              - generic [ref=e1459]:
+                - generic [ref=e1461]:
+                  - link "13 x 13 storage image" [ref=e1463]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_2093184547.webp
+                    - img "13 x 13 storage image" [ref=e1464]
+                  - generic [ref=e1465]:
+                    - generic [ref=e1466]: Temp Control 2nd Flr
+                    - heading "13' WIDTH x 13' DEPTH" [level=2] [ref=e1467]:
+                      - generic [ref=e1468]:
+                        - text: 13'
+                        - generic [ref=e1469]: WIDTH
+                      - text: x
+                      - generic [ref=e1470]:
+                        - text: 13'
+                        - generic [ref=e1471]: DEPTH
+                    - generic [ref=e1472]:
+                      - paragraph [ref=e1473]:
+                        - generic [ref=e1474]: 
+                        - link "What Size Do I Need?" [ref=e1475] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e1476]:
+                        - generic [ref=e1477]: 50% Off 2 Full Mths
+                        - generic [ref=e1478]: Sale Ends Apr 30th
+                - generic [ref=e1479]:
+                  - generic [ref=e1480]:
+                    - generic [ref=e1481]:
+                      - heading "$93/month" [level=3] [ref=e1482]
+                      - generic [ref=e1483]: During Promo Period
+                    - generic [ref=e1484]:
+                      - heading "$185/month" [level=3] [ref=e1485]
+                      - generic [ref=e1486]: After Promo Period
+                    - paragraph [ref=e1488]: Month to Month - No Long Term Commitments
+                  - generic [ref=e1489]:
+                    - paragraph [ref=e1491]: Only 1 left
+                    - generic [ref=e1493]:
+                      - link "rent" [ref=e1495] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=158569&type=rent&con=3157&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e1496]:
+                        - generic [ref=e1497]: Easily switch sizes.
+                    - generic [ref=e1499]:
+                      - generic [ref=e1501] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e1502]:
+                        - generic [ref=e1503]: No credit card required.
+                - generic [ref=e1505]:
+                  - generic "Get to your belongings 7 days a week. Even when our office is closed." [ref=e1506]:
+                    - generic [ref=e1509]:
+                      - generic [ref=e1511]: 
+                      - generic [ref=e1513]: Access 6a – 11p
+                  - generic "Round-the-clock video recording of on-site activity." [ref=e1514]:
+                    - generic [ref=e1517]:
+                      - generic [ref=e1519]: 
+                      - generic [ref=e1521]: 24/7 Monitoring
+                  - generic "Covered loading area to keep you warm and dry while moving your belongings." [ref=e1522]:
+                    - generic [ref=e1525]:
+                      - generic [ref=e1527]: 
+                      - generic [ref=e1529]: Unload Indoors
+                  - generic "Temperature controlled to keep your belongings from freezing." [ref=e1530]:
+                    - generic [ref=e1533]:
+                      - generic [ref=e1535]: 
+                      - generic [ref=e1537]: Heated Units
+                  - generic "Temperature controlled to keep your belongings from getting super hot and reduces the humidity." [ref=e1538]:
+                    - generic [ref=e1541]:
+                      - generic [ref=e1543]: 
+                      - generic [ref=e1545]: Air Cooled
+                  - generic "Unload at ground level and use our large cargo elevators to move your belongings to your floor." [ref=e1547]:
+                    - generic [ref=e1549]:
+                      - generic [ref=e1550]: 
+                      - text: Upper Floor
+                  - link "See All Facility Features" [ref=e1562] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "10 x 20 storage image Temp Control 2nd Flr 10' WIDTH x 20' DEPTH  What Size Do I Need? 50% Off 2 Full Mths Sale Ends Apr 30th $140/month During Promo Period $280/month After Promo Period Month to Month - No Long Term Commitments Only 3 left rent Easily switch sizes. reserve No credit card required.  Upper Floor See All Facility Features" [ref=e1563]:
+            - cell "10 x 20 storage image Temp Control 2nd Flr 10' WIDTH x 20' DEPTH  What Size Do I Need? 50% Off 2 Full Mths Sale Ends Apr 30th $140/month During Promo Period $280/month After Promo Period Month to Month - No Long Term Commitments Only 3 left rent Easily switch sizes. reserve No credit card required.  Upper Floor See All Facility Features" [ref=e1564]:
+              - generic [ref=e1566]:
+                - generic [ref=e1568]:
+                  - link "10 x 20 storage image" [ref=e1570]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1653409645.webp
+                    - img "10 x 20 storage image" [ref=e1571]
+                  - generic [ref=e1572]:
+                    - generic [ref=e1573]: Temp Control 2nd Flr
+                    - heading "10' WIDTH x 20' DEPTH" [level=2] [ref=e1574]:
+                      - generic [ref=e1575]:
+                        - text: 10'
+                        - generic [ref=e1576]: WIDTH
+                      - text: x
+                      - generic [ref=e1577]:
+                        - text: 20'
+                        - generic [ref=e1578]: DEPTH
+                    - generic [ref=e1579]:
+                      - paragraph [ref=e1580]:
+                        - generic [ref=e1581]: 
+                        - link "What Size Do I Need?" [ref=e1582] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e1583]:
+                        - generic [ref=e1584]: 50% Off 2 Full Mths
+                        - generic [ref=e1585]: Sale Ends Apr 30th
+                - generic [ref=e1586]:
+                  - generic [ref=e1587]:
+                    - generic [ref=e1588]:
+                      - heading "$140/month" [level=3] [ref=e1589]
+                      - generic [ref=e1590]: During Promo Period
+                    - generic [ref=e1591]:
+                      - heading "$280/month" [level=3] [ref=e1592]
+                      - generic [ref=e1593]: After Promo Period
+                    - paragraph [ref=e1595]: Month to Month - No Long Term Commitments
+                  - generic [ref=e1596]:
+                    - paragraph [ref=e1598]: Only 3 left
+                    - generic [ref=e1600]:
+                      - link "rent" [ref=e1602] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=4914464&type=rent&con=3157&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e1603]:
+                        - generic [ref=e1604]: Easily switch sizes.
+                    - generic [ref=e1606]:
+                      - generic [ref=e1608] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e1609]:
+                        - generic [ref=e1610]: No credit card required.
+                - generic [ref=e1612]:
+                  - generic "Unload at ground level and use our large cargo elevators to move your belongings to your floor." [ref=e1614]:
+                    - generic [ref=e1616]:
+                      - generic [ref=e1617]: 
+                      - text: Upper Floor
+                  - link "See All Facility Features" [ref=e1629] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "10 x 20 storage image Temp Control 2nd Flr Premium 10' WIDTH x 20' DEPTH  What Size Do I Need? 50% Off 2 Full Mths Sale Ends Apr 30th $145/month During Promo Period $290/month After Promo Period Month to Month - No Long Term Commitments Only 2 left rent Easily switch sizes. reserve No credit card required.  Upper Floor See All Facility Features" [ref=e1630]:
+            - cell "10 x 20 storage image Temp Control 2nd Flr Premium 10' WIDTH x 20' DEPTH  What Size Do I Need? 50% Off 2 Full Mths Sale Ends Apr 30th $145/month During Promo Period $290/month After Promo Period Month to Month - No Long Term Commitments Only 2 left rent Easily switch sizes. reserve No credit card required.  Upper Floor See All Facility Features" [ref=e1631]:
+              - generic [ref=e1633]:
+                - generic [ref=e1635]:
+                  - link "10 x 20 storage image" [ref=e1637]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1653409645.webp
+                    - img "10 x 20 storage image" [ref=e1638]
+                  - generic [ref=e1639]:
+                    - generic [ref=e1640]: Temp Control 2nd Flr Premium
+                    - heading "10' WIDTH x 20' DEPTH" [level=2] [ref=e1641]:
+                      - generic [ref=e1642]:
+                        - text: 10'
+                        - generic [ref=e1643]: WIDTH
+                      - text: x
+                      - generic [ref=e1644]:
+                        - text: 20'
+                        - generic [ref=e1645]: DEPTH
+                    - generic [ref=e1646]:
+                      - paragraph [ref=e1647]:
+                        - generic [ref=e1648]: 
+                        - link "What Size Do I Need?" [ref=e1649] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e1650]:
+                        - generic [ref=e1651]: 50% Off 2 Full Mths
+                        - generic [ref=e1652]: Sale Ends Apr 30th
+                - generic [ref=e1653]:
+                  - generic [ref=e1654]:
+                    - generic [ref=e1655]:
+                      - heading "$145/month" [level=3] [ref=e1656]
+                      - generic [ref=e1657]: During Promo Period
+                    - generic [ref=e1658]:
+                      - heading "$290/month" [level=3] [ref=e1659]
+                      - generic [ref=e1660]: After Promo Period
+                    - paragraph [ref=e1662]: Month to Month - No Long Term Commitments
+                  - generic [ref=e1663]:
+                    - paragraph [ref=e1665]: Only 2 left
+                    - generic [ref=e1667]:
+                      - link "rent" [ref=e1669] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=5144583&type=rent&con=3157&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e1670]:
+                        - generic [ref=e1671]: Easily switch sizes.
+                    - generic [ref=e1673]:
+                      - generic [ref=e1675] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e1676]:
+                        - generic [ref=e1677]: No credit card required.
+                - generic [ref=e1679]:
+                  - generic "Unload at ground level and use our large cargo elevators to move your belongings to your floor." [ref=e1681]:
+                    - generic [ref=e1683]:
+                      - generic [ref=e1684]: 
+                      - text: Upper Floor
+                  - link "See All Facility Features" [ref=e1696] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "12 x 25 storage image Paved Parking 12' WIDTH x 25' DEPTH  What Size Do I Need? $150/month Standard Rate Asphalt Only 1 left rent Easily switch sizes. reserve No credit card required.  Vehicle Parking  Motorcycle Parking  Truck Parking  Trailer Parking  Boat Parking  Commercial Parking  RV Parking See All Facility Features" [ref=e1697]:
+            - cell "12 x 25 storage image Paved Parking 12' WIDTH x 25' DEPTH  What Size Do I Need? $150/month Standard Rate Asphalt Only 1 left rent Easily switch sizes. reserve No credit card required.  Vehicle Parking  Motorcycle Parking  Truck Parking  Trailer Parking  Boat Parking  Commercial Parking  RV Parking See All Facility Features" [ref=e1698]:
+              - generic [ref=e1700]:
+                - generic [ref=e1702]:
+                  - link "12 x 25 storage image" [ref=e1704]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_655760425.webp
+                    - img "12 x 25 storage image" [ref=e1705]
+                  - generic [ref=e1706]:
+                    - generic [ref=e1707]: Paved Parking
+                    - heading "12' WIDTH x 25' DEPTH" [level=2] [ref=e1708]:
+                      - generic [ref=e1709]:
+                        - text: 12'
+                        - generic [ref=e1710]: WIDTH
+                      - text: x
+                      - generic [ref=e1711]:
+                        - text: 25'
+                        - generic [ref=e1712]: DEPTH
+                    - paragraph [ref=e1714]:
+                      - generic [ref=e1715]: 
+                      - link "What Size Do I Need?" [ref=e1716] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e1717]:
+                  - generic [ref=e1719]:
+                    - heading "$150/month" [level=3] [ref=e1720]
+                    - generic [ref=e1721]: Standard Rate
+                    - paragraph [ref=e1722]: Asphalt
+                  - generic [ref=e1723]:
+                    - paragraph [ref=e1725]: Only 1 left
+                    - generic [ref=e1727]:
+                      - link "rent" [ref=e1729] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=5021104&type=rent&con=-999&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e1730]:
+                        - generic [ref=e1731]: Easily switch sizes.
+                    - generic [ref=e1733]:
+                      - generic [ref=e1735] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e1736]:
+                        - generic [ref=e1737]: No credit card required.
+                - generic [ref=e1739]:
+                  - generic [ref=e1741]:
+                    - generic [ref=e1744]:
+                      - generic [ref=e1745]: 
+                      - text: Vehicle Parking
+                    - generic [ref=e1748]:
+                      - generic [ref=e1749]: 
+                      - text: Motorcycle Parking
+                    - generic [ref=e1752]:
+                      - generic [ref=e1753]: 
+                      - text: Truck Parking
+                    - generic [ref=e1756]:
+                      - generic [ref=e1757]: 
+                      - text: Trailer Parking
+                    - generic [ref=e1760]:
+                      - generic [ref=e1761]: 
+                      - text: Boat Parking
+                    - generic [ref=e1764]:
+                      - generic [ref=e1765]: 
+                      - text: Commercial Parking
+                    - generic [ref=e1768]:
+                      - generic [ref=e1769]: 
+                      - text: RV Parking
+                  - link "See All Facility Features" [ref=e1781] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+          - row "12 x 30 storage image Gravel Parking 12' WIDTH x 30' DEPTH  What Size Do I Need? $149/month Standard Rate Only 2 left rent Easily switch sizes. reserve No credit card required.  Vehicle Parking  Motorcycle Parking  Truck Parking  Trailer Parking  Boat Parking  Commercial Parking  RV Parking See All Facility Features" [ref=e1782]:
+            - cell "12 x 30 storage image Gravel Parking 12' WIDTH x 30' DEPTH  What Size Do I Need? $149/month Standard Rate Only 2 left rent Easily switch sizes. reserve No credit card required.  Vehicle Parking  Motorcycle Parking  Truck Parking  Trailer Parking  Boat Parking  Commercial Parking  RV Parking See All Facility Features" [ref=e1783]:
+              - generic [ref=e1785]:
+                - generic [ref=e1787]:
+                  - link "12 x 30 storage image" [ref=e1789]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_633447537.png
+                    - img "12 x 30 storage image" [ref=e1790]
+                  - generic [ref=e1791]:
+                    - generic [ref=e1792]: Gravel Parking
+                    - heading "12' WIDTH x 30' DEPTH" [level=2] [ref=e1793]:
+                      - generic [ref=e1794]:
+                        - text: 12'
+                        - generic [ref=e1795]: WIDTH
+                      - text: x
+                      - generic [ref=e1796]:
+                        - text: 30'
+                        - generic [ref=e1797]: DEPTH
+                    - paragraph [ref=e1799]:
+                      - generic [ref=e1800]: 
+                      - link "What Size Do I Need?" [ref=e1801] [cursor=pointer]:
+                        - /url: "#"
+                - generic [ref=e1802]:
+                  - generic [ref=e1804]:
+                    - heading "$149/month" [level=3] [ref=e1805]
+                    - generic [ref=e1806]: Standard Rate
+                  - generic [ref=e1807]:
+                    - paragraph [ref=e1809]: Only 2 left
+                    - generic [ref=e1811]:
+                      - link "rent" [ref=e1813] [cursor=pointer]:
+                        - /url: https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road/step_four?location=L001&unit=5021244&type=rent&con=-999&is_sitelink=1&site_locations_id=951&gatekeeper-self-storage
+                      - generic "Save time! Pay and sign lease online in just a few minutes. Government issued ID must be shown at storage facility to get access code." [ref=e1814]:
+                        - generic [ref=e1815]: Easily switch sizes.
+                    - generic [ref=e1817]:
+                      - generic [ref=e1819] [cursor=pointer]: reserve
+                      - generic "We’ll hold your unit for up to 14 days and you can finish the rental paperwork at our storage location." [ref=e1820]:
+                        - generic [ref=e1821]: No credit card required.
+                - generic [ref=e1823]:
+                  - generic [ref=e1825]:
+                    - generic [ref=e1828]:
+                      - generic [ref=e1829]: 
+                      - text: Vehicle Parking
+                    - generic [ref=e1832]:
+                      - generic [ref=e1833]: 
+                      - text: Motorcycle Parking
+                    - generic [ref=e1836]:
+                      - generic [ref=e1837]: 
+                      - text: Truck Parking
+                    - generic [ref=e1840]:
+                      - generic [ref=e1841]: 
+                      - text: Trailer Parking
+                    - generic [ref=e1844]:
+                      - generic [ref=e1845]: 
+                      - text: Boat Parking
+                    - generic [ref=e1848]:
+                      - generic [ref=e1849]: 
+                      - text: Commercial Parking
+                    - generic [ref=e1852]:
+                      - generic [ref=e1853]: 
+                      - text: RV Parking
+                  - link "See All Facility Features" [ref=e1865] [cursor=pointer]:
+                    - /url: "#FacilityFeatures"
+      - generic [ref=e1868]:
+        - heading "Customer Reviews" [level=2] [ref=e1869]
+        - generic [ref=e1871]:
+          - generic [ref=e1872]:
+            - generic [ref=e1873] [cursor=pointer]:
+              - generic [ref=e1874]:
+                - img [ref=e1875]
+                - img [ref=e1877]
+                - img [ref=e1879]
+                - img [ref=e1881]
+                - img [ref=e1883]
+              - strong [ref=e1889]: "4.8"
+            - text: 201 Reviews
+          - link "Write a review" [ref=e1890] [cursor=pointer]:
+            - /url: https://www.google.com/search?client=firefox-b-1-d&q=gatekeeper+self+storage+peach+tree&dlnr=1&sei=HrzsZLmSA4eu5NoPiYKLyAU#lrd=0x88f4c3164f1fb37f:0x4bd6cf767cd8e51d,1,,,,
+            - button "Write a review" [ref=e1891]
+        - generic [ref=e1894]:
+          - button "Previous" [ref=e1895] [cursor=pointer]: ←Previous
+          - generic [ref=e1897]:
+            - generic [ref=e1899]:
+              - generic [ref=e1900]:
+                - generic [ref=e1903] [cursor=pointer]:
+                  - img [ref=e1904]
+                  - img [ref=e1906]
+                  - img [ref=e1908]
+                  - img [ref=e1910]
+                  - img [ref=e1912]
+                - img [ref=e1915]
+              - generic [ref=e1921]:
+                - img [ref=e1922]
+                - paragraph [ref=e1923]: Kathy Silva
+                - paragraph [ref=e1924]: a year ago
+              - paragraph [ref=e1926]: Excellent customer service...great group to work with. Love this place.
+            - generic [ref=e1928]:
+              - generic [ref=e1929]:
+                - generic [ref=e1932] [cursor=pointer]:
+                  - img [ref=e1933]
+                  - img [ref=e1935]
+                  - img [ref=e1937]
+                  - img [ref=e1939]
+                  - img [ref=e1941]
+                - img [ref=e1944]
+              - generic [ref=e1950]:
+                - img [ref=e1951]
+                - paragraph [ref=e1952]: Andy Wilkey
+                - paragraph [ref=e1953]: a year ago
+            - generic [ref=e1955]:
+              - generic [ref=e1956]:
+                - generic [ref=e1959] [cursor=pointer]:
+                  - img [ref=e1960]
+                  - img [ref=e1962]
+                  - img [ref=e1964]
+                  - img [ref=e1966]
+                  - img [ref=e1968]
+                - img [ref=e1972]
+              - generic [ref=e1978]:
+                - img [ref=e1979]
+                - paragraph [ref=e1980]: M Bor
+                - paragraph [ref=e1981]: a year ago
+              - generic [ref=e1982]:
+                - paragraph [ref=e1983]: Researched local storage facilities that had climate control but were also reasonably priced. Gatekeeper had a 50% off two months special which ...
+                - link [ref=e1984] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - tabpanel [ref=e1985]:
+              - generic [ref=e1986]:
+                - generic [ref=e1987]:
+                  - generic [ref=e1990] [cursor=pointer]:
+                    - img [ref=e1991]
+                    - img [ref=e1993]
+                    - img [ref=e1995]
+                    - img [ref=e1997]
+                    - img [ref=e1999]
+                  - img [ref=e2003]
+                - generic [ref=e2009]:
+                  - img [ref=e2010]
+                  - paragraph [ref=e2011]: Caitlin Kirby-Wilson
+                  - paragraph [ref=e2012]: 9 months ago
+                - generic [ref=e2013]:
+                  - paragraph [ref=e2014]: Reasonably priced and truly a great, safe facility over the 5 years I’ve been with them. The facility (floors specifically) used to be a lot ...
+                  - link [ref=e2015] [cursor=pointer]:
+                    - /url: "#"
+                    - text: Show more
+            - tabpanel [ref=e2016]:
+              - generic [ref=e2017]:
+                - generic [ref=e2018]:
+                  - generic [ref=e2021] [cursor=pointer]:
+                    - img [ref=e2022]
+                    - img [ref=e2024]
+                    - img [ref=e2026]
+                    - img [ref=e2028]
+                    - img [ref=e2030]
+                  - img [ref=e2033]
+                - generic [ref=e2039]:
+                  - img "google review" [ref=e2040]
+                  - paragraph [ref=e2041]: kirstin hadwiger
+                  - paragraph [ref=e2042]: 9 months ago
+                - paragraph [ref=e2044]: Amazing service and amazing owners. Would recommend to anyone. Great facility too.
+            - tabpanel [ref=e2045]:
+              - generic [ref=e2046]:
+                - generic [ref=e2047]:
+                  - generic [ref=e2050] [cursor=pointer]:
+                    - img [ref=e2051]
+                    - img [ref=e2053]
+                    - img [ref=e2055]
+                    - img [ref=e2057]
+                    - img [ref=e2059]
+                  - img [ref=e2062]
+                - generic [ref=e2068]:
+                  - img "google review" [ref=e2069]
+                  - paragraph [ref=e2070]: Eve
+                  - paragraph [ref=e2071]: 9 months ago
+                - generic [ref=e2072]:
+                  - paragraph [ref=e2073]: ive had a storage unit here for about 3 years now and never had problems , i feel like my stuff is very safe and ...
+                  - link "Show more" [ref=e2074] [cursor=pointer]:
+                    - /url: "#"
+            - tabpanel [ref=e2075]:
+              - generic [ref=e2076]:
+                - generic [ref=e2077]:
+                  - generic [ref=e2080] [cursor=pointer]:
+                    - img [ref=e2081]
+                    - img [ref=e2083]
+                    - img [ref=e2085]
+                    - img [ref=e2087]
+                    - img [ref=e2089]
+                  - img [ref=e2092]
+                - generic [ref=e2098]:
+                  - img "google review" [ref=e2099]
+                  - paragraph [ref=e2100]: Eddie Munster
+                  - paragraph [ref=e2101]: a year ago
+                - generic:
+                  - paragraph
+            - tabpanel [ref=e2102]:
+              - generic [ref=e2103]:
+                - generic [ref=e2104]:
+                  - generic [ref=e2107] [cursor=pointer]:
+                    - img [ref=e2108]
+                    - img [ref=e2110]
+                    - img [ref=e2112]
+                    - img [ref=e2114]
+                    - img [ref=e2116]
+                  - img [ref=e2119]
+                - generic [ref=e2125]:
+                  - img [ref=e2126]
+                  - paragraph [ref=e2127]: Brad Pasto
+                  - paragraph [ref=e2128]: a year ago
+                - paragraph [ref=e2130]: Amazing staff at this place! Great customer service and a nice facility!
+            - tabpanel [ref=e2131]:
+              - generic [ref=e2132]:
+                - generic [ref=e2133]:
+                  - generic [ref=e2136] [cursor=pointer]:
+                    - img [ref=e2137]
+                    - img [ref=e2139]
+                    - img [ref=e2141]
+                    - img [ref=e2143]
+                    - img [ref=e2145]
+                  - img [ref=e2148]
+                - generic [ref=e2154]:
+                  - img [ref=e2155]
+                  - paragraph [ref=e2156]: Loraine Goss
+                  - paragraph [ref=e2157]: a year ago
+            - tabpanel [ref=e2158]:
+              - generic [ref=e2159]:
+                - generic [ref=e2160]:
+                  - generic [ref=e2163] [cursor=pointer]:
+                    - img [ref=e2164]
+                    - img [ref=e2166]
+                    - img [ref=e2168]
+                    - img [ref=e2170]
+                    - img [ref=e2172]
+                  - img [ref=e2175]
+                - generic [ref=e2181]:
+                  - img [ref=e2182]
+                  - paragraph [ref=e2183]: Kathy Silva
+                  - paragraph [ref=e2184]: a year ago
+                - paragraph [ref=e2186]: Excellent customer service...great group to work with. Love this place.
+            - tabpanel [ref=e2187]:
+              - generic [ref=e2188]:
+                - generic [ref=e2189]:
+                  - generic [ref=e2192] [cursor=pointer]:
+                    - img [ref=e2193]
+                    - img [ref=e2195]
+                    - img [ref=e2197]
+                    - img [ref=e2199]
+                    - img [ref=e2201]
+                  - img [ref=e2204]
+                - generic [ref=e2210]:
+                  - img [ref=e2211]
+                  - paragraph [ref=e2212]: Andy Wilkey
+                  - paragraph [ref=e2213]: a year ago
+            - tabpanel [ref=e2214]:
+              - generic [ref=e2215]:
+                - generic [ref=e2216]:
+                  - generic [ref=e2219] [cursor=pointer]:
+                    - img [ref=e2220]
+                    - img [ref=e2222]
+                    - img [ref=e2224]
+                    - img [ref=e2226]
+                    - img [ref=e2228]
+                  - img [ref=e2232]
+                - generic [ref=e2238]:
+                  - img [ref=e2239]
+                  - paragraph [ref=e2240]: M Bor
+                  - paragraph [ref=e2241]: a year ago
+                - generic [ref=e2242]:
+                  - paragraph [ref=e2243]: Researched local storage facilities that had climate control but were also reasonably priced. Gatekeeper had a 50% off two months special which ...
+                  - link [ref=e2244] [cursor=pointer]:
+                    - /url: "#"
+                    - text: Show more
+            - generic [ref=e2246]:
+              - generic [ref=e2247]:
+                - generic [ref=e2250] [cursor=pointer]:
+                  - img [ref=e2251]
+                  - img [ref=e2253]
+                  - img [ref=e2255]
+                  - img [ref=e2257]
+                  - img [ref=e2259]
+                - img [ref=e2263]
+              - generic [ref=e2269]:
+                - img [ref=e2270]
+                - paragraph [ref=e2271]: Caitlin Kirby-Wilson
+                - paragraph [ref=e2272]: 9 months ago
+              - generic [ref=e2273]:
+                - paragraph [ref=e2274]: Reasonably priced and truly a great, safe facility over the 5 years I’ve been with them. The facility (floors specifically) used to be a lot ...
+                - link [ref=e2275] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - generic [ref=e2277]:
+              - generic [ref=e2278]:
+                - generic [ref=e2281] [cursor=pointer]:
+                  - img [ref=e2282]
+                  - img [ref=e2284]
+                  - img [ref=e2286]
+                  - img [ref=e2288]
+                  - img [ref=e2290]
+                - img [ref=e2293]
+              - generic [ref=e2299]:
+                - img [ref=e2300]
+                - paragraph [ref=e2301]: kirstin hadwiger
+                - paragraph [ref=e2302]: 9 months ago
+              - paragraph [ref=e2304]: Amazing service and amazing owners. Would recommend to anyone. Great facility too.
+            - generic [ref=e2306]:
+              - generic [ref=e2307]:
+                - generic [ref=e2310] [cursor=pointer]:
+                  - img [ref=e2311]
+                  - img [ref=e2313]
+                  - img [ref=e2315]
+                  - img [ref=e2317]
+                  - img [ref=e2319]
+                - img [ref=e2322]
+              - generic [ref=e2328]:
+                - img [ref=e2329]
+                - paragraph [ref=e2330]: Eve
+                - paragraph [ref=e2331]: 9 months ago
+              - generic [ref=e2332]:
+                - paragraph [ref=e2333]: ive had a storage unit here for about 3 years now and never had problems , i feel like my stuff is very safe and ...
+                - link [ref=e2334] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - generic [ref=e2336]:
+              - generic [ref=e2337]:
+                - generic [ref=e2340] [cursor=pointer]:
+                  - img [ref=e2341]
+                  - img [ref=e2343]
+                  - img [ref=e2345]
+                  - img [ref=e2347]
+                  - img [ref=e2349]
+                - img [ref=e2352]
+              - generic [ref=e2358]:
+                - img [ref=e2359]
+                - paragraph [ref=e2360]: Eddie Munster
+                - paragraph [ref=e2361]: a year ago
+            - generic [ref=e2363]:
+              - generic [ref=e2364]:
+                - generic [ref=e2367] [cursor=pointer]:
+                  - img [ref=e2368]
+                  - img [ref=e2370]
+                  - img [ref=e2372]
+                  - img [ref=e2374]
+                  - img [ref=e2376]
+                - img [ref=e2379]
+              - generic [ref=e2385]:
+                - img [ref=e2386]
+                - paragraph [ref=e2387]: Brad Pasto
+                - paragraph [ref=e2388]: a year ago
+              - paragraph [ref=e2390]: Amazing staff at this place! Great customer service and a nice facility!
+            - generic [ref=e2392]:
+              - generic [ref=e2393]:
+                - generic [ref=e2396] [cursor=pointer]:
+                  - img [ref=e2397]
+                  - img [ref=e2399]
+                  - img [ref=e2401]
+                  - img [ref=e2403]
+                  - img [ref=e2405]
+                - img [ref=e2408]
+              - generic [ref=e2414]:
+                - img [ref=e2415]
+                - paragraph [ref=e2416]: Loraine Goss
+                - paragraph [ref=e2417]: a year ago
+            - generic [ref=e2419]:
+              - generic [ref=e2420]:
+                - generic [ref=e2423] [cursor=pointer]:
+                  - img [ref=e2424]
+                  - img [ref=e2426]
+                  - img [ref=e2428]
+                  - img [ref=e2430]
+                  - img [ref=e2432]
+                - img [ref=e2435]
+              - generic [ref=e2441]:
+                - img [ref=e2442]
+                - paragraph [ref=e2443]: Kathy Silva
+                - paragraph [ref=e2444]: a year ago
+              - paragraph [ref=e2446]: Excellent customer service...great group to work with. Love this place.
+            - generic [ref=e2448]:
+              - generic [ref=e2449]:
+                - generic [ref=e2452] [cursor=pointer]:
+                  - img [ref=e2453]
+                  - img [ref=e2455]
+                  - img [ref=e2457]
+                  - img [ref=e2459]
+                  - img [ref=e2461]
+                - img [ref=e2464]
+              - generic [ref=e2470]:
+                - img [ref=e2471]
+                - paragraph [ref=e2472]: Andy Wilkey
+                - paragraph [ref=e2473]: a year ago
+            - generic [ref=e2475]:
+              - generic [ref=e2476]:
+                - generic [ref=e2479] [cursor=pointer]:
+                  - img [ref=e2480]
+                  - img [ref=e2482]
+                  - img [ref=e2484]
+                  - img [ref=e2486]
+                  - img [ref=e2488]
+                - img [ref=e2492]
+              - generic [ref=e2498]:
+                - img [ref=e2499]
+                - paragraph [ref=e2500]: M Bor
+                - paragraph [ref=e2501]: a year ago
+              - generic [ref=e2502]:
+                - paragraph [ref=e2503]: Researched local storage facilities that had climate control but were also reasonably priced. Gatekeeper had a 50% off two months special which ...
+                - link [ref=e2504] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+          - button "Next" [ref=e2505] [cursor=pointer]: →Next
+          - tablist [ref=e2506]:
+            - tab "1 of 3" [ref=e2507] [cursor=pointer]: • 1
+            - tab "2 of 3" [selected] [ref=e2508] [cursor=pointer]: • 2
+            - tab "3 of 3" [ref=e2509] [cursor=pointer]: • 3
+            - tab "4 of 3" [ref=e2510] [cursor=pointer]: • 4
+            - tab "5 of 3" [ref=e2511] [cursor=pointer]: • 5
+            - tab "6 of 3" [ref=e2512] [cursor=pointer]: • 6
+            - tab "7 of 3" [ref=e2513] [cursor=pointer]: • 7
+            - tab "8 of 3" [ref=e2514] [cursor=pointer]: • 8
+            - tab "9 of 3" [ref=e2515] [cursor=pointer]: • 9
+      - generic [ref=e2516]:
+        - generic [ref=e2517]:
+          - img "secure self storage units peachtree city" [ref=e2519]
+          - generic [ref=e2521]:
+            - img "self storage near me" [ref=e2523]
+            - img "self storage units peachtree city" [ref=e2525]
+        - generic [ref=e2526]:
+          - generic [ref=e2527]:
+            - heading "About Peachtree City | Senoia Road" [level=2] [ref=e2528]
+            - paragraph [ref=e2529]:
+              - text: Gatekeeper Self Storage is the newest storage facility in the Tyrone/Peachtree City area. Our capable and experienced staff are on a mission to provide residents and businesses of Fayetteville, Newnan, Sharpsburg, Tyrone, Peachtree City, Palmetto, Fairburn, and Union City with an easy, convenient, and stress-free storage experience. Contact us with any questions, or use our handy size guide to select the best unit for your needs.
+              - text: Whether you're downsizing, decluttering, or needing a temporary space for your belongings during a move, our state-of-the-art self storage units in Peachtree City are your best bet. Not only do we prioritize the safety and security of your items, but our range of unit sizes means you can find the perfect fit for your storage needs, be it furniture, seasonal items, or even a vehicle.
+              - text: Our top-notch customer service makes Gatekeeper Self Storage the prime choice for residents looking for storage solutions in the Peachtree City vicinity. Plus, our flexible leasing options mean you aren’t locked into long-term commitments. Join our growing community of satisfied customers and experience the seamless blend of convenience and security that only Gatekeeper Self Storage can offer.
+          - generic [ref=e2530]:
+            - paragraph [ref=e2531]: Facility Features
+            - generic [ref=e2533]:
+              - generic [ref=e2534]:
+                - generic [ref=e2535]: 
+                - generic [ref=e2536]: Automatic Gate
+              - generic [ref=e2537]:
+                - generic [ref=e2538]: 
+                - generic [ref=e2539]: Boardroom
+              - generic [ref=e2540]:
+                - generic [ref=e2541]: 
+                - generic [ref=e2542]: Boat Parking
+              - generic [ref=e2543]:
+                - generic [ref=e2544]: 
+                - generic [ref=e2545]: Code Gate Entry
+              - generic [ref=e2546]:
+                - generic [ref=e2547]: 
+                - generic [ref=e2548]: Covered Loading Area
+              - generic [ref=e2549]:
+                - generic [ref=e2550]: 
+                - generic [ref=e2551]: Dollies & Handcarts
+              - generic [ref=e2552]:
+                - generic [ref=e2553]: 
+                - generic [ref=e2554]: Elevators
+              - generic [ref=e2555]:
+                - generic [ref=e2556]: 
+                - generic [ref=e2557]: High-Tech Security
+              - generic [ref=e2558]:
+                - generic [ref=e2559]: 
+                - generic [ref=e2560]: Live Monitoring
+              - generic [ref=e2561]:
+                - generic [ref=e2562]: 
+                - generic [ref=e2563]: Locally Owned
+              - generic [ref=e2564]:
+                - generic [ref=e2565]: 
+                - generic [ref=e2566]: Lock Checks
+              - generic [ref=e2567]:
+                - generic [ref=e2568]: 
+                - generic [ref=e2569]: Modern, Clean & Bright
+              - generic [ref=e2570]:
+                - generic [ref=e2571]: 
+                - generic [ref=e2572]: Motion Alarm
+              - generic [ref=e2573]:
+                - generic [ref=e2574]: 
+                - generic [ref=e2575]: Motorcycle Storage
+              - generic [ref=e2576]:
+                - generic [ref=e2577]: 
+                - generic [ref=e2578]: Moving Supplies
+              - generic [ref=e2579]:
+                - generic [ref=e2580]: 
+                - generic [ref=e2581]: Office Space
+              - generic [ref=e2582]:
+                - generic [ref=e2583]: 
+                - generic [ref=e2584]: Protection Plan
+              - generic [ref=e2585]:
+                - generic [ref=e2586]: 
+                - generic [ref=e2587]: RV Parking
+              - generic [ref=e2588]:
+                - generic [ref=e2589]: 
+                - generic [ref=e2590]: Security Fence
+              - generic [ref=e2591]:
+                - generic [ref=e2592]: 
+                - generic [ref=e2593]: Temperature-Controlled Units
+              - generic [ref=e2594]:
+                - generic [ref=e2595]: 
+                - generic [ref=e2596]: Vehicle Parking
+      - generic [ref=e2599]:
+        - heading [level=3]
+        - paragraph
+      - generic [ref=e2601]:
+        - heading "Facility Features" [level=3] [ref=e2602]
+        - list [ref=e2604]:
+          - listitem [ref=e2605]: Automatic Gate
+          - listitem [ref=e2606]: Boardroom
+          - listitem [ref=e2607]: Boat Parking
+          - listitem [ref=e2608]: Code Gate Entry
+          - listitem [ref=e2609]: Covered Loading Area
+          - listitem [ref=e2610]: Dollies & Handcarts
+          - listitem [ref=e2611]: Elevators
+          - listitem [ref=e2612]: High-Tech Security
+          - listitem [ref=e2613]: Live Monitoring
+          - listitem [ref=e2614]: Locally Owned
+          - listitem [ref=e2615]: Lock Checks
+          - listitem [ref=e2616]: Modern, Clean & Bright
+          - listitem [ref=e2617]: Motion Alarm
+          - listitem [ref=e2618]: Motorcycle Storage
+          - listitem [ref=e2619]: Moving Supplies
+          - listitem [ref=e2620]: Office Space
+          - listitem [ref=e2621]: Protection Plan
+          - listitem [ref=e2622]: RV Parking
+          - listitem [ref=e2623]: Security Fence
+          - listitem [ref=e2624]: Temperature-Controlled Units
+          - listitem [ref=e2625]: Vehicle Parking
+    - generic [ref=e2626]:
+      - generic [ref=e2628]:
+        - generic [ref=e2629]:
+          - link "Footer Logo" [ref=e2631] [cursor=pointer]:
+            - /url: https://gatekeeperstoragega.com
+            - img "Footer Logo" [ref=e2632]
+          - generic [ref=e2633]:
+            - link "Find Storage" [ref=e2634] [cursor=pointer]:
+              - /url: /storage-units/georgia/peachtree-city/senoia-road
+              - img [ref=e2635]
+              - generic [ref=e2638]: Find Storage
+            - link "Size Guide" [ref=e2639] [cursor=pointer]:
+              - /url: /storage-unit-size-guide
+              - img [ref=e2640]
+              - generic [ref=e2643]: Size Guide
+        - generic [ref=e2644]:
+          - generic [ref=e2645]:
+            - generic [ref=e2646]:
+              - text: Find Storage
+              - separator [ref=e2647]
+            - link "Rent Now" [ref=e2649] [cursor=pointer]:
+              - /url: /storage-units/georgia/peachtree-city/senoia-road
+          - generic [ref=e2650]:
+            - generic [ref=e2651]:
+              - text: Storage Types
+              - separator [ref=e2652]
+            - generic [ref=e2653]:
+              - link "Boat Storage" [ref=e2654] [cursor=pointer]:
+                - /url: /storage-type/boat-storage
+              - link "Business Storage" [ref=e2655] [cursor=pointer]:
+                - /url: /storage-type/business-storage
+              - link "Climate Controlled Storage" [ref=e2656] [cursor=pointer]:
+                - /url: /storage-type/climate-controlled-storage
+              - link "Household Storage" [ref=e2657] [cursor=pointer]:
+                - /url: /storage-type/household-storage
+              - link "Moving Storage" [ref=e2658] [cursor=pointer]:
+                - /url: /storage-type/moving-storage
+              - link "RV Storage" [ref=e2659] [cursor=pointer]:
+                - /url: /storage-type/rv-storage
+              - link "Student Storage" [ref=e2660] [cursor=pointer]:
+                - /url: /storage-type/student-storage
+              - link "Vehicle Storage" [ref=e2661] [cursor=pointer]:
+                - /url: /storage-type/vehicle-storage
+          - generic [ref=e2662]:
+            - generic [ref=e2663]:
+              - text: Resources
+              - separator [ref=e2664]
+            - generic [ref=e2665]:
+              - link "Size Guide" [ref=e2666] [cursor=pointer]:
+                - /url: /storage-guide
+              - link "FAQs" [ref=e2667] [cursor=pointer]:
+                - /url: /storage-faqs
+              - link "Blog" [ref=e2668] [cursor=pointer]:
+                - /url: https://gatekeeperstoragega.com/blog
+              - link "My Account" [ref=e2669] [cursor=pointer]:
+                - /url: https://myaccount.gatekeeperstoragega.com/existing-customer
+              - link "Contact Us" [ref=e2670] [cursor=pointer]:
+                - /url: /pages/contact
+          - generic [ref=e2671]:
+            - generic [ref=e2672]:
+              - text: About
+              - separator [ref=e2673]
+            - generic [ref=e2674]:
+              - link "Our Team" [ref=e2675] [cursor=pointer]:
+                - /url: /our-team
+              - link "Where and Why" [ref=e2676] [cursor=pointer]:
+                - /url: /where-and-why
+              - link "Moving Supplies & Property Management" [ref=e2677] [cursor=pointer]:
+                - /url: /moving-supplies-property-management
+          - generic [ref=e2678]:
+            - generic [ref=e2679]:
+              - text: Contact
+              - separator [ref=e2680]
+            - generic [ref=e2681]:
+              - link "" [ref=e2682] [cursor=pointer]:
+                - /url: https://www.facebook.com/gatekeeperselfstorage/
+                - generic [ref=e2683]: 
+              - link "" [ref=e2684] [cursor=pointer]:
+                - /url: https://www.instagram.com/gatekeeperselfstorage/
+                - generic [ref=e2685]: 
+      - generic [ref=e2688]:
+        - text: © Gatekeeper Self Storage
+        - generic [ref=e2690]:
+          - text: "|"
+          - link "Privacy Policy" [ref=e2691] [cursor=pointer]:
+            - /url: /privacy-policy
+  - text: "\""

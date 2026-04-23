@@ -220,7 +220,11 @@ export class PaymentDetailsPage extends BasePage {
       // Find and click RENT NOW button (attempt 1)
       const rentNowButton = this.page.getByRole('button', { name: 'RENT NOW' });
       await rentNowButton.waitFor({ state: 'visible', timeout: 15000 });
-      await rentNowButton.click({ timeout: 30000 });
+      // Scroll into center of viewport — prevents "element outside viewport" error after
+      // Playwright's own scroll leaves the button off-screen (seen on distinctstorage).
+      // force:true bypasses overlay interception (form/div intercepts pointer events).
+      await rentNowButton.evaluate((btn: HTMLElement) => btn.scrollIntoView({ block: 'center', behavior: 'instant' }));
+      await rentNowButton.click({ force: true, timeout: 15000 });
       
       console.log(`[${new Date().toISOString()}] ✅ RENT NOW clicked - detecting errors...`);
       
@@ -266,7 +270,8 @@ export class PaymentDetailsPage extends BasePage {
       
       // Click RENT NOW again (attempt 2)
       await rentNowButton.waitFor({ state: 'visible', timeout: 15000 });
-      await rentNowButton.click({ timeout: 30000 });
+      await rentNowButton.evaluate((btn: HTMLElement) => btn.scrollIntoView({ block: 'center', behavior: 'instant' }));
+      await rentNowButton.click({ force: true, timeout: 15000 });
       
       console.log(`[${new Date().toISOString()}] ✅ RENT NOW clicked (retry) - re-detecting errors...`);
       

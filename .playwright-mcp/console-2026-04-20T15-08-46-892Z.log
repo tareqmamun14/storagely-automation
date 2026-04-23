@@ -1,0 +1,75 @@
+[    1891ms] ReferenceError: bootstrap is not defined
+    at https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd:18548:9
+    at Array.map (<anonymous>)
+    at https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd:18547:42
+[    1975ms] Unexpected token '<'
+[    1996ms] ReferenceError: oqhaqzwnbjgcpycneryg is not defined
+    at https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd:20764:18
+[    1902ms] [LOG] Doesn't exist @ https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd:20917
+[    2006ms] TypeError: window.trackEvent is not a function
+    at https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd:20934:16
+    at https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd:20941:9
+[    2008ms] Uncaught Error: Syntax error, unrecognized expression: nth-child(2
+    at se.error (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:13638)
+    at se.tokenize (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21649)
+    at se.compile (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21752)
+    at <anonymous> (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:16987)
+    at PSEUDO (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:16751)
+    at Ee (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:20888)
+    at se.compile (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21782)
+    at se.select (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:22997)
+    at se (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:7115)
+    at find (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:25046)
+    at S.fn.init (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:25535)
+    at S (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:1050)
+    at <anonymous> (https://cdn2.hubspot.net/hub/8821504/hub_generated/template_assets/65922726656/1644828231829/Bluebird_Storage_Febraury2022/js/main.js:0:1173)
+[    1933ms] [LOG] [widgets.ts] Script loaded @ https://static.storagely.link/public/build/js/widgets-CZyLJK9l.js:1
+[    1933ms] [LOG] [widgets.ts] Available components: [./components/widgets/LocationMap/index.vue] @ https://static.storagely.link/public/build/js/widgets-CZyLJK9l.js:1
+[    1934ms] [LOG] [widgets.ts] mountComponents called @ https://static.storagely.link/public/build/js/widgets-CZyLJK9l.js:1
+[    1934ms] [LOG] [widgets.ts] Found elements: 0 @ https://static.storagely.link/public/build/js/widgets-CZyLJK9l.js:1
+[    1936ms] [LOG] French background override script loaded @ https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd:18699
+[    1936ms] [LOG] Not fr-ca domain, skipping override @ https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd:18727
+[    2058ms] [ERROR] A bad HTTP response code (404) was received when fetching the script. @ :0
+[    8855ms] [WARNING] jQuery.Deferred exception: jQuery(...).tooltip is not a function TypeError: jQuery(...).tooltip is not a function
+    at HTMLDocument.<anonymous> (https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd:19385:47)
+    at e (https://static.storagely.link/public/js/jquery-3.6.0.min.js:2:30038)
+    at t (https://static.storagely.link/public/js/jquery-3.6.0.min.js:2:30340) undefined @ https://static.storagely.link/public/js/jquery-3.6.0.min.js:1
+[    9040ms] [ERROR] TypeError: Failed to register a ServiceWorker for scope ('https://minimallstorage.com/~partytown/') with script ('https://minimallstorage.com/~partytown/partytown-sw.js'): A bad HTTP response code (404) was received when fetching the script. @ :0
+[    9281ms] Uncaught TypeError: jQuery(...).tooltip is not a function
+    at <anonymous> (https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd:19384:46)
+    at e (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:30037)
+    at t (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:30339)
+[   43655ms] Uncaught (in promise) Error: reCAPTCHA Timeout
+    at <anonymous> (https://www.gstatic.com/recaptcha/releases/gTpTIWhbKpxADzTzkcabhXN4/recaptcha__en.js:355:456)
+    at p (https://www.gstatic.com/recaptcha/releases/gTpTIWhbKpxADzTzkcabhXN4/recaptcha__en.js:279:107)
+[   43655ms] Uncaught (in promise) Error: reCAPTCHA Timeout
+    at <anonymous> (https://www.gstatic.com/recaptcha/releases/gTpTIWhbKpxADzTzkcabhXN4/recaptcha__en.js:355:456)
+    at p (https://www.gstatic.com/recaptcha/releases/gTpTIWhbKpxADzTzkcabhXN4/recaptcha__en.js:279:107)
+[   96580ms] [LOG] props : {config: Object, server: swivl-mono-server-production-64c99f7e0057.herokuapp.com, webSocketServer: wss://swivl-mono-channels-prod-0a77d7a40566.herokuapp.com, notificationsServer: https://swivl-mono-notifications-prod-f00caadcb96e.herokuapp.com, messagingServer: https://swivl-mono-messaging-prod-c71b58a4caef.herokuapp.com} @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96581ms] [LOG] Config.id = 896 @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96581ms] [LOG] Config.createdAt = 2025-08-01T22:39:31.937Z @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96581ms] [LOG] Config.updatedAt = 2026-02-05T15:45:44.677Z @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96581ms] [LOG] Config.orgId = 92 @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96581ms] [LOG] Config.isDefault = false @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96581ms] [LOG] Config.spotSlug = mini-mall-storage @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96581ms] [LOG] Config.spotLinkSlug = minimalls @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96582ms] [LOG] Config.theme = {primaryHover: #262440, primaryActive: #f16322, secondaryText: #ffffff, secondaryHover: #f16322, secondaryActive: #262440} @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96582ms] [LOG] Config.avatarURL = https://swivl-uploads-production.s3.amazonaws.com/org_1/lSNabLUn.jpg @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96582ms] [LOG] Config.ctaBody = You can ask us questions about inventory, pricing, amenities and more! @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96582ms] [LOG] Config.dotText = Questions? How can we help? @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96582ms] [LOG] Config.showCTA = false @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96582ms] [LOG] Config.ctaDelay = 3 @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96582ms] [LOG] Config.ctaTitle = How can we help? @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96582ms] [LOG] Config.position = bottom-left @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96582ms] [LOG] Config.headerText = Chat with <b>Mini Mall Storage</b> @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96582ms] [LOG] Config.ctaImageURL = https://swivl-cdn.s3-us-west-1.amazonaws.com/compass-cta.jpg @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96582ms] [LOG] Config.collapsedStyle = dot @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96583ms] [LOG] Config.ctaStartOnQuest = PrqfBDIR1Q @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96583ms] [LOG] Config.brandId = 615 @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96583ms] [LOG] Config.settings = {ctaBody: You can ask us questions about inventory, pricing, amenities and more!, dotText: Questions? How can we help?, showCTA: false, ctaDelay: 3, ctaTitle: How can we help?} @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96584ms] [LOG] Config.preloadVariables = {} @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96595ms] [LOG] Config.slug = null @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96595ms] [LOG] Config.brand = {id: 615, createdAt: 2025-07-28T01:11:47.815Z, updatedAt: 2025-12-10T22:24:11.951Z, orgId: 92, name: Mini Mall Storage} @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96596ms] [LOG] Config.webSocketServer = wss://swivl-mono-channels-prod-0a77d7a40566.herokuapp.com @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96596ms] [LOG]  this.state : undefined @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84
+[   96599ms] [LOG]  this.props : {config: Object, server: swivl-mono-server-production-64c99f7e0057.herokuapp.com, webSocketServer: wss://swivl-mono-channels-prod-0a77d7a40566.herokuapp.com, notificationsServer: https://swivl-mono-notifications-prod-f00caadcb96e.herokuapp.com, messagingServer: https://swivl-mono-messaging-prod-c71b58a4caef.herokuapp.com} @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/render-sQZq3GZs.mjs:84

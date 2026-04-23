@@ -1,0 +1,236 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - heading "Symfony Exception" [level=1] [ref=e4]:
+        - img [ref=e5]
+        - text: Symfony Exception
+      - link "Symfony Docs" [ref=e8] [cursor=pointer]:
+        - /url: https://symfony.com/doc/6.4.24/index.html
+        - img [ref=e10]
+        - text: Symfony Docs
+  - generic [ref=e12]:
+    - generic [ref=e14]:
+      - heading "PDOException QueryException" [level=2] [ref=e15]:
+        - link "PDOException" [ref=e16] [cursor=pointer]:
+          - /url: "#trace-box-2"
+        - img [ref=e18]
+        - link "QueryException" [ref=e20] [cursor=pointer]:
+          - /url: "#trace-box-1"
+      - heading "HTTP 500 Internal Server Error" [level=2] [ref=e21]
+    - generic [ref=e23]:
+      - 'heading "SQLSTATE[HY000] [2002] No such file or directory (SQL: select `id`, `new_url` from `redirect_links` where `old_url` in (https://test.staging.storagely-api.com/first-storage/storage-units/alabama/huntsville/memorial-parkway-sw, https://www.test.staging.storagely-api.com/first-storage/storage-units/alabama/huntsville/memorial-parkway-sw) limit 1)" [level=1] [ref=e24]'
+      - img [ref=e26]
+  - generic [ref=e29]:
+    - tablist [ref=e30]:
+      - tab "Exceptions 2" [selected] [ref=e31] [cursor=pointer]:
+        - text: Exceptions
+        - generic [ref=e32]: "2"
+      - tab "Stack Traces 2" [ref=e33] [cursor=pointer]:
+        - text: Stack Traces
+        - generic [ref=e34]: "2"
+    - tabpanel [ref=e35]:
+      - generic [ref=e36]:
+        - generic [ref=e38]:
+          - generic [ref=e39]:
+            - generic [ref=e40] [cursor=pointer]:
+              - img [ref=e42]
+              - heading "Illuminate\\Database\\ QueryException" [level=3] [ref=e44]:
+                - generic [ref=e45]: Illuminate\Database\
+                - text: QueryException
+            - group [ref=e46]:
+              - generic "Show exception properties" [ref=e47] [cursor=pointer]
+          - generic [ref=e48]:
+            - generic [ref=e50] [cursor=pointer]:
+              - img [ref=e52]
+              - generic [ref=e54]:
+                - text: in
+                - link "/var/www/html/vendor/laravel/framework/src/Illuminate/Database/Connection.php" [ref=e55]:
+                  - /url: file:///var/www/html/vendor/laravel/framework/src/Illuminate/Database/Connection.php#L760
+                  - text: /var/www/html/vendor/laravel/framework/src/Illuminate/Database/
+                  - strong [ref=e56]: Connection.php
+                - text: (line 760)
+            - generic [ref=e58] [cursor=pointer]:
+              - img [ref=e60]
+              - generic [ref=e62]:
+                - text: in
+                - link "/var/www/html/vendor/laravel/framework/src/Illuminate/Database/Connection.php" [ref=e63]:
+                  - /url: file:///var/www/html/vendor/laravel/framework/src/Illuminate/Database/Connection.php#L899
+                  - text: /var/www/html/vendor/laravel/framework/src/Illuminate/Database/
+                  - strong [ref=e64]: Connection.php
+                - text: "-> runQueryCallback (line 899)"
+            - generic [ref=e66] [cursor=pointer]:
+              - img [ref=e68]
+              - generic [ref=e70]:
+                - text: in
+                - link "/var/www/html/vendor/laravel/framework/src/Illuminate/Database/Connection.php" [ref=e71]:
+                  - /url: file:///var/www/html/vendor/laravel/framework/src/Illuminate/Database/Connection.php#L878
+                  - text: /var/www/html/vendor/laravel/framework/src/Illuminate/Database/
+                  - strong [ref=e72]: Connection.php
+                - text: "-> tryAgainIfCausedByLostConnection (line 878)"
+            - generic [ref=e74] [cursor=pointer]:
+              - img [ref=e76]
+              - generic [ref=e78]:
+                - text: in
+                - link "/var/www/html/vendor/laravel/framework/src/Illuminate/Database/Connection.php" [ref=e79]:
+                  - /url: file:///var/www/html/vendor/laravel/framework/src/Illuminate/Database/Connection.php#L722
+                  - text: /var/www/html/vendor/laravel/framework/src/Illuminate/Database/
+                  - strong [ref=e80]: Connection.php
+                - text: "-> handleQueryException (line 722)"
+            - generic [ref=e82] [cursor=pointer]:
+              - img [ref=e84]
+              - generic [ref=e86]:
+                - text: in
+                - link "/var/www/html/vendor/laravel/framework/src/Illuminate/Database/Connection.php" [ref=e87]:
+                  - /url: file:///var/www/html/vendor/laravel/framework/src/Illuminate/Database/Connection.php#L405
+                  - text: /var/www/html/vendor/laravel/framework/src/Illuminate/Database/
+                  - strong [ref=e88]: Connection.php
+                - text: "-> run (line 405)"
+            - generic [ref=e90] [cursor=pointer]:
+              - img [ref=e92]
+              - generic [ref=e94]:
+                - text: in
+                - link "/var/www/html/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php" [ref=e95]:
+                  - /url: file:///var/www/html/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php#L2705
+                  - text: /var/www/html/vendor/laravel/framework/src/Illuminate/Database/Query/
+                  - strong [ref=e96]: Builder.php
+                - text: "-> select (line 2705)"
+            - generic [ref=e98] [cursor=pointer]:
+              - img [ref=e100]
+              - generic [ref=e102]:
+                - text: in
+                - link "/var/www/html/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php" [ref=e103]:
+                  - /url: file:///var/www/html/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php#L2694
+                  - text: /var/www/html/vendor/laravel/framework/src/Illuminate/Database/Query/
+                  - strong [ref=e104]: Builder.php
+                - text: "-> runSelect (line 2694)"
+            - generic [ref=e106] [cursor=pointer]:
+              - img [ref=e108]
+              - generic [ref=e110]:
+                - text: in
+                - link "/var/www/html/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php" [ref=e111]:
+                  - /url: file:///var/www/html/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php#L3230
+                  - text: /var/www/html/vendor/laravel/framework/src/Illuminate/Database/Query/
+                  - strong [ref=e112]: Builder.php
+                - text: "-> Illuminate\\Database\\Query\\{closure} (line 3230)"
+            - generic [ref=e114] [cursor=pointer]:
+              - img [ref=e116]
+              - generic [ref=e118]:
+                - text: in
+                - link "/var/www/html/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php" [ref=e119]:
+                  - /url: file:///var/www/html/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php#L2693
+                  - text: /var/www/html/vendor/laravel/framework/src/Illuminate/Database/Query/
+                  - strong [ref=e120]: Builder.php
+                - text: "-> onceWithColumns (line 2693)"
+            - generic [ref=e122] [cursor=pointer]:
+              - img [ref=e124]
+              - generic [ref=e126]:
+                - text: in
+                - link "/var/www/html/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php" [ref=e127]:
+                  - /url: file:///var/www/html/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php#L710
+                  - text: /var/www/html/vendor/laravel/framework/src/Illuminate/Database/Eloquent/
+                  - strong [ref=e128]: Builder.php
+                - text: "-> get (line 710)"
+            - generic [ref=e130] [cursor=pointer]:
+              - img [ref=e132]
+              - generic [ref=e134]:
+                - text: in
+                - link "/var/www/html/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php" [ref=e135]:
+                  - /url: file:///var/www/html/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php#L694
+                  - text: /var/www/html/vendor/laravel/framework/src/Illuminate/Database/Eloquent/
+                  - strong [ref=e136]: Builder.php
+                - text: "-> getModels (line 694)"
+            - generic [ref=e138] [cursor=pointer]:
+              - img [ref=e140]
+              - generic [ref=e142]:
+                - text: in
+                - link "/var/www/html/vendor/laravel/framework/src/Illuminate/Database/Concerns/BuildsQueries.php" [ref=e143]:
+                  - /url: file:///var/www/html/vendor/laravel/framework/src/Illuminate/Database/Concerns/BuildsQueries.php#L296
+                  - text: /var/www/html/vendor/laravel/framework/src/Illuminate/Database/Concerns/
+                  - strong [ref=e144]: BuildsQueries.php
+                - text: "-> get (line 296)"
+            - generic [ref=e145]:
+              - generic [ref=e146] [cursor=pointer]:
+                - img [ref=e148]
+                - generic [ref=e150]: Builder
+                - text: "->first()"
+                - generic [ref=e151]:
+                  - text: in
+                  - link "/var/www/html/app/Http/Middleware/RedirectLink.php" [ref=e152]:
+                    - /url: file:///var/www/html/app/Http/Middleware/RedirectLink.php#L62
+                    - text: /var/www/html/app/Http/Middleware/
+                    - strong [ref=e153]: RedirectLink.php
+                  - text: (line 62)
+              - list [ref=e155]:
+                - listitem [ref=e156]:
+                  - code [ref=e157]: // If "www" is NOT present, add a "www." prefixed version to the list
+                - listitem [ref=e158]:
+                  - code [ref=e159]: "$urls[] = Str::replaceFirst($host, \"www.{$host}\", $url);"
+                - listitem [ref=e160]:
+                  - code [ref=e161]: "}"
+                - listitem [ref=e162]:
+                  - code
+                - listitem [ref=e163]:
+                  - code [ref=e164]: // Look up the URL variations (both www and non-www) in the redirects table
+                - listitem [ref=e165]:
+                  - code [ref=e166]: $redirects = RedirectLinkModel::whereIn('old_url', $urls)->first(['id', 'new_url']);
+                - listitem [ref=e167]:
+                  - code [ref=e168]: // Log debug info if enabled
+                - listitem [ref=e169]:
+                  - code [ref=e170]: "if ($is_debug) {"
+                - listitem [ref=e171]:
+                  - code [ref=e172]: Log::info('[redirect-link-check]', ['urls' => $urls, 'url' => $url, 'fetch' => $redirects?->toArray()]);
+                - listitem [ref=e173]:
+                  - code [ref=e174]: "}"
+                - listitem [ref=e175]:
+                  - code
+            - generic [ref=e177] [cursor=pointer]:
+              - img [ref=e179]
+              - generic [ref=e181]:
+                - text: in
+                - link "/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php" [ref=e182]:
+                  - /url: file:///var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php#L180
+                  - text: /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/
+                  - strong [ref=e183]: Pipeline.php
+                - text: "-> handle (line 180)"
+            - generic [ref=e185] [cursor=pointer]:
+              - img [ref=e187]
+              - generic [ref=e189]:
+                - text: in
+                - link "/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php" [ref=e190]:
+                  - /url: file:///var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php#L116
+                  - text: /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/
+                  - strong [ref=e191]: Pipeline.php
+                - text: "-> Illuminate\\Pipeline\\{closure} (line 116)"
+            - generic [ref=e193] [cursor=pointer]:
+              - img [ref=e195]
+              - generic [ref=e197]:
+                - text: in
+                - link "/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php" [ref=e198]:
+                  - /url: file:///var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php#L165
+                  - text: /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/
+                  - strong [ref=e199]: Kernel.php
+                - text: "-> then (line 165)"
+            - generic [ref=e201] [cursor=pointer]:
+              - img [ref=e203]
+              - generic [ref=e205]:
+                - text: in
+                - link "/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php" [ref=e206]:
+                  - /url: file:///var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php#L134
+                  - text: /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/
+                  - strong [ref=e207]: Kernel.php
+                - text: "-> sendRequestThroughRouter (line 134)"
+            - generic [ref=e209] [cursor=pointer]:
+              - img [ref=e211]
+              - generic [ref=e213]: Kernel
+              - text: "->handle()"
+              - generic [ref=e214]:
+                - text: in
+                - link "/var/www/html/public/index.php" [ref=e215]:
+                  - /url: file:///var/www/html/public/index.php#L51
+                  - text: /var/www/html/public/
+                  - strong [ref=e216]: index.php
+                - text: (line 51)
+        - generic [ref=e220] [cursor=pointer]:
+          - img [ref=e222]
+          - heading "PDOException" [level=3] [ref=e224]
+          - paragraph [ref=e225]: SQLSTATE[HY000] [2002] No such file or directory

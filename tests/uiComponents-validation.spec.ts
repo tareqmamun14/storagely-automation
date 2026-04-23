@@ -2,7 +2,9 @@ import { test, expect } from '@playwright/test';
 import { StorageSitePage } from '../pages/HomePage';
 import { ContactPage, ContactFormResult } from '../pages/ContactPage';
 import { StorageListingPage } from '../pages/StorageListingPage';
-import { getStorageSiteUrls, CURRENT_ENVIRONMENT, Environment, STOREROCKET_SITES, STAGING_CONTACT_SKIP, CONTACT_CAPTCHA_SITES } from '../configs/urls';
+import { FAQPage, FAQTestResult } from '../pages/FAQPage';
+import { PricingPage, PricingTestResult } from '../pages/PricingPage';
+import { getStorageSiteUrls, CURRENT_ENVIRONMENT, Environment, STOREROCKET_SITES, STAGING_CONTACT_SKIP, CONTACT_CAPTCHA_SITES, PRICING_VALIDATION_LOCATIONS, UNIT_FEATURES_CONFLICT_LOCATIONS } from '../configs/urls';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -42,6 +44,13 @@ function isContactCaptchaSite(url: string): boolean {
   return CONTACT_CAPTCHA_SITES.some(s => url.toLowerCase().includes(s));
 }
 
+// Sites whose FAQ page has NO accordion (flat Q&A layout) — test runs but failure is expected
+const FAQ_NO_ACCORDION_SITES = ['almightystorage.com'];
+
+function isFaqExpectedFail(url: string): boolean {
+  return FAQ_NO_ACCORDION_SITES.some(s => url.toLowerCase().includes(s));
+}
+
 const siteUrls = getStorageSiteUrls();
 
 // --------------- Shared Helpers ---------------
@@ -75,12 +84,12 @@ const UI_RESULTS_FILE = path.join(process.cwd(), 'test-results', 'ui-components-
 interface UITestResult {
   module: string;
   name: string;
-  status: 'PASSED' | 'FAILED';
+  status: 'PASSED' | 'FAILED' | 'EXPECTED';
   detail?: string;
   timestamp: string;
 }
 
-function pushResult(module: string, name: string, status: 'PASSED' | 'FAILED', detail?: string) {
+function pushResult(module: string, name: string, status: 'PASSED' | 'FAILED' | 'EXPECTED', detail?: string) {
   const resultsDir = path.dirname(UI_RESULTS_FILE);
   if (!fs.existsSync(resultsDir)) fs.mkdirSync(resultsDir, { recursive: true });
 
@@ -471,6 +480,317 @@ test.describe('[Location Page] Verify Banner Loading', () => {
 });
 
 // ============================================
+// 4. FAQ PAGE — ACCORDION EXPANSION VERIFICATION
+// ============================================
+test.describe('[FAQ Page] Accordion Expansion Verification', () => {
+  test.setTimeout(180000);
+
+  for (const url of siteUrls) {
+    test(`[FAQ Page] Verify FAQ accordion for ${clientLabel(url)}`, async ({ page }) => {
+      console.log(`\n📦 MODULE: FAQ Page ${envTag}`);
+      if (isMiniMall(url)) console.log(`⭐ MINI MALL CLIENT DETECTED`);
+      console.log(`🔍 Testing FAQ page: ${url}`);
+
+      const faqPage = new FAQPage(page);
+      let faqResult: FAQTestResult | null = null;
+
+      try {
+        await faqPage.navigateToFAQPage(url);
+        faqResult = await faqPage.verifyFAQAccordion();
+
+        // Build detail string
+        const parts: string[] = [];
+        if (!faqResult.hasFaqPage) {
+          parts.push('FAQ page not found');
+        } else {
+          parts.push(`Page: OK`);
+          parts.push(`Type: ${faqResult.accordionType}`);
+          parts.push(`Questions: ${faqResult.totalQuestions}`);
+          if (faqResult.clickedQuestion) parts.push(`Clicked: "${faqResult.clickedQuestion.substring(0, 50)}"`);
+          parts.push(`Expanded: ${faqResult.expanded ? 'YES' : 'NO'}`);
+        }
+        if (faqResult.error) parts.push(`Err: ${faqResult.error}`);
+        const detail = parts.join(' | ');
+
+        if (faqResult.expanded) {
+          console.log(`✅ FAQ accordion verified for: ${url}`);
+          pushResult('FAQ Page', clientLabel(url), 'PASSED', detail);
+        } else if (isFaqExpectedFail(url)) {
+          console.log(`⚠️  FAQ accordion EXPECTED FAIL for: ${url} (no accordion on this site)`);
+          pushResult('FAQ Page', clientLabel(url), 'EXPECTED', detail);
+        } else {
+          console.log(`❌ FAQ accordion FAILED for: ${url}`);
+          pushResult('FAQ Page', clientLabel(url), 'FAILED', detail);
+        }
+
+        // Print summary
+        console.log(`\n   📋 FAQ RESULT:`);
+        console.log(`      Page found: ${faqResult.hasFaqPage ? 'YES' : 'NO'}`);
+        console.log(`      Accordion type: ${faqResult.accordionType}`);
+        console.log(`      Total questions: ${faqResult.totalQuestions}`);
+        console.log(`      Clicked: "${faqResult.clickedQuestion}"`);
+        console.log(`      Expanded: ${faqResult.expanded ? '✅ YES' : '❌ NO'}`);
+        if (faqResult.error) console.log(`      Error: ${faqResult.error}`);
+
+        if (!isFaqExpectedFail(url)) {
+          expect(faqResult.expanded, `FAQ accordion expansion failed for ${url}: ${faqResult.error || 'did not expand'}`).toBeTruthy();
+        }
+      } catch (error) {
+        const msg = (error as Error).message || 'Unknown error';
+        if (!faqResult) {
+          console.log(`❌ FAQ page error for: ${url} — ${msg}`);
+          pushResult('FAQ Page', clientLabel(url), 'FAILED', msg);
+        }
+        throw error;
+      }
+    });
+  }
+});
+
+// ============================================
+// 5. LOCATION PAGE — UNIT PRICING VALIDATION
+// ============================================
+// For each location: verify dual-price units have first price < second price.
+// First price = promo / web rate. Second price = standard / after promo rate.
+// ============================================
+test.describe('[Location Page] Unit Pricing Validation', () => {
+  test.setTimeout(180000);
+
+  for (const loc of PRICING_VALIDATION_LOCATIONS) {
+    test(`[Unit Pricing] ${loc.label} [${loc.fms}/${loc.version}]`, async ({ page }) => {
+      console.log(`\n📦 MODULE: Unit Pricing ${envTag}`);
+      console.log(`🔍 Location: ${loc.label}`);
+      console.log(`   FMS: ${loc.fms} | Version: ${loc.version}`);
+
+      const pricingPage = new PricingPage(page);
+      let pricingResult: PricingTestResult | null = null;
+
+      try {
+        await pricingPage.navigateToLocation(loc.url);
+        pricingResult = await pricingPage.validatePricing();
+
+        // Build detail string
+        const parts: string[] = [];
+        parts.push(`FMS: ${loc.fms}`);
+        parts.push(`Ver: ${loc.version}`);
+        parts.push(`Units: ${pricingResult.totalUnits}`);
+        parts.push(`Dual: ${pricingResult.dualPriceUnits}`);
+        parts.push(`Single: ${pricingResult.singlePriceUnits}`);
+
+        if (pricingResult.dualPriceUnits > 0) {
+          parts.push(`Valid: ${pricingResult.validCount}`);
+          if (pricingResult.invalidCount > 0) {
+            parts.push(`INVALID: ${pricingResult.invalidCount}`);
+          }
+        }
+        if (pricingResult.error) parts.push(`Err: ${pricingResult.error}`);
+        const detail = parts.join(' | ');
+
+        if (pricingResult.invalidCount > 0) {
+          // FAILED: at least one unit has first price >= second price
+          console.log(`\n   🚨 ALERT: ${pricingResult.invalidCount} unit(s) have INVALID pricing (first price >= second price)`);
+          for (const u of pricingResult.units.filter(u => !u.isValid)) {
+            console.log(`      🚨 ${u.dimensions} ${u.unitType} → $${u.firstPrice} (${u.firstLabel}) ≥ $${u.secondPrice} (${u.secondLabel})`);
+          }
+          pushResult('Unit Pricing', loc.label, 'FAILED', detail);
+        } else if (pricingResult.error) {
+          console.log(`   ❌ Error: ${pricingResult.error}`);
+          pushResult('Unit Pricing', loc.label, 'FAILED', detail);
+        } else if (pricingResult.dualPriceUnits === 0) {
+          // No dual-price units — still pass, but note it
+          console.log(`   ℹ️  All units show single price — no comparison needed`);
+          pushResult('Unit Pricing', loc.label, 'PASSED', detail);
+        } else {
+          console.log(`   ✅ All ${pricingResult.validCount} dual-price unit(s) have valid pricing (first < second)`);
+          pushResult('Unit Pricing', loc.label, 'PASSED', detail);
+        }
+
+        // Print summary table
+        console.log(`\n   📋 PRICING SUMMARY:`);
+        console.log(`      Location: ${loc.label}`);
+        console.log(`      URL: ${loc.url}`);
+        console.log(`      Total units: ${pricingResult.totalUnits}`);
+        console.log(`      Dual-price: ${pricingResult.dualPriceUnits} | Single-price: ${pricingResult.singlePriceUnits}`);
+        if (pricingResult.dualPriceUnits > 0) {
+          console.log(`      Valid pricing: ${pricingResult.validCount} | Invalid: ${pricingResult.invalidCount}`);
+        }
+
+        // Fail the test on invalid pricing
+        if (pricingResult.invalidCount > 0) {
+          const invalidUnits = pricingResult.units.filter(u => !u.isValid);
+          const msg = invalidUnits.map(u => `${u.dimensions}: $${u.firstPrice} >= $${u.secondPrice}`).join('; ');
+          expect(pricingResult.invalidCount, `PRICING ALERT for ${loc.label}: ${msg}`).toBe(0);
+        }
+
+        // Fail on errors (no units found etc)
+        if (pricingResult.error) {
+          expect(pricingResult.error, `Pricing validation error for ${loc.label}`).toBeUndefined();
+        }
+
+      } catch (error) {
+        const msg = (error as Error).message || 'Unknown error';
+        if (!pricingResult) {
+          console.log(`   ❌ Pricing test error: ${msg}`);
+          pushResult('Unit Pricing', loc.label, 'FAILED', msg);
+        }
+        throw error;
+      }
+    });
+  }
+});
+
+// ============================================
+// 6. LOCATION PAGE — UNIT FEATURE CONFLICT DETECTION
+// ============================================
+// Verifies no unit simultaneously shows contradictory feature labels.
+//
+// The bug: Yardi FMS attribute sync used substring matching, so
+// "covered" matched inside "uncovered" — a unit could show BOTH
+// "Covered" and "Uncovered" at the same time (and similarly,
+// "Climate Controlled" + "Non-Climate Controlled" on the same unit).
+//
+// The FMS sync was patched to use strict whole-word matching.
+// This test guards against that regression returning in any future update.
+//
+// HOW IT WORKS:
+//   For each unit row (.listviewrows) on the page, the test extracts the
+//   row text and checks for conflicting feature keyword pairs.
+//   To avoid false positives from substrings (e.g., "Covered" inside
+//   "Uncovered"), it masks the longer/containing string first before
+//   testing for the shorter/contained string.
+//
+// CONFLICTING PAIRS DETECTED:
+//   - "Climate Controlled"  +  "Non-Climate Controlled"  (same unit)
+//   - "Covered"             +  "Uncovered"               (same unit)
+//
+// PRIMARY COVERAGE: Mini Mall (Yardi & SiteLink locations listed in
+// UNIT_FEATURES_CONFLICT_LOCATIONS in configs/urls.ts)
+// ============================================
+
+// Conflicting feature pairs — extend if new contradictory combinations are ever found.
+// For each pair: pair.b should be the string that CONTAINS pair.a as a substring
+// (or they are fully independent). The mask-then-check logic below handles both cases.
+const CONFLICTING_FEATURE_PAIRS: Array<{ a: string; b: string; note: string }> = [
+  // Pair rule: 'b' must be the string that contains 'a' as a substring (or be fully
+  // independent). The masking logic strips 'b' from the row text before checking for
+  // 'a', preventing "Non-X" from triggering a false positive for "X".
+  // To add a new pair: just append an entry — no other code changes needed.
+  {
+    a: 'Climate Controlled',
+    b: 'Non-Climate Controlled',
+    note: 'A unit cannot be both climate-controlled AND non-climate-controlled',
+  },
+  {
+    a: 'Covered',
+    b: 'Uncovered',
+    note: 'A unit cannot be both covered AND uncovered',
+  },
+  {
+    a: 'Drive Up',
+    b: 'Interior Hallway',
+    note: 'A unit cannot have both drive-up and interior hallway access — these are mutually exclusive access types',
+  },
+  {
+    a: 'Heated',
+    b: 'Non-Heated',
+    note: 'A unit cannot be both heated and non-heated',
+  },
+];
+
+test.describe('[Location Page] Unit Feature Conflict Detection', () => {
+  test.setTimeout(90000);
+
+  for (const loc of UNIT_FEATURES_CONFLICT_LOCATIONS) {
+    test(`[Unit Features] ${loc.label} [${loc.fms}]`, async ({ page }) => {
+      console.log(`\n📦 MODULE: Unit Feature Conflicts ${envTag}`);
+      console.log(`🔍 Location: ${loc.label}`);
+      console.log(`   FMS: ${loc.fms} | URL: ${loc.url}`);
+
+      const conflicts: string[] = [];
+
+      try {
+        await page.goto(loc.url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+        await page.waitForSelector('.listviewrows', { timeout: 20000 }).catch(() => {});
+        await page.waitForTimeout(1500);
+
+        const unitRows = page.locator('.listviewrows');
+        const rowCount = await unitRows.count();
+
+        if (rowCount === 0) {
+          console.log(`   ⚠️  No unit rows (.listviewrows) found — page may have no units`);
+          pushResult('Unit Feature Conflicts', loc.label, 'PASSED', 'No units found — skipped');
+          return;
+        }
+
+        console.log(`   ✓ Found ${rowCount} unit row(s) — scanning for conflicting features...`);
+
+        for (let i = 0; i < rowCount; i++) {
+          const row = unitRows.nth(i);
+          const rowText = await row.innerText();
+
+          // Build a short identifier for this unit (for clear error messages)
+          const unitNameLoc = row.locator('.unit-type-listing-name');
+          const unitName = (await unitNameLoc.count() > 0)
+            ? (await unitNameLoc.first().innerText()).replace(/\d{4,}/g, '').trim()
+            : '';
+          const dimsLoc = row.locator('h2.widthHeight');
+          const dims = (await dimsLoc.count() > 0)
+            ? (await dimsLoc.first().innerText()).replace(/WIDTH|DEPTH/gi, '').replace(/\s+/g, ' ').trim()
+            : '';
+          const unitLabel = [dims, unitName].filter(Boolean).join(' ').trim() || `Row ${i + 1}`;
+
+          // Check each conflicting pair.
+          // Key technique: mask pair.b (the "longer" / containing string) from the row text
+          // BEFORE testing for pair.a — this prevents false positives where pair.a's text
+          // appears only as a substring inside pair.b.
+          //
+          // Example: row text = "Non-Climate Controlled Drive Up Unit"
+          //   mask pair.b ('Non-Climate Controlled') → "[MASKED] Drive Up Unit"
+          //   check for pair.a ('Climate Controlled') → NOT FOUND → no false conflict ✓
+          //
+          // Example: row text = "Climate Controlled Non-Climate Controlled" (the BUG)
+          //   mask pair.b ('Non-Climate Controlled') → "Climate Controlled [MASKED]"
+          //   check for pair.a ('Climate Controlled') → FOUND → conflict detected ✓
+          for (const pair of CONFLICTING_FEATURE_PAIRS) {
+            const escapedB = pair.b.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const maskedText = rowText.replace(new RegExp(escapedB, 'gi'), '[MASKED]');
+            const hasA = maskedText.includes(pair.a);
+            const hasB = rowText.includes(pair.b);
+
+            if (hasA && hasB) {
+              const msg = `${unitLabel} — shows "${pair.a}" AND "${pair.b}" simultaneously`;
+              console.log(`   🚨 CONFLICT: ${msg}`);
+              console.log(`      → ${pair.note}`);
+              conflicts.push(msg);
+            }
+          }
+        }
+
+        if (conflicts.length > 0) {
+          console.log(`\n   ❌ ${conflicts.length} conflicting feature issue(s) found at ${loc.label}:`);
+          conflicts.forEach((c, idx) => console.log(`   ${idx + 1}. ${c}`));
+          const detail = `${conflicts.length} conflict(s): ${conflicts.slice(0, 3).join(' | ')}${conflicts.length > 3 ? ' ...' : ''}`;
+          pushResult('Unit Feature Conflicts', loc.label, 'FAILED', detail);
+          expect(conflicts.length,
+            `Unit feature conflicts at ${loc.label}:\n${conflicts.map((c, i) => `  ${i + 1}. ${c}`).join('\n')}`
+          ).toBe(0);
+        } else {
+          console.log(`   ✅ All ${rowCount} unit(s) have consistent, non-conflicting features`);
+          pushResult('Unit Feature Conflicts', loc.label, 'PASSED', `${rowCount} units checked — no conflicts`);
+        }
+
+      } catch (error) {
+        const msg = (error as Error).message || 'Unknown error';
+        console.log(`   ❌ Error: ${msg}`);
+        pushResult('Unit Feature Conflicts', loc.label, 'FAILED', msg);
+        throw error;
+      }
+    });
+  }
+});
+
+
+// ============================================
 // GRAND SUMMARY (prints after ALL modules)
 // ============================================
 test.afterAll(() => {
@@ -488,7 +808,8 @@ test.afterAll(() => {
 
   const totalPassed = allResults.filter(r => r.status === 'PASSED').length;
   const totalFailed = allResults.filter(r => r.status === 'FAILED').length;
-  const totalTests = totalPassed + totalFailed;
+  const totalExpected = allResults.filter(r => r.status === 'EXPECTED').length;
+  const totalTests = totalPassed + totalFailed + totalExpected;
 
   console.log('\n\n');
   console.log('#'.repeat(80));
@@ -498,18 +819,21 @@ test.afterAll(() => {
   // --- Module-level overview ---
   console.log('\n📦 MODULE OVERVIEW:');
   console.log('-'.repeat(80));
-  console.log(`   ${'Module'.padEnd(25)} | ${'Passed'.padEnd(8)} | ${'Failed'.padEnd(8)} | Total  | Status`);
+  console.log(`   ${'Module'.padEnd(25)} | ${'Passed'.padEnd(8)} | ${'Failed'.padEnd(8)} | ${'Expected'.padEnd(8)} | Total  | Status`);
   console.log('-'.repeat(80));
 
   for (const m of modules) {
     const p = m.tests.filter(t => t.status === 'PASSED').length;
     const f = m.tests.filter(t => t.status === 'FAILED').length;
+    const e = m.tests.filter(t => t.status === 'EXPECTED').length;
     const icon = f === 0 ? '✅' : '❌';
-    console.log(`   ${m.module.padEnd(25)} | ${String(p).padEnd(8)} | ${String(f).padEnd(8)} | ${String(p + f).padEnd(6)} | ${icon} ${f === 0 ? 'ALL PASSED' : `${f} FAILED`}`);
+    const statusStr = f === 0 ? (e > 0 ? `ALL PASSED (${e} expected fail)` : 'ALL PASSED') : `${f} FAILED`;
+    console.log(`   ${m.module.padEnd(25)} | ${String(p).padEnd(8)} | ${String(f).padEnd(8)} | ${String(e).padEnd(8)} | ${String(p + f + e).padEnd(6)} | ${icon} ${statusStr}`);
   }
 
   console.log('-'.repeat(80));
-  console.log(`   ${'TOTAL'.padEnd(25)} | ${String(totalPassed).padEnd(8)} | ${String(totalFailed).padEnd(8)} | ${String(totalTests).padEnd(6)} | ${totalFailed === 0 ? '✅ ALL CLEAR' : `❌ ${totalFailed} ISSUE(S)`}`);
+  const totalStatusStr = totalFailed === 0 ? (totalExpected > 0 ? `✅ ALL CLEAR (${totalExpected} expected fail)` : '✅ ALL CLEAR') : `❌ ${totalFailed} ISSUE(S)`;
+  console.log(`   ${'TOTAL'.padEnd(25)} | ${String(totalPassed).padEnd(8)} | ${String(totalFailed).padEnd(8)} | ${String(totalExpected).padEnd(8)} | ${String(totalTests).padEnd(6)} | ${totalStatusStr}`);
   console.log('-'.repeat(80));
 
   // --- Per-Client x Module matrix ---
@@ -526,11 +850,12 @@ test.afterAll(() => {
     }).filter(r => r.status);
 
     const anyFailed = resultsForClient.some(r => r.status === 'FAILED');
-    const clientIcon = anyFailed ? '❌' : '✅';
+    const anyExpected = resultsForClient.some(r => r.status === 'EXPECTED');
+    const clientIcon = anyFailed ? '❌' : anyExpected ? '⚠️' : '✅';
 
     console.log(`\n   ${clientIcon} ${client}`);
     for (const r of resultsForClient) {
-      const statusIcon = r.status === 'PASSED' ? '✅' : '🚩';
+      const statusIcon = r.status === 'PASSED' ? '✅' : r.status === 'EXPECTED' ? '⚠️' : '🚩';
       const detailStr = r.detail ? ` → ${r.detail.substring(0, 80)}` : '';
       console.log(`      ${statusIcon} ${r.module}${detailStr}`);
     }
@@ -540,6 +865,7 @@ test.afterAll(() => {
 
   // --- Failures call-out section ---
   const allFailed = modules.flatMap(m => m.tests.filter(t => t.status === 'FAILED').map(t => ({ ...t, module: m.module })));
+  const allExpected = modules.flatMap(m => m.tests.filter(t => t.status === 'EXPECTED').map(t => ({ ...t, module: m.module })));
 
   if (allFailed.length > 0) {
     console.log('\n\n');
@@ -553,8 +879,26 @@ test.afterAll(() => {
     });
 
     console.log('\n' + '🚩'.repeat(20));
-  } else {
+  }
+
+  if (allExpected.length > 0) {
+    console.log('\n\n');
+    console.log('⚠️'.repeat(20));
+    console.log('⚠️  EXPECTED FAILURES (known issues):');
+    console.log('⚠️'.repeat(20));
+
+    allExpected.forEach((f, i) => {
+      console.log(`\n   ${i + 1}. ⚠️ [${f.module}] ${f.name}`);
+      if (f.detail) console.log(`      ↳ ${f.detail}`);
+    });
+
+    console.log('\n' + '⚠️'.repeat(20));
+  }
+
+  if (allFailed.length === 0 && allExpected.length === 0) {
     console.log('\n\n🎉 ALL TESTS PASSED — NO FAILURES!\n');
+  } else if (allFailed.length === 0) {
+    console.log('\n\n🎉 ALL TESTS PASSED (expected failures are known issues)\n');
   }
 
   // --- Mini Mall consolidated section ---

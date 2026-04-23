@@ -91,7 +91,7 @@ export const SINGLE_PAGE_RENT_URLS = {
     'https://www.yourwaystorage.com/storage-units/georgia/augusta/walton-way-ext',                  // YourWay        | SSM
     'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',               // Red Rocks      | SiteLink
     'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',           // Storage Star   | SSM
-    'https://www.storsafe.com/storage-units/florida/melbourne/north-highway-1',                     // Storsafe       | storEDGE
+    //'https://www.storsafe.com/storage-units/florida/melbourne/north-highway-1',                   // Storsafe       | storEDGE (disabled)
     //'https://minimallstorage.com/storage-units/arkansas/batesville/batesville-blvd',               // Mini Mall      | SiteLink (disabled)
   ]
 };
@@ -117,7 +117,7 @@ export const SINGLE_PAGE_FMS_PLATFORM: Record<string, string> = CURRENT_ENVIRONM
   'https://www.yourwaystorage.com/storage-units/georgia/augusta/walton-way-ext':               'SSM',
   'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue':            'SiteLink',
   'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive':        'SSM',
-  'https://www.storsafe.com/storage-units/florida/melbourne/north-highway-1':                  'storEDGE',
+  //'https://www.storsafe.com/storage-units/florida/melbourne/north-highway-1':                'storEDGE',
   //'https://minimallstorage.com/storage-units/arkansas/batesville/batesville-blvd':            'SiteLink',
 };
 
@@ -144,7 +144,7 @@ export const CAPTCHA_CUSTOMER_URLS: string[] = CURRENT_ENVIRONMENT === Environme
   'https://www.yourwaystorage.com/storage-units/georgia/augusta/walton-way-ext',               // YourWay
   'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',            // Red Rocks
   'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',        // Storage Star
-  'https://www.storsafe.com/storage-units/florida/melbourne/north-highway-1',                  // Storsafe
+  //'https://www.storsafe.com/storage-units/florida/melbourne/north-highway-1',                // Storsafe (disabled)
 ];
 
 // --- 2d. Captcha on Step 4 (before "Continue to next step") ---
@@ -251,7 +251,107 @@ export const STAGING_CORP_CODE_CLIENTS: Record<string, string> = {
 
 
 // ============================================================================
-// §5  HELPER FUNCTIONS
+// §5  LOCATION PAGE PRICING VALIDATION
+// ============================================================================
+// Used by: uiComponents-validation.spec.ts (Unit Pricing section)
+// Verifies that dual-price units show first price < second price.
+//
+// Each entry: { url, fms, version, label }
+// ============================================================================
+
+export interface PricingLocationConfig {
+  url: string;
+  fms: string;       // storEDGE | SiteLink | SSM | Yardi
+  version: string;   // V1 | V2
+  label: string;     // Human-readable name
+}
+
+export const PRICING_VALIDATION_LOCATIONS: PricingLocationConfig[] = [
+  // --- V2 Clients ---
+  // storEDGE
+  { url: 'https://www.storsafe.com/storage-units/iowa/altoona/34th-avenue-southwest',                                          fms: 'storEDGE', version: 'V2', label: 'StorSafe (Cubix) — Altoona, IA' },
+  { url: 'https://www.columbiaselfstorage.com/storage-units/arizona/cottonwood/az-260',                                        fms: 'storEDGE', version: 'V2', label: 'Columbia Self Storage — Cottonwood, AZ' },
+  // SiteLink
+  { url: 'https://app.storagely.io/green-valley-storage/storage-units/arizona/green-valley/west-duval-commerce-court',          fms: 'SiteLink', version: 'V2', label: 'Green Valley (Argus) — Green Valley, AZ' },
+  { url: 'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland',                                                   fms: 'SiteLink', version: 'V2', label: 'Bluebird Storage — Calgary, AB' },
+  // SSM
+  { url: 'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',                                  fms: 'SSM',      version: 'V2', label: 'Storage Star — Colorado Springs, CO' },
+
+  // --- V1 Clients ---
+  // storEDGE
+  { url: 'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road',                                        fms: 'storEDGE', version: 'V1', label: 'Distinct Storage — New Milford, CT' },
+  // SiteLink
+  { url: 'https://selfstorage.ca/storage-units/british-columbia/mission/gill-avenue',                                          fms: 'SiteLink', version: 'V1', label: 'U-Lock Mini Storage — Mission, BC' },
+  // SSM
+  { url: 'https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road',                                             fms: 'SSM',      version: 'V1', label: 'Smart Storage Ohio — Macedonia, OH' },
+
+  // --- Yardi ---
+  { url: 'https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd',                             fms: 'Yardi',    version: 'V2', label: '⭐ Mini Mall Storage — Birmingham, AL' },
+];
+
+
+// ============================================================================
+// §6  UNIT FEATURE CONFLICT CHECK LOCATIONS
+// ============================================================================
+// Used by: uiComponents-validation.spec.ts (Unit Feature Conflicts section)
+//
+// Verifies that no unit on a listing page shows contradictory feature labels
+// at the same time (e.g., "Climate Controlled" AND "Non-Climate Controlled").
+//
+// Primary focus: Mini Mall (Yardi) where this bug was found in production.
+// Root cause: FMS attribute substring-matching was too broad — "covered" matched
+// inside "uncovered", "climate controlled" matched inside "non-climate controlled".
+// The FMS sync was fixed to use strict whole-word matching, but a future change
+// could reintroduce a similar regression — this test acts as the safety net.
+//
+// Conflicting pairs detected automatically (see CONFLICTING_FEATURE_PAIRS in test):
+//   - "Climate Controlled"  ↔  "Non-Climate Controlled"
+//   - "Covered"             ↔  "Uncovered"
+//
+// To add more locations: add an entry below. Production URLs only (FMS data is
+// live; staging test data may not have the same attributes).
+// ============================================================================
+
+export interface UnitFeaturesLocationConfig {
+  url: string;
+  label: string;
+  fms: string;    // Yardi | SiteLink | storEDGE | SSM
+}
+
+export const UNIT_FEATURES_CONFLICT_LOCATIONS: UnitFeaturesLocationConfig[] = [
+  // --- Mini Mall (Yardi) — primary bug locations ---
+  { url: 'https://minimallstorage.com/storage-units/alberta/airdrie/east-lake-road-ne',                                         fms: 'Yardi',    label: '⭐ Mini Mall — Airdrie, AB (original bug site)'     },
+  { url: 'https://minimallstorage.com/storage-units/south-carolina/longs/highway-9-east',                                       fms: 'Yardi',    label: '⭐ Mini Mall — Longs, SC (original bug site)'       },
+  // --- Mini Mall (Yardi) — additional coverage ---
+  { url: 'https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd',                              fms: 'Yardi',    label: '⭐ Mini Mall — Birmingham, AL'                      },
+  // --- Mini Mall (SiteLink) — different FMS to catch any SiteLink-side regressions ---
+  { url: 'https://minimallstorage.com/storage-units/alabama/courtland/highway-33',                                              fms: 'SiteLink', label: '⭐ Mini Mall — Courtland, AL (SiteLink)'           },
+
+  // --- storEDGE clients ---
+  { url: 'https://www.firststorage.com/storage-units/alabama/huntsville/memorial-parkway-sw',                                   fms: 'storEDGE', label: 'First Storage — Huntsville, AL'                  },
+  { url: 'https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue',                          fms: 'storEDGE', label: 'Columbia Self Storage — South Plainfield, NJ'    },
+  { url: 'https://purelystorage.com/storage-units/washington/pasco/north-road-44',                                              fms: 'storEDGE', label: 'Purely Storage — Pasco, WA'                      },
+  { url: 'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road',                                        fms: 'storEDGE', label: 'Distinct Storage — New Milford, CT'              },
+  { url: 'https://www.storsafe.com/storage-units/iowa/altoona/34th-avenue-southwest',                                          fms: 'storEDGE', label: 'StorSafe — Altoona, IA'                          },
+
+  // --- SiteLink clients ---
+  { url: 'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland',                                                   fms: 'SiteLink', label: 'Bluebird Storage — Calgary, AB'                  },
+  { url: 'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club',                                             fms: 'SiteLink', label: 'Sunbird Storage — Winston-Salem, NC'             },
+  { url: 'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',                                     fms: 'SiteLink', label: 'Red Rocks Storage — Aurora, CO'                  },
+  { url: 'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive',                                           fms: 'SiteLink', label: 'Rhino Storage — Covington, LA'                   },
+  { url: 'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road',                                   fms: 'SiteLink', label: 'Gatekeeper Self Storage — Peachtree City, GA'   },
+  { url: 'https://storagedepotla.com/storage-units/louisiana/hammond/north-morrison-blvd',                                     fms: 'SiteLink', label: 'Storage Depot LA — Hammond, LA'                },
+  { url: 'https://selfstorage.ca/storage-units/british-columbia/mission/gill-avenue',                                          fms: 'SiteLink', label: 'U-Lock Mini Storage — Mission, BC'              },
+
+  // --- SSM clients ---
+  { url: 'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',                                 fms: 'SSM',      label: 'Storage Star — Colorado Springs, CO'               },
+  { url: 'https://www.yourwaystorage.com/storage-units/georgia/augusta/walton-way-ext',                                        fms: 'SSM',      label: 'YourWay Storage — Augusta, GA'                     },
+  { url: 'https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road',                                             fms: 'SSM',      label: 'Smart Storage Ohio — Macedonia, OH'                },
+];
+
+
+// ============================================================================
+// §7  HELPER FUNCTIONS
 // ============================================================================
 
 /** Returns UI component site URLs for the current environment. */

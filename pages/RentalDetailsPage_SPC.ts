@@ -169,6 +169,84 @@ export class RentalDetailsPageSinglePage extends BasePage {
       .or(this.page.getByRole('button', { name: /rent now/i })); 
   }
 
+  private async getClickableRentNowButton() {
+    const candidates = this.page.locator('button#rent-now, button:has-text("Rent Now"), button:has-text("RENT NOW")');
+    const count = await candidates.count();
+
+    for (let i = 0; i < count; i++) {
+      const candidate = candidates.nth(i);
+      const isVisible = await candidate.isVisible().catch(() => false);
+      const isEnabled = await candidate.isEnabled().catch(() => false);
+      if (!isVisible || !isEnabled) continue;
+
+      const className = (await candidate.getAttribute('class')) || '';
+      const ariaDisabled = (await candidate.getAttribute('aria-disabled')) || 'false';
+      const disabledAttr = await candidate.getAttribute('disabled');
+
+      if (className.includes('pointer-events-none') || ariaDisabled === 'true' || disabledAttr !== null) {
+        continue;
+      }
+
+      return candidate;
+    }
+
+    return this.rentNowButton.first();
+  }
+
+  private normalizeCapturedError(text: string): string {
+    return text.replace(/\s+/g, ' ').trim();
+  }
+
+  private extractErrorFromRawBody(body: string): string {
+    const normalized = this.normalizeCapturedError(body);
+    if (!normalized) return '';
+
+    const paymentKeywords = [
+      'response code',
+      'payment failed',
+      'invalid card',
+      'card number',
+      'invalid account data',
+      'could not save payment method',
+      'could not initialize transaction',
+      'unit is not available',
+      'reason text',
+      'reason code'
+    ];
+
+    const lower = normalized.toLowerCase();
+    if (paymentKeywords.some(keyword => lower.includes(keyword))) {
+      return normalized.length > 500 ? normalized.substring(0, 500) : normalized;
+    }
+
+    return '';
+  }
+
+  private async scanVisiblePageForPaymentError(): Promise<string> {
+    const meaningfulErrorPattern = /response code|payment failed|not a valid credit card number|invalid account data|invalid card number|could not save payment method|could not initialize transaction|unit is not available|reason text|reason code|your card number is incorrect/i;
+
+    const keywordLocators = [
+      this.page.locator('text=/Response Code|Payment failed|not a valid credit card number|Invalid Account Data|Invalid Card Number|Reason Text|Reason Code|Your card number is incorrect|Could not save payment method|Unit is not available/i').first(),
+      this.page.locator('p, div, span').filter({ hasText: meaningfulErrorPattern }).first(),
+      this.page.locator('.text-white, .text-red-500, .toast-body, [role="alert"]').filter({ hasText: meaningfulErrorPattern }).first(),
+    ];
+
+    for (const locator of keywordLocators) {
+      try {
+        if (await locator.isVisible({ timeout: 300 })) {
+          const text = this.normalizeCapturedError(await locator.innerText());
+          if (text && text.length >= 20 && meaningfulErrorPattern.test(text)) {
+            return text;
+          }
+        }
+      } catch {
+        // keep scanning
+      }
+    }
+
+    return '';
+  }
+
   // ============================================
   // MAIN METHODS
   // ============================================
@@ -1178,14 +1256,20 @@ export class RentalDetailsPageSinglePage extends BasePage {
                 const msg = json.message || json.error || json.msg || json.errors || json.detail || '';
                 const extracted = typeof msg === 'string' ? msg : JSON.stringify(msg);
                 if (extracted && extracted.length > 5) {
-                  apiErrorMessage = extracted;
+                  apiErrorMessage = this.normalizeCapturedError(extracted);
                   console.log(`🌐 API error captured from ${url}: ${apiErrorMessage.substring(0, 200)}`);
                 }
               } catch {
                 // Not JSON — check if body itself is an error message
-                if (body.length < 500 && body.length > 5) {
-                  apiErrorMessage = body;
+                const extracted = this.extractErrorFromRawBody(body);
+                if (extracted) {
+                  apiErrorMessage = extracted;
                 }
+              }
+            } else if (body) {
+              const extracted = this.extractErrorFromRawBody(body);
+              if (extracted) {
+                apiErrorMessage = extracted;
               }
             }
           }
@@ -1193,14 +1277,26 @@ export class RentalDetailsPageSinglePage extends BasePage {
       };
       this.page.on('response', responseHandler);
       
-      // Wait for rent now button
-      await this.safeScroll(this.rentNowButton);
-      await this.rentNowButton.waitFor({ state: 'visible', timeout: 5000 });
+      // Wait for a clickable RENT NOW button
+      const clickableRentNowButton = await this.getClickableRentNowButton();
+      await this.safeScroll(clickableRentNowButton);
+      await clickableRentNowButton.waitFor({ state: 'visible', timeout: 10000 });
       await this.wait(500);
       
       // Click the button
       console.log(`[${new Date().toISOString()}] 🖱️ Clicking RENT NOW...`);
-      await this.rentNowButton.click({ timeout: 10000 });
+      try {
+        await clickableRentNowButton.click({ timeout: 8000 });
+      } catch (clickError) {
+        const clickMessage = (clickError as Error).message || '';
+        console.log(`[${new Date().toISOString()}] ⚠️ Standard click failed, trying fallback click...`);
+
+        if (clickMessage.includes('intercepts pointer events') || clickMessage.includes('pointer-events')) {
+          await clickableRentNowButton.click({ timeout: 8000, force: true });
+        } else {
+          await clickableRentNowButton.evaluate((button: HTMLButtonElement) => button.click());
+        }
+      }
       console.log(`[${new Date().toISOString()}] ✓ RENT NOW button clicked`);
       
       // Detect error message (polls up to 15s internally)
@@ -1220,6 +1316,14 @@ export class RentalDetailsPageSinglePage extends BasePage {
         this.page.removeListener('response', responseHandler);
         return `Error Occurred — ${apiErrorMessage}`;
       }
+
+      // Last DOM-based fallback for clients whose toast renders outside the current selectors
+      const pageErrorMessage = await this.scanVisiblePageForPaymentError();
+      if (pageErrorMessage) {
+        console.log(`[${new Date().toISOString()}] ✅ Error captured via visible page scan: ${pageErrorMessage}`);
+        this.page.removeListener('response', responseHandler);
+        return pageErrorMessage;
+      }
       
       // No error detected - retry once (only if RENT NOW button is still available)
       console.log(`[${new Date().toISOString()}] ⚠️ No error detected on first attempt, retrying...`);
@@ -1232,8 +1336,9 @@ export class RentalDetailsPageSinglePage extends BasePage {
         if (!buttonStillVisible) {
           console.log(`[${new Date().toISOString()}] ℹ️ RENT NOW button no longer visible — first click likely succeeded, skipping retry`);
         } else {
+          const retryButton = await this.getClickableRentNowButton();
           console.log(`[${new Date().toISOString()}] 🖱️ Clicking RENT NOW again (retry)...`);
-          await this.rentNowButton.click({ timeout: 10000 });
+          await retryButton.click({ timeout: 8000, force: true });
           console.log(`[${new Date().toISOString()}] ✓ RENT NOW button clicked (retry)`);
           retryClickSucceeded = true;
         }
@@ -1259,6 +1364,12 @@ export class RentalDetailsPageSinglePage extends BasePage {
       if (apiErrorMessage) {
         console.log(`[${new Date().toISOString()}] ✅ Using API error fallback: ${apiErrorMessage}`);
         return `Error Occurred — ${apiErrorMessage}`;
+      }
+
+      const pageErrorOnRetry = await this.scanVisiblePageForPaymentError();
+      if (pageErrorOnRetry) {
+        console.log(`[${new Date().toISOString()}] ✅ Using visible page fallback after retry: ${pageErrorOnRetry}`);
+        return pageErrorOnRetry;
       }
       
       // Still no error after retry
@@ -1370,6 +1481,13 @@ export class RentalDetailsPageSinglePage extends BasePage {
       } catch { /* not visible */ }
     }
 
+    // CHECK 5: broader visible text scan for payment errors (SiteLink variants)
+    const pageScan = await this.scanVisiblePageForPaymentError();
+    if (pageScan) {
+      console.log(`🔍 Found payment error via page scan: "${pageScan}"`);
+      return pageScan;
+    }
+
     return '';
   }
 
@@ -1471,6 +1589,12 @@ export class RentalDetailsPageSinglePage extends BasePage {
               }
             }
           } catch { /* not visible */ }
+        }
+
+        const pageScan = await this.scanVisiblePageForPaymentError();
+        if (pageScan) {
+          console.log(`✓ Payment error found via page scan at poll ${i + 1}`);
+          return pageScan;
         }
 
       } catch (error) {

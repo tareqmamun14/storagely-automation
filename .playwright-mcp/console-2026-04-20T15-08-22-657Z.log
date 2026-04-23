@@ -1,0 +1,50 @@
+[    4490ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/mini-mall-storage/project_18/var/assets/svg/icon/22465944/editor/up-arrow-filled.svg from frame with URL https://minimallstorage.com/?mini-mall-storage. Domains, protocols and ports must match.
+ @ https://minimallstorage.com/?mini-mall-storage:9191
+[    4490ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/mini-mall-storage/project_18/var/assets/svg/icon/22465944/editor/down-arrow-filled.svg from frame with URL https://minimallstorage.com/?mini-mall-storage. Domains, protocols and ports must match.
+ @ https://minimallstorage.com/?mini-mall-storage:9191
+[    4490ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/mini-mall-storage/project_18/var/assets/svg/icon/22465944/editor/up-arrow-filled.svg from frame with URL https://minimallstorage.com/?mini-mall-storage. Domains, protocols and ports must match.
+ @ https://minimallstorage.com/?mini-mall-storage:9191
+[    4491ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/mini-mall-storage/project_18/var/assets/svg/icon/22465944/editor/down-arrow-filled.svg from frame with URL https://minimallstorage.com/?mini-mall-storage. Domains, protocols and ports must match.
+ @ https://minimallstorage.com/?mini-mall-storage:9191
+[    4491ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/mini-mall-storage/project_18/var/assets/svg/icon/22465944/editor/up-arrow-filled.svg from frame with URL https://minimallstorage.com/?mini-mall-storage. Domains, protocols and ports must match.
+ @ https://minimallstorage.com/?mini-mall-storage:9191
+[    4491ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/mini-mall-storage/project_18/var/assets/svg/icon/22465944/editor/down-arrow-filled.svg from frame with URL https://minimallstorage.com/?mini-mall-storage. Domains, protocols and ports must match.
+ @ https://minimallstorage.com/?mini-mall-storage:9191
+[    4632ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/mini-mall-storage/project_18/var/assets/svg/icon/22465944/editor/up-arrow-filled.svg from frame with URL https://minimallstorage.com/?mini-mall-storage. Domains, protocols and ports must match.
+ @ https://minimallstorage.com/?mini-mall-storage:9192
+[    4632ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/mini-mall-storage/project_18/var/assets/svg/icon/22465944/editor/down-arrow-filled.svg from frame with URL https://minimallstorage.com/?mini-mall-storage. Domains, protocols and ports must match.
+ @ https://minimallstorage.com/?mini-mall-storage:9192
+[    4632ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/mini-mall-storage/project_18/var/assets/svg/icon/22465944/editor/up-arrow-filled.svg from frame with URL https://minimallstorage.com/?mini-mall-storage. Domains, protocols and ports must match.
+ @ https://minimallstorage.com/?mini-mall-storage:9193
+[    4632ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/mini-mall-storage/project_18/var/assets/svg/icon/22465944/editor/down-arrow-filled.svg from frame with URL https://minimallstorage.com/?mini-mall-storage. Domains, protocols and ports must match.
+ @ https://minimallstorage.com/?mini-mall-storage:9193
+[    4633ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/mini-mall-storage/project_18/var/assets/svg/icon/22465944/editor/up-arrow-filled.svg from frame with URL https://minimallstorage.com/?mini-mall-storage. Domains, protocols and ports must match.
+ @ https://minimallstorage.com/?mini-mall-storage:9194
+[    4633ms] [ERROR] Unsafe attempt to load URL https://storagely-prod-public-assets.s3.us-east-2.amazonaws.com/brizy/mini-mall-storage/project_18/var/assets/svg/icon/22465944/editor/down-arrow-filled.svg from frame with URL https://minimallstorage.com/?mini-mall-storage. Domains, protocols and ports must match.
+ @ https://minimallstorage.com/?mini-mall-storage:9194
+[    4803ms] ReferenceError: oqhaqzwnbjgcpycneryg is not defined
+    at https://minimallstorage.com/?mini-mall-storage:10135:18
+[    4804ms] [LOG] Found it @ https://minimallstorage.com/?mini-mall-storage:10272
+[    4806ms] [LOG] https://minimallstorage.com/ @ https://minimallstorage.com/?mini-mall-storage:10283
+[    4909ms] Identifier 't' has already been declared
+[    5025ms] Uncaught Error: Syntax error, unrecognized expression: nth-child(2
+    at se.error (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:13638)
+    at se.tokenize (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21649)
+    at se.compile (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21752)
+    at <anonymous> (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:16987)
+    at PSEUDO (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:16751)
+    at Ee (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:20888)
+    at se.compile (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21782)
+    at se.select (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:22997)
+    at se (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:7115)
+    at find (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:25046)
+    at S.fn.init (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:25535)
+    at S (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:1050)
+    at <anonymous> (https://cdn2.hubspot.net/hub/8821504/hub_generated/template_assets/65922726656/1644828231829/Bluebird_Storage_Febraury2022/js/main.js:0:1173)
+[    4984ms] [LOG] [widgets.ts] Script loaded @ https://static.storagely.link/public/build/js/widgets-CZyLJK9l.js:1
+[    4984ms] [LOG] [widgets.ts] Available components: [./components/widgets/LocationMap/index.vue] @ https://static.storagely.link/public/build/js/widgets-CZyLJK9l.js:1
+[    4985ms] [LOG] [widgets.ts] mountComponents called @ https://static.storagely.link/public/build/js/widgets-CZyLJK9l.js:1
+[    4985ms] [LOG] [widgets.ts] Found elements: 0 @ https://static.storagely.link/public/build/js/widgets-CZyLJK9l.js:1
+[    5158ms] [ERROR] A bad HTTP response code (404) was received when fetching the script. @ :0
+[    5640ms] [ERROR] TypeError: Failed to register a ServiceWorker for scope ('https://minimallstorage.com/~partytown/') with script ('https://minimallstorage.com/~partytown/partytown-sw.js'): A bad HTTP response code (404) was received when fetching the script. @ :0
+[    6118ms] [LOG] Asia/Dhaka @ https://minimallstorage.com/?mini-mall-storage:9688

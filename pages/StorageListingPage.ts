@@ -45,7 +45,7 @@ export class StorageListingPage extends BasePage {
     
     // SMART CACHE BUSTING: Sites that have issues with cache busting query params
     // These sites return ERR_ABORTED when query params are added
-    const sitesWithQueryParamIssues = ['10federal', 'bluebird'];
+    const sitesWithQueryParamIssues = ['10federal', 'bluebird', 'redrocksstorage'];
     const shouldAddCacheBust = !sitesWithQueryParamIssues.some(site => url.toLowerCase().includes(site));
     
     let urlWithQuery = url;
@@ -73,7 +73,30 @@ export class StorageListingPage extends BasePage {
       console.log(`[${new Date().toISOString()}] ✅ Navigation completed in ${navDuration}ms`);
       console.log(`[${new Date().toISOString()}] ✓ Successfully navigated to storage listing page`);
     } catch (error) {
-      const errorMsg = `CRITICAL ERROR: Failed to navigate to ${url} - ${(error as Error).message}`;
+      const message = (error as Error).message || '';
+
+      // Some clients intermittently abort when an extra query param is appended.
+      // Retry the plain URL once before failing the test.
+      if (shouldAddCacheBust && message.includes('ERR_ABORTED')) {
+        console.warn(`⚠️ Navigation with cache busting aborted, retrying plain URL: ${url}`);
+        try {
+          await this.page.goto(url, {
+            waitUntil: 'domcontentloaded',
+            timeout: 60000
+          });
+
+          const navDuration = Date.now() - startTime;
+          console.log(`[${new Date().toISOString()}] ✅ Fallback navigation completed in ${navDuration}ms`);
+          console.log(`[${new Date().toISOString()}] ✓ Successfully navigated to storage listing page (fallback)`);
+          return;
+        } catch (fallbackError) {
+          const fallbackMsg = `CRITICAL ERROR: Failed to navigate to ${url} after retrying without cache busting - ${(fallbackError as Error).message}`;
+          console.error(fallbackMsg);
+          throw new Error(fallbackMsg);
+        }
+      }
+
+      const errorMsg = `CRITICAL ERROR: Failed to navigate to ${url} - ${message}`;
       console.error(errorMsg);
       throw new Error(errorMsg);
     }
