@@ -1,0 +1,47 @@
+[    3989ms] ReferenceError: bootstrap is not defined
+    at https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive:14050:9
+    at Array.map (<anonymous>)
+    at https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive:14049:42
+[    4013ms] [LOG] Doesn't exist @ https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive:16291
+[    4021ms] TypeError: window.trackEvent is not a function
+    at https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive:16308:16
+    at https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive:16315:9
+[    4132ms] Uncaught Error: Syntax error, unrecognized expression: nth-child(2
+    at se.error (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:13638)
+    at se.tokenize (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21649)
+    at se.compile (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21752)
+    at <anonymous> (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:16987)
+    at PSEUDO (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:16751)
+    at Ee (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:20888)
+    at se.compile (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:21782)
+    at se.select (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:22997)
+    at se (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:7115)
+    at find (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:25046)
+    at S.fn.init (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:25535)
+    at S (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:1050)
+    at <anonymous> (https://cdn2.hubspot.net/hub/8821504/hub_generated/template_assets/65922726656/1644828231829/Bluebird_Storage_Febraury2022/js/main.js:0:1173)
+[    4035ms] [LOG] [widgets.ts] Script loaded @ https://static.storagely.link/public/build/js/widgets-rWMDSmMn.js:1
+[    4035ms] [LOG] [widgets.ts] Available components: [./components/widgets/LocationMap/index.vue] @ https://static.storagely.link/public/build/js/widgets-rWMDSmMn.js:1
+[    4035ms] [LOG] [widgets.ts] mountComponents called @ https://static.storagely.link/public/build/js/widgets-rWMDSmMn.js:1
+[    4035ms] [LOG] [widgets.ts] Found elements: 0 @ https://static.storagely.link/public/build/js/widgets-rWMDSmMn.js:1
+[    5206ms] [WARNING] jQuery.Deferred exception: jQuery(...).tooltip is not a function TypeError: jQuery(...).tooltip is not a function
+    at HTMLDocument.<anonymous> (https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive:14638:47)
+    at e (https://static.storagely.link/public/js/jquery-3.6.0.min.js:2:30038)
+    at t (https://static.storagely.link/public/js/jquery-3.6.0.min.js:2:30340) undefined @ https://static.storagely.link/public/js/jquery-3.6.0.min.js:1
+[   12199ms] [ERROR] eapps.Platform throws: "Widget "b96d2fb9-9f8e-487b-9593-d542f3b12633" can`t be initialized because WIDGET_NOT_FOUND" with 
+	 -> JSHandle@node @ https://static.elfsight.com/platform/platform.js:15
+[   12204ms] [WARNING] jQuery.Deferred exception: jQuery(...).popover is not a function TypeError: jQuery(...).popover is not a function
+    at HTMLDocument.<anonymous> (https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive:14622:53)
+    at e (https://static.storagely.link/public/js/jquery-3.6.0.min.js:2:30038)
+    at t (https://static.storagely.link/public/js/jquery-3.6.0.min.js:2:30340) undefined @ https://static.storagely.link/public/js/jquery-3.6.0.min.js:1
+[   13850ms] Uncaught TypeError: jQuery(...).tooltip is not a function
+    at <anonymous> (https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive:14637:46)
+    at e (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:30037)
+    at t (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:30339)
+[   14367ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://cdn.acsbapp.com/config/storagestar.com/config.json:0
+[   14373ms] Uncaught TypeError: jQuery(...).popover is not a function
+    at <anonymous> (https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive:14621:52)
+    at e (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:30037)
+    at t (https://static.storagely.link/public/js/jquery-3.6.0.min.js:1:30339)
+[   15971ms] [LOG] acsb: This website is not registered or its license is expired. @ https://acsbapp.com/apps/app/dist/js/app.js:21
+[   16100ms] [WARNING] @import rules are not allowed here. See https://github.com/WICG/construct-stylesheets/issues/119#issuecomment-588352418. @ https://beta.leadconnectorhq.com/chat-widget/p-DtHhXbDc.js:8

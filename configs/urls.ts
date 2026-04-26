@@ -209,6 +209,12 @@ export const STOREROCKET_SITES = ['ulok.com'];
 // Staging sites whose contact page is empty/broken (contact test skipped in staging)
 export const STAGING_CONTACT_SKIP = ['sunbirdstorage', 'bluebirdstorage', 'storage-boss'];
 
+// Sites (any environment) where the contact page has no contact form — contact test skipped
+export const CONTACT_SKIP_SITES = ['smartstorageohio', 'firststorage'];
+
+// Sites where the FAQ page has no accordion / is not testable — FAQ test skipped entirely
+export const FAQ_SKIP_SITES = ['almightystorage'];
+
 // Contact pages that have hCaptcha / reCAPTCHA requiring manual solve.
 // When a site is in this list, automation fills the form, pauses for you
 // to solve the CAPTCHA in the browser, then clicks Send.

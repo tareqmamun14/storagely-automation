@@ -541,6 +541,8 @@ export class ContactPage extends BasePage {
     const successPatterns = [
       this.page.locator('.toast-body, .toast-container, [role="alert"]').filter({ hasText: /thank|success|sent|received|submitted/i }),
       this.page.getByText(/thank you|message sent|successfully|we will|we'll get back|received your|your email was sent/i),
+      // .brz-forms2__alert can show success OR error — only treat as success when the text confirms it
+      this.page.locator('.brz-forms2__alert').filter({ hasText: /thank|success|sent|received|submitted/i }),
     ];
     for (const loc of successPatterns) {
       try {
@@ -555,7 +557,8 @@ export class ContactPage extends BasePage {
     if (!result.successMessage) {
       const errorPatterns = [
         this.page.locator('.toast-body, .toast-container, [role="alert"]').filter({ hasText: /error|fail|invalid|required|wrong/i }),
-        this.page.locator('.brz-forms2__alert').filter({ hasText: /.+/ }),
+        // Only treat .brz-forms2__alert as an error when the text is clearly an error (not a success message)
+        this.page.locator('.brz-forms2__alert').filter({ hasText: /error|fail|invalid|required|wrong|oops/i }),
         this.page.locator('.error, .field-error, .form-error, .invalid-feedback').filter({ hasText: /.+/ }),
       ];
       for (const loc of errorPatterns) {

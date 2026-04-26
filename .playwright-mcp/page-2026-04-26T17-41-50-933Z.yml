@@ -1,0 +1,1527 @@
+- generic [active] [ref=e1]:
+  - text:           
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - navigation [ref=e6]:
+        - generic:
+          - link "logo" [ref=e7] [cursor=pointer]:
+            - /url: https://www.storagestar.com
+            - img "logo" [ref=e8]
+          - button "Toggle navigation" [ref=e9] [cursor=pointer]
+    - generic [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - navigation "breadcrumb" [ref=e14]:
+            - list [ref=e15]:
+              - listitem [ref=e16]:
+                - link "Home" [ref=e17] [cursor=pointer]:
+                  - /url: https://www.storagestar.com/
+              - listitem [ref=e18]:
+                - text: /
+                - link "Colorado" [ref=e19] [cursor=pointer]:
+                  - /url: https://www.storagestar.com/storage-units-colorado-springs?search=Colorado Springs, Colorado, Usa
+              - listitem [ref=e20]:
+                - text: /
+                - link "Colorado Springs" [ref=e21] [cursor=pointer]:
+                  - /url: https://www.storagestar.com/storage-units-colorado-springs?search=Colorado Springs, Colorado, Usa
+              - listitem [ref=e22]: / Aerotech Drive
+          - generic [ref=e23]:
+            - generic [ref=e25]:
+              - generic [ref=e26]:
+                - button "Slide 1" [ref=e27] [cursor=pointer]
+                - button "Slide 2" [ref=e28] [cursor=pointer]
+                - button "Slide 3" [ref=e29] [cursor=pointer]
+                - button "Slide 4" [ref=e30] [cursor=pointer]
+                - button "Slide 5" [ref=e31] [cursor=pointer]
+                - button "Slide 6" [ref=e32] [cursor=pointer]
+                - button "Slide 7" [ref=e33] [cursor=pointer]
+                - button "Slide 8" [ref=e34] [cursor=pointer]
+              - img "self storage units colorado springs" [ref=e37]
+              - button "Previous" [ref=e38] [cursor=pointer]:
+                - generic [ref=e40]: Previous
+              - button "Next" [ref=e41] [cursor=pointer]:
+                - generic [ref=e43]: Next
+            - generic [ref=e44]:
+              - heading "Storage Units in Colorado Springs on Aerotech Dr" [level=1] [ref=e46]:
+                - strong [ref=e47]: Storage Units in Colorado Springs on Aerotech Dr
+              - heading "Storage Star | Aerotech Drive" [level=2] [ref=e48]
+              - link "1935 Aerotech Drive Colorado Springs, Colorado 80916" [ref=e51] [cursor=pointer]:
+                - /url: https://www.google.com/maps/place/Storage+Star+-+Colorado+Springs/@38.8043799,-104.732082,15z/data=!4m2!3m1!1s0x0:0xe2a3e58fb0a80f74?sa=X&ved=1t:2428&ictx=111
+                - text: 1935 Aerotech Drive
+                - text: Colorado Springs, Colorado 80916
+              - link "(719) 204-4829" [ref=e53] [cursor=pointer]:
+                - /url: tel:(719) 204-4829
+              - generic [ref=e54]:
+                - button "Office" [ref=e57] [cursor=pointer]:
+                  - generic [ref=e58]:
+                    - text: 
+                    - generic [ref=e59]: Office
+                - button "Access View Hours" [ref=e62] [cursor=pointer]:
+                  - generic [ref=e63]:
+                    - text: 
+                    - generic [ref=e64]: Access
+                    - generic [ref=e65]: View Hours
+              - generic [ref=e67] [cursor=pointer]:
+                - generic [ref=e68]:
+                  - img [ref=e69]
+                  - img [ref=e71]
+                  - img [ref=e73]
+                  - img [ref=e75]
+                  - img [ref=e77]
+                - paragraph [ref=e81]: 219 Reviews
+              - generic [ref=e82]:
+                - link " Call" [ref=e84] [cursor=pointer]:
+                  - /url: tel:(719) 204-4829
+                  - generic [ref=e85]: 
+                  - text: Call
+                - link " Email" [ref=e87] [cursor=pointer]:
+                  - /url: mailto:sscoloradosprings@storagestar.com
+                  - generic [ref=e88]: 
+                  - text: Email
+                - link " Directions" [ref=e90] [cursor=pointer]:
+                  - /url: https://www.google.com/maps/place/Storage+Star+-+Colorado+Springs/@38.8043799,-104.732082,15z/data=!4m2!3m1!1s0x0:0xe2a3e58fb0a80f74?sa=X&ved=1t:2428&ictx=111
+                  - generic [ref=e91]: 
+                  - text: Directions
+                - text: 
+                - link " What Size Do I Need?" [ref=e93] [cursor=pointer]:
+                  - /url: "#"
+                  - generic [ref=e94]: 
+                  - text: What Size Do I Need?
+        - generic [ref=e98]:
+          - button "Sizes" [ref=e101] [cursor=pointer]: Sizes
+          - button "Type" [ref=e104] [cursor=pointer]: Type
+          - button "Reset filters" [ref=e106] [cursor=pointer]
+          - generic [ref=e108]:
+            - text: "Sort by: Size Small to Large"
+            - menu
+      - table [ref=e111]:
+        - rowgroup [ref=e112]:
+          - row "5 x 5 storage image Climate Control 5' WIDTH x 5' DEPTH  What Size Do I Need? $1 MOVE-IN $11/month Web Rate Only $18/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Climate-Controlled  Ground Floor" [ref=e113]:
+            - cell "5 x 5 storage image Climate Control 5' WIDTH x 5' DEPTH  What Size Do I Need? $1 MOVE-IN $11/month Web Rate Only $18/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Climate-Controlled  Ground Floor" [ref=e114]:
+              - generic [ref=e116]:
+                - generic [ref=e118]:
+                  - link "5 x 5 storage image" [ref=e120]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_677325206.webp
+                    - img "5 x 5 storage image" [ref=e121]
+                  - generic [ref=e122]:
+                    - generic [ref=e123]: Climate Control
+                    - heading "5' WIDTH x 5' DEPTH" [level=2] [ref=e124]:
+                      - generic [ref=e125]:
+                        - text: 5'
+                        - generic [ref=e126]: WIDTH
+                      - text: x
+                      - generic [ref=e127]:
+                        - text: 5'
+                        - generic [ref=e128]: DEPTH
+                    - generic [ref=e129]:
+                      - paragraph [ref=e130]:
+                        - generic [ref=e131]: 
+                        - link "What Size Do I Need?" [ref=e132] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e133]:
+                        - generic [ref=e134]: $1 MOVE-IN
+                - generic [ref=e135]:
+                  - generic [ref=e136]:
+                    - generic [ref=e137]:
+                      - heading "$11/month" [level=3] [ref=e138]
+                      - generic [ref=e139]: Web Rate Only
+                    - generic [ref=e140]:
+                      - heading "$18/month" [level=3] [ref=e141]
+                      - generic [ref=e142]: Standard Rate
+                    - paragraph [ref=e144]: Month to Month - No Long Term Commitments
+                  - generic [ref=e145]:
+                    - generic [ref=e147]:
+                      - link "Rent" [ref=e149] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive/step-four?unit_id=4295031&storage-star
+                      - generic "Save time, pay and sign your lease online in minutes." [ref=e150]:
+                        - generic [ref=e151]: Easily switch sizes.
+                    - generic [ref=e153]:
+                      - generic [ref=e155] [cursor=pointer]: reserve
+                      - 'generic "Reserve Now, Paperwork at Move-In: We''ll secure your unit until you''re ready." [ref=e156]':
+                        - generic [ref=e157]: No credit card required.
+                - generic [ref=e159]:
+                  - generic [ref=e163]:
+                    - generic [ref=e165]: 
+                    - generic [ref=e167]: Climate-Controlled
+                  - generic [ref=e171]:
+                    - generic [ref=e173]: 
+                    - generic [ref=e175]: Ground Floor
+          - row "5 x 10 storage image Climate Control 5' WIDTH x 10' DEPTH  What Size Do I Need? $1 MOVE-IN $23/month Web Rate Only $38/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Climate-Controlled  Ground Floor" [ref=e187]:
+            - cell "5 x 10 storage image Climate Control 5' WIDTH x 10' DEPTH  What Size Do I Need? $1 MOVE-IN $23/month Web Rate Only $38/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Climate-Controlled  Ground Floor" [ref=e188]:
+              - generic [ref=e190]:
+                - generic [ref=e192]:
+                  - link "5 x 10 storage image" [ref=e194]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_2147085866.webp
+                    - img "5 x 10 storage image" [ref=e195]
+                  - generic [ref=e196]:
+                    - generic [ref=e197]: Climate Control
+                    - heading "5' WIDTH x 10' DEPTH" [level=2] [ref=e198]:
+                      - generic [ref=e199]:
+                        - text: 5'
+                        - generic [ref=e200]: WIDTH
+                      - text: x
+                      - generic [ref=e201]:
+                        - text: 10'
+                        - generic [ref=e202]: DEPTH
+                    - generic [ref=e203]:
+                      - paragraph [ref=e204]:
+                        - generic [ref=e205]: 
+                        - link "What Size Do I Need?" [ref=e206] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e207]:
+                        - generic [ref=e208]: $1 MOVE-IN
+                - generic [ref=e209]:
+                  - generic [ref=e210]:
+                    - generic [ref=e211]:
+                      - heading "$23/month" [level=3] [ref=e212]
+                      - generic [ref=e213]: Web Rate Only
+                    - generic [ref=e214]:
+                      - heading "$38/month" [level=3] [ref=e215]
+                      - generic [ref=e216]: Standard Rate
+                    - paragraph [ref=e218]: Month to Month - No Long Term Commitments
+                  - generic [ref=e219]:
+                    - generic [ref=e221]:
+                      - link "Rent" [ref=e223] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive/step-four?unit_id=4780320&storage-star
+                      - generic "Save time, pay and sign your lease online in minutes." [ref=e224]:
+                        - generic [ref=e225]: Easily switch sizes.
+                    - generic [ref=e227]:
+                      - generic [ref=e229] [cursor=pointer]: reserve
+                      - 'generic "Reserve Now, Paperwork at Move-In: We''ll secure your unit until you''re ready." [ref=e230]':
+                        - generic [ref=e231]: No credit card required.
+                - generic [ref=e233]:
+                  - generic [ref=e237]:
+                    - generic [ref=e239]: 
+                    - generic [ref=e241]: Climate-Controlled
+                  - generic [ref=e245]:
+                    - generic [ref=e247]: 
+                    - generic [ref=e249]: Ground Floor
+          - row "5 x 10 storage image Drive-Up 5' WIDTH x 10' DEPTH  What Size Do I Need? $1 MOVE-IN $30/month Web Rate Only $50/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Drive-Up" [ref=e261]:
+            - cell "5 x 10 storage image Drive-Up 5' WIDTH x 10' DEPTH  What Size Do I Need? $1 MOVE-IN $30/month Web Rate Only $50/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Drive-Up" [ref=e262]:
+              - generic [ref=e264]:
+                - generic [ref=e266]:
+                  - link "5 x 10 storage image" [ref=e268]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_2147085866.webp
+                    - img "5 x 10 storage image" [ref=e269]
+                  - generic [ref=e270]:
+                    - generic [ref=e271]: Drive-Up
+                    - heading "5' WIDTH x 10' DEPTH" [level=2] [ref=e272]:
+                      - generic [ref=e273]:
+                        - text: 5'
+                        - generic [ref=e274]: WIDTH
+                      - text: x
+                      - generic [ref=e275]:
+                        - text: 10'
+                        - generic [ref=e276]: DEPTH
+                    - generic [ref=e277]:
+                      - paragraph [ref=e278]:
+                        - generic [ref=e279]: 
+                        - link "What Size Do I Need?" [ref=e280] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e281]:
+                        - generic [ref=e282]: $1 MOVE-IN
+                - generic [ref=e283]:
+                  - generic [ref=e284]:
+                    - generic [ref=e285]:
+                      - heading "$30/month" [level=3] [ref=e286]
+                      - generic [ref=e287]: Web Rate Only
+                    - generic [ref=e288]:
+                      - heading "$50/month" [level=3] [ref=e289]
+                      - generic [ref=e290]: Standard Rate
+                    - paragraph [ref=e292]: Month to Month - No Long Term Commitments
+                  - generic [ref=e293]:
+                    - generic [ref=e295]:
+                      - link "Rent" [ref=e297] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive/step-four?unit_id=5166626&storage-star
+                      - generic "Save time, pay and sign your lease online in minutes." [ref=e298]:
+                        - generic [ref=e299]: Easily switch sizes.
+                    - generic [ref=e301]:
+                      - generic [ref=e303] [cursor=pointer]: reserve
+                      - 'generic "Reserve Now, Paperwork at Move-In: We''ll secure your unit until you''re ready." [ref=e304]':
+                        - generic [ref=e305]: No credit card required.
+                - generic [ref=e307]:
+                  - generic [ref=e311]:
+                    - generic [ref=e313]: 
+                    - generic [ref=e315]: Non-Climate Controlled
+                  - generic [ref=e319]:
+                    - generic [ref=e321]: 
+                    - generic [ref=e323]: Drive-Up
+          - row "10 x 10 storage image Climate Control 10' WIDTH x 10' DEPTH  What Size Do I Need? $1 MOVE-IN $60/month Web Rate Only $100/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Climate-Controlled  Ground Floor" [ref=e335]:
+            - cell "10 x 10 storage image Climate Control 10' WIDTH x 10' DEPTH  What Size Do I Need? $1 MOVE-IN $60/month Web Rate Only $100/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Climate-Controlled  Ground Floor" [ref=e336]:
+              - generic [ref=e338]:
+                - generic [ref=e340]:
+                  - link "10 x 10 storage image" [ref=e342]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_464051487.webp
+                    - img "10 x 10 storage image" [ref=e343]
+                  - generic [ref=e344]:
+                    - generic [ref=e345]: Climate Control
+                    - heading "10' WIDTH x 10' DEPTH" [level=2] [ref=e346]:
+                      - generic [ref=e347]:
+                        - text: 10'
+                        - generic [ref=e348]: WIDTH
+                      - text: x
+                      - generic [ref=e349]:
+                        - text: 10'
+                        - generic [ref=e350]: DEPTH
+                    - generic [ref=e351]:
+                      - paragraph [ref=e352]:
+                        - generic [ref=e353]: 
+                        - link "What Size Do I Need?" [ref=e354] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e355]:
+                        - generic [ref=e356]: $1 MOVE-IN
+                - generic [ref=e357]:
+                  - generic [ref=e358]:
+                    - generic [ref=e359]:
+                      - heading "$60/month" [level=3] [ref=e360]
+                      - generic [ref=e361]: Web Rate Only
+                    - generic [ref=e362]:
+                      - heading "$100/month" [level=3] [ref=e363]
+                      - generic [ref=e364]: Standard Rate
+                    - paragraph [ref=e366]: Month to Month - No Long Term Commitments
+                  - generic [ref=e367]:
+                    - generic [ref=e369]:
+                      - link "Rent" [ref=e371] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive/step-four?unit_id=4636802&storage-star
+                      - generic "Save time, pay and sign your lease online in minutes." [ref=e372]:
+                        - generic [ref=e373]: Easily switch sizes.
+                    - generic [ref=e375]:
+                      - generic [ref=e377] [cursor=pointer]: reserve
+                      - 'generic "Reserve Now, Paperwork at Move-In: We''ll secure your unit until you''re ready." [ref=e378]':
+                        - generic [ref=e379]: No credit card required.
+                - generic [ref=e381]:
+                  - generic [ref=e385]:
+                    - generic [ref=e387]: 
+                    - generic [ref=e389]: Climate-Controlled
+                  - generic [ref=e393]:
+                    - generic [ref=e395]: 
+                    - generic [ref=e397]: Ground Floor
+          - row "5 x 20 storage image Climate Control 5' WIDTH x 20' DEPTH  What Size Do I Need? $1 MOVE-IN $60/month Web Rate Only $100/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Climate-Controlled  Ground Floor" [ref=e409]:
+            - cell "5 x 20 storage image Climate Control 5' WIDTH x 20' DEPTH  What Size Do I Need? $1 MOVE-IN $60/month Web Rate Only $100/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Climate-Controlled  Ground Floor" [ref=e410]:
+              - generic [ref=e412]:
+                - generic [ref=e414]:
+                  - link "5 x 20 storage image" [ref=e416]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1651266775.webp
+                    - img "5 x 20 storage image" [ref=e417]
+                  - generic [ref=e418]:
+                    - generic [ref=e419]: Climate Control
+                    - heading "5' WIDTH x 20' DEPTH" [level=2] [ref=e420]:
+                      - generic [ref=e421]:
+                        - text: 5'
+                        - generic [ref=e422]: WIDTH
+                      - text: x
+                      - generic [ref=e423]:
+                        - text: 20'
+                        - generic [ref=e424]: DEPTH
+                    - generic [ref=e425]:
+                      - paragraph [ref=e426]:
+                        - generic [ref=e427]: 
+                        - link "What Size Do I Need?" [ref=e428] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e429]:
+                        - generic [ref=e430]: $1 MOVE-IN
+                - generic [ref=e431]:
+                  - generic [ref=e432]:
+                    - generic [ref=e433]:
+                      - heading "$60/month" [level=3] [ref=e434]
+                      - generic [ref=e435]: Web Rate Only
+                    - generic [ref=e436]:
+                      - heading "$100/month" [level=3] [ref=e437]
+                      - generic [ref=e438]: Standard Rate
+                    - paragraph [ref=e440]: Month to Month - No Long Term Commitments
+                  - generic [ref=e441]:
+                    - generic [ref=e443]:
+                      - link "Rent" [ref=e445] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive/step-four?unit_id=4842045&storage-star
+                      - generic "Save time, pay and sign your lease online in minutes." [ref=e446]:
+                        - generic [ref=e447]: Easily switch sizes.
+                    - generic [ref=e449]:
+                      - generic [ref=e451] [cursor=pointer]: reserve
+                      - 'generic "Reserve Now, Paperwork at Move-In: We''ll secure your unit until you''re ready." [ref=e452]':
+                        - generic [ref=e453]: No credit card required.
+                - generic [ref=e455]:
+                  - generic [ref=e459]:
+                    - generic [ref=e461]: 
+                    - generic [ref=e463]: Climate-Controlled
+                  - generic [ref=e467]:
+                    - generic [ref=e469]: 
+                    - generic [ref=e471]: Ground Floor
+          - row "10 x 15 storage image Climate Control 10' WIDTH x 15' DEPTH  What Size Do I Need? $1 MOVE-IN $72/month Web Rate Only $120/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Climate-Controlled  Ground Floor" [ref=e483]:
+            - cell "10 x 15 storage image Climate Control 10' WIDTH x 15' DEPTH  What Size Do I Need? $1 MOVE-IN $72/month Web Rate Only $120/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Climate-Controlled  Ground Floor" [ref=e484]:
+              - generic [ref=e486]:
+                - generic [ref=e488]:
+                  - link "10 x 15 storage image" [ref=e490]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_700422589.webp
+                    - img "10 x 15 storage image" [ref=e491]
+                  - generic [ref=e492]:
+                    - generic [ref=e493]: Climate Control
+                    - heading "10' WIDTH x 15' DEPTH" [level=2] [ref=e494]:
+                      - generic [ref=e495]:
+                        - text: 10'
+                        - generic [ref=e496]: WIDTH
+                      - text: x
+                      - generic [ref=e497]:
+                        - text: 15'
+                        - generic [ref=e498]: DEPTH
+                    - generic [ref=e499]:
+                      - paragraph [ref=e500]:
+                        - generic [ref=e501]: 
+                        - link "What Size Do I Need?" [ref=e502] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e503]:
+                        - generic [ref=e504]: $1 MOVE-IN
+                - generic [ref=e505]:
+                  - generic [ref=e506]:
+                    - generic [ref=e507]:
+                      - heading "$72/month" [level=3] [ref=e508]
+                      - generic [ref=e509]: Web Rate Only
+                    - generic [ref=e510]:
+                      - heading "$120/month" [level=3] [ref=e511]
+                      - generic [ref=e512]: Standard Rate
+                    - paragraph [ref=e514]: Month to Month - No Long Term Commitments
+                  - generic [ref=e515]:
+                    - generic [ref=e517]:
+                      - link "Rent" [ref=e519] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive/step-four?unit_id=5166663&storage-star
+                      - generic "Save time, pay and sign your lease online in minutes." [ref=e520]:
+                        - generic [ref=e521]: Easily switch sizes.
+                    - generic [ref=e523]:
+                      - generic [ref=e525] [cursor=pointer]: reserve
+                      - 'generic "Reserve Now, Paperwork at Move-In: We''ll secure your unit until you''re ready." [ref=e526]':
+                        - generic [ref=e527]: No credit card required.
+                - generic [ref=e529]:
+                  - generic [ref=e533]:
+                    - generic [ref=e535]: 
+                    - generic [ref=e537]: Climate-Controlled
+                  - generic [ref=e541]:
+                    - generic [ref=e543]: 
+                    - generic [ref=e545]: Ground Floor
+          - row "10 x 20 storage image Climate Control 10' WIDTH x 20' DEPTH  What Size Do I Need? $1 MOVE-IN $91/month Web Rate Only $152/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Climate-Controlled  Ground Floor" [ref=e557]:
+            - cell "10 x 20 storage image Climate Control 10' WIDTH x 20' DEPTH  What Size Do I Need? $1 MOVE-IN $91/month Web Rate Only $152/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Climate-Controlled  Ground Floor" [ref=e558]:
+              - generic [ref=e560]:
+                - generic [ref=e562]:
+                  - link "10 x 20 storage image" [ref=e564]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1808486142.webp
+                    - img "10 x 20 storage image" [ref=e565]
+                  - generic [ref=e566]:
+                    - generic [ref=e567]: Climate Control
+                    - heading "10' WIDTH x 20' DEPTH" [level=2] [ref=e568]:
+                      - generic [ref=e569]:
+                        - text: 10'
+                        - generic [ref=e570]: WIDTH
+                      - text: x
+                      - generic [ref=e571]:
+                        - text: 20'
+                        - generic [ref=e572]: DEPTH
+                    - generic [ref=e573]:
+                      - paragraph [ref=e574]:
+                        - generic [ref=e575]: 
+                        - link "What Size Do I Need?" [ref=e576] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e577]:
+                        - generic [ref=e578]: $1 MOVE-IN
+                - generic [ref=e579]:
+                  - generic [ref=e580]:
+                    - generic [ref=e581]:
+                      - heading "$91/month" [level=3] [ref=e582]
+                      - generic [ref=e583]: Web Rate Only
+                    - generic [ref=e584]:
+                      - heading "$152/month" [level=3] [ref=e585]
+                      - generic [ref=e586]: Standard Rate
+                    - paragraph [ref=e588]: Month to Month - No Long Term Commitments
+                  - generic [ref=e589]:
+                    - generic [ref=e591]:
+                      - link "Rent" [ref=e593] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive/step-four?unit_id=4555486&storage-star
+                      - generic "Save time, pay and sign your lease online in minutes." [ref=e594]:
+                        - generic [ref=e595]: Easily switch sizes.
+                    - generic [ref=e597]:
+                      - generic [ref=e599] [cursor=pointer]: reserve
+                      - 'generic "Reserve Now, Paperwork at Move-In: We''ll secure your unit until you''re ready." [ref=e600]':
+                        - generic [ref=e601]: No credit card required.
+                - generic [ref=e603]:
+                  - generic [ref=e607]:
+                    - generic [ref=e609]: 
+                    - generic [ref=e611]: Climate-Controlled
+                  - generic [ref=e615]:
+                    - generic [ref=e617]: 
+                    - generic [ref=e619]: Ground Floor
+          - row "10 x 30 storage image Drive-Up 10' WIDTH x 30' DEPTH  What Size Do I Need? $1 MOVE-IN $135/month Web Rate Only $225/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Drive-Up" [ref=e631]:
+            - cell "10 x 30 storage image Drive-Up 10' WIDTH x 30' DEPTH  What Size Do I Need? $1 MOVE-IN $135/month Web Rate Only $225/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Drive-Up" [ref=e632]:
+              - generic [ref=e634]:
+                - generic [ref=e636]:
+                  - link "10 x 30 storage image" [ref=e638]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1829839348.webp
+                    - img "10 x 30 storage image" [ref=e639]
+                  - generic [ref=e640]:
+                    - generic [ref=e641]: Drive-Up
+                    - heading "10' WIDTH x 30' DEPTH" [level=2] [ref=e642]:
+                      - generic [ref=e643]:
+                        - text: 10'
+                        - generic [ref=e644]: WIDTH
+                      - text: x
+                      - generic [ref=e645]:
+                        - text: 30'
+                        - generic [ref=e646]: DEPTH
+                    - generic [ref=e647]:
+                      - paragraph [ref=e648]:
+                        - generic [ref=e649]: 
+                        - link "What Size Do I Need?" [ref=e650] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e651]:
+                        - generic [ref=e652]: $1 MOVE-IN
+                - generic [ref=e653]:
+                  - generic [ref=e654]:
+                    - generic [ref=e655]:
+                      - heading "$135/month" [level=3] [ref=e656]
+                      - generic [ref=e657]: Web Rate Only
+                    - generic [ref=e658]:
+                      - heading "$225/month" [level=3] [ref=e659]
+                      - generic [ref=e660]: Standard Rate
+                    - paragraph [ref=e662]: Month to Month - No Long Term Commitments
+                  - generic [ref=e663]:
+                    - generic [ref=e665]:
+                      - link "Rent" [ref=e667] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive/step-four?unit_id=5028749&storage-star
+                      - generic "Save time, pay and sign your lease online in minutes." [ref=e668]:
+                        - generic [ref=e669]: Easily switch sizes.
+                    - generic [ref=e671]:
+                      - generic [ref=e673] [cursor=pointer]: reserve
+                      - 'generic "Reserve Now, Paperwork at Move-In: We''ll secure your unit until you''re ready." [ref=e674]':
+                        - generic [ref=e675]: No credit card required.
+                - generic [ref=e677]:
+                  - generic [ref=e681]:
+                    - generic [ref=e683]: 
+                    - generic [ref=e685]: Non-Climate Controlled
+                  - generic [ref=e689]:
+                    - generic [ref=e691]: 
+                    - generic [ref=e693]: Drive-Up
+          - row "15 x 30 storage image Parking 15' WIDTH x 30' DEPTH  What Size Do I Need? $1 MOVE-IN $128/month Web Rate Only $213/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Parking  Vehicle Parking  Motorcycle Parking  Truck Parking  Trailer Parking  Boat Parking  Commercial Parking  RV Parking" [ref=e705]:
+            - cell "15 x 30 storage image Parking 15' WIDTH x 30' DEPTH  What Size Do I Need? $1 MOVE-IN $128/month Web Rate Only $213/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Parking  Vehicle Parking  Motorcycle Parking  Truck Parking  Trailer Parking  Boat Parking  Commercial Parking  RV Parking" [ref=e706]:
+              - generic [ref=e708]:
+                - generic [ref=e710]:
+                  - link "15 x 30 storage image" [ref=e712]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1076193073.webp
+                    - img "15 x 30 storage image" [ref=e713]
+                  - generic [ref=e714]:
+                    - generic [ref=e715]: Parking
+                    - heading "15' WIDTH x 30' DEPTH" [level=2] [ref=e716]:
+                      - generic [ref=e717]:
+                        - text: 15'
+                        - generic [ref=e718]: WIDTH
+                      - text: x
+                      - generic [ref=e719]:
+                        - text: 30'
+                        - generic [ref=e720]: DEPTH
+                    - generic [ref=e721]:
+                      - paragraph [ref=e722]:
+                        - generic [ref=e723]: 
+                        - link "What Size Do I Need?" [ref=e724] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e725]:
+                        - generic [ref=e726]: $1 MOVE-IN
+                - generic [ref=e727]:
+                  - generic [ref=e728]:
+                    - generic [ref=e729]:
+                      - heading "$128/month" [level=3] [ref=e730]
+                      - generic [ref=e731]: Web Rate Only
+                    - generic [ref=e732]:
+                      - heading "$213/month" [level=3] [ref=e733]
+                      - generic [ref=e734]: Standard Rate
+                    - paragraph [ref=e736]: Month to Month - No Long Term Commitments
+                  - generic [ref=e737]:
+                    - generic [ref=e739]:
+                      - link "Rent" [ref=e741] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive/step-four?unit_id=4328177&storage-star
+                      - generic "Save time, pay and sign your lease online in minutes." [ref=e742]:
+                        - generic [ref=e743]: Easily switch sizes.
+                    - generic [ref=e745]:
+                      - generic [ref=e747] [cursor=pointer]: reserve
+                      - 'generic "Reserve Now, Paperwork at Move-In: We''ll secure your unit until you''re ready." [ref=e748]':
+                        - generic [ref=e749]: No credit card required.
+                - generic [ref=e751]:
+                  - generic [ref=e755]:
+                    - generic [ref=e757]: 
+                    - generic [ref=e759]: Parking
+                  - generic [ref=e760]:
+                    - generic [ref=e763]:
+                      - generic [ref=e764]: 
+                      - text: Vehicle Parking
+                    - generic [ref=e767]:
+                      - generic [ref=e768]: 
+                      - text: Motorcycle Parking
+                    - generic [ref=e771]:
+                      - generic [ref=e772]: 
+                      - text: Truck Parking
+                    - generic [ref=e775]:
+                      - generic [ref=e776]: 
+                      - text: Trailer Parking
+                    - generic [ref=e779]:
+                      - generic [ref=e780]: 
+                      - text: Boat Parking
+                    - generic [ref=e783]:
+                      - generic [ref=e784]: 
+                      - text: Commercial Parking
+                    - generic [ref=e787]:
+                      - generic [ref=e788]: 
+                      - text: RV Parking
+          - row "20 x 30 storage image Drive-Up 20' WIDTH x 30' DEPTH  What Size Do I Need? $1 MOVE-IN $270/month Web Rate Only $450/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Drive-Up" [ref=e799]:
+            - cell "20 x 30 storage image Drive-Up 20' WIDTH x 30' DEPTH  What Size Do I Need? $1 MOVE-IN $270/month Web Rate Only $450/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Drive-Up" [ref=e800]:
+              - generic [ref=e802]:
+                - generic [ref=e804]:
+                  - link "20 x 30 storage image" [ref=e806]:
+                    - /url: https://static.storagely.link/public/uploads/unit_3d_images/unit_3d_1953668845.webp
+                    - img "20 x 30 storage image" [ref=e807]
+                  - generic [ref=e808]:
+                    - generic [ref=e809]: Drive-Up
+                    - heading "20' WIDTH x 30' DEPTH" [level=2] [ref=e810]:
+                      - generic [ref=e811]:
+                        - text: 20'
+                        - generic [ref=e812]: WIDTH
+                      - text: x
+                      - generic [ref=e813]:
+                        - text: 30'
+                        - generic [ref=e814]: DEPTH
+                    - generic [ref=e815]:
+                      - paragraph [ref=e816]:
+                        - generic [ref=e817]: 
+                        - link "What Size Do I Need?" [ref=e818] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e819]:
+                        - generic [ref=e820]: $1 MOVE-IN
+                - generic [ref=e821]:
+                  - generic [ref=e822]:
+                    - generic [ref=e823]:
+                      - heading "$270/month" [level=3] [ref=e824]
+                      - generic [ref=e825]: Web Rate Only
+                    - generic [ref=e826]:
+                      - heading "$450/month" [level=3] [ref=e827]
+                      - generic [ref=e828]: Standard Rate
+                    - paragraph [ref=e830]: Month to Month - No Long Term Commitments
+                  - generic [ref=e831]:
+                    - generic [ref=e833]:
+                      - link "Rent" [ref=e835] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive/step-four?unit_id=4636891&storage-star
+                      - generic "Save time, pay and sign your lease online in minutes." [ref=e836]:
+                        - generic [ref=e837]: Easily switch sizes.
+                    - generic [ref=e839]:
+                      - generic [ref=e841] [cursor=pointer]: reserve
+                      - 'generic "Reserve Now, Paperwork at Move-In: We''ll secure your unit until you''re ready." [ref=e842]':
+                        - generic [ref=e843]: No credit card required.
+                - generic [ref=e845]:
+                  - generic [ref=e849]:
+                    - generic [ref=e851]: 
+                    - generic [ref=e853]: Non-Climate Controlled
+                  - generic [ref=e857]:
+                    - generic [ref=e859]: 
+                    - generic [ref=e861]: Drive-Up
+          - row "14 x 45 storage image SELF STORAGE 14' WIDTH x 45' DEPTH  What Size Do I Need? $1 MOVE-IN $225/month Web Rate Only $375/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor" [ref=e873]:
+            - cell "14 x 45 storage image SELF STORAGE 14' WIDTH x 45' DEPTH  What Size Do I Need? $1 MOVE-IN $225/month Web Rate Only $375/month Standard Rate Month to Month - No Long Term Commitments Rent Easily switch sizes. reserve No credit card required.  Non-Climate Controlled  Ground Floor" [ref=e874]:
+              - generic [ref=e876]:
+                - generic [ref=e878]:
+                  - link "14 x 45 storage image" [ref=e880]:
+                    - /url: https://static.storagely.link/public/uploads/no-storage-available.png
+                    - img "14 x 45 storage image" [ref=e881]
+                  - generic [ref=e882]:
+                    - generic [ref=e883]: SELF STORAGE
+                    - heading "14' WIDTH x 45' DEPTH" [level=2] [ref=e884]:
+                      - generic [ref=e885]:
+                        - text: 14'
+                        - generic [ref=e886]: WIDTH
+                      - text: x
+                      - generic [ref=e887]:
+                        - text: 45'
+                        - generic [ref=e888]: DEPTH
+                    - generic [ref=e889]:
+                      - paragraph [ref=e890]:
+                        - generic [ref=e891]: 
+                        - link "What Size Do I Need?" [ref=e892] [cursor=pointer]:
+                          - /url: "#"
+                      - paragraph [ref=e893]:
+                        - generic [ref=e894]: $1 MOVE-IN
+                - generic [ref=e895]:
+                  - generic [ref=e896]:
+                    - generic [ref=e897]:
+                      - heading "$225/month" [level=3] [ref=e898]
+                      - generic [ref=e899]: Web Rate Only
+                    - generic [ref=e900]:
+                      - heading "$375/month" [level=3] [ref=e901]
+                      - generic [ref=e902]: Standard Rate
+                    - paragraph [ref=e904]: Month to Month - No Long Term Commitments
+                  - generic [ref=e905]:
+                    - generic [ref=e907]:
+                      - link "Rent" [ref=e909] [cursor=pointer]:
+                        - /url: https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive/step-four?unit_id=4897579&storage-star
+                      - generic "Save time, pay and sign your lease online in minutes." [ref=e910]:
+                        - generic [ref=e911]: Easily switch sizes.
+                    - generic [ref=e913]:
+                      - generic [ref=e915] [cursor=pointer]: reserve
+                      - 'generic "Reserve Now, Paperwork at Move-In: We''ll secure your unit until you''re ready." [ref=e916]':
+                        - generic [ref=e917]: No credit card required.
+                - generic [ref=e919]:
+                  - generic [ref=e923]:
+                    - generic [ref=e925]: 
+                    - generic [ref=e927]: Non-Climate Controlled
+                  - generic [ref=e931]:
+                    - generic [ref=e933]: 
+                    - generic [ref=e935]: Ground Floor
+      - generic [ref=e949]:
+        - heading "Customer Reviews" [level=2] [ref=e950]
+        - generic [ref=e952]:
+          - generic [ref=e953]:
+            - generic [ref=e954] [cursor=pointer]:
+              - generic [ref=e955]:
+                - img [ref=e956]
+                - img [ref=e958]
+                - img [ref=e960]
+                - img [ref=e962]
+                - img [ref=e964]
+              - strong [ref=e970]: "4.7"
+            - text: 219 Reviews
+          - link "Write a review" [ref=e971] [cursor=pointer]:
+            - /url: https://www.google.com/search?newwindow=1&sca_esv=3cf5305f7235dc23&sca_upv=1&q=Storage+Star+-+Colorado+Springs&ludocid=16331149079082438516&lsig=AB86z5XEIq86eMhvAVizPnT_PME7&sa=X&ved=2ahUKEwik_8TwzJWGAxWQ6ckDHd2EAN4QoAJ6BAgXEAc&biw=1700&bih=951&dpr=1#lrd=0x8713475c4402dc03:0xe2a3e58fb0a80f74,1,,,,
+            - button "Write a review" [ref=e972]
+        - generic [ref=e975]:
+          - button "Previous" [ref=e976] [cursor=pointer]: ←Previous
+          - generic [ref=e978]:
+            - generic [ref=e980]:
+              - generic [ref=e981]:
+                - generic [ref=e984] [cursor=pointer]:
+                  - img [ref=e985]
+                  - img [ref=e987]
+                  - img [ref=e989]
+                  - img [ref=e991]
+                  - img [ref=e993]
+                - img [ref=e996]
+              - generic [ref=e1002]:
+                - img [ref=e1003]
+                - paragraph [ref=e1004]: Alyssa Castellanos
+                - paragraph [ref=e1005]: a week ago
+              - generic [ref=e1006]:
+                - paragraph [ref=e1007]: Diana was incredibly kind and welcoming. She made the whole process smooth and stress-free, answering all my questions with patience and a genuine smile. ...
+                - link [ref=e1008] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - generic [ref=e1010]:
+              - generic [ref=e1011]:
+                - generic [ref=e1014] [cursor=pointer]:
+                  - img [ref=e1015]
+                  - img [ref=e1017]
+                  - img [ref=e1019]
+                  - img [ref=e1021]
+                  - img [ref=e1023]
+                - img [ref=e1026]
+              - generic [ref=e1032]:
+                - img [ref=e1033]
+                - paragraph [ref=e1034]: Jen
+                - paragraph [ref=e1035]: a week ago
+              - paragraph [ref=e1037]: John Ochoa says its perfect here. That Diana is amazing!
+            - generic [ref=e1039]:
+              - generic [ref=e1040]:
+                - generic [ref=e1043] [cursor=pointer]:
+                  - img [ref=e1044]
+                  - img [ref=e1046]
+                  - img [ref=e1048]
+                  - img [ref=e1050]
+                  - img [ref=e1052]
+                - img [ref=e1055]
+              - generic [ref=e1061]:
+                - img [ref=e1062]
+                - paragraph [ref=e1063]: Williams
+                - paragraph [ref=e1064]: Edited 2 weeks ago
+              - paragraph [ref=e1066]: Diane is amazing! Super friendly and made the process so simple. Star storage will be where I go from now on!
+            - tabpanel [ref=e1067]:
+              - generic [ref=e1068]:
+                - generic [ref=e1069]:
+                  - generic [ref=e1072] [cursor=pointer]:
+                    - img [ref=e1073]
+                    - img [ref=e1075]
+                    - img [ref=e1077]
+                    - img [ref=e1079]
+                    - img [ref=e1081]
+                  - img [ref=e1084]
+                - generic [ref=e1090]:
+                  - img [ref=e1091]
+                  - paragraph [ref=e1092]: Christean Barrows
+                  - paragraph [ref=e1093]: Edited 2 days ago
+                - generic [ref=e1094]:
+                  - paragraph [ref=e1095]: I have to say that life get hard sometimes. And you need a little help sometimes as well. Diana from storage star is that person. ...
+                  - link [ref=e1096] [cursor=pointer]:
+                    - /url: "#"
+                    - text: Show more
+            - tabpanel [ref=e1097]:
+              - generic [ref=e1098]:
+                - generic [ref=e1099]:
+                  - generic [ref=e1102] [cursor=pointer]:
+                    - img [ref=e1103]
+                    - img [ref=e1105]
+                    - img [ref=e1107]
+                    - img [ref=e1109]
+                    - img [ref=e1111]
+                  - img [ref=e1114]
+                - generic [ref=e1120]:
+                  - img "google review" [ref=e1121]
+                  - paragraph [ref=e1122]: Angela Wallis
+                  - paragraph [ref=e1123]: 3 days ago
+                - generic [ref=e1124]:
+                  - paragraph [ref=e1125]: Diane is a delightful person, I had no problem getting the right storage. Because of her my experience with getting a storage unit was hassle ...
+                  - link "Show more" [ref=e1126] [cursor=pointer]:
+                    - /url: "#"
+            - tabpanel [ref=e1127]:
+              - generic [ref=e1128]:
+                - generic [ref=e1129]:
+                  - generic [ref=e1132] [cursor=pointer]:
+                    - img [ref=e1133]
+                    - img [ref=e1135]
+                    - img [ref=e1137]
+                    - img [ref=e1139]
+                    - img [ref=e1141]
+                  - img [ref=e1144]
+                - generic [ref=e1150]:
+                  - img "google review" [ref=e1151]
+                  - paragraph [ref=e1152]: Anthony HAZARD
+                  - paragraph [ref=e1153]: Edited 3 days ago
+                - paragraph [ref=e1155]: I have to say that the rates and customer service are top notch. Diane is very knowledgeable, friendly and very professional.
+            - tabpanel [ref=e1156]:
+              - generic [ref=e1157]:
+                - generic [ref=e1158]:
+                  - generic [ref=e1161] [cursor=pointer]:
+                    - img [ref=e1162]
+                    - img [ref=e1164]
+                    - img [ref=e1166]
+                    - img [ref=e1168]
+                    - img [ref=e1170]
+                  - img [ref=e1173]
+                - generic [ref=e1179]:
+                  - img "google review" [ref=e1180]
+                  - paragraph [ref=e1181]: Mariah Carroll
+                  - paragraph [ref=e1182]: 4 days ago
+                - generic [ref=e1183]:
+                  - paragraph [ref=e1184]: I cannot recommend this facility enough, specifically because of Diane! I arrived 15 minutes after the office had closed, in the middle of a very ...
+                  - link "Show more" [ref=e1185] [cursor=pointer]:
+                    - /url: "#"
+            - tabpanel [ref=e1186]:
+              - generic [ref=e1187]:
+                - generic [ref=e1188]:
+                  - generic [ref=e1191] [cursor=pointer]:
+                    - img [ref=e1192]
+                    - img [ref=e1194]
+                    - img [ref=e1196]
+                    - img [ref=e1198]
+                    - img [ref=e1200]
+                  - img [ref=e1203]
+                - generic [ref=e1209]:
+                  - img [ref=e1210]
+                  - paragraph [ref=e1211]: John Sherman
+                  - paragraph [ref=e1212]: 4 days ago
+                - paragraph [ref=e1214]: Very helpful, professional, and had a great attitude
+            - tabpanel [ref=e1215]:
+              - generic [ref=e1216]:
+                - generic [ref=e1217]:
+                  - generic [ref=e1220] [cursor=pointer]:
+                    - img [ref=e1221]
+                    - img [ref=e1223]
+                    - img [ref=e1225]
+                    - img [ref=e1227]
+                    - img [ref=e1229]
+                  - img [ref=e1232]
+                - generic [ref=e1238]:
+                  - img [ref=e1239]
+                  - paragraph [ref=e1240]: Ericka Pitre
+                  - paragraph [ref=e1241]: 6 days ago
+                - generic [ref=e1242]:
+                  - paragraph [ref=e1243]: I have been a longtime customer.I came in with an issue and Diana, was amazing and my problem was resolved and I am super happy. ...
+                  - link [ref=e1244] [cursor=pointer]:
+                    - /url: "#"
+                    - text: Show more
+            - tabpanel [ref=e1245]:
+              - generic [ref=e1246]:
+                - generic [ref=e1247]:
+                  - generic [ref=e1250] [cursor=pointer]:
+                    - img [ref=e1251]
+                    - img [ref=e1253]
+                    - img [ref=e1255]
+                    - img [ref=e1257]
+                    - img [ref=e1259]
+                  - img [ref=e1262]
+                - generic [ref=e1268]:
+                  - img [ref=e1269]
+                  - paragraph [ref=e1270]: bonnie walton
+                  - paragraph [ref=e1271]: a week ago
+                - paragraph [ref=e1273]: I always have a great experience when having to speak to management. Diana always makes sure we are taken care of! Recommend for sure!
+            - tabpanel [ref=e1274]:
+              - generic [ref=e1275]:
+                - generic [ref=e1276]:
+                  - generic [ref=e1279] [cursor=pointer]:
+                    - img [ref=e1280]
+                    - img [ref=e1282]
+                    - img [ref=e1284]
+                    - img [ref=e1286]
+                    - img [ref=e1288]
+                  - img [ref=e1291]
+                - generic [ref=e1297]:
+                  - img [ref=e1298]
+                  - paragraph [ref=e1299]: Alyssa Castellanos
+                  - paragraph [ref=e1300]: a week ago
+                - generic [ref=e1301]:
+                  - paragraph [ref=e1302]: Diana was incredibly kind and welcoming. She made the whole process smooth and stress-free, answering all my questions with patience and a genuine smile. ...
+                  - link [ref=e1303] [cursor=pointer]:
+                    - /url: "#"
+                    - text: Show more
+            - tabpanel [ref=e1304]:
+              - generic [ref=e1305]:
+                - generic [ref=e1306]:
+                  - generic [ref=e1309] [cursor=pointer]:
+                    - img [ref=e1310]
+                    - img [ref=e1312]
+                    - img [ref=e1314]
+                    - img [ref=e1316]
+                    - img [ref=e1318]
+                  - img [ref=e1321]
+                - generic [ref=e1327]:
+                  - img [ref=e1328]
+                  - paragraph [ref=e1329]: Jen
+                  - paragraph [ref=e1330]: a week ago
+                - paragraph [ref=e1332]: John Ochoa says its perfect here. That Diana is amazing!
+            - tabpanel [ref=e1333]:
+              - generic [ref=e1334]:
+                - generic [ref=e1335]:
+                  - generic [ref=e1338] [cursor=pointer]:
+                    - img [ref=e1339]
+                    - img [ref=e1341]
+                    - img [ref=e1343]
+                    - img [ref=e1345]
+                    - img [ref=e1347]
+                  - img [ref=e1350]
+                - generic [ref=e1356]:
+                  - img [ref=e1357]
+                  - paragraph [ref=e1358]: Williams
+                  - paragraph [ref=e1359]: Edited 2 weeks ago
+                - paragraph [ref=e1361]: Diane is amazing! Super friendly and made the process so simple. Star storage will be where I go from now on!
+            - generic [ref=e1363]:
+              - generic [ref=e1364]:
+                - generic [ref=e1367] [cursor=pointer]:
+                  - img [ref=e1368]
+                  - img [ref=e1370]
+                  - img [ref=e1372]
+                  - img [ref=e1374]
+                  - img [ref=e1376]
+                - img [ref=e1379]
+              - generic [ref=e1385]:
+                - img [ref=e1386]
+                - paragraph [ref=e1387]: Christean Barrows
+                - paragraph [ref=e1388]: Edited 2 days ago
+              - generic [ref=e1389]:
+                - paragraph [ref=e1390]: I have to say that life get hard sometimes. And you need a little help sometimes as well. Diana from storage star is that person. ...
+                - link [ref=e1391] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - generic [ref=e1393]:
+              - generic [ref=e1394]:
+                - generic [ref=e1397] [cursor=pointer]:
+                  - img [ref=e1398]
+                  - img [ref=e1400]
+                  - img [ref=e1402]
+                  - img [ref=e1404]
+                  - img [ref=e1406]
+                - img [ref=e1409]
+              - generic [ref=e1415]:
+                - img [ref=e1416]
+                - paragraph [ref=e1417]: Angela Wallis
+                - paragraph [ref=e1418]: 3 days ago
+              - generic [ref=e1419]:
+                - paragraph [ref=e1420]: Diane is a delightful person, I had no problem getting the right storage. Because of her my experience with getting a storage unit was hassle ...
+                - link [ref=e1421] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - generic [ref=e1423]:
+              - generic [ref=e1424]:
+                - generic [ref=e1427] [cursor=pointer]:
+                  - img [ref=e1428]
+                  - img [ref=e1430]
+                  - img [ref=e1432]
+                  - img [ref=e1434]
+                  - img [ref=e1436]
+                - img [ref=e1439]
+              - generic [ref=e1445]:
+                - img [ref=e1446]
+                - paragraph [ref=e1447]: Anthony HAZARD
+                - paragraph [ref=e1448]: Edited 3 days ago
+              - paragraph [ref=e1450]: I have to say that the rates and customer service are top notch. Diane is very knowledgeable, friendly and very professional.
+            - generic [ref=e1452]:
+              - generic [ref=e1453]:
+                - generic [ref=e1456] [cursor=pointer]:
+                  - img [ref=e1457]
+                  - img [ref=e1459]
+                  - img [ref=e1461]
+                  - img [ref=e1463]
+                  - img [ref=e1465]
+                - img [ref=e1468]
+              - generic [ref=e1474]:
+                - img [ref=e1475]
+                - paragraph [ref=e1476]: Mariah Carroll
+                - paragraph [ref=e1477]: 4 days ago
+              - generic [ref=e1478]:
+                - paragraph [ref=e1479]: I cannot recommend this facility enough, specifically because of Diane! I arrived 15 minutes after the office had closed, in the middle of a very ...
+                - link [ref=e1480] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - generic [ref=e1482]:
+              - generic [ref=e1483]:
+                - generic [ref=e1486] [cursor=pointer]:
+                  - img [ref=e1487]
+                  - img [ref=e1489]
+                  - img [ref=e1491]
+                  - img [ref=e1493]
+                  - img [ref=e1495]
+                - img [ref=e1498]
+              - generic [ref=e1504]:
+                - img [ref=e1505]
+                - paragraph [ref=e1506]: John Sherman
+                - paragraph [ref=e1507]: 4 days ago
+              - paragraph [ref=e1509]: Very helpful, professional, and had a great attitude
+            - generic [ref=e1511]:
+              - generic [ref=e1512]:
+                - generic [ref=e1515] [cursor=pointer]:
+                  - img [ref=e1516]
+                  - img [ref=e1518]
+                  - img [ref=e1520]
+                  - img [ref=e1522]
+                  - img [ref=e1524]
+                - img [ref=e1527]
+              - generic [ref=e1533]:
+                - img [ref=e1534]
+                - paragraph [ref=e1535]: Ericka Pitre
+                - paragraph [ref=e1536]: 6 days ago
+              - generic [ref=e1537]:
+                - paragraph [ref=e1538]: I have been a longtime customer.I came in with an issue and Diana, was amazing and my problem was resolved and I am super happy. ...
+                - link [ref=e1539] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - generic [ref=e1541]:
+              - generic [ref=e1542]:
+                - generic [ref=e1545] [cursor=pointer]:
+                  - img [ref=e1546]
+                  - img [ref=e1548]
+                  - img [ref=e1550]
+                  - img [ref=e1552]
+                  - img [ref=e1554]
+                - img [ref=e1557]
+              - generic [ref=e1563]:
+                - img [ref=e1564]
+                - paragraph [ref=e1565]: bonnie walton
+                - paragraph [ref=e1566]: a week ago
+              - paragraph [ref=e1568]: I always have a great experience when having to speak to management. Diana always makes sure we are taken care of! Recommend for sure!
+            - generic [ref=e1570]:
+              - generic [ref=e1571]:
+                - generic [ref=e1574] [cursor=pointer]:
+                  - img [ref=e1575]
+                  - img [ref=e1577]
+                  - img [ref=e1579]
+                  - img [ref=e1581]
+                  - img [ref=e1583]
+                - img [ref=e1586]
+              - generic [ref=e1592]:
+                - img [ref=e1593]
+                - paragraph [ref=e1594]: Alyssa Castellanos
+                - paragraph [ref=e1595]: a week ago
+              - generic [ref=e1596]:
+                - paragraph [ref=e1597]: Diana was incredibly kind and welcoming. She made the whole process smooth and stress-free, answering all my questions with patience and a genuine smile. ...
+                - link [ref=e1598] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Show more
+            - generic [ref=e1600]:
+              - generic [ref=e1601]:
+                - generic [ref=e1604] [cursor=pointer]:
+                  - img [ref=e1605]
+                  - img [ref=e1607]
+                  - img [ref=e1609]
+                  - img [ref=e1611]
+                  - img [ref=e1613]
+                - img [ref=e1616]
+              - generic [ref=e1622]:
+                - img [ref=e1623]
+                - paragraph [ref=e1624]: Jen
+                - paragraph [ref=e1625]: a week ago
+              - paragraph [ref=e1627]: John Ochoa says its perfect here. That Diana is amazing!
+            - generic [ref=e1629]:
+              - generic [ref=e1630]:
+                - generic [ref=e1633] [cursor=pointer]:
+                  - img [ref=e1634]
+                  - img [ref=e1636]
+                  - img [ref=e1638]
+                  - img [ref=e1640]
+                  - img [ref=e1642]
+                - img [ref=e1645]
+              - generic [ref=e1651]:
+                - img [ref=e1652]
+                - paragraph [ref=e1653]: Williams
+                - paragraph [ref=e1654]: Edited 2 weeks ago
+              - paragraph [ref=e1656]: Diane is amazing! Super friendly and made the process so simple. Star storage will be where I go from now on!
+          - button "Next" [ref=e1657] [cursor=pointer]: →Next
+          - tablist [ref=e1658]:
+            - tab "1 of 4" [ref=e1659] [cursor=pointer]: • 1
+            - tab "2 of 4" [selected] [ref=e1660] [cursor=pointer]: • 2
+            - tab "3 of 4" [ref=e1661] [cursor=pointer]: • 3
+            - tab "4 of 4" [ref=e1662] [cursor=pointer]: • 4
+            - tab "5 of 4" [ref=e1663] [cursor=pointer]: • 5
+            - tab "6 of 4" [ref=e1664] [cursor=pointer]: • 6
+            - tab "7 of 4" [ref=e1665] [cursor=pointer]: • 7
+            - tab "8 of 4" [ref=e1666] [cursor=pointer]: • 8
+            - tab "9 of 4" [ref=e1667] [cursor=pointer]: • 9
+            - tab "10 of 4" [ref=e1668] [cursor=pointer]: • 10
+      - generic [ref=e1669]:
+        - generic [ref=e1670]:
+          - img "self storage units colorado springs" [ref=e1672]
+          - generic [ref=e1674]:
+            - img "secure self storage colorado springs" [ref=e1676]
+            - img "drive up self storage colorado springs" [ref=e1678]
+        - generic [ref=e1680]:
+          - heading "About Colorado Springs | Aerotech Drive" [level=2] [ref=e1681]
+          - paragraph
+          - heading "About the Aerotech Drive, Colorado Springs Storage Star Facility" [level=2] [ref=e1682]
+          - paragraph [ref=e1683]: Located on the eastern edge of Colorado Springs, just minutes from Peterson Space Force Base and Colorado Springs Airport, Storage Star on Aerotech Drive makes storage simple and stress-free. Whether you’re preparing for a PCS move, clearing out space at home, or need secure storage for your business, our climate-controlled units are designed to protect your items year-round from Colorado’s changing weather. With 24/7 security, flexible month-to-month rentals, and a friendly local team ready to help, you’ll have the confidence and convenience you need.
+          - paragraph [ref=e1684]:
+            - link "Call us to speak with your local Colorado Springs Storage Star" [ref=e1685] [cursor=pointer]:
+              - /url: tel:+17192239938
+            - text: ", or scroll up to rent or reserve your storage unit."
+          - iframe [ref=e1687]:
+            
+          - paragraph
+          - 'heading "Find Us Here: 1935 Aerotech Drive, Colorado Springs, CO 80916" [level=2] [ref=e1688]':
+            - link "Find Us Here" [ref=e1689] [cursor=pointer]:
+              - /url: https://maps.app.goo.gl/k6cLYhXHX7FaAy3A8
+            - text: ": 1935 Aerotech Drive, Colorado Springs, CO 80916"
+          - paragraph [ref=e1690]: Our Southeast Colorado Springs storage facility is located at the corner of State Highway 21 (SH 21) and US-24 (East Fountain Boulevard), providing easy access to storage from major highways. Whether heading to the Colorado Springs Airport or planning a visit to the Cheyenne Mountain Zoo, you’ll find us on Aerotech Drive. Getting to your storage unit is quick, straightforward, and hassle-free.
+          - paragraph [ref=e1691]: "Perfect for residents and businesses near:"
+          - list [ref=e1692]:
+            - listitem [ref=e1693]: Southeast Colorado Springs
+            - listitem [ref=e1694]: Cimarron Hills
+            - listitem [ref=e1695]: Spring Creek
+            - listitem [ref=e1696]: Pikes Peak Park
+            - listitem [ref=e1697]: Stratmoor Valley
+            - listitem [ref=e1698]: Stratton Meadows
+            - listitem [ref=e1699]: Security-Widefield
+            - listitem [ref=e1700]: Fort Carson
+            - listitem [ref=e1701]: Powers Boulevard Corridor
+            - listitem [ref=e1702]: Colorado Springs Airport
+            - listitem [ref=e1703]: The Airplane Restaurant
+            - listitem [ref=e1704]: Nash Springs Apartments
+            - listitem [ref=e1705]: Panorama Park
+            - listitem [ref=e1706]: Peterson Space Force Base
+          - heading "Self-Storage Facility Features in Southeast Colorado Springs, CO" [level=2] [ref=e1707]
+          - paragraph [ref=e1708]: "Our facility offers an array of modern storage features to meet your needs, including:"
+          - list [ref=e1709]:
+            - listitem [ref=e1710]: Month-to-month rental options
+            - listitem [ref=e1711]: Ground-floor units
+            - listitem [ref=e1712]: Access seven days a week
+            - listitem [ref=e1713]: Covered loading and unloading
+            - listitem [ref=e1714]: Online bill payment
+            - listitem [ref=e1715]: And more!
+          - paragraph [ref=e1716]: Scroll up to rent online or reserve your unit for future use!
+          - heading "Aerotech Drive Self-Storage Units" [level=2] [ref=e1717]
+          - paragraph [ref=e1718]:
+            - text: The storage units at 1935 Aerotech Dr come in a wide range, from our popular 5’x5’ and 10’x10’ storage units, all the way to 14’x45’ storage units. Use our
+            - link "self-storage unit size guide" [ref=e1719] [cursor=pointer]:
+              - /url: https://www.storagestar.com/pages/storage-unit-size-guide
+            - text: for help choosing the best storage unit for your needs.
+          - paragraph [ref=e1720]: "Learn more about the types of self-storage units available at the Southeast Colorado Springs Storage Star:"
+          - heading "Climate-Controlled Storage in Colorado Springs" [level=3] [ref=e1721]:
+            - link "Climate-Controlled Storage" [ref=e1722] [cursor=pointer]:
+              - /url: https://www.storagestar.com/storage-type/climate-controlled-storage
+            - text: in Colorado Springs
+          - paragraph [ref=e1723]: When winter arrives, and you’re searching for a secure and pristine furniture storage solution, Storage Star is the ultimate destination for top-quality climate-controlled storage in Colorado Springs, CO. The harsh cold of Colorado winters can threaten delicate items, causing irreversible damage.
+          - paragraph [ref=e1724]: "But with our climate-controlled storage units featuring stable roofs and regulated temperatures, you can enjoy peace of mind knowing we focus on your belongings’ security. Our climate-controlled storage is ideal for temperature-sensitive items, including but not limited to:"
+          - list [ref=e1725]:
+            - listitem [ref=e1726]: Electronics
+            - listitem [ref=e1727]: Musical instruments
+            - listitem [ref=e1728]: Vinyl records
+            - listitem [ref=e1729]: Artwork
+            - listitem [ref=e1730]: Photographs
+            - listitem [ref=e1731]: And more!
+          - heading "Accessible Colorado Springs Drive-Up Storage Units" [level=3] [ref=e1732]:
+            - text: Accessible Colorado Springs
+            - link "Drive-Up Storage Units" [ref=e1733] [cursor=pointer]:
+              - /url: https://www.storagestar.com/drive-up-storage
+          - paragraph [ref=e1734]: At Storage Star, we aim to simplify your life by offering convenient self-storage solutions. We focus on accessibility, providing a wide range of ground-floor and drive-up access storage units. With access hours available every day from 6:00 a.m. to 10:00 p.m., you’ll have the flexibility to visit your storage unit at a time that suits your schedule. Our goal is to ensure your storage experience is hassle-free and convenient.
+          - paragraph [ref=e1735]: "Drive-up units are great when you need to:"
+          - list [ref=e1736]:
+            - listitem [ref=e1737]: Regularly load or unload your unit
+            - listitem [ref=e1738]: Stash heavy or bulky furniture and appliances
+            - listitem [ref=e1739]:
+              - link "Store your motorcycle" [ref=e1740] [cursor=pointer]:
+                - /url: https://www.storagestar.com/motorcycle-storage
+              - text: ", trailer, or"
+              - link "all-terrain vehicle (ATV)" [ref=e1741] [cursor=pointer]:
+                - /url: https://www.storagestar.com/atv-storage
+            - listitem [ref=e1742]:
+              - text: Have
+              - link "quick access to your jet ski" [ref=e1743] [cursor=pointer]:
+                - /url: https://www.storagestar.com/jet-ski-storage
+              - text: or boat
+            - listitem [ref=e1744]:
+              - text: Keep your
+              - link "collectible, commercial, or antique car" [ref=e1745] [cursor=pointer]:
+                - /url: https://www.storagestar.com/car-storage-units
+              - text: safe
+            - listitem [ref=e1746]: Access seasonal gear like camping, sports, or holiday items
+            - listitem [ref=e1747]: Run a small business that needs frequent access to inventory or supplies
+            - listitem [ref=e1748]: Move in or out quickly without navigating elevators or hallways
+          - heading "Indoor Vehicle & Outdoor Parking Storage" [level=3] [ref=e1749]:
+            - link "Indoor Vehicle & Outdoor Parking Storage" [ref=e1750] [cursor=pointer]:
+              - /url: https://www.storagestar.com/storage-type/vehicle-storage
+          - paragraph [ref=e1751]: At Storage Star on Aerotech Drive, we make vehicle storage simple and secure. Our indoor vehicle storage and outdoor parking options are ideal for residents and businesses looking for a safe place to store extra vehicles, trailers, or recreational equipment.
+          - paragraph [ref=e1752]: "Renting a large storage unit is a great option when you need to:"
+          - list [ref=e1753]:
+            - listitem [ref=e1754]: Store a classic, collectible, or seasonal vehicle
+            - listitem [ref=e1755]: Keep an extra car off the street or out of the driveway
+            - listitem [ref=e1756]: Park a trailer, boat, or utility vehicle safely
+            - listitem [ref=e1757]: Protect vehicles from Colorado’s changing weather
+            - listitem [ref=e1758]: Free up garage or driveway space at home
+            - listitem [ref=e1759]: Access your vehicle without long-term commitments
+          - table "Vehicle Storage Size Guide for Colorado Springs Colorado" [ref=e1761]:
+            - caption [ref=e1762]: Colorado Springs Vehicle Storage Size Guide
+            - rowgroup [ref=e1763]:
+              - row "Vehicle Storage Unit Size Considerations" [ref=e1764]:
+                - columnheader "Vehicle" [ref=e1765]
+                - columnheader "Storage Unit Size" [ref=e1766]
+                - columnheader "Considerations" [ref=e1767]
+            - rowgroup [ref=e1768]:
+              - row "Motorcycle 5′ × 10′ (50 sq. ft.) Fits 1–2 motorcycles; allows space for gear like helmets, jackets, and maintenance supplies." [ref=e1769]:
+                - cell "Motorcycle" [ref=e1770]
+                - cell "5′ × 10′ (50 sq. ft.)" [ref=e1771]
+                - cell "Fits 1–2 motorcycles; allows space for gear like helmets, jackets, and maintenance supplies." [ref=e1772]
+              - row "Golf Cart 5′ × 10′ to 10′ × 10′ (50–100 sq. ft.) Choose larger if storing a golf cart plus accessories like a bag, clubs, or batteries." [ref=e1773]:
+                - cell "Golf Cart" [ref=e1774]
+                - cell "5′ × 10′ to 10′ × 10′ (50–100 sq. ft.)" [ref=e1775]
+                - cell "Choose larger if storing a golf cart plus accessories like a bag, clubs, or batteries." [ref=e1776]
+              - row "Sedan / Small Car 10′ × 20′ (200 sq. ft.) Provides extra space for some boxes, small furniture, or tires." [ref=e1777]:
+                - cell "Sedan / Small Car" [ref=e1778]
+                - cell "10′ × 20′ (200 sq. ft.)" [ref=e1779]
+                - cell "Provides extra space for some boxes, small furniture, or tires." [ref=e1780]
+              - row "Truck / SUV 10′ × 20′ to 12′ × 25′ (200–300 sq. ft.) Larger trucks may need the 12′ × 25′ unit; allows room for cargo or tools." [ref=e1781]:
+                - cell "Truck / SUV" [ref=e1782]
+                - cell "10′ × 20′ to 12′ × 25′ (200–300 sq. ft.)" [ref=e1783]
+                - cell "Larger trucks may need the 12′ × 25′ unit; allows room for cargo or tools." [ref=e1784]
+              - row "Van / Minivan 10′ × 20′ to 12′ × 25′ (200–300 sq. ft.) Extra length accommodates storage of household items alongside the vehicle." [ref=e1785]:
+                - cell "Van / Minivan" [ref=e1786]
+                - cell "10′ × 20′ to 12′ × 25′ (200–300 sq. ft.)" [ref=e1787]
+                - cell "Extra length accommodates storage of household items alongside the vehicle." [ref=e1788]
+              - row "RV / Camper 12′ × 30′ to 14′ × 40′ (360–560 sq. ft.) Measure the length and height of your RV carefully; climate-controlled storage may be preferred for sensitive interiors." [ref=e1789]:
+                - cell "RV / Camper" [ref=e1790]
+                - cell "12′ × 30′ to 14′ × 40′ (360–560 sq. ft.)" [ref=e1791]
+                - cell "Measure the length and height of your RV carefully; climate-controlled storage may be preferred for sensitive interiors." [ref=e1792]
+              - row "Boat (Small to Medium) 10′ × 25′ to 12′ × 30′ (250–360 sq. ft.) Larger boats or trailers may require a wider or taller unit; indoor storage helps protect from the weather." [ref=e1793]:
+                - cell "Boat (Small to Medium)" [ref=e1794]
+                - cell "10′ × 25′ to 12′ × 30′ (250–360 sq. ft.)" [ref=e1795]
+                - cell "Larger boats or trailers may require a wider or taller unit; indoor storage helps protect from the weather." [ref=e1796]
+              - row "Jet Ski / Personal Watercraft 5′ × 10′ to 10′ × 10′ (50–100 sq. ft.) Fits 1–2 personal watercraft with some room for gear and trailer." [ref=e1797]:
+                - cell "Jet Ski / Personal Watercraft" [ref=e1798]
+                - cell "5′ × 10′ to 10′ × 10′ (50–100 sq. ft.)" [ref=e1799]
+                - cell "Fits 1–2 personal watercraft with some room for gear and trailer." [ref=e1800]
+          - heading "Southeast Colorado Springs RV Storage Units" [level=3] [ref=e1801]:
+            - text: Southeast Colorado Springs
+            - link "RV Storage Units" [ref=e1802] [cursor=pointer]:
+              - /url: https://www.storagestar.com/rv-storage
+          - paragraph [ref=e1803]: In Colorado Springs, it’s all about the great outdoors! We know residents love to take adventures on the road. That’s why we have secure indoor and outdoor RV self-storage in Colorado Springs, so you can keep your home away from home safe. Our facility is also near major roadways, making it easy to store and retrieve your motorhome, camper, or travel trailer.
+          - paragraph [ref=e1804]: "An RV storage unit is perfect if you need to:"
+          - list [ref=e1805]:
+            - listitem [ref=e1806]: Store a motorhome, camper, or fifth wheel between trips
+            - listitem [ref=e1807]: Free up HOA-restricted parking at home
+            - listitem [ref=e1808]: Prepare for seasonal travel or long road trips
+            - listitem [ref=e1809]: Keep your RV secure when not in use
+            - listitem [ref=e1810]: Access your RV quickly before heading out of town
+          - paragraph [ref=e1811]: With easy access, flexible month-to-month rentals, and a friendly local staff, storing as a student has never been simpler.
+          - heading "Apartment Storage on Aerotech Drive" [level=3] [ref=e1812]
+          - paragraph [ref=e1813]: Apartment living often means limited storage space. Storage Star provides affordable, flexible storage solutions for apartment residents throughout southeast Colorado Springs. Whether you’re downsizing, moving between leases, or simply need extra room, our self-storage units help keep your belongings protected and organized.
+          - paragraph [ref=e1814]: "Apartment storage is ideal when you need to:"
+          - list [ref=e1815]:
+            - listitem [ref=e1816]: Store furniture during a move or renovation
+            - listitem [ref=e1817]: Make room in a smaller apartment or condo
+            - listitem [ref=e1818]: Store seasonal clothing, décor, or sports gear
+            - listitem [ref=e1819]: Keep belongings safe during lease transitions
+            - listitem [ref=e1820]: Declutter your living space without getting rid of essentials
+          - heading "Military Storage Near Peterson Space Force Base" [level=3] [ref=e1821]
+          - paragraph [ref=e1822]: Storage Star proudly supports military members and their families stationed in Colorado Springs. Located just minutes from Peterson Space Force Base, our facility offers secure, flexible self-storage units designed to support PCS moves, deployments, and temporary housing situations. Month-to-month rentals make it easy to store what you need for as long as you need.
+          - paragraph [ref=e1823]: "Military storage is a great solution for:"
+          - list [ref=e1824]:
+            - listitem [ref=e1825]: PCS moves or temporary duty assignments
+            - listitem [ref=e1826]: Deployment or extended training periods
+            - listitem [ref=e1827]: Storing household goods between moves
+            - listitem [ref=e1828]: Keeping vehicles, gear, or equipment secure
+            - listitem [ref=e1829]: Short-term or long-term storage needs with flexible terms
+          - paragraph [ref=e1830]:
+            - text: We’re also about a 15-25 minute drive away from the Cheyenne Mountain Space Force Station, Schriever Space Force Base, and the Fort Carson (U.S. Army) Base.
+            - link "Call our office" [ref=e1831] [cursor=pointer]:
+              - /url: tel:+17192239938
+            - text: to ask about our military discounts.
+          - heading "Contractor and Commercial Storage in Southeast Colorado Springs" [level=3] [ref=e1832]
+          - paragraph [ref=e1833]: Running a business often requires more space than your office or storefront can provide. Storage Star offers convenient business storage solutions for contractors, retailers, and local businesses. Near the Powers Boulevard corridor and many popular residential neighborhoods, our location is a convenient pit stop for contractors and service techs. With easy access hours and secure storage options, managing inventory, equipment, and documents becomes simpler and more efficient.
+          - paragraph [ref=e1834]: "Business storage works well when you need to:"
+          - list [ref=e1835]:
+            - listitem [ref=e1836]: Store excess inventory or seasonal products
+            - listitem [ref=e1837]: Keep tools, equipment, or supplies organized
+            - listitem [ref=e1838]: Archive documents and records securely
+            - listitem [ref=e1839]: Support a growing business without upgrading office space
+            - listitem [ref=e1840]: Access your products or equipment regularly on your schedule
+          - heading "Rent Southeast Colorado Springs Self-Storage Today" [level=2] [ref=e1841]
+          - paragraph [ref=e1842]:
+            - text: Ready to clear space in your home, apartment, or business? Storage Star on Aerotech Drive offers affordable and secure storage solutions in Colorado Springs, Colorado. Reserve your unit online for a future date, rent online today, or
+            - link "call our team" [ref=e1843] [cursor=pointer]:
+              - /url: tel:+17192239938
+            - text: for help getting started. You’ll have the storage space you need in just a few clicks!
+          - paragraph [ref=e1844]: "Need more information about what we do? Here are some helpful links:"
+          - list [ref=e1845]:
+            - listitem [ref=e1846]:
+              - text: Visit the
+              - link "Storage Star FAQ page" [ref=e1847] [cursor=pointer]:
+                - /url: https://www.storagestar.com/pages/self-storage-faq
+              - text: .
+            - listitem [ref=e1848]:
+              - text: Use our
+              - link "storage unit size guide" [ref=e1849] [cursor=pointer]:
+                - /url: https://www.storagestar.com/pages/storage-unit-size-guide
+              - text: for help choosing the best storage unit.
+            - listitem [ref=e1850]:
+              - link "Learn more about self-storage" [ref=e1851] [cursor=pointer]:
+                - /url: https://www.storagestar.com/blogs/what-is-self-storage
+              - text: .
+            - listitem [ref=e1852]:
+              - link "Learn about climate-controlled storage" [ref=e1853] [cursor=pointer]:
+                - /url: https://www.storagestar.com/blogs/what-is-climate-controlled-storage
+              - text: .
+            - listitem [ref=e1854]:
+              - text: Get an idea of
+              - link "how much storage units cost each month" [ref=e1855] [cursor=pointer]:
+                - /url: https://www.storagestar.com/blogs/how-much-do-storage-units-cost
+              - text: .
+          - heading "Didn’t find the storage unit you’re looking for?" [level=2] [ref=e1856]
+          - paragraph [ref=e1857]:
+            - text: Looking for Colorado storage units that aren’t available at this Colorado Springs storage facility? Check out our other
+            - link "storage facilities in Colorado!" [ref=e1858] [cursor=pointer]:
+              - /url: https://www.storagestar.com/storage-units-colorado
+          - heading "Lifestyle & Seasonal Storage Demand in Southeast Colorado Springs" [level=2] [ref=e1859]
+          - paragraph [ref=e1860]: Southeast Colorado Springs is a dynamic area shaped by military life, growing neighborhoods, and easy access to outdoor adventure. With Peterson Space Force Base, Colorado Springs Airport, and the Powers Boulevard corridor nearby, residents and businesses are constantly on the move. Local parks like Panorama Park and nearby trail systems make it easy to enjoy Colorado’s active lifestyle—whether that means hiking, biking, or gearing up for weekend trips into the mountains.
+          - paragraph [ref=e1861]: With changing seasons, PCS moves, and limited space at home or work, self-storage plays an important role in staying organized. Storage Star on Aerotech Drive offers flexible, secure storage solutions for everything from seasonal gear and household items to business inventory and vehicles. Whether you’re freeing up space in a nearby apartment, preparing for a move, or managing work equipment, our conveniently located facility makes storage simple and stress-free.
+          - paragraph
+          - region "Storage Star Colorado Springs FAQs" [ref=e1862]:
+            - heading "Frequently Asked Questions About Our Aerotech Drive Storage Units" [level=2] [ref=e1863]
+            - button "What are your hours? +" [ref=e1865] [cursor=pointer]
+            - button "Do I need storage unit insurance? +" [ref=e1867] [cursor=pointer]
+            - button "Do I need to bring my own lock? +" [ref=e1869] [cursor=pointer]
+            - button "How much does it cost to rent a storage unit at Storage Star on Aerotech Drive? +" [ref=e1871] [cursor=pointer]
+            - button "How do I rent a storage unit in Colorado Springs? +" [ref=e1873] [cursor=pointer]
+            - button "Can I store my RV here? +" [ref=e1875] [cursor=pointer]
+            - button "What do I need to rent a storage unit from Storage Star? +" [ref=e1877] [cursor=pointer]
+            - button "Is this facility easy to access from major roads? +" [ref=e1879] [cursor=pointer]
+            - button "Are you close to any apartment complexes or townhomes? +" [ref=e1881] [cursor=pointer]
+            - button "Is the facility close to local employers and landmarks? +" [ref=e1883] [cursor=pointer]
+          - heading "Rent a Storage Unit at the Colorado Springs Storage Star" [level=2] [ref=e1884]
+          - paragraph [ref=e1885]:
+            - text: Ready to store with us? Secure your storage unit online to get a clean, secure facility built for your needs. Scroll up to find your perfect self-storage unit or
+            - link "give us a call!" [ref=e1886] [cursor=pointer]:
+              - /url: tel:+17192239938
+          - paragraph [ref=e1887]: First Month Promotions valid at select locations, subject to unit availability. First month promotions only apply to the monthly rent charge for the first month; regular monthly charges will apply after. Administrative fees, taxes, insurance, or other charges may apply. Cannot be combined with other discounts or on transfers and is subject to change. See store for complete details.
+          - paragraph [ref=e1888]: Multi-month promotions valid at select locations, subject to unit availability. Two-month rate promotions only apply to the monthly rent charge for the first two months; three-month rate promotions only apply to the monthly rent charge for the first three months; regular monthly charges will apply after. Administrative fees, taxes, insurance, or other charges may apply. Cannot be combined with other discounts or on transfers and is subject to change. See store for complete details.
+          - paragraph [ref=e1889]: Unit sizes are approximate and may vary by location. Square footage is based on exterior measurements. Images and descriptions are for illustrative purposes only. Unit size availability may be limited and is subject to change without notice.
+          - paragraph
+      - generic [ref=e1891]:
+        - heading "Facility Features" [level=3] [ref=e1892]
+        - list [ref=e1894]:
+          - listitem [ref=e1895]: 24/7 Video Surveillance
+          - listitem [ref=e1896]: Boat Storage
+          - listitem [ref=e1897]: Climate-Controlled Units
+          - listitem [ref=e1898]: Drive Up Units
+          - listitem [ref=e1899]: Protection Plan
+          - listitem [ref=e1900]: RV Storage
+          - listitem [ref=e1901]: Security Fence
+          - listitem [ref=e1902]: Vehicle Storage
+    - generic [ref=e1903]:
+      - generic [ref=e1905]:
+        - generic [ref=e1906]:
+          - link "Footer Logo" [ref=e1908] [cursor=pointer]:
+            - /url: https://www.storagestar.com
+            - img "Footer Logo" [ref=e1909]
+          - generic [ref=e1910]:
+            - link "Find Storage" [ref=e1911] [cursor=pointer]:
+              - /url: /storage-units-near-me
+              - img [ref=e1912]
+              - generic [ref=e1915]: Find Storage
+            - link "Size Guide" [ref=e1916] [cursor=pointer]:
+              - /url: /pages/storage-unit-size-guide
+              - img [ref=e1917]
+              - generic [ref=e1920]: Size Guide
+        - generic [ref=e1921]:
+          - generic [ref=e1922]:
+            - generic [ref=e1923]:
+              - text: Featured States
+              - separator [ref=e1924]
+            - generic [ref=e1925]:
+              - link "Alaska" [ref=e1926] [cursor=pointer]:
+                - /url: /storage-units-alaska
+              - link "California" [ref=e1927] [cursor=pointer]:
+                - /url: /storage-units-california
+              - link "Colorado" [ref=e1928] [cursor=pointer]:
+                - /url: /storage-units-colorado
+              - link "Idaho" [ref=e1929] [cursor=pointer]:
+                - /url: /storage-units-idaho
+              - link "Illinois" [ref=e1930] [cursor=pointer]:
+                - /url: /storage-units-illinois
+              - link "Texas" [ref=e1931] [cursor=pointer]:
+                - /url: /storage-units-texas
+              - link "Utah" [ref=e1932] [cursor=pointer]:
+                - /url: /storage-units-utah
+              - link "Wyoming" [ref=e1933] [cursor=pointer]:
+                - /url: /storage-units-wyoming
+          - generic [ref=e1934]:
+            - generic [ref=e1935]:
+              - text: Featured Cities
+              - separator [ref=e1936]
+            - generic [ref=e1937]:
+              - link "Anchorage" [ref=e1938] [cursor=pointer]:
+                - /url: /storage-units-anchorage
+              - link "Austin" [ref=e1939] [cursor=pointer]:
+                - /url: /storage-units-austin
+              - link "Boise" [ref=e1940] [cursor=pointer]:
+                - /url: /storage-units-boise
+              - link "Cheyenne" [ref=e1941] [cursor=pointer]:
+                - /url: /storage-units-cheyenne
+              - link "Chicago" [ref=e1942] [cursor=pointer]:
+                - /url: /storage-units-chicago
+              - link "Chico" [ref=e1943] [cursor=pointer]:
+                - /url: /storage-units-chico-ca
+              - link "Cloverdale" [ref=e1944] [cursor=pointer]:
+                - /url: /storage-units-cloverdale
+              - link "Coeur D’Alene" [ref=e1945] [cursor=pointer]:
+                - /url: https://rent.storagestar.com/storage-units/idaho/coeur-d-alene/
+              - link "Colorado Springs" [ref=e1946] [cursor=pointer]:
+                - /url: /storage-units-colorado-springs
+              - link "Dallas" [ref=e1947] [cursor=pointer]:
+                - /url: /storage-units-dallas
+              - link "Denver" [ref=e1948] [cursor=pointer]:
+                - /url: /storage-units-denver
+              - link "El Paso" [ref=e1949] [cursor=pointer]:
+                - /url: /storage-units-el-paso
+              - link "Fort Collins" [ref=e1950] [cursor=pointer]:
+                - /url: /storage-units-fort-collins
+              - link "Laredo" [ref=e1951] [cursor=pointer]:
+                - /url: /storage-units-laredo
+              - link "Laramie" [ref=e1952] [cursor=pointer]:
+                - /url: /storage-units-laramie
+              - link "Modesto" [ref=e1953] [cursor=pointer]:
+                - /url: /storage-units-modesto
+              - link "Nampa" [ref=e1954] [cursor=pointer]:
+                - /url: https://rent.storagestar.com/storage-units/idaho/nampa/
+              - link "Sonoma" [ref=e1955] [cursor=pointer]:
+                - /url: /storage-units-sonoma
+              - link "Rio Vista" [ref=e1956] [cursor=pointer]:
+                - /url: /storage-units-rio-vista
+              - link "Twin Falls" [ref=e1957] [cursor=pointer]:
+                - /url: /storage-units-twin-falls
+              - link "Vacaville" [ref=e1958] [cursor=pointer]:
+                - /url: /storage-units-vacaville
+              - link "Yuba City" [ref=e1959] [cursor=pointer]:
+                - /url: /storage-units-yuba-city
+          - generic [ref=e1960]:
+            - generic [ref=e1961]:
+              - text: About
+              - separator [ref=e1962]
+            - generic [ref=e1963]:
+              - link "About Storage Star" [ref=e1964] [cursor=pointer]:
+                - /url: /about-our-storage-facility
+              - link "Storage Solutions" [ref=e1965] [cursor=pointer]:
+                - /url: /storage-solutions
+              - link "Careers" [ref=e1966] [cursor=pointer]:
+                - /url: /careers
+              - link "Follow on Facebook" [ref=e1967] [cursor=pointer]:
+                - /url: https://www.facebook.com/storagestar
+              - link "Follow on Instagram" [ref=e1968] [cursor=pointer]:
+                - /url: https://www.instagram.com/storagestarselfstorage/
+              - link "Follow on LinkedIn" [ref=e1969] [cursor=pointer]:
+                - /url: https://www.linkedin.com/company/storagestar
+              - link "Follow on YouTube" [ref=e1970] [cursor=pointer]:
+                - /url: https://www.youtube.com/@storagestarselfstorage
+          - generic [ref=e1971]:
+            - generic [ref=e1972]:
+              - text: Storage Types
+              - separator [ref=e1973]
+            - generic [ref=e1974]:
+              - link "ATV Storage" [ref=e1975] [cursor=pointer]:
+                - /url: /atv-storage
+              - link "Boat Storage" [ref=e1976] [cursor=pointer]:
+                - /url: /boat-storage
+              - link "Business Storage" [ref=e1977] [cursor=pointer]:
+                - /url: /business-storage
+              - link "Car Storage" [ref=e1978] [cursor=pointer]:
+                - /url: /car-storage-units
+              - link "Climate Controlled Storage" [ref=e1979] [cursor=pointer]:
+                - /url: /climate-controlled-storage
+              - link "Drive-Up Storage" [ref=e1980] [cursor=pointer]:
+                - /url: /drive-up-storage
+              - link "Furniture Storage" [ref=e1981] [cursor=pointer]:
+                - /url: /furniture-storage-units
+              - link "Household Storage" [ref=e1982] [cursor=pointer]:
+                - /url: /household-storage
+              - link "Jet Ski Storage" [ref=e1983] [cursor=pointer]:
+                - /url: /jet-ski-storage
+              - link "Motorcycle Storage" [ref=e1984] [cursor=pointer]:
+                - /url: /motorcycle-storage
+              - link "RV Storage" [ref=e1985] [cursor=pointer]:
+                - /url: /rv-storage
+              - link "Student Storage" [ref=e1986] [cursor=pointer]:
+                - /url: /student-storage
+              - link "Vehicle Storage" [ref=e1987] [cursor=pointer]:
+                - /url: /vehicle-storage
+              - link "Wine Storage" [ref=e1988] [cursor=pointer]:
+                - /url: /wine-storage-units
+          - generic [ref=e1989]:
+            - generic [ref=e1990]:
+              - text: Resources
+              - separator [ref=e1991]
+            - generic [ref=e1992]:
+              - link "FAQs" [ref=e1993] [cursor=pointer]:
+                - /url: /self-storage-faq
+              - link "Size Guide" [ref=e1994] [cursor=pointer]:
+                - /url: /storage-unit-size-guide
+              - link "Moving Guide" [ref=e1995] [cursor=pointer]:
+                - /url: /moving-guide
+              - link "Moving & Packing Supplies" [ref=e1996] [cursor=pointer]:
+                - /url: /moving-and-packing-supplies
+              - link "Tenant Protection & Insurance" [ref=e1997] [cursor=pointer]:
+                - /url: /tenant-protection-and-insurance
+              - link "Blog" [ref=e1998] [cursor=pointer]:
+                - /url: https://www.storagestar.com/blogs
+              - link "Accessibility" [ref=e1999] [cursor=pointer]:
+                - /url: /accessibility
+              - link "Make Payment" [ref=e2000] [cursor=pointer]:
+                - /url: https://storagestar-payment.ssm-erp.com/
+              - link "Investor Portal Login" [ref=e2001] [cursor=pointer]:
+                - /url: https://storagestar.investorcafe.app/content/login#/appaccess/login
+              - link "Contact" [ref=e2002] [cursor=pointer]:
+                - /url: /contact
+      - generic [ref=e2005]:
+        - text: © Storage Star
+        - generic [ref=e2007]:
+          - text: "|"
+          - link "Privacy Policy" [ref=e2008] [cursor=pointer]:
+            - /url: /privacy-policy
+  - button "Report An Issue" [ref=e2009] [cursor=pointer]
+  - generic [ref=e2011]:
+    - generic [ref=e2012] [cursor=pointer]: ×
+    - iframe [ref=e2013]:
+      - generic [active] [ref=f20e1]:
+        - link "Skip to form" [ref=f20e2] [cursor=pointer]:
+          - /url: "#main"
+        - main "Main Content Area" [ref=f20e3]:
+          - form "HubSpot Form" [ref=f20e7]:
+            - generic [ref=f20e9]:
+              - heading "Contact Our Support Team" [level=1] [ref=f20e11]
+              - generic [ref=f20e13]:
+                - paragraph [ref=f20e14]: 👋 Need help or running into an issue?
+                - paragraph [ref=f20e15]: Fill out the form below and our support team will get back to you as soon as possible.
+              - generic [ref=f20e17]:
+                - generic [ref=f20e19]: Email*
+                - generic [ref=f20e20]: Please use the email associated with your Storagely account.
+                - textbox "Email*" [ref=f20e21]:
+                  - /placeholder: ""
+              - button "Submit" [disabled] [ref=f20e24]

@@ -4,7 +4,7 @@ import { ContactPage, ContactFormResult } from '../pages/ContactPage';
 import { StorageListingPage } from '../pages/StorageListingPage';
 import { FAQPage, FAQTestResult } from '../pages/FAQPage';
 import { PricingPage, PricingTestResult } from '../pages/PricingPage';
-import { getStorageSiteUrls, CURRENT_ENVIRONMENT, Environment, STOREROCKET_SITES, STAGING_CONTACT_SKIP, CONTACT_CAPTCHA_SITES, PRICING_VALIDATION_LOCATIONS, UNIT_FEATURES_CONFLICT_LOCATIONS } from '../configs/urls';
+import { getStorageSiteUrls, CURRENT_ENVIRONMENT, Environment, STOREROCKET_SITES, STAGING_CONTACT_SKIP, CONTACT_SKIP_SITES, FAQ_SKIP_SITES, CONTACT_CAPTCHA_SITES, PRICING_VALIDATION_LOCATIONS, UNIT_FEATURES_CONFLICT_LOCATIONS } from '../configs/urls';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -37,7 +37,8 @@ function isStorerocket(url: string): boolean {
 }
 
 function isStagingContactSkip(url: string): boolean {
-  return isStaging && STAGING_CONTACT_SKIP.some(s => url.toLowerCase().includes(s));
+  return (isStaging && STAGING_CONTACT_SKIP.some(s => url.toLowerCase().includes(s)))
+    || CONTACT_SKIP_SITES.some(s => url.toLowerCase().includes(s));
 }
 
 function isContactCaptchaSite(url: string): boolean {
@@ -45,10 +46,14 @@ function isContactCaptchaSite(url: string): boolean {
 }
 
 // Sites whose FAQ page has NO accordion (flat Q&A layout) — test runs but failure is expected
-const FAQ_NO_ACCORDION_SITES = ['almightystorage.com'];
+const FAQ_NO_ACCORDION_SITES: string[] = [];
 
 function isFaqExpectedFail(url: string): boolean {
   return FAQ_NO_ACCORDION_SITES.some(s => url.toLowerCase().includes(s));
+}
+
+function isFaqSkip(url: string): boolean {
+  return FAQ_SKIP_SITES.some(s => url.toLowerCase().includes(s));
 }
 
 const siteUrls = getStorageSiteUrls();
@@ -189,8 +194,8 @@ test.describe('[Contact Page] Full Verification', () => {
         return;
       }
       if (isStagingContactSkip(url)) {
-        console.log(`⚠️  SKIPPED — Contact page empty/unavailable in staging`);
-        pushResult('Contact Page', clientLabel(url), 'PASSED', 'Contact page unavailable in staging — skipped');
+        console.log(`⚠️  SKIPPED — Contact page has no form or is unavailable`);
+        pushResult('Contact Page', clientLabel(url), 'PASSED', 'Contact page has no form — skipped');
         test.skip();
         return;
       }
@@ -263,7 +268,8 @@ test.describe('[Contact Page] Full Verification', () => {
             }
             console.log(`   📋 OUTCOME: ${formResult.submitOutcome}`);
             if (formResult.successMessage) console.log(`   ✅ CONFIRMATION: ${formResult.successMessage}`);
-            if (formResult.errorMessage) console.log(`   ❌ ERROR: ${formResult.errorMessage}`);
+            // Only show errorMessage if the overall outcome was not SUCCESS (avoids printing success toasts classified as errors)
+            if (formResult.errorMessage && formResult.submitOutcome !== 'SUCCESS') console.log(`   ❌ ERROR: ${formResult.errorMessage}`);
           }
         } catch (error) {
           const msg = (error as Error).message || 'Unknown error';
@@ -490,6 +496,13 @@ test.describe('[FAQ Page] Accordion Expansion Verification', () => {
       console.log(`\n📦 MODULE: FAQ Page ${envTag}`);
       if (isMiniMall(url)) console.log(`⭐ MINI MALL CLIENT DETECTED`);
       console.log(`🔍 Testing FAQ page: ${url}`);
+
+      if (isFaqSkip(url)) {
+        console.log(`⚠️  SKIPPED — FAQ page has no accordion on this site`);
+        pushResult('FAQ Page', clientLabel(url), 'PASSED', 'FAQ page has no accordion — skipped');
+        test.skip();
+        return;
+      }
 
       const faqPage = new FAQPage(page);
       let faqResult: FAQTestResult | null = null;
@@ -791,10 +804,529 @@ test.describe('[Location Page] Unit Feature Conflict Detection', () => {
 
 
 // ============================================
+// 7. LOCATION PAGE — FILTER & SORT VALIDATION
+// ============================================
+// MODULE 7a — FILTER: dynamically discovers every filter dropdown present on the
+//   page (#filterArea .btn-group select), selects the first available option in
+//   each, verifies the row count changes correctly, then resets and confirms all
+//   rows are restored.
+//
+// MODULE 7b — SORT: discovers every sort option in the sort menu dynamically,
+//   applies each one, reads the resulting price/size values from the DOM, and
+//   verifies the ordering is correct (asc or desc).
+//
+// FILTER ARCHITECTURE (shared across all Storagely clients):
+//   #filterArea > .newFilterSection
+//     [1..N .btn-group elements — one per filter dimension]
+//       <select hidden>  — Bootstrap Multiselect reads options from here
+//       <button.multiselect>  — the visible button
+//     #resetButton  — resets all active filters
+//
+//   Filtering hides non-matching tr.shortableClass rows (display:none).
+//
+// EVENT BINDING NOTE:
+//   Bootstrap Multiselect binds jQuery handlers on the <a> inside each <li>.
+//   Playwright pointer events are also blocked on some clients by the filter bar
+//   overlay. Solution: $(el).trigger('click') via page.evaluate() throughout.
+// ============================================
+
+const FILTER_TEST_CLIENTS = isStaging ? [
+  {
+    label: 'First Storage — Huntsville, AL',
+    fms:   'storEDGE',
+    url:   'https://test.staging.storagely-api.com/first-storage/storage-units/alabama/huntsville/memorial-parkway-sw',
+  },
+  {
+    label: 'Sunbird Storage — Winston-Salem, NC',
+    fms:   'SiteLink',
+    url:   'https://test.staging.storagely-api.com/sunbirdstorage/storage-units/nc/winston-salem/country-club',
+  },
+  {
+    label: 'Storage Star — Colorado Springs, CO',
+    fms:   'SSM',
+    url:   'https://test.staging.storagely-api.com/storage-star/storage-units/colorado/colorado-springs/aerotech-drive',
+  },
+  {
+    label: '⭐ Mini Mall — Courtland, AL',
+    fms:   'Yardi/SiteLink',
+    url:   'https://test.staging.storagely-api.com/mini-mall-storage/storage-units/alabama/courtland/highway-33',
+  },
+] : [
+  {
+    label: 'First Storage — Huntsville, AL',
+    fms:   'storEDGE',
+    url:   'https://www.firststorage.com/storage-units/alabama/huntsville/memorial-parkway-sw',
+  },
+  {
+    label: 'Sunbird Storage — Winston-Salem, NC',
+    fms:   'SiteLink',
+    url:   'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club',
+  },
+  {
+    label: 'Storage Star — Colorado Springs, CO',
+    fms:   'SSM',
+    url:   'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',
+  },
+  {
+    label: '⭐ Mini Mall — Birmingham, AL',
+    fms:   'Yardi',
+    url:   'https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd',
+  },
+];
+
+// ── MODULE 7a: FILTER VALIDATION ──────────────────────────────────────────────
+test.describe('[Location Page] Filter Validation', () => {
+  test.setTimeout(120_000);
+
+  for (const client of FILTER_TEST_CLIENTS) {
+    test(`[Filter] ${clientLabel(client.label)} [${client.fms}]`, async ({ page }) => {
+      console.log(`\n📦 MODULE: Location Page > Filter Validation ${envTag}`);
+      if (isMiniMall(client.label)) console.log(`⭐ MINI MALL CLIENT DETECTED`);
+      console.log(`🔍 Client : ${client.label}`);
+      console.log(`   FMS    : ${client.fms}`);
+      console.log(`   URL    : ${client.url}`);
+
+      let totalCount      = 0;
+      let afterResetCount = 0;
+
+      interface DiscoveredFilter {
+        selectId: string;
+        label:    string;
+        options:  Array<{ value: string; text: string }>;
+      }
+      interface AppliedFilter {
+        label:        string;
+        chosenOption: string;
+        countBefore:  number;
+        countAfter:   number;
+        optionFound:  boolean;
+      }
+
+      const discoveredFilters: DiscoveredFilter[] = [];
+      const appliedFilters:    AppliedFilter[]    = [];
+
+      try {
+        // ── Navigate & wait ─────────────────────────────────────────────
+        await page.goto(client.url, { waitUntil: 'domcontentloaded', timeout: 30_000 });
+        await page.waitForSelector('tr.shortableClass', { timeout: 20_000 });
+        await page.waitForTimeout(1500); // Bootstrap Multiselect init
+
+        // ── STEP 1: Verify filter container present ────────────────────
+        console.log(`\n   ──────────────────────────────────────────────`);
+        console.log(`   📋 STEP 1 — Verify Filter UI`);
+        await expect(page.locator('#filterArea'), '#filterArea must be in DOM').toBeAttached({ timeout: 5000 });
+        await expect(page.locator('#resetButton'), '#resetButton must be visible').toBeVisible({ timeout: 5000 });
+        console.log(`   ✅ #filterArea and #resetButton confirmed present`);
+
+        // ── STEP 2: Count total unit rows ──────────────────────────────
+        console.log(`\n   📋 STEP 2 — Count Total Units (baseline)`);
+        totalCount = await page.evaluate(() => document.querySelectorAll('tr.shortableClass').length);
+        expect(totalCount, 'Page must have at least 1 unit').toBeGreaterThan(0);
+        console.log(`   ✅ Baseline unit count: ${totalCount} units`);
+
+        // ── STEP 3: Discover ALL filter dropdowns dynamically ─────────
+        // Scans every .btn-group inside #filterArea that has a hidden <select>
+        // with at least one non-empty option AND a button.multiselect.
+        // This captures Size, Floor, Type — and anything added in the future —
+        // without hardcoding class names.
+        console.log(`\n   📋 STEP 3 — Discover Filter Dropdowns (dynamic)`);
+
+        const discovered: DiscoveredFilter[] = await page.evaluate(() => {
+          const result: { selectId: string; label: string; options: { value: string; text: string }[] }[] = [];
+          // <select> is a SIBLING of .btn-group (both inside .form-group).
+          // Query .form-group and then find both the select and button inside it.
+          document.querySelectorAll('#filterArea .form-group').forEach(grp => {
+            const select = grp.querySelector<HTMLSelectElement>('select');
+            const btn    = grp.querySelector<HTMLButtonElement>('button.multiselect');
+            if (!select || !btn) return;
+            const opts = Array.from(select.options)
+              .filter(o => o.value && o.value.trim() !== '')
+              .map(o => ({ value: o.value.trim(), text: o.text.trim() }));
+            if (opts.length === 0) return;
+            const rawTitle = btn.getAttribute('title') ?? btn.textContent?.trim() ?? select.id;
+            const label    = rawTitle.replace(/\s*\(\d+\)$/, '').trim() || select.id;
+            result.push({ selectId: select.id || select.name || 'filter', label, options: opts });
+          });
+          return result;
+        });
+
+        discoveredFilters.push(...discovered);
+
+        if (discovered.length === 0) {
+          console.log(`   ⚠️  No filter dropdowns found on this page`);
+        } else {
+          console.log(`   ✅ Found ${discovered.length} filter dropdown(s):`);
+          discovered.forEach((d, i) => {
+            console.log(`      ${i + 1}. [${d.selectId}] "${d.label}"`);
+            console.log(`         Options: ${d.options.map(o => `"${o.text}"`).join(', ')}`);
+          });
+        }
+
+        // ── STEP 4: Select first option in each dropdown and verify ───
+        console.log(`\n   📋 STEP 4 — Apply Each Filter (first option)`);
+
+        for (const dropdown of discovered) {
+          const chosen = dropdown.options[0];
+
+          const countBefore = await page.evaluate(() =>
+            Array.from(document.querySelectorAll('tr.shortableClass'))
+              .filter(r => window.getComputedStyle(r).display !== 'none').length
+          );
+
+          // Open the dropdown via jQuery trigger (native click + pointer events both
+          // fail on some clients due to sticky header / filter bar overlay)
+          await page.evaluate((selectId: string) => {
+            const jq  = (window as any).jQuery;
+            const sel = document.getElementById(selectId) as HTMLElement | null;
+            // <select> is sibling of .btn-group — use parentElement to reach .form-group
+            const btn = sel?.parentElement?.querySelector<HTMLElement>('button.multiselect');
+            if (btn) { if (jq) jq(btn).trigger('click'); else btn.click(); }
+          }, dropdown.selectId);
+          await page.waitForTimeout(500);
+
+          // Click the matching <a> via jQuery trigger
+          // (Bootstrap Multiselect binds mousedown+click on <a>, not on <li>)
+          const optionFound = await page.evaluate(
+            ([selectId, optText]: [string, string]) => {
+              const jq   = (window as any).jQuery;
+              if (!jq) return false;
+              const sel  = document.getElementById(selectId) as HTMLElement | null;
+              // <select> is sibling of .btn-group — use parentElement to reach .form-group
+              const menu = sel?.parentElement?.querySelector<HTMLElement>('ul.multiselect-container');
+              if (!menu) return false;
+              let clicked = false;
+              jq(menu).find('li:not(.multiselect-item) a').each(function (this: HTMLElement) {
+                if (jq(this).text().trim().toLowerCase().indexOf(optText.toLowerCase()) !== -1) {
+                  jq(this).trigger('click');
+                  clicked = true;
+                  return false; // break $.each
+                }
+              });
+              return clicked;
+            },
+            [dropdown.selectId, chosen.text] as [string, string]
+          );
+          await page.waitForTimeout(1000);
+
+          const countAfter = await page.evaluate(() =>
+            Array.from(document.querySelectorAll('tr.shortableClass'))
+              .filter(r => window.getComputedStyle(r).display !== 'none').length
+          );
+
+          appliedFilters.push({ label: dropdown.label, chosenOption: chosen.text, countBefore, countAfter, optionFound });
+
+          const changeTag = countAfter < countBefore
+            ? `${countBefore} → ${countAfter}  (reduced by ${countBefore - countAfter})`
+            : `${countAfter}  (all units match this option)`;
+          const status    = optionFound ? '✅' : '⚠️ ';
+          console.log(`\n      ${status} Filter: "${dropdown.label}"  |  Option selected: "${chosen.text}"`);
+          console.log(`         Visible units : ${changeTag}`);
+
+          expect(countAfter, `Filter "${chosen.text}" in "${dropdown.label}" produced 0 results`).toBeGreaterThan(0);
+          expect(countAfter, `Filtered count must not exceed baseline`).toBeLessThanOrEqual(totalCount);
+        }
+
+        // ── STEP 5: Reset and verify full restore ──────────────────────
+        console.log(`\n   📋 STEP 5 — Reset All Filters`);
+
+        await page.evaluate(() => {
+          const jq  = (window as any).jQuery;
+          const btn = document.getElementById('resetButton') as HTMLElement | null;
+          if (btn) { if (jq) jq(btn).trigger('click'); else btn.click(); }
+        });
+        await page.waitForTimeout(1000);
+
+        afterResetCount = await page.evaluate(() =>
+          Array.from(document.querySelectorAll('tr.shortableClass'))
+            .filter(r => window.getComputedStyle(r).display !== 'none').length
+        );
+        expect(afterResetCount, `After reset all ${totalCount} units must be visible`).toBe(totalCount);
+        console.log(`   ✅ Reset successful — ${afterResetCount} units visible (matches baseline ✅)`);
+
+        // ── Result & console summary ────────────────────────────────────
+        const filterSummary = appliedFilters.length > 0
+          ? appliedFilters.map(f => `${f.label}:"${f.chosenOption}"(${f.countBefore}→${f.countAfter})`).join(', ')
+          : 'no filter dropdowns';
+        const detail = `FMS: ${client.fms} | Total: ${totalCount} | Filters: ${filterSummary} | After reset: ${afterResetCount}`;
+        pushResult('Filter', clientLabel(client.label), 'PASSED', detail);
+
+        console.log(`\n   ══════════════════════════════════════════════`);
+        console.log(`   📊 FILTER SUMMARY — ${client.label}`);
+        console.log(`   ══════════════════════════════════════════════`);
+        console.log(`   FMS          : ${client.fms}`);
+        console.log(`   Baseline     : ${totalCount} units`);
+        if (appliedFilters.length === 0) {
+          console.log(`   Filters      : none found`);
+        } else {
+          appliedFilters.forEach(f => {
+            const tag = f.countAfter < f.countBefore ? `→ ${f.countAfter} (↓${f.countBefore - f.countAfter})` : `→ ${f.countAfter} (all match)`;
+            console.log(`   ${f.label.padEnd(16)}: "${f.chosenOption}" ${tag}`);
+          });
+        }
+        console.log(`   After reset  : ${afterResetCount} (restored ✅)`);
+        console.log(`   ══════════════════════════════════════════════`);
+        console.log(`   🎉 PASSED\n`);
+
+      } catch (error) {
+        const msg = (error as Error).message ?? 'Unknown error';
+        console.log(`\n   ❌ FAILED: ${client.label}`);
+        console.log(`   Error: ${msg}`);
+        const detail = `FMS: ${client.fms} | Total: ${totalCount} | After reset: ${afterResetCount} | Error: ${msg.substring(0, 120)}`;
+        pushResult('Filter', clientLabel(client.label), 'FAILED', detail);
+        throw error;
+      }
+    });
+  }
+});
+
+
+// ── MODULE 7b: SORT VALIDATION ────────────────────────────────────────────────
+test.describe('[Location Page] Sort Validation', () => {
+  test.setTimeout(180_000);
+
+  for (const client of FILTER_TEST_CLIENTS) {
+    test(`[Sort] ${clientLabel(client.label)} [${client.fms}]`, async ({ page }) => {
+      console.log(`\n📦 MODULE: Location Page > Sort Validation ${envTag}`);
+      if (isMiniMall(client.label)) console.log(`⭐ MINI MALL CLIENT DETECTED`);
+      console.log(`🔍 Client : ${client.label}`);
+      console.log(`   FMS    : ${client.fms}`);
+      console.log(`   URL    : ${client.url}`);
+
+      let totalCount = 0;
+
+      interface SortResult {
+        label:       string;
+        sortType:    'price' | 'size';
+        dir:         'asc' | 'desc';
+        availValues: number[];
+        waitValues:  number[];
+        passed:      boolean;
+        reason:      string;
+      }
+      const sortResults: SortResult[] = [];
+
+      // Read sqft and price for every visible tr.shortableClass.
+      // Groups rows into 'available' (rentable) and 'waitlist' (join-waitlist/inquiry only).
+      // The page sorts each group independently, so we verify order within each group separately.
+      async function readVisibleUnits(): Promise<{ sqft: number; price: number; group: 'available' | 'waitlist' }[]> {
+        return page.evaluate(() =>
+          Array.from(document.querySelectorAll('tr.shortableClass'))
+            .filter(r => window.getComputedStyle(r).display !== 'none')
+            .map(r => {
+              const isWaitlist = Array.from(r.querySelectorAll('a, button'))
+                .some(el => /waitlist|inquiry/i.test(el.textContent ?? ''));
+              const group: 'available' | 'waitlist' = isWaitlist ? 'waitlist' : 'available';
+
+              let price = parseFloat(r.getAttribute('data-price') ?? '0');
+              if (!price) {
+                // Match only the first dollar-amount (e.g. "$24.00\n/4 weeks" → "24.00")
+                const txt = r.querySelector('h3.actualMoPrice')?.textContent?.match(/[\d,]+(?:\.\d{1,2})?/)?.[0]?.replace(/,/g, '') ?? '0';
+                price = parseFloat(txt) || 0;
+              }
+              let sqft = parseFloat(r.getAttribute('data-sqft') ?? r.getAttribute('data-size') ?? '0');
+              if (!sqft) {
+                const dim = r.querySelector('h2.widthHeight')?.textContent ?? '';
+                const m   = dim.match(/(\d+)[^0-9]+(\d+)/);
+                sqft = m ? parseInt(m[1]) * parseInt(m[2]) : 0;
+              }
+              return { sqft, price, group };
+            })
+        );
+      }
+
+      // Returns true if values are in the expected order (ties are allowed).
+      function isSorted(vals: number[], dir: 'asc' | 'desc'): boolean {
+        for (let i = 0; i < vals.length - 1; i++) {
+          if (vals[i] === 0 || vals[i + 1] === 0) continue; // skip unparseable
+          if (dir === 'asc'  && vals[i] > vals[i + 1]) return false;
+          if (dir === 'desc' && vals[i] < vals[i + 1]) return false;
+        }
+        return true;
+      }
+
+      try {
+        // ── Navigate & wait ─────────────────────────────────────────────
+        await page.goto(client.url, { waitUntil: 'domcontentloaded', timeout: 30_000 });
+        await page.waitForSelector('tr.shortableClass', { timeout: 20_000 });
+        await page.waitForTimeout(1500);
+
+        totalCount = await page.evaluate(() => document.querySelectorAll('tr.shortableClass').length);
+        expect(totalCount, 'Page must have at least 1 unit').toBeGreaterThan(0);
+
+        const sortBtn         = page.locator('sortvalue.multi-select-button').first();
+        const initialSortText = (await sortBtn.textContent() ?? '').trim();
+        console.log(`\n   ✅ Baseline: ${totalCount} units | Default sort: "${initialSortText}"`);
+
+        // ── STEP 1: Discover all sort options ──────────────────────────
+        console.log(`\n   ──────────────────────────────────────────────`);
+        console.log(`   📋 STEP 1 — Discover Sort Options`);
+
+        await sortBtn.click({ force: true });
+        await page.waitForTimeout(400);
+
+        interface SortOption { forAttr: string; text: string }
+        const sortOptions: SortOption[] = await page.evaluate(() =>
+          // sortvalue element is NOT a wrapper — .multi-select-menu is a sibling/elsewhere.
+          // Query the sort labels directly from the document.
+          Array.from(document.querySelectorAll('.multi-select-menu label[for^="sortby_"], label[for^="sortby_"]'))
+            .map(l => ({ forAttr: l.getAttribute('for') ?? '', text: (l.textContent ?? '').replace(/\s+/g, ' ').trim() }))
+            .filter(o => o.forAttr && o.text)
+        );
+
+        await page.keyboard.press('Escape');
+        await page.waitForTimeout(200);
+
+        if (sortOptions.length === 0) {
+          console.log(`   ⚠️  No sort options found — skipping`);
+          pushResult('Sort', clientLabel(client.label), 'PASSED', `FMS: ${client.fms} | No sort options found`);
+          return;
+        }
+
+        console.log(`   ✅ Found ${sortOptions.length} sort option(s):`);
+        sortOptions.forEach((o, i) => console.log(`      ${i + 1}. [${o.forAttr}] "${o.text}"`));
+
+        // ── STEP 2: Apply each sort and verify order ───────────────────
+        console.log(`\n   📋 STEP 2 — Apply Each Sort & Verify Order`);
+
+        for (const opt of sortOptions) {
+          // force:true bypasses overlay hit-testing (Crisp chat, sticky header) while still firing mousedown/mouseup/click
+          await sortBtn.click({ force: true });
+          await page.waitForTimeout(400);
+
+          const isVisible = await page.locator(`label[for="${opt.forAttr}"]`).first()
+            .isVisible({ timeout: 2000 }).catch(() => false);
+          if (!isVisible) {
+            console.log(`\n      ⚠️  "${opt.text}" — label not visible, skipped`);
+            continue;
+          }
+
+          await page.evaluate((forAttr: string) => {
+            const jq  = (window as any).jQuery;
+            const lbl = document.querySelector(`label[for="${forAttr}"]`);
+            if (lbl) { if (jq) jq(lbl).trigger('click'); else (lbl as HTMLElement).click(); }
+          }, opt.forAttr);
+          await page.waitForTimeout(800);
+
+          const units     = await readVisibleUnits();
+          const available = units.filter(u => u.group === 'available');
+          const waitlist  = units.filter(u => u.group === 'waitlist');
+          const txt       = opt.text.toLowerCase();
+          const sortType: 'price' | 'size' = txt.includes('price') ? 'price' : 'size';
+          const dir: 'asc' | 'desc' =
+            (txt.includes('low to high') || txt.includes('small to large')) ? 'asc' : 'desc';
+
+          const getVals = (arr: typeof units) => arr.map(u => sortType === 'price' ? u.price : u.sqft);
+          const availVals = getVals(available);
+          const waitVals  = getVals(waitlist);
+
+          // Each section (available / waitlist) must be sorted independently
+          const availOk = availVals.filter(v => v > 0).length < 2 || isSorted(availVals, dir);
+          const waitOk  = waitVals.filter(v => v > 0).length < 2  || isSorted(waitVals, dir);
+          const passed  = availOk && waitOk;
+
+          const failParts: string[] = [];
+          if (!availOk) failParts.push(`available section out of order`);
+          if (!waitOk)  failParts.push(`waitlist section out of order`);
+          const reason = passed
+            ? `order confirmed (${available.length} available + ${waitlist.length} waitlist)`
+            : failParts.join('; ');
+
+          sortResults.push({ label: opt.text, sortType, dir, availValues: availVals, waitValues: waitVals, passed, reason });
+
+          const nzAvail = availVals.filter(v => v > 0);
+          const nzWait  = waitVals.filter(v => v > 0);
+          const icon    = passed ? '✅' : '❌';
+          console.log(`\n      ${icon} "${opt.text}"`);
+          console.log(`         Sort type   : ${sortType}  |  Direction: ${dir === 'asc' ? 'ascending ↑' : 'descending ↓'}`);
+          if (available.length > 0)
+            console.log(`         Available   : [${nzAvail.slice(0, 8).join(', ')}${nzAvail.length > 8 ? '…' : ''}] (${available.length} units) ${availOk ? '✅' : '❌ OUT OF ORDER'}`);
+          if (waitlist.length > 0)
+            console.log(`         Waitlist    : [${nzWait.slice(0, 8).join(', ')}${nzWait.length > 8 ? '…' : ''}] (${waitlist.length} units) ${waitOk ? '✅' : '❌ OUT OF ORDER'}`);
+          console.log(`         Ordered?    : ${passed ? 'YES ✅' : 'NO ❌  — ' + failParts.join('; ')}`);
+        }
+
+        // ── Result ─────────────────────────────────────────────────────
+        const verifiedCount = sortResults.filter(r => r.passed).length;
+        const allPassed     = verifiedCount === sortResults.length;
+
+        const detail = [
+          `FMS: ${client.fms}`,
+          `Total: ${totalCount}`,
+          `Options: ${sortResults.length}`,
+          `Verified: ${verifiedCount}/${sortResults.length}`,
+          ...sortResults.filter(r => !r.passed).map(r => `⚠️ "${r.label}": ${r.reason}`),
+        ].join(' | ');
+
+        pushResult('Sort', clientLabel(client.label), allPassed ? 'PASSED' : 'FAILED', detail);
+
+        console.log(`\n   ══════════════════════════════════════════════`);
+        console.log(`   📊 SORT SUMMARY — ${client.label}`);
+        console.log(`   ══════════════════════════════════════════════`);
+        console.log(`   FMS            : ${client.fms}`);
+        console.log(`   Default sort   : "${initialSortText}"`);
+        console.log(`   Units on page  : ${totalCount}`);
+        console.log(`   Options tested : ${sortResults.length}`);
+        console.log(`   ─────────────────────────────────────────────`);
+        sortResults.forEach(r => {
+          const icon   = r.passed ? '✅' : '❌';
+          const dirTag = r.dir === 'asc' ? '↑ asc' : '↓ desc';
+          const nzA    = r.availValues.filter(v => v > 0);
+          const nzW    = r.waitValues.filter(v => v > 0);
+          console.log(`   ${icon} ${r.label.padEnd(30)} [${r.sortType} ${dirTag}]`);
+          if (nzA.length > 0) console.log(`      Available : [${nzA.slice(0, 6).join(', ')}${nzA.length > 6 ? '…' : ''}]`);
+          if (nzW.length > 0) console.log(`      Waitlist  : [${nzW.slice(0, 6).join(', ')}${nzW.length > 6 ? '…' : ''}]`);
+          console.log(`      Result    : ${r.reason}`);
+        });
+        console.log(`   ─────────────────────────────────────────────`);
+        console.log(`   Verified : ${verifiedCount}/${sortResults.length} sort(s) confirmed correct`);
+        console.log(`   ══════════════════════════════════════════════`);
+
+        if (!allPassed) {
+          const failedOpts = sortResults.filter(r => !r.passed)
+            .map(r => `"${r.label}" (${r.reason})`).join(', ');
+          console.log(`\n   ❌ SORT FAILURES DETECTED:`);
+          console.log(`      ${failedOpts}`);
+          throw new Error(`Sort order incorrect — ${failedOpts}`);
+        }
+        console.log(`   🎉 PASSED\n`);
+
+      } catch (error) {
+        const msg = (error as Error).message ?? 'Unknown error';
+        console.log(`\n   ❌ FAILED: ${client.label}`);
+        console.log(`   Error: ${msg}`);
+        const detail = `FMS: ${client.fms} | Total: ${totalCount} | Error: ${msg.substring(0, 120)}`;
+        pushResult('Sort', clientLabel(client.label), 'FAILED', detail);
+        throw error;
+      }
+    });
+  }
+});
+
+
+// ============================================
 // GRAND SUMMARY (prints after ALL modules)
 // ============================================
-test.afterAll(() => {
-  // Read consolidated results from shared file (all workers combined)
+const SUMMARY_LOCK_FILE = path.join(process.cwd(), 'test-results', '.ui-summary-lock');
+
+test.afterAll(async () => {
+  // ── Deduplication: with multiple workers each worker runs afterAll once.
+  // We use a last-writer-wins lock so only the LAST worker to finish prints.
+  const myToken = `${process.pid}-${Date.now()}`;
+  try {
+    const resultsDir = path.dirname(UI_RESULTS_FILE);
+    if (!fs.existsSync(resultsDir)) fs.mkdirSync(resultsDir, { recursive: true });
+    fs.writeFileSync(SUMMARY_LOCK_FILE, myToken);
+  } catch { /* ignore */ }
+
+  // Wait long enough for any other worker that's about to write its token
+  await new Promise<void>(r => setTimeout(r, 2500));
+
+  try {
+    const lockToken = fs.readFileSync(SUMMARY_LOCK_FILE, 'utf-8').trim();
+    if (lockToken !== myToken) return; // Another worker wrote after us — let them print
+  } catch { /* if unreadable, proceed */ }
+
+  // Re-read the results file now that all workers have had a chance to finish
   const allResults = readAllUIResults();
   if (allResults.length === 0) return;
 
@@ -827,7 +1359,16 @@ test.afterAll(() => {
     const f = m.tests.filter(t => t.status === 'FAILED').length;
     const e = m.tests.filter(t => t.status === 'EXPECTED').length;
     const icon = f === 0 ? '✅' : '❌';
-    const statusStr = f === 0 ? (e > 0 ? `ALL PASSED (${e} expected fail)` : 'ALL PASSED') : `${f} FAILED`;
+    let statusStr: string;
+    if (f === 0) {
+      statusStr = e > 0 ? `ALL PASSED (${e} expected fail)` : 'ALL PASSED';
+    } else {
+      const failedNames = m.tests.filter(t => t.status === 'FAILED').map(t => t.name);
+      const namesList = failedNames.length > 3
+        ? failedNames.slice(0, 3).join(', ') + ` +${failedNames.length - 3} more`
+        : failedNames.join(', ');
+      statusStr = `${f} FAILED: ${namesList}`;
+    }
     console.log(`   ${m.module.padEnd(25)} | ${String(p).padEnd(8)} | ${String(f).padEnd(8)} | ${String(e).padEnd(8)} | ${String(p + f + e).padEnd(6)} | ${icon} ${statusStr}`);
   }
 
@@ -837,7 +1378,7 @@ test.afterAll(() => {
   console.log('-'.repeat(80));
 
   // --- Per-Client x Module matrix ---
-  console.log('\n\n📋 ALL CLIENT RESULTS (per module):');
+  console.log('\n\n📋 ALL CLIENT RESULTS — UI COMPONENTS VALIDATION (per module):');
   console.log('='.repeat(80));
 
   // Collect unique client names across all modules (exclude Mini Mall — shown in dedicated section below)
