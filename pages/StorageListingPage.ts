@@ -387,8 +387,22 @@ export class StorageListingPage extends BasePage {
       const context = this.page.context();
       const pagesBefore = context.pages();
 
-      await rentButtonLocator.click({ timeout: 5000, noWaitAfter: true });
-      console.log(`✅ [${Date.now() - startTime}ms] Click executed successfully`);
+      try {
+        await rentButtonLocator.click({ timeout: 5000, noWaitAfter: true });
+        console.log(`✅ [${Date.now() - startTime}ms] Click executed successfully`);
+      } catch (clickErr) {
+        // Fallback for buttons that resolve in DOM but report as "not visible"
+        // (e.g. SiteLink RESERVE THIS UNIT with id=mySubmitReserve hidden by CSS).
+        console.log(`⚠️  [${Date.now() - startTime}ms] Standard click failed, trying force click...`);
+        try {
+          await rentButtonLocator.click({ timeout: 5000, noWaitAfter: true, force: true });
+          console.log(`✅ [${Date.now() - startTime}ms] Force click executed successfully`);
+        } catch (forceErr) {
+          console.log(`⚠️  [${Date.now() - startTime}ms] Force click failed, dispatching click via JS...`);
+          await rentButtonLocator.evaluate((el: HTMLElement) => el.click());
+          console.log(`✅ [${Date.now() - startTime}ms] JS click executed successfully`);
+        }
+      }
 
       // Give a short window for a popup/new page to appear
       console.log(`🔄 [${Date.now() - startTime}ms] Checking for new page/popup...`);

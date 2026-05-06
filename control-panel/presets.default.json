@@ -1,0 +1,185 @@
+[
+  {
+    "name": "All Tests — Production (regression)",
+    "settings": {
+      "env": "production",
+      "headed": false,
+      "workers": null,
+      "allure": "serve",
+      "suites": ["ui", "spc", "v1", "datasync"],
+      "ui":  { "clients": [], "extras": [], "modules": [] },
+      "spc": { "clients": [], "extras": [] },
+      "v1":  { "clients": [], "extras": [] },
+      "datasync": { "env": "prod", "clients": ["SiteLink", "storEDGE", "SSM"], "stagePwd": null }
+    }
+  },
+  {
+    "name": "Pre-deploy smoke (Stage) — SPC + V1",
+    "settings": {
+      "env": "staging",
+      "headed": false,
+      "workers": null,
+      "allure": "off",
+      "suites": ["spc", "v1"],
+      "ui":  { "clients": [], "extras": [], "modules": [] },
+      "spc": { "clients": [], "extras": [] },
+      "v1":  { "clients": [], "extras": [] },
+      "datasync": { "env": "stage", "clients": [], "stagePwd": null }
+    }
+  },
+  {
+    "name": "UI Components — All (Prod)",
+    "settings": {
+      "env": "production",
+      "headed": false,
+      "workers": null,
+      "allure": "off",
+      "suites": ["ui"],
+      "ui":  { "clients": [], "extras": [], "modules": [] },
+      "spc": { "clients": [], "extras": [] },
+      "v1":  { "clients": [], "extras": [] },
+      "datasync": { "env": "prod", "clients": [], "stagePwd": null }
+    }
+  },
+  {
+    "name": "UI — Home Page only",
+    "settings": {
+      "env": "production",
+      "headed": false,
+      "workers": null,
+      "allure": "off",
+      "suites": ["ui"],
+      "ui":  { "clients": [], "extras": [], "modules": ["Home Page"] },
+      "spc": { "clients": [], "extras": [] },
+      "v1":  { "clients": [], "extras": [] },
+      "datasync": { "env": "prod", "clients": [], "stagePwd": null }
+    }
+  },
+  {
+    "name": "UI — Contact Page only",
+    "settings": {
+      "env": "production",
+      "headed": false,
+      "workers": null,
+      "allure": "off",
+      "suites": ["ui"],
+      "ui":  { "clients": [], "extras": [], "modules": ["Contact Page"] },
+      "spc": { "clients": [], "extras": [] },
+      "v1":  { "clients": [], "extras": [] },
+      "datasync": { "env": "prod", "clients": [], "stagePwd": null }
+    }
+  },
+  {
+    "name": "UI — Pricing only",
+    "settings": {
+      "env": "production",
+      "headed": false,
+      "workers": null,
+      "allure": "off",
+      "suites": ["ui"],
+      "ui":  { "clients": [], "extras": [], "modules": ["Unit Pricing"] },
+      "spc": { "clients": [], "extras": [] },
+      "v1":  { "clients": [], "extras": [] },
+      "datasync": { "env": "prod", "clients": [], "stagePwd": null }
+    }
+  },
+  {
+    "name": "UI — Filter + Sort",
+    "settings": {
+      "env": "production",
+      "headed": false,
+      "workers": null,
+      "allure": "off",
+      "suites": ["ui"],
+      "ui":  { "clients": [], "extras": [], "modules": ["Filter Validation", "Sort Validation"] },
+      "spc": { "clients": [], "extras": [] },
+      "v1":  { "clients": [], "extras": [] },
+      "datasync": { "env": "prod", "clients": [], "stagePwd": null }
+    }
+  },
+  {
+    "name": "SPC Rent — Production",
+    "settings": {
+      "env": "production",
+      "headed": false,
+      "workers": null,
+      "allure": "off",
+      "suites": ["spc"],
+      "ui":  { "clients": [], "extras": [], "modules": [] },
+      "spc": { "clients": [], "extras": [] },
+      "v1":  { "clients": [], "extras": [] },
+      "datasync": { "env": "prod", "clients": [], "stagePwd": null }
+    }
+  },
+  {
+    "name": "V1 Rent — Production",
+    "settings": {
+      "env": "production",
+      "headed": false,
+      "workers": null,
+      "allure": "off",
+      "suites": ["v1"],
+      "ui":  { "clients": [], "extras": [], "modules": [] },
+      "spc": { "clients": [], "extras": [] },
+      "v1":  { "clients": [], "extras": [] },
+      "datasync": { "env": "prod", "clients": [], "stagePwd": null }
+    }
+  },
+  {
+    "name": "Data Sync — Prod (all FMS)",
+    "settings": {
+      "env": "production",
+      "headed": true,
+      "workers": null,
+      "allure": "off",
+      "suites": ["datasync"],
+      "ui":  { "clients": [], "extras": [], "modules": [] },
+      "spc": { "clients": [], "extras": [] },
+      "v1":  { "clients": [], "extras": [] },
+      "datasync": { "env": "prod", "clients": ["SiteLink", "storEDGE", "SSM"], "stagePwd": null }
+    }
+  },
+  {
+    "name": "Mini Mall — Full Scan",
+    "settings": {
+      "env": "production",
+      "headed": false,
+      "workers": null,
+      "allure": "off",
+      "suites": ["minimall"],
+      "ui":  { "clients": [], "extras": [], "modules": [] },
+      "spc": { "clients": [], "extras": [] },
+      "v1":  { "clients": [], "extras": [] },
+      "datasync": { "env": "prod", "clients": [], "stagePwd": null }
+    }
+  },
+  {
+    "name": "Staging — UI + SPC + V1",
+    "settings": {
+      "env": "staging",
+      "headed": false,
+      "workers": null,
+      "allure": "off",
+      "suites": ["ui", "spc", "v1"],
+      "ui":  { "clients": [], "extras": [], "modules": [] },
+      "spc": { "clients": [], "extras": [] },
+      "v1":  { "clients": [], "extras": [] },
+      "datasync": { "env": "stage", "clients": [], "stagePwd": null }
+    }
+  },
+  {
+    "name": "Build Instance — paste URL then pick clients",
+    "settings": {
+      "env": "staging",
+      "headed": false,
+      "workers": null,
+      "allure": "off",
+      "suites": ["build"],
+      "ui":  { "clients": [], "extras": [], "modules": [] },
+      "spc": { "clients": [], "extras": [] },
+      "v1":  { "clients": [], "extras": [] },
+      "datasync": { "env": "stage", "clients": [], "stagePwd": null },
+      "build": { "base": "", "clients": [], "corpCodes": {} }
+    }
+  }
+]

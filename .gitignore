@@ -8,6 +8,11 @@ playwright/.cache/
 playwright-report/
 screenshots/
 videos/
+scan-progress.txt
+
+# Environment / secrets
+.env
+.env.local
 
 # Dependencies
 node_modules/
@@ -19,3 +24,9 @@ Thumbs.db
 # IDE Files
 .vscode/
 .idea/
+
+# Control Panel — runtime files (presets and saved extras are local)
+control-panel/presets.user.json
+control-panel/logs/
+# Saved corp codes can contain passwords — keep them out of git
+control-panel/corp-codes.json

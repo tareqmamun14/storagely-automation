@@ -4,12 +4,26 @@ import { cleanupOldErrorScreenshots, takeErrorScreenshot } from '../utils/screen
 import { TEST_USER } from '../configs/credentials';
 import { RentResultCollector } from '../utils/RentResultCollector';
 import { setupCorpCodeIfNeeded } from '../utils/corpCodeSetup';
+import * as fs from 'fs';
+import * as path from 'path';
 
 // Clean up old error screenshots before starting tests
 cleanupOldErrorScreenshots();
 
 // Create a result collector to track all test results
 const resultCollector = new RentResultCollector();
+
+// Results directory — each worker writes its own file to avoid cross-worker race conditions
+const V1_RESULTS_DIR = path.join(process.cwd(), 'test-results', 'v1-results');
+
+function writeV1ResultToFile(result: { url: string; company: string; platform: string; error: string; success: boolean; attempt?: number }) {
+  if (!fs.existsSync(V1_RESULTS_DIR)) {
+    fs.mkdirSync(V1_RESULTS_DIR, { recursive: true });
+  }
+  const safeFileName = result.company.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+  const resultFile = path.join(V1_RESULTS_DIR, `${safeFileName}.json`);
+  fs.writeFileSync(resultFile, JSON.stringify({ ...result, timestamp: new Date().toISOString() }, null, 2));
+}
 
 test.describe('Payment Verification Tests', () => {
   const customerUrls = getCurrentUrls().customer;
@@ -91,6 +105,7 @@ test.describe('Payment Verification Tests', () => {
           testResult.error = 'No error - JOIN WAITLIST option (not direct rental)';
           testResult.success = true;
           resultCollector.addResult(baseURL, companyName, platform, testResult.error, testResult.success);
+          writeV1ResultToFile({ url: baseURL, company: companyName, platform, error: testResult.error, success: testResult.success, attempt: test.info().retry });
           console.log(`✅ TEST COMPLETED (Join Waitlist scenario) FOR: ${companyName}`);
           console.log(`${'='.repeat(80)}\n`);
           return;
@@ -99,7 +114,7 @@ test.describe('Payment Verification Tests', () => {
         // ============================================
         // STEP 3: Check for immediate error (STEP 4 renumbered to STEP 3)
         // ============================================
-        console.log('\n� STEP 3: Checking for immediate errors...');
+        console.log('\n📍 STEP 3: Checking for immediate errors...');
         const immediateError = await storageListingPage.checkForImmediateError();
         if (immediateError) {
           testResult.immediateError = immediateError;
@@ -122,6 +137,7 @@ test.describe('Payment Verification Tests', () => {
             console.log('='.repeat(80));
             
             resultCollector.addResult(baseURL, companyName, platform, testResult.error, true);
+            writeV1ResultToFile({ url: baseURL, company: companyName, platform, error: testResult.error, success: true, attempt: test.info().retry });
             return; // Exit test early - error prevented navigation
           } else {
             // Page navigated despite error - continue to see what happens
@@ -219,6 +235,7 @@ test.describe('Payment Verification Tests', () => {
         
         // Record the result with immediate error included
         resultCollector.addResult(baseURL, companyName, platform, finalErrorMessage, testResult.success);
+        writeV1ResultToFile({ url: baseURL, company: companyName, platform, error: finalErrorMessage, success: testResult.success, attempt: test.info().retry });
         
       } catch (error) {
         testResult.success = false;
@@ -247,12 +264,13 @@ test.describe('Payment Verification Tests', () => {
         
         // Record the failure
         resultCollector.addResult(
-          baseURL, 
-          companyName, 
-          platform, 
+          baseURL,
+          companyName,
+          platform,
           testResult.error,
           false
         );
+        writeV1ResultToFile({ url: baseURL, company: companyName, platform, error: testResult.error, success: false, attempt: test.info().retry });
         
         // Re-throw the error to mark the test as failed
         throw error;
@@ -261,11 +279,20 @@ test.describe('Payment Verification Tests', () => {
   }
 });
 
-// Print a comprehensive summary of all results at the end
-test.afterAll(() => {
-  console.log(`\n${'='.repeat(100)}`);
-  console.log(`🏁 PAYMENT VERIFICATION TEST SUMMARY`);
-  console.log(`${'='.repeat(100)}`);
-  resultCollector.printSummary();
-  console.log(`${'='.repeat(100)}\n`);
+// Clean up V1 results before all workers start (uses a lock file to run once)
+const V1_LOCK_FILE = path.join(process.cwd(), 'test-results', 'v1-results.json.lock');
+test.beforeAll(() => {
+  if (!fs.existsSync(V1_LOCK_FILE)) {
+    try {
+      fs.writeFileSync(V1_LOCK_FILE, String(process.pid), { flag: 'wx' });
+      if (fs.existsSync(V1_RESULTS_DIR)) {
+        const oldFiles = fs.readdirSync(V1_RESULTS_DIR);
+        for (const f of oldFiles) { try { fs.unlinkSync(path.join(V1_RESULTS_DIR, f)); } catch { /* ignore */ } }
+      }
+    } catch {
+      // Another worker already created the lock — skip cleanup
+    }
+  }
 });
+
+// Summary printing moved to global-teardown.ts so it runs ONCE after ALL workers finish.

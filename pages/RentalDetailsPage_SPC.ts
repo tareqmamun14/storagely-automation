@@ -107,8 +107,11 @@ export class RentalDetailsPageSinglePage extends BasePage {
   // ============================================
   private get cardNumberField() {
     return this.page.getByRole('textbox', { name: 'Card Number' })
-      .or(this.page.locator('input[name="card_number"], input[name="cardNumber"]'))
-      .or(this.page.getByPlaceholder('Card Number'));
+      .or(this.page.locator('input[name="card_number"], input[name="cardNumber"], input[name="cardnumber"]'))
+      .or(this.page.getByPlaceholder('Card Number'))
+      .or(this.page.getByPlaceholder('Card number'))
+      .or(this.page.getByLabel(/card number/i))
+      .or(this.page.locator('input[autocomplete="cc-number"]'));
   }
   
   private get expiryField() {
@@ -379,6 +382,9 @@ export class RentalDetailsPageSinglePage extends BasePage {
       await this.wait(2000);
       this.ensurePageAlive('form initialization');
 
+      // Dismiss any cookie consent banners or overlays that might intercept clicks
+      await this.handleCookieConsent();
+
       // Detect two-step layout (e.g. Minimall Storage)
       const twoStep = await this.isTwoStepLayout();
 
@@ -402,6 +408,9 @@ export class RentalDetailsPageSinglePage extends BasePage {
           await this.waitForManualCaptcha(clientName);
           this.ensurePageAlive('after captcha solve (step 4)');
         }
+
+        // Dismiss any cookie consent/overlay before CONTINUE click
+        await this.handleCookieConsent();
 
         // STEP 4 → STEP 5: Click "CONTINUE TO NEXT STEP"
         // Same button element used in rentReservation step-four flow
@@ -467,9 +476,16 @@ export class RentalDetailsPageSinglePage extends BasePage {
   }): Promise<void> {
     console.log('\n📍 SECTION 1: Filling Tenant Details...');
     
-    // First Name - click then fill
+    // First Name - click then fill (with force fallback for overlay-blocked clicks)
     await this.safeScroll(this.firstNameField);
-    await this.firstNameField.click();
+    try {
+      await this.firstNameField.click({ timeout: 10000 });
+    } catch {
+      console.log('  ⚠️ First Name click blocked (likely overlay), dismissing and retrying...');
+      await this.handleCookieConsent();
+      await this.wait(500);
+      await this.firstNameField.click({ force: true, timeout: 10000 });
+    }
     await this.firstNameField.fill(userData.firstName);
     console.log(`  ✓ Filled First Name: ${userData.firstName}`);
     
@@ -558,8 +574,8 @@ export class RentalDetailsPageSinglePage extends BasePage {
         }
       } else if (currentUrl.includes('columbiaselfstorage.com')) {
         stateValue = userData.province.newJersey || 'New Jersey';
-      } else if (currentUrl.includes('firststorage.com')) {
-        stateValue = userData.province.alabama || 'Alabama';
+      } else if (currentUrl.includes('firststorage.com') || currentUrl.includes('first-storage')) {
+        stateValue = userData.province.southCarolina || 'South Carolina';
       } else if (currentUrl.includes('yourwaystorage.com')) {
         stateValue = userData.province.georgia || 'Georgia';
       } else if (currentUrl.includes('purelystorage.com')) {
@@ -576,11 +592,20 @@ export class RentalDetailsPageSinglePage extends BasePage {
         stateValue = userData.province.alabama;
       }
       
-      await this.selectDropdownOption(
-        this.stateField,
-        stateValue,
-        fieldLabel
-      );
+      // Try standard HTML <select> first (SSM / V1-style sites use #province)
+      const stdSelect = this.page.locator('#province, select[name="state"], select[name="province"]');
+      const isStdSelect = await stdSelect.isVisible({ timeout: 3000 }).catch(() => false);
+      if (isStdSelect) {
+        await stdSelect.selectOption(stateValue);
+        console.log(`  ✓ Selected ${fieldLabel}: ${stateValue} (standard select)`);
+      } else {
+        // Custom dropdown (Vue/React components)
+        await this.selectDropdownOption(
+          this.stateField,
+          stateValue,
+          fieldLabel
+        );
+      }
     } catch {
       console.log('  - State/Province field not found, skipping');
     }
@@ -795,11 +820,40 @@ export class RentalDetailsPageSinglePage extends BasePage {
     expiryDate: string,
     cvv: string
   }): Promise<void> {
-    console.log('\n📍 Filling Card Details Only (Minimall step=2)...');
+    console.log('\n📍 Filling Card Details Only (two-step step=2)...');
+
+    // Scroll down to ensure payment section is visible / lazy-loaded
+    await this.page.evaluate(() => {
+      const paymentSection = document.querySelector('[class*="payment"], [id*="payment"], [data-section="payment"]');
+      if (paymentSection) paymentSection.scrollIntoView({ block: 'center' });
+      else window.scrollTo(0, document.body.scrollHeight * 0.7);
+    });
+    await this.wait(1500);
+
+    // Card Number — try main page, then iframe fallback
+    let cardVisible = await this.cardNumberField.isVisible({ timeout: 8000 }).catch(() => false);
+
+    if (!cardVisible) {
+      console.log('  ⚠️ Card Number not found, scrolling fully down...');
+      await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+      await this.wait(2000);
+      cardVisible = await this.cardNumberField.isVisible({ timeout: 5000 }).catch(() => false);
+    }
+
+    if (!cardVisible) {
+      console.log('  ⚠️ Still not found, checking for payment iframes...');
+      const iframeFilled = await this.tryFillCardInIframe(paymentData);
+      if (iframeFilled) {
+        console.log('  ✓ Card details filled via payment iframe');
+        console.log('✅ Card details completed (via iframe)');
+        return;
+      }
+      throw new Error('Card Number field not found on step 5 — payment form may not have loaded');
+    }
 
     // Card Number
     await this.safeScroll(this.cardNumberField);
-    await this.cardNumberField.click();
+    await this.cardNumberField.click({ timeout: 10000 });
     await this.cardNumberField.fill(paymentData.cardNumber);
     console.log(`  ✓ Filled Card Number: ${paymentData.cardNumber}`);
 
@@ -819,6 +873,65 @@ export class RentalDetailsPageSinglePage extends BasePage {
   }
 
   /**
+   * Try to fill card details inside a payment iframe (Stripe, Spreedly, etc.)
+   * Returns true if card fields were found and filled inside an iframe.
+   */
+  private async tryFillCardInIframe(paymentData: {
+    cardNumber: string,
+    expiryDate: string,
+    cvv: string
+  }): Promise<boolean> {
+    try {
+      const iframes = this.page.locator('iframe');
+      const count = await iframes.count();
+
+      for (let i = 0; i < count; i++) {
+        const iframe = iframes.nth(i);
+        const src = (await iframe.getAttribute('src') || '').toLowerCase();
+        const title = (await iframe.getAttribute('title') || '').toLowerCase();
+        const name = (await iframe.getAttribute('name') || '').toLowerCase();
+
+        const isPaymentIframe = ['stripe', 'payment', 'card', 'spreedly', 'secure', 'checkout', 'braintree', 'paysafe']
+          .some(keyword => src.includes(keyword) || title.includes(keyword) || name.includes(keyword));
+
+        if (!isPaymentIframe) continue;
+
+        console.log(`  🔍 Found payment iframe: src="${src.substring(0, 80)}" title="${title}"`);
+        const frame = this.page.frameLocator(`iframe >> nth=${i}`);
+
+        const cardInput = frame.locator('input[name="cardnumber"], input[name="card_number"], input[placeholder*="card number" i], input[autocomplete="cc-number"]').first();
+        const cardExists = await cardInput.isVisible({ timeout: 3000 }).catch(() => false);
+
+        if (cardExists) {
+          await cardInput.click();
+          await cardInput.fill(paymentData.cardNumber);
+          console.log(`  ✓ Filled Card Number (iframe): ${paymentData.cardNumber}`);
+
+          const expiryInput = frame.locator('input[name="exp-date"], input[name="expiry"], input[placeholder*="MM" i], input[autocomplete="cc-exp"]').first();
+          if (await expiryInput.isVisible({ timeout: 2000 }).catch(() => false)) {
+            await expiryInput.click();
+            await expiryInput.fill(paymentData.expiryDate);
+            console.log(`  ✓ Filled Expiry (iframe): ${paymentData.expiryDate}`);
+          }
+
+          const cvvInput = frame.locator('input[name="cvc"], input[name="cvv"], input[placeholder*="CVV" i], input[placeholder*="CVC" i], input[autocomplete="cc-csc"]').first();
+          if (await cvvInput.isVisible({ timeout: 2000 }).catch(() => false)) {
+            await cvvInput.click();
+            await cvvInput.fill(paymentData.cvv);
+            console.log(`  ✓ Filled CVV (iframe): ${paymentData.cvv}`);
+          }
+
+          return true;
+        }
+      }
+    } catch (error) {
+      console.log(`  ⚠️ Iframe card fill attempt failed: ${(error as Error).message}`);
+    }
+
+    return false;
+  }
+
+  /**
    * Fill Payment Details Section
    * Uses exact sequence from Playwright recording
    */
@@ -834,24 +947,55 @@ export class RentalDetailsPageSinglePage extends BasePage {
     province: any
   ): Promise<void> {
     console.log('\n📍 SECTION 3: Filling Payment Details...');
-    
-    // Card Number
-    await this.safeScroll(this.cardNumberField);
-    await this.cardNumberField.click();
-    await this.cardNumberField.fill(paymentData.cardNumber);
-    console.log(`  ✓ Filled Card Number: ${paymentData.cardNumber}`);
-    
-    // Expiry
-    await this.safeScroll(this.expiryField);
-    await this.expiryField.click();
-    await this.expiryField.fill(paymentData.expiryDate);
-    console.log(`  ✓ Filled Expiry: ${paymentData.expiryDate}`);
-    
-    // CVV
-    await this.safeScroll(this.cvvField);
-    await this.cvvField.click();
-    await this.cvvField.fill(paymentData.cvv);
-    console.log(`  ✓ Filled CVV: ${paymentData.cvv}`);
+
+    // Scroll down to ensure payment section is visible / lazy-loaded
+    await this.page.evaluate(() => {
+      const paymentSection = document.querySelector('[class*="payment"], [id*="payment"], [data-section="payment"]');
+      if (paymentSection) paymentSection.scrollIntoView({ block: 'center' });
+      else window.scrollTo(0, document.body.scrollHeight * 0.7);
+    });
+    await this.wait(1500);
+
+    // Card Number — try main page, then iframe fallback
+    let cardFilledViaIframe = false;
+    let cardVisible = await this.cardNumberField.isVisible({ timeout: 8000 }).catch(() => false);
+
+    if (!cardVisible) {
+      console.log('  ⚠️ Card Number not found in main page, scrolling fully down...');
+      await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+      await this.wait(2000);
+      cardVisible = await this.cardNumberField.isVisible({ timeout: 5000 }).catch(() => false);
+    }
+
+    if (!cardVisible) {
+      console.log('  ⚠️ Still not found, checking for payment iframes...');
+      cardFilledViaIframe = await this.tryFillCardInIframe(paymentData);
+      if (cardFilledViaIframe) {
+        console.log('  ✓ Card details filled via payment iframe');
+      } else {
+        throw new Error('Card Number field not found — payment form may not have loaded or uses an unsupported iframe/widget');
+      }
+    }
+
+    if (!cardFilledViaIframe) {
+      // Fill card fields on main page
+      await this.safeScroll(this.cardNumberField);
+      await this.cardNumberField.click({ timeout: 10000 });
+      await this.cardNumberField.fill(paymentData.cardNumber);
+      console.log(`  ✓ Filled Card Number: ${paymentData.cardNumber}`);
+
+      // Expiry
+      await this.safeScroll(this.expiryField);
+      await this.expiryField.click();
+      await this.expiryField.fill(paymentData.expiryDate);
+      console.log(`  ✓ Filled Expiry: ${paymentData.expiryDate}`);
+
+      // CVV
+      await this.safeScroll(this.cvvField);
+      await this.cvvField.click();
+      await this.cvvField.fill(paymentData.cvv);
+      console.log(`  ✓ Filled CVV: ${paymentData.cvv}`);
+    }
     
     // Billing Address - click, type, then select first dropdown option
     try {
@@ -925,8 +1069,8 @@ export class RentalDetailsPageSinglePage extends BasePage {
         }
       } else if (currentUrl.includes('columbiaselfstorage.com')) {
         stateName = province.newJersey || 'New Jersey';
-      } else if (currentUrl.includes('firststorage.com')) {
-        stateName = province.alabama || 'Alabama';
+      } else if (currentUrl.includes('firststorage.com') || currentUrl.includes('first-storage')) {
+        stateName = province.southCarolina || 'South Carolina';
       } else if (currentUrl.includes('yourwaystorage.com')) {
         stateName = province.georgia || 'Georgia';
       } else if (currentUrl.includes('purelystorage.com')) {

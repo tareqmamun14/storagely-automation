@@ -38,7 +38,7 @@ export default defineConfig({
     }],
     ['junit', { outputFile: 'test-results/junit.xml' }]
   ] : [
-    ['list'],  // Shows full console output for every test in real-time (line reporter suppresses passing test logs)
+    ['./utils/clean-reporter.ts'],
   ],
   
   use: {

@@ -20,18 +20,18 @@ A multi-module suite that verifies the core UI components across all Storagely c
 
 | Site | Notes |
 |---|---|
-| Smart Self Storage Ohio | — |
-| Storage Star | — |
-| Sunbird Storage | Contact page empty in staging |
-| Bluebird Storage | Contact page empty in staging |
-| Gatekeeper Self Storage | — |
-| First Storage | — |
-| Red Rocks Self Storage | — |
-| Distinct Storage | — |
-| Rhino Storage | — |
-| Storage Boss | Contact page empty in staging |
-| Mini Mall Storage ⭐ | — |
-| Storsafe Self Storage | — |
+| Smart Self Storage Ohio | <span style="color: white; background: #27ae60; border-radius: 4px; padding: 2px 6px; font-size: 90%;">SITELINK</span> |
+| Storage Star | |
+| Sunbird Storage | |
+| Bluebird Storage | |
+| Gatekeeper Self Storage | <span style="color: white; background: #27ae60; border-radius: 4px; padding: 2px 6px; font-size: 90%;">SITELINK</span> |
+| First Storage | |
+| Red Rocks Self Storage | <span style="color: white; background: #27ae60; border-radius: 4px; padding: 2px 6px; font-size: 90%;">SITELINK</span> |
+| Distinct Storage | |
+| Rhino Storage | |
+| Storage Boss | |
+| Mini Mall Storage ⭐ | |
+| Storsafe Self Storage | <span style="color: white; background: #27ae60; border-radius: 4px; padding: 2px 6px; font-size: 90%;">SITELINK</span> |
 
 ### Production
 
@@ -243,6 +243,143 @@ Navigates to the Mini Mall Courtland, AL location and logs all elements matching
 
 ---
 
+## Module 7a — Filter Verification
+
+**Test describe:** `[Location Page] Filter Validation`
+
+### TC-UI-07a — Filter Verification (per location)
+
+| Field | Value |
+|---|---|
+| **Test ID** | TC-UI-07a-[LocationLabel] |
+| **Priority** | High |
+
+**Description:**
+Dynamically discovers all filter dropdowns on the location page, applies the first available option in each, verifies that the visible unit count changes accordingly, then resets all filters and confirms all units are restored.
+
+**Steps:**
+
+| # | Action | Expected Result |
+|---|---|---|
+| 1 | Navigate to the location page | Page loads |
+| 2 | Verify filter UI is present (`#filterArea`, `#resetButton`) | Filter UI elements found |
+| 3 | Discover all filter dropdowns dynamically | At least one filter dropdown found (if present) |
+| 4 | For each filter: select first option, verify visible unit count | Unit count decreases or all units match the filter |
+| 5 | Reset all filters | All units are visible again |
+
+**Pass Criteria:**
+- Each filter option applied results in a visible unit count ≤ baseline and > 0.
+- After reset, all units are visible (matches baseline count).
+
+**Fail Criteria:**
+- No units are visible after applying a filter.
+- Filtered count exceeds baseline.
+- After reset, not all units are restored.
+
+---
+
+## Module 7b — Sort Verification
+
+**Test describe:** `[Location Page] Sort Validation`
+
+### TC-UI-07b — Sort Verification (per location)
+
+| Field | Value |
+|---|---|
+| **Test ID** | TC-UI-07b-[LocationLabel] |
+| **Priority** | High |
+
+**Description:**
+Dynamically discovers all sort options on the location page, applies each one, and verifies that the displayed units are sorted correctly by price or size in the expected direction (ascending/descending).
+
+**Steps:**
+
+| # | Action | Expected Result |
+|---|---|---|
+| 1 | Navigate to the location page | Page loads |
+| 2 | Discover all sort options dynamically | At least one sort option found |
+| 3 | For each sort option: apply sort, read visible units, verify order | Units are sorted as expected (asc/desc by price/size) |
+| 4 | Log summary of sort results | Summary printed |
+
+**Pass Criteria:**
+- All sort options, when applied, result in the correct order of units (by price or size, asc/desc as labeled).
+
+**Fail Criteria:**
+- Any sort option produces an incorrect order.
+- No sort options found when expected.
+
+---
+
+## Module 8 — Image & Carousel Validation (Production only, one-per-FMS smoke)
+
+**Test describe:** `[Location Page] Image & Carousel Validation`
+
+### TC-UI-08 — Location Image & Carousel Verification (per FMS)
+
+| Field | Value |
+|---|---|
+| **Test ID** | TC-UI-08-[FMS-Location] |
+| **Priority** | High |
+| **Environment** | **Production only** — entire module is skipped in staging (staging serves placeholder images that 404 and produce false positives) |
+
+**Locations tested — one representative per FMS** (kept minimal so standard UI runs stay fast):
+
+| FMS      | Sample location                                  | URL |
+|----------|--------------------------------------------------|-----|
+| storEDGE | Distinct Storage — New Milford, CT               | `distinctstorage.com/storage-units/connecticut/new-milford/kent-road` |
+| SiteLink | Bluebird Storage — Calgary, AB                   | `bluebirdstorage.ca/storage-units/alberta/calgary/mayland` |
+| SSM      | Storage Star — Colorado Springs, CO              | `www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive` |
+| Yardi    | ⭐ Mini Mall Storage — Birmingham, AL             | `minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd` |
+
+For exhaustive coverage of **every facility URL of every client**, run the dedicated **All Pages — All Clients** suite in the control panel ([tests/allLocationsScan.spec.ts](../tests/allLocationsScan.spec.ts)). Mini Mall has its own dedicated full scan ([tests/miniMallFullScan.spec.ts](../tests/miniMallFullScan.spec.ts)). Both auto-include the same image + carousel checks per discovered location.
+
+**Sections checked on each page:**
+
+| Section | Selectors / Rule |
+|---|---|
+| **TOP CAROUSEL** | (1) Selector match: `.carousel`, `.swiper`, `.slick-slider`, `.hero`, `[class*=banner]`, `#topSection`, `.topPagePictures`. (2) **Position fallback**: any visible `<img>` whose top is above the first `.listviewrows` row (or above 40% viewport height when no rows exist) and not in chrome — catches future carousel renames so a 404 in a re-skinned hero still reports under TOP CAROUSEL. |
+| **UNIT IMAGES** | `.listviewrows img`, `tr.shortableClass img`, `[class*=unit-type] img`, `.unit-listing img` |
+| **BOTTOM IMAGES** | Every remaining `<img>` not in TOP/UNITS, EXCLUDING those nested in `<header>`, `<nav>`, `<footer>` or any element whose class contains `logo`/`navbar`/`header`/`footer`. This is a true catch-all so no `<img>` is ever silently dropped. |
+
+**Steps:**
+
+| # | Action | Expected Result |
+|---|---|---|
+| 1 | Navigate to the location URL | Page loads |
+| 2 | Scroll the entire page (top → bottom → top) to trigger lazy-loaders | All lazy images are requested |
+| 3 | For each `<img>` element with an `http(s)://` src, read `complete && naturalWidth > 0 && naturalHeight > 0` | Browser confirms the image actually loaded (not 404/error) |
+| 4 | Group every image into one of the 3 sections above | Each section has its own checked / loaded / failed counts |
+| 5 | Print SECTION RESULTS — pass/fail per section + image counts | Per-section status visible in console + control panel + log file |
+| 6 | If any image failed: print every failed image grouped with section, src, alt | All broken images listed in one block at bottom of test output |
+
+**Pass Criteria:** Every detected image in every section has `complete && naturalWidth > 0 && naturalHeight > 0` AND no image's src matches a known placeholder pattern. If a page has zero detected images at all, the test fails (probable page load failure).
+
+**Fail Criteria (any of):**
+- **Network failure** — any image with an `http(s)://` src fails to load (`naturalWidth === 0` after `complete === true` — i.e. 404, network error, decode failure).
+- **Placeholder fallback** — an image LOADED successfully but its src matches a known "No Image Available" pattern (e.g. `no-storage-available.png`). The bytes decoded fine, but the page is showing a generic graphic because the real unit/carousel image was missing on the backend. Patterns are listed in `PLACEHOLDER_IMAGE_PATTERNS` in [utils/imageScan.ts](../utils/imageScan.ts) — add new ones there as they're spotted.
+- **Structure regression** — `.listviewrows` / `tr.shortableClass` is in the DOM but our unit-image selectors found 0 images inside them. Strong signal the unit row markup was restructured and the selectors need updating.
+- Page has zero detected images across all 3 sections.
+
+**Soft warning (does not fail the test):**
+- **Tiny-image flag** — any LOADED image with both `naturalWidth < 30` and `naturalHeight < 30`. Likely a 1×1 placeholder or broken-but-decoded response. Listed in the section breakdown with dimensions and src; reviewers should confirm intent.
+
+**Per-section dimension stats:** For every section with at least one loaded image the report prints `dims: minW×minH → maxW×maxH, avg avgW×avgH` — a sudden shift between runs (e.g. carousel went from 1920×1080 to 1×1) makes a "loaded but visually broken" placeholder visible without manual inspection.
+
+The test prints a single consolidated list of all broken images so they can all be addressed in one pass.
+
+**Result entry (added to `test-results/ui-components-results.json`):**
+- Module: `Image & Carousel`
+- Detail format: `Ver: V1|V2 | Top: X/Y | Units: X/Y | Bottom: X/Y | Total: X/Y` (and `FAILED: N | First: …` when failures exist)
+
+**Run alone:**
+```bash
+npx playwright test tests/uiComponents-validation.spec.ts --grep "Image & Carousel"
+```
+
+**Control panel:** Selectable as the "Image & Carousel (PROD)" sub-module under UI Components in `control-panel/index.html`.
+
+---
+
 ## Results File
 
 `test-results/ui-components-results.json` — updated after each test (upsert by module + test name so retries overwrite previous failures).
@@ -261,13 +398,28 @@ npx playwright test tests/uiComponents-validation.spec.ts --grep "Contact Page"
 npx playwright test tests/uiComponents-validation.spec.ts --grep "FAQ Page"
 npx playwright test tests/uiComponents-validation.spec.ts --grep "Unit Pricing"
 npx playwright test tests/uiComponents-validation.spec.ts --grep "Unit Feature Conflict"
+npx playwright test tests/uiComponents-validation.spec.ts --grep "Filter Validation"
+npx playwright test tests/uiComponents-validation.spec.ts --grep "Sort Validation"
+npx playwright test tests/uiComponents-validation.spec.ts --grep "Image & Carousel"
+npx playwright test tests/uiComponents-validation.spec.ts --grep "Location Page"
 ```
 
 ---
 
 ## Adding a New Site
 
+### Core modules (Home Page + Contact Page — Modules 1 & 2)
+
 1. Add URL to `STORAGE_SITE_URLS` in `configs/urls.ts` (staging & production).
 2. If the site uses Storerocket (no staging version): add domain to `STOREROCKET_SITES`.
 3. If staging contact page is empty/broken: add slug to `STAGING_CONTACT_SKIP`.
 4. If the site requires captcha on the contact form: add to `CONTACT_CAPTCHA_SITES`.
+5. If the site's FAQ page should be skipped entirely: add domain slug to `FAQ_SKIP_SITES` in `configs/urls.ts`.
+6. If the site's FAQ page uses a flat Q&A layout (no accordion): add domain slug to `FAQ_NO_ACCORDION_SITES` in `tests/uiComponents-validation.spec.ts`.
+
+### Location page modules (Modules 5, 6, 7)
+
+7. **Unit Pricing Validation (Module 5):** To test that promo prices are lower than standard prices on a location page, add an entry to `PRICING_VALIDATION_LOCATIONS` in `configs/urls.ts` with `label`, `url`, `fms`, and `version`.
+8. **Unit Feature Conflict Detection (Module 6):** To scan a location for contradictory feature labels (e.g. a Yardi or SiteLink FMS sync issue), add an entry to `UNIT_FEATURES_CONFLICT_LOCATIONS` in `configs/urls.ts`.
+9. **Filter & Sort Validation (Modules 7a & 7b):** To test filter dropdowns and sort options on a location page, add an entry to `FILTER_TEST_CLIENTS` in `tests/uiComponents-validation.spec.ts`. Both the filter and sort modules share this list.
+10. **Image & Carousel Validation (Module 8):** Pulls automatically from `CUSTOMER_URLS` (V1) and `SINGLE_PAGE_RENT_URLS` (V2) production lists — adding any new client to either list automatically enrolls it in image/carousel coverage. The module is **production-only** and skipped in staging. Mini Mall coverage runs separately in `tests/miniMallFullScan.spec.ts` (every discovered facility is image-checked there).

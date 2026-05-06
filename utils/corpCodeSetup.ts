@@ -9,7 +9,10 @@ import { DataSyncIntegrationsPage } from '../pages/DataSyncIntegrationsPage';
 import { CURRENT_ENVIRONMENT, Environment, STAGING_CORP_CODE_CLIENTS } from '../configs/urls';
 import { ADMIN_CREDENTIALS } from '../configs/credentials';
 
-const STAGING_BASE = 'https://test.staging.storagely-api.com';
+// Honors STORAGELY_BUILD_BASE so the Control Panel can point corp-code
+// setup at a build-instance host (e.g. https://elastic-hypatia.staging.storagely-api.com).
+// When the env var is unset, behavior is identical to before.
+const STAGING_BASE = (process.env.STORAGELY_BUILD_BASE?.trim() || 'https://test.staging.storagely-api.com').replace(/\/$/, '');
 
 /**
  * Extract the client slug from a staging or production URL.

@@ -31,6 +31,7 @@ Verifies the **single-page rent flow** where Rental Details (Step 4) and Payment
 | Red Rocks Self Storage — Aurora, CO | SiteLink | — |
 | Storage Star — Colorado Springs, CO | SSM | — |
 | Storsafe Self Storage — Melbourne, FL | storEDGE | hCaptcha at RENT NOW |
+| Smart Self Storage Ohio — Macedonia, OH | SSM | — |
 
 ### Production
 
@@ -44,6 +45,7 @@ Verifies the **single-page rent flow** where Rental Details (Step 4) and Payment
 | YourWay Storage — Augusta, GA | SSM | hCaptcha at RENT NOW |
 | Red Rocks Self Storage — Aurora, CO | SiteLink | hCaptcha at RENT NOW |
 | Storage Star — Colorado Springs, CO | SSM | hCaptcha at RENT NOW |
+| Smart Self Storage Ohio — Macedonia, OH | SSM | hCaptcha at RENT NOW |
 
 > Mini Mall and Storsafe (prod) are currently disabled (commented out).
 

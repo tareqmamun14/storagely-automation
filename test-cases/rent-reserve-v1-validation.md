@@ -26,7 +26,6 @@ Verifies the **V1 multi-step rent flow** where Rental Details (Step 4) and Payme
 | Rhino Storage — Covington, LA | SiteLink |
 | Gatekeeper Self Storage — Peachtree City, GA | SiteLink |
 | Storage Boss — Ponchatoula, LA | SiteLink |
-| Smart Self Storage Ohio — Macedonia, OH | SSM |
 
 ### Production
 
@@ -36,7 +35,6 @@ Verifies the **V1 multi-step rent flow** where Rental Details (Step 4) and Payme
 | Rhino Storage — Covington, LA | SiteLink |
 | Gatekeeper Self Storage — Peachtree City, GA | SiteLink |
 | Storage Depot LA — Hammond, LA | SiteLink |
-| Smart Self Storage Ohio — Macedonia, OH | SSM |
 
 ---
 

@@ -5,6 +5,7 @@ import { StorageListingPage } from '../pages/StorageListingPage';
 import { FAQPage, FAQTestResult } from '../pages/FAQPage';
 import { PricingPage, PricingTestResult } from '../pages/PricingPage';
 import { getStorageSiteUrls, CURRENT_ENVIRONMENT, Environment, STOREROCKET_SITES, STAGING_CONTACT_SKIP, CONTACT_SKIP_SITES, FAQ_SKIP_SITES, CONTACT_CAPTCHA_SITES, PRICING_VALIDATION_LOCATIONS, UNIT_FEATURES_CONFLICT_LOCATIONS } from '../configs/urls';
+import { scanPageImages, hasUnitsStructureRegression, countTotalBroken, type PageImageScan } from '../utils/imageScan';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -110,11 +111,6 @@ function pushResult(module: string, name: string, status: 'PASSED' | 'FAILED' | 
   if (idx !== -1) { results[idx] = entry; } else { results.push(entry); }
 
   fs.writeFileSync(UI_RESULTS_FILE, JSON.stringify(results, null, 2));
-}
-
-function readAllUIResults(): UITestResult[] {
-  if (!fs.existsSync(UI_RESULTS_FILE)) return [];
-  try { return JSON.parse(fs.readFileSync(UI_RESULTS_FILE, 'utf-8')); } catch { return []; }
 }
 
 // Clear results file at start of this test file (only first worker to arrive)
@@ -1304,175 +1300,191 @@ test.describe('[Location Page] Sort Validation', () => {
 
 
 // ============================================
-// GRAND SUMMARY (prints after ALL modules)
+// 8. LOCATION PAGE — IMAGE & CAROUSEL VALIDATION (one-per-FMS smoke)
 // ============================================
-const SUMMARY_LOCK_FILE = path.join(process.cwd(), 'test-results', '.ui-summary-lock');
+// Verifies that every image on a location page actually loads, grouped into
+// 3 sections (TOP CAROUSEL / UNIT IMAGES / BOTTOM IMAGES). Detects:
+//   • Network failures (404, decode errors)              — naturalWidth === 0
+//   • Placeholder fallbacks (e.g. "no-storage-available") — src URL matches
+//     known placeholder patterns (catches the Storage Star prod bug class
+//     where the real unit image was missing on the backend and the page
+//     served a generic "No Image Available" graphic instead)
+//   • Structure regressions (.listviewrows in DOM but 0 unit images detected)
+//
+// COVERAGE — one location per FMS only:
+//   This module is the smoke test that runs as part of standard UI Component
+//   runs. It picks ONE representative production location per FMS so a
+//   full UI run stays fast. For exhaustive per-client coverage of every
+//   facility URL across every client, run the dedicated "All Pages" suite
+//   (tests/allLocationsScan.spec.ts) which crawls each client's site and
+//   image-checks every discovered location.
+//
+// PRODUCTION ONLY: staging serves placeholder URLs that 404; the whole
+// module is skipped when CURRENT_ENVIRONMENT is staging.
+// ============================================
 
-test.afterAll(async () => {
-  // ── Deduplication: with multiple workers each worker runs afterAll once.
-  // We use a last-writer-wins lock so only the LAST worker to finish prints.
-  const myToken = `${process.pid}-${Date.now()}`;
+interface LocationImageTarget {
+  url:     string;
+  label:   string;
+  version: 'V1' | 'V2';
+  fms:     string;
+}
+
+// One representative production location per FMS — kept stable so the smoke
+// test is fast and predictable. Full per-client coverage lives in the
+// All Pages suite (tests/allLocationsScan.spec.ts).
+//
+// When STORAGELY_UI_CLIENTS is set (the control panel sends it whenever the
+// user un-checks any clients in the UI Components panel) we apply the same
+// substring filter that getStorageSiteUrls() uses. That way "only the URLs
+// available" — i.e. only the image-scan locations that match a checked
+// client — actually run, instead of always running the full hardcoded list.
+function buildImageScanTargets(): LocationImageTarget[] {
+  if (isStaging) return [];
+  const all: LocationImageTarget[] = [
+    { fms: 'storEDGE', version: 'V1', label: 'Distinct Storage — New Milford, CT (storEDGE)',
+      url: 'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road' },
+    { fms: 'SiteLink', version: 'V2', label: 'Bluebird Storage — Calgary, AB (SiteLink)',
+      url: 'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland' },
+    { fms: 'SSM',      version: 'V2', label: 'Storage Star — Colorado Springs, CO (SSM)',
+      url: 'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive' },
+    { fms: 'SSM',      version: 'V2', label: 'Storage Star — Anchorage, AK (SSM)',
+      url: 'https://www.storagestar.com/storage-units/alaska/anchorage/boniface' },
+    { fms: 'SiteLink', version: 'V1', label: 'U-Lock Mini Storage — Nanaimo, BC (SiteLink)',
+      url: 'https://selfstorage.ca/storage-units/british-columbia/nanaimo/wellington-road' },
+    { fms: 'Yardi',    version: 'V2', label: '⭐ Mini Mall Storage — Birmingham, AL (Yardi)',
+      url: 'https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd' },
+  ];
+  const filterCsv = process.env.STORAGELY_UI_CLIENTS || '';
+  const subs = filterCsv.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+  if (subs.length === 0) return all;
+  return all.filter(t => subs.some(s => t.url.toLowerCase().includes(s)));
+}
+
+async function scanLocationImages(page: import('@playwright/test').Page, url: string): Promise<PageImageScan> {
+  // Some sites (Storage Star/SSM) intermittently respond to automated
+  // requests with Content-Disposition: attachment as anti-bot defense, which
+  // makes Playwright throw "page.goto: Download is starting" before the page
+  // renders. Cancel any spurious download and re-try once after a short
+  // delay so transient bot-detection backs off.
+  page.on('download', d => { d.cancel().catch(() => {}); });
   try {
-    const resultsDir = path.dirname(UI_RESULTS_FILE);
-    if (!fs.existsSync(resultsDir)) fs.mkdirSync(resultsDir, { recursive: true });
-    fs.writeFileSync(SUMMARY_LOCK_FILE, myToken);
-  } catch { /* ignore */ }
-
-  // Wait long enough for any other worker that's about to write its token
-  await new Promise<void>(r => setTimeout(r, 2500));
-
-  try {
-    const lockToken = fs.readFileSync(SUMMARY_LOCK_FILE, 'utf-8').trim();
-    if (lockToken !== myToken) return; // Another worker wrote after us — let them print
-  } catch { /* if unreadable, proceed */ }
-
-  // Re-read the results file now that all workers have had a chance to finish
-  const allResults = readAllUIResults();
-  if (allResults.length === 0) return;
-
-  // Rebuild module buckets from flat results
-  const moduleMap = new Map<string, UITestResult[]>();
-  for (const r of allResults) {
-    if (!moduleMap.has(r.module)) moduleMap.set(r.module, []);
-    moduleMap.get(r.module)!.push(r);
-  }
-  const modules = [...moduleMap.entries()].map(([module, tests]) => ({ module, tests }));
-
-  const totalPassed = allResults.filter(r => r.status === 'PASSED').length;
-  const totalFailed = allResults.filter(r => r.status === 'FAILED').length;
-  const totalExpected = allResults.filter(r => r.status === 'EXPECTED').length;
-  const totalTests = totalPassed + totalFailed + totalExpected;
-
-  console.log('\n\n');
-  console.log('#'.repeat(80));
-  console.log('##  📊 UI COMPONENTS VALIDATION — GRAND SUMMARY');
-  console.log('#'.repeat(80));
-
-  // --- Module-level overview ---
-  console.log('\n📦 MODULE OVERVIEW:');
-  console.log('-'.repeat(80));
-  console.log(`   ${'Module'.padEnd(25)} | ${'Passed'.padEnd(8)} | ${'Failed'.padEnd(8)} | ${'Expected'.padEnd(8)} | Total  | Status`);
-  console.log('-'.repeat(80));
-
-  for (const m of modules) {
-    const p = m.tests.filter(t => t.status === 'PASSED').length;
-    const f = m.tests.filter(t => t.status === 'FAILED').length;
-    const e = m.tests.filter(t => t.status === 'EXPECTED').length;
-    const icon = f === 0 ? '✅' : '❌';
-    let statusStr: string;
-    if (f === 0) {
-      statusStr = e > 0 ? `ALL PASSED (${e} expected fail)` : 'ALL PASSED';
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45_000 });
+  } catch (e) {
+    const msg = (e as Error).message ?? '';
+    if (msg.toLowerCase().includes('download is starting')) {
+      await page.waitForTimeout(2500);
+      await page.goto(url, { waitUntil: 'commit', timeout: 45_000 });
+      await page.waitForSelector('body', { timeout: 30_000 }).catch(() => {});
     } else {
-      const failedNames = m.tests.filter(t => t.status === 'FAILED').map(t => t.name);
-      const namesList = failedNames.length > 3
-        ? failedNames.slice(0, 3).join(', ') + ` +${failedNames.length - 3} more`
-        : failedNames.join(', ');
-      statusStr = `${f} FAILED: ${namesList}`;
-    }
-    console.log(`   ${m.module.padEnd(25)} | ${String(p).padEnd(8)} | ${String(f).padEnd(8)} | ${String(e).padEnd(8)} | ${String(p + f + e).padEnd(6)} | ${icon} ${statusStr}`);
-  }
-
-  console.log('-'.repeat(80));
-  const totalStatusStr = totalFailed === 0 ? (totalExpected > 0 ? `✅ ALL CLEAR (${totalExpected} expected fail)` : '✅ ALL CLEAR') : `❌ ${totalFailed} ISSUE(S)`;
-  console.log(`   ${'TOTAL'.padEnd(25)} | ${String(totalPassed).padEnd(8)} | ${String(totalFailed).padEnd(8)} | ${String(totalExpected).padEnd(8)} | ${String(totalTests).padEnd(6)} | ${totalStatusStr}`);
-  console.log('-'.repeat(80));
-
-  // --- Per-Client x Module matrix ---
-  console.log('\n\n📋 ALL CLIENT RESULTS — UI COMPONENTS VALIDATION (per module):');
-  console.log('='.repeat(80));
-
-  // Collect unique client names across all modules (exclude Mini Mall — shown in dedicated section below)
-  const clientNames = [...new Set(modules.flatMap(m => m.tests.map(t => t.name)))].filter(n => !isMiniMall(n));
-
-  for (const client of clientNames) {
-    const resultsForClient = modules.map(m => {
-      const t = m.tests.find(t => t.name === client);
-      return { module: m.module, ...t };
-    }).filter(r => r.status);
-
-    const anyFailed = resultsForClient.some(r => r.status === 'FAILED');
-    const anyExpected = resultsForClient.some(r => r.status === 'EXPECTED');
-    const clientIcon = anyFailed ? '❌' : anyExpected ? '⚠️' : '✅';
-
-    console.log(`\n   ${clientIcon} ${client}`);
-    for (const r of resultsForClient) {
-      const statusIcon = r.status === 'PASSED' ? '✅' : r.status === 'EXPECTED' ? '⚠️' : '🚩';
-      const detailStr = r.detail ? ` → ${r.detail.substring(0, 80)}` : '';
-      console.log(`      ${statusIcon} ${r.module}${detailStr}`);
+      throw e;
     }
   }
+  await page.waitForTimeout(1500);
+  return scanPageImages(page);
+}
 
-  console.log('\n' + '='.repeat(80));
+test.describe('[Location Page] Image & Carousel Validation', () => {
+  test.setTimeout(180_000);
+  // No retries: image scan is deterministic; retrying just prints the per-location
+  // header twice in the live log. The wait-for-load + cross-section dedup logic
+  // in utils/imageScan.ts already absorbs flaky lazy-load timing.
+  test.describe.configure({ retries: 0 });
 
-  // --- Failures call-out section ---
-  const allFailed = modules.flatMap(m => m.tests.filter(t => t.status === 'FAILED').map(t => ({ ...t, module: m.module })));
-  const allExpected = modules.flatMap(m => m.tests.filter(t => t.status === 'EXPECTED').map(t => ({ ...t, module: m.module })));
+  const imageTargets = buildImageScanTargets();
 
-  if (allFailed.length > 0) {
-    console.log('\n\n');
-    console.log('🚩'.repeat(20));
-    console.log('❌  FAILURES THAT NEED ATTENTION:');
-    console.log('🚩'.repeat(20));
-
-    allFailed.forEach((f, i) => {
-      console.log(`\n   ${i + 1}. ❌ [${f.module}] ${f.name}`);
-      if (f.detail) console.log(`      ↳ ${f.detail}`);
+  // Always create at least one test (the skip notice) so the module appears in
+  // the run output when staging is active.
+  if (imageTargets.length === 0) {
+    test('[Image/Carousel] Skipped — staging environment (production-only suite)', async () => {
+      console.log(`\n📦 MODULE: Image & Carousel Validation ${envTag}`);
+      console.log(`⚠️  SKIPPED — Image/carousel test runs in production only (staging images often 404).`);
+      pushResult('Image & Carousel', 'Image & Carousel (one-per-FMS)', 'PASSED', 'Skipped: staging only — runs in production');
+      test.skip();
     });
-
-    console.log('\n' + '🚩'.repeat(20));
   }
 
-  if (allExpected.length > 0) {
-    console.log('\n\n');
-    console.log('⚠️'.repeat(20));
-    console.log('⚠️  EXPECTED FAILURES (known issues):');
-    console.log('⚠️'.repeat(20));
+  for (const loc of imageTargets) {
+    test(`[Image/Carousel] ${clientLabel(loc.label)} [${loc.version}/${loc.fms}]`, async ({ page }) => {
+      console.log(`\n📦 MODULE: Image & Carousel Validation ${envTag}`);
+      if (isMiniMall(loc.label) || isMiniMall(loc.url)) console.log(`⭐ MINI MALL CLIENT DETECTED`);
+      console.log(`🔍 Location : ${loc.label} [${loc.version} / ${loc.fms}]`);
+      console.log(`   URL     : ${loc.url}`);
 
-    allExpected.forEach((f, i) => {
-      console.log(`\n   ${i + 1}. ⚠️ [${f.module}] ${f.name}`);
-      if (f.detail) console.log(`      ↳ ${f.detail}`);
+      let scan: PageImageScan | null = null;
+
+      try {
+        scan = await scanLocationImages(page, loc.url);
+      } catch (e) {
+        const msg = (e as Error).message ?? 'Unknown error';
+        console.log(`   ❌ Page failed to load / scan: ${msg}`);
+        pushResult('Image & Carousel', clientLabel(loc.label), 'FAILED', `Scan error: ${msg.substring(0, 120)}`);
+        throw e;
+      }
+
+      const totalChecked      = scan.top.total + scan.units.total + scan.bottom.total;
+      const totalBroken       = countTotalBroken(scan);
+      const unitsStructureRegression = hasUnitsStructureRegression(scan);
+
+      // ── Clean output: only show what matters ───────────────────────────
+      if (totalBroken === 0 && !unitsStructureRegression) {
+        if (totalChecked === 0) {
+          console.log(`   ⚠️  No images found — page may be empty / unreachable.`);
+          pushResult('Image & Carousel', clientLabel(loc.label), 'FAILED', 'No images found at all');
+          expect(totalChecked, `No images found on ${loc.label} — page may be broken`).toBeGreaterThan(0);
+        } else {
+          console.log(`   ✅ All ${totalChecked} images OK`);
+          pushResult('Image & Carousel', clientLabel(loc.label), 'PASSED', `${totalChecked} images OK`);
+        }
+      } else {
+        // Show only the broken items, identified by alt text
+        for (const img of scan.units.failed)
+          console.log(`   ❌ Unit image MISSING (network) — ${img.alt || 'no alt'}`);
+        for (const img of scan.units.placeholders)
+          console.log(`   ❌ Unit image PLACEHOLDER — ${img.alt || 'no alt'}`);
+        const topBroken = scan.top.failed.length + scan.top.placeholders.length;
+        const bottomBroken = scan.bottom.failed.length + scan.bottom.placeholders.length;
+        if (topBroken > 0)    console.log(`   ❌ Top carousel: ${topBroken} broken`);
+        if (bottomBroken > 0) console.log(`   ❌ Bottom images: ${bottomBroken} broken`);
+        if (unitsStructureRegression)
+          console.log(`   🚨 Unit rows exist but 0 unit images detected — selectors may need updating`);
+
+        const unitIssues = scan.units.failed.length + scan.units.placeholders.length;
+        const detail = [
+          unitIssues > 0 ? `${unitIssues} unit image(s) broken` : null,
+          topBroken > 0 ? `${topBroken} carousel broken` : null,
+          bottomBroken > 0 ? `${bottomBroken} bottom broken` : null,
+          unitsStructureRegression ? 'STRUCTURE REGRESSION' : null,
+        ].filter(Boolean).join(', ');
+        pushResult('Image & Carousel', clientLabel(loc.label), 'FAILED', detail);
+
+        if (unitsStructureRegression) {
+          expect.soft(scan.units.total,
+            `Structure regression at ${loc.label}: unit rows present but 0 unit images detected.`
+          ).toBeGreaterThan(0);
+        }
+        if (totalBroken > 0) {
+          const brokenAlts = [
+            ...scan.units.failed.map(f => f.alt || 'no alt'),
+            ...scan.units.placeholders.map(f => f.alt || 'no alt'),
+          ];
+          const unitMsg = brokenAlts.length > 0 ? `Unit images: ${brokenAlts.join(', ')}` : '';
+          const otherMsg = [
+            topBroken > 0 ? `${topBroken} carousel` : '',
+            bottomBroken > 0 ? `${bottomBroken} bottom` : '',
+          ].filter(Boolean).join(' + ');
+          expect(totalBroken,
+            `${loc.label}: ${totalBroken} broken image(s). ${unitMsg}${otherMsg ? ` | Other: ${otherMsg}` : ''}`
+          ).toBe(0);
+        }
+      }
     });
-
-    console.log('\n' + '⚠️'.repeat(20));
   }
-
-  if (allFailed.length === 0 && allExpected.length === 0) {
-    console.log('\n\n🎉 ALL TESTS PASSED — NO FAILURES!\n');
-  } else if (allFailed.length === 0) {
-    console.log('\n\n🎉 ALL TESTS PASSED (expected failures are known issues)\n');
-  }
-
-  // --- Mini Mall consolidated section ---
-  const allMiniMall = modules.flatMap(m =>
-    m.tests.filter(t => isMiniMall(t.name)).map(t => ({ ...t, module: m.module }))
-  );
-
-  if (allMiniMall.length > 0) {
-    const mmPassed = allMiniMall.filter(t => t.status === 'PASSED').length;
-    const mmFailed = allMiniMall.filter(t => t.status === 'FAILED').length;
-
-    console.log('\n\n');
-    console.log('⭐'.repeat(20));
-    console.log('⭐  MINI MALL STORAGE — DEDICATED REPORT');
-    console.log('⭐'.repeat(20));
-    console.log(`\n   Results: ✅ ${mmPassed} Passed   ❌ ${mmFailed} Failed   📋 ${allMiniMall.length} Total`);
-    console.log('-'.repeat(60));
-
-    for (const t of allMiniMall) {
-      const icon = t.status === 'PASSED' ? '✅' : '🚩';
-      console.log(`   ${icon} [${t.module}] ${t.name}`);
-      if (t.detail) console.log(`      ↳ ${t.detail}`);
-    }
-
-    if (mmFailed > 0) {
-      console.log('\n   ⚠️  MINI MALL HAS FAILURES — REVIEW ABOVE');
-    } else {
-      console.log('\n   🎉 MINI MALL — ALL CLEAR!');
-    }
-
-    console.log('-'.repeat(60));
-    console.log('⭐'.repeat(20));
-  }
-
-  console.log('\n' + '#'.repeat(80) + '\n');
 });
+
+
+// ============================================
+// GRAND SUMMARY — printed once by global-teardown.ts after ALL workers
+// (and retries) finish. Was firing per-worker via test.afterAll before,
+// which produced 5-7 duplicate summaries during a single run.
+// ============================================

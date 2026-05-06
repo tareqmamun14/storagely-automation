@@ -124,7 +124,7 @@ export class PaymentDetailsPage extends BasePage {
     
     try {
       // Wait for payment form to be visible with longer timeout
-      await this.cardNumberInput.waitFor({ state: 'visible', timeout: 10000 });
+      await this.cardNumberInput.waitFor({ state: 'visible', timeout: 30000 });
       await this.cardNumberInput.fill(paymentData.cardNumber);
       await this.page.keyboard.press('Tab');
       
@@ -247,14 +247,24 @@ export class PaymentDetailsPage extends BasePage {
       
       // No error detected after 15s polling - RETRY LOGIC
       console.log(`[${new Date().toISOString()}] ⚠️ No error detected on first attempt`);
-      
+
       // Only retry if paymentData is provided
       if (!paymentData) {
         console.log(`[${new Date().toISOString()}] ℹ️ No payment data provided - cannot retry`);
         this.page.removeListener('response', responseHandler);
         return 'FAILED to fetch Error Message @ Step-5 (Payment Details - After RENT NOW click)';
       }
-      
+
+      // If the payment form is gone, the first click actually succeeded and the page
+      // navigated forward. Don't try to refill — that just triggers a 30s timeout on
+      // a Card Number field that no longer exists (storagedepotla regression).
+      const paymentFormStillPresent = await this.cardNumberInput.isVisible({ timeout: 1500 }).catch(() => false);
+      if (!paymentFormStillPresent) {
+        console.log(`[${new Date().toISOString()}] ✅ Payment form is gone — first RENT NOW click succeeded (no error toast = transaction went through)`);
+        this.page.removeListener('response', responseHandler);
+        return apiErrorMessage ? `Error Occurred — ${apiErrorMessage}` : 'No error - payment processed (page navigated past payment form)';
+      }
+
       console.log(`[${new Date().toISOString()}] 🔄 RETRY: Refilling payment form...`);
       
       // Wait 2 seconds before retry

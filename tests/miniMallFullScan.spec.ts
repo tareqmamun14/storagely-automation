@@ -1,6 +1,8 @@
 import { test, expect, Page } from '@playwright/test';
 import * as fs from 'fs';
 import * as path from 'path';
+import { scanPageImages, hasUnitsStructureRegression, countTotalBroken, shortSrc, type PageImageScan, type SectionScan } from '../utils/imageScan';
+import { CONFLICTING_FEATURE_PAIRS as SHARED_PAIRS } from '../utils/unitConflictScan';
 
 // Real-time log helper: writes to both console AND scan-progress.txt
 // so progress is visible even before the test exits (Node.js buffers stdout
@@ -34,30 +36,10 @@ function log(msg: string): void {
 
 const MINI_MALL_BASE = 'https://minimallstorage.com';
 
-// Conflicting feature pairs — same as in uiComponents-validation.spec.ts Section 6.
-// Append new pairs here if new contradictory combinations are ever discovered.
-const CONFLICTING_FEATURE_PAIRS: Array<{ a: string; b: string; note: string }> = [
-  {
-    a: 'Climate Controlled',
-    b: 'Non-Climate Controlled',
-    note: 'A unit cannot be both climate-controlled AND non-climate-controlled',
-  },
-  {
-    a: 'Covered',
-    b: 'Uncovered',
-    note: 'A unit cannot be both covered AND uncovered',
-  },
-  {
-    a: 'Drive Up',
-    b: 'Interior Hallway',
-    note: 'A unit cannot have both drive-up and interior hallway access',
-  },
-  {
-    a: 'Heated',
-    b: 'Non-Heated',
-    note: 'A unit cannot be both heated and non-heated',
-  },
-];
+// Conflicting feature pairs — sourced from utils/unitConflictScan.ts so all
+// scans (mini-mall, all-locations, ui-components) stay in sync. Append new
+// pairs there to roll them out everywhere at once.
+const CONFLICTING_FEATURE_PAIRS = SHARED_PAIRS;
 
 // ─── URL classification ───────────────────────────────────────────────────────
 
@@ -192,6 +174,15 @@ async function discoverAllLocations(page: Page): Promise<string[]> {
   return Array.from(facilityUrls);
 }
 
+// ─── Image / Carousel check (per facility) ────────────────────────────────────
+// Uses the shared scan in utils/imageScan.ts so all three suites
+// (uiComponents Module 8, miniMallFullScan, allLocationsScan) stay in sync.
+// The page is already navigated to by the conflict checker — we just need to
+// trigger lazy-loaders and read the per-section results.
+async function scanFacilityImages(page: Page): Promise<PageImageScan> {
+  return scanPageImages(page);
+}
+
 // ─── Conflict check ───────────────────────────────────────────────────────────
 
 interface ScanResult {
@@ -199,6 +190,7 @@ interface ScanResult {
   conflicts: string[];
   unitsChecked: number;
   errorMsg?: string;
+  images?: PageImageScan;
 }
 
 /**
@@ -255,10 +247,21 @@ async function checkUrlForConflicts(page: Page, url: string): Promise<ScanResult
       }
     }
 
+    // ── Image / Carousel scan (same page — already loaded) ───────────────
+    let images: PageImageScan | undefined;
+    try {
+      images = await scanFacilityImages(page);
+    } catch {
+      // image scan failures should not break the conflict check — they are
+      // surfaced as their own line in the summary.
+      images = undefined;
+    }
+
     return {
       status: conflicts.length > 0 ? 'failed' : 'passed',
       conflicts,
       unitsChecked: rowCount,
+      images,
     };
   } catch (e) {
     return {
@@ -337,13 +340,35 @@ test.describe('⭐ Mini Mall — Full Location Scan (All Sites)', () => {
 
     // ━━━ PHASE 2: Scan ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     log(`\n${DASH}`);
-    log('  Phase 2: Scanning each location for unit feature conflicts...');
+    log('  Phase 2: Scanning each location for unit feature conflicts + images/carousel...');
     log(`${DASH}\n`);
 
     const passed:  string[]                                                 = [];
     const failed:  Array<{ label: string; url: string; conflicts: string[] }> = [];
     const skipped: string[]                                                 = [];
     const errors:  Array<{ label: string; url: string; error: string }>    = [];
+
+    // Image scan results for the dedicated image summary section
+    type SectionName = 'TOP CAROUSEL' | 'UNIT IMAGES' | 'BOTTOM IMAGES';
+    interface ImageFailureEntry { section: SectionName; src: string; alt: string; kind: 'NETWORK' | 'PLACEHOLDER'; }
+    interface TinyImageEntry    { section: SectionName; src: string; width: number; height: number; }
+    interface ImageScanRecord {
+      label: string;
+      url: string;
+      top:    SectionScan;
+      units:  SectionScan;
+      bottom: SectionScan;
+      totalChecked: number;
+      totalBroken:  number;       // network failures + placeholder fallbacks
+      totalNetwork: number;
+      totalPlaceholder: number;
+      failures: ImageFailureEntry[];
+      tinyImages: TinyImageEntry[];
+      structureRegression: boolean;
+    }
+    const imagePassed: ImageScanRecord[] = [];
+    const imageFailed: ImageScanRecord[] = [];
+    const structureRegressions: ImageScanRecord[] = [];
 
     const pad = String(facilityUrls.length).length;
 
@@ -354,38 +379,121 @@ test.describe('⭐ Mini Mall — Full Location Scan (All Sites)', () => {
 
       const result = await checkUrlForConflicts(page, url);
 
+      // ── Build a one-line image suffix when image scan ran ──────────────
+      let imgTag = '';
+      if (result.images) {
+        const img = result.images;
+        const tot         = img.top.total + img.units.total + img.bottom.total;
+        const networkFld  = img.top.failed.length + img.units.failed.length + img.bottom.failed.length;
+        const placeholderFld = img.top.placeholders.length + img.units.placeholders.length + img.bottom.placeholders.length;
+        const totalBroken = networkFld + placeholderFld;
+        const tinyCount   = img.top.tiny.length + img.units.tiny.length + img.bottom.tiny.length;
+        const structureRegression = hasUnitsStructureRegression(img);
+
+        const tagParts: string[] = [];
+        if (totalBroken === 0) {
+          tagParts.push(`🖼️  ${tot}/${tot} images ✅`);
+        } else {
+          const subParts: string[] = [];
+          if (networkFld    > 0) subParts.push(`${networkFld} NETWORK`);
+          if (placeholderFld > 0) subParts.push(`${placeholderFld} PLACEHOLDER`);
+          tagParts.push(`🖼️  ${tot - totalBroken}/${tot} images — ${subParts.join(' + ')} ❌`);
+        }
+        if (tinyCount > 0) tagParts.push(`⚠️ ${tinyCount} tiny`);
+        if (structureRegression) tagParts.push(`🚨 STRUCTURE REGRESSION`);
+        imgTag = `  |  ${tagParts.join('  |  ')}`;
+
+        const failures: ImageFailureEntry[] = [
+          ...img.top.failed.map(f         => ({ section: 'TOP CAROUSEL'  as const, src: f.src, alt: f.alt, kind: 'NETWORK'     as const })),
+          ...img.top.placeholders.map(f   => ({ section: 'TOP CAROUSEL'  as const, src: f.src, alt: f.alt, kind: 'PLACEHOLDER' as const })),
+          ...img.units.failed.map(f       => ({ section: 'UNIT IMAGES'   as const, src: f.src, alt: f.alt, kind: 'NETWORK'     as const })),
+          ...img.units.placeholders.map(f => ({ section: 'UNIT IMAGES'   as const, src: f.src, alt: f.alt, kind: 'PLACEHOLDER' as const })),
+          ...img.bottom.failed.map(f      => ({ section: 'BOTTOM IMAGES' as const, src: f.src, alt: f.alt, kind: 'NETWORK'     as const })),
+          ...img.bottom.placeholders.map(f=> ({ section: 'BOTTOM IMAGES' as const, src: f.src, alt: f.alt, kind: 'PLACEHOLDER' as const })),
+        ];
+        const tinyImages: TinyImageEntry[] = [
+          ...img.top.tiny.map(t    => ({ section: 'TOP CAROUSEL'  as const, src: t.src, width: t.width, height: t.height })),
+          ...img.units.tiny.map(t  => ({ section: 'UNIT IMAGES'   as const, src: t.src, width: t.width, height: t.height })),
+          ...img.bottom.tiny.map(t => ({ section: 'BOTTOM IMAGES' as const, src: t.src, width: t.width, height: t.height })),
+        ];
+        const record: ImageScanRecord = {
+          label, url,
+          top:    img.top,
+          units:  img.units,
+          bottom: img.bottom,
+          totalChecked:     tot,
+          totalBroken,
+          totalNetwork:     networkFld,
+          totalPlaceholder: placeholderFld,
+          failures,
+          tinyImages,
+          structureRegression,
+        };
+        if (totalBroken > 0) imageFailed.push(record); else imagePassed.push(record);
+        if (structureRegression) structureRegressions.push(record);
+      }
+
       if (result.status === 'passed') {
-        log(`${prefix} ${label} — ✅ PASS  (${result.unitsChecked} units)`);
+        log(`${prefix} ${label} — ✅ PASS  (${result.unitsChecked} units)${imgTag}`);
         passed.push(label);
       } else if (result.status === 'failed') {
-        log(`${prefix} ${label} — ❌ FAIL  (${result.conflicts.length} conflict(s))`);
+        log(`${prefix} ${label} — ❌ FAIL  (${result.conflicts.length} conflict(s))${imgTag}`);
         result.conflicts.forEach(c => log(`          🚨 ${c}`));
         failed.push({ label, url, conflicts: result.conflicts });
       } else if (result.status === 'skipped') {
-        log(`${prefix} ${label} — ○  SKIP  (no unit listings)`);
+        log(`${prefix} ${label} — ○  SKIP  (no unit listings)${imgTag}`);
         skipped.push(label);
       } else {
         log(`${prefix} ${label} — ⚠️  ERROR`);
         log(`          ${result.errorMsg}`);
         errors.push({ label, url, error: result.errorMsg ?? 'unknown error' });
       }
+
+      // Print broken image list immediately under the line for quick scanning
+      if (result.images) {
+        const allBroken = [
+          ...result.images.top.failed.map(f         => ({ s: 'TOP CAROUSEL',  k: 'NETWORK',     ...f })),
+          ...result.images.top.placeholders.map(f   => ({ s: 'TOP CAROUSEL',  k: 'PLACEHOLDER', ...f })),
+          ...result.images.units.failed.map(f       => ({ s: 'UNIT IMAGES',   k: 'NETWORK',     ...f })),
+          ...result.images.units.placeholders.map(f => ({ s: 'UNIT IMAGES',   k: 'PLACEHOLDER', ...f })),
+          ...result.images.bottom.failed.map(f      => ({ s: 'BOTTOM IMAGES', k: 'NETWORK',     ...f })),
+          ...result.images.bottom.placeholders.map(f=> ({ s: 'BOTTOM IMAGES', k: 'PLACEHOLDER', ...f })),
+        ];
+        for (const f of allBroken) {
+          log(`          🖼️  [${f.s}/${f.k}] ${shortSrc(f.src)}${f.alt ? `  alt="${f.alt}"` : ''}`);
+        }
+      }
     }
 
     // ━━━ PHASE 3: Summary ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     const scanned = passed.length + failed.length + errors.length;
+
+    // Aggregate image counts (used by both the high-level summary line and the
+    // detailed failure section below).
+    const totalImgChecked     = imagePassed.concat(imageFailed).reduce((n, r) => n + r.totalChecked, 0);
+    const totalImgBroken      = imageFailed.reduce((n, r) => n + r.totalBroken,      0);
+    const totalImgNetwork     = imageFailed.reduce((n, r) => n + r.totalNetwork,     0);
+    const totalImgPlaceholder = imageFailed.reduce((n, r) => n + r.totalPlaceholder, 0);
+    const totalImgLoaded      = totalImgChecked - totalImgBroken;
 
     log(`\n${BAR}`);
     log('  ⭐  MINI MALL FULL SCAN — RESULTS SUMMARY');
     log(`${BAR}`);
     log(`  Discovered     : ${facilityUrls.length} facility page(s) from navbar`);
     log(`  Scanned        : ${scanned}  |  Skipped: ${skipped.length} (no unit listings on page)`);
-    log(`  ✅  Passed     : ${passed.length}`);
-    log(`  ❌  Failed     : ${failed.length}`);
+    log(`  Unit Conflicts : ✅ ${passed.length} passed  |  ❌ ${failed.length} failed`);
+    log(`  Image/Carousel : ✅ ${imagePassed.length} passed  |  ❌ ${imageFailed.length} failed  (sections checked: TOP CAROUSEL, UNIT IMAGES, BOTTOM IMAGES)`);
+    if (imageFailed.length > 0) {
+      log(`     Breakdown   : ${totalImgNetwork} network failure(s) + ${totalImgPlaceholder} placeholder fallback(s)`);
+    }
+    if (structureRegressions.length > 0) {
+      log(`  🚨 Structure   : ${structureRegressions.length} location(s) have unit rows but ZERO unit images — selectors likely outdated`);
+    }
     if (errors.length > 0) {
       log(`  ⚠️   Load errors: ${errors.length}`);
     }
 
-    // ── Failed locations ──────────────────────────────────────────────────────
+    // ── Failed locations (unit feature conflicts) ─────────────────────────────
     if (failed.length > 0) {
       log(`\n${DASH}`);
       log('  ❌  FAILED LOCATIONS — Contradictory Unit Feature Labels Detected:');
@@ -396,6 +504,76 @@ test.describe('⭐ Mini Mall — Full Location Scan (All Sites)', () => {
         f.conflicts.forEach(c => log(`     🚨  ${c}`));
       });
     }
+
+    // ── Image / Carousel — failures (every broken image, grouped by location) ─
+    if (imageFailed.length > 0) {
+      log(`\n${DASH}`);
+      log('  🖼️   FAILED IMAGES / CAROUSEL — Locations With Broken or Placeholder Images:');
+      log(`${DASH}`);
+      imageFailed.forEach((r, idx) => {
+        log(`\n  ${idx + 1}. ${r.label}`);
+        log(`     URL    : ${r.url}`);
+        log(`     Sections: top ${r.top.loaded}/${r.top.total} | units ${r.units.loaded}/${r.units.total} | bottom ${r.bottom.loaded}/${r.bottom.total}`);
+        if (r.totalNetwork     > 0) log(`     Network failures   : ${r.totalNetwork}`);
+        if (r.totalPlaceholder > 0) log(`     Placeholder fallbacks: ${r.totalPlaceholder} (real image missing on backend → "No Image Available" graphic shown)`);
+        r.failures.forEach(f => {
+          const altPart = f.alt ? `  alt="${f.alt}"` : '';
+          log(`     ❌ [${f.section}/${f.kind}] ${shortSrc(f.src)}${altPart}`);
+        });
+      });
+    }
+
+    // ── Image / Carousel — successes (which sections were checked & passed) ───
+    if (imagePassed.length > 0) {
+      log(`\n${DASH}`);
+      log('  🖼️   IMAGE / CAROUSEL — Locations That Passed (sections checked):');
+      log(`${DASH}`);
+      imagePassed.forEach(r => {
+        const parts: string[] = [];
+        const dimSummary = (s: SectionScan) =>
+          s.dims ? ` (dims ${s.dims.minW}×${s.dims.minH}→${s.dims.maxW}×${s.dims.maxH})` : '';
+        if (r.top.total    > 0) parts.push(`TOP CAROUSEL ✅ ${r.top.loaded}/${r.top.total}${dimSummary(r.top)}`);
+        if (r.units.total  > 0) parts.push(`UNIT IMAGES ✅ ${r.units.loaded}/${r.units.total}${dimSummary(r.units)}`);
+        if (r.bottom.total > 0) parts.push(`BOTTOM IMAGES ✅ ${r.bottom.loaded}/${r.bottom.total}${dimSummary(r.bottom)}`);
+        if (parts.length === 0) parts.push('no images detected on page');
+        log(`  ✅ ${r.label} — ${parts.join('  |  ')}`);
+        if (r.tinyImages.length > 0) {
+          log(`     ⚠️  ${r.tinyImages.length} loaded image(s) suspiciously small (<30×30) — possible placeholder`);
+        }
+      });
+    }
+
+    // ── Structure regressions (unit rows present but 0 unit images detected) ──
+    if (structureRegressions.length > 0) {
+      log(`\n${DASH}`);
+      log('  🚨  STRUCTURE REGRESSION — Unit rows in DOM but ZERO unit images detected:');
+      log(`${DASH}`);
+      log('  → Unit row markup likely changed (e.g. .listviewrows children restructured).');
+      log('  → Update unit-image selectors in scanFacilityImages() inside miniMallFullScan.spec.ts.');
+      structureRegressions.forEach((r, idx) => {
+        log(`\n  ${idx + 1}. ${r.label}`);
+        log(`     URL: ${r.url}`);
+      });
+    }
+
+    // ── Tiny-image summary (loaded but suspiciously small — possible placeholders) ──
+    const tinyTotal = imagePassed.concat(imageFailed).reduce((n, r) => n + r.tinyImages.length, 0);
+    if (tinyTotal > 0) {
+      log(`\n${DASH}`);
+      log(`  ⚠️   TINY IMAGES (<30×30) — ${tinyTotal} suspicious loaded image(s) across all locations:`);
+      log(`${DASH}`);
+      log('  → These DECODED successfully but are smaller than 30px — likely 1×1 placeholders or icons.');
+      log('  → Not flagged as a hard failure; review to confirm.');
+      const allTiny = imagePassed.concat(imageFailed)
+        .flatMap(r => r.tinyImages.map(t => ({ label: r.label, ...t })));
+      // Show up to 20 to keep noise down
+      allTiny.slice(0, 20).forEach((t, idx) => {
+        log(`  ${idx + 1}. [${t.section}] ${t.width}×${t.height}  ${shortSrc(t.src)}  (${t.label})`);
+      });
+      if (allTiny.length > 20) log(`  …and ${allTiny.length - 20} more`);
+    }
+
+    log(`\n  🖼️   Image/Carousel TOTAL: ${totalImgLoaded}/${totalImgChecked} image(s) loaded across ${imagePassed.length + imageFailed.length} location(s)`);
 
     // ── Load errors ───────────────────────────────────────────────────────────
     if (errors.length > 0) {
@@ -411,13 +589,25 @@ test.describe('⭐ Mini Mall — Full Location Scan (All Sites)', () => {
 
     log(`\n${BAR}\n`);
 
-    // Fail the Playwright test if any conflicts were found
-    expect(
-      failed.length,
+    // Fail the Playwright test if any of: unit-feature conflicts, broken images,
+    // or structure regressions were found — all three surfaced together.
+    const conflictMsg = failed.length === 0 ? '' :
       `${failed.length} Mini Mall location(s) have contradictory unit feature labels:\n` +
-      failed.map(f =>
-        `\n• ${f.label}\n  ${f.url}\n  ${f.conflicts.map(c => `🚨 ${c}`).join('\n  ')}`
-      ).join('\n')
+      failed.map(f => `\n• ${f.label}\n  ${f.url}\n  ${f.conflicts.map(c => `🚨 ${c}`).join('\n  ')}`).join('\n');
+
+    const imageMsg = imageFailed.length === 0 ? '' :
+      `\n\n${imageFailed.length} Mini Mall location(s) have broken images/carousel (${totalImgBroken} broken: ${totalImgNetwork} network + ${totalImgPlaceholder} placeholder):\n` +
+      imageFailed.map(r => `\n• ${r.label}\n  ${r.url}\n  ` +
+        r.failures.map(f => `🖼️  [${f.section}/${f.kind}] ${f.src}${f.alt ? ` (alt="${f.alt}")` : ''}`).join('\n  ')
+      ).join('\n');
+
+    const structureMsg = structureRegressions.length === 0 ? '' :
+      `\n\n${structureRegressions.length} Mini Mall location(s) have unit rows but ZERO unit images detected — selectors likely outdated:\n` +
+      structureRegressions.map(r => `\n• ${r.label}\n  ${r.url}`).join('\n');
+
+    expect(
+      failed.length + imageFailed.length + structureRegressions.length,
+      (conflictMsg + imageMsg + structureMsg).trim() || 'mini mall scan failed'
     ).toBe(0);
   });
 });

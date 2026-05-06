@@ -17,13 +17,31 @@ export class RentalDetailsPage extends BasePage {
       .or(this.page.getByPlaceholder('Street address', { exact: true })); 
   }
   private get cityInput() { return this.page.getByPlaceholder('City'); }
-  private get zipCodeInput() { 
-    return this.page.getByRole('textbox', { name: 'Zip' })
-      .or(this.page.getByRole('textbox', { name: 'Postal' }))
-      .or(this.page.getByPlaceholder(/Zip Code|Postal Code|ZIP/)); 
+  private get zipCodeInput() {
+    // .first() avoids strict-mode hangs when a page has multiple zip inputs
+    // (e.g. tenant + alternate-contact). Each branch is narrowed to its first match.
+    return this.page.getByRole('textbox', { name: 'Zip' }).first()
+      .or(this.page.getByRole('textbox', { name: 'Postal' }).first())
+      .or(this.page.getByPlaceholder(/Zip Code|Postal Code|ZIP/i).first());
   }
-  private get datepicker() { return this.page.locator('.datepicker-days .today.active.day'); }
-  private get continueButton() { return this.page.getByRole('button', { name: 'CONTINUE TO NEXT STEP' }); }
+  private get datepicker() {
+    // Bootstrap datepicker variants — try active day first, then any selectable day.
+    return this.page.locator('.datepicker-days .today.active.day').first()
+      .or(this.page.locator('.datepicker-days td.day.active').first())
+      .or(this.page.locator('.datepicker-days td.today:not(.disabled)').first())
+      .or(this.page.locator('.datepicker-days td.day:not(.disabled):not(.old):not(.new)').first());
+  }
+  private get continueButton() {
+    // Production sometimes ships slightly different button text/casing per FMS theme.
+    // Falls back from most-specific to most-generic to keep the click bounded.
+    return this.page.getByRole('button', { name: /CONTINUE TO NEXT STEP/i })
+      .or(this.page.getByRole('link',   { name: /CONTINUE TO NEXT STEP/i }))
+      .or(this.page.getByRole('button', { name: /continue to next/i }))
+      .or(this.page.getByRole('button', { name: /^next step$/i }))
+      .or(this.page.getByRole('button', { name: /^continue$/i }))
+      .or(this.page.locator('button[type="submit"]:has-text("Continue"), input[type="submit"][value*="Continue" i]'))
+      .first();
+  }
 
   /**
    * Fill out the rental details form - CRITICAL STEP that must succeed
@@ -93,29 +111,24 @@ export class RentalDetailsPage extends BasePage {
    */
   private async fillZipCode(zipCode: string): Promise<void> {
     console.log(`Attempting to fill zip code: ${zipCode}`);
-    
+
     try {
-      // Wait for zip code input to be available
+      // Bound every step so a hung locator can't consume the whole 360s test timeout.
       await this.zipCodeInput.waitFor({ state: 'visible', timeout: 10000 });
-      await this.wait(500);
-      
-      // First try to click the zip code input to ensure it's focused
+      await this.wait(300);
+
       await this.zipCodeInput.click({ timeout: 5000 });
-      await this.wait(500);
-      
-      // Then fill the zip code
       await this.zipCodeInput.fill(zipCode, { timeout: 5000 });
       console.log(`✓ Successfully filled zip code: ${zipCode}`);
     } catch (error) {
-      console.warn(`Primary zip code method failed: ${error}`);
-      
-      // Try alternative approaches if the main one fails
+      console.warn(`Primary zip code method failed: ${(error as Error).message}`);
+
+      // Fallback: placeholder match scoped to the first match (avoids strict-mode hang).
       try {
-        const zipByPlaceholder = this.page.getByPlaceholder(/Zip|Postal/i);
+        const zipByPlaceholder = this.page.getByPlaceholder(/Zip|Postal/i).first();
         await zipByPlaceholder.waitFor({ state: 'visible', timeout: 5000 });
-        
-        await zipByPlaceholder.first().click();
-        await zipByPlaceholder.first().fill(zipCode);
+        await zipByPlaceholder.click({ timeout: 5000 });
+        await zipByPlaceholder.fill(zipCode, { timeout: 5000 });
         console.log(`✓ Successfully filled zip code using placeholder approach: ${zipCode}`);
       } catch (fallbackError) {
         const errorMsg = `CRITICAL ERROR: Unable to fill zip code field with value: ${zipCode} - ${(fallbackError as Error).message}`;
@@ -334,20 +347,43 @@ export class RentalDetailsPage extends BasePage {
    */
   private async proceedToNextStep(): Promise<void> {
     console.log('Attempting to proceed to next step - CRITICAL STEP');
-    
+
     try {
       await this.wait(500);
-      
-      await this.continueButton.waitFor({ state: 'visible', timeout: 15000 });
-      await this.continueButton.scrollIntoViewIfNeeded();
-      await this.wait(500);
-      
-      // Single click attempt with proper timeout
-      console.log('Continue button click attempt 1');
-      await this.continueButton.click({ timeout: 15000 });
-      console.log('✓ Successfully clicked continue button');
-      
-      await this.wait(1500); // Reduced from 3000ms - Wait for navigation to next step
+
+      // Primary: the (now broadened) continueButton locator chain.
+      try {
+        await this.continueButton.waitFor({ state: 'visible', timeout: 15000 });
+        await this.continueButton.scrollIntoViewIfNeeded();
+        await this.wait(300);
+        console.log('Continue button click attempt 1');
+        await this.continueButton.click({ timeout: 15000 });
+        console.log('✓ Successfully clicked continue button');
+        await this.wait(1500);
+        return;
+      } catch (primaryError) {
+        console.warn(`⚠️ Primary continue-button locator failed: ${(primaryError as Error).message}`);
+      }
+
+      // Fallback: scan all buttons for any text that looks like "next" / "continue".
+      // Rationale: some FMS skins ship slightly different copy in production vs staging.
+      const buttonHandles = await this.page.locator('button, a[role="button"], input[type="submit"]').all();
+      for (const btn of buttonHandles) {
+        const text = ((await btn.innerText().catch(() => '')) || (await btn.getAttribute('value').catch(() => '')) || '').trim();
+        if (!text) continue;
+        if (/continue|next step|proceed/i.test(text) && /step|next|continue/i.test(text)) {
+          if (await btn.isVisible().catch(() => false)) {
+            console.log(`Continue fallback: clicking button with text "${text}"`);
+            await btn.scrollIntoViewIfNeeded().catch(() => undefined);
+            await btn.click({ timeout: 10000, force: true });
+            console.log('✓ Successfully clicked continue button (fallback)');
+            await this.wait(1500);
+            return;
+          }
+        }
+      }
+
+      throw new Error('No visible "continue/next step" button found on the form');
     } catch (error) {
       const errorMsg = `CRITICAL ERROR: Could not find or click continue button - ${(error as Error).message}`;
       console.error(errorMsg);

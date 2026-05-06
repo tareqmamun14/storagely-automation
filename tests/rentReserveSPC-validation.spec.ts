@@ -18,15 +18,14 @@ import * as path from 'path';
  * 
  * Test Flow:
  * 1. Navigate to storage listing page
- * 2. Click RESERVE button (if available) → Close popup
- * 3. Click RENT button
- * 4. Fill complete single-page form:
+ * 2. Click RENT button
+ * 3. Fill complete single-page form:
  *    - Tenant Details
  *    - Driver's License Details (if available)
  *    - Payment Details
  *    - Agreement Toggles
- * 5. Click RENT NOW
- * 6. Capture and report error from toast
+ * 4. Click RENT NOW
+ * 5. Capture and report error from toast
  * 
  * URLs tested:
  * - First Storage (Travelers Rest)

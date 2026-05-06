@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pkill -f \"control-panel/server.js\")",
+      "Bash(npx tsc *)",
+      "Bash(npx playwright *)",
+      "Bash(tasklist)",
+      "Bash(node_modules/.bin/tsc --noEmit)"
+    ]
+  }
+}

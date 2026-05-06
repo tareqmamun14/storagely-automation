@@ -15,7 +15,16 @@
     "deploy:only": "node deploy-only.js",
     "test:deploy": "npm run test:allure-only && npm run allure:generate && node quick-deploy.js",
     "test:allure:serve": "npm run test:allure-only && npm run allure:serve",
-    "test:ci": "npx playwright test --reporter=allure-playwright,html,junit"
+    "test:ci": "npx playwright test --reporter=allure-playwright,html,junit",
+    "panel": "node control-panel/server.js",
+    "run:v1":       "npx playwright test tests/rentReserveV1-validation.spec.ts",
+    "run:spc":      "npx playwright test tests/rentReserveSPC-validation.spec.ts",
+    "run:uic":      "npx playwright test tests/uiComponents-validation.spec.ts",
+    "run:admin":    "npx playwright test tests/adminPlatform-validation.spec.ts",
+    "run:datasync": "npx playwright test tests/data-sync-validation.spec.ts",
+    "run:minimallrent": "npx playwright test tests/miniMallRental.spec.ts --headed",
+    "run:minimall": "npx playwright test tests/miniMallFullScan.spec.ts --project=chrome",
+    "run:allpages": "npx playwright test tests/allLocationsScan.spec.ts --project=chrome"
   },
   "keywords": [],
   "author": "",
