@@ -24,7 +24,12 @@
     "run:datasync": "npx playwright test tests/data-sync-validation.spec.ts",
     "run:minimallrent": "npx playwright test tests/miniMallRental.spec.ts --headed",
     "run:minimall": "npx playwright test tests/miniMallFullScan.spec.ts --project=chrome",
-    "run:allpages": "npx playwright test tests/allLocationsScan.spec.ts --project=chrome"
+    "run:allpages": "npx playwright test tests/allLocationsScan.spec.ts --project=chrome",
+    "run:helix":          "npx playwright test --config=helix/playwright.config.ts --headed",
+    "run:helix:live":     "npx playwright test --config=helix/playwright.config.ts --project=live",
+    "run:helix:editor":   "npx playwright test --config=helix/playwright.config.ts --project=editor",
+    "run:helix:e2e":      "npx playwright test --config=helix/playwright.config.ts --project=live tests/e2e/",
+    "run:helix:health":   "npx playwright test --config=helix/playwright.config.ts --project=live tests/live/"
   },
   "keywords": [],
   "author": "",

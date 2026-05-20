@@ -91,7 +91,7 @@ One test case runs per client URL. Test ID uses the client's company name.
 - Navigation fails or the rent form cannot be reached.
 
 **Special cases:**
-- If the RENT button leads to a **Join Waitlist** flow → test is marked successful with note "No error — Join Waitlist option".
+- **Join Waitlist / Reserve-only sites** (e.g. `red-rocks-self-storage`): the listing page exposes only "Join our waitlist" or "RESERVE THIS UNIT" instead of a normal rent button. `clickRentButton()` detects this and returns `'WAITLIST'`. The spec short-circuits after Step 2 — no form fill, no payment submission — and records the result as successful with note `"No error - JOIN WAITLIST option (not direct rental)"`. This is **expected behavior** and must NOT be reported as a failure.
 - If the toast contains `"Alternate contact must have a first name, last name, and address"` → result is flagged with `[NEEDS ATTENTION]` in the output.
 
 ---

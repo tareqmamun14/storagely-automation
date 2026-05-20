@@ -13,6 +13,10 @@ scan-progress.txt
 # Environment / secrets
 .env
 .env.local
+.env.*
+
+# Helix test results
+helix/test-results/
 
 # Dependencies
 node_modules/

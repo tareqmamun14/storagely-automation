@@ -87,6 +87,7 @@ export const SINGLE_PAGE_RENT_URLS = {
     'https://test.staging.storagely-api.com/storage-star/storage-units/colorado/colorado-springs/aerotech-drive',             // Storage Star   | SSM
     'https://test.staging.storagely-api.com/storsafe-self-storage/storage-units/florida/melbourne/north-highway-1',           // Storsafe       | storEDGE
     'https://test.staging.storagely-api.com/smart-self-storage-ohio/storage-units/ohio/macedonia/bavaria-road',             // Smart Ohio     | SSM
+    'https://test.staging.storagely-api.com/easy-stop-storage/storage-units/texas/bushland/south-fm-2381',                  // Easy Stop      | SiteLink
     //'https://test.staging.storagely-api.com/mini-mall-storage/storage-units/alabama/courtland/highway-33',                  // Mini Mall      | SiteLink (disabled)
   ],
   [Environment.PRODUCTION]: [
@@ -99,7 +100,8 @@ export const SINGLE_PAGE_RENT_URLS = {
     'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',               // Red Rocks      | SiteLink
     'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',           // Storage Star   | SSM
     'https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road',                       // Smart Ohio     | SSM
-    //'https://www.storsafe.com/storage-units/florida/melbourne/north-highway-1',                   // Storsafe       | storEDGE (disabled)
+    'https://www.storsafe.com/storage-units/florida/melbourne/north-highway-1',                     // Storsafe       | storEDGE
+    'https://www.easystopstorage.com/storage-units/texas/bushland/south-fm-2381',                   // Easy Stop      | SiteLink
     //'https://minimallstorage.com/storage-units/arkansas/batesville/batesville-blvd',               // Mini Mall      | SiteLink (disabled)
   ]
 };
@@ -116,6 +118,7 @@ export const SINGLE_PAGE_FMS_PLATFORM: Record<string, string> = CURRENT_ENVIRONM
   'https://test.staging.storagely-api.com/storage-star/storage-units/colorado/colorado-springs/aerotech-drive':         'SSM',
   'https://test.staging.storagely-api.com/storsafe-self-storage/storage-units/florida/melbourne/north-highway-1':      'storEDGE',
   'https://test.staging.storagely-api.com/smart-self-storage-ohio/storage-units/ohio/macedonia/bavaria-road':           'SSM',
+  'https://test.staging.storagely-api.com/easy-stop-storage/storage-units/texas/bushland/south-fm-2381':               'SiteLink',
   //'https://test.staging.storagely-api.com/mini-mall-storage/storage-units/alabama/courtland/highway-33':              'SiteLink',
 } : {
   'https://www.firststorage.com/storage-units/south-carolina/travelers-rest/hawkins-road':     'storEDGE',
@@ -127,7 +130,8 @@ export const SINGLE_PAGE_FMS_PLATFORM: Record<string, string> = CURRENT_ENVIRONM
   'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue':            'SiteLink',
   'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive':        'SSM',
   'https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road':                   'SSM',
-  //'https://www.storsafe.com/storage-units/florida/melbourne/north-highway-1':                'storEDGE',
+  'https://www.storsafe.com/storage-units/florida/melbourne/north-highway-1':                  'storEDGE',
+  'https://www.easystopstorage.com/storage-units/texas/bushland/south-fm-2381':                'SiteLink',
   //'https://minimallstorage.com/storage-units/arkansas/batesville/batesville-blvd':            'SiteLink',
 };
 
@@ -144,7 +148,7 @@ export const CAPTCHA_CUSTOMER_URLS: string[] = CURRENT_ENVIRONMENT === Environme
   //'https://test.staging.storagely-api.com/yourway-storage/storage-units/georgia/augusta/walton-way-ext',                // YourWay
   //'https://test.staging.storagely-api.com/red-rocks-self-storage/storage-units/colorado/golden/west-colfax-avenue',     // Red Rocks
   //'https://test.staging.storagely-api.com/storage-star/storage-units/colorado/colorado-springs/aerotech-drive',         // Storage Star
-  'https://test.staging.storagely-api.com/storsafe-self-storage/storage-units/florida/melbourne/north-highway-1',       // Storsafe
+  //'https://test.staging.storagely-api.com/storsafe-self-storage/storage-units/florida/melbourne/north-highway-1',     // Storsafe (no captcha)
 ] : [
   'https://www.firststorage.com/storage-units/south-carolina/travelers-rest/hawkins-road',     // First Storage
   'https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue', // Columbia
@@ -265,6 +269,8 @@ const _BASE_STAGING_CORP_CODE_CLIENTS: Record<string, string> = {
   'bluebirdstorage':    '7ou5@H@W9bdM$i',
   'sunbirdstorage':     '7ou5@H@W9bdM$i',
   'mini-mall-storage':  'bright31SKIES!',
+  'storage-boss':       'P?artie42!',
+  'easy-stop-storage':  'E6oVs7YRD5Crst!',
 };
 
 // Optional Control-Panel runtime overrides (slug → corp code).

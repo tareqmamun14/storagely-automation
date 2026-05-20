@@ -59,6 +59,8 @@ const FMS_BY_SLUG = {
   'storage-boss':             'SiteLink',
   'storagedepotla':           'SiteLink',
   'selfstorage':              'SiteLink',
+  'easy-stop-storage':        'SiteLink',
+  'easystopstorage':          'SiteLink',
   // SSM
   'yourway-storage':          'SSM',
   'yourwaystorage':           'SSM',
@@ -162,6 +164,18 @@ function idFor(url) {
   } catch { return url; }
 }
 
+// ───────── Parse Helix client sites from helix/configs/urls.ts ─────────
+function parseHelixSites() {
+  try {
+    const content = fs.readFileSync(path.join(ROOT, 'helix', 'configs', 'urls.ts'), 'utf8');
+    const sites = [];
+    const re = /url:\s*'([^']+)'[\s\S]*?label:\s*'([^']+)'/g;
+    let m;
+    while ((m = re.exec(content))) sites.push({ url: m[1], label: m[2] });
+    return sites;
+  } catch { return []; }
+}
+
 // ───────── /api/config ─────────
 function buildConfigPayload() {
   const parsed = parseUrlsConfig();
@@ -173,8 +187,10 @@ function buildConfigPayload() {
   }
   // Combined client list for "Build Instance Regression" — staging only,
   // deduped by id across UI / SPC / V1, with which-suites-it-appears-in info.
+  // Also appends Mini Mall (SiteLink + Yardi) which are exposed by the
+  // dedicated minimallrent spec, not UI/SPC/V1.
   function buildInstanceClients() {
-    const map = new Map(); // id -> { id, label, fms, suites:Set }
+    const map = new Map(); // id -> { id, label, fms, suites:Set, sampleUrl, defaultChecked? }
     for (const suite of ['ui','spc','v1']) {
       for (const url of parsed[suite].staging) {
         const id = idFor(url);
@@ -182,10 +198,31 @@ function buildConfigPayload() {
         map.get(id).suites.add(suite);
       }
     }
+    // Mini Mall — biggest client. Toggled on by default in Build Instance mode.
+    // Same flow as test.staging, just URL is rewritten to the build base.
+    const miniMall = [
+      { id: 'mini-mall-storage',       label: '⭐ Mini Mall SiteLink — Sainte-Thérèse, QC', fms: 'SiteLink',
+        sampleUrl: 'https://test.staging.storagely-api.com/mini-mall-storage/storage-units/quebec/sainte-therese/30-place-sicard' },
+      { id: 'mini-mall-storage-yardi', label: '⭐ Mini Mall Yardi — Birmingham, AL',        fms: 'Yardi',
+        sampleUrl: 'https://test.staging.storagely-api.com/mini-mall-storage-yardi/storage-units/alabama/birmingham/richard-arrington-jr-blvd' },
+    ];
+    for (const mm of miniMall) {
+      const existing = map.get(mm.id);
+      if (existing) {
+        // Override fms + label from the rental-flow definition (more accurate
+        // than the generic FMS_BY_SLUG mapping, e.g. SiteLink vs Yardi variant).
+        existing.fms = mm.fms;
+        existing.label = mm.label;
+        existing.suites.add('minimallrent');
+        existing.defaultChecked = true;
+      } else {
+        map.set(mm.id, { ...mm, suites: new Set(['minimallrent']), defaultChecked: true });
+      }
+    }
     return Array.from(map.values()).map(c => ({ ...c, suites: Array.from(c.suites) }));
   }
   return {
-    suites: ['ui', 'spc', 'v1', 'admin', 'datasync', 'minimallrent', 'minimall', 'allpages', 'build'],
+    suites: ['ui', 'spc', 'v1', 'admin', 'datasync', 'minimallrent', 'minimall', 'allpages', 'build', 'helix'],
     clients: {
       ui:  { staging: decorate(parsed.ui.staging),  production: decorate(parsed.ui.production)  },
       spc: { staging: decorate(parsed.spc.staging), production: decorate(parsed.spc.production) },
@@ -212,6 +249,7 @@ function buildConfigPayload() {
       { id: 'location', label: 'Location Page',        grep: 'Location Page'        },
     ],
     defaultPresets: readJsonSafe(DEFAULT_PRESETS_FILE, []),
+    helix: { sites: parseHelixSites() },
   };
 }
 
@@ -251,13 +289,15 @@ function buildRunCommand(req) {
   if (req.minimallrent?.customSitelink) env.STORAGELY_MMRENT_CUSTOM_SITELINK = req.minimallrent.customSitelink;
   if (req.minimallrent?.customYardi)    env.STORAGELY_MMRENT_CUSTOM_YARDI    = req.minimallrent.customYardi;
   if (req.minimallrent?.filter)         env.STORAGELY_MMRENT_FILTER          = req.minimallrent.filter;
+  if (req.helix?.password)              env.HELIX_PASSWORD                   = req.helix.password;
+  if (req.helix?.customUrl)             env.HELIX_CUSTOM_URL                 = req.helix.customUrl;
 
   let suites = Array.isArray(req.suites) ? req.suites.slice() : [];
 
   // ── Build-Instance Regression mode ─────────────────────────────────
-  // When "build" suite is selected, we expand it to UI+SPC+V1, force staging,
-  // pin the build-instance host, and apply the combined client filter to
-  // each underlying suite. Corp codes (slug→code map) are passed as JSON.
+  // When "build" suite is selected we run RENTAL FLOWS ONLY (SPC + V1 + minimallrent).
+  // Force staging, pin the build-instance host, route Mini Mall clients to the
+  // minimallrent spec and everyone else to SPC + V1. Corp codes flow through as JSON.
   if (suites.includes('build')) {
     if (!req.build?.base?.trim()) return null; // require build base URL
     env.STORAGELY_ENV = 'staging';
@@ -267,15 +307,31 @@ function buildRunCommand(req) {
       const merged = { ...savedCorp, ...req.build.corpCodes };
       env.STORAGELY_CORP_CODES_JSON = JSON.stringify(merged);
     }
-    const csv = (req.build.clients || []).join(',');
-    if (csv) {
-      env.STORAGELY_UI_CLIENTS  = env.STORAGELY_UI_CLIENTS  || csv;
+
+    // Partition selected clients: Mini Mall (→ minimallrent spec) vs everything else (→ SPC+V1).
+    const all = req.build.clients || [];
+    const miniMallSitelink = all.includes('mini-mall-storage');
+    const miniMallYardi    = all.includes('mini-mall-storage-yardi');
+    const nonMiniMall      = all.filter(id => id !== 'mini-mall-storage' && id !== 'mini-mall-storage-yardi');
+
+    // Drop the synthetic "build" suite and rebuild the spec list from selection.
+    suites = suites.filter(s => s !== 'build');
+
+    if (nonMiniMall.length > 0) {
+      const csv = nonMiniMall.join(',');
       env.STORAGELY_SPC_CLIENTS = env.STORAGELY_SPC_CLIENTS || csv;
       env.STORAGELY_V1_CLIENTS  = env.STORAGELY_V1_CLIENTS  || csv;
+      if (!suites.includes('spc')) suites.push('spc');
+      if (!suites.includes('v1'))  suites.push('v1');
     }
-    // Drop the synthetic "build" entry, expand to actual specs (deduped).
-    suites = suites.filter(s => s !== 'build');
-    for (const s of ['ui','spc','v1']) if (!suites.includes(s)) suites.push(s);
+
+    if (miniMallSitelink || miniMallYardi) {
+      if (!suites.includes('minimallrent')) suites.push('minimallrent');
+      // If only one variant is checked, filter the mini-mall spec to it.
+      // If both are checked, no filter → spec runs both.
+      if (miniMallSitelink && !miniMallYardi) env.STORAGELY_MMRENT_FILTER = 'sitelink';
+      else if (miniMallYardi && !miniMallSitelink) env.STORAGELY_MMRENT_FILTER = 'yardi';
+    }
   }
   const specMap = {
     ui:            'tests/uiComponents-validation.spec.ts',
@@ -288,7 +344,28 @@ function buildRunCommand(req) {
     allpages:      'tests/allLocationsScan.spec.ts',
   };
   const specs = suites.map(s => specMap[s]).filter(Boolean);
-  if (specs.length === 0) return null;
+
+  // Helix suite — uses its own playwright config with project-based routing.
+  // Modules map to Playwright projects: e2e/live → 'live' project, editor → 'editor' project.
+  let helixCmd = null;
+  if (suites.includes('helix')) {
+    const hm = req.helix?.modules || ['e2e', 'live'];
+    const projects = new Set();
+    if (hm.includes('e2e') || hm.includes('live')) projects.add('live');
+    if (hm.includes('editor')) projects.add('editor');
+    if (projects.size > 0) {
+      const args = ['playwright', 'test', '--config=helix/playwright.config.ts'];
+      for (const p of projects) args.push('--project=' + p);
+      if (req.headed) args.push('--headed');
+      if (req.workers && Number(req.workers) > 0) args.push('--workers', String(req.workers));
+      helixCmd = { cmd: 'npx', args, env, allure: 'off' };
+    }
+  }
+
+  if (specs.length === 0 && !helixCmd) return null;
+
+  // Helix has its own config — if selected, it takes priority.
+  if (helixCmd) return helixCmd;
 
   const args = ['playwright', 'test', ...specs];
 
@@ -444,9 +521,14 @@ function stopRun(req, res, id) {
   const entry = runs.get(id);
   if (!entry) return send(res, 404, { error: 'unknown run' });
   if (entry.proc && !entry.done) {
-    try { entry.proc.kill('SIGTERM'); } catch {}
     if (process.platform === 'win32') {
+      // On Windows with shell:true the proc PID is cmd.exe. Calling
+      // proc.kill() would terminate cmd.exe first, orphaning the real
+      // child processes (node/playwright/browsers). Use taskkill /T /F
+      // instead — it walks the process tree and kills everything.
       try { spawn('taskkill', ['/pid', String(entry.proc.pid), '/T', '/F']); } catch {}
+    } else {
+      try { entry.proc.kill('SIGTERM'); } catch {}
     }
   }
   if (entry.allureProc) { try { entry.allureProc.kill(); } catch {} }

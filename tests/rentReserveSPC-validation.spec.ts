@@ -155,9 +155,22 @@ test.describe('Single-Page Rent Verification Tests', () => {
         // ============================================
         testResult.step = 'Rent Button';
         console.log('\n📍 STEP 2: Clicking RENT button...');
-        await storageListingPage.clickRentButton();
+        const rentButtonResult = await storageListingPage.clickRentButton();
         console.log('✅ RENT button clicked successfully');
-        
+
+        // Short-circuit on JOIN WAITLIST flow (e.g. red-rocks-self-storage) — site exposes
+        // only "Join our waitlist" / "Reserve" instead of a rent button. No form to fill.
+        if (rentButtonResult === 'WAITLIST') {
+          console.log('ℹ️  This site uses JOIN WAITLIST instead of direct rental — stopping here');
+          testResult.error = 'No error - JOIN WAITLIST option (not direct rental)';
+          testResult.success = true;
+          resultCollector.addResult(baseURL, companyName, platform, testResult.error, testResult.success);
+          writeResultToFile({ url: baseURL, company: companyName, platform, error: testResult.error, success: testResult.success, attempt: test.info().retry });
+          console.log(`\n✅ TEST COMPLETED (Join Waitlist scenario) FOR: ${companyName}`);
+          console.log(`${'='.repeat(80)}\n`);
+          return;
+        }
+
         // Wait for page to load
         await page.waitForTimeout(3000);
         

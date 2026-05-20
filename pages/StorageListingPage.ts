@@ -157,7 +157,7 @@ export class StorageListingPage extends BasePage {
       // SINGLE-PAGE CUSTOMER DETECTION
       // ==========================================
       // List of single-page customer domains
-      const singlePageDomains = ['firststorage.com', 'columbiaselfstorage.com', 'bluebirdstorage.ca', 'sunbirdstorage.com', 'purelystorage.com', 'yourwaystorage.com', 'redrocksstorage.com'];
+      const singlePageDomains = ['firststorage.com', 'columbiaselfstorage.com', 'bluebirdstorage.ca', 'sunbirdstorage.com', 'purelystorage.com', 'yourwaystorage.com', 'redrocksstorage.com', 'storsafe.com', 'storsafe-self-storage'];
       const pageUrl = this.page.url();
       const isSinglePageCustomer = singlePageDomains.some(domain => pageUrl.includes(domain));
       
@@ -298,18 +298,23 @@ export class StorageListingPage extends BasePage {
         console.log(`✅ [${Date.now() - startTime}ms] Strategy 4 (table/visible rent buttons): Found ${count} button(s)`);
       }
       
-      // STRATEGY 5: If no rent buttons, check for RESERVE/WAITLIST buttons (SiteLink platforms)
+      // STRATEGY 5: If no rent buttons, check for RESERVE/WAITLIST buttons or links (SiteLink platforms)
+      // Includes <a> variants because some sites (e.g. red-rocks-self-storage) render
+      // "Join our waitlist" as a link rather than a <button>.
       if (count === 0) {
         console.log(`⏳ [${Date.now() - startTime}ms] No RENT buttons, checking for JOIN WAITLIST...`);
-        rentButtons = this.page.locator('button:has-text("Join Waitlist"), button:has-text("RESERVE")');
+        rentButtons = this.page.locator(
+          'button:has-text("Join Waitlist"), button:has-text("Join our waitlist"), button:has-text("RESERVE"), ' +
+          'a:has-text("Join Waitlist"), a:has-text("Join our waitlist"), a:has-text("Reserve this unit")'
+        );
         count = await rentButtons.count().catch(() => 0);
         console.log(`✅ [${Date.now() - startTime}ms] Strategy 5 (waitlist/reserve): Found ${count} button(s)`);
-        
+
         if (count > 0) {
           console.log(`⚠️  WARNING: Using JOIN WAITLIST instead of direct rent (SiteLink platform)`);
         }
       }
-      
+
       // STRATEGY 6: Last resort - look for ANY link/button that has step_four or checkout in href
       if (count === 0) {
         console.log(`⏳ [${Date.now() - startTime}ms] All strategies failed, trying fallback checkout links...`);
@@ -317,7 +322,24 @@ export class StorageListingPage extends BasePage {
         count = await rentButtons.count().catch(() => 0);
         console.log(`✅ [${Date.now() - startTime}ms] Strategy 6 (fallback checkout): Found ${count} button(s)`);
       }
-      
+
+      // NO-BUTTON WAITLIST FALLBACK: page exposes only "Join our waitlist" text with no
+      // interactive element — treat as a WAITLIST scenario rather than failing the test.
+      if (count === 0) {
+        const waitlistTextVisible = await this.page
+          .getByText(/join our waitlist|join the waitlist|join waitlist/i)
+          .first()
+          .isVisible({ timeout: 1000 })
+          .catch(() => false);
+        if (waitlistTextVisible) {
+          console.log(`⚠️  [${Date.now() - startTime}ms] No rent/reserve button found, but page shows "Join our waitlist" text — treating as WAITLIST scenario`);
+          console.log(`${'='.repeat(70)}\n`);
+          const totalDuration = Date.now() - startTime;
+          console.log(`[${new Date().toISOString()}] ✅ Rent button completed (${totalDuration}ms) - WAITLIST (text only)`);
+          return 'WAITLIST';
+        }
+      }
+
       if (count === 0) {
         throw new Error('No rent, pricing option, reserve, or waitlist buttons found on page');
       }
@@ -435,7 +457,8 @@ export class StorageListingPage extends BasePage {
       // ==========================================
       // CHECK IF THIS IS A WAITLIST SCENARIO
       // ==========================================
-      if (buttonText?.includes('Waitlist') || buttonText?.includes('RESERVE')) {
+      // Case-insensitive so we catch "Join our waitlist", "join waitlist", "Reserve this unit" etc.
+      if (/waitlist|reserve/i.test(buttonText ?? '')) {
         console.log(`⚠️  WAITLIST/RESERVE scenario detected - test will stop here`);
         console.log(`${'='.repeat(70)}\n`);
         const totalDuration = Date.now() - startTime;

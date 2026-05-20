@@ -1,0 +1,5 @@
+# Auth session state (contains cookies — never commit)
+fixtures/auth/
+
+# Test artifacts
+test-results/

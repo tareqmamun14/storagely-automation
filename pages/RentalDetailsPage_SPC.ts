@@ -19,58 +19,61 @@ export class RentalDetailsPageSinglePage extends BasePage {
   // ============================================
   // TENANT DETAILS SECTION - LOCATORS
   // ============================================
+  // NOTE: tenant fields use .first() because some platforms (e.g. storsafe-self-storage)
+  // render duplicate name="first_name"/"last_name"/etc inputs on the same page — likely
+  // a hidden/secondary section. Billing equivalents below use .last() to pick the payment copy.
   private get firstNameField() {
-    return this.page.getByRole('textbox', { name: 'First name' })
-      .or(this.page.locator('input[name="first_name"], input[name="firstName"]'))
-      .or(this.page.getByPlaceholder('First name'));
+    return this.page.getByRole('textbox', { name: 'First name' }).first()
+      .or(this.page.locator('input[name="first_name"], input[name="firstName"]').first())
+      .or(this.page.getByPlaceholder('First name').first());
   }
-  
+
   private get lastNameField() {
-    return this.page.getByRole('textbox', { name: 'Last name' })
-      .or(this.page.locator('input[name="last_name"], input[name="lastName"]'))
-      .or(this.page.getByPlaceholder('Last name'));
+    return this.page.getByRole('textbox', { name: 'Last name' }).first()
+      .or(this.page.locator('input[name="last_name"], input[name="lastName"]').first())
+      .or(this.page.getByPlaceholder('Last name').first());
   }
-  
+
   private get emailField() {
-    return this.page.getByRole('textbox', { name: 'Email address' })
-      .or(this.page.locator('input[name="email"]'))
-      .or(this.page.getByPlaceholder('Email address'));
+    return this.page.getByRole('textbox', { name: 'Email address' }).first()
+      .or(this.page.locator('input[name="email"]').first())
+      .or(this.page.getByPlaceholder('Email address').first());
   }
-  
+
   private get phoneField() {
-    return this.page.getByRole('textbox', { name: 'Cell phone number' })
-      .or(this.page.locator('input[name="phone"], input[name="cell_phone"]'))
-      .or(this.page.getByPlaceholder(/phone/i));
+    return this.page.getByRole('textbox', { name: 'Cell phone number' }).first()
+      .or(this.page.locator('input[name="phone"], input[name="cell_phone"]').first())
+      .or(this.page.getByPlaceholder(/phone/i).first());
   }
-  
+
   private get addressField() {
     // IMPORTANT: Do NOT use getByPlaceholder('Address') without exact:true —
     // it matches "Email address" too, causing a strict mode violation that
     // silently fails the whole .or() chain.
-    return this.page.locator('#tenant-address-input')
-      .or(this.page.getByPlaceholder('Street address', { exact: true }))
-      .or(this.page.getByRole('textbox', { name: 'Street address' }))
-      .or(this.page.locator('input[name="address"]'))
-      .or(this.page.getByPlaceholder('Address', { exact: true }));
+    return this.page.locator('#tenant-address-input').first()
+      .or(this.page.getByPlaceholder('Street address', { exact: true }).first())
+      .or(this.page.getByRole('textbox', { name: 'Street address' }).first())
+      .or(this.page.locator('input[name="address"]').first())
+      .or(this.page.getByPlaceholder('Address', { exact: true }).first());
   }
-  
+
   private get cityField() {
-    return this.page.getByRole('textbox', { name: 'City' })
-      .or(this.page.locator('input[name="city"]'))
-      .or(this.page.getByPlaceholder('City'));
+    return this.page.getByRole('textbox', { name: 'City' }).first()
+      .or(this.page.locator('input[name="city"]').first())
+      .or(this.page.getByPlaceholder('City').first());
   }
-  
+
   private get stateField() {
-    return this.page.getByRole('textbox', { name: 'State', exact: true })
-      .or(this.page.getByRole('textbox', { name: 'Province', exact: true }))
-      .or(this.page.locator('input[name="state"]'))
-      .or(this.page.locator('input[name="province"]'));
+    return this.page.getByRole('textbox', { name: 'State', exact: true }).first()
+      .or(this.page.getByRole('textbox', { name: 'Province', exact: true }).first())
+      .or(this.page.locator('input[name="state"]').first())
+      .or(this.page.locator('input[name="province"]').first());
   }
-  
+
   private get zipField() {
-    return this.page.getByRole('textbox', { name: 'Zip' })
-      .or(this.page.locator('input[name="zip"], input[name="zipcode"], input[name="postal_code"]'))
-      .or(this.page.getByPlaceholder(/Zip|Postal/i));
+    return this.page.getByRole('textbox', { name: 'Zip' }).first()
+      .or(this.page.locator('input[name="zip"], input[name="zipcode"], input[name="postal_code"]').first())
+      .or(this.page.getByPlaceholder(/Zip|Postal/i).first());
   }
 
   // ============================================
@@ -127,8 +130,63 @@ export class RentalDetailsPageSinglePage extends BasePage {
   }
   
   private get billingAddressField() {
-    return this.page.getByRole('textbox', { name: 'Street address' })
-      .or(this.page.locator('input[name="billing_address"]'));
+    // Payment section uses id="address-input" specifically. Some pages (e.g. storsafe)
+    // also render #tenant-address-input and #alternate-contact-address-input-rounded —
+    // matching the bare id is the only reliable way to hit payment without ambiguity.
+    return this.page.locator('#address-input').first()
+      .or(this.page.getByRole('textbox', { name: 'Street address' }).last())
+      .or(this.page.locator('input[name="billing_address"]').first());
+  }
+
+  // ============================================
+  // ALTERNATE / ADDITIONAL CONTACT SECTION - LOCATORS
+  // ============================================
+  // Some platforms (e.g. storsafe-self-storage) render an "Additional Contact" / "Alternate Contact"
+  // section that is toggled ON by default. Its inputs reuse generic name="first_name"/"last_name"
+  // (clashing with tenant inputs) so we scope by parent: alternate_address container,
+  // alternate__phone/email wrappers, or the additional-contact section heading.
+  private get alternateContactHeading() {
+    return this.page.getByRole('heading', { name: /additional contact|alternate contact/i }).first();
+  }
+
+  // Scope to the input wrapper class — the input itself is a child of <div class="...alternate__phone">.
+  private get alternatePhoneField() {
+    return this.page.locator('.alternate__phone input').first();
+  }
+
+  private get alternateEmailField() {
+    return this.page.locator('.alternate__email input').first();
+  }
+
+  // For first/last name we anchor via the alternate address input's ancestor, since the
+  // alternate section is the only place with id="alternate-contact-address-input-rounded".
+  // Using xpath ancestor to find the section root, then descendant input[name="first_name"].
+  private get alternateFirstNameField() {
+    return this.page.locator(
+      'xpath=//input[@id="alternate-contact-address-input-rounded"]/ancestor::div[contains(@class,"flex-col") and .//h3][1]//input[@name="first_name"]'
+    ).first();
+  }
+
+  private get alternateLastNameField() {
+    return this.page.locator(
+      'xpath=//input[@id="alternate-contact-address-input-rounded"]/ancestor::div[contains(@class,"flex-col") and .//h3][1]//input[@name="last_name"]'
+    ).first();
+  }
+
+  private get alternateAddressField() {
+    return this.page.locator('#alternate-contact-address-input-rounded').first();
+  }
+
+  private get alternateCityField() {
+    return this.page.locator(
+      'xpath=//input[@id="alternate-contact-address-input-rounded"]/ancestor::div[contains(@class,"flex-col") and .//h3][1]//input[@name="city"]'
+    ).first();
+  }
+
+  private get alternateZipField() {
+    return this.page.locator(
+      'xpath=//input[@id="alternate-contact-address-input-rounded"]/ancestor::div[contains(@class,"flex-col") and .//h3][1]//input[@name="zip"]'
+    ).first();
   }
   
   private get billingCityField() {
@@ -402,6 +460,19 @@ export class RentalDetailsPageSinglePage extends BasePage {
         await this.fillTenantDetails(userData);
         this.ensurePageAlive('after tenant details (step 4)');
 
+        // STEP 4: Additional Contact (if visible — toggled ON by default on some platforms)
+        console.log(`[${new Date().toISOString()}] 👥 [Step 4] Checking for additional/alternate contact...`);
+        await this.fillAlternateContactIfVisible({
+          firstName: userData.firstName,
+          lastName: userData.lastName,
+          email: userData.email,
+          phone: userData.phone,
+          address: userData.address,
+          city: userData.city,
+          zipCode: userData.zipCode,
+        });
+        this.ensurePageAlive('after alternate contact (step 4)');
+
         // STEP 4: hCaptcha — wait for manual solve before continuing
         if (hasStepFourCaptcha) {
           console.log(`[${new Date().toISOString()}] 🛑 [Step 4] hCaptcha detected — waiting for manual solve...`);
@@ -434,6 +505,18 @@ export class RentalDetailsPageSinglePage extends BasePage {
         console.log(`[${new Date().toISOString()}] 📋 Filling tenant details...`);
         await this.fillTenantDetails(userData);
         this.ensurePageAlive('after tenant details');
+
+        console.log(`[${new Date().toISOString()}] 👥 Checking for additional/alternate contact...`);
+        await this.fillAlternateContactIfVisible({
+          firstName: userData.firstName,
+          lastName: userData.lastName,
+          email: userData.email,
+          phone: userData.phone,
+          address: userData.address,
+          city: userData.city,
+          zipCode: userData.zipCode,
+        });
+        this.ensurePageAlive('after alternate contact');
 
         console.log(`[${new Date().toISOString()}] 🪪 Filling driver's license details...`);
         await this.fillDriversLicenseDetails();
@@ -620,6 +703,114 @@ export class RentalDetailsPageSinglePage extends BasePage {
     }
     
     console.log('✅ Tenant details section completed');
+  }
+
+  /**
+   * Fill Additional Contact / Alternate Contact section if visible.
+   *
+   * Some platforms (e.g. storsafe-self-storage) render an "Additional Contact" section
+   * that is toggled ON by default. When present, its first_name/last_name/phone/email/address
+   * fields are required and submission fails ("Alternate contact must have a first name…")
+   * unless populated. Re-uses the tenant user data so we don't need additional fixtures.
+   */
+  private async fillAlternateContactIfVisible(userData: {
+    firstName: string,
+    lastName: string,
+    email: string,
+    phone: string,
+    address: string,
+    city: string,
+    zipCode: string
+  }): Promise<void> {
+    console.log('\n📍 SECTION 1B: Checking for Additional Contact section...');
+
+    const headingVisible = await this.alternateContactHeading.isVisible({ timeout: 2000 }).catch(() => false);
+    if (!headingVisible) {
+      console.log('  - Additional Contact section not present, skipping');
+      return;
+    }
+
+    // Heading is present — confirm the section is actually expanded (toggle ON) by checking
+    // that the alternate address input is visible. If the toggle is off, no inputs render.
+    const addressVisible = await this.alternateAddressField.isVisible({ timeout: 2000 }).catch(() => false);
+    if (!addressVisible) {
+      console.log('  - Additional Contact section heading found but inputs hidden (toggle off), skipping');
+      return;
+    }
+
+    console.log('  ⚙️  Additional Contact toggle is ON — filling alternate contact fields');
+
+    try {
+      await this.safeScroll(this.alternateFirstNameField);
+      await this.alternateFirstNameField.fill(userData.firstName);
+      console.log(`  ✓ Filled Alt First Name: ${userData.firstName}`);
+    } catch {
+      console.log('  - Alt First Name not found, skipping');
+    }
+
+    try {
+      await this.alternateLastNameField.fill(userData.lastName);
+      console.log(`  ✓ Filled Alt Last Name: ${userData.lastName}`);
+    } catch {
+      console.log('  - Alt Last Name not found, skipping');
+    }
+
+    try {
+      await this.alternatePhoneField.fill(userData.phone);
+      console.log(`  ✓ Filled Alt Phone: ${userData.phone}`);
+    } catch {
+      console.log('  - Alt Phone not found, skipping');
+    }
+
+    try {
+      await this.alternateEmailField.fill(userData.email);
+      console.log(`  ✓ Filled Alt Email: ${userData.email}`);
+    } catch {
+      console.log('  - Alt Email not found, skipping');
+    }
+
+    // Address fields — only fill if the inputs render. Some Additional Contact configs
+    // only collect name+phone+email and omit address.
+    try {
+      await this.safeScroll(this.alternateAddressField);
+      await this.alternateAddressField.click();
+      await this.alternateAddressField.fill(userData.address);
+      console.log(`  ✓ Filled Alt Address: ${userData.address}`);
+
+      // Dismiss Google Places autocomplete same way the tenant section does
+      await this.dismissGoogleMapsModal();
+      await this.wait(500);
+      try {
+        await this.alternateContactHeading.click({ timeout: 2000 });
+      } catch {
+        await this.page.locator('body').click({ position: { x: 0, y: 0 }, force: true });
+      }
+      await this.wait(300);
+    } catch {
+      console.log('  - Alt Address not found, skipping');
+    }
+
+    try {
+      const cityVisible = await this.alternateCityField.isVisible({ timeout: 2000 }).catch(() => false);
+      if (cityVisible) {
+        await this.alternateCityField.fill(userData.city);
+        console.log(`  ✓ Filled Alt City: ${userData.city}`);
+      }
+    } catch {
+      console.log('  - Alt City not found, skipping');
+    }
+
+    try {
+      const zipVisible = await this.alternateZipField.isVisible({ timeout: 2000 }).catch(() => false);
+      if (zipVisible) {
+        await this.alternateZipField.fill(userData.zipCode);
+        console.log(`  ✓ Filled Alt Zip: ${userData.zipCode}`);
+      }
+    } catch {
+      console.log('  - Alt Zip not found, skipping');
+    }
+
+    console.log('✅ Additional Contact section completed');
   }
 
   /**

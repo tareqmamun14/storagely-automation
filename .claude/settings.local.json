@@ -5,7 +5,10 @@
       "Bash(npx tsc *)",
       "Bash(npx playwright *)",
       "Bash(tasklist)",
-      "Bash(node_modules/.bin/tsc --noEmit)"
+      "Bash(node_modules/.bin/tsc --noEmit)",
+      "PowerShell(Test-Connection -ComputerName sites.apps.mystoragely.com -Count 1 -Quiet)",
+      "PowerShell(Resolve-DnsName -Name \"sites.apps.mystoragely.com\" -ErrorAction SilentlyContinue)",
+      "PowerShell(ipconfig /flushdns)"
     ]
   }
 }

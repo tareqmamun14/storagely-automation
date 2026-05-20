@@ -122,6 +122,10 @@
   .suite-name { font-weight: 600; }
   .suite-desc { color: var(--muted); font-size: 12px; }
 
+  /* Suites disabled by Build Instance env mode — visually dim and unclickable. */
+  details.suite.locked-off { opacity: .45; pointer-events: none; }
+  details.suite.locked-off > summary { cursor: not-allowed; }
+
   /* ── Output console ───────────────────────────────────────────────── */
   #output {
     background: #0a0c11; color: #d6dae3; border-radius: 8px; padding: 10px;
@@ -189,6 +193,31 @@
     color: #b87a1d;
   }
 
+  /* ── Helix (v4) — teal accent ────────────────────────────────── */
+  details.suite.helix-suite {
+    border-color: #2da88833;
+    background: color-mix(in srgb, #2da888 6%, var(--panel-2));
+  }
+  details.suite.helix-suite > summary {
+    background: color-mix(in srgb, #2da888 10%, var(--panel-2));
+  }
+  details.suite.helix-suite > summary .suite-name {
+    color: #2da888;
+  }
+  details.suite.helix-suite .body {
+    border-top-color: #2da88833;
+  }
+  :root[data-theme="light"] details.suite.helix-suite {
+    border-color: #2da88844;
+    background: color-mix(in srgb, #2da888 8%, #fff);
+  }
+  :root[data-theme="light"] details.suite.helix-suite > summary {
+    background: color-mix(in srgb, #2da888 12%, #fff);
+  }
+  :root[data-theme="light"] details.suite.helix-suite > summary .suite-name {
+    color: #1e7d62;
+  }
+
   .url-list { display: flex; flex-direction: column; gap: 4px; margin-top: 6px; }
   .url-list .row-item { display: flex; gap: 6px; align-items: center; }
   .url-list .row-item input { flex: 1; font: 12px/1.4 ui-monospace, Menlo, Consolas, monospace; }
@@ -236,8 +265,9 @@
           <div class="row">
             <label class="switch"><input id="envProd" type="radio" name="env" value="production" checked /><span class="track"></span><span class="lbl">Production</span></label>
             <label class="switch"><input id="envStage" type="radio" name="env" value="staging" /><span class="track"></span><span class="lbl">Staging</span></label>
+            <label class="switch"><input id="envBuild" type="radio" name="env" value="build" /><span class="track"></span><span class="lbl">Build Instance</span></label>
           </div>
-          <div class="small">Used by UI / SPC / V1 / Mini Mall suites. Data Sync has its own toggle below.</div>
+          <div class="small">Used by UI / SPC / V1 / Mini Mall suites. Data Sync has its own toggle below. <b>Build Instance</b> locks the run to rental-flow tests only.</div>
         </div>
         <div class="col">
           <div class="small">Browser</div>
@@ -430,6 +460,40 @@
         </div>
       </details>
 
+      <!-- Helix Editor & v4 Sites -->
+      <details class="suite helix-suite" id="suite-helix">
+        <summary>
+          <label class="switch" onclick="event.stopPropagation()"><input class="suite-toggle" data-suite="helix" type="checkbox" /><span class="track"></span></label>
+          <span class="suite-name">Helix (v4)</span>
+          <span class="suite-desc">E2E rent journey, live page health, editor smoke — helix/tests/</span>
+        </summary>
+        <div class="body">
+          <div class="small" style="margin-bottom:6px">Helix v4 site builder — editor at <code>sites.apps.mystoragely.com</code> + published facility pages.</div>
+
+          <div class="small" style="margin:8px 0 6px"><b>Test layers:</b></div>
+          <div class="check-list">
+            <label><input type="checkbox" id="helix-mod-e2e" data-mod="e2e" checked /> E2E Rent Journey (P0)</label>
+            <label><input type="checkbox" id="helix-mod-live" data-mod="live" checked /> Live Page Health + Token Audit (P0/P1)</label>
+            <label><input type="checkbox" id="helix-mod-editor" data-mod="editor" /> Editor Smoke + Palette Inventory (P2)</label>
+          </div>
+
+          <div style="margin-top:12px">
+            <div class="small" style="margin-bottom:4px"><b>Editor password</b> <span class="small">(tareq@storagely.io — saved in browser)</span></div>
+            <input id="helix-password" type="password" placeholder="Enter Helix editor password" style="width:100%" />
+          </div>
+
+          <div style="margin-top:10px">
+            <div class="small" style="margin-bottom:4px"><b>Helix-built client sites</b> (production):</div>
+            <div id="helix-sites" class="check-list"></div>
+          </div>
+
+          <div style="margin-top:10px">
+            <div class="small" style="margin-bottom:4px"><b>Custom URL</b> <span class="small">(test any Helix v4 page)</span></div>
+            <input id="helix-custom-url" type="text" placeholder="https://safeguard.test.getstoragely.com/storage-units/..." style="width:100%;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace" />
+          </div>
+        </div>
+      </details>
+
       <!-- Saved extra clients -->
       <details class="suite">
         <summary>
@@ -523,9 +587,20 @@ async function boot() {
   renderExtras();
   renderBuildClients();
   renderMiniMallRentPresets();
+  renderHelixSites();
   renderPresets();
   hookCmdPreview();
+  applyBuildEnvLock();
   refreshCmdPreview();
+
+  // Restore saved Helix password from localStorage
+  const savedHelixPwd = localStorage.getItem('panel.helix.password');
+  if (savedHelixPwd && $('#helix-password')) $('#helix-password').value = savedHelixPwd;
+  if ($('#helix-password')) {
+    $('#helix-password').addEventListener('change', () => {
+      localStorage.setItem('panel.helix.password', $('#helix-password').value);
+    });
+  }
 }
 
 // ─────────────────────────────────────────────────────────────────────
@@ -604,7 +679,14 @@ function paintClients(suite) {
   }
 }
 
-function currentEnv() { return $('input[name=env]:checked').value; }
+// Raw radio value: 'production' | 'staging' | 'build'.
+function currentEnvRaw() { return $('input[name=env]:checked').value; }
+// Maps 'build' → 'staging' so existing client lookups (keyed by 'staging'/'production') keep working.
+function currentEnv() {
+  const v = currentEnvRaw();
+  return v === 'build' ? 'staging' : v;
+}
+function isBuildMode() { return currentEnvRaw() === 'build'; }
 function currentDsEnv() { return $('input[name=dsEnv]:checked').value; }
 
 // ─── Build Instance (combined client list + corp codes + Yardi banner) ───
@@ -615,7 +697,8 @@ function renderBuildClients() {
   for (const c of list) {
     const lbl = document.createElement('label');
     lbl.title = `${c.label} (${c.fms}) — appears in: ${c.suites.join(', ')}`;
-    lbl.innerHTML = `<input type="checkbox" data-id="${escapeAttr(c.id)}" data-fms="${escapeAttr(c.fms)}" /> <span class="name">${escapeHtml(c.label)}</span> ${fmsBadge(c.fms)}`;
+    const checked = c.defaultChecked ? ' checked' : '';
+    lbl.innerHTML = `<input type="checkbox" data-id="${escapeAttr(c.id)}" data-fms="${escapeAttr(c.fms)}"${checked} /> <span class="name">${escapeHtml(c.label)}</span> ${fmsBadge(c.fms)}`;
     lbl.querySelector('input').addEventListener('change', renderBuildCorpCodes);
     root.appendChild(lbl);
   }
@@ -637,6 +720,22 @@ function renderMiniMallRentPresets() {
   for (const p of presets) {
     const lbl = document.createElement('label');
     lbl.innerHTML = `<input type="checkbox" data-id="${escapeAttr(p.id)}" data-fms="${escapeAttr(p.fms)}" checked /> <span class="name">${escapeHtml(p.label)}</span> ${fmsBadge(p.fms)}`;
+    root.appendChild(lbl);
+  }
+}
+
+// ─── Helix Sites (parsed from helix/configs/urls.ts) ─────────────────
+function renderHelixSites() {
+  const root = $('#helix-sites'); if (!root) return; root.innerHTML = '';
+  const sites = (CFG.helix && CFG.helix.sites) || [];
+  if (sites.length === 0) {
+    root.innerHTML = '<div class="small">No Helix client sites configured yet</div>';
+    return;
+  }
+  for (const s of sites) {
+    const lbl = document.createElement('label');
+    lbl.innerHTML = `<input type="checkbox" data-url="${escapeAttr(s.url)}" checked /> <span class="name">${escapeHtml(s.label)}</span>`;
+    lbl.title = s.url;
     root.appendChild(lbl);
   }
 }
@@ -689,9 +788,38 @@ document.addEventListener('change', e => {
   if (e.target.matches('input[name=env]')) {
     for (const s of ['ui','spc','v1']) paintClients(s);
     renderMiniMallRentPresets();
+    applyBuildEnvLock();
     refreshCmdPreview();
   }
 });
+
+// When env=build, force Build Instance suite ON (and locked) and lock all other suites OFF + disabled.
+// When env switches away, re-enable everything (but leave checkboxes as the user left them).
+function applyBuildEnvLock() {
+  const onBuild = isBuildMode();
+  $$('.suite-toggle').forEach(tog => {
+    const suite = tog.dataset.suite;
+    const det = tog.closest('details.suite');
+    if (suite === 'build') {
+      if (onBuild) {
+        tog.checked = true;
+        tog.disabled = true; // locked ON while env=build so user can't accidentally uncheck
+        if (det) { det.open = true; det.classList.remove('locked-off'); }
+      } else {
+        tog.disabled = false;
+      }
+    } else {
+      if (onBuild) {
+        tog.checked = false;
+        tog.disabled = true;
+        if (det) { det.open = false; det.classList.add('locked-off'); }
+      } else {
+        tog.disabled = false;
+        if (det) det.classList.remove('locked-off');
+      }
+    }
+  });
+}
 
 // ─────────────────────────────────────────────────────────────────────
 // Extras manager
@@ -838,6 +966,12 @@ function collectSettings() {
       clients: buildClients,
       corpCodes: buildCorpCodes,
     },
+    helix: {
+      modules: $$('#suite-helix .body input[data-mod]:checked').map(c => c.dataset.mod),
+      password: $('#helix-password') ? $('#helix-password').value : null,
+      customUrl: ($('#helix-custom-url') ? $('#helix-custom-url').value.trim() : '') || null,
+      sites: $$('#helix-sites input:checked').map(c => c.dataset.url),
+    },
     // For preview only — NOT sent to server.
     _checkedClientUrls: { ui: clientUrls('ui'), spc: clientUrls('spc'), v1: clientUrls('v1') },
   };
@@ -905,6 +1039,7 @@ function applyPreset(p) {
     }
     refreshYardiBanner();
   }
+  applyBuildEnvLock();
   refreshCmdPreview();
 }
 function cssEscape(s) { return String(s).replace(/[^a-zA-Z0-9_-]/g, ''); }
@@ -939,17 +1074,46 @@ function refreshCmdPreview() {
     minimall: 'tests/miniMallFullScan.spec.ts',
     allpages: 'tests/allLocationsScan.spec.ts',
   };
-  // Build instance expands to UI + SPC + V1.
-  const effSuites = s.suites.includes('build')
-    ? Array.from(new Set([...s.suites.filter(x => x !== 'build'), 'ui', 'spc', 'v1']))
-    : s.suites;
+  // Build Instance expands to RENTAL FLOWS ONLY: SPC + V1 (non-mini-mall clients)
+  // and/or minimallrent (mini-mall clients). UI / admin / data-sync are excluded.
+  let effSuites;
+  if (s.suites.includes('build')) {
+    const sel = s.build?.clients || [];
+    const hasMiniMall = sel.some(id => id === 'mini-mall-storage' || id === 'mini-mall-storage-yardi');
+    const hasOther    = sel.some(id => id !== 'mini-mall-storage' && id !== 'mini-mall-storage-yardi');
+    const expanded = [];
+    if (hasOther) expanded.push('spc', 'v1');
+    if (hasMiniMall) expanded.push('minimallrent');
+    effSuites = Array.from(new Set([...s.suites.filter(x => x !== 'build'), ...expanded]));
+  } else {
+    effSuites = s.suites;
+  }
   const specs = effSuites.map(x => specMap[x]).filter(Boolean);
-  const args = ['npx', 'playwright', 'test', ...specs];
-  if (effSuites.includes('ui') && s.ui.modules.length) args.push('--grep', '"' + s.ui.modules.join('|') + '"');
-  if (s.headed) args.push('--headed');
-  if (s.workers) args.push('--workers', String(s.workers));
-  if (effSuites.includes('minimall') || effSuites.includes('allpages')) args.push('--project=chrome');
-  let line = '$ ' + (specs.length === 0 ? '(no suites selected)' : args.join(' '));
+  // Helix — uses its own config with project-based routing.
+  let helixArgs = null;
+  if (effSuites.includes('helix')) {
+    const hm = $$('#suite-helix .body input[data-mod]:checked').map(c => c.dataset.mod);
+    const projects = new Set();
+    if (hm.includes('e2e') || hm.includes('live')) projects.add('live');
+    if (hm.includes('editor')) projects.add('editor');
+    if (projects.size > 0) {
+      helixArgs = ['npx', 'playwright', 'test', '--config=helix/playwright.config.ts'];
+      for (const p of projects) helixArgs.push('--project=' + p);
+      if (s.headed) helixArgs.push('--headed');
+      if (s.workers) helixArgs.push('--workers', String(s.workers));
+    }
+  }
+  let args;
+  if (helixArgs) {
+    args = helixArgs;
+  } else {
+    args = ['npx', 'playwright', 'test', ...specs];
+    if (effSuites.includes('ui') && s.ui.modules.length) args.push('--grep', '"' + s.ui.modules.join('|') + '"');
+    if (s.headed) args.push('--headed');
+    if (s.workers) args.push('--workers', String(s.workers));
+    if (effSuites.includes('minimall') || effSuites.includes('allpages')) args.push('--project=chrome');
+  }
+  let line = '$ ' + (specs.length === 0 && !helixArgs ? '(no suites selected)' : args.join(' '));
   if (s.suites.includes('build') && s.build?.base) {
     line += `\n  STORAGELY_ENV=staging  STORAGELY_BUILD_BASE=${s.build.base}  (clients: ${(s.build.clients || []).length || 0})`;
   }

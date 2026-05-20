@@ -60,15 +60,17 @@ export class RentalDetailsPage extends BasePage {
     },
     zipCode: string
   }): Promise<void> {
+    const formStart = Date.now();
+    const stamp = (label: string) => `[+${((Date.now() - formStart) / 1000).toFixed(1)}s]`;
     console.log(`[${new Date().toISOString()}] 📝 Filling rental details form...`);
-    
+
     try {
       // Wait for summary heading to be visible with longer timeout
       await this.summaryHeading.waitFor({ state: 'visible', timeout: 15000 });
       await this.summaryHeading.click();
       await this.wait(1000);
 
-      console.log('✓ Summary heading found and clicked');
+      console.log(`${stamp('summary')} ✓ Summary heading found and clicked`);
 
       // Fill required fields with proper error handling
       await this.fillCriticalField(this.firstNameInput, userData.firstName, 'First Name');
@@ -77,12 +79,17 @@ export class RentalDetailsPage extends BasePage {
       await this.fillCriticalField(this.phoneInput, userData.phone, 'Phone');
       await this.fillCriticalField(this.addressInput, userData.address, 'Address');
       await this.fillCriticalField(this.cityInput, userData.city, 'City');
+      console.log(`${stamp('fields')} ✓ All text fields filled`);
 
       await this.selectStateOptimized(userData.province);
+      console.log(`${stamp('state')} ✓ State selected`);
       await this.fillZipCode(userData.zipCode);
+      console.log(`${stamp('zip')} ✓ Zip code filled`);
       await this.selectDateIfAvailable();
+      console.log(`${stamp('date')} ✓ Date step done`);
       await this.proceedToNextStep();
-      
+      console.log(`${stamp('continue')} ✓ Continue step done`);
+
       console.log(`[${new Date().toISOString()}] ✅ Rental details form completed`);
     } catch (error) {
       const errorMsg = `CRITICAL ERROR: Failed to fill rental details form - ${(error as Error).message}`;
@@ -352,6 +359,7 @@ export class RentalDetailsPage extends BasePage {
       await this.wait(500);
 
       // Primary: the (now broadened) continueButton locator chain.
+      let primaryClickSucceeded = false;
       try {
         await this.continueButton.waitFor({ state: 'visible', timeout: 15000 });
         await this.continueButton.scrollIntoViewIfNeeded();
@@ -359,10 +367,26 @@ export class RentalDetailsPage extends BasePage {
         console.log('Continue button click attempt 1');
         await this.continueButton.click({ timeout: 15000 });
         console.log('✓ Successfully clicked continue button');
-        await this.wait(1500);
+        primaryClickSucceeded = true;
+        // Short post-click buffer — bounded so test-timeout / page-close exits cleanly
+        // instead of dying inside waitForTimeout and producing misleading errors.
+        await this.page.waitForTimeout(800).catch(() => undefined);
         return;
       } catch (primaryError) {
+        // If the click already succeeded, the failure is in the trailing wait and
+        // most likely means the test budget is exhausted or the page has closed.
+        // Treat it as success — the next step will surface real navigation issues.
+        if (primaryClickSucceeded) {
+          console.warn(`⚠️ Post-click wait interrupted (likely test timeout / navigation): ${(primaryError as Error).message}`);
+          return;
+        }
         console.warn(`⚠️ Primary continue-button locator failed: ${(primaryError as Error).message}`);
+      }
+
+      // If the page is already closed, don't bother running the fallback —
+      // it will just throw a confusing "locator.all: Target page... closed" error.
+      if (this.page.isClosed()) {
+        throw new Error('Page closed before fallback continue-button scan could run (likely test timeout)');
       }
 
       // Fallback: scan all buttons for any text that looks like "next" / "continue".
@@ -377,7 +401,7 @@ export class RentalDetailsPage extends BasePage {
             await btn.scrollIntoViewIfNeeded().catch(() => undefined);
             await btn.click({ timeout: 10000, force: true });
             console.log('✓ Successfully clicked continue button (fallback)');
-            await this.wait(1500);
+            await this.page.waitForTimeout(800).catch(() => undefined);
             return;
           }
         }
