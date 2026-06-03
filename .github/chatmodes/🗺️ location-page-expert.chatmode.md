@@ -38,7 +38,7 @@ body
 | Close modal | `button[name="Close"]` OR `.close` (`.first()`) | After Reserve click modal opens |
 
 **SPC clients**: detecting by domain. These domains use single-page checkout (Step 4 + Step 5 merged):
-`firststorage.com`, `columbiaselfstorage.com`, `bluebirdstorage.ca`, `sunbirdstorage.com`, `purelystorage.com`, `yourwaystorage.com`, `redrocksstorage.com`
+`columbiaselfstorage.com`, `bluebirdstorage.ca`, `sunbirdstorage.com`, `purelystorage.com`, `yourwaystorage.com`, `redrocksstorage.com`
 
 ### 3. Client Matrix
 
@@ -46,7 +46,6 @@ body
 
 | Client | Production URL | FMS | hCaptcha | Status |
 |--------|---------------|-----|----------|--------|
-| First Storage | firststorage.com | storEDGE | ✅ RENT NOW | Active |
 | Columbia Self Storage | columbiaselfstorage.com | storEDGE | ✅ RENT NOW | Active |
 | Bluebird Storage | bluebirdstorage.ca | SiteLink | ✅ RENT NOW | Active |
 | Sunbird Storage | sunbirdstorage.com | SiteLink | ✅ RENT NOW | Active |
@@ -76,7 +75,6 @@ body
 | Sunbird Storage | sunbirdstorage.com | Contact page empty in staging |
 | Bluebird Storage | bluebirdstorage.ca | Contact page empty in staging |
 | Gatekeeper | gatekeeperstoragega.com | — |
-| First Storage | firststorage.com | No contact form |
 | Red Rocks | redrocksstorage.com | — |
 | Distinct Storage | distinctstorage.com | — |
 | Rhino Storage | rhino-storage.com | — |

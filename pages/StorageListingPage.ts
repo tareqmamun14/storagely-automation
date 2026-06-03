@@ -145,10 +145,11 @@ export class StorageListingPage extends BasePage {
    * 3. JOIN WAITLIST flow (rhino-storage)
    * 4. RESERVE flow (SiteLink)
    */
-  async clickRentButton(): Promise<string | null> {
+  async clickRentButton(retryCount: number = 0): Promise<string | null> {
+    const MAX_RETRIES = 2; // up to 3 total attempts (initial + 2 retries) — covers transient page-load misses
     const startTime = Date.now();
     console.log(`\n${'='.repeat(70)}`);
-    console.log(`[${new Date().toISOString()}] 🎯 RENT BUTTON SEARCH START`);
+    console.log(`[${new Date().toISOString()}] 🎯 RENT BUTTON SEARCH START${retryCount > 0 ? ` (retry ${retryCount}/${MAX_RETRIES})` : ''}`);
     console.log(`📍 Current URL: ${this.page.url()}`);
     console.log(`${'='.repeat(70)}\n`);
 
@@ -157,7 +158,7 @@ export class StorageListingPage extends BasePage {
       // SINGLE-PAGE CUSTOMER DETECTION
       // ==========================================
       // List of single-page customer domains
-      const singlePageDomains = ['firststorage.com', 'columbiaselfstorage.com', 'bluebirdstorage.ca', 'sunbirdstorage.com', 'purelystorage.com', 'yourwaystorage.com', 'redrocksstorage.com', 'storsafe.com', 'storsafe-self-storage'];
+      const singlePageDomains = ['columbiaselfstorage.com', 'bluebirdstorage.ca', 'sunbirdstorage.com', 'purelystorage.com', 'yourwaystorage.com', 'redrocksstorage.com', 'storsafe.com', 'storsafe-self-storage'];
       const pageUrl = this.page.url();
       const isSinglePageCustomer = singlePageDomains.some(domain => pageUrl.includes(domain));
       
@@ -521,15 +522,59 @@ export class StorageListingPage extends BasePage {
       return null;
       
     } catch (error) {
-      console.error(`CRITICAL ERROR: ${(error as Error).message}`);
-      throw new Error(`Could not find or click rent button - ${(error as Error).message}`);
+      const msg = (error as Error).message || '';
+
+      // Auto-retry on transient "no buttons found" — typically a page-load timing issue
+      // where the rent buttons aren't yet rendered (especially on slow CDN responses
+      // or when the page hasn't fully hydrated). Reload and try again.
+      const isRetryable =
+        msg.includes('No rent, pricing option, reserve, or waitlist buttons') ||
+        msg.includes('Wrong button clicked - navigated to');
+
+      if (retryCount < MAX_RETRIES && isRetryable) {
+        console.log(`\n⚠️  [${Date.now() - startTime}ms] Rent button search failed on attempt ${retryCount + 1}: "${msg.substring(0, 120)}"`);
+        try {
+          const pageTitle = await this.page.title().catch(() => 'N/A');
+          console.log(`   📋 URL:   ${this.page.url()}`);
+          console.log(`   📋 Title: ${pageTitle}`);
+        } catch { /* ignore */ }
+
+        console.log(`🔄 Reloading page and retrying (attempt ${retryCount + 2}/${MAX_RETRIES + 1})...`);
+        try {
+          await this.page.reload({ waitUntil: 'domcontentloaded', timeout: 60000 });
+          await this.page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {});
+          await this.page.waitForTimeout(2000);
+        } catch (reloadErr) {
+          console.log(`⚠️  Reload failed: ${(reloadErr as Error).message.substring(0, 120)} — trying clickRentButton anyway`);
+        }
+        return await this.clickRentButton(retryCount + 1);
+      }
+
+      // Final failure — log diagnostics so we can debug WHY no buttons were found
+      console.error(`CRITICAL ERROR: ${msg}`);
+      if (retryCount >= MAX_RETRIES) {
+        console.error(`\n📋 DIAGNOSTIC INFO (after ${MAX_RETRIES + 1} attempts):`);
+        try {
+          const pageTitle = await this.page.title().catch(() => 'N/A');
+          const bodyPreview = await this.page.locator('body').innerText({ timeout: 3000 }).catch(() => '');
+          const visibleButtons = await this.page.locator('a, button').count().catch(() => 0);
+          console.error(`   📋 URL:                 ${this.page.url()}`);
+          console.error(`   📋 Title:               ${pageTitle}`);
+          console.error(`   📋 Total a/button tags: ${visibleButtons}`);
+          console.error(`   📋 Body preview (first 500 chars):`);
+          console.error(`      ${bodyPreview.substring(0, 500).replace(/\n/g, ' / ')}`);
+        } catch (diagErr) {
+          console.error(`   (could not gather diagnostics: ${(diagErr as Error).message})`);
+        }
+      }
+      throw new Error(`Could not find or click rent button - ${msg}`);
     }
   }
 
   /**
    * Single-Page Customer Specific Button Click
    * STRATEGY: Look for step-four links with specific button styling
-   * Used by: First Storage, Columbia Self Storage
+   * Used by: Columbia Self Storage
    * Button pattern: <a class="btn blackBtnStoragely" href="...step-four?...">RENT NOW or rent</a>
    */
   private async clickRentButtonSinglePage(startTime: number): Promise<string | null> {

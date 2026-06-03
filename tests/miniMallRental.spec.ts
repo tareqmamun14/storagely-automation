@@ -192,7 +192,6 @@ test.describe('⭐ Mini-Mall Rental Flow Tests', () => {
             lastName: SINGLE_PAGE_USER.lastName,
             email: SINGLE_PAGE_USER.email,
             phone: SINGLE_PAGE_USER.phone,
-            address: '6255 Towncenter Drive',
           });
 
           // STEP 4: hCaptcha

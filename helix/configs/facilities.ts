@@ -1,35 +1,186 @@
+/**
+ * Helix v4 facility registry.
+ *
+ * Every facility tested by the live + e2e specs is parameterized from this list.
+ * Adding a new client/facility is a one-line change here — all section specs
+ * (nav, header, FAQ, carousel, amenities, units, gallery, footer) and the
+ * end-to-end rent journey auto-pick it up.
+ *
+ * NOTHING in this file should be facility-specific beyond the URL + the
+ * minimal identity patterns (heading regex / title regex) used to confirm the
+ * page actually rendered for the right client. Section detectors live in
+ * `helix/pages/sections/` and use semantic locators, not facility-specific text.
+ */
+/**
+ * Which deployment a facility lives on.
+ *  - 'production' — the real customer-facing domain (e.g. www.safeguardit.com).
+ *    Helix post-release regression runs against these, same as V1/V2 prod runs.
+ *  - 'test'       — the Helix test/stage domain (*.test.getstoragely.com).
+ */
+export type HelixEnv = 'production' | 'test';
+
 export interface HelixFacility {
   id: string;
   name: string;
-  client: string;
+  client: string;          // brand slug — e.g. "safeguard"
+  env: HelixEnv;           // production (real domain) vs test (stage domain)
   url: string;
+  /** Title pattern used to confirm correct page loaded. Layout-tolerant. */
   expectedTitle: RegExp;
+  /** Facility heading pattern (the big H3 / H1 the user sees in the header). */
   expectedHeading: RegExp;
-  hasUnits: boolean;
-  hasReviews: boolean;
-  hasAmenities: boolean;
+  /** Optional toggles — used by tests to skip checks when a section is intentionally absent. */
+  features?: {
+    hasUnits?: boolean;
+    hasReviews?: boolean;
+    hasAmenities?: boolean;
+    hasFaq?: boolean;
+    hasCarousel?: boolean;
+    hasGallery?: boolean;
+    hasFooter?: boolean;
+    hasNav?: boolean;
+    hasHeader?: boolean;
+  };
 }
 
+/** Full feature set — Helix renders the same template for every client, so most
+ *  facilities ship every section. Override individual flags only for genuine
+ *  empty-state facilities. */
+const ALL_FEATURES = {
+  hasUnits: true, hasReviews: true, hasAmenities: true,
+  hasFaq: true, hasCarousel: true, hasGallery: true,
+  hasFooter: true, hasNav: true, hasHeader: true,
+} as const;
+
+/**
+ * Helix-built sites. Add new clients/locations here — every live + section spec
+ * and the end-to-end rent journey auto-run against each one.
+ *
+ * `env` decides which deployment a facility belongs to:
+ *   - 'production' → real customer domain; runs in the prod post-release regression.
+ *   - 'test'       → *.test.getstoragely.com stage domain; runs in the test pass.
+ * The control-panel Prod/Test toggle (and `HELIX_ENV`) filters this list.
+ *
+ * Helix is the launch pipeline going forward: as customers migrate, add one
+ * row each. The page template is identical across clients — only the data
+ * differs — so the generic section detectors apply to every facility unchanged.
+ *
+ * Keep features explicit so empty-state facilities can skip checks cleanly.
+ */
 export const FACILITIES: HelixFacility[] = [
+  // ── PRODUCTION (real customer domains) ──────────────────────────────────
+  {
+    id: 'safeguard-bridgeport-west-end',
+    name: 'Safeguard — Bridgeport, CT (West End / West Side)',
+    client: 'safeguard',
+    env: 'production',
+    url: 'https://www.safeguardit.com/storage-units/connecticut/bridgeport/west-end-west-side',
+    expectedTitle: /self storage.*bridgeport|bridgeport.*storage|safeguard/i,
+    expectedHeading: /safeguard.*self storage|west end|west side|bridgeport/i,
+    features: { ...ALL_FEATURES },
+  },
+
+  // ── TEST / STAGE (*.test.getstoragely.com) ──────────────────────────────
+  {
+    id: 'safeguard-seffner-kingsway',
+    name: 'Safeguard — Seffner, FL (Kingsway Road)',
+    client: 'safeguard',
+    env: 'test',
+    url: 'https://safeguard.test.getstoragely.com/storage-units/florida/seffner/kingsway-road',
+    expectedTitle: /self storage.*seffner|seffner.*storage|safeguard/i,
+    expectedHeading: /safeguard.*self storage|kingsway/i,
+    features: { ...ALL_FEATURES },
+  },
   {
     id: 'safeguard-bridgeview-harlem',
     name: 'Safeguard — Bridgeview, IL (Harlem Ave)',
     client: 'safeguard',
+    env: 'test',
     url: 'https://safeguard.test.getstoragely.com/storage-units/illinois/bridgeview/harlem-avenue',
     expectedTitle: /self storage.*bridgeview|bridgeview.*storage/i,
-    expectedHeading: /safeguard.*self storage/i,
-    hasUnits: true,
-    hasReviews: true,
-    hasAmenities: true,
+    expectedHeading: /safeguard.*self storage|harlem/i,
+    features: { ...ALL_FEATURES },
   },
 ];
 
+/**
+ * Resolve the currently selected Helix environment.
+ *
+ * HELIX_ENV accepts production aliases (production / prod) and test aliases
+ * (test / stage / staging). Default is PRODUCTION, because the headline use of
+ * the Helix suite is prod post-release regression — same as the V1/V2 prod runs.
+ */
+export function getSelectedHelixEnv(): HelixEnv {
+  const v = (process.env.HELIX_ENV || '').trim().toLowerCase();
+  if (v === 'test' || v === 'stage' || v === 'staging') return 'test';
+  return 'production';
+}
+
+/**
+ * Resolve the facility list at runtime, honoring optional env-var overrides.
+ *
+ * - HELIX_ENV — 'production' (default) | 'test'. Restricts to facilities on the
+ *     matching deployment. The control-panel Prod/Test toggle drives this.
+ * - HELIX_FACILITY_FILTER — comma-separated facility IDs to restrict the run to
+ *     (within the selected env). Empty / unset = every facility in that env.
+ * - HELIX_CUSTOM_URL — comma-separated extra URLs; each becomes an ad-hoc
+ *     facility tagged with the selected env. Lets the control panel test an
+ *     arbitrary prod/stage URL without code changes.
+ */
+export function getAllFacilities(): HelixFacility[] {
+  const env = getSelectedHelixEnv();
+  const filter = (process.env.HELIX_FACILITY_FILTER || '').split(',').map(s => s.trim()).filter(Boolean);
+
+  let base = FACILITIES.filter(f => f.env === env);
+  if (filter.length > 0) base = base.filter(f => filter.includes(f.id));
+
+  const customRaw = process.env.HELIX_CUSTOM_URL || '';
+  if (!customRaw.trim()) return base;
+
+  const customs: HelixFacility[] = customRaw
+    .split(',')
+    .map(s => s.trim())
+    .filter(Boolean)
+    .map((url, i) => ({
+      id: `custom-${i + 1}-${slugForUrl(url)}`,
+      name: `Custom — ${labelForUrl(url)}`,
+      client: hostBrand(url),
+      env,
+      url,
+      expectedTitle: /.+/,         // any non-empty title — we don't know what to expect
+      expectedHeading: /.+/,       // any non-empty heading
+      features: { ...ALL_FEATURES },
+    }));
+
+  // Custom URLs are always included regardless of the facility filter.
+  return [...base, ...customs];
+}
+
 export function getFacility(id: string): HelixFacility {
-  const f = FACILITIES.find(fac => fac.id === id);
-  if (!f) throw new Error(`Facility not found: ${id}. Available: ${FACILITIES.map(fac => fac.id).join(', ')}`);
+  const f = getAllFacilities().find(fac => fac.id === id);
+  if (!f) throw new Error(`Facility not found: ${id}. Available: ${getAllFacilities().map(fac => fac.id).join(', ')}`);
   return f;
 }
 
-export function getAllFacilities(): HelixFacility[] {
-  return FACILITIES;
+// ── Helpers (URL-derived metadata for custom URLs) ──
+
+function hostBrand(url: string): string {
+  try { return new URL(url).hostname.split('.')[0] || 'custom'; }
+  catch { return 'custom'; }
+}
+
+function slugForUrl(url: string): string {
+  try {
+    const u = new URL(url);
+    const path = u.pathname.split('/').filter(Boolean).slice(-2).join('-');
+    return (u.hostname.split('.')[0] + '-' + path).replace(/[^a-z0-9-]/gi, '-').toLowerCase().slice(0, 60);
+  } catch { return 'ad-hoc'; }
+}
+
+function labelForUrl(url: string): string {
+  try {
+    const u = new URL(url);
+    const tail = u.pathname.split('/').filter(Boolean).slice(-2).join(' / ');
+    return `${u.hostname.replace(/^www\./, '')} (${tail || '/'})`;
+  } catch { return url; }
 }

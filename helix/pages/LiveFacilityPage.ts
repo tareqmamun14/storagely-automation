@@ -1,5 +1,16 @@
 import { Page, Locator, expect } from '@playwright/test';
+import { ISectionDetector, SectionContext, SectionResult, SECTION_DETECTORS, getDetector } from './sections';
 
+/**
+ * LiveFacilityPage — page object for a published Helix v4 facility page.
+ *
+ * Two API surfaces:
+ *  1. The legacy helpers used by existing tests (page-health, rent-journey) —
+ *     kept stable so nothing breaks.
+ *  2. The new section-detector surface, which exposes one detector per
+ *     testable section. Each detector is layout-tolerant: it uses semantic
+ *     locators (role / aria / text) rather than CSS classnames.
+ */
 export class LiveFacilityPage {
   readonly page: Page;
   private consoleErrors: string[] = [];
@@ -16,7 +27,57 @@ export class LiveFacilityPage {
     await this.page.waitForLoadState('networkidle', { timeout: 30_000 }).catch(() => {});
   }
 
-  // ── Page-level assertions ──
+  // ── Section detection ──────────────────────────────────────────────────
+  //
+  // Use these for the new section specs. Detectors are pure inspectors —
+  // call after `goto()` and they return a SectionResult.
+
+  /** All registered detectors, in display order. */
+  get detectors(): ISectionDetector[] { return SECTION_DETECTORS; }
+
+  /** Look up a single detector by section id (e.g. "nav", "units"). */
+  detector(id: string): ISectionDetector { return getDetector(id); }
+
+  /**
+   * Run a single section detector against the current page.
+   * The caller supplies the context (facility id / name / url) so the
+   * report can identify which run the result belongs to.
+   */
+  async verifySection(id: string, ctx: SectionContext): Promise<SectionResult> {
+    return this.detector(id).verify(this.page, ctx);
+  }
+
+  /**
+   * Run every detector (or a filtered subset) against the current page.
+   * Detectors run sequentially against the same page — one navigation, many
+   * verifications. Returned in display order.
+   */
+  async verifyAllSections(ctx: SectionContext, sectionIds?: string[]): Promise<SectionResult[]> {
+    const list = sectionIds && sectionIds.length > 0
+      ? SECTION_DETECTORS.filter(d => sectionIds.includes(d.id))
+      : SECTION_DETECTORS;
+    const out: SectionResult[] = [];
+    for (const detector of list) {
+      try {
+        const r = await detector.verify(this.page, ctx);
+        out.push(r);
+      } catch (err) {
+        out.push({
+          sectionId: detector.id,
+          facilityId: ctx.facilityId,
+          facilityName: ctx.facilityName,
+          url: ctx.url,
+          present: false,
+          checks: [],
+          durationMs: 0,
+          errors: [(err as Error).message],
+        });
+      }
+    }
+    return out;
+  }
+
+  // ── Legacy page-level assertions (kept for existing tests) ────────────
 
   async expectPageLoaded() {
     const title = await this.page.title();
@@ -38,8 +99,6 @@ export class LiveFacilityPage {
     }
     expect(found, `No visible heading matching ${pattern}`).toBe(true);
   }
-
-  // ── Token audit ──
 
   async expectNoUnresolvedTokens() {
     const bodyText = await this.page.locator('body').innerText();
@@ -63,7 +122,7 @@ export class LiveFacilityPage {
     expect(leaks, `Unresolved tokens in attributes: ${leaks.join(', ')}`).toHaveLength(0);
   }
 
-  // ── Unit / Rent assertions ──
+  // ── Unit / Rent assertions (used by rent-journey spec) ────────────────
 
   async expectUnitsVisible() {
     const rentLink = this.page.getByRole('link', { name: /rent now/i }).first();
@@ -91,8 +150,6 @@ export class LiveFacilityPage {
     return hrefs[0];
   }
 
-  // ── Section assertions ──
-
   async expectReviewsSection() {
     const heading = this.page.getByRole('heading', { name: /customer reviews/i }).first();
     await expect(heading).toBeVisible({ timeout: 10_000 });
@@ -103,7 +160,7 @@ export class LiveFacilityPage {
     await expect(heading).toBeVisible({ timeout: 10_000 });
   }
 
-  // ── Quality checks ──
+  // ── Quality checks ─────────────────────────────────────────────────────
 
   getConsoleErrors(): string[] {
     return this.consoleErrors.filter(
@@ -139,7 +196,7 @@ export class LiveFacilityPage {
     );
   }
 
-  // ── V2 handoff validation ──
+  // ── V2 handoff validation ─────────────────────────────────────────────
 
   static validateRentNowUrl(href: string) {
     const url = new URL(href);

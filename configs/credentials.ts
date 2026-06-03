@@ -28,8 +28,10 @@ export const TEST_USER = {
     alabama: 'Alabama'
   },
   zipCode: '29690', // South Carolina zip for Travelers Rest
-  alternatePhone: '01674646008',
-  alternateEmail: 'tareqmamun14@gmail.com',
+  alternateFirstName: 'Test1',
+  alternateLastName: 'Testing2',
+  alternatePhone: '2125556788',
+  alternateEmail: 'tareq2@storagely.io',
   driversLicense: '6244114',
   driversLicenseState: 'South Carolina',
   birthMonth: '01',
@@ -63,8 +65,10 @@ export const SINGLE_PAGE_USER = {
     quebec: 'Quebec'
   },
   zipCode: '27012', // NC zip for Clemmons
-  alternatePhone: '01674646008',
-  alternateEmail: 'tareqmamun14@gmail.com',
+  alternateFirstName: 'Test1',
+  alternateLastName: 'Testing2',
+  alternatePhone: '2125556788',
+  alternateEmail: 'tareq2@storagely.io',
   driversLicense: '6244114',
   driversLicenseState: 'South Carolina',
   birthMonth: '01',

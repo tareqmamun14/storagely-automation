@@ -453,6 +453,9 @@ async function globalTeardown() {
       console.log(`${index + 1}. ${icon} — ${result.company} (${result.platform})`);
       console.log(`   URL:     ${result.url}`);
       console.log(`   Message: ${cleanError(result.error)}`);
+      if (result.retried) {
+        console.log(`   🔄 Retried — attempt 1: "${result.attempt1Error}"`);
+      }
       if (result.error.includes('Alternate contact must have a first name')) {
         console.log(`   🚩 ATTENTION: Alternate contact address may need to be provided!`);
       }
@@ -461,6 +464,28 @@ async function globalTeardown() {
         console.log(`   ${'-'.repeat(80)}\n`);
       }
     });
+
+    // Flag clients that need manual checking
+    const manualCheckClients = allResults.filter((r: any) => r.error.toLowerCase().includes('manual check needed'));
+    if (manualCheckClients.length > 0) {
+      console.log(`\n🔍 CLIENTS NEEDING MANUAL CHECK (unexpected error persisted after retry):`);
+      console.log(`${'─'.repeat(80)}`);
+      manualCheckClients.forEach((r: any, i: number) => {
+        console.log(`   ${i + 1}. ${r.company} (${r.platform})`);
+      });
+      console.log(`${'─'.repeat(80)}`);
+    }
+
+    // Flag clients that were retried
+    const retriedClients = allResults.filter((r: any) => r.retried);
+    if (retriedClients.length > 0) {
+      console.log(`\n🔄 CLIENTS THAT WERE RETRIED:`);
+      console.log(`${'─'.repeat(80)}`);
+      retriedClients.forEach((r: any, i: number) => {
+        console.log(`   ${i + 1}. ${r.company} — attempt 1: "${r.attempt1Error}" → attempt 2: "${cleanError(r.error)}"`);
+      });
+      console.log(`${'─'.repeat(80)}`);
+    }
 
     console.log(`\n${'='.repeat(100)}`);
     console.log(`${'='.repeat(100)}\n`);

@@ -29,7 +29,11 @@
     "run:helix:live":     "npx playwright test --config=helix/playwright.config.ts --project=live",
     "run:helix:editor":   "npx playwright test --config=helix/playwright.config.ts --project=editor",
     "run:helix:e2e":      "npx playwright test --config=helix/playwright.config.ts --project=live tests/e2e/",
-    "run:helix:health":   "npx playwright test --config=helix/playwright.config.ts --project=live tests/live/"
+    "run:helix:health":   "npx playwright test --config=helix/playwright.config.ts --project=live tests/live/",
+    "run:helix:sections":      "npx playwright test --config=helix/playwright.config.ts --project=live --grep \"Helix . All Sections\"",
+    "run:helix:sections:each": "npx playwright test --config=helix/playwright.config.ts --project=live --grep \"Section:\"",
+    "run:helix:visual":         "npx playwright test --config=helix/playwright.config.ts --project=live --grep \"Visual baseline\"",
+    "run:helix:visual:update":  "npx playwright test --config=helix/playwright.config.ts --project=live --grep \"Visual baseline\" --update-snapshots"
   },
   "keywords": [],
   "author": "",

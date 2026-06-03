@@ -8,7 +8,10 @@
       "Bash(node_modules/.bin/tsc --noEmit)",
       "PowerShell(Test-Connection -ComputerName sites.apps.mystoragely.com -Count 1 -Quiet)",
       "PowerShell(Resolve-DnsName -Name \"sites.apps.mystoragely.com\" -ErrorAction SilentlyContinue)",
-      "PowerShell(ipconfig /flushdns)"
+      "PowerShell(ipconfig /flushdns)",
+      "WebFetch(domain:safeguard.test.getstoragely.com)",
+      "Bash(node -e ' *)",
+      "WebFetch(domain:app.storagely.io)"
     ]
   }
 }

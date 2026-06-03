@@ -22,7 +22,6 @@ Verifies the **single-page rent flow** where Rental Details (Step 4) and Payment
 
 | Client | FMS | Captcha |
 |---|---|---|
-| First Storage — Huntsville, AL | storEDGE | — |
 | Columbia Self Storage — South Plainfield, NJ | storEDGE | — |
 | Bluebird Storage — Calgary, AB | SiteLink | — |
 | Sunbird Storage — Winston-Salem, NC | SiteLink | — |
@@ -37,7 +36,6 @@ Verifies the **single-page rent flow** where Rental Details (Step 4) and Payment
 
 | Client | FMS | Captcha |
 |---|---|---|
-| First Storage — Huntsville, AL | storEDGE | hCaptcha at RENT NOW |
 | Columbia Self Storage — South Plainfield, NJ | storEDGE | hCaptcha at RENT NOW |
 | Bluebird Storage — Calgary, AB | SiteLink | hCaptcha at RENT NOW |
 | Sunbird Storage — Winston-Salem, NC | SiteLink | hCaptcha at RENT NOW |
@@ -112,7 +110,7 @@ One test case runs per client URL. Test ID uses the client's company name.
 npx playwright test tests/rentReserveSPC-validation.spec.ts
 
 # Specific client (filter by URL substring)
-npx playwright test tests/rentReserveSPC-validation.spec.ts --grep "first-storage"
+npx playwright test tests/rentReserveSPC-validation.spec.ts --grep "columbia-self-storage"
 ```
 
 ---

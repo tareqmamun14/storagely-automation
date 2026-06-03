@@ -69,12 +69,6 @@ export class MiniMallRentalPage extends BasePage {
       .or(this.page.getByPlaceholder('Cell Phone number'));
   }
 
-  private get yardiAddressField() {
-    return this.page.locator('#address-input')
-      .or(this.page.locator('input[name="address_1"]'))
-      .or(this.page.getByPlaceholder('Address', { exact: true }));
-  }
-
   // ============================================
   // SHARED LOCATORS
   // ============================================
@@ -617,7 +611,7 @@ export class MiniMallRentalPage extends BasePage {
   // YARDI FLOW
   // ============================================
   async fillYardiTenantDetails(userData: {
-    firstName: string; lastName: string; email: string; phone: string; address: string;
+    firstName: string; lastName: string; email: string; phone: string;
   }): Promise<void> {
     console.log('\n📍 YARDI: Filling Tenant Details...');
 
@@ -655,61 +649,6 @@ export class MiniMallRentalPage extends BasePage {
     console.log(`  ✓ Phone: ${userData.phone}`);
 
     await this.wait(500);
-
-    // Address with Google Places autocomplete
-    console.log(`  📍 Typing address for Google Places autocomplete...`);
-    await this.safeScroll(this.yardiAddressField);
-    await this.yardiAddressField.click();
-    await this.yardiAddressField.fill('');
-    await this.wait(300);
-
-    // Type the address slowly so Google Places picks it up
-    await this.yardiAddressField.pressSequentially(userData.address, { delay: 50 });
-    console.log(`  ✓ Typed address: ${userData.address}`);
-
-    // Wait for Google Places dropdown to appear
-    await this.wait(2000);
-
-    // Dismiss Google Maps modal if it appears
-    await this.dismissGoogleMapsModal();
-
-    // Select the first suggestion from the dropdown
-    try {
-      const pacItem = this.page.locator('.pac-container .pac-item').first();
-      const pacVisible = await pacItem.isVisible({ timeout: 3000 }).catch(() => false);
-
-      if (pacVisible) {
-        await pacItem.click();
-        console.log('  ✓ Selected address from Google Places dropdown');
-      } else {
-        // Fallback: ArrowDown + Enter
-        await this.page.keyboard.press('ArrowDown');
-        await this.wait(300);
-        await this.page.keyboard.press('Enter');
-        console.log('  ✓ Selected address via keyboard (ArrowDown + Enter)');
-      }
-    } catch {
-      // Last resort: just press ArrowDown + Enter
-      await this.page.keyboard.press('ArrowDown');
-      await this.wait(300);
-      await this.page.keyboard.press('Enter');
-      console.log('  ✓ Selected address via keyboard fallback');
-    }
-
-    // Wait for City, State, Zip to auto-fill from Google Places
-    console.log('  ⏳ Waiting for City/State/Zip to auto-fill from address selection...');
-    await this.wait(2000);
-
-    // Verify auto-fill happened
-    try {
-      const cityInput = this.page.locator('input[name="city"], #city-input').first();
-      const cityValue = await cityInput.inputValue().catch(() => '');
-      if (cityValue) {
-        console.log(`  ✓ City auto-filled: ${cityValue}`);
-      } else {
-        console.log('  ⚠️ City may not have auto-filled — proceeding anyway');
-      }
-    } catch { /* non-critical */ }
 
     console.log('✅ Yardi tenant details completed');
   }

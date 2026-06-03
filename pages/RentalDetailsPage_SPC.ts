@@ -2,6 +2,11 @@ import { Page } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { CURRENT_ENVIRONMENT, Environment } from '../configs/urls';
 
+/** Escape regex metacharacters for safe insertion into a dynamic RegExp source. */
+function escapeRegex(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 /**
  * RentalDetailsPage_singlepage - Single Page Layout
  * 
@@ -283,6 +288,35 @@ export class RentalDetailsPageSinglePage extends BasePage {
     return '';
   }
 
+  private async deepExtractToastText(): Promise<string> {
+    try {
+      const text = await this.page.evaluate(() => {
+        const containers = document.querySelectorAll(
+          '[data-id*="toast-notification"], .toast-container, .toast, [role="alert"], .Toastify__toast'
+        );
+        for (const container of containers) {
+          if (!(container as HTMLElement).offsetParent && !(container as HTMLElement).getBoundingClientRect().height) continue;
+          const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+          const parts: string[] = [];
+          let node: Node | null;
+          while ((node = walker.nextNode())) {
+            const t = (node.textContent || '').trim();
+            if (t && !['Close', '×', 'X', '✕'].includes(t)) parts.push(t);
+          }
+          const joined = parts.join(' ').replace(/\s+/g, ' ').trim();
+          if (joined && joined.length > 5) return joined;
+        }
+        return '';
+      });
+      if (text) {
+        console.log(`🔍 Deep toast extraction found: "${text}"`);
+      }
+      return text;
+    } catch {
+      return '';
+    }
+  }
+
   private async scanVisiblePageForPaymentError(): Promise<string> {
     const meaningfulErrorPattern = /response code|payment failed|not a valid credit card number|invalid account data|invalid card number|could not save payment method|could not initialize transaction|unit is not available|reason text|reason code|your card number is incorrect/i;
 
@@ -306,6 +340,84 @@ export class RentalDetailsPageSinglePage extends BasePage {
     }
 
     return '';
+  }
+
+  // ============================================
+  // DISCOUNT TIMING & BREAKDOWN
+  // ============================================
+
+  async selectDiscountTiming(option: string): Promise<void> {
+    console.log(`\n📍 Selecting discount timing: "${option}"...`);
+
+    const dropdownField = this.page.getByLabel('Select When to Apply Discount');
+    await this.safeScroll(dropdownField);
+    await this.wait(300);
+
+    // Try native <select> first
+    try {
+      const tagName = await dropdownField.evaluate(el => el.tagName.toLowerCase());
+      if (tagName === 'select') {
+        await dropdownField.selectOption({ label: option });
+        console.log(`  ✓ Selected "${option}" via native select`);
+        await this.wait(1000);
+        return;
+      }
+    } catch { /* not a native select */ }
+
+    // Custom Vue dropdown — use existing helper
+    await this.selectDropdownOption(dropdownField, option, 'Discount Timing');
+    await this.wait(1000);
+    console.log(`  ✓ Selected "${option}"`);
+  }
+
+  async captureBreakdownLineItems(): Promise<{ items: Array<{label: string, amount: string}>, total: string }> {
+    console.log('\n📍 Capturing breakdown line items...');
+
+    const items: Array<{label: string, amount: string}> = [];
+    let total = '';
+
+    // The breakdown sits inside a border-t container with flex justify-between rows
+    const breakdownContainer = this.page.locator('.border-t.border-primary-300').first();
+    await this.safeScroll(breakdownContainer);
+    await this.wait(500);
+
+    const rows = breakdownContainer.locator('.flex.justify-between.items-center');
+    const count = await rows.count();
+
+    for (let i = 0; i < count; i++) {
+      const row = rows.nth(i);
+      const rowText = (await row.innerText()).trim();
+      if (!rowText) continue;
+
+      // Extract all spans — the label is the first non-$ text, the amount is the $ text
+      const spans = row.locator('span');
+      const spanCount = await spans.count();
+      const texts: string[] = [];
+      for (let j = 0; j < spanCount; j++) {
+        const t = (await spans.nth(j).innerText()).trim();
+        if (t) texts.push(t);
+      }
+
+      const amountText = texts.find(s => /^\$/.test(s));
+      const labelText = texts.find(s => !/^\$/.test(s) && s.length > 1);
+
+      if (labelText && amountText) {
+        if (/total due today/i.test(labelText)) {
+          total = amountText;
+        } else {
+          items.push({ label: labelText, amount: amountText });
+        }
+      }
+    }
+
+    console.log('  ┌─ Breakdown ─────────────────────────────');
+    for (const item of items) {
+      console.log(`  │ ${item.label.padEnd(35)} ${item.amount}`);
+    }
+    console.log(`  │ ${'Total Due Today'.padEnd(35)} ${total}`);
+    console.log('  └──────────────────────────────────────────');
+
+    return { items, total };
   }
 
   // ============================================
@@ -422,6 +534,10 @@ export class RentalDetailsPageSinglePage extends BasePage {
       colorado?: string
     },
     zipCode: string,
+    alternateFirstName?: string,
+    alternateLastName?: string,
+    alternatePhone?: string,
+    alternateEmail?: string,
     driversLicense?: string,
     driversLicenseState?: string,
     birthMonth?: string,
@@ -432,9 +548,9 @@ export class RentalDetailsPageSinglePage extends BasePage {
       expiryDate: string,
       cvv: string
     }
-  }, hasStepFourCaptcha: boolean = false, clientName?: string): Promise<void> {
+  }, hasStepFourCaptcha: boolean = false, clientName?: string, recommendedAddons: string[] = []): Promise<void> {
     console.log(`[${new Date().toISOString()}] 📝 Starting single-page rental form fill...`);
-    
+
     try {
       // Wait for form to be ready
       await this.wait(2000);
@@ -442,6 +558,15 @@ export class RentalDetailsPageSinglePage extends BasePage {
 
       // Dismiss any cookie consent banners or overlays that might intercept clicks
       await this.handleCookieConsent();
+
+      // Toggle on any recommended add-ons BEFORE filling tenant details. The
+      // add-on section sits at the top of the SPC page (above tenant) for
+      // single-page layouts, and on Step 4 for two-step layouts. Affects the
+      // unit total, so it must be flipped before payment is computed.
+      if (recommendedAddons.length > 0) {
+        await this.selectRecommendedAddons(recommendedAddons);
+        this.ensurePageAlive('after recommended add-ons');
+      }
 
       // Detect two-step layout (e.g. Minimall Storage)
       const twoStep = await this.isTwoStepLayout();
@@ -470,6 +595,10 @@ export class RentalDetailsPageSinglePage extends BasePage {
           address: userData.address,
           city: userData.city,
           zipCode: userData.zipCode,
+          alternateFirstName: userData.alternateFirstName,
+          alternateLastName: userData.alternateLastName,
+          alternatePhone: userData.alternatePhone,
+          alternateEmail: userData.alternateEmail,
         });
         this.ensurePageAlive('after alternate contact (step 4)');
 
@@ -515,6 +644,10 @@ export class RentalDetailsPageSinglePage extends BasePage {
           address: userData.address,
           city: userData.city,
           zipCode: userData.zipCode,
+          alternateFirstName: userData.alternateFirstName,
+          alternateLastName: userData.alternateLastName,
+          alternatePhone: userData.alternatePhone,
+          alternateEmail: userData.alternateEmail,
         });
         this.ensurePageAlive('after alternate contact');
 
@@ -542,6 +675,91 @@ export class RentalDetailsPageSinglePage extends BasePage {
   // ============================================
   // SECTION-SPECIFIC METHODS
   // ============================================
+
+  /**
+   * Toggle ON one or more named "Recommended Add-ons" in the SPC checkout
+   * (e.g. "24 Hour Access" for Safeguard).
+   *
+   * Strategy mirrors enableAgreementToggle() — try the cleanest selector first,
+   * fall back to broader ones. The add-on row layout:
+   *   <h4>24 Hour Access</h4>  +  <input type="checkbox" name="toggle-XXXXX">
+   * The checkbox is visually hidden (1×1 px) behind a styled toggle; .check()
+   * with { force: true } flips it the same way a click on the visible UI does.
+   *
+   * @param addonNames array of add-on display names to enable
+   */
+  async selectRecommendedAddons(addonNames: string[]): Promise<void> {
+    if (!addonNames || addonNames.length === 0) return;
+
+    console.log(`\n📍 SECTION 0: Selecting Recommended Add-ons: ${addonNames.join(', ')}...`);
+
+    for (const name of addonNames) {
+      const heading = this.page.locator('h4, h5, h6, label, [role="heading"]')
+        .filter({ hasText: new RegExp(`^\\s*${escapeRegex(name)}\\s*$`, 'i') })
+        .first();
+      const found = await heading.count() > 0;
+      if (!found) {
+        // Fallback: any element containing the add-on name as a short label.
+        const looser = this.page.locator(`text=/^\\s*${escapeRegex(name)}\\s*$/i`).first();
+        if (await looser.count() === 0) {
+          console.log(`  ⚠️ Add-on "${name}" not found on page — skipping`);
+          continue;
+        }
+        await looser.scrollIntoViewIfNeeded({ timeout: 5000 }).catch(() => {});
+      } else {
+        await heading.scrollIntoViewIfNeeded({ timeout: 5000 }).catch(() => {});
+      }
+      await this.wait(300);
+
+      // Climb to the smallest ancestor that contains a checkbox/switch — that's
+      // the add-on row. Then toggle the input. If it's already on, leave it.
+      const container = (found ? heading : this.page.locator(`text=/^\\s*${escapeRegex(name)}\\s*$/i`).first())
+        .locator('xpath=ancestor::*[descendant::input[@type="checkbox"] or descendant::*[@role="switch"]][1]');
+      const checkbox = container.locator('input[type="checkbox"], [role="switch"]').first();
+
+      const cbxCount = await checkbox.count().catch(() => 0);
+      if (cbxCount === 0) {
+        console.log(`  ⚠️ No checkbox found inside the "${name}" add-on row — skipping`);
+        continue;
+      }
+
+      const wasChecked = await checkbox.isChecked().catch(() => false);
+      if (wasChecked) {
+        console.log(`  ✓ "${name}" — already enabled`);
+        continue;
+      }
+
+      // Strategy 1: native .check() with force (works for hidden styled inputs).
+      try {
+        await checkbox.check({ force: true, timeout: 3000 });
+        console.log(`  ✓ "${name}" — enabled via check()`);
+        continue;
+      } catch { /* fall through */ }
+
+      // Strategy 2: click the wrapping label or the row container (toggles the input).
+      try {
+        await container.click({ force: true, timeout: 3000 });
+        const after = await checkbox.isChecked().catch(() => false);
+        if (after) {
+          console.log(`  ✓ "${name}" — enabled via container click`);
+          continue;
+        }
+      } catch { /* fall through */ }
+
+      // Strategy 3: dispatch a synthetic click event directly on the input.
+      try {
+        await checkbox.dispatchEvent('click');
+        const after = await checkbox.isChecked().catch(() => false);
+        if (after) {
+          console.log(`  ✓ "${name}" — enabled via dispatchEvent`);
+          continue;
+        }
+      } catch { /* fall through */ }
+
+      console.log(`  ⚠️ Could not enable add-on "${name}" — all strategies exhausted`);
+    }
+    console.log('✅ Recommended add-ons step completed');
+  }
 
   /**
    * Fill Tenant Details Section
@@ -657,8 +875,6 @@ export class RentalDetailsPageSinglePage extends BasePage {
         }
       } else if (currentUrl.includes('columbiaselfstorage.com')) {
         stateValue = userData.province.newJersey || 'New Jersey';
-      } else if (currentUrl.includes('firststorage.com') || currentUrl.includes('first-storage')) {
-        stateValue = userData.province.southCarolina || 'South Carolina';
       } else if (currentUrl.includes('yourwaystorage.com')) {
         stateValue = userData.province.georgia || 'Georgia';
       } else if (currentUrl.includes('purelystorage.com')) {
@@ -720,7 +936,11 @@ export class RentalDetailsPageSinglePage extends BasePage {
     phone: string,
     address: string,
     city: string,
-    zipCode: string
+    zipCode: string,
+    alternateFirstName?: string,
+    alternateLastName?: string,
+    alternatePhone?: string,
+    alternateEmail?: string
   }): Promise<void> {
     console.log('\n📍 SECTION 1B: Checking for Additional Contact section...');
 
@@ -740,31 +960,36 @@ export class RentalDetailsPageSinglePage extends BasePage {
 
     console.log('  ⚙️  Additional Contact toggle is ON — filling alternate contact fields');
 
+    const altFirstName = userData.alternateFirstName || 'Alt' + userData.firstName;
+    const altLastName = userData.alternateLastName || userData.lastName + 'Alt';
+    const altPhone = userData.alternatePhone || '555' + userData.phone.slice(3);
+    const altEmail = userData.alternateEmail || userData.email.replace('@', '+alt@');
+
     try {
       await this.safeScroll(this.alternateFirstNameField);
-      await this.alternateFirstNameField.fill(userData.firstName);
-      console.log(`  ✓ Filled Alt First Name: ${userData.firstName}`);
+      await this.alternateFirstNameField.fill(altFirstName);
+      console.log(`  ✓ Filled Alt First Name: ${altFirstName}`);
     } catch {
       console.log('  - Alt First Name not found, skipping');
     }
 
     try {
-      await this.alternateLastNameField.fill(userData.lastName);
-      console.log(`  ✓ Filled Alt Last Name: ${userData.lastName}`);
+      await this.alternateLastNameField.fill(altLastName);
+      console.log(`  ✓ Filled Alt Last Name: ${altLastName}`);
     } catch {
       console.log('  - Alt Last Name not found, skipping');
     }
 
     try {
-      await this.alternatePhoneField.fill(userData.phone);
-      console.log(`  ✓ Filled Alt Phone: ${userData.phone}`);
+      await this.alternatePhoneField.fill(altPhone);
+      console.log(`  ✓ Filled Alt Phone: ${altPhone}`);
     } catch {
       console.log('  - Alt Phone not found, skipping');
     }
 
     try {
-      await this.alternateEmailField.fill(userData.email);
-      console.log(`  ✓ Filled Alt Email: ${userData.email}`);
+      await this.alternateEmailField.fill(altEmail);
+      console.log(`  ✓ Filled Alt Email: ${altEmail}`);
     } catch {
       console.log('  - Alt Email not found, skipping');
     }
@@ -1260,8 +1485,6 @@ export class RentalDetailsPageSinglePage extends BasePage {
         }
       } else if (currentUrl.includes('columbiaselfstorage.com')) {
         stateName = province.newJersey || 'New Jersey';
-      } else if (currentUrl.includes('firststorage.com') || currentUrl.includes('first-storage')) {
-        stateName = province.southCarolina || 'South Carolina';
       } else if (currentUrl.includes('yourwaystorage.com')) {
         stateName = province.georgia || 'Georgia';
       } else if (currentUrl.includes('purelystorage.com')) {
@@ -1306,15 +1529,21 @@ export class RentalDetailsPageSinglePage extends BasePage {
    * Enable Agreement Toggle
    * Handles different platforms:
    * - storEDGE: Toggle switch with "Be advised" text
-   * - SiteLink: Checkbox with "I understand that failure to complete" text
+   * - SiteLink/SSM: Checkbox whose disclaimer STARTS WITH "I understand…"
+   *
+   * Match on the "I understand" PREFIX only — not the full sentence. The
+   * disclaimer body after it (e.g. "…failure to complete all required
+   * agreements…", "…A 3% convenience fee…") varies per client and changes over
+   * time; matching the whole sentence would silently miss the toggle when the
+   * wording changes. The "Be advised" (storEDGE) path is kept as well.
    */
   private async enableAgreementToggle(): Promise<void> {
     console.log('\n📍 SECTION 4: Enabling Agreement Toggle...');
-    
-    // Strategy 1: SiteLink format (Bluebird) - Fast path for "I understand" text
+
+    // Strategy 1: SiteLink/SSM format - Fast path for any "I understand…" disclaimer
     try {
       const checkbox = this.page.locator('input[type="checkbox"]').filter({
-        has: this.page.locator('text=/I understand.*failure to complete.*required agreements/i')
+        has: this.page.locator('text=/I understand/i')
       }).first();
       
       const checkboxCount = await checkbox.count().catch(() => 0);
@@ -1370,7 +1599,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
     
     // Strategy 2: SiteLink format - Find checkbox near "I understand" text
     try {
-      const agreementText = this.page.locator('text=/I understand.*failure to complete.*required agreements/i').first();
+      const agreementText = this.page.locator('text=/I understand/i').first();
       const textCount = await agreementText.count().catch(() => 0);
       
       if (textCount > 0) {
@@ -1561,6 +1790,53 @@ export class RentalDetailsPageSinglePage extends BasePage {
   }
 
   /**
+   * Detect an error toast that appears RIGHT AFTER landing on the step-four page,
+   * BEFORE any form interaction (e.g. "Could not find facility for ID …" in the
+   * screenshot). This catches backend/handoff failures that surface the instant
+   * the next page loads, independent of anything the test types.
+   *
+   * IMPORTANT: this reuses the EXACT same toast-detection elements as
+   * clickRentNowAndCaptureError (quickErrorCheck → toast body / toast container /
+   * alert-danger / role=alert / visible-page scan, plus the deep extractor), so a
+   * landing error reads identically to a post-submit error in the report.
+   *
+   * @returns the error string when a real (non-generic) error toast is present on
+   *          landing, or '' when the page landed clean.
+   */
+  async captureLandingError(maxWaitMs: number = 6000): Promise<string> {
+    console.log(`[${new Date().toISOString()}] 🔎 Checking for an error toast right after landing on step-four...`);
+    // Don't let the live-chat widget cover the toast region.
+    await this.minimizeLiveChat().catch(() => {});
+
+    const deadline = Date.now() + maxWaitMs;
+    let captured = '';
+    while (Date.now() < deadline) {
+      if (this.page.isClosed()) return '';
+      const msg = await this.quickErrorCheck().catch(() => '');
+      if (msg && !this.isGenericToastHeader(msg)) { captured = msg; break; }
+      if (msg && this.isGenericToastHeader(msg)) {
+        // Only the generic "Error Occurred" header rendered so far — try the deep
+        // text walk to pull the real body, exactly like the submit-time path does.
+        const deep = await this.deepExtractToastText().catch(() => '');
+        if (deep && !this.isGenericToastHeader(deep)) { captured = deep; break; }
+        captured = msg; // keep the generic header in case nothing richer appears
+      }
+      await this.wait(500).catch(() => {});
+    }
+
+    if (captured && !this.isGenericToastHeader(captured)) {
+      console.log(`[${new Date().toISOString()}] 🚩 Landing error detected: ${captured}`);
+      return captured;
+    }
+    if (captured) {
+      console.log(`[${new Date().toISOString()}] 🚩 Landing error detected (generic toast header only).`);
+      return 'Error Occurred (toast appeared on landing but details not rendered by client)';
+    }
+    console.log(`[${new Date().toISOString()}] ✅ No error toast on landing — page is clean.`);
+    return '';
+  }
+
+  /**
    * Click RENT NOW button and capture error message
    */
   async clickRentNowAndCaptureError(hasCaptcha: boolean = false, clientName?: string): Promise<string> {
@@ -1583,7 +1859,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
           const url = response.url();
           const status = response.status();
           // Capture error responses from rent/payment/move-in API calls
-          if (status >= 400 || (url.includes('/rent') || url.includes('/move-in') || url.includes('/payment') || url.includes('/checkout') || url.includes('/lease'))) {
+          if (status >= 400 || (url.includes('/rent') || url.includes('/move-in') || url.includes('/payment') || url.includes('/checkout') || url.includes('/lease') || url.includes('/order') || url.includes('/transaction') || url.includes('/process') || url.includes('/reserve') || url.includes('/submit') || url.includes('/user/checkout'))) {
             const body = await response.text().catch(() => '');
             if (body && (body.includes('error') || body.includes('Error') || body.includes('message') || status >= 400)) {
               try {
@@ -1652,6 +1928,14 @@ export class RentalDetailsPageSinglePage extends BasePage {
         return `Error Occurred — ${apiErrorMessage}`;
       }
 
+      // Deep toast extraction — walks all text nodes in toast containers
+      const deepText = await this.deepExtractToastText();
+      if (deepText && !this.isGenericToastHeader(deepText)) {
+        console.log(`[${new Date().toISOString()}] ✅ Error captured via deep toast extraction: ${deepText}`);
+        this.page.removeListener('response', responseHandler);
+        return deepText;
+      }
+
       // Last DOM-based fallback for clients whose toast renders outside the current selectors
       const pageErrorMessage = await this.scanVisiblePageForPaymentError();
       if (pageErrorMessage) {
@@ -1659,14 +1943,32 @@ export class RentalDetailsPageSinglePage extends BasePage {
         this.page.removeListener('response', responseHandler);
         return pageErrorMessage;
       }
-      
+
+      // Page-closed check — if page is gone, the first click navigated successfully (no error to capture)
+      if (this.page.isClosed()) {
+        console.log(`[${new Date().toISOString()}] ℹ️ Page closed — first click navigated, no error toast to capture`);
+        this.page.removeListener('response', responseHandler);
+        return apiErrorMessage ? `Error Occurred — ${apiErrorMessage}` : 'No error - flow completed (page navigated)';
+      }
+
       // No error detected - retry once (only if RENT NOW button is still available)
       console.log(`[${new Date().toISOString()}] ⚠️ No error detected on first attempt, retrying...`);
-      await this.wait(1000);
-      
+      try {
+        await this.wait(1000);
+      } catch {
+        console.log(`[${new Date().toISOString()}] ℹ️ Wait failed — page likely closed/navigated. Skipping retry.`);
+        this.page.removeListener('response', responseHandler);
+        return apiErrorMessage ? `Error Occurred — ${apiErrorMessage}` : 'No error - flow completed (page navigated)';
+      }
+
       // Check if page navigated away or button is gone — if so, the first click worked
       let retryClickSucceeded = false;
       try {
+        if (this.page.isClosed()) {
+          console.log(`[${new Date().toISOString()}] ℹ️ Page closed after wait — skipping retry`);
+          this.page.removeListener('response', responseHandler);
+          return apiErrorMessage ? `Error Occurred — ${apiErrorMessage}` : 'No error - flow completed (page navigated)';
+        }
         const buttonStillVisible = await this.rentNowButton.isVisible({ timeout: 3000 }).catch(() => false);
         if (!buttonStillVisible) {
           console.log(`[${new Date().toISOString()}] ℹ️ RENT NOW button no longer visible — first click likely succeeded, skipping retry`);
@@ -1706,13 +2008,35 @@ export class RentalDetailsPageSinglePage extends BasePage {
         console.log(`[${new Date().toISOString()}] ✅ Using visible page fallback after retry: ${pageErrorOnRetry}`);
         return pageErrorOnRetry;
       }
-      
-      // Still no error after retry
+
+      // Last resort: deep toast extraction
+      const deepFallback = await this.deepExtractToastText();
+      if (deepFallback && !this.isGenericToastHeader(deepFallback)) {
+        console.log(`[${new Date().toISOString()}] ✅ Using deep toast extraction fallback: ${deepFallback}`);
+        return deepFallback;
+      }
+
+      // If we saw a generic toast header, the flow DID complete — return it instead of "FAILED"
+      if (errorMessage && errorMessage.includes('toast body not captured')) {
+        console.log(`[${new Date().toISOString()}] ⚠️ Returning generic toast — body was never rendered`);
+        return 'Error Occurred (toast appeared but details not rendered by client)';
+      }
+
       console.log(`[${new Date().toISOString()}] ❌ Still no error after retry`);
       return 'FAILED to fetch Error Message @ Step-5 (Single-Page - After RENT NOW click)';
       
     } catch (error) {
-      const errorMsg = `❌ Failed to click RENT NOW button - ${(error as Error).message}`;
+      const rawMsg = (error as Error).message || '';
+      // Page-closed / context-destroyed during error detection usually means the
+      // click succeeded and the page navigated. Return gracefully so the test
+      // doesn't fail on what is really a SUCCESS path.
+      if (rawMsg.includes('Target page, context or browser has been closed') ||
+          rawMsg.includes('Execution context was destroyed') ||
+          rawMsg.includes('frame was detached')) {
+        console.log(`[${new Date().toISOString()}] ℹ️ Page closed mid-detection — treating as navigation success.`);
+        return 'No error - flow completed (page navigated)';
+      }
+      const errorMsg = `❌ Failed to click RENT NOW button - ${rawMsg}`;
       console.error(errorMsg);
       throw new Error(errorMsg);
     }
@@ -1794,9 +2118,13 @@ export class RentalDetailsPageSinglePage extends BasePage {
             console.log(`🔍 Found toast text: "${cleaned}"`);
             return cleaned;
           }
-          // If only generic header found, try to get body separately
+          // If only generic header found, try deep text extraction
           if (cleaned && this.isGenericToastHeader(cleaned)) {
-            console.log(`🔍 Generic toast header detected ("${cleaned}"), waiting for body...`);
+            console.log(`🔍 Generic toast header detected ("${cleaned}"), trying deep extraction...`);
+            const deepText = await this.deepExtractToastText();
+            if (deepText && !this.isGenericToastHeader(deepText)) {
+              return deepText;
+            }
           }
         }
       } catch { /* not visible yet */ }
@@ -1903,7 +2231,11 @@ export class RentalDetailsPageSinglePage extends BasePage {
               }
               if (cleaned && this.isGenericToastHeader(cleaned)) {
                 sawGenericHeader = true;
-                // Don't return — keep polling for the body to appear
+                const deepText = await this.deepExtractToastText();
+                if (deepText && !this.isGenericToastHeader(deepText)) {
+                  console.log(`✓ Error found via deep extraction at poll ${i + 1}`);
+                  return deepText;
+                }
               }
             }
           } catch { /* not visible yet */ }

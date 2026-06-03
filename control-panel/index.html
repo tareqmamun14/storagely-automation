@@ -218,6 +218,34 @@
     color: #1e7d62;
   }
 
+  /* ── Helix nested groups (collapsible, collapsed by default) ───────── */
+  details.helix-group {
+    border: 1px solid var(--line); border-radius: 6px; background: var(--panel); margin: 8px 0;
+  }
+  details.helix-group > summary {
+    list-style: none; cursor: pointer; padding: 7px 10px; display: flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 600; color: var(--text);
+  }
+  details.helix-group > summary::-webkit-details-marker { display: none; }
+  details.helix-group > summary::after { content: '▸'; margin-left: auto; color: var(--muted); transition: transform .15s; }
+  details.helix-group[open] > summary::after { transform: rotate(90deg); }
+  details.helix-group > summary .grp-desc { font-weight: 400; color: var(--muted); font-size: 11px; }
+  details.helix-group .hg-body { padding: 8px 12px 12px; border-top: 1px solid var(--line); }
+  /* Small Prod/Test env badge on facility rows */
+  .env-badge {
+    display: inline-block; padding: 1px 6px; font-size: 10px; font-weight: 600;
+    border-radius: 4px; letter-spacing: .2px; line-height: 1.4; flex: 0 0 auto;
+    border: 1px solid transparent; text-transform: uppercase;
+  }
+  .env-badge.prod { background: #1f5a3c33; color: #6dd4a4; border-color: #1f5a3c; }
+  .env-badge.test { background: #5a3e1f33; color: #f5b651; border-color: #5a3e1f; }
+  .helix-env-bar {
+    display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center;
+    padding: 8px 10px; margin-bottom: 6px; border-radius: 6px;
+    background: color-mix(in srgb, #2da888 8%, var(--panel));
+    border: 1px solid #2da88833;
+  }
+
   .url-list { display: flex; flex-direction: column; gap: 4px; margin-top: 6px; }
   .url-list .row-item { display: flex; gap: 6px; align-items: center; }
   .url-list .row-item input { flex: 1; font: 12px/1.4 ui-monospace, Menlo, Consolas, monospace; }
@@ -291,6 +319,89 @@
 
       <!-- ── Suites ── -->
       <div class="small" style="margin-bottom:6px">Pick suites to run. Open each card to fine-tune clients/modules.</div>
+
+      <!-- ═══ Helix (v4) — kept at the TOP: this is the launch pipeline ═══ -->
+      <details class="suite helix-suite" id="suite-helix">
+        <summary>
+          <label class="switch" onclick="event.stopPropagation()"><input class="suite-toggle" data-suite="helix" type="checkbox" /><span class="track"></span></label>
+          <span class="suite-name">Helix (v4) — launch pipeline</span>
+          <span class="suite-desc">E2E rent journey · live page health · per-section checks · editor smoke</span>
+        </summary>
+        <div class="body">
+          <!-- Prod / Test toggle — top of the card, independent of the global env. Prod default. -->
+          <div class="helix-env-bar">
+            <div class="col">
+              <div class="small"><b>Helix environment</b> <span class="small">(independent of the top-level Environment above)</span></div>
+              <div class="row" style="margin-top:4px">
+                <label class="switch"><input id="helixEnvProd" type="radio" name="helixEnv" value="production" checked /><span class="track"></span><span class="lbl">Production</span></label>
+                <label class="switch"><input id="helixEnvTest" type="radio" name="helixEnv" value="test" /><span class="track"></span><span class="lbl">Test / Stage</span></label>
+              </div>
+            </div>
+            <div class="small" style="flex:1;min-width:200px">
+              <b>Production</b> = real customer domains (e.g. <code>www.safeguardit.com</code>) — the post-release regression, same cadence as V1/V2.<br/>
+              <b>Test / Stage</b> = <code>*.test.getstoragely.com</code>. Every Helix client uses the same page template, so these checks apply to each new client automatically.
+            </div>
+          </div>
+
+          <!-- ── Group: Test Layers ── -->
+          <details class="helix-group" id="helix-grp-layers">
+            <summary>Test Layers <span class="grp-desc">— which kinds of tests to run</span></summary>
+            <div class="hg-body">
+              <div class="check-list">
+                <label title="Land → browse units → click Rent Now → assert V2 SPC /step-four?unit_id handoff."><input type="checkbox" id="helix-mod-e2e" data-mod="e2e" checked /> E2E Rent Journey (P0)</label>
+                <label title="Title, heading, no unresolved {tokens}, images load, no console errors, units present."><input type="checkbox" id="helix-mod-live" data-mod="live" checked /> Live Page Health + Token Audit (P0/P1)</label>
+                <label title="Runs all enabled page-section detectors in ONE navigation per facility, with a rollup report."><input type="checkbox" id="helix-mod-sections" data-mod="sections" checked /> Live Sections — Combined run (P0)</label>
+                <label title="Each section as its own isolated test — slower, but pinpoints failures per section/facility."><input type="checkbox" id="helix-mod-sections-each" data-mod="sections-each" /> Live Sections — Each as own test (slower)</label>
+                <label title="Editor login + component palette inventory at sites.apps.mystoragely.com (needs editor password)."><input type="checkbox" id="helix-mod-editor" data-mod="editor" /> Editor Smoke + Palette Inventory (P2)</label>
+              </div>
+            </div>
+          </details>
+
+          <!-- ── Group: Page Sections (drives HELIX_SECTIONS — only affects the Sections layers) ── -->
+          <details class="helix-group" id="helix-grp-sections">
+            <summary>Page Sections <span class="grp-desc">— which sections the Sections layers verify</span></summary>
+            <div class="hg-body">
+              <div class="small" style="margin-bottom:6px">Each section is a generic, layout-tolerant detector with a defined expected behaviour (hover for details). All checked = verify every section. Only applies when a <b>Sections</b> layer above is on.</div>
+              <div id="helix-section-checks" class="check-list"></div>
+              <div class="toolbar" style="margin-top:6px">
+                <button id="helix-section-all" class="ghost" type="button">all</button>
+                <button id="helix-section-none" class="ghost" type="button">none</button>
+              </div>
+            </div>
+          </details>
+
+          <!-- ── Group: Facilities (drives HELIX_FACILITY_FILTER — filtered by the Prod/Test toggle) ── -->
+          <details class="helix-group" id="helix-grp-facilities">
+            <summary>Facilities <span class="grp-desc">— which locations to run against</span></summary>
+            <div class="hg-body">
+              <div class="small" style="margin-bottom:6px">Locations in the selected environment. All checked = run every facility in this env. Add an on-demand URL under <b>Ad-hoc URL</b> below without touching code.</div>
+              <div id="helix-facility-checks" class="check-list"></div>
+              <div class="toolbar" style="margin-top:6px">
+                <button id="helix-facility-all" class="ghost" type="button">all</button>
+                <button id="helix-facility-none" class="ghost" type="button">none</button>
+              </div>
+            </div>
+          </details>
+
+          <!-- ── Group: Editor & Auth ── -->
+          <details class="helix-group" id="helix-grp-editor">
+            <summary>Editor &amp; Auth <span class="grp-desc">— login for editor tests</span></summary>
+            <div class="hg-body">
+              <div class="small" style="margin-bottom:4px"><b>Editor password</b> <span class="small">(tareq@storagely.io — only needed for the Editor layer; saved in browser)</span></div>
+              <input id="helix-password" type="password" placeholder="Enter Helix editor password" style="width:100%" />
+            </div>
+          </details>
+
+          <!-- ── Group: Ad-hoc URL ── -->
+          <details class="helix-group" id="helix-grp-custom">
+            <summary>Ad-hoc URL <span class="grp-desc">— test any single Helix v4 page on demand</span></summary>
+            <div class="hg-body">
+              <div class="small" style="margin-bottom:4px">Runs all selected Test Layers against this one URL too (tagged with the selected env). Leave blank to use the facilities above.</div>
+              <input id="helix-custom-url" type="text" placeholder="https://www.safeguardit.com/storage-units/..." style="width:100%;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace" />
+            </div>
+          </details>
+        </div>
+      </details>
 
       <!-- UI Components -->
       <details class="suite" id="suite-ui">
@@ -432,7 +543,7 @@
       </details>
 
       <!-- Build Instance Regression -->
-      <details class="suite" id="suite-build" open>
+      <details class="suite" id="suite-build">
         <summary>
           <label class="switch" onclick="event.stopPropagation()"><input class="suite-toggle" data-suite="build" type="checkbox" /><span class="track"></span></label>
           <span class="suite-name">Build Instance Regression</span>
@@ -456,40 +567,6 @@
             <b>⚠ Manual reminder — Yardi (Mini Mall):</b> automated regression doesn't cover Yardi.
             After this run, manually spot-check on the build instance:
             <code id="build-yardi-url" style="display:block;margin-top:4px"></code>
-          </div>
-        </div>
-      </details>
-
-      <!-- Helix Editor & v4 Sites -->
-      <details class="suite helix-suite" id="suite-helix">
-        <summary>
-          <label class="switch" onclick="event.stopPropagation()"><input class="suite-toggle" data-suite="helix" type="checkbox" /><span class="track"></span></label>
-          <span class="suite-name">Helix (v4)</span>
-          <span class="suite-desc">E2E rent journey, live page health, editor smoke — helix/tests/</span>
-        </summary>
-        <div class="body">
-          <div class="small" style="margin-bottom:6px">Helix v4 site builder — editor at <code>sites.apps.mystoragely.com</code> + published facility pages.</div>
-
-          <div class="small" style="margin:8px 0 6px"><b>Test layers:</b></div>
-          <div class="check-list">
-            <label><input type="checkbox" id="helix-mod-e2e" data-mod="e2e" checked /> E2E Rent Journey (P0)</label>
-            <label><input type="checkbox" id="helix-mod-live" data-mod="live" checked /> Live Page Health + Token Audit (P0/P1)</label>
-            <label><input type="checkbox" id="helix-mod-editor" data-mod="editor" /> Editor Smoke + Palette Inventory (P2)</label>
-          </div>
-
-          <div style="margin-top:12px">
-            <div class="small" style="margin-bottom:4px"><b>Editor password</b> <span class="small">(tareq@storagely.io — saved in browser)</span></div>
-            <input id="helix-password" type="password" placeholder="Enter Helix editor password" style="width:100%" />
-          </div>
-
-          <div style="margin-top:10px">
-            <div class="small" style="margin-bottom:4px"><b>Helix-built client sites</b> (production):</div>
-            <div id="helix-sites" class="check-list"></div>
-          </div>
-
-          <div style="margin-top:10px">
-            <div class="small" style="margin-bottom:4px"><b>Custom URL</b> <span class="small">(test any Helix v4 page)</span></div>
-            <input id="helix-custom-url" type="text" placeholder="https://safeguard.test.getstoragely.com/storage-units/..." style="width:100%;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace" />
           </div>
         </div>
       </details>
@@ -587,7 +664,9 @@ async function boot() {
   renderExtras();
   renderBuildClients();
   renderMiniMallRentPresets();
-  renderHelixSites();
+  renderHelixSections();
+  renderHelixFacilities();
+  refreshHelixSectionVisibility();
   renderPresets();
   hookCmdPreview();
   applyBuildEnvLock();
@@ -724,19 +803,62 @@ function renderMiniMallRentPresets() {
   }
 }
 
-// ─── Helix Sites (parsed from helix/configs/urls.ts) ─────────────────
-function renderHelixSites() {
-  const root = $('#helix-sites'); if (!root) return; root.innerHTML = '';
-  const sites = (CFG.helix && CFG.helix.sites) || [];
-  if (sites.length === 0) {
-    root.innerHTML = '<div class="small">No Helix client sites configured yet</div>';
+// ─── Helix env (Prod/Test toggle within the Helix card) ─────────────
+function currentHelixEnv() {
+  const r = $('input[name=helixEnv]:checked');
+  return r ? r.value : 'production';
+}
+
+// ─── Helix Sections (parsed from helix/configs/sections.ts) ──────────
+function renderHelixSections() {
+  const root = $('#helix-section-checks'); if (!root) return; root.innerHTML = '';
+  const sections = (CFG.helix && CFG.helix.sections) || [];
+  if (sections.length === 0) {
+    root.innerHTML = '<div class="small">No sections discovered</div>';
     return;
   }
-  for (const s of sites) {
+  for (const s of sections) {
     const lbl = document.createElement('label');
-    lbl.innerHTML = `<input type="checkbox" data-url="${escapeAttr(s.url)}" checked /> <span class="name">${escapeHtml(s.label)}</span>`;
-    lbl.title = s.url;
+    lbl.title = s.description || '';
+    lbl.innerHTML = `<input type="checkbox" data-section="${escapeAttr(s.id)}" checked /> <span class="name">${escapeHtml(s.label)}</span>`;
     root.appendChild(lbl);
+  }
+}
+
+// ─── Helix Facilities (parsed from helix/configs/facilities.ts) ──────
+// Filtered by the Prod/Test toggle so the list only shows facilities that will
+// actually run in the selected environment. Each row carries a Prod/Stage badge.
+function renderHelixFacilities() {
+  const root = $('#helix-facility-checks'); if (!root) return; root.innerHTML = '';
+  const env = currentHelixEnv();
+  const facs = ((CFG.helix && CFG.helix.facilities) || []).filter(f => (f.env || 'production') === env);
+  if (facs.length === 0) {
+    root.innerHTML = `<div class="small">No ${env === 'test' ? 'test/stage' : 'production'} facilities configured yet</div>`;
+    return;
+  }
+  for (const f of facs) {
+    const lbl = document.createElement('label');
+    lbl.title = f.url;
+    const badge = f.env === 'test'
+      ? '<span class="env-badge test" title="Test / stage domain">Stage</span>'
+      : '<span class="env-badge prod" title="Production domain">Prod</span>';
+    lbl.innerHTML = `<input type="checkbox" data-facility="${escapeAttr(f.id)}" data-env="${escapeAttr(f.env || 'production')}" checked /> <span class="name">${escapeHtml(f.name)}</span> ${badge}`;
+    root.appendChild(lbl);
+  }
+}
+
+// Dim the Page Sections group when no Sections layer is selected — the section
+// filter only affects those layers, so this signals "this won't do anything yet".
+// (Facilities always apply, so that group is never dimmed.)
+function refreshHelixSectionVisibility() {
+  const sectionsOn = $$('#suite-helix .body input[data-mod="sections"]:checked, #suite-helix .body input[data-mod="sections-each"]:checked').length > 0;
+  const grp = $('#helix-grp-sections');
+  if (grp) {
+    grp.style.opacity = sectionsOn ? '' : '.55';
+    const desc = grp.querySelector('.grp-desc');
+    if (desc) desc.textContent = sectionsOn
+      ? '— which sections the Sections layers verify'
+      : '— (enable a Sections layer above to use)';
   }
 }
 
@@ -778,9 +900,27 @@ function refreshYardiBanner() {
 document.addEventListener('change', e => {
   if (e.target.matches('#build-clients input')) { renderBuildCorpCodes(); refreshYardiBanner(); }
   if (e.target.matches('#buildBase')) refreshYardiBanner();
+  // Show / hide the section + facility filter panels when section modules toggle.
+  if (e.target.matches('#suite-helix .body input[data-mod]')) refreshHelixSectionVisibility();
+});
+
+// All / none helpers for the section + facility filter check-lists.
+document.addEventListener('click', e => {
+  if (e.target.id === 'helix-section-all')     { $$('#helix-section-checks  input').forEach(c => c.checked = true);  refreshCmdPreview(); }
+  if (e.target.id === 'helix-section-none')    { $$('#helix-section-checks  input').forEach(c => c.checked = false); refreshCmdPreview(); }
+  if (e.target.id === 'helix-facility-all')    { $$('#helix-facility-checks input').forEach(c => c.checked = true);  refreshCmdPreview(); }
+  if (e.target.id === 'helix-facility-none')   { $$('#helix-facility-checks input').forEach(c => c.checked = false); refreshCmdPreview(); }
 });
 document.addEventListener('input', e => {
   if (e.target.matches('#buildBase')) refreshYardiBanner();
+});
+
+// Helix Prod/Test toggle — re-render the env-filtered facility list.
+document.addEventListener('change', e => {
+  if (e.target.matches('input[name=helixEnv]')) {
+    renderHelixFacilities();
+    refreshCmdPreview();
+  }
 });
 
 // Re-paint client checkboxes whenever env changes.
@@ -967,10 +1107,12 @@ function collectSettings() {
       corpCodes: buildCorpCodes,
     },
     helix: {
+      env: currentHelixEnv(),
       modules: $$('#suite-helix .body input[data-mod]:checked').map(c => c.dataset.mod),
       password: $('#helix-password') ? $('#helix-password').value : null,
       customUrl: ($('#helix-custom-url') ? $('#helix-custom-url').value.trim() : '') || null,
-      sites: $$('#helix-sites input:checked').map(c => c.dataset.url),
+      sections: $$('#helix-section-checks input:checked').map(c => c.dataset.section),
+      facilities: $$('#helix-facility-checks input:checked').map(c => c.dataset.facility),
     },
     // For preview only — NOT sent to server.
     _checkedClientUrls: { ui: clientUrls('ui'), spc: clientUrls('spc'), v1: clientUrls('v1') },
@@ -1039,6 +1181,31 @@ function applyPreset(p) {
     }
     refreshYardiBanner();
   }
+  // helix — env + modules + section/facility filters
+  if (s.helix) {
+    if (s.helix.env) {
+      const r = $(`input[name=helixEnv][value=${s.helix.env}]`); if (r) r.checked = true;
+    }
+    // Re-render facilities for the (possibly changed) env before applying checks.
+    renderHelixFacilities();
+    if (Array.isArray(s.helix.modules)) {
+      $$('#suite-helix .body input[data-mod]').forEach(c => {
+        c.checked = s.helix.modules.includes(c.dataset.mod);
+      });
+    }
+    if (Array.isArray(s.helix.sections)) {
+      const want = new Set(s.helix.sections);
+      $$('#helix-section-checks input').forEach(c => { c.checked = want.has(c.dataset.section); });
+    }
+    if (Array.isArray(s.helix.facilities)) {
+      const want = new Set(s.helix.facilities);
+      $$('#helix-facility-checks input').forEach(c => { c.checked = want.has(c.dataset.facility); });
+    }
+    if (typeof s.helix.customUrl === 'string' && $('#helix-custom-url')) {
+      $('#helix-custom-url').value = s.helix.customUrl;
+    }
+    refreshHelixSectionVisibility();
+  }
   applyBuildEnvLock();
   refreshCmdPreview();
 }
@@ -1094,11 +1261,19 @@ function refreshCmdPreview() {
   if (effSuites.includes('helix')) {
     const hm = $$('#suite-helix .body input[data-mod]:checked').map(c => c.dataset.mod);
     const projects = new Set();
-    if (hm.includes('e2e') || hm.includes('live')) projects.add('live');
+    if (hm.some(m => ['e2e', 'live', 'sections', 'sections-each'].includes(m))) projects.add('live');
     if (hm.includes('editor')) projects.add('editor');
     if (projects.size > 0) {
       helixArgs = ['npx', 'playwright', 'test', '--config=helix/playwright.config.ts'];
       for (const p of projects) helixArgs.push('--project=' + p);
+      // Narrow within the live project to the chosen modules (server.js does the
+      // same to keep preview + actual run aligned).
+      const greps = [];
+      if (hm.includes('e2e'))            greps.push('E2E');
+      if (hm.includes('live'))           greps.push('Live Page Health');
+      if (hm.includes('sections'))       greps.push('Helix . All Sections');
+      if (hm.includes('sections-each'))  greps.push('Section:');
+      if (greps.length && !hm.includes('editor')) helixArgs.push('--grep', greps.join('|'));
       if (s.headed) helixArgs.push('--headed');
       if (s.workers) helixArgs.push('--workers', String(s.workers));
     }

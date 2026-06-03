@@ -1,5 +1,5 @@
 import { test } from '../fixtures/rentReserveSPC-fixture';
-import { getSinglePageUrls, SINGLE_PAGE_FMS_PLATFORM, CAPTCHA_CUSTOMER_URLS, STEP_FOUR_CAPTCHA_URLS } from '../configs/urls';
+import { getSinglePageUrls, SINGLE_PAGE_FMS_PLATFORM, CAPTCHA_CUSTOMER_URLS, STEP_FOUR_CAPTCHA_URLS, CURRENT_ENVIRONMENT, Environment } from '../configs/urls';
 import { cleanupOldErrorScreenshots, takeErrorScreenshot } from '../utils/screenshot';
 import { SINGLE_PAGE_USER } from '../configs/credentials';
 import { RentResultCollector } from '../utils/RentResultCollector';
@@ -28,8 +28,8 @@ import * as path from 'path';
  * 5. Capture and report error from toast
  * 
  * URLs tested:
- * - First Storage (Travelers Rest)
  * - Columbia Self Storage (South Plainfield)
+ * - (and the rest of the SPC client list in configs/urls.ts)
  */
 
 // Clean up old error screenshots before starting tests
@@ -43,7 +43,7 @@ const RESULTS_FILE = path.join(process.cwd(), 'test-results', 'singlepage-result
 const RESULTS_DIR = path.join(process.cwd(), 'test-results', 'singlepage-results');
 
 // Helper function to write a single test result to its own file (no race condition)
-function writeResultToFile(result: { url: string; company: string; platform: string; error: string; success: boolean; attempt?: number }) {
+function writeResultToFile(result: { url: string; company: string; platform: string; error: string; success: boolean; attempt?: number; retried?: boolean; attempt1Error?: string }) {
   if (!fs.existsSync(RESULTS_DIR)) {
     fs.mkdirSync(RESULTS_DIR, { recursive: true });
   }
@@ -74,6 +74,11 @@ function readAllResults(): any[] {
   return results;
 }
 
+function isRetryableUnexpectedError(errorMsg: string): boolean {
+  if (!errorMsg) return false;
+  return errorMsg.toLowerCase().includes('unexpected error');
+}
+
 test.describe('Single-Page Rent Verification Tests', () => {
   test.describe.configure({ retries: 0 });
   const singlePageUrls = getSinglePageUrls().customer;
@@ -85,10 +90,14 @@ test.describe('Single-Page Rent Verification Tests', () => {
       rentalDetailsPageSinglePage,
       companyNameFromUrl
     }) => {
-      // Set timeout — captcha customers get NO timeout (user solves manually)
-      const hasCaptchaUrl = CAPTCHA_CUSTOMER_URLS.includes(baseURL);
-      const hasStepFourCaptcha = STEP_FOUR_CAPTCHA_URLS.includes(baseURL);
-      test.setTimeout((hasCaptchaUrl || hasStepFourCaptcha) ? 0 : 240 * 1000); // 0 = no timeout for captcha, 4 min for others
+      // Set timeout — captcha customers get NO timeout (user solves manually).
+      // Defensive guard: on STAGING no SPC client uses hCaptcha (Mini Mall has its own
+      // spec). Force both flags off so even if a URL is accidentally added back to
+      // CAPTCHA_CUSTOMER_URLS, we won't waste time polling for a captcha that never appears.
+      const isStaging = CURRENT_ENVIRONMENT === Environment.STAGING;
+      const hasCaptchaUrl = !isStaging && CAPTCHA_CUSTOMER_URLS.includes(baseURL);
+      const hasStepFourCaptcha = !isStaging && STEP_FOUR_CAPTCHA_URLS.includes(baseURL);
+      test.setTimeout((hasCaptchaUrl || hasStepFourCaptcha) ? 0 : 360 * 1000); // 0 = no timeout for captcha, 6 min for others (allows retry)
       
       // Get company/client name and platform
       const companyName = companyNameFromUrl(baseURL);
@@ -113,137 +122,198 @@ test.describe('Single-Page Rent Verification Tests', () => {
       
       try {
         // ============================================
-        // PRE-STEP: Corp Code Setup (staging only)
+        // PRE-STEP: Corp Code Setup (staging only) — runs once, outside retry loop
         // ============================================
         const browser = page.context().browser();
         if (browser) {
           await setupCorpCodeIfNeeded(browser, baseURL);
         }
 
-        // ============================================
-        // STEP 1: Navigate to the storage listing page
-        // ============================================
-        testResult.step = 'Navigation';
-        console.log('\n📍 STEP 1: Navigating to storage listing page...');
-        await storageListingPage.navigateWithCacheBusting(baseURL);
-        console.log('✅ Navigation completed successfully');
-        
-        // ============================================
-        // STEP 2: RESERVE BUTTON - COMMENTED OUT FOR DEBUGGING
-        // ============================================
-        // testResult.step = 'Reserve Button';
-        // console.log('\n📍 STEP 2: Checking for RESERVE button...');
-        // const reserveButtonText = await storageListingPage.clickReserveButtonIfAvailable();
-        // 
-        // if (reserveButtonText) {
-        //   console.log(`   Found and clicked: "${reserveButtonText}"`);
-        //   
-        //   // If the button was "Join Waitlist", finish the test run
-        //   if (reserveButtonText?.trim() === 'Join Waitlist') {
-        //     console.log('ℹ️  Test completed - Join Waitlist option encountered');
-        //     testResult.error = 'No error - Join Waitlist option';
-        //     testResult.success = true;
-        //     resultCollector.addResult(baseURL, companyName, platform, testResult.error, testResult.success);
-        //     return;
-        //   }
-        // } else {
-        //   console.log('   No RESERVE button found, proceeding...');
-        // }
-        
-        // ============================================
-        // STEP 2: Click the RENT button (STEP 3 renumbered to STEP 2)
-        // ============================================
-        testResult.step = 'Rent Button';
-        console.log('\n📍 STEP 2: Clicking RENT button...');
-        const rentButtonResult = await storageListingPage.clickRentButton();
-        console.log('✅ RENT button clicked successfully');
+        // ── Unified retry loop ──
+        // Retries the WHOLE flow (navigate → click rent → fill form → submit)
+        // when the first attempt either:
+        //   • returned an "unexpected error" toast, or
+        //   • crashed (page closed, browser died, third-party script killed page)
+        const MAX_FLOW_ATTEMPTS = 2;
+        let finalError = '';
+        let wasRetried = false;
+        let attempt1Error = '';
+        let attempt1Type: 'unexpected' | 'crash' | null = null;
 
-        // Short-circuit on JOIN WAITLIST flow (e.g. red-rocks-self-storage) — site exposes
-        // only "Join our waitlist" / "Reserve" instead of a rent button. No form to fill.
-        if (rentButtonResult === 'WAITLIST') {
-          console.log('ℹ️  This site uses JOIN WAITLIST instead of direct rental — stopping here');
-          testResult.error = 'No error - JOIN WAITLIST option (not direct rental)';
-          testResult.success = true;
-          resultCollector.addResult(baseURL, companyName, platform, testResult.error, testResult.success);
-          writeResultToFile({ url: baseURL, company: companyName, platform, error: testResult.error, success: testResult.success, attempt: test.info().retry });
-          console.log(`\n✅ TEST COMPLETED (Join Waitlist scenario) FOR: ${companyName}`);
-          console.log(`${'='.repeat(80)}\n`);
-          return;
+        for (let attempt = 1; attempt <= MAX_FLOW_ATTEMPTS; attempt++) {
+          try {
+            if (attempt > 1) {
+              const icon = attempt1Type === 'crash' ? '💥' : '🔄';
+              const label = attempt1Type === 'crash' ? 'CRASH RETRY' : 'UNEXPECTED ERROR RETRY';
+              console.log(`\n${icon.repeat(40)}`);
+              console.log(`${icon} ${label} for ${companyName} — attempt 1: "${attempt1Error}"`);
+              console.log(`${icon.repeat(40)}`);
+            }
+
+            // ============================================
+            // STEP 1: Navigate to the storage listing page
+            // ============================================
+            testResult.step = 'Navigation';
+            console.log(`\n📍 STEP 1${attempt > 1 ? ' (retry)' : ''}: Navigating to storage listing page...`);
+            await storageListingPage.navigateWithCacheBusting(baseURL);
+            console.log('✅ Navigation completed successfully');
+
+            // ============================================
+            // STEP 2: Click the RENT button
+            // ============================================
+            testResult.step = 'Rent Button';
+            console.log(`\n📍 STEP 2${attempt > 1 ? ' (retry)' : ''}: Clicking RENT button...`);
+            const rentButtonResult = await storageListingPage.clickRentButton();
+            console.log('✅ RENT button clicked successfully');
+
+            // Short-circuit on JOIN WAITLIST flow (e.g. red-rocks, rhino) — site exposes
+            // only "Join our waitlist" / "Reserve" instead of a rent button. No form to fill.
+            if (rentButtonResult === 'WAITLIST') {
+              console.log('ℹ️  This site uses JOIN WAITLIST instead of direct rental — stopping here');
+              testResult.error = 'No error - JOIN WAITLIST option (not direct rental)';
+              testResult.success = true;
+              resultCollector.addResult(baseURL, companyName, platform, testResult.error, testResult.success);
+              writeResultToFile({ url: baseURL, company: companyName, platform, error: testResult.error, success: testResult.success, attempt: test.info().retry });
+              console.log(`\n✅ TEST COMPLETED (Join Waitlist scenario) FOR: ${companyName}`);
+              console.log(`${'='.repeat(80)}\n`);
+              return;
+            }
+
+            await page.waitForTimeout(3000);
+            console.log(`   Navigated to: ${page.url()}`);
+
+            // ============================================
+            // STEP 2.5: Detect errors that appear RIGHT AFTER landing
+            // ============================================
+            // Some clients surface an API error toast (e.g. "Could not find facility
+            // for ID …") the instant the next page loads — before any form input.
+            // Treat this like any other first-attempt failure: re-run the whole flow
+            // on a fresh navigation. If it persists on the final attempt, capture the
+            // error (same toast elements as the post-submit capture) and FAIL the test.
+            testResult.step = 'Post-Landing Error Check';
+            console.log(`\n📍 STEP 2.5${attempt > 1 ? ' (retry)' : ''}: Checking for errors right after landing...`);
+            const landingError = await rentalDetailsPageSinglePage.captureLandingError();
+            if (landingError) {
+              if (attempt < MAX_FLOW_ATTEMPTS) {
+                attempt1Error = landingError;
+                attempt1Type = 'unexpected';
+                wasRetried = true;
+                console.log(`\n🚩 Error appeared right after landing for ${companyName}: "${landingError}"`);
+                console.log(`🔄 Re-running the page (fresh navigation) to confirm it's reproducible...`);
+                continue;
+              }
+              // Persisted after a fresh re-run → real, reproducible failure → FAIL.
+              throw new Error(`Error on landing page (persisted after retry): ${landingError}`);
+            }
+
+            // ============================================
+            // STEP 3: Fill complete single-page form
+            // ============================================
+            testResult.step = 'Single-Page Form Fill';
+            console.log(`\n📍 STEP 3${attempt > 1 ? ' (retry)' : ''}: Filling single-page rental form...`);
+            console.log('   This includes: Tenant Details + Driver\'s License + Payment + Agreements');
+            await rentalDetailsPageSinglePage.fillCompleteSinglePageForm({
+              firstName: SINGLE_PAGE_USER.firstName,
+              lastName: SINGLE_PAGE_USER.lastName,
+              email: SINGLE_PAGE_USER.email,
+              phone: SINGLE_PAGE_USER.phone,
+              address: SINGLE_PAGE_USER.address,
+              city: SINGLE_PAGE_USER.city,
+              province: SINGLE_PAGE_USER.province,
+              zipCode: SINGLE_PAGE_USER.zipCode,
+              alternateFirstName: SINGLE_PAGE_USER.alternateFirstName,
+              alternateLastName: SINGLE_PAGE_USER.alternateLastName,
+              alternatePhone: SINGLE_PAGE_USER.alternatePhone,
+              alternateEmail: SINGLE_PAGE_USER.alternateEmail,
+              driversLicense: SINGLE_PAGE_USER.driversLicense,
+              driversLicenseState: SINGLE_PAGE_USER.driversLicenseState,
+              birthMonth: SINGLE_PAGE_USER.birthMonth,
+              birthDate: SINGLE_PAGE_USER.birthDate,
+              birthYear: SINGLE_PAGE_USER.birthYear,
+              paymentInfo: SINGLE_PAGE_USER.paymentInfo
+            }, hasStepFourCaptcha, companyName);
+            console.log('✅ Single-page rental form completed successfully');
+
+            // ============================================
+            // STEP 4: Click RENT NOW and capture error
+            // ============================================
+            testResult.step = 'Payment Submission';
+            console.log(`\n📍 STEP 4${attempt > 1 ? ' (retry)' : ''}: Submitting payment and checking for errors...`);
+            const errorMessage = await rentalDetailsPageSinglePage.clickRentNowAndCaptureError(hasCaptchaUrl, companyName);
+
+            if (errorMessage && errorMessage.startsWith('FAILED to fetch')) {
+              console.log(`⚠️  Warning: Could not capture error toast for ${companyName}, but rent flow completed`);
+            }
+            console.log('✅ Payment submission completed');
+
+            // Check whether to retry on "unexpected error" toast (only if attempts remain)
+            if (attempt < MAX_FLOW_ATTEMPTS && isRetryableUnexpectedError(errorMessage || '')) {
+              attempt1Error = errorMessage || '';
+              attempt1Type = 'unexpected';
+              wasRetried = true;
+              console.log(`🔄 "${errorMessage}" — will retry full flow on a fresh navigation...`);
+              continue;
+            }
+
+            finalError = errorMessage || 'No error - Test completed successfully';
+            break;
+          } catch (flowError) {
+            const msg = (flowError as Error).message || '';
+            // ANY first-attempt error is retryable. Rent button not found, form fill
+            // failed, payment submission threw, page crashed, site killed by third-party
+            // script — all the same recovery: refresh + run the whole flow from STEP 1.
+            // The only hard stop is a closed page (can't reload what doesn't exist).
+            if (attempt < MAX_FLOW_ATTEMPTS && !page.isClosed()) {
+              const isCrashy =
+                msg.includes('Target page, context or browser has been closed') ||
+                msg.includes('Execution context was destroyed') ||
+                msg.includes('frame was detached') ||
+                msg.includes('Page/browser closed during') ||
+                msg.includes('site crash') ||
+                msg.includes('third-party script') ||
+                msg.includes('Test timeout');
+              attempt1Error = msg.substring(0, 200);
+              attempt1Type = isCrashy ? 'crash' : 'unexpected';
+              wasRetried = true;
+              const icon = isCrashy ? '💥 CRASH' : '⚠️  ERROR';
+              console.log(`\n${icon} on attempt 1 at "${testResult.step}":`);
+              console.log(`   ${msg.substring(0, 200)}`);
+              console.log(`🔄 Refreshing and retrying full flow from STEP 1...`);
+              continue;
+            }
+            throw flowError;
+          }
         }
 
-        // Wait for page to load
-        await page.waitForTimeout(3000);
-        
-        // Verify we landed on the single-page form
-        const currentUrl = page.url();
-        console.log(`   Navigated to: ${currentUrl}`);
-        
         // ============================================
-        // STEP 3: Fill complete single-page form (STEP 4 renumbered to STEP 3)
+        // Build final result
         // ============================================
-        testResult.step = 'Single-Page Form Fill';
-        console.log('\n📍 STEP 3: Filling single-page rental form...');
-        console.log('   This includes: Tenant Details + Driver\'s License + Payment + Agreements');
-        
-        await rentalDetailsPageSinglePage.fillCompleteSinglePageForm({
-          firstName: SINGLE_PAGE_USER.firstName,
-          lastName: SINGLE_PAGE_USER.lastName,
-          email: SINGLE_PAGE_USER.email,
-          phone: SINGLE_PAGE_USER.phone,
-          address: SINGLE_PAGE_USER.address,
-          city: SINGLE_PAGE_USER.city,
-          province: SINGLE_PAGE_USER.province,
-          zipCode: SINGLE_PAGE_USER.zipCode,
-          driversLicense: SINGLE_PAGE_USER.driversLicense,
-          driversLicenseState: SINGLE_PAGE_USER.driversLicenseState,
-          birthMonth: SINGLE_PAGE_USER.birthMonth,
-          birthDate: SINGLE_PAGE_USER.birthDate,
-          birthYear: SINGLE_PAGE_USER.birthYear,
-          paymentInfo: SINGLE_PAGE_USER.paymentInfo
-        }, hasStepFourCaptcha, companyName);
-        
-        console.log('✅ Single-page rental form completed successfully');
-        
-        // ============================================
-        // STEP 4: Click RENT NOW and capture error (STEP 5 renumbered to STEP 4)
-        // ============================================
-        testResult.step = 'Payment Submission';
-        console.log('\n📍 STEP 4: Submitting payment and checking for errors...');
-        
-        // For step-four captcha customers (e.g. Minimall), captcha was already handled during form fill
-        // Only pass hasCaptcha for RENT NOW-level captcha customers
-        const errorMessage = await rentalDetailsPageSinglePage.clickRentNowAndCaptureError(hasCaptchaUrl, companyName);
-        
-        // If error capture itself failed, log warning but DON'T throw —
-        // the rent flow completed successfully, only the toast capture had an issue.
-        // Throwing here was causing passed tests (e.g. Bluebird, Red Rocks) to retry.
-        if (errorMessage && errorMessage.startsWith('FAILED to fetch')) {
-          console.log(`⚠️  Warning: Could not capture error toast for ${companyName}, but rent flow completed`);
+        if (wasRetried) {
+          const prefix = attempt1Type === 'crash' ? '💥 Crash retry' : '🔄 Unexpected-error retry';
+          testResult.error = `[${prefix} — Attempt 1: "${attempt1Error}"] → [Attempt 2: "${finalError}"]`;
+        } else {
+          testResult.error = finalError;
         }
-        
-        console.log('✅ Payment submission completed');
-        
-        // ============================================
-        // Test completed successfully
-        // ============================================
-        testResult.error = errorMessage || 'No error - Test completed successfully';
         testResult.success = true;
-        
-        // Flag unexpected "Alternate contact" error — this means the site requires alternate contact address
+
+        // Flag "unexpected error" in the FINAL result for manual review
+        if (isRetryableUnexpectedError(finalError)) {
+          testResult.error = `🔍 [MANUAL CHECK NEEDED] ${testResult.error}`;
+        }
+
+        // Flag unexpected "Alternate contact" error
         if (testResult.error.includes('Alternate contact must have a first name')) {
           console.log(`\n🚩 UNEXPECTED ERROR for ${companyName}: "Alternate contact must have a first name, last name, and address" — needs attention!`);
           testResult.error = `🚩 [NEEDS ATTENTION] ${testResult.error}`;
         }
-        
-        console.log(`\n✅ TEST COMPLETED SUCCESSFULLY FOR: ${companyName}`);
+
+        const retrySuffix = wasRetried ? ` (after ${attempt1Type === 'crash' ? 'crash' : 'unexpected-error'} retry)` : '';
+        console.log(`\n✅ TEST COMPLETED${retrySuffix} FOR: ${companyName}`);
         console.log(`📊 Final Result: ${testResult.error}`);
         console.log(`${'='.repeat(80)}\n`);
-        
-        // Record the result
+
         resultCollector.addResult(baseURL, companyName, platform, testResult.error, testResult.success);
-        
-        // Write result to shared file for cross-worker consolidation
-        writeResultToFile({ url: baseURL, company: companyName, platform, error: testResult.error, success: testResult.success, attempt: test.info().retry });
+        writeResultToFile({ url: baseURL, company: companyName, platform, error: testResult.error, success: testResult.success, attempt: wasRetried ? 2 : 1, retried: wasRetried, attempt1Error: wasRetried ? attempt1Error : undefined });
         
       } catch (error) {
         testResult.success = false;

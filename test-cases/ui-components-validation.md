@@ -25,7 +25,6 @@ A multi-module suite that verifies the core UI components across all Storagely c
 | Sunbird Storage | |
 | Bluebird Storage | |
 | Gatekeeper Self Storage | <span style="color: white; background: #27ae60; border-radius: 4px; padding: 2px 6px; font-size: 90%;">SITELINK</span> |
-| First Storage | |
 | Red Rocks Self Storage | <span style="color: white; background: #27ae60; border-radius: 4px; padding: 2px 6px; font-size: 90%;">SITELINK</span> |
 | Distinct Storage | |
 | Rhino Storage | |
@@ -101,7 +100,6 @@ Includes all of the above plus **ULok** (Storerocket — prod only, skipped in s
 
 | Client | URL | Expected Text |
 |---|---|---|
-| First Storage — North Wilkesboro, NC | `…first-storage/…/d-street` | `Sale` |
 | Mini Mall Storage ⭐ — Courtland, AL | `…mini-mall-storage/…/highway-33` | `First Month Free` |
 
 **Steps:**
@@ -138,7 +136,6 @@ Navigates to the Mini Mall Courtland, AL location and logs all elements matching
 | Radiant Storage — Montgomery, AL | *(staging only)* |
 | Storage Star — Cloverdale, CA | Storage Star — Cloverdale, CA |
 | Best Box Storage — Pensacola, FL | *(staging only)* |
-| First Storage — East Market St, Greensboro, NC | First Storage — East Market St |
 | Mini Mall Storage ⭐ — Airdrie, AB | Mini Mall Storage ⭐ — Airdrie, AB |
 
 **Steps:**

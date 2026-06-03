@@ -38,8 +38,6 @@ if (!fs.existsSync(LOGS_DIR)) fs.mkdirSync(LOGS_DIR, { recursive: true });
 // Used to render FMS badges in the panel and to drive the "1 per FMS" picker.
 const FMS_BY_SLUG = {
   // storEDGE
-  'first-storage':            'storEDGE',
-  'firststorage':             'storEDGE',
   'columbia-self-storage':    'storEDGE',
   'columbiaselfstorage':      'storEDGE',
   'purely-storage':           'storEDGE',
@@ -176,6 +174,35 @@ function parseHelixSites() {
   } catch { return []; }
 }
 
+// ───────── Parse Helix section manifest from helix/configs/sections.ts ─────────
+// Each entry maps to a toggle in the control panel's Helix card. Adding a
+// section in sections.ts auto-surfaces here — no panel code change needed.
+function parseHelixSections() {
+  try {
+    const content = fs.readFileSync(path.join(ROOT, 'helix', 'configs', 'sections.ts'), 'utf8');
+    const out = [];
+    const re = /\{\s*id:\s*'([^']+)'\s*,\s*label:\s*'([^']+)'\s*,\s*description:\s*'([^']+)'\s*,\s*order:\s*(\d+)/g;
+    let m;
+    while ((m = re.exec(content))) {
+      out.push({ id: m[1], label: m[2], description: m[3], order: Number(m[4]) });
+    }
+    return out.sort((a, b) => a.order - b.order);
+  } catch { return []; }
+}
+
+// ───────── Parse Helix facilities from helix/configs/facilities.ts ─────────
+function parseHelixFacilities() {
+  try {
+    const content = fs.readFileSync(path.join(ROOT, 'helix', 'configs', 'facilities.ts'), 'utf8');
+    const out = [];
+    // Each facility is a multi-line object; pull id + name + env + url out of each block.
+    const re = /id:\s*'([^']+)'\s*,[\s\S]*?name:\s*'([^']+)'\s*,[\s\S]*?env:\s*'([^']+)'\s*,[\s\S]*?url:\s*'([^']+)'/g;
+    let m;
+    while ((m = re.exec(content))) out.push({ id: m[1], name: m[2], env: m[3], url: m[4] });
+    return out;
+  } catch { return []; }
+}
+
 // ───────── /api/config ─────────
 function buildConfigPayload() {
   const parsed = parseUrlsConfig();
@@ -249,7 +276,11 @@ function buildConfigPayload() {
       { id: 'location', label: 'Location Page',        grep: 'Location Page'        },
     ],
     defaultPresets: readJsonSafe(DEFAULT_PRESETS_FILE, []),
-    helix: { sites: parseHelixSites() },
+    helix: {
+      sites: parseHelixSites(),
+      sections: parseHelixSections(),
+      facilities: parseHelixFacilities(),
+    },
   };
 }
 
@@ -291,6 +322,15 @@ function buildRunCommand(req) {
   if (req.minimallrent?.filter)         env.STORAGELY_MMRENT_FILTER          = req.minimallrent.filter;
   if (req.helix?.password)              env.HELIX_PASSWORD                   = req.helix.password;
   if (req.helix?.customUrl)             env.HELIX_CUSTOM_URL                 = req.helix.customUrl;
+  // Helix has its OWN prod/test toggle, independent of the top-level Storagely env.
+  // Defaults to production (post-release regression) when unset.
+  if (req.helix?.env)                   env.HELIX_ENV                        = req.helix.env;
+  if (Array.isArray(req.helix?.sections) && req.helix.sections.length) {
+    env.HELIX_SECTIONS = req.helix.sections.join(',');
+  }
+  if (Array.isArray(req.helix?.facilities) && req.helix.facilities.length) {
+    env.HELIX_FACILITY_FILTER = req.helix.facilities.join(',');
+  }
 
   let suites = Array.isArray(req.suites) ? req.suites.slice() : [];
 
@@ -319,10 +359,24 @@ function buildRunCommand(req) {
 
     if (nonMiniMall.length > 0) {
       const csv = nonMiniMall.join(',');
-      env.STORAGELY_SPC_CLIENTS = env.STORAGELY_SPC_CLIENTS || csv;
-      env.STORAGELY_V1_CLIENTS  = env.STORAGELY_V1_CLIENTS  || csv;
+      // Build mode MUST override any SPC/V1 selection — the build panel is the
+      // single source of truth for which clients to run. Without this override
+      // a stale selection in the SPC/V1 tabs (or no selection → undefined env)
+      // would either filter to the wrong clients or run ALL clients.
+      env.STORAGELY_SPC_CLIENTS = csv;
+      env.STORAGELY_V1_CLIENTS  = csv;
+      // Same for any "extras" (typed-in URLs in SPC/V1 tabs) — ignore in build mode.
+      delete env.STORAGELY_SPC_EXTRA;
+      delete env.STORAGELY_V1_EXTRA;
       if (!suites.includes('spc')) suites.push('spc');
       if (!suites.includes('v1'))  suites.push('v1');
+    } else {
+      // No non-mini-mall build clients selected → ensure SPC/V1 specs don't run
+      // with stale env vars. Mini Mall (if any) is handled by the minimallrent spec below.
+      delete env.STORAGELY_SPC_CLIENTS;
+      delete env.STORAGELY_V1_CLIENTS;
+      delete env.STORAGELY_SPC_EXTRA;
+      delete env.STORAGELY_V1_EXTRA;
     }
 
     if (miniMallSitelink || miniMallYardi) {
@@ -346,16 +400,32 @@ function buildRunCommand(req) {
   const specs = suites.map(s => specMap[s]).filter(Boolean);
 
   // Helix suite — uses its own playwright config with project-based routing.
-  // Modules map to Playwright projects: e2e/live → 'live' project, editor → 'editor' project.
+  // Modules map to Playwright projects:
+  //   e2e / live / sections / sections-each → 'live' project (narrowed via --grep)
+  //   editor                                → 'editor' project
   let helixCmd = null;
   if (suites.includes('helix')) {
-    const hm = req.helix?.modules || ['e2e', 'live'];
+    const hm = req.helix?.modules || ['e2e', 'live', 'sections'];
     const projects = new Set();
-    if (hm.includes('e2e') || hm.includes('live')) projects.add('live');
+    if (hm.some(m => ['e2e', 'live', 'sections', 'sections-each'].includes(m))) projects.add('live');
     if (hm.includes('editor')) projects.add('editor');
     if (projects.size > 0) {
       const args = ['playwright', 'test', '--config=helix/playwright.config.ts'];
       for (const p of projects) args.push('--project=' + p);
+
+      // Narrow within the live project using Playwright's --grep. Each module
+      // corresponds to a unique describe block title (kept stable across the
+      // codebase). When 'editor' is checked we don't grep because editor specs
+      // live under their own project.
+      if (!hm.includes('editor')) {
+        const greps = [];
+        if (hm.includes('e2e'))           greps.push('E2E');
+        if (hm.includes('live'))          greps.push('Live Page Health');
+        if (hm.includes('sections'))      greps.push('Helix . All Sections');
+        if (hm.includes('sections-each')) greps.push('Section:');
+        if (greps.length) args.push('--grep', greps.join('|'));
+      }
+
       if (req.headed) args.push('--headed');
       if (req.workers && Number(req.workers) > 0) args.push('--workers', String(req.workers));
       helixCmd = { cmd: 'npx', args, env, allure: 'off' };

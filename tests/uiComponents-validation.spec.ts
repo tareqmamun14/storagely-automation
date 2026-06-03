@@ -291,21 +291,11 @@ test.describe('[Contact Page] Full Verification', () => {
 
 const discountChecks = isStaging ? [
   {
-    customer: 'First Storage : StorEDGE',
-    url: 'https://test.staging.storagely-api.com/first-storage/storage-units/north-carolina/north-wilkesboro/d-street',
-    expected: 'Sale'
-  },
-  {
     customer: 'Mini Mall : SiteLink',
     url: 'https://test.staging.storagely-api.com/mini-mall-storage/storage-units/alabama/courtland/highway-33',
     expected: 'First Month Free'
   }
 ] : [
-  {
-    customer: 'First Storage : StorEDGE',
-    url: 'https://www.firststorage.com/storage-units/north-carolina/north-wilkesboro/d-street',
-    expected: 'Sale'
-  },
   {
     customer: 'Mini Mall : SiteLink',
     url: 'https://minimallstorage.com/storage-units/alabama/courtland/highway-33',
@@ -435,10 +425,6 @@ const bannerChecks = isStaging ? [
     url: 'https://test.staging.storagely-api.com/bestbox-storage/storage-units/florida/pensacola/north-palafox'
   },
   {
-    client: 'First Storage - E Market St',
-    url: 'https://test.staging.storagely-api.com/first-storage/storage-units/north-carolina/greensboro/east-market-street'
-  },
-  {
     client: 'Mini Mall Storage - Airdrie',
     url: 'https://test.staging.storagely-api.com/mini-mall-storage/storage-units/alberta/airdrie/east-lake-road-ne'
   }
@@ -446,10 +432,6 @@ const bannerChecks = isStaging ? [
   {
     client: 'Storage Star - Cloverdale',
     url: 'https://www.storagestar.com/storage-units/california/cloverdale/industrial-drive'
-  },
-  {
-    client: 'First Storage - E Market St',
-    url: 'https://www.firststorage.com/storage-units/north-carolina/greensboro/east-market-street'
   },
   {
     client: 'Mini Mall Storage - Airdrie',
@@ -828,11 +810,6 @@ test.describe('[Location Page] Unit Feature Conflict Detection', () => {
 
 const FILTER_TEST_CLIENTS = isStaging ? [
   {
-    label: 'First Storage — Huntsville, AL',
-    fms:   'storEDGE',
-    url:   'https://test.staging.storagely-api.com/first-storage/storage-units/alabama/huntsville/memorial-parkway-sw',
-  },
-  {
     label: 'Sunbird Storage — Winston-Salem, NC',
     fms:   'SiteLink',
     url:   'https://test.staging.storagely-api.com/sunbirdstorage/storage-units/nc/winston-salem/country-club',
@@ -848,11 +825,6 @@ const FILTER_TEST_CLIENTS = isStaging ? [
     url:   'https://test.staging.storagely-api.com/mini-mall-storage/storage-units/alabama/courtland/highway-33',
   },
 ] : [
-  {
-    label: 'First Storage — Huntsville, AL',
-    fms:   'storEDGE',
-    url:   'https://www.firststorage.com/storage-units/alabama/huntsville/memorial-parkway-sw',
-  },
   {
     label: 'Sunbird Storage — Winston-Salem, NC',
     fms:   'SiteLink',

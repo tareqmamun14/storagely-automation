@@ -16,9 +16,37 @@ export class PaymentDetailsPage extends BasePage {
   private get birthDateSelect() { return this.page.locator('#drivers_birth_date'); }
   private get birthYearInput() { return this.page.getByPlaceholder('Birth Year'); }
 
-  private get cardNumberInput() { return this.page.getByPlaceholder('Card Number'); }
-  private get cardExpiryInput() { return this.page.getByPlaceholder('MM / YY'); }
-  private get cardCvvInput() { return this.page.getByPlaceholder('CVV'); }
+  // Payment field selectors — multiple fallbacks for resilience across clients.
+  // Different FMS platforms (storEDGE, SiteLink, SSM) render the same field with
+  // slightly different attributes; we accept any of the common variants.
+  private get cardNumberInput() {
+    return this.page
+      .getByPlaceholder(/card\s*number/i)
+      .or(this.page.locator('input[name*="card" i][name*="number" i]'))
+      .or(this.page.locator('input[id*="card" i][id*="number" i]'))
+      .or(this.page.locator('input[autocomplete="cc-number"]'))
+      .or(this.page.locator('input[data-stripe="number"]'))
+      .or(this.page.locator('input[name="cardnumber" i]'))
+      .first();
+  }
+  private get cardExpiryInput() {
+    return this.page
+      .getByPlaceholder(/mm\s*\/?\s*yy/i)
+      .or(this.page.locator('input[autocomplete="cc-exp"]'))
+      .or(this.page.locator('input[name*="exp" i]'))
+      .or(this.page.locator('input[id*="exp" i]'))
+      .or(this.page.locator('input[data-stripe="exp"]'))
+      .first();
+  }
+  private get cardCvvInput() {
+    return this.page
+      .getByPlaceholder(/cvv|cvc|security/i)
+      .or(this.page.locator('input[autocomplete="cc-csc"]'))
+      .or(this.page.locator('input[name*="cvv" i], input[name*="cvc" i], input[name*="csc" i]'))
+      .or(this.page.locator('input[id*="cvv" i], input[id*="cvc" i], input[id*="csc" i]'))
+      .or(this.page.locator('input[data-stripe="cvc"]'))
+      .first();
+  }
 
   private get rentNowButton() { return this.page.getByRole('button', { name: 'RENT NOW' }); }
 
@@ -113,7 +141,15 @@ export class PaymentDetailsPage extends BasePage {
   }
 
   /**
-   * Fill out the payment details - CRITICAL STEP that must succeed
+   * Fill out the payment details - CRITICAL STEP that must succeed.
+   *
+   * Resilience:
+   *  • Waits up to 45s for the Card Number field (some clients hydrate the
+   *    payment iframe asynchronously after the rest of the page).
+   *  • Retries the entire fill up to 2 times if the form doesn't appear (with
+   *    a small scroll + settle between attempts) before giving up.
+   *  • On final failure, dumps page diagnostics so we can SEE why the field
+   *    wasn't there (different placeholder, iframe, missing form, etc.).
    */
   async fillPaymentDetails(paymentData: {
     cardNumber: string,
@@ -121,25 +157,70 @@ export class PaymentDetailsPage extends BasePage {
     cvv: string
   }): Promise<void> {
     console.log(`[${new Date().toISOString()}] 💳 Filling payment details...`);
-    
-    try {
-      // Wait for payment form to be visible with longer timeout
-      await this.cardNumberInput.waitFor({ state: 'visible', timeout: 30000 });
-      await this.cardNumberInput.fill(paymentData.cardNumber);
-      await this.page.keyboard.press('Tab');
-      
-      await this.cardExpiryInput.fill(paymentData.expiryDate);
-      await this.page.keyboard.press('Tab');
-      
-      await this.cardCvvInput.fill(paymentData.cvv);
-      await this.page.keyboard.press('Tab');
-      
-      console.log(`[${new Date().toISOString()}] ✅ Payment details filled`);
-    } catch (error) {
-      const errorMsg = `CRITICAL ERROR: Failed to fill payment details - ${(error as Error).message}`;
-      console.error(errorMsg);
-      throw new Error(errorMsg);
+
+    const MAX_ATTEMPTS = 3;
+    let lastError: Error | null = null;
+
+    for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+      try {
+        if (attempt > 1) {
+          console.log(`[${new Date().toISOString()}] 🔄 Payment-fill retry ${attempt}/${MAX_ATTEMPTS}...`);
+          // Settle the page — sometimes the payment iframe loads late
+          await this.page.waitForLoadState('networkidle', { timeout: 10000 }).catch(() => {});
+          await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight)).catch(() => {});
+          await this.page.waitForTimeout(1500);
+        }
+
+        // Wait for the card number field — bumped from 30s to 45s for slow clients
+        await this.cardNumberInput.waitFor({ state: 'visible', timeout: 45000 });
+        // Scroll into view so the field is in the viewport before we type
+        await this.cardNumberInput.scrollIntoViewIfNeeded({ timeout: 5000 }).catch(() => {});
+        await this.cardNumberInput.fill(paymentData.cardNumber);
+        await this.page.keyboard.press('Tab');
+
+        await this.cardExpiryInput.waitFor({ state: 'visible', timeout: 10000 });
+        await this.cardExpiryInput.fill(paymentData.expiryDate);
+        await this.page.keyboard.press('Tab');
+
+        await this.cardCvvInput.waitFor({ state: 'visible', timeout: 10000 });
+        await this.cardCvvInput.fill(paymentData.cvv);
+        await this.page.keyboard.press('Tab');
+
+        console.log(`[${new Date().toISOString()}] ✅ Payment details filled${attempt > 1 ? ` (succeeded on retry ${attempt})` : ''}`);
+        return;
+      } catch (error) {
+        lastError = error as Error;
+        console.log(`[${new Date().toISOString()}] ⚠️ Payment-fill attempt ${attempt} failed: ${lastError.message.substring(0, 150)}`);
+
+        if (attempt === MAX_ATTEMPTS) {
+          // Dump diagnostics so we can SEE why the form isn't there
+          console.error(`\n📋 PAYMENT-FORM DIAGNOSTIC INFO (after ${MAX_ATTEMPTS} attempts):`);
+          try {
+            const pageUrl = this.page.url();
+            const pageTitle = await this.page.title().catch(() => 'N/A');
+            const iframes = await this.page.locator('iframe').count().catch(() => 0);
+            const allInputs = await this.page.locator('input').count().catch(() => 0);
+            const visibleInputs = await this.page.locator('input:visible').count().catch(() => 0);
+            const placeholders: string[] = await this.page.locator('input:visible').evaluateAll(
+              (els) => els.slice(0, 20).map((el: any) => el.placeholder || el.name || el.id || '(none)')
+            ).catch(() => [] as string[]);
+            console.error(`   📋 URL:                ${pageUrl}`);
+            console.error(`   📋 Title:              ${pageTitle}`);
+            console.error(`   📋 iframes:            ${iframes}`);
+            console.error(`   📋 inputs (all):       ${allInputs}`);
+            console.error(`   📋 inputs (visible):   ${visibleInputs}`);
+            console.error(`   📋 visible placeholders (up to 20):`);
+            placeholders.forEach((p, i) => console.error(`      ${i + 1}. "${p}"`));
+          } catch (diagErr) {
+            console.error(`   (could not gather diagnostics: ${(diagErr as Error).message})`);
+          }
+        }
+      }
     }
+
+    const errorMsg = `CRITICAL ERROR: Failed to fill payment details after ${MAX_ATTEMPTS} attempts - ${lastError?.message || 'unknown error'}`;
+    console.error(errorMsg);
+    throw new Error(errorMsg);
   }
 
   /**
@@ -255,11 +336,32 @@ export class PaymentDetailsPage extends BasePage {
         return 'FAILED to fetch Error Message @ Step-5 (Payment Details - After RENT NOW click)';
       }
 
-      // If the payment form is gone, the first click actually succeeded and the page
-      // navigated forward. Don't try to refill — that just triggers a 30s timeout on
-      // a Card Number field that no longer exists (storagedepotla regression).
+      // If the payment form is gone, the first click usually navigated forward. Don't
+      // try to refill — that just triggers a 30s timeout on a Card Number field that no
+      // longer exists (storagedepotla regression).
       const paymentFormStillPresent = await this.cardNumberInput.isVisible({ timeout: 1500 }).catch(() => false);
       if (!paymentFormStillPresent) {
+        // BUT: "form gone" is not always success. On some clients (distinctstorage) a
+        // lost/expired session BOUNCES the page back to the HOMEPAGE after RENT NOW
+        // (e.g. https://distinctstorage.com/?st) instead of showing the error toast.
+        // The card field is "gone" simply because we're on the homepage now — that is
+        // NOT a completed transaction. Detect a bare-homepage redirect and throw so the
+        // spec re-runs the whole flow on a fresh navigation (and ultimately FAILS if it
+        // keeps bouncing) rather than reporting a false "payment processed".
+        // Manual runs reach the error toast fine, so a transient bounce recovers on retry.
+        const landedUrl = this.page.url();
+        let bouncedHome = false;
+        try {
+          const path = new URL(landedUrl).pathname.replace(/\/+$/, ''); // strip trailing slash
+          bouncedHome = path === '' || path === '/';                    // bare domain / homepage
+        } catch { /* leave false on parse error */ }
+
+        if (bouncedHome && !apiErrorMessage) {
+          console.log(`[${new Date().toISOString()}] ⚠️ After RENT NOW the page bounced to the homepage (${landedUrl}) — not a confirmation/next step. Treating as a flow failure so it gets retried/flagged.`);
+          this.page.removeListener('response', responseHandler);
+          throw new Error(`RENT NOW redirected to the homepage (${landedUrl}) instead of completing or showing an error — likely a lost/expired session in the automated flow (manual flow reaches the error as expected).`);
+        }
+
         console.log(`[${new Date().toISOString()}] ✅ Payment form is gone — first RENT NOW click succeeded (no error toast = transaction went through)`);
         this.page.removeListener('response', responseHandler);
         return apiErrorMessage ? `Error Occurred — ${apiErrorMessage}` : 'No error - payment processed (page navigated past payment form)';

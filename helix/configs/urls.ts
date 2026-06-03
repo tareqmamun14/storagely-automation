@@ -40,13 +40,22 @@ export interface HelixClientSite {
 }
 
 export const HELIX_CLIENT_SITES: Record<string, HelixClientSite[]> = {
+  // STAGING = the *.test.getstoragely.com Helix stage domain.
   [HelixEnvironment.STAGING]: [
-    // Add staging URLs as they become available
-  ],
-  [HelixEnvironment.PRODUCTION]: [
+    {
+      url: 'https://safeguard.test.getstoragely.com/storage-units/florida/seffner/kingsway-road',
+      label: 'Safeguard — Seffner, FL (Helix, stage)',
+    },
     {
       url: 'https://safeguard.test.getstoragely.com/storage-units/illinois/bridgeview/harlem-avenue',
-      label: 'Safeguard — Bridgeview, IL (Helix sample)',
+      label: 'Safeguard — Bridgeview, IL (Helix, stage)',
+    },
+  ],
+  // PRODUCTION = real customer domains served by Helix.
+  [HelixEnvironment.PRODUCTION]: [
+    {
+      url: 'https://www.safeguardit.com/storage-units/connecticut/bridgeport/west-end-west-side',
+      label: 'Safeguard — Bridgeport, CT (Helix, prod)',
     },
   ],
 };

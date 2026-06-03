@@ -77,7 +77,6 @@ export const FMS_PLATFORM: Record<string, string> = {
 // --- 2a. SPC Location URLs ---
 export const SINGLE_PAGE_RENT_URLS = {
   [Environment.STAGING]: [
-    'https://test.staging.storagely-api.com/first-storage/storage-units/south-carolina/travelers-rest/hawkins-road',          // First Storage  | storEDGE
     'https://test.staging.storagely-api.com/columbia-self-storage/storage-units/new-jersey/south-plainfield/park-avenue',     // Columbia       | storEDGE
     'https://test.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/mayland',                           // Bluebird       | SiteLink
     'https://test.staging.storagely-api.com/sunbirdstorage/storage-units/nc/winston-salem/country-club',                      // Sunbird        | SiteLink
@@ -91,7 +90,6 @@ export const SINGLE_PAGE_RENT_URLS = {
     //'https://test.staging.storagely-api.com/mini-mall-storage/storage-units/alabama/courtland/highway-33',                  // Mini Mall      | SiteLink (disabled)
   ],
   [Environment.PRODUCTION]: [
-    'https://www.firststorage.com/storage-units/south-carolina/travelers-rest/hawkins-road',          // First Storage  | storEDGE
     'https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue',    // Columbia       | storEDGE
     'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland',                             // Bluebird       | SiteLink
     'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club',                       // Sunbird        | SiteLink
@@ -108,7 +106,6 @@ export const SINGLE_PAGE_RENT_URLS = {
 
 // --- 2b. FMS Platform for each SPC URL (used for logging) ---
 export const SINGLE_PAGE_FMS_PLATFORM: Record<string, string> = CURRENT_ENVIRONMENT === Environment.STAGING ? {
-  'https://test.staging.storagely-api.com/first-storage/storage-units/south-carolina/travelers-rest/hawkins-road':     'storEDGE',
   'https://test.staging.storagely-api.com/columbia-self-storage/storage-units/new-jersey/south-plainfield/park-avenue': 'storEDGE',
   'https://test.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/mayland':                       'SiteLink',
   'https://test.staging.storagely-api.com/sunbirdstorage/storage-units/nc/winston-salem/country-club':                  'SiteLink',
@@ -121,7 +118,6 @@ export const SINGLE_PAGE_FMS_PLATFORM: Record<string, string> = CURRENT_ENVIRONM
   'https://test.staging.storagely-api.com/easy-stop-storage/storage-units/texas/bushland/south-fm-2381':               'SiteLink',
   //'https://test.staging.storagely-api.com/mini-mall-storage/storage-units/alabama/courtland/highway-33':              'SiteLink',
 } : {
-  'https://www.firststorage.com/storage-units/south-carolina/travelers-rest/hawkins-road':     'storEDGE',
   'https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue': 'storEDGE',
   'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland':                          'SiteLink',
   'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club':                    'SiteLink',
@@ -140,7 +136,6 @@ export const SINGLE_PAGE_FMS_PLATFORM: Record<string, string> = CURRENT_ENVIRONM
 // The test pauses for manual captcha solve, then clicks RENT NOW.
 // Add/remove URLs here when a client enables/disables captcha.
 export const CAPTCHA_CUSTOMER_URLS: string[] = CURRENT_ENVIRONMENT === Environment.STAGING ? [
-  //'https://test.staging.storagely-api.com/first-storage/storage-units/south-carolina/travelers-rest/hawkins-road',     // First Storage
   //'https://test.staging.storagely-api.com/columbia-self-storage/storage-units/new-jersey/south-plainfield/park-avenue', // Columbia
   //'https://test.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/mayland',                       // Bluebird
   //'https://test.staging.storagely-api.com/sunbirdstorage/storage-units/nc/winston-salem/country-club',                  // Sunbird
@@ -150,7 +145,6 @@ export const CAPTCHA_CUSTOMER_URLS: string[] = CURRENT_ENVIRONMENT === Environme
   //'https://test.staging.storagely-api.com/storage-star/storage-units/colorado/colorado-springs/aerotech-drive',         // Storage Star
   //'https://test.staging.storagely-api.com/storsafe-self-storage/storage-units/florida/melbourne/north-highway-1',     // Storsafe (no captcha)
 ] : [
-  'https://www.firststorage.com/storage-units/south-carolina/travelers-rest/hawkins-road',     // First Storage
   'https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue', // Columbia
   'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland',                          // Bluebird
   'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club',                    // Sunbird
@@ -191,7 +185,6 @@ export const STORAGE_SITE_URLS = {
     'https://test.staging.storagely-api.com/sunbirdstorage/',            // Sunbird       ⚠️ staging contact empty
     'https://test.staging.storagely-api.com/bluebirdstorage/',           // Bluebird      ⚠️ staging contact empty
     'https://test.staging.storagely-api.com/gatekeeper-self-storage/',   // Gatekeeper
-    'https://test.staging.storagely-api.com/first-storage/',             // First Storage
     'https://test.staging.storagely-api.com/red-rocks-self-storage/',    // Red Rocks
     'https://test.staging.storagely-api.com/distinct-storage/',          // Distinct
     'https://test.staging.storagely-api.com/rhino-storage/',             // Rhino
@@ -206,7 +199,6 @@ export const STORAGE_SITE_URLS = {
     'https://sunbirdstorage.com/',         // Sunbird
     'https://bluebirdstorage.ca/',         // Bluebird
     'https://gatekeeperstoragega.com/',    // Gatekeeper
-    'https://www.firststorage.com/',       // First Storage
     'https://redrocksstorage.com/',        // Red Rocks
     'https://distinctstorage.com/',        // Distinct
     'https://rhino-storage.com/',          // Rhino
@@ -226,7 +218,7 @@ export const STOREROCKET_SITES = ['ulok.com'];
 export const STAGING_CONTACT_SKIP = ['sunbirdstorage', 'bluebirdstorage', 'storage-boss'];
 
 // Sites (any environment) where the contact page has no contact form — contact test skipped
-export const CONTACT_SKIP_SITES = ['smartstorageohio', 'firststorage'];
+export const CONTACT_SKIP_SITES = ['smartstorageohio'];
 
 // Sites where the FAQ page has no accordion / is not testable — FAQ test skipped entirely
 export const FAQ_SKIP_SITES = ['almightystorage'];
@@ -365,7 +357,6 @@ export const UNIT_FEATURES_CONFLICT_LOCATIONS: UnitFeaturesLocationConfig[] = [
   { url: 'https://minimallstorage.com/storage-units/alabama/courtland/highway-33',                                              fms: 'SiteLink', label: '⭐ Mini Mall — Courtland, AL (SiteLink)'           },
 
   // --- storEDGE clients ---
-  { url: 'https://www.firststorage.com/storage-units/south-carolina/travelers-rest/hawkins-road',                                fms: 'storEDGE', label: 'First Storage — Travelers Rest, SC'              },
   { url: 'https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue',                          fms: 'storEDGE', label: 'Columbia Self Storage — South Plainfield, NJ'    },
   { url: 'https://purelystorage.com/storage-units/washington/pasco/north-road-44',                                              fms: 'storEDGE', label: 'Purely Storage — Pasco, WA'                      },
   { url: 'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road',                                        fms: 'storEDGE', label: 'Distinct Storage — New Milford, CT'              },

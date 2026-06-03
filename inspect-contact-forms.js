@@ -7,7 +7,6 @@ const SITES = [
   { name: 'Sunbird',       url: 'https://sunbirdstorage.com/contact' },
   { name: 'Bluebird',      url: 'https://bluebirdstorage.ca/contact' },
   { name: 'Gatekeeper',    url: 'https://gatekeeperstoragega.com/pages/contact' },
-  { name: 'First Storage', url: 'https://www.firststorage.com/contact' },
   { name: 'Red Rocks',     url: 'https://redrocksstorage.com/pages/contact' },
   { name: 'Distinct',      url: 'https://distinctstorage.com/contact' },
   { name: 'Rhino',         url: 'https://rhino-storage.com/pages/contact' },
