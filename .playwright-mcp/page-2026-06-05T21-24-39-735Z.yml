@@ -1,0 +1,311 @@
+- main [ref=e3]:
+  - generic [ref=e5]:
+    - link "Logo" [ref=e6] [cursor=pointer]:
+      - /url: https://www.safeguardit.com
+      - img "Logo" [ref=e7]
+    - link "Back to Location" [ref=e9] [cursor=pointer]:
+      - /url: https://www.safeguardit.com/storage-units/connecticut/bridgeport/west-end-west-side/
+  - generic [ref=e13]:
+    - generic [ref=e14]:
+      - generic [ref=e15]:
+        - heading "tenant details" [level=2] [ref=e16]
+        - generic [ref=e17]:
+          - generic [ref=e19]:
+            - generic [ref=e21]:
+              - generic [ref=e22]:
+                - generic [ref=e23]: First name
+                - textbox "First name" [ref=e26]:
+                  - /placeholder: ""
+              - generic [ref=e27]:
+                - generic [ref=e28]: Last name
+                - textbox "Last name" [ref=e31]:
+                  - /placeholder: ""
+            - generic [ref=e32]:
+              - generic [ref=e33]:
+                - generic [ref=e34]: Email address
+                - textbox "Email address" [ref=e37]:
+                  - /placeholder: ""
+              - generic [ref=e38]:
+                - generic [ref=e39]: Cell phone number
+                - textbox "Cell phone number" [ref=e42]:
+                  - /placeholder: ""
+          - generic [ref=e44]:
+            - checkbox [checked] [ref=e48]
+            - paragraph [ref=e51]: By providing your phone number, you consent to receive informational text messages from Safeguard Self Storage. Message frequency varies. Message and data rates may apply. Reply HELP for help or STOP to unsubscribe at any time.
+          - generic [ref=e54]:
+            - generic [ref=e56]:
+              - checkbox [ref=e58]
+              - paragraph [ref=e61]: Are you active duty military?
+            - button [ref=e62]:
+              - img [ref=e64] [cursor=pointer]
+      - generic [ref=e66]:
+        - heading "Upgrades & Add Ons" [level=2] [ref=e68]
+        - generic [ref=e69]:
+          - generic [ref=e70] [cursor=pointer]:
+            - generic [ref=e71]:
+              - generic [ref=e72]:
+                - paragraph [ref=e73]: Ideal for Daily Access
+                - heading "Best" [level=3] [ref=e74]
+              - generic [ref=e75]:
+                - generic [ref=e77]:
+                  - button "Why Choose Best" [ref=e78]:
+                    - paragraph [ref=e79]: Why Choose Best
+                    - img [ref=e81]
+                  - list [ref=e85]:
+                    - listitem [ref=e86]:
+                      - img [ref=e88]
+                      - paragraph [ref=e90]: Climate-Controlled
+                    - listitem [ref=e91]:
+                      - img [ref=e93]
+                      - paragraph [ref=e95]: Free Lock ($19 value)
+                    - listitem [ref=e96]:
+                      - img [ref=e98]
+                      - paragraph [ref=e100]: Great for Frequent Visits
+                    - listitem [ref=e101]:
+                      - img [ref=e103]
+                      - paragraph [ref=e105]: Premium Unit
+                    - listitem [ref=e106]:
+                      - img [ref=e108]
+                      - paragraph [ref=e110]: Closest to Entrance
+                    - listitem [ref=e111]:
+                      - img [ref=e113]
+                      - paragraph [ref=e115]: Easiest for Move-In/Move-Out
+                - generic [ref=e116]:
+                  - generic [ref=e117]:
+                    - generic [ref=e118]: $56/mo
+                    - generic [ref=e119]: Standard Rate
+                  - generic [ref=e120]:
+                    - paragraph [ref=e121]: $14
+                    - paragraph [ref=e122]: /mo
+                    - generic [ref=e123]: Discounted Rate
+            - generic [ref=e125]: Best Value
+          - generic [ref=e126] [cursor=pointer]:
+            - generic [ref=e127]:
+              - generic [ref=e128]:
+                - paragraph [ref=e129]: Ideal for Frequent Access
+                - heading "Better" [level=3] [ref=e130]
+              - generic [ref=e131]:
+                - generic [ref=e133]:
+                  - button "Why Choose Better" [ref=e134]:
+                    - paragraph [ref=e135]: Why Choose Better
+                    - img [ref=e137]
+                  - list [ref=e142]:
+                    - listitem [ref=e143]:
+                      - img [ref=e145]
+                      - paragraph [ref=e147]: Climate-Controlled
+                    - listitem [ref=e148]:
+                      - img [ref=e150]
+                      - paragraph [ref=e152]: Best Value
+                    - listitem [ref=e153]:
+                      - img [ref=e155]
+                      - paragraph [ref=e157]: Free Lock ($19 value)
+                    - listitem [ref=e158]:
+                      - img [ref=e160]
+                      - paragraph [ref=e162]: Convenient Location
+                - generic [ref=e163]:
+                  - generic [ref=e164]:
+                    - generic [ref=e165]: $47/mo
+                    - generic [ref=e166]: Standard Rate
+                  - generic [ref=e167]:
+                    - paragraph [ref=e168]: $11.75
+                    - paragraph [ref=e169]: /mo
+                    - generic [ref=e170]: Discounted Rate
+            - generic [ref=e172]: Most Popular
+          - generic [ref=e173] [cursor=pointer]:
+            - generic [ref=e174]:
+              - generic [ref=e175]:
+                - paragraph [ref=e176]: Ideal for Limited Access
+                - heading "Good" [level=3] [ref=e177]
+              - generic [ref=e178]:
+                - generic [ref=e180]:
+                  - button "Why Choose Good" [ref=e181]:
+                    - paragraph [ref=e182]: Why Choose Good
+                    - img [ref=e184]
+                  - list [ref=e188]:
+                    - listitem [ref=e189]:
+                      - img [ref=e191]
+                      - paragraph [ref=e193]: Climate-Controlled
+                    - listitem [ref=e194]:
+                      - img [ref=e196]
+                      - paragraph [ref=e198]: Lowest Cost
+                - generic [ref=e199]:
+                  - generic [ref=e200]:
+                    - generic [ref=e201]: $39/mo
+                    - generic [ref=e202]: Standard Rate
+                  - generic [ref=e203]:
+                    - paragraph [ref=e204]: $9.75
+                    - paragraph [ref=e205]: /mo
+                    - generic [ref=e206]: Discounted Rate
+            - generic [ref=e208]: Standard
+      - generic [ref=e210]:
+        - heading "Choose Your Insurance" [level=3] [ref=e211]
+        - generic [ref=e213]:
+          - generic [ref=e214]: Select Insurance Plan
+          - generic [ref=e216] [cursor=pointer]:
+            - generic [ref=e217]: "Covers up to $3,000 (Rate: $19.00/mo)"
+            - img [ref=e220]
+      - generic [ref=e225]:
+        - generic [ref=e226]:
+          - heading "Choose Move-in Date" [level=2] [ref=e227]
+          - paragraph [ref=e228]: You may rent up to 7 days in advance.
+        - button "06/06/2026" [ref=e230] [cursor=pointer]:
+          - img [ref=e232]
+          - paragraph [ref=e234]: 06/06/2026
+      - generic [ref=e235]:
+        - heading "Payment Details" [level=2] [ref=e236]
+        - generic [ref=e237]:
+          - generic [ref=e238]:
+            - generic [ref=e240]:
+              - generic [ref=e241]: Card Number
+              - textbox "Card Number" [ref=e244]:
+                - /placeholder: ""
+            - generic [ref=e245]:
+              - generic [ref=e246]:
+                - generic [ref=e247]: MM / YY
+                - textbox "MM / YY" [ref=e250]:
+                  - /placeholder: ""
+              - generic [ref=e251]:
+                - generic [ref=e252]: CVV
+                - textbox "CVV" [ref=e255]:
+                  - /placeholder: ""
+          - generic [ref=e256]:
+            - generic [ref=e257]:
+              - generic [ref=e258]: Street address
+              - textbox "Street address" [ref=e261]:
+                - /placeholder: ""
+            - generic [ref=e262]:
+              - generic [ref=e263]:
+                - generic [ref=e264]: City
+                - textbox "City" [ref=e267]:
+                  - /placeholder: ""
+              - generic [ref=e268]:
+                - generic [ref=e269]: State
+                - generic [ref=e270]:
+                  - textbox "State" [ref=e271]:
+                    - /placeholder: ""
+                  - img [ref=e274] [cursor=pointer]
+              - generic [ref=e278]:
+                - generic [ref=e279]: Zip
+                - textbox "Zip" [ref=e282]:
+                  - /placeholder: ""
+          - generic [ref=e283]:
+            - generic [ref=e284]:
+              - generic [ref=e286]:
+                - checkbox [checked] [ref=e288]
+                - paragraph [ref=e291]: Select a Discount
+              - generic [ref=e292]:
+                - generic [ref=e293]:
+                  - generic [ref=e294]: Select a Discount
+                  - generic [ref=e296] [cursor=pointer]:
+                    - generic [ref=e297]: 75% Off 2 Months
+                    - img [ref=e300]
+                - generic [ref=e304]:
+                  - generic [ref=e305]: Select When to Apply Discount
+                  - generic [ref=e307] [cursor=pointer]:
+                    - generic [ref=e308]: Select When to Apply Discount
+                    - img [ref=e311]
+            - generic [ref=e315]:
+              - generic [ref=e317]:
+                - checkbox [checked] [ref=e319]
+                - paragraph [ref=e322]: Enable Autopay
+              - paragraph [ref=e323]: Your payment method will be charged automatically each month.
+          - generic [ref=e325]:
+            - checkbox [ref=e329]
+            - paragraph [ref=e332]: I understand that failure to complete all required agreements and authorizations may result in restricted access to the unit and the facility.
+    - generic [ref=e333]:
+      - generic [ref=e334]:
+        - generic [ref=e335]:
+          - heading "Storage Unit" [level=2] [ref=e336]
+          - generic [ref=e340]:
+            - paragraph [ref=e341]: 5' × 5'
+            - link [ref=e342] [cursor=pointer]:
+              - /url: https://www.safeguardit.com/storage-units/connecticut/bridgeport/west-end-west-side/
+              - img [ref=e344]
+        - generic [ref=e346]:
+          - heading "Rental Location" [level=2] [ref=e347]
+          - generic [ref=e348]:
+            - img "self storage units Bridgeport" [ref=e350]
+            - generic [ref=e351]:
+              - generic [ref=e352]:
+                - paragraph [ref=e353]: North Avenue
+                - link [ref=e354] [cursor=pointer]:
+                  - /url: https://www.safeguardit.com/storage-units/connecticut/bridgeport/west-end-west-side/
+                  - img [ref=e356]
+              - generic [ref=e358]:
+                - generic [ref=e359]:
+                  - generic [ref=e360]:
+                    - img [ref=e362]
+                    - img [ref=e366]
+                  - generic [ref=e368]:
+                    - img [ref=e370]
+                    - img [ref=e374]
+                  - generic [ref=e376]:
+                    - img [ref=e378]
+                    - img [ref=e382]
+                  - generic [ref=e384]:
+                    - img [ref=e386]
+                    - img [ref=e390]
+                  - generic [ref=e392]:
+                    - img [ref=e394]
+                    - img [ref=e398]
+                - paragraph [ref=e400]: 126 Reviews
+              - generic [ref=e401]:
+                - img [ref=e403]
+                - link "2680 North Ave, Bridgeport, 06604" [ref=e406] [cursor=pointer]:
+                  - /url: https://www.google.com/maps/search/?api=1&query=2680%20North%20Ave%2C%20Bridgeport%2C%2006604
+                  - paragraph [ref=e407]: 2680 North Ave, Bridgeport, 06604
+        - generic [ref=e410]:
+          - generic [ref=e412]:
+            - generic [ref=e413]:
+              - generic [ref=e414]: First Month's Rent
+              - button [ref=e415]:
+                - img [ref=e417] [cursor=pointer]
+            - generic [ref=e419]: $9.79
+          - generic [ref=e421]:
+            - generic [ref=e422]:
+              - generic [ref=e423]: Monthly Insurance Plan
+              - button [ref=e424]:
+                - img [ref=e426] [cursor=pointer]
+            - generic [ref=e428]: $15.83
+          - generic [ref=e430]:
+            - generic [ref=e431]:
+              - generic [ref=e432]: Administrative Fee (one time)
+              - button [ref=e433]:
+                - img [ref=e435] [cursor=pointer]
+            - generic [ref=e437]: $29.00
+          - generic [ref=e439]:
+            - generic [ref=e441]: Software Maintenance Fee
+            - generic [ref=e442]: $1.00
+          - generic [ref=e444]:
+            - generic [ref=e446]: Tax
+            - generic [ref=e447]: $0.62
+          - generic [ref=e450]:
+            - generic [ref=e451]: Total Due Today
+            - generic [ref=e452]: $56.24
+          - generic [ref=e453]: Discounted rates reflect limited-time promotional pricing and apply only during the specified promotion period.
+        - iframe [ref=e455]:
+          - generic [ref=f4e2] [cursor=pointer]:
+            - checkbox "'I am human', Select in order to trigger the challenge, or to bypass it if you have an accessibility cookie" [ref=f4e7]
+            - generic [ref=f4e11]: I am human
+            - generic [ref=f4e12]:
+              - generic "hCaptcha" [ref=f4e13]:
+                - button "hCaptcha logo, opens new window with more information" [ref=f4e14]:
+                  - img [ref=f4e16]
+              - generic [ref=f4e78]:
+                - link "hCaptcha Privacy Policy, opens in a new tab" [ref=f4e79]:
+                  - /url: https://hcaptcha.com/privacy?ref=www.safeguardit.com&utm_campaign=a108cc22-9a14-4928-b94c-3e7a4f32d980&utm_medium=checkbox&hl=en
+                  - text: Privacy
+                - text: "-"
+                - link "hCaptcha Terms of Service, opens in a new tab" [ref=f4e80]:
+                  - /url: https://hcaptcha.com/terms?ref=www.safeguardit.com&utm_campaign=a108cc22-9a14-4928-b94c-3e7a4f32d980&utm_medium=checkbox&hl=en
+                  - text: Terms
+              - generic:
+                - img
+        - generic [ref=e456]:
+          - button "Rent Now"
+      - generic [ref=e457]:
+        - img [ref=e459]
+        - heading "Guaranteed Safe Checkout" [level=2] [ref=e461]
+  - link "Logo" [ref=e464] [cursor=pointer]:
+    - /url: https://www.safeguardit.com
+    - img "Logo" [ref=e465]

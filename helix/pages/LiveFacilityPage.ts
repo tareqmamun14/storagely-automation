@@ -168,32 +168,66 @@ export class LiveFacilityPage {
     );
   }
 
-  async expectAllImagesLoaded() {
+  /**
+   * Assert on-screen images are loaded — and return the counts so callers can
+   * report the actual numbers.
+   *
+   * False-positive avoidance (two causes, both confirmed against live Safeguard):
+   *   1. TIMING — lazy / CDN-rendered images decode a beat after the page
+   *      settles. A single fixed-wait snapshot intermittently caught them
+   *      mid-load ("8 of 36 failed" when all 36 actually load). We now POLL:
+   *      scroll to trigger lazy loads, then re-check every second until the
+   *      broken set clears (or the grace window expires).
+   *   2. CAROUSEL DEFERRED SLIDES — a slider's non-active slides keep full
+   *      layout size but are translated entirely off-screen (x ≥ viewport) and
+   *      stay `loading="lazy"` with naturalWidth=0. They are intentionally
+   *      deferred, not broken, so we exclude anything horizontally off-screen.
+   */
+  async expectAllImagesLoaded(): Promise<{ visible: number; loaded: number }> {
+    // Trigger lazy-loading: walk the page top→bottom, then settle back at top.
     await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-    await this.page.waitForTimeout(2000);
+    await this.page.waitForTimeout(1500);
     await this.page.evaluate(() => window.scrollTo(0, 0));
-    await this.page.waitForTimeout(1000);
+    await this.page.waitForTimeout(500);
 
-    const results = await this.page.evaluate(() => {
-      const imgs = Array.from(document.querySelectorAll('img[src]'));
-      return imgs
+    const collect = () => this.page.evaluate(() => {
+      const vw = window.innerWidth;
+      return Array.from(document.querySelectorAll<HTMLImageElement>('img[src]'))
         .filter(img => {
           const r = img.getBoundingClientRect();
-          return r.width > 0 && r.height > 0;
+          if (r.width <= 0 || r.height <= 0) return false;        // not rendered
+          if (r.right <= 0 || r.left >= vw) return false;         // carousel deferred slide (off-screen X)
+          return true;
         })
         .map(img => ({
-          src: (img as HTMLImageElement).src.slice(0, 120),
-          loaded: (img as HTMLImageElement).complete && (img as HTMLImageElement).naturalWidth > 0,
+          src: img.currentSrc || img.src,
+          alt: img.alt || '(no alt)',
+          loaded: img.complete && img.naturalWidth > 0,
         }));
     });
-    const broken = results.filter(r => !r.loaded);
-    if (broken.length > 0) {
-      console.log(`[warn] ${broken.length} images not fully loaded (may be lazy/CDN-delayed):`);
-      for (const b of broken.slice(0, 5)) console.log(`  - ${b.src}`);
+
+    // Poll: give lazy / CDN-delayed images up to ~6s of grace to finish.
+    let results = await collect();
+    let broken = results.filter(r => !r.loaded);
+    for (let attempt = 0; attempt < 6 && broken.length > 0; attempt++) {
+      await this.page.waitForTimeout(1000);
+      results = await collect();
+      broken = results.filter(r => !r.loaded);
     }
-    expect(broken.length, `${broken.length} of ${results.length} visible images failed to load`).toBeLessThanOrEqual(
-      Math.floor(results.length * 0.2)
-    );
+
+    const limit = Math.floor(results.length * 0.2);
+    if (broken.length > limit) {
+      // Single line (the reporter keeps only the first line) — name the offenders.
+      const offenders = broken
+        .slice(0, 6)
+        .map(b => `"${b.alt}" …${b.src.slice(-44)}`)
+        .join(' · ');
+      const more = broken.length > 6 ? ` (+${broken.length - 6} more)` : '';
+      throw new Error(
+        `${broken.length} of ${results.length} on-screen images failed to load (tolerance ${limit}): ${offenders}${more}`,
+      );
+    }
+    return { visible: results.length, loaded: results.length - broken.length };
   }
 
   // ── V2 handoff validation ─────────────────────────────────────────────

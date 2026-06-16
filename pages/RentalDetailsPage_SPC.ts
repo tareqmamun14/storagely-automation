@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Page, Locator } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { CURRENT_ENVIRONMENT, Environment } from '../configs/urls';
 
@@ -346,28 +346,111 @@ export class RentalDetailsPageSinglePage extends BasePage {
   // DISCOUNT TIMING & BREAKDOWN
   // ============================================
 
-  async selectDiscountTiming(option: string): Promise<void> {
-    console.log(`\n📍 Selecting discount timing: "${option}"...`);
+  // Helix renders a custom <select>-style "When to Apply Discount" control —
+  // NOT a native <select> and NOT label-associated. Verified live on Safeguard:
+  //   <div class="relative flex flex-col gap-px" options="…" modelvalue="…">
+  //     <label for="select-XXXX">Select When to Apply Discount</label>   ← no element has id=select-XXXX,
+  //     <div tabindex="0"><span>{current value}</span> …chevron… </div>  ←   so getByLabel() never resolves
+  //     <div class="…z-50…">                       ← options panel; ONLY in the DOM while OPEN
+  //        <div class="…cursor-pointer…"><p>Select When to Apply Discount</p></div>  ← option 0 = placeholder echo
+  //        <div class="…cursor-pointer…"><p>This Month</p></div>                      ← option 1 = first real option
+  //        <div class="…cursor-pointer…"><p>Next Month</p></div>
+  //     </div>
+  //   </div>
+  // Leaving it unset keeps the Rent Now button pointer-events-none. Anchored on
+  // the label TEXT (not ids / CSS classes) so it tolerates markup churn and
+  // applies unchanged to future Helix clients.
 
-    const dropdownField = this.page.getByLabel('Select When to Apply Discount');
-    await this.safeScroll(dropdownField);
+  /** Wrapper <div> of the discount-timing control (0 matches when not present). */
+  private get discountTimingWrapper(): Locator {
+    return this.page
+      .locator('xpath=//label[contains(normalize-space(.),"Apply Discount")]/parent::div')
+      .first();
+  }
+
+  /**
+   * Select the "When to Apply Discount" option IF the dropdown is on the page.
+   *
+   * @param preferred exact option label to pick (e.g. "This Month"). When omitted
+   *   or not found, the FIRST real option (after the placeholder) is chosen — so
+   *   new Helix clients work with no extra config.
+   * @returns the option text actually selected, or null when no dropdown present.
+   */
+  async selectDiscountTimingIfPresent(preferred?: string): Promise<string | null> {
+    return this.applyDiscountTiming(preferred, false);
+  }
+
+  /**
+   * Strict variant: selects `option` and throws if the dropdown isn't present.
+   * Used by the discount-timing verification spec, which asserts the breakdown
+   * for each specific option.
+   */
+  async selectDiscountTiming(option: string): Promise<void> {
+    await this.applyDiscountTiming(option, true);
+  }
+
+  private async applyDiscountTiming(preferred: string | undefined, required: boolean): Promise<string | null> {
+    const wrapper = this.discountTimingWrapper;
+    if ((await wrapper.count()) === 0) {
+      if (required) throw new Error('Discount-timing dropdown ("…Apply Discount") not found on page');
+      console.log('  - No discount-timing dropdown on this page — skipping (not required for this client)');
+      return null;
+    }
+
+    console.log(`\n📍 Selecting discount timing${preferred ? `: "${preferred}"` : ' (first available option)'}...`);
+    await this.safeScroll(wrapper);
     await this.wait(300);
 
-    // Try native <select> first
-    try {
-      const tagName = await dropdownField.evaluate(el => el.tagName.toLowerCase());
-      if (tagName === 'select') {
-        await dropdownField.selectOption({ label: option });
-        console.log(`  ✓ Selected "${option}" via native select`);
-        await this.wait(1000);
-        return;
-      }
-    } catch { /* not a native select */ }
+    const trigger = wrapper.locator('[tabindex="0"]').first();
+    const placeholder = (await wrapper.locator('label').first().innerText().catch(() => '')).trim();
 
-    // Custom Vue dropdown — use existing helper
-    await this.selectDropdownOption(dropdownField, option, 'Discount Timing');
-    await this.wait(1000);
-    console.log(`  ✓ Selected "${option}"`);
+    // Open the panel. Options (<p>) render only while open; clicking an already
+    // open panel closes it — so retry once and re-check for options.
+    let optionTexts: string[] = [];
+    for (let attempt = 0; attempt < 2 && optionTexts.length === 0; attempt++) {
+      await trigger.click({ timeout: 5000 }).catch(() => {});
+      await this.wait(400);
+      optionTexts = (await wrapper.locator('p').allInnerTexts().catch(() => []))
+        .map(t => t.trim())
+        .filter(Boolean);
+    }
+    if (optionTexts.length === 0) {
+      if (required) throw new Error('Discount-timing dropdown did not open / exposed no options');
+      console.log('  ⚠️ Discount-timing dropdown did not open — skipping');
+      return null;
+    }
+
+    // Real options = everything except the placeholder echo (same text as label).
+    const real = optionTexts.filter(t => t.toLowerCase() !== placeholder.toLowerCase());
+    let target = real[0];
+    if (preferred) {
+      const match = optionTexts.find(t => t.toLowerCase() === preferred.toLowerCase());
+      if (match) target = match;
+      else console.log(`  ⚠️ Preferred "${preferred}" not in [${optionTexts.join(', ')}] — using "${target}"`);
+    }
+    if (!target) {
+      if (required) throw new Error(`No selectable discount option in [${optionTexts.join(', ')}]`);
+      console.log('  ⚠️ No real discount option to select — skipping');
+      return null;
+    }
+
+    // Click the option <p> (the trigger value lives in a <span>, so targeting <p>
+    // can never accidentally hit the trigger).
+    await wrapper
+      .locator('p')
+      .filter({ hasText: new RegExp(`^\\s*${escapeRegex(target)}\\s*$`, 'i') })
+      .first()
+      .click({ timeout: 5000 });
+    await this.wait(800);
+
+    // Confirm the trigger now reflects the choice (panel closed, value committed).
+    const after = (await trigger.innerText().catch(() => '')).trim();
+    if (after.toLowerCase().includes(target.toLowerCase())) {
+      console.log(`  ✓ Discount timing set to "${target}"`);
+    } else {
+      console.log(`  ⚠️ Selected "${target}" but trigger shows "${after}" — continuing`);
+    }
+    return target;
   }
 
   async captureBreakdownLineItems(): Promise<{ items: Array<{label: string, amount: string}>, total: string }> {

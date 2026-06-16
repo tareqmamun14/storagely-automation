@@ -65,32 +65,46 @@ export class NavSection implements ISectionDetector {
 
       // ── 2. Functional — specific items the brief asks about ──────────
 
-      // BLOG — direct link with an href that points at /blog*. Some clients
-      // call it "Blog", others "Articles" / "Resources"; we match by item text.
+      // BLOG — direct link with an href that points at /blog*. Not every client
+      // has a Blog item in the header nav, so a missing item is a soft pass.
+      // Only fail when the item IS present but has a broken/missing href.
       const blog = headerItems.find(i => /^blog$/i.test(i.text));
       const blogHref = blog?.href || '';
-      const blogOk = !!blog && blog.tag === 'a' && /blog/i.test(blogHref);
+      const blogOk = !blog || (blog.tag === 'a' && /blog/i.test(blogHref));
       data.blog = blog ? { tag: blog.tag, href: blog.href } : null;
       checks.push(check(
-        'Blog menu — present as a link with /blog href',
+        'Blog menu — if present, is a link with /blog href',
         blogOk,
         blog
           ? `tag=${blog.tag}, href=${blog.href || '(none)'}`
-          : 'Blog item not found in header',
+          : 'No Blog item in header (ok — not all clients have one)',
       ));
 
-      // MY ACCOUNT — direct link to the tenant portal (tenantconnect.com,
-      // or a /login / /my-account path for clients with a custom portal).
+      // MY ACCOUNT — link to the tenant portal. Portals are almost always an
+      // EXTERNAL branded domain (tenantconnect.com, or e.g.
+      // mysafeguardselfstorage.com), so the reliable signal is "absolute URL to
+      // a different host". We also accept same-site /login|/account|/portal
+      // paths for clients whose portal is mounted on the marketing domain.
+      // A dead `#` / same-page link still fails (no external host, no keyword).
       const myAcct = headerItems.find(i => /my account|account|login|sign in/i.test(i.text));
       const myAcctHref = myAcct?.href || '';
-      const myAcctOk = !!myAcct && myAcct.tag === 'a' &&
-        /tenantconnect|login|account|customer/i.test(myAcctHref);
-      data.myAccount = myAcct ? { tag: myAcct.tag, href: myAcct.href } : null;
+      let myAcctExternal = false;
+      let myAcctHost = '';
+      if (myAcctHref) {
+        try {
+          const dest = new URL(myAcctHref, ctx.url);
+          myAcctHost = dest.host;
+          myAcctExternal = /^https?:$/.test(dest.protocol) && dest.host !== new URL(ctx.url).host;
+        } catch { /* not a resolvable URL (e.g. "#") */ }
+      }
+      const myAcctKeyword = /tenantconnect|login|account|customer|portal|tenant|sign-?in/i.test(myAcctHref);
+      const myAcctOk = !!myAcct && myAcct.tag === 'a' && (myAcctExternal || myAcctKeyword);
+      data.myAccount = myAcct ? { tag: myAcct.tag, href: myAcct.href, host: myAcctHost, external: myAcctExternal } : null;
       checks.push(check(
         'My Account — link to tenant portal / login',
         myAcctOk,
         myAcct
-          ? `tag=${myAcct.tag}, href=${(myAcct.href || '').slice(0, 80)}`
+          ? `tag=${myAcct.tag}, ${myAcctExternal ? `external portal → ${myAcctHost}` : `href=${(myAcct.href || '').slice(0, 80)}`}`
           : 'No My Account / Login item found in header',
       ));
 

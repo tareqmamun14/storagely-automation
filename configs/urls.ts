@@ -258,11 +258,12 @@ export const storageSiteUrls = STORAGE_SITE_URLS[Environment.PRODUCTION];
 
 // Baseline (committed) — keep slugs you want hardcoded so they ALWAYS work.
 const _BASE_STAGING_CORP_CODE_CLIENTS: Record<string, string> = {
-  'bluebirdstorage':    '7ou5@H@W9bdM$i',
-  'sunbirdstorage':     '7ou5@H@W9bdM$i',
-  'mini-mall-storage':  'bright31SKIES!',
-  'storage-boss':       'P?artie42!',
-  'easy-stop-storage':  'E6oVs7YRD5Crst!',
+  'bluebirdstorage':          '7ou5@H@W9bdM$i',
+  'sunbirdstorage':           '7ou5@H@W9bdM$i',
+  'mini-mall-storage':        'bright31SKIES!',
+  'storage-boss':             'P?artie42!',
+  'easy-stop-storage':        'E6oVs7YRD5Crst!',
+  'gatekeeper-self-storage':  'Oct#2024!!',
 };
 
 // Optional Control-Panel runtime overrides (slug → corp code).

@@ -127,12 +127,11 @@ export class CarouselSection implements ISectionDetector {
 
 async function activeTabIndex(page: Page): Promise<number> {
   return page.evaluate(() => {
-    const tabs = Array.from(document.querySelectorAll<HTMLElement>('[aria-label^="Go to slide"]'));
-    for (let i = 0; i < tabs.length; i++) {
-      const r = tabs[i].getBoundingClientRect();
-      // The active tab is visually wider — that's how the carousel highlights it.
-      if (r.width > 12) return i;
-    }
-    return -1;
+    // The active slide is marked with aria-selected="true" on its tab — the
+    // stable accessibility signal. (An earlier version measured tab width, but
+    // every tab button is the same fixed size: only an inner <span> scales, so
+    // width was always index 0 → "active tab 0 → 0" false negatives.)
+    const tabs = Array.from(document.querySelectorAll<HTMLElement>('[role="tab"][aria-label^="Go to slide"]'));
+    return tabs.findIndex(t => t.getAttribute('aria-selected') === 'true');
   });
 }

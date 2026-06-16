@@ -52,43 +52,37 @@ function duration(ms: number): string {
 }
 
 class CleanReporter implements Reporter {
-  private passed = 0;
-  private failed = 0;
-  private skipped = 0;
-  private total = 0;
-  private failures: { test: TestCase; result: TestResult }[] = [];
+  private suite!: Suite;
 
   onBegin(_config: FullConfig, suite: Suite) {
-    this.total = suite.allTests().length;
-    console.log(`\nRunning ${this.total} test${this.total !== 1 ? 's' : ''}\n`);
+    this.suite = suite;
+    const total = suite.allTests().length;
+    console.log(`\nRunning ${total} test${total !== 1 ? 's' : ''}\n`);
   }
 
   onTestBegin(test: TestCase) {
     process.stdout.write(`${COLORS.gray}  ◌ ${testTitle(test)}${COLORS.reset}\r`);
   }
 
+  // Streams each attempt as it finishes — purely live feedback. Final tallies
+  // (and the flaky-vs-failed distinction) are computed in onEnd from each
+  // test's overall outcome, so a failed attempt that later passes on retry is
+  // NOT counted as a permanent failure.
   onTestEnd(test: TestCase, result: TestResult) {
     const dur = duration(result.duration);
     const retryTag = result.retry > 0 ? ` ${COLORS.yellow}(retry #${result.retry})${COLORS.reset}` : '';
 
-    if (result.status === 'passed' || result.status === 'skipped') {
-      if (result.status === 'skipped') {
-        this.skipped++;
-        console.log(`${COLORS.yellow}  - ${testTitle(test)}${COLORS.reset}`);
-      } else {
-        this.passed++;
-        console.log(`${COLORS.green}  ✓ ${testTitle(test)} ${COLORS.gray}(${dur})${COLORS.reset}${retryTag}`);
+    if (result.status === 'skipped') {
+      console.log(`${COLORS.yellow}  - ${testTitle(test)}${COLORS.reset}`);
+    } else if (result.status === 'passed') {
+      console.log(`${COLORS.green}  ✓ ${testTitle(test)} ${COLORS.gray}(${dur})${COLORS.reset}${retryTag}`);
+    } else {
+      // failed / timedOut / interrupted on THIS attempt (may still pass on a later retry)
+      const concise = extractConciseError(result);
+      console.log(`${COLORS.red}  ✘ ${testTitle(test)} ${COLORS.gray}(${dur})${COLORS.reset}${retryTag}`);
+      if (concise) {
+        console.log(`${COLORS.red}    → ${concise}${COLORS.reset}`);
       }
-      return;
-    }
-
-    // failed / timedOut / interrupted
-    this.failed++;
-    this.failures.push({ test, result });
-    const concise = extractConciseError(result);
-    console.log(`${COLORS.red}  ✘ ${testTitle(test)} ${COLORS.gray}(${dur})${COLORS.reset}${retryTag}`);
-    if (concise) {
-      console.log(`${COLORS.red}    → ${concise}${COLORS.reset}`);
     }
   }
 
@@ -123,20 +117,47 @@ class CleanReporter implements Reporter {
   onEnd(result: FullResult) {
     console.log('');
 
-    if (this.failures.length > 0) {
-      console.log(`${COLORS.red}  ${this.failures.length} failed${COLORS.reset}`);
-      for (const { test } of this.failures) {
+    // Tally by each test's FINAL outcome, not per attempt. A test that fails an
+    // early attempt but passes on retry is 'flaky' (overall pass — Playwright
+    // exits 0) and must NOT be reported as failed.
+    let passed = 0, failed = 0, flaky = 0, skipped = 0;
+    const failures: TestCase[] = [];
+    const flakies: TestCase[] = [];
+
+    for (const test of this.suite.allTests()) {
+      switch (test.outcome()) {
+        case 'expected':   passed++; break;
+        case 'unexpected': failed++; failures.push(test); break;
+        case 'flaky':      flaky++;  flakies.push(test); break;
+        case 'skipped':    skipped++; break;
+      }
+    }
+
+    const listTests = (tests: TestCase[], color: string) => {
+      for (const test of tests) {
         const project = test.parent.project()?.name;
         const tag = project ? `[${project}]` : '';
-        console.log(`${COLORS.red}    ${tag} › ${testTitle(test)}${COLORS.reset}`);
+        console.log(`${color}    ${tag} › ${testTitle(test)}${COLORS.reset}`);
       }
+    };
+
+    if (failures.length > 0) {
+      console.log(`${COLORS.red}  ${failures.length} failed${COLORS.reset}`);
+      listTests(failures, COLORS.red);
+      console.log('');
+    }
+
+    if (flakies.length > 0) {
+      console.log(`${COLORS.yellow}  ${flakies.length} flaky (failed first, passed on retry)${COLORS.reset}`);
+      listTests(flakies, COLORS.yellow);
       console.log('');
     }
 
     const parts: string[] = [];
-    if (this.passed) parts.push(`${COLORS.green}${this.passed} passed${COLORS.reset}`);
-    if (this.failed) parts.push(`${COLORS.red}${this.failed} failed${COLORS.reset}`);
-    if (this.skipped) parts.push(`${COLORS.yellow}${this.skipped} skipped${COLORS.reset}`);
+    if (passed)  parts.push(`${COLORS.green}${passed} passed${COLORS.reset}`);
+    if (flaky)   parts.push(`${COLORS.yellow}${flaky} flaky${COLORS.reset}`);
+    if (failed)  parts.push(`${COLORS.red}${failed} failed${COLORS.reset}`);
+    if (skipped) parts.push(`${COLORS.yellow}${skipped} skipped${COLORS.reset}`);
 
     console.log(`  ${parts.join(`${COLORS.gray} | ${COLORS.reset}`)}`);
     console.log(`${COLORS.gray}  Total time: ${duration(result.duration)}${COLORS.reset}\n`);

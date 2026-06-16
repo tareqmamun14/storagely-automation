@@ -193,7 +193,7 @@ export function writeMarkdownReport(results: SectionResult[], outFile: string): 
 // This is the "what was actually found" string. Keep it short (one line)
 // and section-aware so reviewers can spot regressions at a glance.
 
-function formatFindings(r: SectionResult): string {
+export function formatFindings(r: SectionResult): string {
   const d = (r.data || {}) as Record<string, any>;
   switch (r.sectionId) {
     case 'nav': {

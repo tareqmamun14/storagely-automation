@@ -80,6 +80,10 @@ function fmsFor(id) { return FMS_BY_SLUG[id] || '—'; }
 /** id → { proc, buffer:[], listeners:Set<res>, done:bool, exitCode } */
 const runs = new Map();
 
+// ───────── Heartbeat — lifecycle sync (Ctrl+C ↔ tab close) ─────────
+const heartbeatClients = new Set();
+let panelShutdownTimer = null;
+
 // ───────── Helpers ─────────
 function readJsonSafe(file, fallback) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); }
@@ -400,31 +404,54 @@ function buildRunCommand(req) {
   const specs = suites.map(s => specMap[s]).filter(Boolean);
 
   // Helix suite — uses its own playwright config with project-based routing.
-  // Modules map to Playwright projects:
-  //   e2e / live / sections / sections-each → 'live' project (narrowed via --grep)
-  //   editor                                → 'editor' project
+  //
+  // The e2e / live / sections checkboxes are STEPS of ONE top-down journey per
+  // facility (facility-journey.spec.ts), exactly like V1/SPC: one browser per
+  // customer. All are selectable — uncheck any to skip. Checkbox → HELIX_LAYERS:
+  //
+  //   live            → 'health'   (page health + token audit)
+  //   sections        → 'sections' (section detectors, single navigation)
+  //   e2e             → 'rent'     (SPC form fill + submit — runs LAST)
+  //   sections-each   → SLOWER pinpoint mode: each section as its own
+  //                     isolated test/browser (helix/tests/live/sections/*.spec.ts)
+  //   editor          → 'editor' project (separate login browser)
   let helixCmd = null;
   if (suites.includes('helix')) {
     const hm = req.helix?.modules || ['e2e', 'live', 'sections'];
+
+    // Which layers does the unified journey run? The journey runs whenever any
+    // of e2e / live / sections is selected. All are optional.
+    const journeyLayers = [];
+    if (hm.includes('live'))     journeyLayers.push('health');
+    if (hm.includes('sections')) journeyLayers.push('sections');
+    if (hm.includes('e2e'))      journeyLayers.push('rent');
+    const runJourney = journeyLayers.length > 0;
+
     const projects = new Set();
-    if (hm.some(m => ['e2e', 'live', 'sections', 'sections-each'].includes(m))) projects.add('live');
+    if (runJourney || hm.includes('sections-each')) projects.add('live');
     if (hm.includes('editor')) projects.add('editor');
+
     if (projects.size > 0) {
       const args = ['playwright', 'test', '--config=helix/playwright.config.ts'];
       for (const p of projects) args.push('--project=' + p);
 
-      // Narrow within the live project using Playwright's --grep. Each module
-      // corresponds to a unique describe block title (kept stable across the
-      // codebase). When 'editor' is checked we don't grep because editor specs
-      // live under their own project.
+      // Narrow within the live project via --grep. The unified journey is one
+      // describe block ("Helix Facility Journey"); the pinpoint mode uses the
+      // per-section "Section:" blocks. Editor specs live in their own project.
       if (!hm.includes('editor')) {
         const greps = [];
-        if (hm.includes('e2e'))           greps.push('E2E');
-        if (hm.includes('live'))          greps.push('Live Page Health');
-        if (hm.includes('sections'))      greps.push('Helix . All Sections');
-        if (hm.includes('sections-each')) greps.push('Section:');
+        if (runJourney) greps.push('Helix Facility Journey');
+        // "Sections — each as own test" only runs the per-section pinpoint specs
+        // when the journey is NOT already verifying sections. They check the same
+        // detectors, so never run both in one cycle (the UI enforces this too).
+        const journeyDoesSections = journeyLayers.includes('sections');
+        if (hm.includes('sections-each') && !journeyDoesSections) greps.push('Section:');
         if (greps.length) args.push('--grep', greps.join('|'));
       }
+
+      // Tell the journey spec which layers to run. An empty HELIX_LAYERS would
+      // mean "all layers", so only set it when the journey actually runs.
+      if (runJourney) env.HELIX_LAYERS = journeyLayers.join(',');
 
       if (req.headed) args.push('--headed');
       if (req.workers && Number(req.workers) > 0) args.push('--workers', String(req.workers));
@@ -566,6 +593,38 @@ function closeListeners(entry) {
   }
 }
 
+// ───────── /api/heartbeat — panel lifecycle sync ─────────
+function heartbeatConnect(req, res) {
+  res.writeHead(200, {
+    'Content-Type':      'text/event-stream',
+    'Cache-Control':     'no-cache',
+    'Connection':        'keep-alive',
+    'X-Accel-Buffering': 'no',
+  });
+  res.write('retry: 3000\n\n');
+  res.write('data: connected\n\n');
+  heartbeatClients.add(res);
+
+  // New client connected — cancel any pending shutdown
+  if (panelShutdownTimer) { clearTimeout(panelShutdownTimer); panelShutdownTimer = null; }
+
+  const keepAlive = setInterval(() => {
+    try { res.write('data: ping\n\n'); } catch { clearInterval(keepAlive); }
+  }, 15_000);
+
+  req.on('close', () => {
+    clearInterval(keepAlive);
+    heartbeatClients.delete(res);
+    // All panel tabs closed → start a delayed shutdown
+    if (heartbeatClients.size === 0 && !panelShutdownTimer) {
+      panelShutdownTimer = setTimeout(() => {
+        console.log('\n  Panel tab closed — shutting down.\n');
+        shutdownServer();
+      }, 3000);
+    }
+  });
+}
+
 // ───────── /api/stream/:id ─────────
 function streamRun(req, res, id) {
   const entry = runs.get(id);
@@ -627,6 +686,9 @@ function serveStatic(req, res) {
 const server = http.createServer((req, res) => {
   const url = req.url || '';
 
+  if (url === '/api/heartbeat' && req.method === 'GET') {
+    return heartbeatConnect(req, res);
+  }
   if (url === '/api/config' && req.method === 'GET') {
     return send(res, 200, buildConfigPayload());
   }
@@ -685,4 +747,29 @@ server.listen(PORT, () => {
                  : ['xdg-open', [url]];
     try { spawn(opener[0], opener[1], { detached: true, stdio: 'ignore' }).unref(); } catch {}
   }
+});
+
+// ───────── Graceful shutdown (Ctrl+C or panel tab closed) ─────────
+function shutdownServer() {
+  for (const [, entry] of runs) {
+    if (entry.proc && !entry.done) {
+      if (process.platform === 'win32') {
+        try { spawn('taskkill', ['/pid', String(entry.proc.pid), '/T', '/F']); } catch {}
+      } else {
+        try { entry.proc.kill('SIGTERM'); } catch {}
+      }
+    }
+    if (entry.allureProc) { try { entry.allureProc.kill(); } catch {} }
+  }
+  server.close();
+  process.exit(0);
+}
+
+process.on('SIGINT', () => {
+  console.log('\n  Ctrl+C — notifying panel and shutting down…');
+  for (const res of heartbeatClients) {
+    try { res.write('event: shutdown\ndata: {}\n\n'); } catch {}
+  }
+  // Give the SSE event a moment to flush before exiting
+  setTimeout(shutdownServer, 500);
 });

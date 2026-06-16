@@ -1,0 +1,1513 @@
+- generic [ref=e1]:
+  - generic "Cookie Consent Widget" [ref=e1705]:
+    - generic [ref=e1706]:
+      - generic [ref=e1710]:
+        - text: This website uses cookies to ensure you get the best experience on our website. By continuing to use this website, you consent to the use of cookies in accordance with our
+        - link "Cookie Policy" [ref=e1711] [cursor=pointer]:
+          - /url: https://www.safeguardit.com/cookie-policy/
+        - text: and our
+        - link "Privacy Policy" [ref=e1712] [cursor=pointer]:
+          - /url: https://www.safeguardit.com/privacy-policy/
+        - text: .
+      - button "Got it" [ref=e1714] [cursor=pointer]
+  - generic [ref=e6]:
+    - main [ref=e7]:
+      - generic [ref=e14]:
+        - link "Home" [ref=e16] [cursor=pointer]:
+          - /url: /
+          - img "Safeguard Self Storage Logo" [ref=e19]
+        - generic [ref=e20]:
+          - generic [ref=e21]:
+            - button "Find Storage" [ref=e23] [cursor=pointer]:
+              - text: Find Storage
+              - img [ref=e24]
+            - button "Storage Types" [ref=e27] [cursor=pointer]:
+              - text: Storage Types
+              - img [ref=e28]
+            - button "Resources" [active] [ref=e31] [cursor=pointer]:
+              - text: Resources
+              - img [ref=e32]
+            - button "About" [ref=e35] [cursor=pointer]:
+              - text: About
+              - img [ref=e36]
+            - button "Contact" [ref=e39] [cursor=pointer]:
+              - text: Contact
+              - img [ref=e40]
+            - link "Pay Online" [ref=e42] [cursor=pointer]:
+              - /url: https://mysafeguardselfstorage.com
+          - link "My Account" [ref=e45] [cursor=pointer]:
+            - /url: https://mysafeguardselfstorage.com
+      - generic [ref=e48]:
+        - navigation [ref=e49]:
+          - link "Home" [ref=e50] [cursor=pointer]:
+            - /url: /
+            - img [ref=e51]
+          - img [ref=e53]
+          - link "Connecticut" [ref=e55] [cursor=pointer]:
+            - /url: /storage-units/connecticut
+          - img [ref=e56]
+          - link "Bridgeport" [ref=e58] [cursor=pointer]:
+            - /url: /storage-units/connecticut/bridgeport
+          - img [ref=e59]
+          - generic [ref=e61]: 2680 North Ave
+        - generic [ref=e62]:
+          - generic [ref=e63]:
+            - generic [ref=e64]:
+              - heading "Safeguard Self Storage | North Avenue" [level=3] [ref=e65]
+              - generic [ref=e66]:
+                - img [ref=e67]
+                - generic [ref=e69]: "5"
+                - generic [ref=e70]: (130)
+            - generic [ref=e71]:
+              - 'button "Office: Wed: 9AM - 7PM" [ref=e73] [cursor=pointer]':
+                - generic [ref=e74]: "Office:"
+                - generic [ref=e75]: "Wed: 9AM - 7PM"
+                - img [ref=e76]
+              - generic [ref=e78]: "|"
+              - 'button "Access: Wed: 6AM - 10PM" [ref=e80] [cursor=pointer]':
+                - generic [ref=e81]: "Access:"
+                - generic [ref=e82]: "Wed: 6AM - 10PM"
+                - img [ref=e83]
+              - generic [ref=e85]: "|"
+              - generic [ref=e86]:
+                - generic [ref=e87]: "Phone:"
+                - link "(203) 489-2086" [ref=e88] [cursor=pointer]:
+                  - /url: tel:2034892086
+          - generic [ref=e89]:
+            - link "What Will Fit?" [ref=e90] [cursor=pointer]:
+              - /url: /storage-unit-size-guide
+              - img [ref=e91]
+              - text: What Will Fit?
+            - link "FAQ" [ref=e93] [cursor=pointer]:
+              - /url: "#faq"
+              - img [ref=e94]
+              - text: FAQ
+      - generic [ref=e98]:
+        - generic [ref=e103]:
+          - region "Image carousel" [ref=e105]:
+            - generic [ref=e106]:
+              - generic [ref=e107]:
+                - img "self storage units Bridgeport" [ref=e110]
+                - img "Bridgeport storage facility" [ref=e113]
+                - img "modern self storage" [ref=e116]
+                - img "moving and packing supplies" [ref=e119]
+                - img "secure storage in Bridgeport" [ref=e122]
+                - img "storage units for rent" [ref=e125]
+                - img "self storage near me" [ref=e128]
+                - img "climate controlled storage" [ref=e131]
+                - img "large storage unit" [ref=e134]
+                - img "affordable storage" [ref=e137]
+                - img "self storage security" [ref=e140]
+              - button "Previous slide" [ref=e142] [cursor=pointer]:
+                - img [ref=e143]
+              - button "Next slide" [ref=e146] [cursor=pointer]:
+                - img [ref=e147]
+              - tablist "Slide navigation" [ref=e150]:
+                - tab "Go to slide 1 of 11" [ref=e151] [cursor=pointer]
+                - tab "Go to slide 2 of 11" [selected] [ref=e153] [cursor=pointer]
+                - tab "Go to slide 3 of 11" [ref=e155] [cursor=pointer]
+                - tab "Go to slide 4 of 11" [ref=e157] [cursor=pointer]
+                - tab "Go to slide 5 of 11" [ref=e159] [cursor=pointer]
+                - tab "Go to slide 6 of 11" [ref=e161] [cursor=pointer]
+                - tab "Go to slide 7 of 11" [ref=e163] [cursor=pointer]
+                - tab "Go to slide 8 of 11" [ref=e165] [cursor=pointer]
+                - tab "Go to slide 9 of 11" [ref=e167] [cursor=pointer]
+                - tab "Go to slide 10 of 11" [ref=e169] [cursor=pointer]
+                - tab "Go to slide 11 of 11" [ref=e171] [cursor=pointer]
+            - generic [ref=e173]: Slide 2 of 11
+          - list [ref=e175]:
+            - listitem [ref=e176]:
+              - link "2680 North Ave Bridgeport CT, 06604" [ref=e177] [cursor=pointer]:
+                - /url: https://maps.app.goo.gl/zmcZapfQ8aYb3V1v9
+                - img [ref=e179]
+                - generic [ref=e181]: 2680 North Ave Bridgeport CT, 06604
+          - generic [ref=e183]:
+            - heading "Amenities" [level=2] [ref=e184]
+            - list [ref=e185]:
+              - listitem [ref=e186]:
+                - img [ref=e188]
+                - generic [ref=e190]: Climate-Controlled Units
+              - listitem [ref=e191]:
+                - img [ref=e193]
+                - generic [ref=e195]: Elevators
+              - listitem [ref=e196]:
+                - img [ref=e198]
+                - generic [ref=e200]: High-Tech Security
+              - listitem [ref=e201]:
+                - img [ref=e203]
+                - generic [ref=e205]: Indoor Unloading Area
+              - listitem [ref=e206]:
+                - img [ref=e208]
+                - generic [ref=e210]: Moving Supplies
+              - listitem [ref=e211]:
+                - img [ref=e213]
+                - generic [ref=e215]: Package Receiving Service
+          - generic [ref=e217]:
+            - heading "Customer Reviews" [level=2] [ref=e218]
+            - generic [ref=e219]:
+              - img [ref=e220]
+              - generic [ref=e222]: "5.0"
+              - generic [ref=e223]: (130)
+            - generic [ref=e224]:
+              - generic [ref=e225]:
+                - generic [ref=e226]:
+                  - generic [ref=e227]:
+                    - generic [ref=e228]: EC
+                    - generic [ref=e229]: eugene charleus
+                  - generic [ref=e230]:
+                    - img [ref=e231]
+                    - img [ref=e233]
+                    - img [ref=e235]
+                    - img [ref=e237]
+                    - img [ref=e239]
+                - generic [ref=e241]:
+                  - paragraph [ref=e242]: This is my first experience at Safeguard storage. They’re very professional and efficient. The place is very very clean and the unit storages are pretty awesome. I recommend Safeguard to anyone looking for a safe storage for their belongings
+                  - button "Read more" [ref=e243] [cursor=pointer]
+              - generic [ref=e244]:
+                - generic [ref=e245]:
+                  - generic [ref=e246]:
+                    - generic [ref=e247]: TT
+                    - generic [ref=e248]: Theo T
+                  - generic [ref=e249]:
+                    - img [ref=e250]
+                    - img [ref=e252]
+                    - img [ref=e254]
+                    - img [ref=e256]
+                    - img [ref=e258]
+                - generic:
+                  - paragraph
+              - generic [ref=e260]:
+                - generic [ref=e261]:
+                  - generic [ref=e262]:
+                    - generic [ref=e263]: MR
+                    - generic [ref=e264]: Melly Ramos
+                  - generic [ref=e265]:
+                    - img [ref=e266]
+                    - img [ref=e268]
+                    - img [ref=e270]
+                    - img [ref=e272]
+                    - img [ref=e274]
+                - generic [ref=e276]:
+                  - paragraph [ref=e277]: Great location and affordable prices. Michelle was very helpful and professional. She greeted me the minute I walked in and made me feel very comfortable and secure to do business with safeguard self storage. I highly recommend
+                  - button "Read more" [ref=e278] [cursor=pointer]
+        - generic [ref=e283]:
+          - generic [ref=e287]:
+            - heading "Storage Units Bridgeport" [level=1] [ref=e288]
+            - generic [ref=e289]:
+              - 'button "Size: Small to Large" [ref=e291] [cursor=pointer]':
+                - text: "Size: Small to Large"
+                - img [ref=e292]
+              - button "Filters" [ref=e294] [cursor=pointer]:
+                - img [ref=e295]
+                - text: Filters
+          - generic [ref=e298]:
+            - generic [ref=e299]:
+              - text: Discounted rate applies for the stated promotional period only.
+              - generic [ref=e301]:
+                - img "5X5X4SLGCC" [ref=e303]
+                - paragraph [ref=e305]:
+                  - generic [ref=e306]:
+                    - generic [ref=e307]: 5'
+                    - generic [ref=e308]: x
+                    - generic [ref=e309]: 5'
+                  - generic [ref=e310]: 25 sq ft
+                - generic [ref=e311]:
+                  - generic [ref=e312]:
+                    - img [ref=e313]
+                    - text: 75% Off 2 Months
+                    - generic [ref=e315]: ⓘ Discounted rate applies for the stated promotional period only.
+                  - generic [ref=e316]:
+                    - generic [ref=e317]:
+                      - generic [ref=e318]:
+                        - generic [ref=e319]: $9.75
+                        - generic [ref=e320]: /mo
+                      - generic [ref=e321]: WEB RATE
+                    - generic [ref=e322]:
+                      - generic [ref=e323]:
+                        - generic [ref=e324]: $39
+                        - generic [ref=e325]: /mo
+                      - generic [ref=e326]: STANDARD RATE
+                  - generic [ref=e327]:
+                    - link "Rent Now" [ref=e329] [cursor=pointer]:
+                      - /url: /storage-units/connecticut/bridgeport/west-end-west-side/step-four?unit_id=5982450&promo=12857
+                    - button "Reserve" [ref=e331] [cursor=pointer]
+            - generic [ref=e332]:
+              - text: Discounted rate applies for the stated promotional period only.
+              - generic [ref=e334]:
+                - img "5X5X8CC" [ref=e336]
+                - generic [ref=e337]:
+                  - paragraph [ref=e338]:
+                    - generic [ref=e339]:
+                      - generic [ref=e340]: 5'
+                      - generic [ref=e341]: x
+                      - generic [ref=e342]: 5'
+                    - generic [ref=e343]: 25 sq ft
+                  - generic [ref=e344]:
+                    - generic [ref=e345]:
+                      - img [ref=e346]
+                      - text: Climate-Controlled
+                    - generic [ref=e348]:
+                      - img [ref=e349]
+                      - text: Elevator Access
+                - generic [ref=e351]:
+                  - generic [ref=e352]:
+                    - img [ref=e353]
+                    - text: 75% Off 2 Months
+                    - generic [ref=e355]: ⓘ Discounted rate applies for the stated promotional period only.
+                  - generic [ref=e356]:
+                    - generic [ref=e357]:
+                      - generic [ref=e358]:
+                        - generic [ref=e359]: $14.75
+                        - generic [ref=e360]: /mo
+                      - generic [ref=e361]: WEB RATE
+                    - generic [ref=e362]:
+                      - generic [ref=e363]:
+                        - generic [ref=e364]: $59
+                        - generic [ref=e365]: /mo
+                      - generic [ref=e366]: STANDARD RATE
+                  - generic [ref=e367]:
+                    - link "Rent Now" [ref=e369] [cursor=pointer]:
+                      - /url: /storage-units/connecticut/bridgeport/west-end-west-side/step-four?unit_id=5966946&promo=12857
+                    - button "Reserve" [ref=e371] [cursor=pointer]
+            - generic [ref=e372]:
+              - text: Discounted rate applies for the stated promotional period only.
+              - generic [ref=e374]:
+                - img "5X5X8GCC" [ref=e376]
+                - generic [ref=e377]:
+                  - paragraph [ref=e378]:
+                    - generic [ref=e379]:
+                      - generic [ref=e380]: 5'
+                      - generic [ref=e381]: x
+                      - generic [ref=e382]: 5'
+                    - generic [ref=e383]: 25 sq ft
+                  - generic [ref=e384]:
+                    - generic [ref=e385]:
+                      - img [ref=e386]
+                      - text: Climate-Controlled
+                    - generic [ref=e388]:
+                      - img [ref=e389]
+                      - text: 1st Floor Access
+                - generic [ref=e391]:
+                  - generic [ref=e392]:
+                    - img [ref=e393]
+                    - text: 50% Off 2 Months
+                    - generic [ref=e395]: ⓘ Discounted rate applies for the stated promotional period only.
+                  - generic [ref=e396]:
+                    - generic [ref=e397]:
+                      - generic [ref=e398]:
+                        - generic [ref=e399]: $34.50
+                        - generic [ref=e400]: /mo
+                      - generic [ref=e401]: WEB RATE
+                    - generic [ref=e402]:
+                      - generic [ref=e403]:
+                        - generic [ref=e404]: $69
+                        - generic [ref=e405]: /mo
+                      - generic [ref=e406]: STANDARD RATE
+                  - generic [ref=e407]:
+                    - link "Rent Now" [ref=e409] [cursor=pointer]:
+                      - /url: /storage-units/connecticut/bridgeport/west-end-west-side/step-four?unit_id=5933149&promo=14279
+                    - button "Reserve" [ref=e411] [cursor=pointer]
+            - generic [ref=e412]:
+              - text: Discounted rate applies for the stated promotional period only.
+              - generic [ref=e414]:
+                - img "5X10X8CC" [ref=e416]
+                - generic [ref=e417]:
+                  - paragraph [ref=e418]:
+                    - generic [ref=e419]:
+                      - generic [ref=e420]: 5'
+                      - generic [ref=e421]: x
+                      - generic [ref=e422]: 10'
+                    - generic [ref=e423]: 50 sq ft
+                  - generic [ref=e424]:
+                    - generic [ref=e425]:
+                      - img [ref=e426]
+                      - text: Climate-Controlled
+                    - generic [ref=e428]:
+                      - img [ref=e429]
+                      - text: Elevator Access
+                - generic [ref=e431]:
+                  - generic [ref=e432]:
+                    - img [ref=e433]
+                    - text: 75% Off 2 Months
+                    - generic [ref=e435]: ⓘ Discounted rate applies for the stated promotional period only.
+                  - generic [ref=e436]:
+                    - generic [ref=e437]:
+                      - generic [ref=e438]:
+                        - generic [ref=e439]: $19.75
+                        - generic [ref=e440]: /mo
+                      - generic [ref=e441]: WEB RATE
+                    - generic [ref=e442]:
+                      - generic [ref=e443]:
+                        - generic [ref=e444]: $79
+                        - generic [ref=e445]: /mo
+                      - generic [ref=e446]: STANDARD RATE
+                  - generic [ref=e447]:
+                    - link "Rent Now" [ref=e449] [cursor=pointer]:
+                      - /url: /storage-units/connecticut/bridgeport/west-end-west-side/step-four?unit_id=5983990&promo=12857
+                    - button "Reserve" [ref=e451] [cursor=pointer]
+            - generic [ref=e452]:
+              - text: Discounted rate applies for the stated promotional period only.
+              - generic [ref=e454]:
+                - img "10X5X8GCC" [ref=e456]
+                - generic [ref=e457]:
+                  - paragraph [ref=e458]:
+                    - generic [ref=e459]:
+                      - generic [ref=e460]: 10'
+                      - generic [ref=e461]: x
+                      - generic [ref=e462]: 5'
+                    - generic [ref=e463]: 50 sq ft
+                  - generic [ref=e464]:
+                    - generic [ref=e465]:
+                      - img [ref=e466]
+                      - text: Climate-Controlled
+                    - generic [ref=e468]:
+                      - img [ref=e469]
+                      - text: 1st Floor Access
+                - generic [ref=e471]:
+                  - generic [ref=e472]:
+                    - img [ref=e473]
+                    - text: 50% Off 2 Months
+                    - generic [ref=e475]: ⓘ Discounted rate applies for the stated promotional period only.
+                  - generic [ref=e476]:
+                    - generic [ref=e477]:
+                      - generic [ref=e478]:
+                        - generic [ref=e479]: $54.50
+                        - generic [ref=e480]: /mo
+                      - generic [ref=e481]: WEB RATE
+                    - generic [ref=e482]:
+                      - generic [ref=e483]:
+                        - generic [ref=e484]: $109
+                        - generic [ref=e485]: /mo
+                      - generic [ref=e486]: STANDARD RATE
+                  - generic [ref=e487]:
+                    - link "Rent Now" [ref=e489] [cursor=pointer]:
+                      - /url: /storage-units/connecticut/bridgeport/west-end-west-side/step-four?unit_id=5466138&promo=14279
+                    - button "Reserve" [ref=e491] [cursor=pointer]
+            - generic [ref=e492]:
+              - text: Discounted rate applies for the stated promotional period only.
+              - generic [ref=e494]:
+                - img "10X7.5X8CC" [ref=e496]
+                - generic [ref=e497]:
+                  - paragraph [ref=e498]:
+                    - generic [ref=e499]:
+                      - generic [ref=e500]: 10'
+                      - generic [ref=e501]: x
+                      - generic [ref=e502]: 7.5'
+                    - generic [ref=e503]: 75 sq ft
+                  - generic [ref=e504]:
+                    - generic [ref=e505]:
+                      - img [ref=e506]
+                      - text: Climate-Controlled
+                    - generic [ref=e508]:
+                      - img [ref=e509]
+                      - text: Elevator Access
+                - generic [ref=e511]:
+                  - generic [ref=e512]:
+                    - img [ref=e513]
+                    - text: 75% Off 2 Months
+                    - generic [ref=e515]: ⓘ Discounted rate applies for the stated promotional period only.
+                  - generic [ref=e516]:
+                    - generic [ref=e517]:
+                      - generic [ref=e518]:
+                        - generic [ref=e519]: $24.75
+                        - generic [ref=e520]: /mo
+                      - generic [ref=e521]: WEB RATE
+                    - generic [ref=e522]:
+                      - generic [ref=e523]:
+                        - generic [ref=e524]: $99
+                        - generic [ref=e525]: /mo
+                      - generic [ref=e526]: STANDARD RATE
+                  - generic [ref=e527]:
+                    - link "Rent Now" [ref=e529] [cursor=pointer]:
+                      - /url: /storage-units/connecticut/bridgeport/west-end-west-side/step-four?unit_id=5973818&promo=12857
+                    - button "Reserve" [ref=e531] [cursor=pointer]
+            - generic [ref=e532]:
+              - text: Discounted rate applies for the stated promotional period only.
+              - generic [ref=e534]:
+                - img "10X7.5X8GCC" [ref=e536]
+                - generic [ref=e537]:
+                  - paragraph [ref=e538]:
+                    - generic [ref=e539]:
+                      - generic [ref=e540]: 10'
+                      - generic [ref=e541]: x
+                      - generic [ref=e542]: 7.5'
+                    - generic [ref=e543]: 75 sq ft
+                  - generic [ref=e544]:
+                    - generic [ref=e545]:
+                      - img [ref=e546]
+                      - text: Climate-Controlled
+                    - generic [ref=e548]:
+                      - img [ref=e549]
+                      - text: 1st Floor Access
+                - generic [ref=e551]:
+                  - generic [ref=e552]:
+                    - img [ref=e553]
+                    - text: 75% Off 2 Months
+                    - generic [ref=e555]: ⓘ Discounted rate applies for the stated promotional period only.
+                  - generic [ref=e556]:
+                    - generic [ref=e557]:
+                      - generic [ref=e558]:
+                        - generic [ref=e559]: $29.75
+                        - generic [ref=e560]: /mo
+                      - generic [ref=e561]: WEB RATE
+                    - generic [ref=e562]:
+                      - generic [ref=e563]:
+                        - generic [ref=e564]: $119
+                        - generic [ref=e565]: /mo
+                      - generic [ref=e566]: STANDARD RATE
+                  - generic [ref=e567]:
+                    - link "Rent Now" [ref=e569] [cursor=pointer]:
+                      - /url: /storage-units/connecticut/bridgeport/west-end-west-side/step-four?unit_id=5973806&promo=12857
+                    - button "Reserve" [ref=e571] [cursor=pointer]
+            - generic [ref=e572]:
+              - text: Discounted rate applies for the stated promotional period only.
+              - generic [ref=e574]:
+                - img "7.5X10X8CC" [ref=e576]
+                - generic [ref=e577]:
+                  - paragraph [ref=e578]:
+                    - generic [ref=e579]:
+                      - generic [ref=e580]: 7.5'
+                      - generic [ref=e581]: x
+                      - generic [ref=e582]: 10'
+                    - generic [ref=e583]: 75 sq ft
+                  - generic [ref=e584]:
+                    - generic [ref=e585]:
+                      - img [ref=e586]
+                      - text: Climate-Controlled
+                    - generic [ref=e588]:
+                      - img [ref=e589]
+                      - text: Elevator Access
+                - generic [ref=e591]:
+                  - generic [ref=e592]:
+                    - img [ref=e593]
+                    - text: 50% Off 2 Months
+                    - generic [ref=e595]: ⓘ Discounted rate applies for the stated promotional period only.
+                  - generic [ref=e596]:
+                    - generic [ref=e597]:
+                      - generic [ref=e598]:
+                        - generic [ref=e599]: $57
+                        - generic [ref=e600]: /mo
+                      - generic [ref=e601]: WEB RATE
+                    - generic [ref=e602]:
+                      - generic [ref=e603]:
+                        - generic [ref=e604]: $114
+                        - generic [ref=e605]: /mo
+                      - generic [ref=e606]: STANDARD RATE
+                  - generic [ref=e607]:
+                    - link "Rent Now" [ref=e609] [cursor=pointer]:
+                      - /url: /storage-units/connecticut/bridgeport/west-end-west-side/step-four?unit_id=5581360&promo=14279
+                    - button "Reserve" [ref=e611] [cursor=pointer]
+            - generic [ref=e612]:
+              - text: Discounted rate applies for the stated promotional period only.
+              - generic [ref=e614]:
+                - img "7.5X10X8GCC" [ref=e616]
+                - generic [ref=e617]:
+                  - paragraph [ref=e618]:
+                    - generic [ref=e619]:
+                      - generic [ref=e620]: 7.5'
+                      - generic [ref=e621]: x
+                      - generic [ref=e622]: 10'
+                    - generic [ref=e623]: 75 sq ft
+                  - generic [ref=e624]:
+                    - generic [ref=e625]:
+                      - img [ref=e626]
+                      - text: Climate-Controlled
+                    - generic [ref=e628]:
+                      - img [ref=e629]
+                      - text: 1st Floor Access
+                - generic [ref=e631]:
+                  - generic [ref=e632]:
+                    - img [ref=e633]
+                    - text: 50% Off 2 Months
+                    - generic [ref=e635]: ⓘ Discounted rate applies for the stated promotional period only.
+                  - generic [ref=e636]:
+                    - generic [ref=e637]:
+                      - generic [ref=e638]:
+                        - generic [ref=e639]: $76
+                        - generic [ref=e640]: /mo
+                      - generic [ref=e641]: WEB RATE
+                    - generic [ref=e642]:
+                      - generic [ref=e643]:
+                        - generic [ref=e644]: $152
+                        - generic [ref=e645]: /mo
+                      - generic [ref=e646]: STANDARD RATE
+                  - generic [ref=e647]:
+                    - link "Rent Now" [ref=e649] [cursor=pointer]:
+                      - /url: /storage-units/connecticut/bridgeport/west-end-west-side/step-four?unit_id=5214872&promo=14279
+                    - button "Reserve" [ref=e651] [cursor=pointer]
+            - generic [ref=e652]:
+              - text: Discounted rate applies for the stated promotional period only.
+              - generic [ref=e654]:
+                - img "10X10X8CC" [ref=e656]
+                - generic [ref=e657]:
+                  - paragraph [ref=e658]:
+                    - generic [ref=e659]:
+                      - generic [ref=e660]: 10'
+                      - generic [ref=e661]: x
+                      - generic [ref=e662]: 10'
+                    - generic [ref=e663]: 100 sq ft
+                  - generic [ref=e664]:
+                    - generic [ref=e665]:
+                      - img [ref=e666]
+                      - text: Climate-Controlled
+                    - generic [ref=e668]:
+                      - img [ref=e669]
+                      - text: Elevator Access
+                - generic [ref=e671]:
+                  - generic [ref=e672]:
+                    - img [ref=e673]
+                    - text: 75% Off 2 Months
+                    - generic [ref=e675]: ⓘ Discounted rate applies for the stated promotional period only.
+                  - generic [ref=e676]:
+                    - generic [ref=e677]:
+                      - generic [ref=e678]:
+                        - generic [ref=e679]: $32.25
+                        - generic [ref=e680]: /mo
+                      - generic [ref=e681]: WEB RATE
+                    - generic [ref=e682]:
+                      - generic [ref=e683]:
+                        - generic [ref=e684]: $129
+                        - generic [ref=e685]: /mo
+                      - generic [ref=e686]: STANDARD RATE
+                  - generic [ref=e687]:
+                    - link "Rent Now" [ref=e689] [cursor=pointer]:
+                      - /url: /storage-units/connecticut/bridgeport/west-end-west-side/step-four?unit_id=5974608&promo=12857
+                    - button "Reserve" [ref=e691] [cursor=pointer]
+            - generic [ref=e692]:
+              - text: Discounted rate applies for the stated promotional period only.
+              - generic [ref=e694]:
+                - img "10X10X8GCC" [ref=e696]
+                - generic [ref=e697]:
+                  - paragraph [ref=e698]:
+                    - generic [ref=e699]:
+                      - generic [ref=e700]: 10'
+                      - generic [ref=e701]: x
+                      - generic [ref=e702]: 10'
+                    - generic [ref=e703]: 100 sq ft
+                  - generic [ref=e704]:
+                    - generic [ref=e705]:
+                      - img [ref=e706]
+                      - text: Climate-Controlled
+                    - generic [ref=e708]:
+                      - img [ref=e709]
+                      - text: 1st Floor Access
+                - generic [ref=e711]:
+                  - generic [ref=e712]:
+                    - img [ref=e713]
+                    - text: 75% Off 2 Months
+                    - generic [ref=e715]: ⓘ Discounted rate applies for the stated promotional period only.
+                  - generic [ref=e716]:
+                    - generic [ref=e717]:
+                      - generic [ref=e718]:
+                        - generic [ref=e719]: $38.75
+                        - generic [ref=e720]: /mo
+                      - generic [ref=e721]: WEB RATE
+                    - generic [ref=e722]:
+                      - generic [ref=e723]:
+                        - generic [ref=e724]: $155
+                        - generic [ref=e725]: /mo
+                      - generic [ref=e726]: STANDARD RATE
+                  - generic [ref=e727]:
+                    - link "Rent Now" [ref=e729] [cursor=pointer]:
+                      - /url: /storage-units/connecticut/bridgeport/west-end-west-side/step-four?unit_id=5973814&promo=12857
+                    - button "Reserve" [ref=e731] [cursor=pointer]
+            - generic [ref=e732]:
+              - text: Discounted rate applies for the stated promotional period only.
+              - generic [ref=e734]:
+                - img "10X15X8CC" [ref=e736]
+                - generic [ref=e737]:
+                  - paragraph [ref=e738]:
+                    - generic [ref=e739]:
+                      - generic [ref=e740]: 10'
+                      - generic [ref=e741]: x
+                      - generic [ref=e742]: 15'
+                    - generic [ref=e743]: 150 sq ft
+                  - generic [ref=e744]:
+                    - generic [ref=e745]:
+                      - img [ref=e746]
+                      - text: Climate-Controlled
+                    - generic [ref=e748]:
+                      - img [ref=e749]
+                      - text: Elevator Access
+                - generic [ref=e751]:
+                  - generic [ref=e752]:
+                    - img [ref=e753]
+                    - text: 75% Off 2 Months
+                    - generic [ref=e755]: ⓘ Discounted rate applies for the stated promotional period only.
+                  - generic [ref=e756]:
+                    - generic [ref=e757]:
+                      - generic [ref=e758]:
+                        - generic [ref=e759]: $44.75
+                        - generic [ref=e760]: /mo
+                      - generic [ref=e761]: WEB RATE
+                    - generic [ref=e762]:
+                      - generic [ref=e763]:
+                        - generic [ref=e764]: $179
+                        - generic [ref=e765]: /mo
+                      - generic [ref=e766]: STANDARD RATE
+                  - generic [ref=e767]:
+                    - link "Rent Now" [ref=e769] [cursor=pointer]:
+                      - /url: /storage-units/connecticut/bridgeport/west-end-west-side/step-four?unit_id=5973822&promo=12857
+                    - button "Reserve" [ref=e771] [cursor=pointer]
+            - generic [ref=e772]:
+              - text: Discounted rate applies for the stated promotional period only.
+              - generic [ref=e774]:
+                - img "10X15X8GCC" [ref=e776]
+                - generic [ref=e777]:
+                  - paragraph [ref=e778]:
+                    - generic [ref=e779]:
+                      - generic [ref=e780]: 10'
+                      - generic [ref=e781]: x
+                      - generic [ref=e782]: 15'
+                    - generic [ref=e783]: 150 sq ft
+                  - generic [ref=e784]:
+                    - generic [ref=e785]:
+                      - img [ref=e786]
+                      - text: Climate-Controlled
+                    - generic [ref=e788]:
+                      - img [ref=e789]
+                      - text: 1st Floor Access
+                - generic [ref=e791]:
+                  - generic [ref=e792]:
+                    - img [ref=e793]
+                    - text: 75% Off 2 Months
+                    - generic [ref=e795]: ⓘ Discounted rate applies for the stated promotional period only.
+                  - generic [ref=e796]:
+                    - generic [ref=e797]:
+                      - generic [ref=e798]:
+                        - generic [ref=e799]: $56.25
+                        - generic [ref=e800]: /mo
+                      - generic [ref=e801]: WEB RATE
+                    - generic [ref=e802]:
+                      - generic [ref=e803]:
+                        - generic [ref=e804]: $225
+                        - generic [ref=e805]: /mo
+                      - generic [ref=e806]: STANDARD RATE
+                  - generic [ref=e807]:
+                    - link "Rent Now" [ref=e809] [cursor=pointer]:
+                      - /url: /storage-units/connecticut/bridgeport/west-end-west-side/step-four?unit_id=5938719&promo=12857
+                    - button "Reserve" [ref=e811] [cursor=pointer]
+            - generic [ref=e812]:
+              - text: Discounted rate applies for the stated promotional period only.
+              - generic [ref=e814]:
+                - img "15X10X8CC" [ref=e816]
+                - generic [ref=e817]:
+                  - paragraph [ref=e818]:
+                    - generic [ref=e819]:
+                      - generic [ref=e820]: 15'
+                      - generic [ref=e821]: x
+                      - generic [ref=e822]: 10'
+                    - generic [ref=e823]: 150 sq ft
+                  - generic [ref=e824]:
+                    - generic [ref=e825]:
+                      - img [ref=e826]
+                      - text: Climate-Controlled
+                    - generic [ref=e828]:
+                      - img [ref=e829]
+                      - text: Elevator Access
+                - generic [ref=e831]:
+                  - generic [ref=e832]:
+                    - img [ref=e833]
+                    - text: 75% Off 2 Months
+                    - generic [ref=e835]: ⓘ Discounted rate applies for the stated promotional period only.
+                  - generic [ref=e836]:
+                    - generic [ref=e837]:
+                      - generic [ref=e838]:
+                        - generic [ref=e839]: $57.50
+                        - generic [ref=e840]: /mo
+                      - generic [ref=e841]: WEB RATE
+                    - generic [ref=e842]:
+                      - generic [ref=e843]:
+                        - generic [ref=e844]: $230
+                        - generic [ref=e845]: /mo
+                      - generic [ref=e846]: STANDARD RATE
+                  - generic [ref=e847]:
+                    - link "Rent Now" [ref=e849] [cursor=pointer]:
+                      - /url: /storage-units/connecticut/bridgeport/west-end-west-side/step-four?unit_id=5214844&promo=12857
+                    - button "Reserve" [ref=e851] [cursor=pointer]
+            - generic [ref=e852]:
+              - text: Discounted rate applies for the stated promotional period only.
+              - generic [ref=e854]:
+                - img "15X10X8GCC" [ref=e856]
+                - generic [ref=e857]:
+                  - paragraph [ref=e858]:
+                    - generic [ref=e859]:
+                      - generic [ref=e860]: 15'
+                      - generic [ref=e861]: x
+                      - generic [ref=e862]: 10'
+                    - generic [ref=e863]: 150 sq ft
+                  - generic [ref=e864]:
+                    - generic [ref=e865]:
+                      - img [ref=e866]
+                      - text: Climate-Controlled
+                    - generic [ref=e868]:
+                      - img [ref=e869]
+                      - text: 1st Floor Access
+                - generic [ref=e871]:
+                  - generic [ref=e872]:
+                    - img [ref=e873]
+                    - text: 75% Off 2 Months
+                    - generic [ref=e875]: ⓘ Discounted rate applies for the stated promotional period only.
+                  - generic [ref=e876]:
+                    - generic [ref=e877]:
+                      - generic [ref=e878]:
+                        - generic [ref=e879]: $62.75
+                        - generic [ref=e880]: /mo
+                      - generic [ref=e881]: WEB RATE
+                    - generic [ref=e882]:
+                      - generic [ref=e883]:
+                        - generic [ref=e884]: $251
+                        - generic [ref=e885]: /mo
+                      - generic [ref=e886]: STANDARD RATE
+                  - generic [ref=e887]:
+                    - link "Rent Now" [ref=e889] [cursor=pointer]:
+                      - /url: /storage-units/connecticut/bridgeport/west-end-west-side/step-four?unit_id=5214842&promo=12857
+                    - button "Reserve" [ref=e891] [cursor=pointer]
+            - generic [ref=e892]:
+              - text: Discounted rate applies for the stated promotional period only.
+              - generic [ref=e894]:
+                - img "10X20X8GCC" [ref=e896]
+                - generic [ref=e897]:
+                  - paragraph [ref=e898]:
+                    - generic [ref=e899]:
+                      - generic [ref=e900]: 10'
+                      - generic [ref=e901]: x
+                      - generic [ref=e902]: 20'
+                    - generic [ref=e903]: 200 sq ft
+                  - generic [ref=e904]:
+                    - generic [ref=e905]:
+                      - img [ref=e906]
+                      - text: Climate-Controlled
+                    - generic [ref=e908]:
+                      - img [ref=e909]
+                      - text: 1st Floor Access
+                - generic [ref=e911]:
+                  - generic [ref=e912]:
+                    - img [ref=e913]
+                    - text: 75% Off 2 Months
+                    - generic [ref=e915]: ⓘ Discounted rate applies for the stated promotional period only.
+                  - generic [ref=e916]:
+                    - generic [ref=e917]:
+                      - generic [ref=e918]:
+                        - generic [ref=e919]: $84.75
+                        - generic [ref=e920]: /mo
+                      - generic [ref=e921]: WEB RATE
+                    - generic [ref=e922]:
+                      - generic [ref=e923]:
+                        - generic [ref=e924]: $339
+                        - generic [ref=e925]: /mo
+                      - generic [ref=e926]: STANDARD RATE
+                  - generic [ref=e927]:
+                    - link "Rent Now" [ref=e929] [cursor=pointer]:
+                      - /url: /storage-units/connecticut/bridgeport/west-end-west-side/step-four?unit_id=5984284&promo=12857
+                    - button "Reserve" [ref=e931] [cursor=pointer]
+            - generic [ref=e932]:
+              - text: Discounted rate applies for the stated promotional period only.
+              - generic [ref=e934]:
+                - img "10X20X8CC" [ref=e936]
+                - generic [ref=e937]:
+                  - paragraph [ref=e938]:
+                    - generic [ref=e939]:
+                      - generic [ref=e940]: 10'
+                      - generic [ref=e941]: x
+                      - generic [ref=e942]: 20'
+                    - generic [ref=e943]: 200 sq ft
+                  - generic [ref=e944]:
+                    - generic [ref=e945]:
+                      - img [ref=e946]
+                      - text: Climate-Controlled
+                    - generic [ref=e948]:
+                      - img [ref=e949]
+                      - text: Elevator Access
+                - generic [ref=e951]:
+                  - generic [ref=e952]:
+                    - img [ref=e953]
+                    - text: 50% Off 2 Months
+                    - generic [ref=e955]: ⓘ Discounted rate applies for the stated promotional period only.
+                  - generic [ref=e956]:
+                    - generic [ref=e957]:
+                      - generic [ref=e958]:
+                        - generic [ref=e959]: $161
+                        - generic [ref=e960]: /mo
+                      - generic [ref=e961]: WEB RATE
+                    - generic [ref=e962]:
+                      - generic [ref=e963]:
+                        - generic [ref=e964]: $322
+                        - generic [ref=e965]: /mo
+                      - generic [ref=e966]: STANDARD RATE
+                  - generic [ref=e967]:
+                    - link "Rent Now" [ref=e969] [cursor=pointer]:
+                      - /url: /storage-units/connecticut/bridgeport/west-end-west-side/step-four?unit_id=5904609&promo=14279
+                    - button "Reserve" [ref=e971] [cursor=pointer]
+            - generic [ref=e972]:
+              - text: Discounted rate applies for the stated promotional period only.
+              - generic [ref=e974]:
+                - img "10X30X8GCC" [ref=e976]
+                - generic [ref=e977]:
+                  - paragraph [ref=e978]:
+                    - generic [ref=e979]:
+                      - generic [ref=e980]: 10'
+                      - generic [ref=e981]: x
+                      - generic [ref=e982]: 30'
+                    - generic [ref=e983]: 300 sq ft
+                  - generic [ref=e984]:
+                    - generic [ref=e985]:
+                      - img [ref=e986]
+                      - text: Climate-Controlled
+                    - generic [ref=e988]:
+                      - img [ref=e989]
+                      - text: 1st Floor Access
+                - generic [ref=e991]:
+                  - generic [ref=e992]:
+                    - img [ref=e993]
+                    - text: 75% Off 2 Months
+                    - generic [ref=e995]: ⓘ Discounted rate applies for the stated promotional period only.
+                  - generic [ref=e996]:
+                    - generic [ref=e997]:
+                      - generic [ref=e998]:
+                        - generic [ref=e999]: $92.25
+                        - generic [ref=e1000]: /mo
+                      - generic [ref=e1001]: WEB RATE
+                    - generic [ref=e1002]:
+                      - generic [ref=e1003]:
+                        - generic [ref=e1004]: $369
+                        - generic [ref=e1005]: /mo
+                      - generic [ref=e1006]: STANDARD RATE
+                  - generic [ref=e1007]:
+                    - link "Rent Now" [ref=e1009] [cursor=pointer]:
+                      - /url: /storage-units/connecticut/bridgeport/west-end-west-side/step-four?unit_id=5984283&promo=12857
+                    - button "Reserve" [ref=e1011] [cursor=pointer]
+      - generic [ref=e1014]:
+        - generic [ref=e1019]:
+          - heading "Frequently Asked Questions" [level=3] [ref=e1021]
+          - generic [ref=e1023]:
+            - generic [ref=e1024]:
+              - button "What’s the typical price for self-storage in Bridgeport per month?" [ref=e1025] [cursor=pointer]:
+                - generic [ref=e1026]: What’s the typical price for self-storage in Bridgeport per month?
+                - img [ref=e1028]
+              - paragraph [ref=e1032]: Monthly rates for storage in Bridgeport vary based on unit size, features, and current availability. Smaller spaces tend to be more budget-friendly, while larger units are priced higher depending on demand. Since rates and specials can change, the best way to get accurate, up-to-date pricing is to check online and reserve early.
+            - generic [ref=e1033]:
+              - button "What storage sizes are available in Bridgeport?" [ref=e1034] [cursor=pointer]:
+                - generic [ref=e1035]: What storage sizes are available in Bridgeport?
+                - img [ref=e1037]
+              - paragraph [ref=e1040]: Our Bridgeport location offers a wide range of unit sizes to meet different storage needs. You’ll find compact 5′ x 5′ units for personal items and boxes, mid-sized options like 10′ x 10′ for apartment contents, and larger units such as 10′ x 20′ that can handle full household or business storage. Use our size guide or speak with a storage expert to find the right fit.
+            - generic [ref=e1041]:
+              - button "How do I go about renting a storage unit in Bridgeport?" [ref=e1042] [cursor=pointer]:
+                - generic [ref=e1043]: How do I go about renting a storage unit in Bridgeport?
+                - img [ref=e1045]
+              - paragraph [ref=e1048]: Renting a unit is quick and easy. You can reserve your space online in just a few steps or visit our Bridgeport facility in person during office hours. Either way, all rentals are month-to-month, so you’re never locked into a long-term commitment.
+            - generic [ref=e1049]:
+              - button "Do you offer climate-controlled storage units in Bridgeport?" [ref=e1050] [cursor=pointer]:
+                - generic [ref=e1051]: Do you offer climate-controlled storage units in Bridgeport?
+                - img [ref=e1053]
+              - paragraph [ref=e1056]: Yes, our Bridgeport facility offers climate-controlled storage units. These are ideal for temperature-sensitive items such as electronics, wooden furniture, or important documents. They help protect your belongings from seasonal shifts in Connecticut’s weather.
+            - generic [ref=e1057]:
+              - button "Is there student-friendly storage available near Bridgeport?" [ref=e1058] [cursor=pointer]:
+                - generic [ref=e1059]: Is there student-friendly storage available near Bridgeport?
+                - img [ref=e1061]
+              - paragraph [ref=e1064]: Yes! Our Bridgeport self-storage facility is a great fit for students attending nearby schools like the University of Bridgeport, Sacred Heart University, and Housatonic Community College. Whether you’re heading home for the summer, moving between apartments, or need extra room during the school year, our flexible month-to-month rentals make it easy to store on your schedule.
+            - generic [ref=e1065]:
+              - button "What features does your Bridgeport storage facility offer?" [ref=e1066] [cursor=pointer]:
+                - generic [ref=e1067]: What features does your Bridgeport storage facility offer?
+                - img [ref=e1069]
+              - paragraph [ref=e1072]: The Bridgeport storage location is designed for convenience and ease of access. Our features include a drive-in loading area to keep you out of the elements while moving in or out, complimentary moving carts, and extended access hours. You’ll also find on-site packing supplies to make move-in day even easier.
+        - generic [ref=e1075]:
+          - heading "Facility Gallery" [level=4] [ref=e1076]
+          - generic [ref=e1077]:
+            - generic [ref=e1078]:
+              - img "self storage units Bridgeport" [ref=e1079]
+              - paragraph [ref=e1082]: Safeguard Self Storage
+            - generic [ref=e1083]:
+              - img "Bridgeport storage facility" [ref=e1085]
+              - img "modern self storage" [ref=e1087]
+              - img "moving and packing supplies" [ref=e1089]
+      - heading "West End/West Side Bridgeport Storage Facility Features and Amenities" [level=2] [ref=e1095]
+      - generic [ref=e1099]:
+        - paragraph [ref=e1102]: When you need dependable storage in Bridgeport, our West End/West Side facility is here to help simplify your space. Whether you’re managing a move, making room for a growing family, or storing business essentials, our location offers thoughtful amenities to make the process smoother. Explore how our modern features set us apart from other storage facilities in Bridgeport, CT, and give you more flexibility when it matters most.
+        - list [ref=e1105]:
+          - listitem [ref=e1106]:
+            - strong [ref=e1107]: "Drive-In Loading Area:"
+            - text: Stay protected from Bridgeport’s unpredictable weather while loading or unloading your belongings. Our drive-in loading zone makes moving in and out hassle-free, rain or shine.
+          - listitem [ref=e1108]:
+            - strong [ref=e1109]: "Climate-Controlled Units:"
+            - text: Bridgeport’s hot summers and cold winters won’t be a problem with our climate-controlled storage. These units help safeguard delicate items like furniture, electronics, and documents from extreme temperature fluctuations.
+          - listitem [ref=e1110]:
+            - strong [ref=e1111]: "Locker Units:"
+            - text: If you only need a small amount of storage, our locker-sized units are the perfect fit. They’re ideal for seasonal décor, important paperwork, or personal keepsakes that need a dedicated space.
+          - listitem [ref=e1112]:
+            - strong [ref=e1113]: "Motion-Sensor Security Cameras:"
+            - text: Our facility is equipped with motion-sensor security cameras that monitor activity throughout the property. This extra layer of protection helps ensure that only authorized visitors are on the premises.
+          - listitem [ref=e1114]:
+            - strong [ref=e1115]: "Elevator Access:"
+            - text: No need to struggle with stairs when moving heavy or bulky items. Our facility features spacious elevators, making it easy to transport your belongings to upper-level storage units.
+          - listitem [ref=e1116]:
+            - strong [ref=e1117]: "7-Day Access:"
+            - text: Store on your schedule with access to your unit every day of the week. Whether it’s a last-minute item pickup or a planned move, you’ll always have the flexibility you need.
+          - listitem [ref=e1118]:
+            - strong [ref=e1119]: "Moving Carts Available:"
+            - text: Heavy lifting isn’t necessary with our complimentary moving carts. Easily transport your boxes and furniture from your vehicle to your storage unit without the strain.
+          - listitem [ref=e1120]:
+            - strong [ref=e1121]: "Packing and Moving Supplies:"
+            - text: Forgot boxes, tape, or bubble wrap? No problem! Our on-site store offers a variety of moving and packing supplies to make storing and organizing simple.
+          - listitem [ref=e1122]:
+            - strong [ref=e1123]: "Deliveries Accepted for Business Customers:"
+            - text: Running a business in Bridgeport? We accept deliveries at our storage facility on your behalf, so you don’t have to worry about missing an important shipment. See manager for details.
+        - emphasis [ref=e1126]: "*Although no security system is 100% effective against crime, our self-storage facilities are designed with security in mind. Our goal is to provide our valued customers with peace of mind when storing their belongings at Safeguard Self Storage. Safeguard Self Storage utilizes computer-controlled security access systems with personalized access codes or handsfree Bluetooth access, motion sensor cameras and enhanced lighting to help maintain a safe and secure environment for all stored belongings."
+      - heading "Self-Storage Units on North Ave. in Bridgeport, CT" [level=2] [ref=e1132]
+      - paragraph [ref=e1139]: At Safeguard Self Storage on North Avenue, we offer a wide range of self-storage units in Bridgeport designed to fit your life. From compact lockers to large units for full household storage, our facility is clean, well-lit, and professionally managed to give you the smoothest experience possible. For self-storage that puts your needs first, Safeguard is the name you can trust.
+      - generic [ref=e1142]:
+        - generic [ref=e1143]:
+          - heading "Climate-Controlled Storage in Bridgeport, CT" [level=3] [ref=e1145]
+          - paragraph [ref=e1148]: Connecticut weather can swing from humid summers to frigid winters, which can be tough on your more delicate belongings. That’s why our climate-controlled storage in Bridgeport helps protect items like wooden furniture, electronics, documents, and more from moisture and temperature extremes. Whether you’re a West End resident with limited home space or a small business owner storing seasonal products, this storage type offers peace of mind year-round.
+          - heading "Personal Storage in Bridgeport, CT" [level=3] [ref=e1150]
+          - paragraph [ref=e1153]:
+            - text: From apartment living in the West End to growing families in the surrounding neighborhoods, personal storage needs can pop up quickly. Whether you’re moving, renovating, or just running out of closet space, our
+            - link "personal storage units" [ref=e1154] [cursor=pointer]:
+              - /url: /household-storage
+              - strong [ref=e1155]: personal storage units
+            - text: in Bridgeport make it easier to stay organized. You’ll find flexible sizes, easy access, and a team ready to help you choose the right fit. Reclaim your space on your terms.
+        - generic [ref=e1156]:
+          - heading "Business Storage in Bridgeport, CT" [level=3] [ref=e1158]
+          - paragraph [ref=e1161]:
+            - text: Local entrepreneurs and small businesses in Bridgeport’s bustling commercial corridors count on Safeguard for extra room to operate. Our
+            - link "business storage" [ref=e1162] [cursor=pointer]:
+              - /url: /business-storage
+              - strong [ref=e1163]: business storage
+            - text: in Bridgeport is ideal for inventory overflow, document archiving, or storing equipment between jobs. With climate-controlled options and extended access hours, you can manage your assets without missing a beat. Whether you’re near North Avenue or downtown, we make storage work for your business.
+          - heading "Student Storage in Bridgeport, CT" [level=3] [ref=e1165]
+          - paragraph [ref=e1168]:
+            - text: College life doesn’t leave much room for storage, especially during moves or summer breaks. That’s why students at nearby schools like the University of Bridgeport and Housatonic Community College rely on us for flexible,
+            - link "affordable student storage" [ref=e1169] [cursor=pointer]:
+              - /url: /student-storage
+              - strong [ref=e1170]: affordable student storage
+            - text: in Bridgeport. Our North Avenue facility is just a short drive from campus, making it easy to stash dorm gear, books, or off-season clothes between semesters. When school’s out, we’ll keep your stuff in.
+          - generic [ref=e1171]:
+            - heading [level=2]
+      - heading "Available Storage Unit Sizes in Bridgeport, CT" [level=2] [ref=e1178]
+      - paragraph [ref=e1185]: At our North Avenue location in Bridgeport’s West End, you’ll find a wide range of storage unit sizes to match your space needs. Whether you’re stashing away a few seasonal items or preparing for a full household move, our selection includes everything from compact locker units to extra-large spaces. Each unit is meticulously maintained, easy to access, and designed with flexibility in mind. When it comes to storage units in Bridgeport, CT, Safeguard delivers options that truly fit your lifestyle.
+      - generic [ref=e1188]:
+        - generic [ref=e1189]:
+          - heading "Small Storage Units in Bridgeport, CT" [level=3] [ref=e1191]:
+            - link "Small Storage Units in Bridgeport, CT" [ref=e1192] [cursor=pointer]:
+              - /url: /size-guide/small-storage-units
+          - paragraph [ref=e1195]:
+            - strong [ref=e1196]: "Locker Units in Bridgeport:"
+          - paragraph [ref=e1199]: Comparable to a small closet, our locker units are perfect for storing a couple of boxes, a few seasonal decorations, or important papers you don’t want cluttering up your home office.
+          - paragraph [ref=e1202]:
+            - strong [ref=e1203]: "5′ x 5′ Storage Units in Bridgeport:"
+          - paragraph [ref=e1206]: These units are great for items like luggage, small furniture, and holiday décor. It’s a top pick for residents looking to declutter without parting with the essentials.
+        - generic [ref=e1207]:
+          - heading "Medium Storage Units in Bridgeport, CT" [level=3] [ref=e1209]:
+            - link "Medium Storage Units in Bridgeport, CT" [ref=e1210] [cursor=pointer]:
+              - /url: /size-guide/medium-storage-units
+          - paragraph [ref=e1213]:
+            - strong [ref=e1214]: "7.5′ x 10′ Storage Units in Bridgeport:"
+          - paragraph [ref=e1217]: Slightly roomier than a standard bedroom closet, this unit is often used to hold small furniture sets, a mattress, or off-season gear. It’s a smart choice for West End renters in transition or families doing a little downsizing.
+          - paragraph [ref=e1220]:
+            - strong [ref=e1221]: "10′ x 10′ Storage Units in Bridgeport:"
+          - paragraph [ref=e1224]: This unit offers space comparable to half of a standard garage, easily fitting the contents of a one-bedroom apartment.
+        - generic [ref=e1225]:
+          - heading "Large Storage Units in Bridgeport, CT" [level=3] [ref=e1227]:
+            - link "Large Storage Units in Bridgeport, CT" [ref=e1228] [cursor=pointer]:
+              - /url: /size-guide/large-storage-units
+          - paragraph [ref=e1231]:
+            - strong [ref=e1232]: "10′ x 20′ Storage Units in Bridgeport:"
+          - paragraph [ref=e1235]: About the size of a single-car garage, this space is built to hold everything from multi-room household items to outdoor equipment and extra office furnishings.
+          - paragraph [ref=e1238]:
+            - strong [ref=e1239]: "10′ x 25′ Storage Units in Bridgeport:"
+          - paragraph [ref=e1242]: Ideal for people relocating or storing larger furniture and equipment, this size accommodates the contents of a multi-bedroom home.
+          - paragraph [ref=e1245]:
+            - strong [ref=e1246]: "10′ x 30′ Storage Units in Bridgeport:"
+          - paragraph [ref=e1249]: Our largest unit offers maximum capacity for major life changes, business expansions, or long-term storage needs.
+      - generic [ref=e1252]:
+        - generic [ref=e1253]:
+          - heading "Looking for Storage Near West Side-West End?" [level=2] [ref=e1255]
+          - paragraph [ref=e1258]: If you’re looking for storage near Bridgeport, Safeguard Self Storage offers a variety of convenient locations to meet your needs. Our Bridgeport self-storage facility on North Avenue is just one of many options across Connecticut and nearby cities. Whether you’re located in Stratford, Fairfield, or other surrounding areas, you can count on Safeguard for easy access to a storage solution that’s close by. With our multiple locations, you’re never far from the flexibility and convenience you need to store your belongings.
+        - generic [ref=e1259]:
+          - generic:
+            - generic:
+              - img "Safeguard Self Storage"
+      - generic [ref=e1263]:
+        - heading "Reserve Your Storage Unit in Bridgeport Today!" [level=2] [ref=e1265]
+        - generic [ref=e1267]:
+          - generic [ref=e1268]:
+            - text: Ready to reclaim your space? Safeguard Self Storage is your trusted source for self-storage units in Bridgeport, offering a variety of sizes to meet your needs. Explore our
+            - link "size guide" [ref=e1269] [cursor=pointer]:
+              - /url: https://www.safeguardit.com/storage-unit-size-guide
+            - text: to find the perfect unit or contact us for personalized assistance. You can also
+            - link "check out our blog for expert storage tips and advice" [ref=e1270] [cursor=pointer]:
+              - /url: https://www.safeguardit.com/blogs
+            - text: to make your experience even easier.
+          - paragraph
+    - contentinfo [ref=e1272]:
+      - generic [ref=e1275]:
+        - link "safeguard self storage logo" [ref=e1282] [cursor=pointer]:
+          - /url: /
+          - img "safeguard self storage logo" [ref=e1284]
+        - generic [ref=e1285]:
+          - list [ref=e1291]:
+            - listitem [ref=e1292]:
+              - link "(866) 214-0221" [ref=e1293] [cursor=pointer]:
+                - /url: tel:8662140221
+                - generic [ref=e1294]: (866) 214-0221
+          - generic [ref=e1297]:
+            - link "Facebook" [ref=e1301] [cursor=pointer]:
+              - /url: https://www.facebook.com/mysafeguardselfstorage
+              - img [ref=e1302]
+            - link "X" [ref=e1306] [cursor=pointer]:
+              - /url: https://x.com/Safeguardit
+              - img [ref=e1307]
+            - link "YouTube" [ref=e1311] [cursor=pointer]:
+              - /url: https://www.youtube.com/@safeguardselfstorage/featured
+              - img [ref=e1312]
+            - link "Instagram" [ref=e1316] [cursor=pointer]:
+              - /url: https://www.instagram.com/safeguard_selfstorage/
+              - img [ref=e1317]
+            - link "TikTok" [ref=e1321] [cursor=pointer]:
+              - /url: https://www.tiktok.com/@safeguardselfstorage
+              - img [ref=e1322]
+      - generic [ref=e1326]:
+        - generic [ref=e1331]:
+          - separator [ref=e1333]
+          - heading "Storage Types" [level=2] [ref=e1335]
+          - list [ref=e1337]:
+            - listitem [ref=e1338]:
+              - link "Business Storage" [ref=e1339] [cursor=pointer]:
+                - /url: /business-storage
+                - generic [ref=e1340]: Business Storage
+            - listitem [ref=e1341]:
+              - link "Household Storage" [ref=e1342] [cursor=pointer]:
+                - /url: /household-storage
+                - generic [ref=e1343]: Household Storage
+            - listitem [ref=e1344]:
+              - link "Military & Veteran Storage" [ref=e1345] [cursor=pointer]:
+                - /url: /military-and-veteran-storage
+                - generic [ref=e1346]: Military & Veteran Storage
+            - listitem [ref=e1347]:
+              - link "Pharmaceutical Storage" [ref=e1348] [cursor=pointer]:
+                - /url: /pharmaceutical-storage
+                - generic [ref=e1349]: Pharmaceutical Storage
+            - listitem [ref=e1350]:
+              - link "Real Estate Storage" [ref=e1351] [cursor=pointer]:
+                - /url: /real-estate-storage
+                - generic [ref=e1352]: Real Estate Storage
+            - listitem [ref=e1353]:
+              - link "Student Storage" [ref=e1354] [cursor=pointer]:
+                - /url: /student-storage
+                - generic [ref=e1355]: Student Storage
+        - generic [ref=e1360]:
+          - separator [ref=e1362]
+          - heading "Resources" [level=2] [ref=e1364]
+          - list [ref=e1366]:
+            - listitem [ref=e1367]:
+              - link "Size Guide" [ref=e1368] [cursor=pointer]:
+                - /url: /storage-unit-size-guide
+                - generic [ref=e1369]: Size Guide
+            - listitem [ref=e1370]:
+              - link "FAQs" [ref=e1371] [cursor=pointer]:
+                - /url: /self-storage-faq
+                - generic [ref=e1372]: FAQs
+            - listitem [ref=e1373]:
+              - link "Moving Checklist" [ref=e1374] [cursor=pointer]:
+                - /url: /moving-checklist
+                - generic [ref=e1375]: Moving Checklist
+            - listitem [ref=e1376]:
+              - link "Moving Tips" [ref=e1377] [cursor=pointer]:
+                - /url: /moving-tips
+                - generic [ref=e1378]: Moving Tips
+            - listitem [ref=e1379]:
+              - link "Packing Tips" [ref=e1380] [cursor=pointer]:
+                - /url: /packing-tips
+                - generic [ref=e1381]: Packing Tips
+            - listitem [ref=e1382]:
+              - link "Storage Tips" [ref=e1383] [cursor=pointer]:
+                - /url: /storage-tips
+                - generic [ref=e1384]: Storage Tips
+      - generic [ref=e1387]:
+        - generic [ref=e1388]:
+          - separator [ref=e1390]
+          - heading "About" [level=2] [ref=e1392]
+          - list [ref=e1394]:
+            - listitem [ref=e1395]:
+              - link "About Safeguard" [ref=e1396] [cursor=pointer]:
+                - /url: /about-our-storage-facility
+                - generic [ref=e1397]: About Safeguard
+            - listitem [ref=e1398]:
+              - link "Developments & Acquisitions" [ref=e1399] [cursor=pointer]:
+                - /url: /developments-acquisitions
+                - generic [ref=e1400]: Developments & Acquisitions
+            - listitem [ref=e1401]:
+              - link "Careers" [ref=e1402] [cursor=pointer]:
+                - /url: /careers
+                - generic [ref=e1403]: Careers
+        - generic [ref=e1404]:
+          - separator [ref=e1406]
+          - heading "Contact" [level=2] [ref=e1408]
+          - list [ref=e1410]:
+            - listitem [ref=e1411]:
+              - link "Inquiry" [ref=e1412] [cursor=pointer]:
+                - /url: /contact
+                - generic [ref=e1413]: Inquiry
+            - listitem [ref=e1414]:
+              - link "Move-Out Request" [ref=e1415] [cursor=pointer]:
+                - /url: /move-out
+                - generic [ref=e1416]: Move-Out Request
+      - generic [ref=e1420]:
+        - separator [ref=e1422]
+        - heading "States" [level=2] [ref=e1424]
+        - list [ref=e1426]:
+          - listitem [ref=e1427]:
+            - link "Connecticut" [ref=e1428] [cursor=pointer]:
+              - /url: /storage-units/connecticut
+              - generic [ref=e1429]: Connecticut
+          - listitem [ref=e1430]:
+            - link "Florida" [ref=e1431] [cursor=pointer]:
+              - /url: /storage-units/florida
+              - generic [ref=e1432]: Florida
+          - listitem [ref=e1433]:
+            - link "Illinois" [ref=e1434] [cursor=pointer]:
+              - /url: /storage-units/illinois
+              - generic [ref=e1435]: Illinois
+          - listitem [ref=e1436]:
+            - link "New Jersey" [ref=e1437] [cursor=pointer]:
+              - /url: /storage-units/new-jersey
+              - generic [ref=e1438]: New Jersey
+          - listitem [ref=e1439]:
+            - link "New York" [ref=e1440] [cursor=pointer]:
+              - /url: /storage-units/new-york
+              - generic [ref=e1441]: New York
+          - listitem [ref=e1442]:
+            - link "Pennsylvania" [ref=e1443] [cursor=pointer]:
+              - /url: /storage-units/pennsylvania
+              - generic [ref=e1444]: Pennsylvania
+      - generic [ref=e1448]:
+        - separator [ref=e1450]
+        - heading "Cities" [level=2] [ref=e1452]
+        - list [ref=e1454]:
+          - listitem [ref=e1455]:
+            - link "Addison" [ref=e1456] [cursor=pointer]:
+              - /url: /storage-units/illinois/addison/lake-street
+              - generic [ref=e1457]: Addison
+          - listitem [ref=e1458]:
+            - link "Arlington Heights" [ref=e1459] [cursor=pointer]:
+              - /url: /storage-units/illinois/arlington-heights/algonquin-road
+              - generic [ref=e1460]: Arlington Heights
+          - listitem [ref=e1461]:
+            - link "Astoria" [ref=e1462] [cursor=pointer]:
+              - /url: /storage-units/new-york/queens/astoria
+              - generic [ref=e1463]: Astoria
+          - listitem [ref=e1464]:
+            - link "Bradenton" [ref=e1465] [cursor=pointer]:
+              - /url: /storage-units/florida/bradenton/cortez
+              - generic [ref=e1466]: Bradenton
+          - listitem [ref=e1467]:
+            - link "Bridgeport" [ref=e1468] [cursor=pointer]:
+              - /url: /storage-units/connecticut/bridgeport/west-end-west-side
+              - generic [ref=e1469]: Bridgeport
+          - listitem [ref=e1470]:
+            - link "Bridgeview" [ref=e1471] [cursor=pointer]:
+              - /url: /storage-units/illinois/bridgeview/harlem-avenue
+              - generic [ref=e1472]: Bridgeview
+          - listitem [ref=e1473]:
+            - link "Bronx" [ref=e1474] [cursor=pointer]:
+              - /url: /storage-units/new-york/bronx
+              - generic [ref=e1475]: Bronx
+          - listitem [ref=e1476]:
+            - link "Brooklyn" [ref=e1477] [cursor=pointer]:
+              - /url: /storage-units/new-york/brooklyn
+              - generic [ref=e1478]: Brooklyn
+          - listitem [ref=e1479]:
+            - link "Broward" [ref=e1480] [cursor=pointer]:
+              - /url: /storage-units/florida/broward
+              - generic [ref=e1481]: Broward
+          - listitem [ref=e1482]:
+            - link "Chicago" [ref=e1483] [cursor=pointer]:
+              - /url: /storage-units/illinois/chicago
+              - generic [ref=e1484]: Chicago
+          - listitem [ref=e1485]:
+            - link "Citrus Park" [ref=e1486] [cursor=pointer]:
+              - /url: /storage-units/florida/tampa/citrus-park
+              - generic [ref=e1487]: Citrus Park
+          - listitem [ref=e1488]:
+            - link "Clearwater" [ref=e1489] [cursor=pointer]:
+              - /url: /storage-units/florida/clearwater/north-clearwater
+              - generic [ref=e1490]: Clearwater
+          - listitem [ref=e1491]:
+            - link "Coconut Creek" [ref=e1492] [cursor=pointer]:
+              - /url: /storage-units/florida/coconut-creek/west-hillsboro
+              - generic [ref=e1493]: Coconut Creek
+          - listitem [ref=e1494]:
+            - link "Coconut Grove" [ref=e1495] [cursor=pointer]:
+              - /url: /storage-units/florida/miami/coconut-grove
+              - generic [ref=e1496]: Coconut Grove
+          - listitem [ref=e1497]:
+            - link "Cortez" [ref=e1498] [cursor=pointer]:
+              - /url: /storage-units/florida/bradenton/cortez
+              - generic [ref=e1499]: Cortez
+          - listitem [ref=e1500]:
+            - link "Darien" [ref=e1501] [cursor=pointer]:
+              - /url: /storage-units/illinois/darien/lemont-road
+              - generic [ref=e1502]: Darien
+          - listitem [ref=e1503]:
+            - link "Des Plaines" [ref=e1504] [cursor=pointer]:
+              - /url: /storage-units/illinois/des-plaines/mannheim-road
+              - generic [ref=e1505]: Des Plaines
+          - listitem [ref=e1506]:
+            - link "East Rockaway" [ref=e1507] [cursor=pointer]:
+              - /url: /storage-units/new-york/east-rockaway/ocean-avenue
+              - generic [ref=e1508]: East Rockaway
+          - listitem [ref=e1509]:
+            - link "Elizabeth" [ref=e1510] [cursor=pointer]:
+              - /url: /storage-units/new-jersey/elizabeth/downtown-elizabeth
+              - generic [ref=e1511]: Elizabeth
+          - listitem [ref=e1512]:
+            - link "Elmsford" [ref=e1513] [cursor=pointer]:
+              - /url: /storage-units/new-york/elmsford/valley-avenue
+              - generic [ref=e1514]: Elmsford
+          - listitem [ref=e1515]:
+            - link "Fort Lauderdale" [ref=e1516] [cursor=pointer]:
+              - /url: /storage-units/florida/fort-lauderdale
+              - generic [ref=e1517]: Fort Lauderdale
+          - listitem [ref=e1518]:
+            - link "Fox Chase" [ref=e1519] [cursor=pointer]:
+              - /url: /storage-units/pennsylvania/philadelphia/fox-chase
+              - generic [ref=e1520]: Fox Chase
+          - listitem [ref=e1521]:
+            - link "Garfield" [ref=e1522] [cursor=pointer]:
+              - /url: /storage-units/new-jersey/garfield/belmont-avenue
+              - generic [ref=e1523]: Garfield
+          - listitem [ref=e1524]:
+            - link "Germantown" [ref=e1525] [cursor=pointer]:
+              - /url: /storage-units/pennsylvania/philadelphia/germantown
+              - generic [ref=e1526]: Germantown
+          - listitem [ref=e1527]:
+            - link "Hawthorne" [ref=e1528] [cursor=pointer]:
+              - /url: /storage-units/new-jersey/hawthorne/goffle-road
+              - generic [ref=e1529]: Hawthorne
+          - listitem [ref=e1530]:
+            - link "Hempstead" [ref=e1531] [cursor=pointer]:
+              - /url: /storage-units/new-york/hempstead
+              - generic [ref=e1532]: Hempstead
+          - listitem [ref=e1533]:
+            - link "Hewlett" [ref=e1534] [cursor=pointer]:
+              - /url: /storage-units/new-york/hewlett/broadway
+              - generic [ref=e1535]: Hewlett
+          - listitem [ref=e1536]:
+            - link "Hillsborough" [ref=e1537] [cursor=pointer]:
+              - /url: /storage-units/florida/tampa/seminole-heights
+              - generic [ref=e1538]: Hillsborough
+          - listitem [ref=e1539]:
+            - link "Hollis" [ref=e1540] [cursor=pointer]:
+              - /url: /storage-units/new-york/queens/hollis
+              - generic [ref=e1541]: Hollis
+          - listitem [ref=e1542]:
+            - link "Hollywood" [ref=e1543] [cursor=pointer]:
+              - /url: /storage-units/florida/hollywood/emerald-hills
+              - generic [ref=e1544]: Hollywood
+          - listitem [ref=e1545]:
+            - link "Holmdel" [ref=e1546] [cursor=pointer]:
+              - /url: /storage-units/new-jersey/holmdel/route-35
+              - generic [ref=e1547]: Holmdel
+          - listitem [ref=e1548]:
+            - link "Jamaica" [ref=e1549] [cursor=pointer]:
+              - /url: /storage-units/new-york/queens/jamaica
+              - generic [ref=e1550]: Jamaica
+          - listitem [ref=e1551]:
+            - link "Juniata" [ref=e1552] [cursor=pointer]:
+              - /url: /storage-units/pennsylvania/philadelphia/juniata
+              - generic [ref=e1553]: Juniata
+          - listitem [ref=e1554]:
+            - link "Lansdowne" [ref=e1555] [cursor=pointer]:
+              - /url: /storage-units/pennsylvania/lansdowne/south-union-avenue
+              - generic [ref=e1556]: Lansdowne
+          - listitem [ref=e1557]:
+            - link "Larchmont" [ref=e1558] [cursor=pointer]:
+              - /url: /storage-units/new-york/larchmont/downtown-larchmont
+              - generic [ref=e1559]: Larchmont
+          - listitem [ref=e1560]:
+            - link "Largo" [ref=e1561] [cursor=pointer]:
+              - /url: /storage-units/florida/largo/ridgecrest
+              - generic [ref=e1562]: Largo
+          - listitem [ref=e1563]:
+            - link "Levittown" [ref=e1564] [cursor=pointer]:
+              - /url: /storage-units/new-york/hempstead/levittown
+              - generic [ref=e1565]: Levittown
+          - listitem [ref=e1566]:
+            - link "Lombard" [ref=e1567] [cursor=pointer]:
+              - /url: /storage-units/illinois/lombard/st-charles-road
+              - generic [ref=e1568]: Lombard
+          - listitem [ref=e1569]:
+            - link "Long Island" [ref=e1570] [cursor=pointer]:
+              - /url: /storage-units/new-york/valley-stream/merrick-road
+              - generic [ref=e1571]: Long Island
+          - listitem [ref=e1572]:
+            - link "Ludlow" [ref=e1573] [cursor=pointer]:
+              - /url: /storage-units/new-york/yonkers/ludlow
+              - generic [ref=e1574]: Ludlow
+          - listitem [ref=e1575]:
+            - link "Lutz" [ref=e1576] [cursor=pointer]:
+              - /url: /storage-units/florida/lutz/nebraska-avenue
+              - generic [ref=e1577]: Lutz
+          - listitem [ref=e1578]:
+            - link "Lyons" [ref=e1579] [cursor=pointer]:
+              - /url: /storage-units/illinois/lyons/1st-avenue
+              - generic [ref=e1580]: Lyons
+          - listitem [ref=e1581]:
+            - link "Massapequa" [ref=e1582] [cursor=pointer]:
+              - /url: /storage-units/new-york/massapequa/sunrise-highway
+              - generic [ref=e1583]: Massapequa
+          - listitem [ref=e1584]:
+            - link "McCook" [ref=e1585] [cursor=pointer]:
+              - /url: /storage-units/illinois/mccook/west-47th-street
+              - generic [ref=e1586]: McCook
+          - listitem [ref=e1587]:
+            - link "Miami" [ref=e1588] [cursor=pointer]:
+              - /url: /storage-units/florida/miami
+              - generic [ref=e1589]: Miami
+          - listitem [ref=e1590]:
+            - link "Miramar" [ref=e1591] [cursor=pointer]:
+              - /url: /storage-units/florida/miramar/miramar-parkway
+              - generic [ref=e1592]: Miramar
+          - listitem [ref=e1593]:
+            - link "Mountainside" [ref=e1594] [cursor=pointer]:
+              - /url: /storage-units/new-jersey/mountainside/route-22
+              - generic [ref=e1595]: Mountainside
+          - listitem [ref=e1596]:
+            - link "Nanuet" [ref=e1597] [cursor=pointer]:
+              - /url: /storage-units/new-york/nanuet/route-59
+              - generic [ref=e1598]: Nanuet
+          - listitem [ref=e1599]:
+            - link "Nassau" [ref=e1600] [cursor=pointer]:
+              - /url: /storage-units/new-york/nassau
+              - generic [ref=e1601]: Nassau
+          - listitem [ref=e1602]:
+            - link "New Rochelle" [ref=e1603] [cursor=pointer]:
+              - /url: /storage-units/new-york/new-rochelle/weyman-avenue
+              - generic [ref=e1604]: New Rochelle
+          - listitem [ref=e1605]:
+            - link "New York City" [ref=e1606] [cursor=pointer]:
+              - /url: /storage-units/new-york/new-york-city
+              - generic [ref=e1607]: New York City
+          - listitem [ref=e1608]:
+            - link "Oakland Park" [ref=e1609] [cursor=pointer]:
+              - /url: /storage-units/florida/fort-lauderdale/oakland-park
+              - generic [ref=e1610]: Oakland Park
+          - listitem [ref=e1611]:
+            - link "Ozone Park" [ref=e1612] [cursor=pointer]:
+              - /url: /storage-units/new-york/queens/ozone-park
+              - generic [ref=e1613]: Ozone Park
+          - listitem [ref=e1614]:
+            - link "Palatine" [ref=e1615] [cursor=pointer]:
+              - /url: /storage-units/illinois/palatine/northwest-highway
+              - generic [ref=e1616]: Palatine
+          - listitem [ref=e1617]:
+            - link "Palmetto Bay" [ref=e1618] [cursor=pointer]:
+              - /url: /storage-units/florida/miami/palmetto-bay
+              - generic [ref=e1619]: Palmetto Bay
+          - listitem [ref=e1620]:
+            - link "Philadelphia" [ref=e1621] [cursor=pointer]:
+              - /url: /storage-units/pennsylvania/philadelphia
+              - generic [ref=e1622]: Philadelphia
+          - listitem [ref=e1623]:
+            - link "Plainview" [ref=e1624] [cursor=pointer]:
+              - /url: /storage-units/new-york/plainview/old-country-road
+              - generic [ref=e1625]: Plainview
+          - listitem [ref=e1626]:
+            - link "Pompano Beach" [ref=e1627] [cursor=pointer]:
+              - /url: /storage-units/florida/pompano-beach/federal-highway
+              - generic [ref=e1628]: Pompano Beach
+          - listitem [ref=e1629]:
+            - link "Queens" [ref=e1630] [cursor=pointer]:
+              - /url: /storage-units/new-york/queens/south-ozone-park-jfk
+              - generic [ref=e1631]: Queens
+          - listitem [ref=e1632]:
+            - link "Richmond Hill" [ref=e1633] [cursor=pointer]:
+              - /url: /storage-units/new-york/queens/richmond-hill
+              - generic [ref=e1634]: Richmond Hill
+          - listitem [ref=e1635]:
+            - link "Ridgewood" [ref=e1636] [cursor=pointer]:
+              - /url: /storage-units/new-york/queens/ridgewood
+              - generic [ref=e1637]: Ridgewood
+          - listitem [ref=e1638]:
+            - link "Riverdale" [ref=e1639] [cursor=pointer]:
+              - /url: /storage-units/new-york/yonkers/ludlow
+              - generic [ref=e1640]: Riverdale
+          - listitem [ref=e1641]:
+            - link "Seffner" [ref=e1642] [cursor=pointer]:
+              - /url: /storage-units/florida/seffner/kingsway-road
+              - generic [ref=e1643]: Seffner
+          - listitem [ref=e1644]:
+            - link "Seminole Heights" [ref=e1645] [cursor=pointer]:
+              - /url: /storage-units/florida/tampa/seminole-heights
+              - generic [ref=e1646]: Seminole Heights
+          - listitem [ref=e1647]:
+            - link "Spring Hill" [ref=e1648] [cursor=pointer]:
+              - /url: /storage-units/florida/spring-hill/county-line-road
+              - generic [ref=e1649]: Spring Hill
+          - listitem [ref=e1650]:
+            - link "Stamford" [ref=e1651] [cursor=pointer]:
+              - /url: /storage-units/connecticut/stamford/glenbrook
+              - generic [ref=e1652]: Stamford
+          - listitem [ref=e1653]:
+            - link "Tacony" [ref=e1654] [cursor=pointer]:
+              - /url: /storage-units/pennsylvania/philadelphia/tacony
+              - generic [ref=e1655]: Tacony
+          - listitem [ref=e1656]:
+            - link "Tamarac" [ref=e1657] [cursor=pointer]:
+              - /url: /storage-units/florida/tamarac/commercial-blvd
+              - generic [ref=e1658]: Tamarac
+          - listitem [ref=e1659]:
+            - link "Tampa" [ref=e1660] [cursor=pointer]:
+              - /url: /storage-units/florida/tampa
+              - generic [ref=e1661]: Tampa
+          - listitem [ref=e1662]:
+            - link "Valley Stream" [ref=e1663] [cursor=pointer]:
+              - /url: /storage-units/new-york/valley-stream
+              - generic [ref=e1664]: Valley Stream
+          - listitem [ref=e1665]:
+            - link "Westchester" [ref=e1666] [cursor=pointer]:
+              - /url: /storage-units/new-york/westchester
+              - generic [ref=e1667]: Westchester
+          - listitem [ref=e1668]:
+            - link "West Hempstead" [ref=e1669] [cursor=pointer]:
+              - /url: /storage-units/new-york/west-hempstead/hempstead-turnpike
+              - generic [ref=e1670]: West Hempstead
+          - listitem [ref=e1671]:
+            - link "West Haven" [ref=e1672] [cursor=pointer]:
+              - /url: /storage-units/connecticut/new-haven/west-haven
+              - generic [ref=e1673]: West Haven
+          - listitem [ref=e1674]:
+            - link "Yonkers" [ref=e1675] [cursor=pointer]:
+              - /url: /storage-units/new-york/yonkers
+              - generic [ref=e1676]: Yonkers
+      - list [ref=e1686]:
+        - listitem [ref=e1687]:
+          - link "Privacy Policy" [ref=e1688] [cursor=pointer]:
+            - /url: /privacy-policy
+            - generic [ref=e1689]: Privacy Policy
+        - listitem [ref=e1690]:
+          - link "Cookie Policy" [ref=e1691] [cursor=pointer]:
+            - /url: /cookie-policy
+            - generic [ref=e1692]: Cookie Policy
+        - listitem [ref=e1693]:
+          - link "Terms and Conditions" [ref=e1694] [cursor=pointer]:
+            - /url: /terms-and-conditions
+            - generic [ref=e1695]: Terms and Conditions
+        - listitem [ref=e1696]:
+          - link "Accessibility" [ref=e1697] [cursor=pointer]:
+            - /url: /accessibility
+            - generic [ref=e1698]: Accessibility
+      - generic [ref=e1704]: © Safeguard Self Storage. All rights reserved.
+  - generic:
+    - generic:
+      - generic:
+        - generic [ref=e1715]:
+          - img "Chatbot Avatar" [ref=e1717]
+          - generic [ref=e1719]: Chat with Safeguard
+        - generic [ref=e1721]:
+          - generic [ref=e1722] [cursor=pointer]:
+            - img "Chatbot Avatar" [ref=e1724]
+            - generic [ref=e1725]: Chat with Safeguard Self Storage
+          - generic [ref=e1733]:
+            - textbox "Enter your message..." [ref=e1734]
+            - button "Send" [ref=e1735]

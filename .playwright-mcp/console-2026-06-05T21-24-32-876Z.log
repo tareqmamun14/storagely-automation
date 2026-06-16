@@ -1,0 +1,34 @@
+[     743ms] [WARNING] The resource https://static.getstoragely.com/v4/external-images/aHR0cHM6Ly9zdGF0aWMuZ2V0c3RvcmFnZWx5LmNvbS91cGxvYWRzL2xvY2F0aW9ucy9zYWZlZ3VhcmQtc2VsZi1zdG9yYWdlLzE3NzgxODY0NTU0OTRCcmlkZ2Vwb3J0JTIwLSUyMDAwMV81MzdfMTYwMTA0XzE1Ny53ZWJw/w800.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://www.safeguardit.com/storage-units/connecticut/bridgeport/west-end-west-side:0
+[    1721ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) %o @ https://www.safeguardit.com/storage-units/connecticut/bridgeport/west-end-west-side/step-four?promo=12857&unit_id=5933147:0
+[    2316ms] [ERROR] InvalidValueError: not an instance of HTMLInputElement @ https://maps.googleapis.com/maps-api-v3/api/js/65/3b/main.js:175
+[    2316ms] [WARNING] As of March 1st, 2025, google.maps.places.Autocomplete is not available to new customers. Please use google.maps.places.PlaceAutocompleteElement instead. At this time, google.maps.places.Autocomplete is not scheduled to be discontinued, but google.maps.places.PlaceAutocompleteElement is recommended over google.maps.places.Autocomplete. While google.maps.places.Autocomplete will continue to receive bug fixes for any major regressions, existing bugs in google.maps.places.Autocomplete will not be addressed. At least 12 months notice will be given before support is discontinued. Please see https://developers.google.com/maps/legacy for additional details and https://developers.google.com/maps/documentation/javascript/places-migration-overview for the migration guide. @ https://maps.googleapis.com/maps-api-v3/api/js/65/3b/places.js:677
+[    3157ms] [WARNING] Invoca 4.42.3: Could not run because requiredParams were not met and there was no PPCPN @ https://solutions.invocacdn.com/js/invoca-latest.min.js:24
+[    7701ms] [INFO] %c[Swivl Embed]%c v1.0.0 (26bb3597d) color:#ff5b02;font-weight:bold color:inherit @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:18
+[    8691ms] [LOG] props : {config: Object, server: https://v3-api.swivl.studio, webSocketServer: wss://channels.swivl.studio, notificationsServer: https://v3-notifications.swivl.studio, messagingServer: https://v3-messaging.swivl.studio} @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8691ms] [LOG] Config.id = 1262 @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8691ms] [LOG] Config.createdAt = 2025-11-04T14:32:01.583Z @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8691ms] [LOG] Config.updatedAt = 2026-05-07T17:20:18.420Z @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8691ms] [LOG] Config.orgId = 250 @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8691ms] [LOG] Config.isDefault = true @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8691ms] [LOG] Config.spotSlug = safeguard-self-storage @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8691ms] [LOG] Config.spotLinkSlug = safe @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8691ms] [LOG] Config.theme = {text: #000000, headerColor: #000000, primaryText: #000000, primaryHover: #000000, botBubbleText: #000000} @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8691ms] [LOG] Config.avatarURL = https://swivl-uploads-production.s3.amazonaws.com/3e100d8984b40ff8e05d4abba3bc1551_avatar.png @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8691ms] [LOG] Config.ctaBody = I'm here to answer any of your self storage questions! @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8691ms] [LOG] Config.dotText = Chat with Safeguard @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8691ms] [LOG] Config.showCTA = true @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8691ms] [LOG] Config.ctaDelay = 30 @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8691ms] [LOG] Config.ctaTitle = Hi there! How can I help? @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8691ms] [LOG] Config.position = bottom-right @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8691ms] [LOG] Config.headerText = Chat with <b>Safeguard Self Storage</b> @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8692ms] [LOG] Config.ctaImageURL = https://swivl-cdn.s3.us-west-1.amazonaws.com/sg-cta.png @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8692ms] [LOG] Config.collapsedStyle = dot @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8692ms] [LOG] Config.ctaStartOnQuest = PrqfBDIR1Q @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8692ms] [LOG] Config.brandId = 806 @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8692ms] [LOG] Config.settings = {ctaBody: I'm here to answer any of your self storage questions!, dotText: Chat with Safeguard, showCTA: true, ctaDelay: 30, ctaTitle: Hi there! How can I help?} @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8692ms] [LOG] Config.preloadVariables = {} @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8692ms] [LOG] Config.slug = oFNy0NhQ6W @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8692ms] [LOG] Config.brand = {id: 806, createdAt: 2025-11-04T14:32:01.472Z, updatedAt: 2026-03-11T01:31:46.392Z, orgId: 250, name: Safeguard Self Storage} @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8692ms] [LOG] Config.webSocketServer = wss://channels.swivl.studio @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8692ms] [LOG]  this.state : undefined @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    8692ms] [LOG]  this.props : {config: Object, server: https://v3-api.swivl.studio, webSocketServer: wss://channels.swivl.studio, notificationsServer: https://v3-notifications.swivl.studio, messagingServer: https://v3-messaging.swivl.studio} @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101

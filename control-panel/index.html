@@ -345,14 +345,19 @@
 
           <!-- ── Group: Test Layers ── -->
           <details class="helix-group" id="helix-grp-layers">
-            <summary>Test Layers <span class="grp-desc">— which kinds of tests to run</span></summary>
+            <summary>Journey Steps <span class="grp-desc">— ONE browser per facility, run top-down</span></summary>
             <div class="hg-body">
+              <div class="small" style="margin-bottom:6px">
+                Each facility opens in <b>one browser</b> and these steps run <b>top-down</b> in it — same as V1/SPC.
+                All selected by default. Uncheck any to skip. Order: health → sections → reserve (when added) → <b>rent flow last</b> (navigates away to V2 SPC).
+                <b>Each as own test</b> and <b>Editor</b> are separate browser modes, not part of the single-browser journey.
+              </div>
               <div class="check-list">
-                <label title="Land → browse units → click Rent Now → assert V2 SPC /step-four?unit_id handoff."><input type="checkbox" id="helix-mod-e2e" data-mod="e2e" checked /> E2E Rent Journey (P0)</label>
-                <label title="Title, heading, no unresolved {tokens}, images load, no console errors, units present."><input type="checkbox" id="helix-mod-live" data-mod="live" checked /> Live Page Health + Token Audit (P0/P1)</label>
-                <label title="Runs all enabled page-section detectors in ONE navigation per facility, with a rollup report."><input type="checkbox" id="helix-mod-sections" data-mod="sections" checked /> Live Sections — Combined run (P0)</label>
-                <label title="Each section as its own isolated test — slower, but pinpoints failures per section/facility."><input type="checkbox" id="helix-mod-sections-each" data-mod="sections-each" /> Live Sections — Each as own test (slower)</label>
-                <label title="Editor login + component palette inventory at sites.apps.mystoragely.com (needs editor password)."><input type="checkbox" id="helix-mod-editor" data-mod="editor" /> Editor Smoke + Palette Inventory (P2)</label>
+                <label title="Click Rent Now on a unit → navigate to V2 SPC /step-four → fill the full SPC form (name, email, phone, address, alternate contact, driver's license, DOB, payment info) → select add-ons (e.g. 24 Hour Access) → select discount timing (e.g. This Month) → submit. Uses test card (expected decline). Runs LAST because it navigates away from the facility page."><input type="checkbox" id="helix-mod-e2e" data-mod="e2e" checked /> Rent Flow — click Rent Now → fill SPC form → submit</label>
+                <label title="Verifies: page title matches expected pattern · facility heading visible · no leaked {template_tokens} in page text · no leaked {tokens} in img src / link href attributes · all visible images load (≤20% tolerance) · units section visible with valid Rent Now links pointing to /step-four · no JavaScript console errors. All run in the same single browser."><input type="checkbox" id="helix-mod-live" data-mod="live" checked /> Page Health — title, heading, tokens, images, links, console errors</label>
+                <label title="Verifies 8 page sections top→bottom in the SAME browser: Nav (≥3 items, blog link, my-account link, contact dropdown) · Header (heading, rating/reviews, hours, phone, address) · Carousel (slides, prev/next nav, images load) · Amenities (≥1 listed) · Units (dimensions, prices web ≤ standard, Rent Now + Reserve, unique IDs) · FAQ (collapsible Q&A) · Gallery (images load) · Footer (columns, social links, copyright). Which sections to verify is configurable in the Page Sections group below."><input type="checkbox" id="helix-mod-sections" data-mod="sections" checked /> Page Sections — nav, header, carousel, amenities, units, faq, gallery, footer</label>
+                <label title="DEBUG MODE: runs each section as its own isolated test in a separate browser. Much slower but pinpoints exactly which section/facility fails. Use when you need to isolate a single section. Not part of the single-browser journey — separate browsers per section per facility."><input type="checkbox" id="helix-mod-sections-each" data-mod="sections-each" /> Sections — each as own test (slower, separate browsers)</label>
+                <label title="Editor tests at sites.apps.mystoragely.com: login → verify palette loads with all 56 components → check preview iframe renders → verify all sidebar tabs are accessible and clickable → no unresolved tokens in preview. Needs HELIX_PASSWORD. Runs in its own browser (separate login)."><input type="checkbox" id="helix-mod-editor" data-mod="editor" /> Editor Smoke — palette inventory, preview, sidebar tabs</label>
               </div>
             </div>
           </details>
@@ -900,6 +905,18 @@ function refreshYardiBanner() {
 document.addEventListener('change', e => {
   if (e.target.matches('#build-clients input')) { renderBuildCorpCodes(); refreshYardiBanner(); }
   if (e.target.matches('#buildBase')) refreshYardiBanner();
+  // "Page Sections" (single-browser journey) and "Sections — each as own test"
+  // (separate-browser pinpoint mode) verify the SAME detectors. They are
+  // alternatives, never both — checking one unchecks the other so sections are
+  // never run twice in one cycle.
+  if (e.target.matches('#suite-helix .body input[data-mod="sections"]') && e.target.checked) {
+    const other = $('#suite-helix .body input[data-mod="sections-each"]');
+    if (other) other.checked = false;
+  }
+  if (e.target.matches('#suite-helix .body input[data-mod="sections-each"]') && e.target.checked) {
+    const other = $('#suite-helix .body input[data-mod="sections"]');
+    if (other) other.checked = false;
+  }
   // Show / hide the section + facility filter panels when section modules toggle.
   if (e.target.matches('#suite-helix .body input[data-mod]')) refreshHelixSectionVisibility();
 });
@@ -1256,26 +1273,34 @@ function refreshCmdPreview() {
     effSuites = s.suites;
   }
   const specs = effSuites.map(x => specMap[x]).filter(Boolean);
-  // Helix — uses its own config with project-based routing.
+  // Helix — uses its own config. The e2e/live/sections checkboxes are STEPS of
+  // ONE top-down journey per facility (one browser per customer), not separate
+  // browsers. They map to HELIX_LAYERS pre-checks; rent always runs. Keep this
+  // preview aligned with server.js buildRunCommand().
   let helixArgs = null;
+  let helixLayers = null;
   if (effSuites.includes('helix')) {
     const hm = $$('#suite-helix .body input[data-mod]:checked').map(c => c.dataset.mod);
+    const journeyLayers = [];
+    if (hm.includes('live'))     journeyLayers.push('health');
+    if (hm.includes('sections')) journeyLayers.push('sections');
+    if (hm.includes('e2e'))      journeyLayers.push('rent');
+    const runJourney = journeyLayers.length > 0;
     const projects = new Set();
-    if (hm.some(m => ['e2e', 'live', 'sections', 'sections-each'].includes(m))) projects.add('live');
+    if (runJourney || hm.includes('sections-each')) projects.add('live');
     if (hm.includes('editor')) projects.add('editor');
     if (projects.size > 0) {
       helixArgs = ['npx', 'playwright', 'test', '--config=helix/playwright.config.ts'];
       for (const p of projects) helixArgs.push('--project=' + p);
-      // Narrow within the live project to the chosen modules (server.js does the
-      // same to keep preview + actual run aligned).
       const greps = [];
-      if (hm.includes('e2e'))            greps.push('E2E');
-      if (hm.includes('live'))           greps.push('Live Page Health');
-      if (hm.includes('sections'))       greps.push('Helix . All Sections');
-      if (hm.includes('sections-each'))  greps.push('Section:');
+      if (runJourney) greps.push('Helix Facility Journey');
+      // Skip the per-section pinpoint specs if the journey already does sections —
+      // same detectors, never run both (matches server.js buildRunCommand()).
+      if (hm.includes('sections-each') && !journeyLayers.includes('sections')) greps.push('Section:');
       if (greps.length && !hm.includes('editor')) helixArgs.push('--grep', greps.join('|'));
       if (s.headed) helixArgs.push('--headed');
       if (s.workers) helixArgs.push('--workers', String(s.workers));
+      if (runJourney) helixLayers = journeyLayers.join(',');
     }
   }
   let args;
@@ -1289,6 +1314,9 @@ function refreshCmdPreview() {
     if (effSuites.includes('minimall') || effSuites.includes('allpages')) args.push('--project=chrome');
   }
   let line = '$ ' + (specs.length === 0 && !helixArgs ? '(no suites selected)' : args.join(' '));
+  if (helixLayers) {
+    line += `\n  HELIX_LAYERS=${helixLayers}  (one browser per facility · top-down)`;
+  }
   if (s.suites.includes('build') && s.build?.base) {
     line += `\n  STORAGELY_ENV=staging  STORAGELY_BUILD_BASE=${s.build.base}  (clients: ${(s.build.clients || []).length || 0})`;
   }
@@ -1376,6 +1404,42 @@ function escapeHtml(s) { return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;',
 function escapeAttr(s) { return escapeHtml(s).replace(/'/g, '&#39;'); }
 
 boot();
+
+// ── Lifecycle sync: Ctrl+C in terminal closes this tab; closing tab stops server ──
+(function connectHeartbeat() {
+  const hb = new EventSource('/api/heartbeat');
+  let errCount = 0;
+
+  hb.addEventListener('shutdown', () => {
+    hb.close();
+    window.close();
+    // Fallback — window.close() may be blocked by the browser
+    setTimeout(() => {
+      document.body.innerHTML =
+        '<div style="display:flex;align-items:center;justify-content:center;height:100vh;' +
+        'font:20px/1.4 -apple-system,sans-serif;color:#8b93a7;background:#0f1115">' +
+        '<div style="text-align:center"><div style="font-size:36px;margin-bottom:12px">' +
+        '⏹</div>Server stopped.<br>' +
+        '<span style="font-size:14px;opacity:.7">You can close this tab.</span></div></div>';
+    }, 500);
+  });
+
+  hb.onopen = () => { errCount = 0; };
+  hb.onmessage = () => { errCount = 0; };
+
+  hb.onerror = () => {
+    errCount++;
+    if (errCount > 2) {
+      hb.close();
+      document.body.innerHTML =
+        '<div style="display:flex;align-items:center;justify-content:center;height:100vh;' +
+        'font:20px/1.4 -apple-system,sans-serif;color:#8b93a7;background:#0f1115">' +
+        '<div style="text-align:center"><div style="font-size:36px;margin-bottom:12px">' +
+        '🔌</div>Server disconnected.<br>' +
+        '<span style="font-size:14px;opacity:.7">You can close this tab.</span></div></div>';
+    }
+  };
+})();
 </script>
 </body>
 </html>

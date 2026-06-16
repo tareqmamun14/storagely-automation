@@ -24,10 +24,31 @@ helix/
     LiveFacilityPage  Live site: units, Rent Now, sections, token audit
   tests/
     setup/            Auth storageState capture (runs once)
-    e2e/              P0: Full rent journey (land → browse → Rent Now → V2 handoff)
-    live/             P0/P1: Page health, token audit, V2 URL validation
+    e2e/              P0: facility-journey.spec.ts — the UNIFIED journey.
+                      ONE browser per facility, top-down: page health → sections
+                      → reserve modal → MANDATORY rent flow (last — navigates
+                      away to V2 SPC). Mirrors V1/SPC.
+    live/             sections/*.spec.ts — per-section detectors for the SLOWER
+                      "each as own test" pinpoint mode (one browser per section).
+                      visual/ — screenshot baselines.
     editor/           P2: Editor smoke, palette inventory, preview iframe
 ```
+
+### One browser per customer (the V1/SPC pattern)
+
+`facility-journey.spec.ts` is the headline layer and the single source of truth
+for the control-panel run. For each facility it opens **one** browser, navigates
+**once**, then runs every selected check **top-down in that same page** — exactly
+like `tests/rentReserveSPC-validation.spec.ts` loops one customer per test. The
+control panel's "Journey Steps" checkboxes are STEPS of this one flow (via the
+`HELIX_LAYERS` env var: `health`, `sections`), not separate browsers. The order
+is: health → sections → reserve modal → rent flow (always last, because it
+navigates away from the listing page to V2 SPC). Adding a customer = one row
+in `facilities.ts` → one more browser, run identically. A clean per-customer
+test report (terminal + JSON + Markdown) is generated at the end of each journey.
+
+The old layout (rent-journey + page-health + all-sections as separate specs)
+spawned ~13 browsers per facility and never ran the full rent flow — replaced.
 
 ## 3 Playwright projects
 
@@ -49,8 +70,8 @@ npx playwright test --config=helix/playwright.config.ts --project=live
 # Just editor tests (setup runs first)
 npx playwright test --config=helix/playwright.config.ts --project=editor
 
-# Specific test file
-npx playwright test --config=helix/playwright.config.ts tests/e2e/rent-journey.spec.ts
+# The unified facility journey (one browser per facility, top-down)
+npx playwright test --config=helix/playwright.config.ts --project=live --grep "Helix Facility Journey"
 ```
 
 **Password**: Set `HELIX_PASSWORD` env var before running. The control panel handles this automatically.

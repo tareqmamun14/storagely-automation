@@ -1,0 +1,84 @@
+[    1942ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/_optimized/1693308000041gatekeeper-self-storage-facility-94-l001-501-414w.webp:0
+[    2330ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/_optimized/logo941693241258-414w.webp:0
+[    3202ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/logo_white941692387695.png:0
+[    3394ms] [ERROR] Refused to execute script from 'https://test.staging.storagely-api.com/files/main.min.js.download' because its MIME type ('application/octet-stream') is not executable, and strict MIME type checking is enabled. @ https://test.staging.storagely-api.com/gatekeeper-self-storage/storage-units/georgia/peachtree-city/senoia-road/:0
+[    3397ms] [ERROR] Refused to execute script from 'https://test.staging.storagely-api.com/files/project.js.download' because its MIME type ('application/octet-stream') is not executable, and strict MIME type checking is enabled. @ https://test.staging.storagely-api.com/gatekeeper-self-storage/storage-units/georgia/peachtree-city/senoia-road/:0
+[    3398ms] [ERROR] Refused to execute script from 'https://test.staging.storagely-api.com/files/project.js(1).download' because its MIME type ('application/octet-stream') is not executable, and strict MIME type checking is enabled. @ https://test.staging.storagely-api.com/gatekeeper-self-storage/storage-units/georgia/peachtree-city/senoia-road/:0
+[    3406ms] ReferenceError: bootstrap is not defined
+    at https://test.staging.storagely-api.com/gatekeeper-self-storage/storage-units/georgia/peachtree-city/senoia-road/:29828:9
+    at Array.map (<anonymous>)
+    at https://test.staging.storagely-api.com/gatekeeper-self-storage/storage-units/georgia/peachtree-city/senoia-road/:29827:42
+[    3578ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/logo941693241258.png:0
+[    3579ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/1693308000041Gatekeeper%20Self%20Storage%20Facility_94_l001_501.webp:0
+[    3593ms] Unexpected token '<'
+[    3727ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/unit_3d_images/_optimized/unit-3d-1368953091-200w.webp:0
+[    3734ms] [LOG] Doesn't exist @ https://test.staging.storagely-api.com/gatekeeper-self-storage/storage-units/georgia/peachtree-city/senoia-road/:31935
+[    3734ms] [LOG] [Event] {event: location-view, client_url: gatekeeper-self-storage, location_code: L001, visitor_id: 3f12d7fa-15cc-4bfc-abaf-024ef5fab261, user_agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb…KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36} @ https://test.staging.storagely-api.com/js/events.js:78
+[    4079ms] [LOG] [widgets.ts] Script loaded @ https://test.staging.storagely-api.com/build/js/widgets-DBbNLiDC.js:1
+[    4079ms] [LOG] [widgets.ts] Available components: [./components/widgets/LocationMap/index.vue, ./components/widgets/SearchBar/index.vue] @ https://test.staging.storagely-api.com/build/js/widgets-DBbNLiDC.js:1
+[    4080ms] [LOG] [widgets.ts] mountComponents called @ https://test.staging.storagely-api.com/build/js/widgets-DBbNLiDC.js:1
+[    4080ms] [LOG] [widgets.ts] Found elements: 0 @ https://test.staging.storagely-api.com/build/js/widgets-DBbNLiDC.js:1
+[    4405ms] [INFO] Slow network is detected. See https://www.chromestatus.com/feature/5636954674692096 for more details. Fallback font will be used while loading: https://test.staging.storagely-api.com/assets/slick/fonts/slick.woff @ https://test.staging.storagely-api.com/js/jquery-3.6.0.min.js:1
+[    4482ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/unit_3d_images/unit_3d_1368953091.png:0
+[    4546ms] [ERROR] A bad HTTP response code (404) was received when fetching the script. @ :0
+[    4616ms] [ERROR] TypeError: Failed to register a ServiceWorker for scope ('https://test.staging.storagely-api.com/~partytown/') with script ('https://test.staging.storagely-api.com/~partytown/partytown-sw.js'): A bad HTTP response code (404) was received when fetching the script. @ :0
+[    5490ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/_optimized/1693272513818gatekeeper-lobby-94-l001-381-414w.webp:0
+[    5789ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/_optimized/1692391097590gatekeeper-interior-hallway-94-l001-713-414w.webp:0
+[    5789ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/unit_3d_images/_optimized/unit-3d-1368953091-200w.webp:0
+[    6241ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/1693272513818Gatekeeper%20Lobby_94_l001_381.webp:0
+[    6275ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/1692391097590Gatekeeper-interior-hallway_94_l001_713.webp:0
+[    6429ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/unit_3d_images/unit_3d_1368953091.png:0
+[    6688ms] [INFO] %c[Swivl Embed]%c v1.0.0 (26bb3597d) color:#ff5b02;font-weight:bold color:inherit @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:18
+[    7214ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/favicon941692387695.ico:0
+[    7764ms] [LOG] props : {config: Object, server: https://v3-api.swivl.studio, webSocketServer: wss://channels.swivl.studio, notificationsServer: https://v3-notifications.swivl.studio, messagingServer: https://v3-messaging.swivl.studio} @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7764ms] [LOG] Config.id = 806 @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7764ms] [LOG] Config.createdAt = 2025-06-24T22:32:28.738Z @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7764ms] [LOG] Config.updatedAt = 2025-10-28T14:03:11.759Z @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7764ms] [LOG] Config.orgId = 14 @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7764ms] [LOG] Config.isDefault = false @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7765ms] [LOG] Config.spotSlug = gk @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7765ms] [LOG] Config.spotLinkSlug = gk @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7765ms] [LOG] Config.theme = {primaryHover: #99907c, primaryActive: #064685, secondaryHover: #064685, secondaryActive: #99907c, primaryBackground: #064685} @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7765ms] [LOG] Config.avatarURL = https://swivl-uploads-production.s3.amazonaws.com/org_1/OBTGtssX.jpg @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7765ms] [LOG] Config.ctaBody = You can ask us questions about inventory, pricing, amenities and more! @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7765ms] [LOG] Config.dotText = Questions? How can we help? @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7765ms] [LOG] Config.showCTA = true @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7765ms] [LOG] Config.ctaDelay = 20 @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7765ms] [LOG] Config.ctaTitle = How can we help? @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7765ms] [LOG] Config.position = bottom-right @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7765ms] [LOG] Config.headerText = Chat with <b>Gatekeeper</b> @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7765ms] [LOG] Config.ctaImageURL = https://swivl-cdn.s3-us-west-1.amazonaws.com/compass-cta.jpg @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7765ms] [LOG] Config.collapsedStyle = dot @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7765ms] [LOG] Config.ctaStartOnQuest = PrqfBDIR1Q @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7765ms] [LOG] Config.brandId = 546 @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7765ms] [LOG] Config.settings = {ctaBody: You can ask us questions about inventory, pricing, amenities and more!, dotText: Questions? How can we help?, showCTA: true, ctaDelay: 20, ctaTitle: How can we help?} @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7765ms] [LOG] Config.preloadVariables = {User:DefaultGroupId: 403, User:LimitToGroupId: 403} @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7765ms] [LOG] Config.slug = null @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7765ms] [LOG] Config.brand = {id: 546, createdAt: 2025-06-24T22:26:08.928Z, updatedAt: 2025-06-24T22:30:26.653Z, orgId: 14, name: Gatekeeper} @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7765ms] [LOG] Config.webSocketServer = wss://channels.swivl.studio @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7765ms] [LOG]  this.state : undefined @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[    7765ms] [LOG]  this.props : {config: Object, server: https://v3-api.swivl.studio, webSocketServer: wss://channels.swivl.studio, notificationsServer: https://v3-notifications.swivl.studio, messagingServer: https://v3-messaging.swivl.studio} @ https://swivl-embed.s3.amazonaws.com/swivl3/embed-code/index.js:101
+[   22254ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/_optimized/1692391097453gatekeeer-interior-10x10-unit-94-l001-266-414w.webp:0
+[   22601ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/1692391097453Gatekeeer-interior-10x10-unit_94_l001_266.webp:0
+[   27224ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/_optimized/1692391097465gatekeeper-self-storage-modern-lobby-94-l001-97-414w.webp:0
+[   27592ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/1692391097465Gatekeeper%20Self%20Storage%20Modern%20Lobby_94_l001_97.webp:0
+[   32216ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/_optimized/1692391097459gatekeeper-self-storage-boardroom-94-l001-449-414w.webp:0
+[   32568ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/1692391097459Gatekeeper%20Self%20Storage%20Boardroom_94_l001_449.webp:0
+[   37251ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/_optimized/1693272538050gatekeeper-front-desk-94-l001-866-414w.webp:0
+[   37716ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/1693272538050Gatekeeper%20Front%20Desk_94_l001_866.webp:0
+[   42246ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/_optimized/1692391097466gatekeeper-self-storage-moving-supplies-94-l001-779-414w.webp:0
+[   42595ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/1692391097466Gatekeeper%20Self%20Storage%20Moving%20Supplies_94_l001_779.webp:0
+[   47247ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/_optimized/1692391097459gatekeeper-self-storage-boxes-94-l001-412-414w.webp:0
+[   47613ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/1692391097459Gatekeeper%20Self%20Storage%20boxes_94_l001_412.webp:0
+[   52301ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/_optimized/1692391097590gatekeepr-front-building-entrance-94-l001-820-414w.webp:0
+[   52658ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/1692391097590Gatekeepr%20Front%20Building%20Entrance_94_l001_820.webp:0
+[   57309ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/_optimized/1692391097460gatekeeper-self-storage-main-entrance-94-l001-139-414w.webp:0
+[   57677ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/1692391097460Gatekeeper%20Self%20Storage%20Main%20Entrance_94_l001_139.webp:0
+[   62280ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/_optimized/1692391097549gatekeeper-self-storage-parking-94-l001-369-414w.webp:0
+[   62630ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/1692391097549Gatekeeper%20Self%20Storage%20Parking_94_l001_369.webp:0
+[   67287ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/_optimized/1692391097590gatekeeper-self-storage-94-l001-257-414w.webp:0
+[   67651ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/1692391097590Gatekeeper%20Self%20Storage_94_l001_257.webp:0
+[   72288ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/_optimized/1692391097460gatekeeper-self-storage-facility-94-l001-852-414w.webp:0
+[   72634ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/1692391097460Gatekeeper%20Self%20Storage%20Facility_94_l001_852.webp:0
+[   77328ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/_optimized/1692391097587gatekeeper-self-storage-sign-94-l001-323-414w.webp:0
+[   77795ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://test.staging.storagely-api.com/uploads/1692391097587Gatekeeper%20Self%20Storage%20Sign_94_l001_323.webp:0
