@@ -160,37 +160,41 @@ export function getSelectedHelixEnv(): HelixEnv {
  *     matching deployment. The control-panel Prod/Test toggle drives this.
  * - HELIX_FACILITY_FILTER — comma-separated facility IDs to restrict the run to
  *     (within the selected env). Empty / unset = every facility in that env.
- * - HELIX_CUSTOM_URL — comma-separated extra URLs; each becomes an ad-hoc
- *     facility tagged with the selected env. Lets the control panel test an
- *     arbitrary prod/stage URL without code changes.
+ * - HELIX_CUSTOM_URL — comma-separated ON-DEMAND URLs (the control panel's
+ *     "Custom URL" field). Each becomes an ad-hoc facility, with its client
+ *     auto-detected from the host (a minimallstorage.com URL → the Mini Mall
+ *     profile + sections, so the SAME tests run). When a custom URL is given we
+ *     run ONLY those URLs — "test exactly what I pasted" — not the registry.
  */
 export function getAllFacilities(): HelixFacility[] {
   const env = getSelectedHelixEnv();
   const filter = (process.env.HELIX_FACILITY_FILTER || '').split(',').map(s => s.trim()).filter(Boolean);
 
+  const customRaw = process.env.HELIX_CUSTOM_URL || '';
+  if (customRaw.trim()) {
+    // On-demand mode: run ONLY the pasted URL(s), each resolved to its client.
+    return customRaw
+      .split(',')
+      .map(s => s.trim())
+      .filter(Boolean)
+      .map((url, i) => {
+        const client = clientForUrl(url);
+        return {
+          id: `custom-${i + 1}-${slugForUrl(url)}`,
+          name: `Custom — ${labelForUrl(url)}`,
+          client,
+          env,
+          url,
+          expectedTitle: /.+/,         // any non-empty title — we don't know what to expect
+          expectedHeading: /.+/,       // any non-empty heading
+          features: { ...featuresForClient(client) },
+        };
+      });
+  }
+
   let base = FACILITIES.filter(f => f.env === env);
   if (filter.length > 0) base = base.filter(f => filter.includes(f.id));
-
-  const customRaw = process.env.HELIX_CUSTOM_URL || '';
-  if (!customRaw.trim()) return base;
-
-  const customs: HelixFacility[] = customRaw
-    .split(',')
-    .map(s => s.trim())
-    .filter(Boolean)
-    .map((url, i) => ({
-      id: `custom-${i + 1}-${slugForUrl(url)}`,
-      name: `Custom — ${labelForUrl(url)}`,
-      client: hostBrand(url),
-      env,
-      url,
-      expectedTitle: /.+/,         // any non-empty title — we don't know what to expect
-      expectedHeading: /.+/,       // any non-empty heading
-      features: { ...ALL_FEATURES },
-    }));
-
-  // Custom URLs are always included regardless of the facility filter.
-  return [...base, ...customs];
+  return base;
 }
 
 export function getFacility(id: string): HelixFacility {
@@ -204,6 +208,25 @@ export function getFacility(id: string): HelixFacility {
 function hostBrand(url: string): string {
   try { return new URL(url).hostname.split('.')[0] || 'custom'; }
   catch { return 'custom'; }
+}
+
+/**
+ * Map a custom/on-demand URL to its client slug so getClientProfile() resolves
+ * the right profile (nav layout, rent handoff, etc.). Mini Mall + Safeguard are
+ * detected by host; anything else falls back to the host brand token (which
+ * getClientProfile treats as the Safeguard-baseline default).
+ */
+function clientForUrl(url: string): string {
+  let host = '';
+  try { host = new URL(url).hostname.toLowerCase(); } catch { return 'default'; }
+  if (host.includes('minimallstorage') || host.includes('mini-mall')) return 'minimall';
+  if (host.includes('safeguard')) return 'safeguard';
+  return hostBrand(url);
+}
+
+/** Feature set for a custom URL's client — Mini Mall gets its extra sections. */
+function featuresForClient(client: string): typeof MINIMALL_FEATURES | typeof ALL_FEATURES {
+  return client === 'minimall' ? MINIMALL_FEATURES : ALL_FEATURES;
 }
 
 function slugForUrl(url: string): string {

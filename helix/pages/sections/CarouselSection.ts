@@ -107,6 +107,15 @@ export class CarouselSection implements ISectionDetector {
           ? 'no hero-sized image currently in viewport'
           : `${loaded.length}/${visibleHero.length} visible hero image(s) loaded`,
       ));
+
+      // Mini Mall renders a Google-Maps directions link beneath the carousel.
+      if (ctx.client === 'minimall') {
+        const mapLink = page.locator('a[href*="google.com/maps"], a[href*="goo.gl/maps"], a[href*="/maps/place"]').first();
+        const hasMap = (await mapLink.count()) > 0;
+        const mapHref = hasMap ? ((await mapLink.getAttribute('href')) || '') : '';
+        data.mapLink = mapHref.slice(0, 80);
+        checks.push(check('Google Maps location link present', hasMap, hasMap ? mapHref.slice(0, 60) : '(no map link)'));
+      }
     } catch (err) {
       errors.push((err as Error).message);
     }

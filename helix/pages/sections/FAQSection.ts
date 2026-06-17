@@ -121,9 +121,22 @@ export class FAQSection implements ISectionDetector {
                 expanded,
                 `aria=${before}→${after}, height=${heightBefore}→${heightAfter}`,
               ));
+              // Click again → it should COLLAPSE back (accordion behavior), and
+              // this also restores the page for downstream checks.
+              if (expanded) {
+                await firstQ.click({ timeout: 3000 }).catch(() => {});
+                await page.waitForTimeout(400);
+                const afterCollapse = await firstQ.getAttribute('aria-expanded');
+                const heightCollapsed = await measureFaqBlockHeight(page, questions[0]);
+                const ariaReset = ariaToggled ? afterCollapse === before : true;
+                const heightReset = visiblyExpanded ? heightCollapsed < heightAfter - 5 : true;
+                checks.push(check(
+                  'first FAQ row collapses when clicked again',
+                  ariaReset && heightReset,
+                  `aria=${after}→${afterCollapse}, height=${heightAfter}→${heightCollapsed}`,
+                ));
+              }
             }
-            // Collapse it back to leave page in original state for downstream checks.
-            if (expanded) await firstQ.click({ timeout: 3000 }).catch(() => {});
           } else {
             // Question text isn't wrapped in a <button> — likely a static FAQ list.
             checks.push(check(

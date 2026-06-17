@@ -77,6 +77,7 @@ export class UnitsSection implements ISectionDetector {
           prices: string[];
           rentHref: string;
           hasReserveButton: boolean;
+          imgLoaded: boolean | null;
         }> = [];
 
         function findCardRoot(el: HTMLElement): HTMLElement {
@@ -134,6 +135,11 @@ export class UnitsSection implements ISectionDetector {
           const hasReserve = !!Array.from(root.querySelectorAll<HTMLElement>('button'))
             .find(b => /^reserve$/i.test((b.innerText || '').trim()));
 
+          // Unit-card image: the largest <img> in the card; loaded = naturalWidth>0.
+          const cardImg = Array.from(root.querySelectorAll('img'))
+            .sort((a, b) => (b.naturalWidth || 0) - (a.naturalWidth || 0))[0] as HTMLImageElement | undefined;
+          const imgLoaded = cardImg ? (cardImg.complete && cardImg.naturalWidth > 0) : null;
+
           const entry = {
             dimensions: dimM ? `${dimM[1]}'x${dimM[2]}'` : '',
             sqft: sqM ? `${sqM[1]} sq ft` : '',
@@ -142,6 +148,7 @@ export class UnitsSection implements ISectionDetector {
             prices: priceMatches,
             rentHref: link.href || '',
             hasReserveButton: hasReserve,
+            imgLoaded,
           };
 
           // Dedupe by rentHref. When the same unit appears in both mobile + desktop
@@ -238,6 +245,17 @@ export class UnitsSection implements ISectionDetector {
           missingReserve.length ? `${missingReserve.length} cards missing Reserve` : 'ok',
         ));
 
+        // Every unit card should show a real (non-broken, non-empty) image.
+        const brokenImgCards = cards.filter(c => c.imgLoaded === false);
+        const noImgCards = cards.filter(c => c.imgLoaded === null);
+        checks.push(check(
+          'every unit card image is loaded (not broken/empty)',
+          brokenImgCards.length === 0,
+          brokenImgCards.length === 0
+            ? `${cards.length - noImgCards.length}/${cards.length} cards have a loaded image`
+            : `${brokenImgCards.length} card(s) with a broken/empty image`,
+        ));
+
         // Cards typically show TWO prices (web rate + standard rate). Tolerate cards
         // with one price (deal-less units), but expect at least one to show two.
         const twoPriceCount = cards.filter(c => c.prices.length >= 2).length;
@@ -287,6 +305,23 @@ export class UnitsSection implements ISectionDetector {
           `${handoff.unitParam} values are unique across cards`,
           unique.size === ids.length,
           `${ids.length} cards, ${unique.size} unique ids`,
+        ));
+      }
+
+      // Mini Mall per-card "View unit details" buttons + the "More units /
+      // See All Units" expander. (Client-specific card chrome — gated.)
+      if (ctx.client === 'minimall') {
+        const viewDetails = await page.getByRole('button', { name: /view unit details|view details/i }).count();
+        checks.push(check(
+          'unit cards expose "View unit details" buttons',
+          viewDetails >= 1,
+          `${viewDetails} view-details button(s)`,
+        ));
+        const moreUnits = await page.getByRole('button', { name: /more units|see all units/i }).count();
+        checks.push(check(
+          '"More units / See All Units" expander present',
+          moreUnits >= 1,
+          `${moreUnits} expander(s)`,
         ));
       }
     } catch (err) {

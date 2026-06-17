@@ -169,6 +169,23 @@ export class NavSection implements ISectionDetector {
             : report.map(d => `${d.trigger}(+${d.revealed})`).join('  '),
         ));
       }
+
+      // ── 6. Header action CTAs (e.g. Pay Online / Rent Unit / Call Us) ──
+      if (nav.actionCtas.length > 0) {
+        const missingCtas: string[] = [];
+        for (const re of nav.actionCtas) {
+          const inHeaderItems = headerItems.some(i => re.test(i.text));
+          const asLink = (await page.getByRole('link', { name: re }).count()) > 0;
+          const asButton = (await page.getByRole('button', { name: re }).count()) > 0;
+          if (!inHeaderItems && !asLink && !asButton) missingCtas.push(re.source);
+        }
+        data.actionCtas = nav.actionCtas.map(re => re.source);
+        checks.push(check(
+          'header action CTAs present',
+          missingCtas.length === 0,
+          missingCtas.length ? `missing: ${missingCtas.join(', ')}` : nav.actionCtas.map(r => r.source).join(', '),
+        ));
+      }
     } catch (err) {
       errors.push((err as Error).message);
     }

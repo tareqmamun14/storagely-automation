@@ -107,6 +107,15 @@ export class FacilityHeaderSection implements ISectionDetector {
       });
       data.address = address;
       checks.push(check('address visible in header', address.length > 0, address || '(none)'));
+
+      // Mini Mall header action buttons: the "What Will Fit?" sizing helper and
+      // the FAQ jump link. (Client-specific header chrome — gated to minimall.)
+      if (ctx.client === 'minimall') {
+        const hasWhatWillFit = (await page.getByRole('button', { name: /what will fit/i }).count()) > 0;
+        const hasFaqJump = (await page.getByRole('link', { name: /^faq$/i }).count()) > 0;
+        checks.push(check('"What Will Fit?" button present', hasWhatWillFit, hasWhatWillFit ? 'ok' : '(missing)'));
+        checks.push(check('FAQ jump link present', hasFaqJump, hasFaqJump ? 'ok' : '(missing)'));
+      }
     } catch (err) {
       errors.push((err as Error).message);
     }

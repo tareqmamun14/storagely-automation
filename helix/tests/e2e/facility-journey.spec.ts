@@ -28,6 +28,7 @@ import { sectionPassed } from '../../pages/sections/types';
 import { getClientProfile, getRentHandoff } from '../../configs/profiles';
 import { YardiCheckoutStartPage } from '../../pages/YardiCheckoutStartPage';
 import { RentalDetailsPageSinglePage } from '../../../pages/RentalDetailsPage_SPC';
+import { MiniMallRentalPage } from '../../../pages/MiniMallRentalPage';
 import { SINGLE_PAGE_USER } from '../../../configs/credentials';
 import {
   JourneyCollector,
@@ -73,7 +74,7 @@ test.describe('Helix Facility Journey', () => {
 
   for (const facility of facilities) {
     const cfg = spcConfigFor(facility);
-    const hasCaptcha = cfg.captchaAtRentNow || cfg.captchaAtStepFour;
+    const hasCaptcha = cfg.captchaAtRentNow || cfg.captchaAtStepFour || getRentHandoff(facility.client).manualCaptcha;
 
     test(`${facility.name} — full journey`, async ({ page }) => {
       test.setTimeout(hasCaptcha ? 0 : 8 * 60_000);
@@ -184,8 +185,25 @@ test.describe('Helix Facility Journey', () => {
           collector.skipStep('sections', 'Sections');
         }
 
-        // ── STEP 3: Reserve modal (placeholder — not implemented yet) ─
-        collector.skipStep('reserve', 'Reserve Modal');
+        // ── STEP 3: Reserve modal ───────────────────────────────────
+        // Click a unit's Reserve button → verify the reservation modal opens
+        // (selected unit + form) → close it. Captcha-free, so it runs with the
+        // sections/rent layers. Clients without a reserve modal skip cleanly.
+        const clientHasReserveModal = facility.client === 'minimall';
+        if (clientHasReserveModal && (layerOn('sections') || layerOn('rent'))) {
+          collector.beginStep('reserve', 'Reserve Modal');
+          const reserve = await live.verifyReserveModal();
+          for (const c of reserve.checks) {
+            collector.check(c.name, c.passed, c.detail,
+              c.passed ? undefined : 'Click a unit Reserve button and check the modal');
+          }
+          for (const c of reserve.checks) {
+            if (!c.passed) expect.soft(false, `Reserve: ${c.name} — ${c.detail}`).toBe(true);
+          }
+          collector.endStep();
+        } else {
+          collector.skipStep('reserve', 'Reserve Modal');
+        }
 
         // ── STEP 4: Rent flow (runs LAST — navigates away to V2 SPC) ─
         if (layerOn('rent')) {
@@ -260,10 +278,10 @@ test.describe('Helix Facility Journey', () => {
             typeof result !== 'string' ? 'Check the Rent Now submit button and payment validation on /step-four' : undefined);
           expect(typeof result === 'string', 'expected a string submit result').toBe(true);
           } else {
-            // ── Mini Mall: verify the Yardi checkout ENTRY rendered, then STOP.
-            // Captcha-gated; the full Yardi checkout is covered by
-            // tests/miniMallRental.spec.ts. (Helix rule: stop at the handoff —
-            // don't drive the checkout form.)
+            // ── Mini Mall: verify the Yardi checkout ENTRY rendered, then DRIVE
+            // the Yardi v2 checkout (fill tenant → manual captcha → Continue) and
+            // FETCH the rent outcome/error. Reuses the proven MiniMallRentalPage
+            // Yardi flow (same as tests/miniMallRental.spec.ts).
             const yardi = new YardiCheckoutStartPage(page);
             const handoffResult = await yardi.verifyHandoff(facility.expectedHeading);
             for (const c of handoffResult.checks) {
@@ -273,6 +291,28 @@ test.describe('Helix Facility Journey', () => {
             for (const c of handoffResult.checks) {
               if (!c.passed) expect.soft(false, `Handoff: ${c.name} — ${c.detail}`).toBe(true);
             }
+
+            // Drive the Yardi v2 checkout and capture the rent outcome.
+            const mm = new MiniMallRentalPage(page);
+            await mm.fillYardiTenantDetails({
+              firstName: SINGLE_PAGE_USER.firstName,
+              lastName:  SINGLE_PAGE_USER.lastName,
+              email:     SINGLE_PAGE_USER.email,
+              phone:     SINGLE_PAGE_USER.phone,
+            });
+            collector.check('Yardi tenant details filled', true,
+              `${SINGLE_PAGE_USER.firstName} ${SINGLE_PAGE_USER.lastName} / ${SINGLE_PAGE_USER.email}`);
+
+            await mm.waitForManualCaptcha(facility.name);
+            await mm.clickContinueToNextStep(facility.client);
+            const rentResult = await mm.waitForYardiRedirect();
+            // "Rent error fetch": SUCCESS (redirect) or a captured ERROR both mean
+            // we exercised the rent path and fetched the outcome; only a TIMEOUT
+            // (no determinable result) is a failure.
+            const fetched = /^SUCCESS|^ERROR/.test(rentResult);
+            collector.check('Yardi v2 rent — outcome fetched', fetched, rentResult,
+              fetched ? undefined : 'Yardi did not redirect or surface an error — inspect the checkout');
+            expect(fetched, `Yardi rent outcome: ${rentResult}`).toBe(true);
           }
 
           collector.endStep();

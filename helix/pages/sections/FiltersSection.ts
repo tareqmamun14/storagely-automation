@@ -124,6 +124,47 @@ export class FiltersSection implements ISectionDetector {
         chipCount >= 1,
         `${chipCount} chip(s)`,
       ));
+
+      // ── FUNCTIONAL: group-by tabs actually switch the active grouping ──
+      if (groupTabCount >= 2) {
+        const tabs = groupTablist.getByRole('tab');
+        let activated = 0;
+        for (let i = 0; i < groupTabCount; i++) {
+          const tab = tabs.nth(i);
+          await tab.click({ timeout: 4000 }).catch(() => {});
+          await page.waitForTimeout(500);
+          if ((await tab.getAttribute('aria-selected')) === 'true') activated++;
+        }
+        await tabs.first().click({ timeout: 4000 }).catch(() => {}); // reset to default grouping
+        await page.waitForTimeout(400);
+        checks.push(check(
+          'group-by tabs switch the active grouping (sorting)',
+          activated >= Math.max(2, groupTabCount - 1),
+          `${activated}/${groupTabCount} tabs activated on click`,
+        ));
+      }
+
+      // ── FUNCTIONAL: applying a feature filter changes the unit grid ──
+      const countUnitCards = () => page.evaluate(() => document.querySelectorAll('article').length);
+      const firstFeature = featureBoxes.first();
+      if ((await firstFeature.count()) > 0) {
+        const before = await countUnitCards();
+        await firstFeature.scrollIntoViewIfNeeded({ timeout: 3000 }).catch(() => {});
+        await firstFeature.click({ timeout: 4000 }).catch(() => {});
+        // Poll up to ~3s for the grid to react.
+        let after = before;
+        for (let i = 0; i < 6 && after === before; i++) { await page.waitForTimeout(500); after = await countUnitCards(); }
+        // Restore (uncheck) so STEP 3 (reserve) / STEP 4 (rent) see the full grid.
+        await firstFeature.click({ timeout: 4000 }).catch(() => {});
+        let restored = await countUnitCards();
+        for (let i = 0; i < 6 && restored < before; i++) { await page.waitForTimeout(500); restored = await countUnitCards(); }
+        data.filterCounts = { before, after, restored };
+        checks.push(check(
+          'applying a feature filter changes the unit grid',
+          after !== before && after >= 0,
+          `unit cards ${before} → ${after} (restored to ${restored})`,
+        ));
+      }
     } catch (err) {
       errors.push((err as Error).message);
     }

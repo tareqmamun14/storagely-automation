@@ -194,6 +194,58 @@ export class LiveFacilityPage {
     await expect(heading).toBeVisible({ timeout: 10_000 });
   }
 
+  /**
+   * Reserve modal — click the first unit's Reserve button and verify the
+   * "Finalize Reservation" modal opens with the selected unit + a reservation
+   * form, then close it (Escape) and confirm it dismisses. Read-only: we never
+   * submit a reservation. Returns granular checks for the journey reporter.
+   */
+  async verifyReserveModal(): Promise<{ ok: boolean; checks: Array<{ name: string; passed: boolean; detail: string }> }> {
+    const page = this.page;
+    const checks: Array<{ name: string; passed: boolean; detail: string }> = [];
+
+    // First unit-card Reserve button. The accessible name includes the size
+    // ("Reserve, 10x10 Climate"), so match the VISIBLE text instead — exactly
+    // "Reserve", which also excludes the U-Haul "Reserve Now".
+    const reserveBtn = page.locator('button').filter({ hasText: /^Reserve$/ }).first();
+    const hasReserve = (await reserveBtn.count()) > 0;
+    checks.push({ name: 'Reserve button present', passed: hasReserve, detail: hasReserve ? 'ok' : '(none)' });
+    if (!hasReserve) return { ok: false, checks };
+
+    await reserveBtn.scrollIntoViewIfNeeded({ timeout: 5000 }).catch(() => {});
+    await reserveBtn.click({ timeout: 10_000 }).catch(() => {});
+
+    const dialog = page.locator('[role="dialog"]').first();
+    let opened = false;
+    try { await dialog.waitFor({ state: 'visible', timeout: 8000 }); opened = true; } catch { /* no modal */ }
+    checks.push({ name: 'Reserve opens a modal', passed: opened, detail: opened ? 'role=dialog appeared' : 'no modal after Reserve click' });
+
+    if (opened) {
+      const dlgText = (await dialog.innerText().catch(() => '')) || '';
+      const hasHeading = /finaliz\w*\s+reservation|reservation/i.test(dlgText)
+        || (await page.getByRole('heading', { name: /finaliz\w*\s+reservation|reservation/i }).count()) > 0;
+      const hasSelectedUnit = /selected unit/i.test(dlgText) || /\d{1,3}\s*['′]?\s*[x×]\s*\d{1,3}/i.test(dlgText);
+      const hasForm = (await dialog.getByRole('textbox', { name: /first name|email/i }).count()) > 0
+        || /first name|email/i.test(dlgText);
+      checks.push({ name: 'modal shows "Finalize Reservation"', passed: hasHeading, detail: hasHeading ? 'ok' : 'no reservation heading' });
+      checks.push({ name: 'modal shows the selected unit', passed: hasSelectedUnit, detail: hasSelectedUnit ? 'ok' : 'no selected-unit details' });
+      checks.push({ name: 'modal has a reservation form', passed: hasForm, detail: hasForm ? 'name/email fields present' : 'no form fields' });
+
+      // Close it so downstream steps see a clean page.
+      await page.keyboard.press('Escape').catch(() => {});
+      await page.waitForTimeout(600);
+      let stillOpen = await dialog.isVisible().catch(() => false);
+      if (stillOpen) {
+        await page.getByRole('button', { name: /close|cancel/i }).first().click({ timeout: 2000 }).catch(() => {});
+        await page.waitForTimeout(300);
+        stillOpen = await dialog.isVisible().catch(() => false);
+      }
+      checks.push({ name: 'modal closes', passed: !stillOpen, detail: stillOpen ? 'still visible after Escape/close' : 'closed' });
+    }
+
+    return { ok: checks.every(c => c.passed), checks };
+  }
+
   // ── Quality checks ─────────────────────────────────────────────────────
 
   getConsoleErrors(): string[] {

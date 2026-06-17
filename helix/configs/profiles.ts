@@ -36,11 +36,12 @@ export interface RentHandoff {
   hrefContains: string;
   /**
    * true  → drive the on-page V2 SPC form to submit (Safeguard).
-   * false → stop after verifying the checkout START page renders (Mini Mall
-   *         Yardi: captcha-gated; full checkout is covered by
-   *         tests/miniMallRental.spec.ts).
+   * false → drive the Yardi v2 checkout instead (Mini Mall): fill tenant
+   *         details → manual captcha → Continue → fetch the rent result/error.
    */
   drivesSpcForm: boolean;
+  /** true → the checkout is gated by a manual hCaptcha (test timeout removed). */
+  manualCaptcha: boolean;
 }
 
 /** Nav expectations that differ by client template. */
@@ -59,6 +60,11 @@ export interface NavProfile {
    * Contact. Empty = don't exercise any dropdown.
    */
   dropdownTriggers: RegExp[];
+  /**
+   * Header action CTAs to assert are present (e.g. Pay Online / Rent Unit /
+   * Call Us). Empty = none to assert.
+   */
+  actionCtas: RegExp[];
 }
 
 export interface ClientProfile {
@@ -107,6 +113,7 @@ export const DEFAULT_PROFILE: ClientProfile = {
     expectContactDropdown: true,
     expectMyAccount: true,
     dropdownTriggers: [],
+    actionCtas: [],
   },
   rentHandoff: {
     label: 'V2 SPC /step-four',
@@ -115,6 +122,7 @@ export const DEFAULT_PROFILE: ClientProfile = {
     unitParam: 'unit_id',
     hrefContains: '/step-four',
     drivesSpcForm: true,
+    manualCaptcha: false,
   },
   consoleAllowlist: HELIX_CONSOLE_ALLOWLIST,
 };
@@ -131,7 +139,8 @@ const PROFILES: Record<string, ClientProfile> = {
       expectBlogLink: false,        // Blog lives in the footer, not the top nav
       expectContactDropdown: false, // no Contact dropdown
       expectMyAccount: true,        // present as a dropdown BUTTON, not a direct link
-      dropdownTriggers: [/^find storage$/i, /^resources$/i, /^about$/i],
+      dropdownTriggers: [/^find storage$/i, /^getting started$/i, /^resources$/i, /^about$/i],
+      actionCtas: [/pay online/i, /rent unit/i, /call us/i],
     },
     rentHandoff: {
       label: 'Yardi v2 /yardi/start',
@@ -140,7 +149,8 @@ const PROFILES: Record<string, ClientProfile> = {
       unitParam: 'unit',
       requireType: 'rent',
       hrefContains: '/yardi/start',
-      drivesSpcForm: false,         // stop at the Yardi checkout entry (captcha-gated)
+      drivesSpcForm: false,         // drive the Yardi v2 checkout (manual captcha)
+      manualCaptcha: true,
     },
     // Same Helix-wide console artifacts as the baseline (the reviews-API 403 is
     // why ReviewsSection treats empty review bodies as info, not a failure).
