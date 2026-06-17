@@ -1,5 +1,6 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { ISectionDetector, SectionContext, SectionResult, SECTION_DETECTORS, getDetector } from './sections';
+import { getRentHandoff, RentHandoff } from '../configs/profiles';
 
 /**
  * LiveFacilityPage — page object for a published Helix v4 facility page.
@@ -18,7 +19,14 @@ export class LiveFacilityPage {
   constructor(page: Page) {
     this.page = page;
     this.page.on('console', msg => {
-      if (msg.type() === 'error') this.consoleErrors.push(msg.text());
+      if (msg.type() === 'error') {
+        // Append the source/resource URL — for "Failed to load resource" 403s
+        // the URL lives in location(), not text(), and client allow-lists need
+        // it to scope (e.g. ignore only specific Atlas-API endpoints, not all 403s).
+        const loc = msg.location();
+        const url = loc && loc.url ? ` ${loc.url}` : '';
+        this.consoleErrors.push(msg.text() + url);
+      }
     });
   }
 
@@ -124,30 +132,56 @@ export class LiveFacilityPage {
 
   // ── Unit / Rent assertions (used by rent-journey spec) ────────────────
 
+  // Backward-compatible Safeguard-flavored helpers (default rent handoff).
   async expectUnitsVisible() {
-    const rentLink = this.page.getByRole('link', { name: /rent now/i }).first();
-    await expect(rentLink).toBeVisible({ timeout: 15_000 });
+    await this.expectRentLinksVisible(getRentHandoff(undefined));
   }
 
   getRentNowLinks(): Locator {
-    return this.page.getByRole('link', { name: /rent now/i });
+    return this.page.getByRole('link', { name: getRentHandoff(undefined).rentLinkText });
   }
 
   async getRentNowHrefs(): Promise<string[]> {
-    const hrefs = await this.page.evaluate(() => {
-      const links = Array.from(document.querySelectorAll('a'));
-      return links
-        .filter(a => /rent now/i.test(a.textContent || ''))
-        .map(a => a.href)
-        .filter(Boolean);
-    });
-    return [...new Set(hrefs)];
+    return this.getRentHrefs(getRentHandoff(undefined));
   }
 
   async getFirstRentNowHref(): Promise<string> {
     const hrefs = await this.getRentNowHrefs();
     expect(hrefs.length, 'No Rent Now links found on page').toBeGreaterThan(0);
     return hrefs[0];
+  }
+
+  // ── Client-aware rent helpers (Safeguard SPC + Mini Mall Yardi, …) ──────
+  //
+  // A unit card's Rent CTA is identified by BOTH its visible text (e.g.
+  // "Rent Now" / "Rent") AND its href matching the client's handoff path
+  // (/step-four | /yardi/start). The href filter is what keeps a stray top-nav
+  // "Rent Unit" link (href="#") out of the result — text alone is ambiguous.
+
+  rentLinksFor(handoff: RentHandoff): Locator {
+    return this.page.getByRole('link', { name: handoff.rentLinkText });
+  }
+
+  async expectRentLinksVisible(handoff: RentHandoff) {
+    await expect(this.rentLinksFor(handoff).first()).toBeVisible({ timeout: 15_000 });
+  }
+
+  /** Distinct Rent-CTA hrefs for the given client handoff (text + path matched). */
+  async getRentHrefs(handoff: RentHandoff): Promise<string[]> {
+    const textSrc = handoff.rentLinkText.source, textFlags = handoff.rentLinkText.flags;
+    const pathSrc = handoff.pathPattern.source, pathFlags = handoff.pathPattern.flags;
+    const hrefs = await this.page.evaluate(({ textSrc, textFlags, pathSrc, pathFlags }) => {
+      const textRe = new RegExp(textSrc, textFlags);
+      const pathRe = new RegExp(pathSrc, pathFlags);
+      return Array.from(document.querySelectorAll('a'))
+        .filter(a => textRe.test((a.textContent || '').trim()))
+        .map(a => (a as HTMLAnchorElement).href)
+        .filter(href => {
+          if (!href) return false;
+          try { return pathRe.test(new URL(href).pathname); } catch { return false; }
+        });
+    }, { textSrc, textFlags, pathSrc, pathFlags });
+    return [...new Set(hrefs)];
   }
 
   async expectReviewsSection() {
@@ -232,11 +266,21 @@ export class LiveFacilityPage {
 
   // ── V2 handoff validation ─────────────────────────────────────────────
 
-  static validateRentNowUrl(href: string) {
+  /**
+   * Validate a Rent CTA href against the client's checkout-handoff contract.
+   *   • Safeguard (default) → /step-four?unit_id=<positive int>
+   *   • Mini Mall           → /yardi/start?unit=<positive int>&type=rent
+   * Passing no client falls back to the Safeguard contract (existing callers).
+   */
+  static validateRentNowUrl(href: string, client?: string) {
+    const handoff = getRentHandoff(client);
     const url = new URL(href);
-    expect(url.pathname).toContain('/step-four');
-    const unitId = url.searchParams.get('unit_id');
-    expect(unitId, 'unit_id missing from Rent Now URL').toBeTruthy();
-    expect(Number(unitId)).toBeGreaterThan(0);
+    expect(url.pathname, `Rent handoff path should match ${handoff.label}`).toMatch(handoff.pathPattern);
+    const unitId = url.searchParams.get(handoff.unitParam);
+    expect(unitId, `"${handoff.unitParam}" missing from Rent URL (${handoff.label})`).toBeTruthy();
+    expect(Number(unitId), `"${handoff.unitParam}" should be a positive number`).toBeGreaterThan(0);
+    if (handoff.requireType) {
+      expect(url.searchParams.get('type'), `Rent URL should carry ?type=${handoff.requireType}`).toBe(handoff.requireType);
+    }
   }
 }

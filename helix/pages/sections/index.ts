@@ -14,6 +14,11 @@ import { FAQSection } from './FAQSection';
 import { UnitsSection } from './UnitsSection';
 import { GallerySection } from './GallerySection';
 import { FooterSection } from './FooterSection';
+import { FiltersSection } from './FiltersSection';
+import { PromoSection } from './PromoSection';
+import { ReviewsSection } from './ReviewsSection';
+import { UHaulSection } from './UHaulSection';
+import { SeoSection } from './SeoSection';
 
 export const SECTION_DETECTORS: ISectionDetector[] = [
   new NavSection(),
@@ -24,6 +29,12 @@ export const SECTION_DETECTORS: ISectionDetector[] = [
   new FAQSection(),
   new GallerySection(),
   new FooterSection(),
+  // Mini Mall additions (gated per-facility by feature flags).
+  new FiltersSection(),
+  new PromoSection(),
+  new ReviewsSection(),
+  new UHaulSection(),
+  new SeoSection(),
 ];
 
 export function getDetector(id: string): ISectionDetector {
@@ -33,4 +44,8 @@ export function getDetector(id: string): ISectionDetector {
 }
 
 export * from './types';
-export { NavSection, FacilityHeaderSection, CarouselSection, AmenitiesSection, FAQSection, UnitsSection, GallerySection, FooterSection };
+export {
+  NavSection, FacilityHeaderSection, CarouselSection, AmenitiesSection, FAQSection,
+  UnitsSection, GallerySection, FooterSection,
+  FiltersSection, PromoSection, ReviewsSection, UHaulSection, SeoSection,
+};

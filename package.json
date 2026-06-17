@@ -33,7 +33,9 @@
     "run:helix:sections":      "npx playwright test --config=helix/playwright.config.ts --project=live --grep \"Helix . All Sections\"",
     "run:helix:sections:each": "npx playwright test --config=helix/playwright.config.ts --project=live --grep \"Section:\"",
     "run:helix:visual":         "npx playwright test --config=helix/playwright.config.ts --project=live --grep \"Visual baseline\"",
-    "run:helix:visual:update":  "npx playwright test --config=helix/playwright.config.ts --project=live --grep \"Visual baseline\" --update-snapshots"
+    "run:helix:visual:update":  "npx playwright test --config=helix/playwright.config.ts --project=live --grep \"Visual baseline\" --update-snapshots",
+    "run:helix:minimall":          "npx playwright test --config=helix/playwright.config.ts --project=live tests/e2e/ --headed --grep \"Mini Mall\"",
+    "run:helix:minimall:sections": "npx playwright test --config=helix/playwright.config.ts --project=live tests/live/sections/ --headed --grep \"Mini Mall\""
   },
   "keywords": [],
   "author": "",

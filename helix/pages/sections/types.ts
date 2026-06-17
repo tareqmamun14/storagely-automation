@@ -54,6 +54,13 @@ export interface SectionContext {
   facilityId: string;
   facilityName: string;
   url: string;
+  /**
+   * Brand slug (e.g. "safeguard", "minimall"). Detectors resolve per-client
+   * expectations via getClientProfile(ctx.client) — nav layout, amenities
+   * heading, rent handoff, etc. Unknown/empty falls back to the Safeguard
+   * baseline, so existing single-client behavior is preserved.
+   */
+  client: string;
 }
 
 /** Roll all sub-checks up into a pass/fail. */

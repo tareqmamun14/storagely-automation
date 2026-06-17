@@ -89,10 +89,13 @@ export class FacilityHeaderSection implements ISectionDetector {
       // state + 5-digit zip). Single-line restriction prevents accidentally
       // matching a wrapper element that also contains the nav menu.
       const address = await page.evaluate(() => {
-        const all = Array.from(document.querySelectorAll<HTMLElement>('p, div, span, address'))
+        // Address can live in the header band OR a map link (an <a> further down,
+        // e.g. Mini Mall renders the full street+zip only in the Google-Maps link).
+        // Search the upper page (y < 900) and include anchors/list items.
+        const all = Array.from(document.querySelectorAll<HTMLElement>('p, div, span, address, a, li'))
           .filter(el => {
             const r = el.getBoundingClientRect();
-            if (r.y >= 500 || r.width === 0) return false;
+            if (r.y >= 900 || r.width === 0) return false;
             const t = el.innerText?.trim() || '';
             // Single short line (≤ 120 chars), no embedded newlines.
             if (t.includes('\n') || t.length > 120 || t.length < 10) return false;

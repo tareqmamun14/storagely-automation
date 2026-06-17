@@ -46,6 +46,7 @@ export function runSectionSuite(sectionId: string): void {
           facilityId: facility.id,
           facilityName: facility.name,
           url: facility.url,
+          client: facility.client,
         });
 
         printSectionResult(result);
@@ -79,6 +80,11 @@ function featureDisabled(facility: HelixFacility, sectionId: string): boolean {
     sectionId === 'units'     ? 'hasUnits' :
     sectionId === 'gallery'   ? 'hasGallery' :
     sectionId === 'footer'    ? 'hasFooter' :
+    sectionId === 'filters'   ? 'hasFilters' :
+    sectionId === 'promo'     ? 'hasPromo' :
+    sectionId === 'reviews'   ? 'hasReviews' :
+    sectionId === 'uhaul'     ? 'hasUhaul' :
+    sectionId === 'seo'       ? 'hasSeo' :
     null;
   if (!key) return false;
   // If a feature flag is explicitly set to false, skip. If unset, run.

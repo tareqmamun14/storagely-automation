@@ -1,10 +1,13 @@
 import { Page } from '@playwright/test';
 import { ISectionDetector, SectionContext, SectionResult, check } from './types';
+import { getClientProfile } from '../../configs/profiles';
 
 /**
- * Amenities section.
+ * Amenities / Facility-Features section.
  *
- * Anchored on the visible "Amenities" heading. We then walk forward in the
+ * Anchored on the visible features heading — which is client-specific
+ * ("Amenities" for Safeguard, "Facility Features" for Mini Mall), so the
+ * heading pattern comes from the client profile. We then walk forward in the
  * DOM to collect the items, which avoids depending on the exact list
  * container class name (which the editor regenerates).
  */
@@ -19,14 +22,18 @@ export class AmenitiesSection implements ISectionDetector {
     const data: Record<string, unknown> = {};
 
     try {
-      const heading = page.getByRole('heading', { name: /amenit(y|ies)/i }).first();
+      const profile = getClientProfile(ctx.client);
+      const headingRe = profile.amenitiesHeading;
+      const heading = page.getByRole('heading', { name: headingRe }).first();
       const hasHeading = (await heading.count()) > 0;
-      checks.push(check('Amenities heading visible', hasHeading));
+      checks.push(check('Amenities / Facility Features heading visible', hasHeading,
+        hasHeading ? undefined : `no heading matching ${headingRe}`));
 
-      const items = await page.evaluate(() => {
-        // Anchor: first visible Amenities heading
+      const items = await page.evaluate(({ headSrc, headFlags }) => {
+        const headRe = new RegExp(headSrc, headFlags);
+        // Anchor: first visible amenities / facility-features heading
         const headings = Array.from(document.querySelectorAll<HTMLElement>('h1, h2, h3, h4'))
-          .filter(h => /amenit(y|ies)/i.test(h.innerText || ''));
+          .filter(h => headRe.test(h.innerText || ''));
         const anchor = headings.find(h => {
           const r = h.getBoundingClientRect();
           return r.width > 0 && r.height > 0;
@@ -52,11 +59,14 @@ export class AmenitiesSection implements ISectionDetector {
           const txt = (el.innerText || '').trim();
           if (!txt || txt.length > 40 || txt.includes('\n')) continue;
           if (blocklist.has(txt)) continue;
-          if (/^[A-Z][a-zA-Z- ]{3,38}$/.test(txt) && !collected.includes(txt)) collected.push(txt);
+          // Allow digits, &, / and apostrophes so labels like "24/7 Video
+          // Surveillance" and "Dollies & Handcarts" are captured, not just
+          // letter-only amenities.
+          if (/^[A-Z0-9][a-zA-Z0-9\-/&' ]{2,38}$/.test(txt) && !collected.includes(txt)) collected.push(txt);
           if (collected.length >= 40) break;
         }
         return collected;
-      });
+      }, { headSrc: headingRe.source, headFlags: headingRe.flags });
 
       data.items = items;
       data.count = items.length;

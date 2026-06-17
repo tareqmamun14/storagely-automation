@@ -38,13 +38,16 @@ export class FAQSection implements ISectionDetector {
     const data: Record<string, unknown> = {};
 
     try {
-      const heading = page.getByRole('heading', { name: /frequently asked questions|^faq$/i }).first();
+      // FAQ heading text varies by client: Safeguard = "Frequently Asked
+      // Questions", Mini Mall = "Have A Question?".
+      const FAQ_HEADING = /frequently asked questions|have a question|^faq$/i;
+      const heading = page.getByRole('heading', { name: FAQ_HEADING }).first();
       let hasHeading = (await heading.count()) > 0;
       if (!hasHeading) {
-        // Fallback: any text node containing "Frequently Asked Questions" near a list.
+        // Fallback: any text node containing a FAQ-ish heading near a list.
         hasHeading = await page.evaluate(() => {
           const el = Array.from(document.querySelectorAll<HTMLElement>('*'))
-            .find(e => /frequently asked questions/i.test(e.innerText?.trim() || ''));
+            .find(e => /frequently asked questions|have a question/i.test(e.innerText?.trim() || ''));
           return !!el;
         });
       }
@@ -59,7 +62,7 @@ export class FAQSection implements ISectionDetector {
       // Count question rows — text ending in "?" within a reasonable y-range below the heading.
       const questions = await page.evaluate(() => {
         const anchor = Array.from(document.querySelectorAll<HTMLElement>('h1, h2, h3, h4'))
-          .find(h => /frequently asked questions|^faq$/i.test(h.innerText?.trim() || ''));
+          .find(h => /frequently asked questions|have a question|^faq$/i.test(h.innerText?.trim() || ''));
         if (!anchor) return [];
         const r0 = anchor.getBoundingClientRect();
         const candidates = Array.from(document.querySelectorAll<HTMLElement>('button, summary, div, p, span, h3, h4, dt, li'));

@@ -40,16 +40,34 @@ export interface HelixFacility {
     hasFooter?: boolean;
     hasNav?: boolean;
     hasHeader?: boolean;
+    // Mini Mall template sections (absent on the Safeguard baseline).
+    hasFilters?: boolean;
+    hasPromo?: boolean;
+    hasUhaul?: boolean;
+    hasSeo?: boolean;
   };
 }
 
-/** Full feature set — Helix renders the same template for every client, so most
- *  facilities ship every section. Override individual flags only for genuine
- *  empty-state facilities. */
+/**
+ * Baseline feature set (the Safeguard template). Ships the shared sections;
+ * the Mini-Mall-only sections are OFF here so baseline facilities skip them
+ * cleanly. Custom ad-hoc URLs inherit this conservative set too.
+ */
 const ALL_FEATURES = {
-  hasUnits: true, hasReviews: true, hasAmenities: true,
-  hasFaq: true, hasCarousel: true, hasGallery: true,
-  hasFooter: true, hasNav: true, hasHeader: true,
+  hasUnits: true, hasAmenities: true, hasFaq: true, hasCarousel: true,
+  hasGallery: true, hasFooter: true, hasNav: true, hasHeader: true,
+  // Mini-Mall-only sections — off on the baseline.
+  hasReviews: false, hasFilters: false, hasPromo: false, hasUhaul: false, hasSeo: false,
+} as const;
+
+/**
+ * Mini Mall feature set — the baseline shared sections PLUS the Mini-Mall
+ * template's own sections (filter sidebar, promo strip, U-Haul block, customer
+ * reviews, SEO copy).
+ */
+const MINIMALL_FEATURES = {
+  ...ALL_FEATURES,
+  hasReviews: true, hasFilters: true, hasPromo: true, hasUhaul: true, hasSeo: true,
 } as const;
 
 /**
@@ -79,6 +97,25 @@ export const FACILITIES: HelixFacility[] = [
     expectedHeading: /safeguard.*self storage|west end|west side|bridgeport/i,
     features: { ...ALL_FEATURES },
   },
+
+  // Mini Mall — the biggest client; its Helix listing page reuses the V4
+  // template but with the Mini Mall layout (filter sidebar, promo strip,
+  // U-Haul block, customer reviews, SEO copy) and a Yardi v2 checkout handoff
+  // (/yardi/start). The 32 launch sites share this exact layout — add one row
+  // each (same MINIMALL_FEATURES, only url + expected text differ).
+  {
+    id: 'minimall-carroll-columbus-lancaster',
+    name: 'Mini Mall — Carroll, OH (Columbus-Lancaster Road)',
+    client: 'minimall',
+    env: 'production',
+    url: 'https://minimallstorage.com/storage-units/ohio/carroll/columbus-lancaster-road',
+    expectedTitle: /self storage|lancaster|mini mall/i,
+    expectedHeading: /self storage units carroll|mini mall storage|columbus-lancaster/i,
+    features: { ...MINIMALL_FEATURES },
+  },
+  // TODO(minimall): when a Mini Mall Helix staging mirror is available, add the
+  // matching { …, env: 'test', url: 'https://…' } row here so HELIX_ENV=test
+  // exercises the same suite pre-production.
 
   // ── TEST / STAGE (*.test.getstoragely.com) ──────────────────────────────
   {

@@ -1,18 +1,23 @@
 import { Page } from '@playwright/test';
 import { ISectionDetector, SectionContext, SectionResult, check } from './types';
+import { getRentHandoff } from '../../configs/profiles';
 
 /**
  * Unit list — the highest-value section to test, since it owns the conversion
  * funnel. For each visible unit card we capture:
- *   • dimensions ("5'x5'") and square footage ("25 sq ft")
- *   • features ("Climate-Controlled", "Elevator Access")
- *   • promo text ("50% Off 2 Months")
- *   • the TWO prices (web rate + standard rate)
- *   • Rent Now link target (validated against the V2 handoff URL contract)
+ *   • dimensions ("5'x5'" / "10' × 10'") and square footage ("25 sq ft")
+ *   • features ("Climate-Controlled", "Drive Up Unit")
+ *   • promo text ("50% Off 2 Months", "4 Weeks Free")
+ *   • the TWO prices (web/intro rate ≤ standard rate)
+ *   • Rent CTA target, validated against the client's checkout-handoff contract
  *   • Reserve button presence
  *
- * Critical: we DO NOT click Rent Now in this section — the V2 SPC flow has
- * its own dedicated test. We verify the V4 → V2 URL contract only.
+ * The Rent CTA + handoff contract are client-specific (see profiles.ts):
+ *   • Safeguard → link "Rent Now" → /step-four?unit_id=<int>
+ *   • Mini Mall → link "Rent"     → /yardi/start?unit=<int>&type=rent
+ *
+ * Critical: we DO NOT click the Rent CTA in this section — the checkout flow
+ * has its own dedicated test. We verify the V4 → checkout URL contract only.
  */
 export class UnitsSection implements ISectionDetector {
   readonly id = 'units';
@@ -25,8 +30,10 @@ export class UnitsSection implements ISectionDetector {
     const data: Record<string, unknown> = {};
 
     try {
-      // Wait until at least one Rent Now appears — guards against lazy-rendered grids.
-      await page.getByRole('link', { name: /rent now/i }).first()
+      const handoff = getRentHandoff(ctx.client);
+
+      // Wait until at least one Rent CTA appears — guards against lazy-rendered grids.
+      await page.getByRole('link', { name: handoff.rentLinkText }).first()
         .waitFor({ state: 'visible', timeout: 15_000 })
         .catch(() => { /* unit grid may legitimately be empty — keep going */ });
 
@@ -44,13 +51,22 @@ export class UnitsSection implements ISectionDetector {
         });
       });
 
-      const cards = await page.evaluate(() => {
-        // Anchor the unit list off the Rent Now CTAs — every card has one.
+      const cards = await page.evaluate(({ textSrc, textFlags, pathSrc, pathFlags }) => {
+        const rentTextRe = new RegExp(textSrc, textFlags);
+        const rentPathRe = new RegExp(pathSrc, pathFlags);
+        // A real Rent CTA matches BOTH the client's link text AND its checkout
+        // path — the path filter keeps a stray top-nav "Rent Unit" link
+        // (href="#") out of the card set.
+        const matchesRentCta = (a: HTMLAnchorElement) => {
+          if (!rentTextRe.test((a.innerText || '').trim())) return false;
+          try { return rentPathRe.test(new URL(a.href).pathname); } catch { return false; }
+        };
+        // Anchor the unit list off the Rent CTAs — every card has one.
         // Responsive layouts often render TWO copies of each card (mobile + desktop
-        // variant), each with its own Rent Now link + Reserve button. We dedupe
-        // by rentHref since the same unit always points at the same V2 unit_id URL.
+        // variant), each with its own Rent link + Reserve button. We dedupe by
+        // rentHref since the same unit always points at the same checkout URL.
         const rentLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('a'))
-          .filter(a => /rent now/i.test(a.innerText || ''));
+          .filter(matchesRentCta);
         const seen = new Set<HTMLElement>();
         const byHref = new Map<string, number>(); // rentHref → index in `out`
         const out: Array<{
@@ -74,8 +90,8 @@ export class UnitsSection implements ISectionDetector {
           for (let i = 0; i < 15 && cur; i++) {
             const text = cur.innerText || '';
             const hasPrice = /\$\s*\d/.test(text);
-            const hasDim   = /\d{1,3}\s*['′]?\s*x\s*\d{1,3}/i.test(text);
-            const rentLinkCount = (text.match(/rent now/gi) || []).length;
+            const hasDim   = /\d{1,3}\s*['′]?\s*[x×]\s*\d{1,3}/i.test(text);
+            const rentLinkCount = Array.from(cur.querySelectorAll('a')).filter(matchesRentCta).length;
             const reserveCount  = (text.match(/\breserve\b/gi) || []).length;
             // Crossed into the neighbour card — back off to the previous-good level.
             // Each unit card may have at most 2 Rent Now occurrences (mobile +
@@ -94,8 +110,9 @@ export class UnitsSection implements ISectionDetector {
 
           const text = (root.innerText || '').trim();
 
-          // Dimensions like 5'x5', 10'x20', 10x15 — apostrophes optional.
-          const dimM = text.match(/(\d{1,3})['']?\s*x\s*(\d{1,3})['']?/i);
+          // Dimensions like 5'x5', 10'x20', 10x15, 10' × 10' — apostrophes
+          // optional, separator may be "x" or the "×" multiplication sign.
+          const dimM = text.match(/(\d{1,3})['′]?\s*[x×]\s*(\d{1,3})['′]?/i);
           // Square footage like "25 sq ft"
           const sqM  = text.match(/(\d{2,5})\s*sq\.?\s*ft/i);
           // Promo — first line containing "Off" or "Free" or percentage
@@ -142,6 +159,9 @@ export class UnitsSection implements ISectionDetector {
           }
         }
         return out;
+      }, {
+        textSrc: handoff.rentLinkText.source, textFlags: handoff.rentLinkText.flags,
+        pathSrc: handoff.pathPattern.source, pathFlags: handoff.pathPattern.flags,
       });
 
       data.unitCount = cards.length;
@@ -170,32 +190,42 @@ export class UnitsSection implements ISectionDetector {
         true,
         hasSort ? 'sort button visible' : 'not configured for this facility',
       ));
+      // Safeguard renders a "Filters" button above the grid (hard check). Mini
+      // Mall uses a persistent filter sidebar instead — covered by the dedicated
+      // Filters section — so the button is informational there.
+      const filterButtonExpected = ctx.client !== 'minimall';
       checks.push(check(
         'Filter control present above unit list',
-        hasFilter,
-        hasFilter ? 'filter button visible' : '(missing)',
+        filterButtonExpected ? hasFilter : true,
+        filterButtonExpected
+          ? (hasFilter ? 'filter button visible' : '(missing)')
+          : (hasFilter ? 'filter button visible' : 'sidebar filters — see Filters section'),
       ));
 
       if (cards.length > 0) {
-        // Every card should expose a Rent Now href.
+        // Every card should expose a Rent CTA href.
         const missingHref = cards.filter(c => !c.rentHref);
         checks.push(check(
-          'every card has a Rent Now link',
+          'every card has a Rent link',
           missingHref.length === 0,
           missingHref.length ? `${missingHref.length} cards missing href` : 'ok',
         ));
 
-        // V2 handoff URL contract: /step-four?unit_id=<positive int>
+        // Checkout-handoff URL contract (client-specific):
+        //   Safeguard → /step-four?unit_id=<positive int>
+        //   Mini Mall → /yardi/start?unit=<positive int>&type=rent
         const badRent = cards.filter(c => {
           try {
             const u = new URL(c.rentHref);
-            if (!u.pathname.includes('/step-four')) return true;
-            const id = u.searchParams.get('unit_id');
-            return !id || Number(id) <= 0;
+            if (!handoff.pathPattern.test(u.pathname)) return true;
+            const id = u.searchParams.get(handoff.unitParam);
+            if (!id || Number(id) <= 0) return true;
+            if (handoff.requireType && u.searchParams.get('type') !== handoff.requireType) return true;
+            return false;
           } catch { return true; }
         });
         checks.push(check(
-          'all Rent Now links target /step-four with valid unit_id',
+          `all Rent links target ${handoff.label} with valid ${handoff.unitParam}`,
           badRent.length === 0,
           badRent.length ? `${badRent.length} bad URL(s); sample: ${badRent[0]?.rentHref}` : 'ok',
         ));
@@ -247,14 +277,14 @@ export class UnitsSection implements ISectionDetector {
             : `${malformedPromo.length} malformed; sample: "${malformedPromo[0]?.promo}"`,
         ));
 
-        // Unique unit_ids across all cards — duplicates would mean broken bindings.
+        // Unique unit ids across all cards — duplicates would mean broken bindings.
         const ids = cards.map(c => {
-          try { return new URL(c.rentHref).searchParams.get('unit_id'); }
+          try { return new URL(c.rentHref).searchParams.get(handoff.unitParam); }
           catch { return null; }
         }).filter(Boolean);
         const unique = new Set(ids);
         checks.push(check(
-          'unit_ids are unique across cards',
+          `${handoff.unitParam} values are unique across cards`,
           unique.size === ids.length,
           `${ids.length} cards, ${unique.size} unique ids`,
         ));

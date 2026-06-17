@@ -25,6 +25,8 @@ import { LiveFacilityPage } from '../../pages/LiveFacilityPage';
 import { getAllFacilities, HelixFacility } from '../../configs/facilities';
 import { getEnabledSections } from '../../configs/sections';
 import { sectionPassed } from '../../pages/sections/types';
+import { getClientProfile, getRentHandoff } from '../../configs/profiles';
+import { YardiCheckoutStartPage } from '../../pages/YardiCheckoutStartPage';
 import { RentalDetailsPageSinglePage } from '../../../pages/RentalDetailsPage_SPC';
 import { SINGLE_PAGE_USER } from '../../../configs/credentials';
 import {
@@ -121,18 +123,25 @@ test.describe('Helix Facility Journey', () => {
           }, 'Scroll the page and check for broken/missing images (carousel off-screen slides are excluded)');
 
           if (facility.features?.hasUnits !== false) {
-            await collector.runCheck('Units + Rent Now links', async () => {
-              await live.expectUnitsVisible();
-              const hrefs = await live.getRentNowHrefs();
-              expect(hrefs.length, 'no Rent Now links').toBeGreaterThan(0);
-              for (const href of hrefs) LiveFacilityPage.validateRentNowUrl(href);
-              return `${hrefs.length} Rent Now links, all valid /step-four URLs`;
-            }, 'Check the units section for Rent Now buttons');
+            await collector.runCheck('Units + Rent links', async () => {
+              const handoff = getRentHandoff(facility.client);
+              await live.expectRentLinksVisible(handoff);
+              const hrefs = await live.getRentHrefs(handoff);
+              expect(hrefs.length, 'no Rent links found').toBeGreaterThan(0);
+              for (const href of hrefs) LiveFacilityPage.validateRentNowUrl(href, facility.client);
+              return `${hrefs.length} Rent links, all valid ${handoff.label}`;
+            }, 'Check the units section for Rent buttons');
           }
 
-          const errs = live.getConsoleErrors();
+          // Console errors — minus this client's benign allow-list (e.g. Mini
+          // Mall's Atlas-API 403s + React #418 hydration warning).
+          const profile = getClientProfile(facility.client);
+          const errs = live.getConsoleErrors()
+            .filter(e => !profile.consoleAllowlist.some(re => re.test(e)));
           collector.check('Console errors', errs.length === 0,
-            errs.length === 0 ? 'none' : errs.slice(0, 3).join('; '),
+            errs.length === 0
+              ? (profile.consoleAllowlist.length ? 'none (client allow-list applied)' : 'none')
+              : errs.slice(0, 3).join('; '),
             errs.length > 0 ? 'Open browser DevTools console on the facility page' : undefined);
 
           for (const ck of collector.activeChecks) {
@@ -159,6 +168,7 @@ test.describe('Helix Facility Journey', () => {
 
           const results = await live.verifyAllSections({
             facilityId: facility.id, facilityName: facility.name, url: facility.url,
+            client: facility.client,
           }, ids);
 
           collector.addSectionResults(results, sectionLabels);
@@ -181,26 +191,41 @@ test.describe('Helix Facility Journey', () => {
         if (layerOn('rent')) {
           collector.beginStep('rent', 'Rent Flow');
 
-          const rentLink = page.getByRole('link', { name: /rent now/i }).first();
+          const handoff = getRentHandoff(facility.client);
+
+          // Safeguard's Rent CTA is uniquely "Rent Now"; Mini Mall's link reads
+          // "Rent" (which also matches a #-only top-nav "Rent Unit"), so target
+          // the Mini Mall link by its checkout href to be safe.
+          const rentLink = handoff.drivesSpcForm
+            ? page.getByRole('link', { name: /rent now/i }).first()
+            : page.locator(`a[href*="${handoff.hrefContains}"]`).first();
           await rentLink.scrollIntoViewIfNeeded({ timeout: 10_000 });
           await page.waitForTimeout(300);
           const beforeUrl = page.url();
           await rentLink.click({ timeout: 15_000 });
 
           try {
-            await page.waitForURL(/step-four/, { timeout: 30_000 });
+            // 'commit' (not the default 'load'): we only need the URL to change.
+            // The checkout page is heavy (hCaptcha + external scripts) and rarely
+            // fires 'load' within 30s, which would falsely read as "didn't navigate".
+            await page.waitForURL(handoff.pathPattern, {
+              timeout: 30_000,
+              waitUntil: handoff.drivesSpcForm ? 'load' : 'commit',
+            });
           } catch {
-            collector.check('Navigate to /step-four', false,
+            collector.check(`Navigate to ${handoff.label}`, false,
               `Did not navigate. Before: ${beforeUrl} — After: ${page.url()}`,
-              'Click any "Rent Now" button on the facility page and check if it redirects to /step-four');
+              `Click a Rent button on the facility page and confirm it lands on ${handoff.label}`);
             throw new Error(
-              `Rent Now did not navigate to /step-four.\n` +
+              `Rent did not navigate to ${handoff.label}.\n` +
               `   before: ${beforeUrl}\n   after:  ${page.url()}`,
             );
           }
           await page.waitForLoadState('networkidle', { timeout: 30_000 }).catch(() => {});
-          collector.check('Navigate to /step-four', true, page.url());
+          collector.check(`Navigate to ${handoff.label}`, true, page.url());
 
+          if (handoff.drivesSpcForm) {
+          // ── Safeguard: drive the on-page V2 SPC form to submit ──
           const spcForm = new RentalDetailsPageSinglePage(page);
           await spcForm.fillCompleteSinglePageForm({
             firstName:           SINGLE_PAGE_USER.firstName,
@@ -234,6 +259,21 @@ test.describe('Helix Facility Journey', () => {
             `Result: ${result || '(no response)'}`,
             typeof result !== 'string' ? 'Check the Rent Now submit button and payment validation on /step-four' : undefined);
           expect(typeof result === 'string', 'expected a string submit result').toBe(true);
+          } else {
+            // ── Mini Mall: verify the Yardi checkout ENTRY rendered, then STOP.
+            // Captcha-gated; the full Yardi checkout is covered by
+            // tests/miniMallRental.spec.ts. (Helix rule: stop at the handoff —
+            // don't drive the checkout form.)
+            const yardi = new YardiCheckoutStartPage(page);
+            const handoffResult = await yardi.verifyHandoff(facility.expectedHeading);
+            for (const c of handoffResult.checks) {
+              collector.check(c.name, c.passed, c.detail,
+                c.passed ? undefined : 'Inspect the /yardi/start checkout entry page');
+            }
+            for (const c of handoffResult.checks) {
+              if (!c.passed) expect.soft(false, `Handoff: ${c.name} — ${c.detail}`).toBe(true);
+            }
+          }
 
           collector.endStep();
         } else {

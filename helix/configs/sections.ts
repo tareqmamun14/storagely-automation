@@ -48,7 +48,7 @@ export const SECTIONS: SectionDef[] = [
   {
     id: 'units',
     label: 'Unit List + Rent / Reserve',
-    description: 'Expect: ≥1 unit card with dimensions, sq ft, features, promo, two prices (web ≤ standard), a Rent Now link → valid /step-four?unit_id V2 handoff, a Reserve button, and unique unit_ids across cards.',
+    description: 'Expect: ≥1 unit card with dimensions, features, promo, two prices (web/intro ≤ standard), a Rent link → valid checkout handoff (Safeguard /step-four?unit_id · Mini Mall /yardi/start?unit&type=rent), a Reserve button, and unique unit ids across cards.',
     order: 5,
   },
   {
@@ -68,6 +68,43 @@ export const SECTIONS: SectionDef[] = [
     label: 'Footer',
     description: 'Expect: footer with logo + phone, social links, the Storage Types / Resources / About / Contact link columns, and a copyright line.',
     order: 8,
+  },
+
+  // ── Mini Mall additions ─────────────────────────────────────────────────
+  // Sections present on the Mini Mall template but not the Safeguard baseline.
+  // Gated per-facility by feature flags (hasFilters / hasPromo / hasReviews /
+  // hasUhaul / hasSeo) so they are skipped cleanly on facilities that lack them.
+  // Listed after the baseline sections (order 9-13); the baseline orders are
+  // left untouched, and the control-panel section parser keys on integer order.
+  {
+    id: 'filters',
+    label: 'Unit Filters',
+    description: 'Expect: a filter sidebar — Group-by tabs (Sm·Md·Lg / Unit Feature / Exact Size), Unit Feature + Unit Size checkboxes with live (N) counts, Storage Usage options, a Card/Row layout toggle, and quick-filter chips above the grid.',
+    order: 9,
+  },
+  {
+    id: 'promo',
+    label: 'Promotions',
+    description: 'Expect: a promo banner image that loads (no broken/token alt), a Featured / Limited-time deal rail, ≥1 "Weeks Free" badge on a unit card, and the pricing disclaimer footnote.',
+    order: 10,
+  },
+  {
+    id: 'uhaul',
+    label: 'U-Haul Rental',
+    description: 'Expect: a U-Haul Rental block with a loaded truck image, a "Starting at $X" price, and a "Reserve Now" CTA.',
+    order: 11,
+  },
+  {
+    id: 'reviews',
+    label: 'Customer Reviews',
+    description: 'Expect: a Customer Reviews block with an aggregate rating + count and ≥1 reviewer card (name + star rating). Review body text is reported (info) — see ReviewsSection note on the Atlas reviews-API 403 under automation.',
+    order: 12,
+  },
+  {
+    id: 'seo',
+    label: 'SEO Content',
+    description: 'Expect: the bottom long-form copy — ≥2 headed prose sections, ≥1 substantial paragraph, internal links, and no unresolved {tokens}.',
+    order: 13,
   },
 ];
 

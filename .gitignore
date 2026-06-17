@@ -18,6 +18,9 @@ scan-progress.txt
 # Helix test results
 helix/test-results/
 
+# Playwright MCP inspection artifacts (local only)
+.playwright-mcp/
+
 # Dependencies
 node_modules/
 
