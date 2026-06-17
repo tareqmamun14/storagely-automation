@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test';
-import { ISectionDetector, SectionContext, SectionResult, check } from './types';
+import { ISectionDetector, SectionContext, SectionResult, check, settleImages } from './types';
 import { getRentHandoff } from '../../configs/profiles';
 
 /**
@@ -37,19 +37,10 @@ export class UnitsSection implements ISectionDetector {
         .waitFor({ state: 'visible', timeout: 15_000 })
         .catch(() => { /* unit grid may legitimately be empty — keep going */ });
 
-      // Trigger a lazy-load by scrolling through the page.
-      await page.evaluate(() => {
-        return new Promise<void>(resolve => {
-          let y = 0;
-          const step = () => {
-            window.scrollTo(0, y);
-            y += 600;
-            if (y < document.body.scrollHeight) setTimeout(step, 60);
-            else { window.scrollTo(0, 0); setTimeout(() => resolve(), 200); }
-          };
-          step();
-        });
-      });
+      // Trigger every lazy unit-card image to fetch and wait for it to settle,
+      // so the per-card "image loaded" check below doesn't false-flag below-the-
+      // fold cards that simply hadn't loaded yet.
+      await settleImages(page);
 
       const cards = await page.evaluate(({ textSrc, textFlags, pathSrc, pathFlags }) => {
         const rentTextRe = new RegExp(textSrc, textFlags);

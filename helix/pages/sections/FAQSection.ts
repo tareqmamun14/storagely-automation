@@ -1,25 +1,6 @@
 import { Page } from '@playwright/test';
 import { ISectionDetector, SectionContext, SectionResult, check } from './types';
 
-/** Measure the FAQ container height around a question — used to detect expansion. */
-async function measureFaqBlockHeight(page: Page, question: string): Promise<number> {
-  return page.evaluate((q) => {
-    const els = Array.from(document.querySelectorAll<HTMLElement>('*'))
-      .filter(el => (el.innerText || '').trim() === q.trim());
-    if (els.length === 0) return 0;
-    // Walk up to find the smallest ancestor that contains both the question
-    // text AND a sibling/answer container. Use bounding-rect height as a proxy.
-    let target: HTMLElement | null = els[0].parentElement;
-    let best = els[0].getBoundingClientRect().height;
-    for (let i = 0; i < 4 && target; i++) {
-      const h = target.getBoundingClientRect().height;
-      if (h > best) best = h;
-      target = target.parentElement;
-    }
-    return best;
-  }, question);
-}
-
 /**
  * FAQ section.
  *
@@ -87,66 +68,102 @@ export class FAQSection implements ISectionDetector {
         questions.length === 0 ? '(no question rows detected)' : `${questions.length} questions`,
       ));
 
-      // Heuristic: try clicking the first question to confirm it toggles an answer.
-      // We measure expansion by either aria-expanded toggling OR the visible answer
-      // text height growing. Many Helix v4 FAQ templates don't use aria-expanded,
-      // so a missing attribute is not a failure — we only fail when the row IS a
-      // button AND aria-expanded is wired AND it doesn't change on click.
+      // Click the first question and assert a real expand⇄collapse round-trip.
+      //
+      // FAQ accordions in the wild signal "open" three different ways, so we read
+      // whichever applies (in priority order):
+      //   1. aria-expanded on the trigger button  (semantic, Safeguard)
+      //   2. an answer panel's open-state — an `active`/`open` class, or a
+      //      max-height that toggles 0px ⇄ Npx  (Mini Mall uses `.faq-answer.active`
+      //      with max-height 0px ⇄ 500px; the answer text is always in the DOM and
+      //      there is no aria, so the old height-of-ancestors heuristic saw nothing)
+      //   3. the bounding height of the question's container growing  (fallback)
+      // Only a genuinely static list (no button, no signal) is treated as info.
       if (questions.length > 0) {
         try {
-          const firstQ = page.getByRole('button', { name: questions[0] }).first();
-          const hasButton = (await firstQ.count()) > 0;
-          if (hasButton) {
-            const before = await firstQ.getAttribute('aria-expanded');
-            const heightBefore = await measureFaqBlockHeight(page, questions[0]);
-            await firstQ.click({ timeout: 3000 });
-            await page.waitForTimeout(500);
-            const after = await firstQ.getAttribute('aria-expanded');
-            const heightAfter = await measureFaqBlockHeight(page, questions[0]);
-            const ariaToggled = before !== after;
-            const visiblyExpanded = heightAfter > heightBefore + 5;
-            const expanded = ariaToggled || visiblyExpanded;
-            const ariaUnused = before == null && after == null;
-            // If aria-expanded was never present and height didn't grow, treat as
-            // "no interactive answer" — record as info-only, not a failure.
-            if (!expanded && ariaUnused) {
-              checks.push(check(
-                'FAQ row is interactive (collapsible)',
-                true,
-                'aria-expanded not used; height unchanged — likely static FAQ list',
-              ));
-            } else {
-              checks.push(check(
-                'first FAQ row expands when clicked',
-                expanded,
-                `aria=${before}→${after}, height=${heightBefore}→${heightAfter}`,
-              ));
-              // Click again → it should COLLAPSE back (accordion behavior), and
-              // this also restores the page for downstream checks.
-              if (expanded) {
-                await firstQ.click({ timeout: 3000 }).catch(() => {});
-                await page.waitForTimeout(400);
-                const afterCollapse = await firstQ.getAttribute('aria-expanded');
-                const heightCollapsed = await measureFaqBlockHeight(page, questions[0]);
-                const ariaReset = ariaToggled ? afterCollapse === before : true;
-                const heightReset = visiblyExpanded ? heightCollapsed < heightAfter - 5 : true;
-                checks.push(check(
-                  'first FAQ row collapses when clicked again',
-                  ariaReset && heightReset,
-                  `aria=${after}→${afterCollapse}, height=${heightAfter}→${heightCollapsed}`,
-                ));
+          const toggle = await page.evaluate(async (q) => {
+            const wait = (ms: number) => new Promise(r => setTimeout(r, ms));
+            const triggers = Array.from(document.querySelectorAll<HTMLElement>('button, summary, [role="button"]'))
+              .filter(el => (el.innerText || '').trim() === q);
+            const btn = triggers.find(el => el.getClientRects().length > 0) || triggers[0];
+            if (!btn) return { kind: 'no-button' as const };
+
+            // Resolve the answer panel: aria-controls target → next sibling →
+            // a sibling whose class looks like an answer/collapsible region.
+            const panelFor = (b: HTMLElement): HTMLElement | null => {
+              const ac = b.getAttribute('aria-controls');
+              if (ac) { const el = document.getElementById(ac); if (el) return el; }
+              if (b.nextElementSibling) return b.nextElementSibling as HTMLElement;
+              const p = b.parentElement;
+              if (p) return (Array.from(p.children).find(c =>
+                c !== b && /answer|accordion|content|panel|collaps/i.test((c.className || '').toString())) as HTMLElement) || null;
+              return null;
+            };
+            const panel = panelFor(btn);
+
+            // Discrete open-state: 1=open, 0=closed, -1=unknown.
+            const stateOf = (b: HTMLElement, p: HTMLElement | null): number => {
+              const aria = b.getAttribute('aria-expanded');
+              if (aria === 'true') return 1;
+              if (aria === 'false') return 0;
+              if (p) {
+                const cls = (p.className || '').toString();
+                if (/\b(active|open|expanded|show)\b/i.test(cls)) return 1;
+                if (/\b(collaps|closed)\b/i.test(cls)) return 0;
+                const mh = getComputedStyle(p).maxHeight;
+                if (mh && mh !== 'none') return mh === '0px' ? 0 : 1;
+                return p.getBoundingClientRect().height > 2 ? 1 : 0;
               }
-            }
+              return -1;
+            };
+            // Continuous fallback: tallest container height around the button.
+            const heightOf = (b: HTMLElement): number => {
+              let node: HTMLElement | null = b.parentElement, best = 0;
+              for (let i = 0; i < 3 && node; i++) { best = Math.max(best, node.getBoundingClientRect().height); node = node.parentElement; }
+              return best;
+            };
+
+            btn.scrollIntoView({ block: 'center' }); await wait(200);
+            const s0 = stateOf(btn, panel), h0 = heightOf(btn);
+            btn.click(); await wait(500);
+            const s1 = stateOf(btn, panel), h1 = heightOf(btn);
+            btn.click(); await wait(500);
+            const s2 = stateOf(btn, panel), h2 = heightOf(btn);
+            return {
+              kind: 'measured' as const,
+              hasPanel: !!panel,
+              panelCls: panel ? (panel.className || '').toString().slice(0, 40) : null,
+              s0, s1, s2, h0: Math.round(h0), h1: Math.round(h1), h2: Math.round(h2),
+            };
+          }, questions[0]);
+
+          if (toggle.kind === 'no-button') {
+            checks.push(check('FAQ row is interactive (collapsible)', true,
+              'first question not a button — treated as static list'));
           } else {
-            // Question text isn't wrapped in a <button> — likely a static FAQ list.
-            checks.push(check(
-              'FAQ row is interactive (collapsible)',
-              true,
-              'first question not a button — treated as static list',
-            ));
+            const stateKnown = toggle.s0 !== -1;
+            // Expand: first click flips the open-state (or grows the container).
+            const expanded = stateKnown
+              ? toggle.s0 !== toggle.s1
+              : Math.abs(toggle.h1 - toggle.h0) > 5;
+            // Collapse: second click flips it back to the original state.
+            const collapsedBack = stateKnown
+              ? (toggle.s1 !== toggle.s2 && toggle.s2 === toggle.s0)
+              : Math.abs(toggle.h2 - toggle.h1) > 5;
+            const signal = stateKnown
+              ? `state ${toggle.s0}→${toggle.s1}→${toggle.s2}${toggle.panelCls ? ` [panel: ${toggle.panelCls}]` : ''}`
+              : `height ${toggle.h0}→${toggle.h1}→${toggle.h2}`;
+
+            if (!expanded && !stateKnown && !toggle.hasPanel) {
+              // No button signal AND no panel AND height never moved → static list.
+              checks.push(check('FAQ row is interactive (collapsible)', true,
+                `no toggle signal — likely static FAQ list (${signal})`));
+            } else {
+              checks.push(check('first FAQ row expands when clicked', expanded, signal));
+              checks.push(check('first FAQ row collapses when clicked again', collapsedBack, signal));
+            }
           }
         } catch (clickErr) {
-          // soft — don't fail the section
           checks.push(check('first FAQ row expands when clicked', false, (clickErr as Error).message));
         }
       }

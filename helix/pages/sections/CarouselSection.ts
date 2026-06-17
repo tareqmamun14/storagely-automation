@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test';
-import { ISectionDetector, SectionContext, SectionResult, check } from './types';
+import { ISectionDetector, SectionContext, SectionResult, check, settleImages } from './types';
 
 /**
  * Hero image carousel section.
@@ -84,28 +84,51 @@ export class CarouselSection implements ISectionDetector {
       // positive that wasted reviewer time. We now ONLY check the slide currently
       // in the viewport: ≥ 200px wide and horizontally on-screen.
       const viewport = page.viewportSize() || { width: 1440, height: 900 };
-      const visibleHero = await page.evaluate((vw) => {
+      // Mini Mall lays the hero slides out as a side-by-side strip, every image
+      // tagged loading="lazy". On first paint a trailing strip image can still be
+      // mid-fetch (naturalWidth=0) — which earlier surfaced as a scary "4/5 loaded"
+      // even though nothing was broken. In-viewport lazy images DO load on their
+      // own, so we poll briefly: any displayed hero that never resolves is a
+      // genuinely broken image and must fail.
+      const measureHeroes = (vw: number) => page.evaluate((w) => {
         return Array.from(document.querySelectorAll<HTMLImageElement>('img'))
           .filter(img => {
             const r = img.getBoundingClientRect();
-            // Above the fold, on-screen horizontally, and big enough to be a hero slide.
-            return r.y < 800 && r.x >= 0 && r.x < vw && r.width >= 200 && r.height >= 100;
+            const cs = getComputedStyle(img);
+            // Above the fold, on-screen, big enough to be a hero — and actually
+            // DISPLAYED (not an opacity:0 / hidden stacked slide).
+            return r.y < 800 && r.x >= 0 && r.x < w && r.width >= 200 && r.height >= 100
+              && cs.visibility !== 'hidden' && parseFloat(cs.opacity || '1') > 0.05;
           })
           .map(img => ({
-            src: img.src.slice(0, 200),
+            src: (img.currentSrc || img.src || '').slice(0, 200),
             alt: img.alt,
             loaded: img.complete && img.naturalWidth > 0,
           }));
-      }, viewport.width);
+      }, vw);
+
+      // Settle lazy hero images first (the strip tags every slide loading="lazy",
+      // and a section-scoped run has no prior scroll to trigger them), then a
+      // short re-poll as a final guard. This is what separates a real broken
+      // hero (never resolves) from a not-yet-loaded one (a false flag).
+      await settleImages(page);
+      let visibleHero = await measureHeroes(viewport.width);
+      for (let i = 0; i < 6 && visibleHero.some(h => !h.loaded); i++) {
+        await page.waitForTimeout(400);
+        visibleHero = await measureHeroes(viewport.width);
+      }
 
       data.visibleHeroImages = visibleHero;
       const loaded = visibleHero.filter(i => i.loaded);
+      const broken = visibleHero.filter(i => !i.loaded);
       checks.push(check(
-        'currently-visible hero image is loaded',
-        loaded.length > 0,
+        'every displayed hero image is loaded (not broken)',
+        visibleHero.length > 0 && broken.length === 0,
         visibleHero.length === 0
           ? 'no hero-sized image currently in viewport'
-          : `${loaded.length}/${visibleHero.length} visible hero image(s) loaded`,
+          : broken.length === 0
+            ? `${loaded.length}/${visibleHero.length} displayed hero image(s) loaded`
+            : `${broken.length} broken; sample: ${broken[0]?.alt || broken[0]?.src}`,
       ));
 
       // Mini Mall renders a Google-Maps directions link beneath the carousel.

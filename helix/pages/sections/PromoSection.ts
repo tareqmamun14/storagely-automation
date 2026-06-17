@@ -82,17 +82,28 @@ export class PromoSection implements ISectionDetector {
       ));
 
       // ── Pricing disclaimer footnote ─────────────────────────────────
+      // Find the TIGHTEST element that carries the disclaimer text, not a wrapper
+      // that merely *contains* it. An earlier version used DOM-order `.find()`,
+      // which returned a giant ancestor whose innerText happened to start with the
+      // nav menu — a false-pass pointing at the wrong node. We now require a
+      // single-line leaf element matching activation/service-charge wording and
+      // pick the shortest match (the real footnote, e.g. "*1-time activation
+      // charge of $35 … + Applicable Facility Service Charge ($12 - $52 …)").
       const disclaimer = await page.evaluate(() => {
-        const el = Array.from(document.querySelectorAll<HTMLElement>('p, div, span'))
+        const kw = /activation charge|facility service charge|service charge|administrative fee|admin fee|intro(ductory)?\s+rate|subject to change/i;
+        const matches = Array.from(document.querySelectorAll<HTMLElement>('p, span, small, em, i, div, li'))
           .map(e => (e.innerText || '').trim())
-          .find(t => /activation charge|intro rate|facility service charge|4[- ]?week|billing/i.test(t) && t.length > 60);
-        return el || '';
+          // A real footnote is a tight, single-line node — exclude wrappers
+          // (the nav/page container have embedded \n line breaks).
+          .filter(t => kw.test(t) && t.length >= 40 && t.length <= 600 && !t.includes('\n'))
+          .sort((a, b) => a.length - b.length);
+        return matches[0] || '';
       });
-      data.disclaimer = disclaimer.slice(0, 160);
+      data.disclaimer = disclaimer.slice(0, 200);
       checks.push(check(
         'pricing disclaimer present',
         disclaimer.length > 0,
-        disclaimer ? `"${disclaimer.slice(0, 80)}…"` : '(no disclaimer footnote found)',
+        disclaimer ? `"${disclaimer.slice(0, 110)}…"` : '(no disclaimer footnote found)',
       ));
     } catch (err) {
       errors.push((err as Error).message);

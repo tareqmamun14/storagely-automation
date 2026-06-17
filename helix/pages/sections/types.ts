@@ -72,3 +72,43 @@ export function sectionPassed(r: SectionResult): boolean {
 export function check(name: string, passed: boolean, detail?: string): SectionCheck {
   return { name, passed, detail };
 }
+
+/**
+ * Force lazy-loaded images to fetch, then wait for them to settle.
+ *
+ * Every Helix v4 image (unit cards, hero carousel strips, gallery) ships
+ * `loading="lazy"`, so anything below the fold — or a horizontally-clipped
+ * carousel slide — reports naturalWidth=0 until it scrolls into view. Measuring
+ * "is this image broken?" before the lazy fetch completes produces FALSE
+ * positives (observed: Safeguard Bridgeport flagged 5 unit cards + 1 hero as
+ * "broken" that load perfectly once scrolled to). This scrolls every image into
+ * view to trigger the fetch, flips lazy→eager as a belt-and-braces nudge,
+ * returns to the top, then polls (Node-side, hard-capped) until the images that
+ * occupy real layout space finish loading. A genuinely broken image never
+ * resolves, so a subsequent naturalWidth===0 assertion still catches it.
+ */
+export async function settleImages(page: Page, opts: { maxWaitMs?: number } = {}): Promise<void> {
+  const maxWaitMs = opts.maxWaitMs ?? 6000;
+  await page.evaluate(async () => {
+    const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
+    for (const im of Array.from(document.querySelectorAll('img'))) {
+      try { im.scrollIntoView({ block: 'center' }); } catch { /* detached node */ }
+      if (im.getAttribute('loading') === 'lazy') im.setAttribute('loading', 'eager');
+      await sleep(8);
+    }
+    window.scrollTo(0, 0);
+  });
+  const deadline = Date.now() + maxWaitMs;
+  for (;;) {
+    const pending = await page.evaluate(() =>
+      Array.from(document.querySelectorAll('img')).filter(im => {
+        const r = im.getBoundingClientRect();
+        // Only wait on images big enough to be real content — skip 0-size /
+        // icon-sized tracking pixels that may never resolve.
+        return r.width >= 40 && r.height >= 40 && !(im.complete && im.naturalWidth > 0);
+      }).length,
+    );
+    if (pending === 0 || Date.now() > deadline) return;
+    await page.waitForTimeout(400);
+  }
+}
