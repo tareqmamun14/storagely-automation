@@ -93,6 +93,12 @@ test.describe('Helix Facility Journey', () => {
         if (layerOn('health')) {
           collector.beginStep('health', 'Page Health');
 
+          await collector.runCheck('HTTP status', async () => {
+            const status = live.lastNavStatus;
+            expect(status, `Main document returned HTTP ${status}`).toBe(200);
+            return `${status} OK`;
+          }, 'Check the page returns HTTP 200 (Network tab, main document request)');
+
           await collector.runCheck('Title', async () => {
             const title = await page.title();
             expect(title).toMatch(facility.expectedTitle);

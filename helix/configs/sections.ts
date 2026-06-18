@@ -106,6 +106,14 @@ export const SECTIONS: SectionDef[] = [
     description: 'Expect: the bottom long-form copy — ≥2 headed prose sections, ≥1 substantial paragraph, internal links, and no unresolved {tokens}.',
     order: 13,
   },
+
+  // ── Universal (all clients) ─────────────────────────────────────────────
+  {
+    id: 'seohead',
+    label: 'Page Meta & Structured Data',
+    description: 'Expect: <title> + meta description, canonical URL, Open Graph (og:title/og:image), viewport, html lang, exactly one <h1>, valid JSON-LD (SelfStorage/LocalBusiness + name/address, FAQ, breadcrumbs), and NO unresolved {tokens} in element attributes (alt/title/aria-label/src/href).',
+    order: 14,
+  },
 ];
 
 /** All section IDs in display order — convenience for tests + the reporter. */

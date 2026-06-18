@@ -15,6 +15,8 @@ import { getRentHandoff, RentHandoff } from '../configs/profiles';
 export class LiveFacilityPage {
   readonly page: Page;
   private consoleErrors: string[] = [];
+  /** HTTP status of the main document response from the last goto() (null if unknown). */
+  lastNavStatus: number | null = null;
 
   constructor(page: Page) {
     this.page = page;
@@ -31,7 +33,11 @@ export class LiveFacilityPage {
   }
 
   async goto(url: string) {
-    await this.page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60_000 });
+    const response = await this.page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60_000 });
+    // Capture the main-document HTTP status so the journey can assert the page
+    // actually served 200 (a soft-404 that returns 200 is caught separately by
+    // the title check; a hard 4xx/5xx is caught here).
+    this.lastNavStatus = response ? response.status() : null;
     await this.page.waitForLoadState('networkidle', { timeout: 30_000 }).catch(() => {});
   }
 
@@ -115,16 +121,21 @@ export class LiveFacilityPage {
   }
 
   async expectNoUnresolvedTokensInAttributes() {
+    // Scan EVERY text-bearing attribute, not just img[src]/a[href]: a leaked
+    // {template.token} also hides in alt / title / aria-label / placeholder
+    // (e.g. a logo rendered as alt="{company.name} logo"), which the visible-
+    // text token check never sees.
     const leaks = await this.page.evaluate(() => {
       const found: string[] = [];
       const pattern = /\{[a-zA-Z0-9_.]+\}/g;
-      document.querySelectorAll('img[src], a[href]').forEach(el => {
-        const src = el.getAttribute('src') || '';
-        const href = el.getAttribute('href') || '';
-        for (const match of (src + ' ' + href).matchAll(pattern)) {
-          found.push(match[0]);
-        }
-      });
+      for (const attr of ['src', 'href', 'alt', 'title', 'aria-label', 'placeholder']) {
+        document.querySelectorAll('[' + attr + ']').forEach(el => {
+          const v = el.getAttribute(attr) || '';
+          for (const match of v.matchAll(pattern)) {
+            found.push(`${attr}=${match[0]}`);
+          }
+        });
+      }
       return [...new Set(found)];
     });
     expect(leaks, `Unresolved tokens in attributes: ${leaks.join(', ')}`).toHaveLength(0);
