@@ -60,9 +60,14 @@ export class UHaulSection implements ISectionDetector {
       });
 
       data.uhaul = info;
-      checks.push(check('U-Haul Rental block present', !!info, info ? 'found' : '(not found)'));
 
-      if (info) {
+      // The U-Haul rental block is OPTIONAL — only facilities that actually offer
+      // U-Haul render it. Treat its absence as a clean skip; when it IS present,
+      // assert the truck image, price, and Reserve CTA are healthy.
+      if (!info) {
+        checks.push(check('U-Haul Rental (optional)', true, 'no U-Haul block on this facility — skipped'));
+      } else {
+        checks.push(check('U-Haul Rental block present', true, 'found'));
         checks.push(check(
           'U-Haul image loaded (not broken)',
           info.imgLoaded !== false,

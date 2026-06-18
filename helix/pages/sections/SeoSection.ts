@@ -48,15 +48,20 @@ export class SeoSection implements ISectionDetector {
           .map(p => (p.innerText || '').trim())
           .filter(t => t.length > 100);
 
-        // Treat www. and the apex as the same site (links often point at
-        // www.<brand>.com while the listing page is served from <brand>.com).
-        const norm = (h: string) => h.replace(/^www\./i, '');
-        const host = norm(location.host);
+        // "Internal" = same brand, by the first DNS label (the brand token).
+        // This holds across environments: a staging page at
+        // minimallstorage.getstoragely.com whose SEO copy links to the prod
+        // minimallstorage.com is still linking to ITS OWN brand — the brand
+        // token "minimallstorage" matches — whereas a www./apex swap on prod
+        // (www.brand.com vs brand.com) also matches. Non-brand hosts (facebook,
+        // getstoragely infra) don't.
+        const brand = (h: string) => h.replace(/^www\./i, '').split('.')[0];
+        const pageBrand = brand(location.host);
         const links = Array.from(root.querySelectorAll<HTMLAnchorElement>('a[href]'))
           .filter(a => {
             const href = a.getAttribute('href') || '';
             if (href.startsWith('/')) return true;
-            try { return norm(new URL(a.href).host) === host; } catch { return false; }
+            try { return brand(new URL(a.href).host) === pageBrand; } catch { return false; }
           });
 
         const tokens = Array.from(new Set((root.innerText || '').match(/\{[a-zA-Z0-9_.]+\}/g) || []));

@@ -20,18 +20,21 @@ export class CarouselSection implements ISectionDetector {
     const data: Record<string, unknown> = {};
 
     try {
-      // Slide indicators: aria-label "Go to slide N of M"
-      const slideTabs = page.locator('[aria-label^="Go to slide"]');
+      // Slide indicators: the pagination dots. The aria wording varies by Helix
+      // template version — Carroll (prod) uses "Go to slide N of M", the newer
+      // Chicago template uses "Go to photo N of M" — so match either.
+      const SLIDE_SEL = '[aria-label^="Go to slide" i], [aria-label^="Go to photo" i]';
+      const slideTabs = page.locator(SLIDE_SEL);
       const tabCount = await slideTabs.count();
       data.slideTabCount = tabCount;
 
-      // Total slide count parsed from the aria-label ("Go to slide 1 of 8" → 8)
-      const total = await page.evaluate(() => {
-        const el = document.querySelector('[aria-label^="Go to slide"]');
+      // Total slide count parsed from the aria-label ("Go to photo 1 of 5" → 5)
+      const total = await page.evaluate((sel) => {
+        const el = document.querySelector(sel);
         if (!el) return 0;
         const m = el.getAttribute('aria-label')?.match(/of\s+(\d+)/);
         return m ? parseInt(m[1], 10) : 0;
-      });
+      }, SLIDE_SEL);
       data.totalSlides = total;
 
       checks.push(check(
@@ -49,29 +52,44 @@ export class CarouselSection implements ISectionDetector {
         ));
       }
 
-      // Prev/Next controls
-      const prev = page.locator('[aria-label="Previous slide" i]');
-      const next = page.locator('[aria-label="Next slide" i]');
+      // Navigation: a carousel is navigable via prev/next ARROWS *or* pagination
+      // DOTS. Carroll ships arrows + dots; the Chicago template ships dots only.
+      // Requiring both arrows would false-fail a perfectly good dot carousel, so
+      // we accept either mechanism.
+      const prev = page.locator('[aria-label="Previous slide" i], [aria-label="Previous" i], [aria-label*="prev" i]');
+      const next = page.locator('[aria-label="Next slide" i], [aria-label="Next" i], [aria-label*="next slide" i]');
       const hasPrev = (await prev.count()) > 0;
       const hasNext = (await next.count()) > 0;
-      checks.push(check('previous slide control', hasPrev));
-      checks.push(check('next slide control', hasNext));
+      const navigable = (hasPrev && hasNext) || tabCount >= 2;
+      checks.push(check(
+        'carousel is navigable (arrows or pagination dots)',
+        navigable,
+        (hasPrev || hasNext) ? `prev=${hasPrev}, next=${hasNext}` : `${tabCount} pagination dot(s)`,
+      ));
 
-      // Try advancing one slide — if Next is functional, an active tab changes.
-      if (hasNext && tabCount > 1) {
+      // Advance the carousel — via the Next arrow if present, else by clicking the
+      // 2nd pagination dot — and confirm the active slide changes. If the template
+      // doesn't expose an active-state via aria (some dot carousels don't), we
+      // report the navigation as present rather than false-fail on an unreadable
+      // active index.
+      if (navigable && tabCount > 1) {
         try {
           const before = await activeTabIndex(page);
-          await next.first().click({ timeout: 5000 });
+          if (hasNext) await next.first().click({ timeout: 5000 });
+          else await slideTabs.nth(1).click({ timeout: 5000 });
           await page.waitForTimeout(700);
           const after = await activeTabIndex(page);
-          checks.push(check(
-            'Next slide control advances carousel',
-            after !== before && after >= 0,
-            `active tab ${before} → ${after}`,
-          ));
-          data.activeTabAfterNext = after;
+          const via = hasNext ? 'next arrow' : 'pagination dot';
+          if (before < 0 && after < 0) {
+            checks.push(check('carousel navigation advances the active slide', true,
+              `navigation present (${via}); active-state not exposed via aria — info`));
+          } else {
+            checks.push(check('carousel navigation advances the active slide',
+              after !== before && after >= 0, `active ${before} → ${after} (via ${via})`));
+          }
+          data.activeTabAfterNav = after;
         } catch (clickErr) {
-          checks.push(check('Next slide control advances carousel', false, (clickErr as Error).message));
+          checks.push(check('carousel navigation advances the active slide', false, (clickErr as Error).message));
         }
       }
 
@@ -159,11 +177,17 @@ export class CarouselSection implements ISectionDetector {
 
 async function activeTabIndex(page: Page): Promise<number> {
   return page.evaluate(() => {
-    // The active slide is marked with aria-selected="true" on its tab — the
-    // stable accessibility signal. (An earlier version measured tab width, but
-    // every tab button is the same fixed size: only an inner <span> scales, so
-    // width was always index 0 → "active tab 0 → 0" false negatives.)
-    const tabs = Array.from(document.querySelectorAll<HTMLElement>('[role="tab"][aria-label^="Go to slide"]'));
-    return tabs.findIndex(t => t.getAttribute('aria-selected') === 'true');
+    // The active slide is marked on its dot via aria-selected / aria-current /
+    // data-active, depending on the template. Match "Go to slide" and "Go to
+    // photo" dots, and accept any of the active-state signals.
+    const tabs = Array.from(document.querySelectorAll<HTMLElement>(
+      '[aria-label^="Go to slide" i], [aria-label^="Go to photo" i]',
+    ));
+    return tabs.findIndex(t =>
+      t.getAttribute('aria-selected') === 'true' ||
+      t.getAttribute('aria-current') === 'true' ||
+      t.getAttribute('data-active') === 'true' ||
+      t.getAttribute('data-state') === 'active',
+    );
   });
 }

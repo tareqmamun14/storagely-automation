@@ -98,6 +98,11 @@ const HELIX_CONSOLE_ALLOWLIST: RegExp[] = [
   /v4\/endpoints\/.*\.json/i,
   /Minified React error #418/i,
   /react\.dev\/errors\/418/i,
+  // Third-party marketing/analytics beacons that fail independently of the
+  // storage page itself (e.g. a Bing UET tag returning 400). Not a page defect.
+  /bat\.bing\.com/i,
+  /facebook\.com\/tr/i,
+  /googletagmanager\.com|google-analytics\.com/i,
 ];
 
 /**

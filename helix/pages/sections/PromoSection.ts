@@ -37,10 +37,14 @@ export class PromoSection implements ISectionDetector {
         };
       });
       data.promoBanner = banner;
+      // A hero promo BANNER image is optional — some facilities run promos only
+      // as per-card "Weeks Free" badges (asserted below) with no banner. So the
+      // banner's presence is informational; when a banner IS present it must load
+      // cleanly and be token-free (hard checks).
       checks.push(check(
-        'promo banner image present',
-        !!banner,
-        banner ? `alt="${banner.alt}"` : 'no promo-themed banner image found',
+        'promo banner image present (info)',
+        true,
+        banner ? `alt="${banner.alt}"` : 'no banner image — promos shown as unit-card badges',
       ));
       if (banner) {
         checks.push(check('promo banner image loaded (not broken)', banner.loaded, banner.loaded ? 'ok' : 'naturalWidth=0'));

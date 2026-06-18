@@ -20,12 +20,13 @@ export class GallerySection implements ISectionDetector {
     try {
       const heading = page.getByRole('heading', { name: /facility gallery|photo gallery|gallery/i }).first();
       const hasHeading = (await heading.count()) > 0;
-      checks.push(check('Gallery heading visible', hasHeading));
 
-      try {
-        await heading.scrollIntoViewIfNeeded({ timeout: 3000 });
-        await page.waitForTimeout(300);
-      } catch { /* no heading — that's a check failure but not exception-worthy */ }
+      if (hasHeading) {
+        try {
+          await heading.scrollIntoViewIfNeeded({ timeout: 3000 });
+          await page.waitForTimeout(300);
+        } catch { /* fine */ }
+      }
 
       // Settle lazy gallery images so "no broken images" reflects real load
       // failures, not below-the-fold images that simply hadn't fetched yet.
@@ -53,17 +54,25 @@ export class GallerySection implements ISectionDetector {
       data.imageCount = galleryImgs.length;
       data.brokenImages = galleryImgs.filter(i => !i.loaded).map(i => i.src.split('/').pop()).slice(0, 5);
 
-      checks.push(check(
-        'gallery has at least 1 image',
-        galleryImgs.length >= 1,
-        `${galleryImgs.length} image(s) detected beneath the gallery heading`,
-      ));
-      const broken = galleryImgs.filter(i => !i.loaded);
-      checks.push(check(
-        'no broken gallery images',
-        broken.length === 0,
-        broken.length === 0 ? 'all OK' : `${broken.length}/${galleryImgs.length} broken`,
-      ));
+      // A dedicated bottom gallery is OPTIONAL — some facilities/templates ship
+      // their photos only in the hero carousel. Treat "no gallery at all" as a
+      // clean skip; only assert load-health when a gallery IS present.
+      if (!hasHeading && galleryImgs.length === 0) {
+        checks.push(check('Facility Gallery (optional)', true, 'no dedicated gallery section on this facility — skipped'));
+      } else {
+        checks.push(check('Gallery heading visible', hasHeading));
+        checks.push(check(
+          'gallery has at least 1 image',
+          galleryImgs.length >= 1,
+          `${galleryImgs.length} image(s) detected beneath the gallery heading`,
+        ));
+        const broken = galleryImgs.filter(i => !i.loaded);
+        checks.push(check(
+          'no broken gallery images',
+          broken.length === 0,
+          broken.length === 0 ? 'all OK' : `${broken.length}/${galleryImgs.length} broken`,
+        ));
+      }
     } catch (err) {
       errors.push((err as Error).message);
     }

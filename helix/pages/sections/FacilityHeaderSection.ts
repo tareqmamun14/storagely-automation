@@ -85,25 +85,38 @@ export class FacilityHeaderSection implements ISectionDetector {
       data.phone = phone;
       checks.push(check('phone number visible in header', phone.length > 0, phone || '(none)'));
 
-      // Address — match a single-line street address (number + words + 2-letter
-      // state + 5-digit zip). Single-line restriction prevents accidentally
-      // matching a wrapper element that also contains the nav menu.
+      // Address — present if ANY of these resolve (templates differ on layout):
+      //   1. a single line with street + state + zip ("3900 … Carroll OH, 43112")
+      //   2. a street line + a separate city/state/zip line (Chicago renders
+      //      "1030 W. North Avenue" and "Chicago, IL 60642" on two lines)
+      //   3. the Google-Maps "directions" link destination (the street address)
       const address = await page.evaluate(() => {
-        // Address can live in the header band OR a map link (an <a> further down,
-        // e.g. Mini Mall renders the full street+zip only in the Google-Maps link).
-        // Search the upper page (y < 900) and include anchors/list items.
-        const all = Array.from(document.querySelectorAll<HTMLElement>('p, div, span, address, a, li'))
-          .filter(el => {
-            const r = el.getBoundingClientRect();
-            if (r.y >= 900 || r.width === 0) return false;
-            const t = el.innerText?.trim() || '';
-            // Single short line (≤ 120 chars), no embedded newlines.
-            if (t.includes('\n') || t.length > 120 || t.length < 10) return false;
-            // Number + street + state + zip — minimum street-address shape.
-            return /\d{1,6}\s+\S+.*[A-Z]{2}\s*,?\s*\d{5}/.test(t);
-          })
-          .map(el => el.innerText?.trim() || '');
-        return all[0] || '';
+        const inHeader = (el: HTMLElement) => {
+          const r = el.getBoundingClientRect();
+          return r.y < 900 && r.width > 0;
+        };
+        const els = Array.from(document.querySelectorAll<HTMLElement>('p, div, span, address, a, li')).filter(inHeader);
+
+        // 1) full single-line address
+        const oneLine = els
+          .map(e => (e.innerText || '').trim())
+          .find(t => !t.includes('\n') && t.length >= 10 && t.length <= 120 && /\d{1,6}\s+\S+.*[A-Z]{2}\s*,?\s*\d{5}/.test(t));
+        if (oneLine) return oneLine;
+
+        // 2) street line + city/state/zip line
+        const lines = els.map(e => (e.innerText || '').trim()).filter(t => t && !t.includes('\n') && t.length <= 80);
+        const street = lines.find(t => /^\d{1,6}\s+\S+.*\b(ave|avenue|st|street|rd|road|blvd|dr|drive|way|pkwy|ln|lane|hwy|highway|ct|court|pl|place|cir|circle|ter|terrace|sq|square|trail|trl)\b/i.test(t));
+        const cityZip = lines.find(t => /[A-Za-z].*\b[A-Z]{2}\b[ ,]*\d{5}\b/.test(t));
+        if (street && cityZip) return `${street}, ${cityZip}`;
+
+        // 3) google-maps directions link destination
+        const map = document.querySelector('a[href*="google.com/maps"], a[href*="/maps/"], a[href*="destination="]');
+        if (map) {
+          const href = map.getAttribute('href') || '';
+          const m = href.match(/destination=([^&]+)/);
+          if (m) { const d = decodeURIComponent(m[1]); if (/\d{1,6}\s+\S+/.test(d)) return d; }
+        }
+        return '';
       });
       data.address = address;
       checks.push(check('address visible in header', address.length > 0, address || '(none)'));
@@ -111,7 +124,11 @@ export class FacilityHeaderSection implements ISectionDetector {
       // Mini Mall header action buttons: the "What Will Fit?" sizing helper and
       // the FAQ jump link. (Client-specific header chrome — gated to minimall.)
       if (ctx.client === 'minimall') {
-        const hasWhatWillFit = (await page.getByRole('button', { name: /what will fit/i }).count()) > 0;
+        // "What Will Fit?" is a <button> on some templates and an <a> anchor
+        // (#what-will-fit) on others — accept either.
+        const hasWhatWillFit =
+          (await page.getByRole('button', { name: /what will fit/i }).count()) > 0 ||
+          (await page.getByRole('link', { name: /what will fit/i }).count()) > 0;
         const hasFaqJump = (await page.getByRole('link', { name: /^faq$/i }).count()) > 0;
         checks.push(check('"What Will Fit?" button present', hasWhatWillFit, hasWhatWillFit ? 'ok' : '(missing)'));
         checks.push(check('FAQ jump link present', hasFaqJump, hasFaqJump ? 'ok' : '(missing)'));
