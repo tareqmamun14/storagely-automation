@@ -1,5 +1,5 @@
 import { Page, Locator, expect } from '@playwright/test';
-import { ISectionDetector, SectionContext, SectionResult, SECTION_DETECTORS, getDetector } from './sections';
+import { ISectionDetector, SectionContext, SectionResult, SECTION_DETECTORS, getDetector, settleImages } from './sections';
 import { getRentHandoff, RentHandoff } from '../configs/profiles';
 
 /**
@@ -258,30 +258,30 @@ export class LiveFacilityPage {
    * Assert on-screen images are loaded — and return the counts so callers can
    * report the actual numbers.
    *
-   * False-positive avoidance (two causes, both confirmed against live Safeguard):
+   * False-positive avoidance (confirmed against live Safeguard + Mini Mall):
    *   1. TIMING — lazy / CDN-rendered images decode a beat after the page
-   *      settles. A single fixed-wait snapshot intermittently caught them
-   *      mid-load ("8 of 36 failed" when all 36 actually load). We now POLL:
-   *      scroll to trigger lazy loads, then re-check every second until the
-   *      broken set clears (or the grace window expires).
+   *      settles. settleImages() forces every lazy image to fetch (scroll into
+   *      view + flip loading→eager) and polls until they finish, so a still-
+   *      unloaded image afterwards is genuinely broken, not merely deferred.
    *   2. CAROUSEL DEFERRED SLIDES — a slider's non-active slides keep full
    *      layout size but are translated entirely off-screen (x ≥ viewport) and
    *      stay `loading="lazy"` with naturalWidth=0. They are intentionally
    *      deferred, not broken, so we exclude anything horizontally off-screen.
+   *
+   * NO tolerance: with lazy-loading handled robustly, "no image should be
+   * broken" is a HARD bar — any on-screen content image (≥ 40px, so we skip
+   * tracking pixels/spacers) that fails to load fails the check by name.
    */
   async expectAllImagesLoaded(): Promise<{ visible: number; loaded: number }> {
-    // Trigger lazy-loading: walk the page top→bottom, then settle back at top.
-    await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-    await this.page.waitForTimeout(1500);
-    await this.page.evaluate(() => window.scrollTo(0, 0));
-    await this.page.waitForTimeout(500);
+    // Force lazy images to load and wait for them to settle.
+    await settleImages(this.page);
 
     const collect = () => this.page.evaluate(() => {
       const vw = window.innerWidth;
       return Array.from(document.querySelectorAll<HTMLImageElement>('img[src]'))
         .filter(img => {
           const r = img.getBoundingClientRect();
-          if (r.width <= 0 || r.height <= 0) return false;        // not rendered
+          if (r.width < 40 || r.height < 40) return false;        // tracking pixel / icon / spacer
           if (r.right <= 0 || r.left >= vw) return false;         // carousel deferred slide (off-screen X)
           return true;
         })
@@ -292,17 +292,16 @@ export class LiveFacilityPage {
         }));
     });
 
-    // Poll: give lazy / CDN-delayed images up to ~6s of grace to finish.
+    // Final short re-poll as a last guard after the settle.
     let results = await collect();
     let broken = results.filter(r => !r.loaded);
-    for (let attempt = 0; attempt < 6 && broken.length > 0; attempt++) {
-      await this.page.waitForTimeout(1000);
+    for (let attempt = 0; attempt < 4 && broken.length > 0; attempt++) {
+      await this.page.waitForTimeout(500);
       results = await collect();
       broken = results.filter(r => !r.loaded);
     }
 
-    const limit = Math.floor(results.length * 0.2);
-    if (broken.length > limit) {
+    if (broken.length > 0) {
       // Single line (the reporter keeps only the first line) — name the offenders.
       const offenders = broken
         .slice(0, 6)
@@ -310,7 +309,7 @@ export class LiveFacilityPage {
         .join(' · ');
       const more = broken.length > 6 ? ` (+${broken.length - 6} more)` : '';
       throw new Error(
-        `${broken.length} of ${results.length} on-screen images failed to load (tolerance ${limit}): ${offenders}${more}`,
+        `${broken.length} of ${results.length} on-screen content images failed to load: ${offenders}${more}`,
       );
     }
     return { visible: results.length, loaded: results.length - broken.length };

@@ -281,9 +281,11 @@ export class UnitsSection implements ISectionDetector {
         checks.push(check(
           'every promo line looks well-formed',
           malformedPromo.length === 0,
-          malformedPromo.length === 0
-            ? `${cardsWithPromo.length} cards with valid promo`
-            : `${malformedPromo.length} malformed; sample: "${malformedPromo[0]?.promo}"`,
+          malformedPromo.length > 0
+            ? `${malformedPromo.length} malformed; sample: "${malformedPromo[0]?.promo}"`
+            : cardsWithPromo.length > 0
+              ? `${cardsWithPromo.length} card promo line(s), all well-formed`
+              : 'no per-card promo lines (promos shown as badges — see Promo section)',
         ));
 
         // Unique unit ids across all cards — duplicates would mean broken bindings.

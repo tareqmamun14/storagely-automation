@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test';
-import { ISectionDetector, SectionContext, SectionResult, check } from './types';
+import { ISectionDetector, SectionContext, SectionResult, check, settleImages } from './types';
 
 /**
  * Bottom Facility Gallery section.
@@ -24,8 +24,12 @@ export class GallerySection implements ISectionDetector {
 
       try {
         await heading.scrollIntoViewIfNeeded({ timeout: 3000 });
-        await page.waitForTimeout(800);
+        await page.waitForTimeout(300);
       } catch { /* no heading — that's a check failure but not exception-worthy */ }
+
+      // Settle lazy gallery images so "no broken images" reflects real load
+      // failures, not below-the-fold images that simply hadn't fetched yet.
+      await settleImages(page);
 
       // Count + load-verify images beneath the gallery heading.
       // Broken gallery images are a top customer-visible regression so we
