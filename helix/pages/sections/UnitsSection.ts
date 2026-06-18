@@ -42,7 +42,7 @@ export class UnitsSection implements ISectionDetector {
       // fold cards that simply hadn't loaded yet.
       await settleImages(page);
 
-      const cards = await page.evaluate(({ textSrc, textFlags, pathSrc, pathFlags }) => {
+      const parsed = await page.evaluate(({ textSrc, textFlags, pathSrc, pathFlags }) => {
         const rentTextRe = new RegExp(textSrc, textFlags);
         const rentPathRe = new RegExp(pathSrc, pathFlags);
         // A real Rent CTA matches BOTH the client's link text AND its checkout
@@ -66,7 +66,10 @@ export class UnitsSection implements ISectionDetector {
           features: string[];
           promo: string;
           prices: string[];
+          struckPrice: number | null;
+          currentPrice: number | null;
           rentHref: string;
+          unitId: string;
           hasReserveButton: boolean;
           imgLoaded: boolean | null;
         }> = [];
@@ -126,10 +129,31 @@ export class UnitsSection implements ISectionDetector {
           const hasReserve = !!Array.from(root.querySelectorAll<HTMLElement>('button'))
             .find(b => /^reserve$/i.test((b.innerText || '').trim()));
 
+          // Struck ("regular") vs current ("intro/discounted") price, by the
+          // line-through style. The discounted price MUST be lower than the
+          // struck one — a card showing current $69 over a struck $21 is an
+          // inverted/mis-bound promo.
+          let struckPrice: number | null = null;
+          let currentPrice: number | null = null;
+          const pricedEls = Array.from(root.querySelectorAll<HTMLElement>('*'))
+            .filter(e => e.children.length === 0 && /\$\s?\d/.test(e.textContent || ''));
+          for (const e of pricedEls) {
+            const cs = getComputedStyle(e);
+            const isStruck = (cs.textDecorationLine || '').includes('line-through') || e.tagName === 'DEL' || e.tagName === 'S';
+            const m = (e.textContent || '').match(/\$\s?(\d{1,4}(?:\.\d{2})?)/);
+            if (!m) continue;
+            const val = parseFloat(m[1]);
+            if (isStruck) { if (struckPrice == null) struckPrice = val; }
+            else if (currentPrice == null) currentPrice = val;
+          }
+
           // Unit-card image: the largest <img> in the card; loaded = naturalWidth>0.
           const cardImg = Array.from(root.querySelectorAll('img'))
             .sort((a, b) => (b.naturalWidth || 0) - (a.naturalWidth || 0))[0] as HTMLImageElement | undefined;
           const imgLoaded = cardImg ? (cardImg.complete && cardImg.naturalWidth > 0) : null;
+
+          let unitId = '';
+          try { unitId = new URL(link.href).searchParams.get('unit') || new URL(link.href).searchParams.get('unit_id') || ''; } catch { /* */ }
 
           const entry = {
             dimensions: dimM ? `${dimM[1]}'x${dimM[2]}'` : '',
@@ -137,7 +161,10 @@ export class UnitsSection implements ISectionDetector {
             features,
             promo: promoLine,
             prices: priceMatches,
+            struckPrice,
+            currentPrice,
             rentHref: link.href || '',
+            unitId,
             hasReserveButton: hasReserve,
             imgLoaded,
           };
@@ -156,15 +183,31 @@ export class UnitsSection implements ISectionDetector {
             if (richer > prevRichness) out[existingIdx] = entry;
           }
         }
-        return out;
+
+        // VISIBLE-only counts. Responsive templates (Safeguard) render each unit
+        // TWICE — a mobile + a desktop variant, one hidden via CSS — so counting
+        // raw DOM nodes would false-flag every unit as a "duplicate" and miscount
+        // cards. We only count elements that are actually displayed (offsetParent
+        // or a client rect), which collapses the hidden responsive twin while
+        // keeping genuinely-duplicated listings (e.g. a featured unit ALSO shown
+        // in the grid — both visible) flagged.
+        const isVis = (el: Element) => (el as HTMLElement).offsetParent !== null || el.getClientRects().length > 0;
+        const visibleRent = rentLinks.filter(isVis);
+        const rentLinkCount = visibleRent.length;
+        const reserveCount = Array.from(document.querySelectorAll('button')).filter(b => /^reserve$/i.test((b.innerText || '').trim()) && isVis(b)).length;
+        const allUnitIds = visibleRent.map(a => { try { const u = new URL(a.href); return u.searchParams.get('unit') || u.searchParams.get('unit_id') || ''; } catch { return ''; } }).filter(Boolean);
+
+        return { units: out, rentLinkCount, reserveCount, allUnitIds };
       }, {
         textSrc: handoff.rentLinkText.source, textFlags: handoff.rentLinkText.flags,
         pathSrc: handoff.pathPattern.source, pathFlags: handoff.pathPattern.flags,
       });
 
+      const cards = parsed.units;
       data.unitCount = cards.length;
       data.units = cards.slice(0, 5); // keep the first 5 in the report to avoid log spam
       data.totalUnitsDetected = cards.length;
+      data.rawCounts = { visibleRentLinks: parsed.rentLinkCount, visibleReserve: parsed.reserveCount, uniqueUnitIds: new Set(parsed.allUnitIds).size };
 
       checks.push(check(
         'at least 1 unit card rendered',
@@ -256,20 +299,42 @@ export class UnitsSection implements ISectionDetector {
           `${twoPriceCount}/${cards.length} cards show 2+ prices`,
         ));
 
-        // Promo (web rate) MUST be < standard rate when both are shown — the
-        // opposite means somebody crossed wires in the price binding.
-        const dualPriceCards = cards.filter(c => c.prices.length >= 2);
-        const invertedPrice = dualPriceCards.filter(c => {
-          const nums = c.prices.map(p => parseFloat(p.replace(/[^0-9.]/g, '')));
-          // We expect first-shown price (web rate) ≤ second-shown (standard rate).
-          return nums[0] > nums[1];
+        // Pricing sanity: the CURRENT (discounted/intro) price must be strictly
+        // LESS than the "regular" price. A card showing current $69 over a
+        // struck $21 is an inverted/mis-bound promo.
+        //   • Chicago template marks the regular price with line-through →
+        //     compare currentPrice vs struckPrice.
+        //   • Carroll template shows two plain prices (web rate then standard)
+        //     with no line-through → fall back to DOM order (first ≤ second).
+        const struckCards = cards.filter(c => c.struckPrice != null && c.currentPrice != null);
+        const invertedStruck = struckCards.filter(c => (c.currentPrice as number) >= (c.struckPrice as number));
+        const dualPlain = cards.filter(c => !(c.struckPrice != null && c.currentPrice != null) && c.prices.length >= 2);
+        const invertedPlain = dualPlain.filter(c => {
+          const n = c.prices.map(p => parseFloat(p.replace(/[^0-9.]/g, '')));
+          return n[0] > n[1]; // first-shown (web/intro) must be ≤ second-shown (standard)
         });
+        const inverted = [...invertedStruck, ...invertedPlain];
+        const pricedCount = struckCards.length + dualPlain.length;
+
+        // Prices must be positive, real numbers — a $0 / negative / NaN price is
+        // a broken binding (and would otherwise sneak past the inversion check).
+        const badPrice = cards.filter(c =>
+          (c.currentPrice != null && (!(c.currentPrice > 0))) ||
+          (c.struckPrice != null && (!(c.struckPrice > 0))),
+        );
         checks.push(check(
-          'web rate ≤ standard rate on every dual-priced card',
-          invertedPrice.length === 0,
-          invertedPrice.length === 0
-            ? `${dualPriceCards.length} dual-priced cards all consistent`
-            : `${invertedPrice.length} card(s) have web > standard; sample: ${invertedPrice[0]?.prices.join(' / ')}`,
+          'all displayed prices are positive numbers',
+          badPrice.length === 0,
+          badPrice.length === 0 ? 'ok' : `${badPrice.length} card(s) with a $0/negative/NaN price; sample ${badPrice[0]?.dimensions}`,
+        ));
+        checks.push(check(
+          'discounted/web price ≤ regular price on every priced card',
+          inverted.length === 0,
+          pricedCount === 0
+            ? '(no comparable price pairs found)'
+            : inverted.length === 0
+              ? `${pricedCount} priced cards all consistent (current ≤ regular)`
+              : `${inverted.length} INVERTED; sample ${inverted[0]?.dimensions}: ${inverted[0]?.struckPrice != null ? `current $${inverted[0]?.currentPrice} ≥ struck $${inverted[0]?.struckPrice}` : inverted[0]?.prices.join(' / ')}`,
         ));
 
         // Promo text — when present, must look like a real promo (% / months / free).
@@ -288,16 +353,32 @@ export class UnitsSection implements ISectionDetector {
               : 'no per-card promo lines (promos shown as badges — see Promo section)',
         ));
 
-        // Unique unit ids across all cards — duplicates would mean broken bindings.
-        const ids = cards.map(c => {
-          try { return new URL(c.rentHref).searchParams.get(handoff.unitParam); }
-          catch { return null; }
-        }).filter(Boolean);
-        const unique = new Set(ids);
+        // No DUPLICATE listings — the same unit (same unit id) must not render
+        // more than once. Uses the RAW, non-deduped ids so it actually catches
+        // duplicates (an earlier version checked the already-deduped set and so
+        // could never fail). On Chicago: 16 cards but unit ids 5378805 / 5378808
+        // / 5378824 each appear twice → 3 duplicate listings.
+        const rawIds = parsed.allUnitIds;
+        const idFreq: Record<string, number> = {};
+        rawIds.forEach(id => { idFreq[id] = (idFreq[id] || 0) + 1; });
+        const dupIds = Object.entries(idFreq).filter(([, n]) => n > 1);
         checks.push(check(
-          `${handoff.unitParam} values are unique across cards`,
-          unique.size === ids.length,
-          `${ids.length} cards, ${unique.size} unique ids`,
+          'no duplicate unit listings (unique unit ids)',
+          dupIds.length === 0,
+          dupIds.length === 0
+            ? `${rawIds.length} listings, all unique`
+            : `${dupIds.length} unit(s) listed more than once: ${dupIds.map(([id, n]) => `${id}×${n}`).join(', ')} (${parsed.rentLinkCount} cards, ${new Set(rawIds).size} unique)`,
+        ));
+
+        // Every unit card carries exactly one Rent CTA and one Reserve button,
+        // so the count of VISIBLE Rent links must equal VISIBLE Reserve buttons.
+        // A mismatch means a card rendered without one of its CTAs (or an orphan
+        // CTA exists). Counts are visible-only so responsive twins don't skew it.
+        const { rentLinkCount, reserveCount } = parsed;
+        checks.push(check(
+          'visible Rent links == visible Reserve buttons (one pair per card)',
+          rentLinkCount === reserveCount,
+          `Rent=${rentLinkCount}, Reserve=${reserveCount} (${new Set(parsed.allUnitIds).size} unique units)`,
         ));
       }
 

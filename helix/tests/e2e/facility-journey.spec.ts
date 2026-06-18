@@ -126,8 +126,8 @@ test.describe('Helix Facility Journey', () => {
 
           await collector.runCheck('Images loaded', async () => {
             const counts = await live.expectAllImagesLoaded();
-            return `${counts.loaded}/${counts.visible} on-screen images loaded`;
-          }, 'Scroll the page and check for broken/missing images (carousel off-screen slides are excluded)');
+            return `${counts.loaded}/${counts.checked} in-viewport images loaded (${counts.total} total <img> on page)`;
+          }, 'Scroll the full page (lazy-load) and check every in-viewport image; only off-screen carousel slides are excluded');
 
           if (facility.features?.hasUnits !== false) {
             await collector.runCheck('Units + Rent links', async () => {
@@ -140,16 +140,32 @@ test.describe('Helix Facility Journey', () => {
             }, 'Check the units section for Rent buttons');
           }
 
-          // Console errors — minus this client's benign allow-list (e.g. Mini
-          // Mall's Atlas-API 403s + React #418 hydration warning).
-          const profile = getClientProfile(facility.client);
-          const errs = live.getConsoleErrors()
-            .filter(e => !profile.consoleAllowlist.some(re => re.test(e)));
-          collector.check('Console errors', errs.length === 0,
-            errs.length === 0
-              ? (profile.consoleAllowlist.length ? 'none (client allow-list applied)' : 'none')
-              : errs.slice(0, 3).join('; '),
-            errs.length > 0 ? 'Open browser DevTools console on the facility page' : undefined);
+          // Console audit — capture errors + warnings + uncaught pageerrors from
+          // the whole load/hydration window. We NEVER swallow first-party errors;
+          // only a small set of third-party analytics hosts is set aside (info).
+          // Give late-firing hydration errors (#418) a beat to surface.
+          await page.waitForTimeout(1200);
+          const audit = live.auditConsole();
+          // Print the FULL console log so failures are inspectable.
+          if (audit.all.length) {
+            console.log(`\n  ── console log (${audit.all.length} msgs: ${audit.all.filter(m => m.type !== 'warning').length} err/pageerror, ${audit.all.filter(m => m.type === 'warning').length} warn) ──`);
+            for (const m of audit.all.slice(0, 40)) {
+              console.log(`    [${m.type}] ${m.text.slice(0, 160)}${m.url ? `  @ ${m.url.slice(-60)}` : ''}`);
+            }
+            if (audit.all.length > 40) console.log(`    … +${audit.all.length - 40} more`);
+          }
+          collector.check('No React #4xx (hydration/render) errors', audit.reactErrors.length === 0,
+            audit.reactErrors.length === 0 ? 'none' : audit.reactErrors.map(e => e.text.slice(0, 120)).join(' | '),
+            audit.reactErrors.length > 0 ? 'React threw a #4xx error — usually a hydration mismatch (often a data-consistency bug). Reproduce by reloading.' : undefined);
+          collector.check('No first-party [icon-leak] warnings', audit.iconLeak.length === 0,
+            audit.iconLeak.length === 0 ? 'none' : `${audit.iconLeak.length} icon-leak warning(s) from the page bundle (SSR icon subsetting)`,
+            audit.iconLeak.length > 0 ? 'The site bundle logs [icon-leak] — add the icon to STATIC_ICONS_BY_COMPONENT / expose as a tracked prop' : undefined);
+          collector.check('No first-party console errors', audit.firstPartyErr.length === 0,
+            audit.firstPartyErr.length === 0 ? 'none' : audit.firstPartyErr.slice(0, 3).map(e => e.text.slice(0, 120)).join(' | '),
+            audit.firstPartyErr.length > 0 ? 'Open DevTools console on the facility page' : undefined);
+          // Info-only: resource 4xx/5xx (often WAF-under-automation) + third-party beacons.
+          collector.check('Resource/3rd-party console (info)', true,
+            `resource-errors=${audit.resourceErr.length}, third-party=${audit.thirdParty.length}`);
 
           for (const ck of collector.activeChecks) {
             if (!ck.passed) expect.soft(false, `Health: ${ck.name} — ${ck.detail}`).toBe(true);

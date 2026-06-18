@@ -20,6 +20,7 @@ import { ReviewsSection } from './ReviewsSection';
 import { UHaulSection } from './UHaulSection';
 import { SeoSection } from './SeoSection';
 import { SeoHeadSection } from './SeoHeadSection';
+import { DataIntegritySection } from './DataIntegritySection';
 
 export const SECTION_DETECTORS: ISectionDetector[] = [
   new NavSection(),
@@ -38,6 +39,8 @@ export const SECTION_DETECTORS: ISectionDetector[] = [
   new SeoSection(),
   // Universal (all clients): page head meta + structured data + attribute tokens.
   new SeoHeadSection(),
+  // Universal: cross-field data consistency (review counts, rating, phone, tokens).
+  new DataIntegritySection(),
 ];
 
 export function getDetector(id: string): ISectionDetector {
@@ -51,4 +54,5 @@ export {
   NavSection, FacilityHeaderSection, CarouselSection, AmenitiesSection, FAQSection,
   UnitsSection, GallerySection, FooterSection,
   FiltersSection, PromoSection, ReviewsSection, UHaulSection, SeoSection, SeoHeadSection,
+  DataIntegritySection,
 };

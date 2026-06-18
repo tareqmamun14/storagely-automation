@@ -12,24 +12,88 @@ import { getRentHandoff, RentHandoff } from '../configs/profiles';
  *     testable section. Each detector is layout-tolerant: it uses semantic
  *     locators (role / aria / text) rather than CSS classnames.
  */
+export interface ConsoleEntry {
+  type: 'error' | 'warning' | 'pageerror';
+  text: string;
+  url: string;
+}
+
 export class LiveFacilityPage {
   readonly page: Page;
   private consoleErrors: string[] = [];
+  /** Full console capture (errors + warnings + uncaught pageerrors) with source URL. */
+  private consoleLog: ConsoleEntry[] = [];
   /** HTTP status of the main document response from the last goto() (null if unknown). */
   lastNavStatus: number | null = null;
 
   constructor(page: Page) {
     this.page = page;
+    // Capture errors AND warnings (the page's own bundle emits first-party
+    // warnings like "[icon-leak]" we must surface) with their source URL.
+    // Listeners are attached BEFORE goto() so the full load + hydration window
+    // is captured — including the intermittent React #418 hydration error.
     this.page.on('console', msg => {
-      if (msg.type() === 'error') {
-        // Append the source/resource URL — for "Failed to load resource" 403s
-        // the URL lives in location(), not text(), and client allow-lists need
-        // it to scope (e.g. ignore only specific Atlas-API endpoints, not all 403s).
+      const type = msg.type();
+      if (type === 'error' || type === 'warning') {
         const loc = msg.location();
-        const url = loc && loc.url ? ` ${loc.url}` : '';
-        this.consoleErrors.push(msg.text() + url);
+        const url = loc && loc.url ? loc.url : '';
+        this.consoleLog.push({ type, text: msg.text(), url });
+        if (type === 'error') this.consoleErrors.push(msg.text() + (url ? ` ${url}` : ''));
       }
     });
+    // Uncaught exceptions surface via 'pageerror', not 'console' — capture them
+    // too (a React render crash can land here rather than in console.error).
+    this.page.on('pageerror', err => {
+      this.consoleLog.push({ type: 'pageerror', text: err.message || String(err), url: '' });
+      this.consoleErrors.push((err.message || String(err)) + ' [pageerror]');
+    });
+  }
+
+  /** Raw console capture (errors + warnings + pageerrors) since construction. */
+  getConsoleLog(): ConsoleEntry[] {
+    return this.consoleLog;
+  }
+
+  /**
+   * Classify the captured console into actionable buckets.
+   *
+   * Principle: NEVER swallow first-party errors. We only set aside a small,
+   * explicit set of THIRD-PARTY analytics/marketing hosts (their beacons fail
+   * independently of the storage page). Everything from the page itself or its
+   * own CDN bundle is first-party and must surface.
+   *   • reactErrors   — React #4xx (hydration/render) — ALWAYS a hard fail
+   *   • iconLeak      — first-party "[icon-leak]" SSR warnings — hard fail
+   *   • firstPartyErr — any other first-party console.error / pageerror — fail
+   *   • resourceErr   — "Failed to load resource" Nxx (often WAF-under-bot) — info
+   *   • thirdParty    — allow-listed third-party hosts — info
+   */
+  auditConsole(): {
+    reactErrors: ConsoleEntry[];
+    iconLeak: ConsoleEntry[];
+    firstPartyErr: ConsoleEntry[];
+    resourceErr: ConsoleEntry[];
+    thirdParty: ConsoleEntry[];
+    all: ConsoleEntry[];
+  } {
+    const THIRD_PARTY = [
+      /bat\.bing\.com/i, /googletagmanager\.com/i, /google-analytics\.com/i,
+      /facebook\.(com|net)/i, /doubleclick\.net/i, /hotjar/i, /clarity\.ms/i,
+      /jQuery is not defined/i, // a GTM custom-tag error originating in gtm.js
+    ];
+    const isThird = (m: ConsoleEntry) => THIRD_PARTY.some(re => re.test(m.url) || re.test(m.text));
+    const isReact = (m: ConsoleEntry) => /Minified React error #4\d\d|react\.dev\/errors\/4\d\d|error-decoder\.html\?invariant=4\d\d/i.test(m.text);
+    const isIcon = (m: ConsoleEntry) => /\[icon-leak\]/i.test(m.text);
+    const isResource = (m: ConsoleEntry) => /Failed to load resource/i.test(m.text);
+
+    const reactErrors = this.consoleLog.filter(isReact);
+    const iconLeak = this.consoleLog.filter(m => m.type === 'warning' && isIcon(m));
+    const thirdParty = this.consoleLog.filter(m => isThird(m) && !isReact(m));
+    const resourceErr = this.consoleLog.filter(m => isResource(m) && !isThird(m) && !isReact(m));
+    const firstPartyErr = this.consoleLog.filter(m =>
+      (m.type === 'error' || m.type === 'pageerror') &&
+      !isReact(m) && !isIcon(m) && !isThird(m) && !isResource(m),
+    );
+    return { reactErrors, iconLeak, firstPartyErr, resourceErr, thirdParty, all: this.consoleLog };
   }
 
   async goto(url: string) {
@@ -115,21 +179,26 @@ export class LiveFacilityPage {
   }
 
   async expectNoUnresolvedTokens() {
+    // VISIBLE text only (innerText excludes <script>/<template>/<style> and
+    // hidden nodes, where template tokens legitimately live). Catch both
+    // {namespaced.token} (single brace WITH a dot) and {{any}} (double brace).
     const bodyText = await this.page.locator('body').innerText();
-    const tokens = bodyText.match(/\{[a-zA-Z0-9_.]+\}/g) || [];
-    expect(tokens, `Unresolved tokens leaked to page: ${tokens.join(', ')}`).toHaveLength(0);
+    const tokens = bodyText.match(/\{\{\s*[\w.$-]+\s*\}\}|\{\s*[\w$-]*\.[\w.$-]+\s*\}/g) || [];
+    expect([...new Set(tokens)], `Unresolved tokens leaked to page: ${[...new Set(tokens)].join(', ')}`).toHaveLength(0);
   }
 
   async expectNoUnresolvedTokensInAttributes() {
     // Scan EVERY text-bearing attribute, not just img[src]/a[href]: a leaked
     // {template.token} also hides in alt / title / aria-label / placeholder
     // (e.g. a logo rendered as alt="{company.name} logo"), which the visible-
-    // text token check never sees.
+    // text token check never sees. Handles {single.token} and {{double}}.
     const leaks = await this.page.evaluate(() => {
       const found: string[] = [];
-      const pattern = /\{[a-zA-Z0-9_.]+\}/g;
-      for (const attr of ['src', 'href', 'alt', 'title', 'aria-label', 'placeholder']) {
+      const pattern = /\{\{\s*[\w.$-]+\s*\}\}|\{\s*[\w$-]*\.[\w.$-]+\s*\}/g;
+      for (const attr of ['src', 'href', 'alt', 'title', 'aria-label', 'placeholder', 'value', 'content']) {
         document.querySelectorAll('[' + attr + ']').forEach(el => {
+          // Skip <template>/<script> attribute scopes (none in practice, but safe).
+          if (el.closest('template, script')) return;
           const v = el.getAttribute(attr) || '';
           for (const match of v.matchAll(pattern)) {
             found.push(`${attr}=${match[0]}`);
@@ -280,50 +349,55 @@ export class LiveFacilityPage {
    *      deferred, not broken, so we exclude anything horizontally off-screen.
    *
    * NO tolerance: with lazy-loading handled robustly, "no image should be
-   * broken" is a HARD bar — any on-screen content image (≥ 40px, so we skip
-   * tracking pixels/spacers) that fails to load fails the check by name.
+   * broken" is a HARD bar. We report the TRUE total <img> count on the page
+   * (not a subset) and check EVERY in-viewport image ≥ 16px (so reviewer
+   * avatars count too — only sub-16px tracking pixels/spacers are skipped).
+   * Off-screen-X carousel slides stay deferred and are excluded.
    */
-  async expectAllImagesLoaded(): Promise<{ visible: number; loaded: number }> {
+  async expectAllImagesLoaded(): Promise<{ total: number; checked: number; loaded: number }> {
     // Force lazy images to load and wait for them to settle.
     await settleImages(this.page);
 
     const collect = () => this.page.evaluate(() => {
       const vw = window.innerWidth;
-      return Array.from(document.querySelectorAll<HTMLImageElement>('img[src]'))
-        .filter(img => {
-          const r = img.getBoundingClientRect();
-          if (r.width < 40 || r.height < 40) return false;        // tracking pixel / icon / spacer
-          if (r.right <= 0 || r.left >= vw) return false;         // carousel deferred slide (off-screen X)
-          return true;
-        })
-        .map(img => ({
+      const all = Array.from(document.querySelectorAll<HTMLImageElement>('img'));
+      const inViewport = all.filter(img => {
+        const r = img.getBoundingClientRect();
+        if (r.width < 16 || r.height < 16) return false;          // tracking pixel / spacer
+        if (r.right <= 0 || r.left >= vw) return false;           // carousel deferred slide (off-screen X)
+        return true;
+      });
+      return {
+        total: all.length,
+        checked: inViewport.map(img => ({
           src: img.currentSrc || img.src,
           alt: img.alt || '(no alt)',
           loaded: img.complete && img.naturalWidth > 0,
-        }));
+        })),
+      };
     });
 
     // Final short re-poll as a last guard after the settle.
-    let results = await collect();
-    let broken = results.filter(r => !r.loaded);
-    for (let attempt = 0; attempt < 4 && broken.length > 0; attempt++) {
-      await this.page.waitForTimeout(500);
-      results = await collect();
-      broken = results.filter(r => !r.loaded);
+    let res = await collect();
+    let broken = res.checked.filter(r => !r.loaded);
+    for (let attempt = 0; attempt < 5 && broken.length > 0; attempt++) {
+      await this.page.waitForTimeout(600);
+      res = await collect();
+      broken = res.checked.filter(r => !r.loaded);
     }
 
     if (broken.length > 0) {
-      // Single line (the reporter keeps only the first line) — name the offenders.
       const offenders = broken
         .slice(0, 6)
         .map(b => `"${b.alt}" …${b.src.slice(-44)}`)
         .join(' · ');
       const more = broken.length > 6 ? ` (+${broken.length - 6} more)` : '';
       throw new Error(
-        `${broken.length} of ${results.length} on-screen content images failed to load: ${offenders}${more}`,
+        `${broken.length} of ${res.checked.length} in-viewport images failed to load ` +
+        `(of ${res.total} total <img>): ${offenders}${more}`,
       );
     }
-    return { visible: results.length, loaded: results.length - broken.length };
+    return { total: res.total, checked: res.checked.length, loaded: res.checked.length - broken.length };
   }
 
   // ── V2 handoff validation ─────────────────────────────────────────────

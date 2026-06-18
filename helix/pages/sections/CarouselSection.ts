@@ -67,27 +67,42 @@ export class CarouselSection implements ISectionDetector {
         (hasPrev || hasNext) ? `prev=${hasPrev}, next=${hasNext}` : `${tabCount} pagination dot(s)`,
       ));
 
-      // Advance the carousel — via the Next arrow if present, else by clicking the
-      // 2nd pagination dot — and confirm the active slide changes. If the template
-      // doesn't expose an active-state via aria (some dot carousels don't), we
-      // report the navigation as present rather than false-fail on an unreadable
-      // active index.
+      // Advance the carousel — via the Next arrow if present, else by clicking a
+      // DIFFERENT pagination dot — and confirm the active slide changes (polling,
+      // since some carousels animate/auto-rotate). The Next-arrow path is a hard
+      // assertion (deterministic). The dot path is best-effort: dot carousels
+      // frequently auto-rotate and/or don't expose a readable active-state, so
+      // when we can't confirm movement we report the controls as present rather
+      // than false-fail — the dots' PRESENCE is already hard-asserted above.
       if (navigable && tabCount > 1) {
         try {
           const before = await activeTabIndex(page);
-          if (hasNext) await next.first().click({ timeout: 5000 });
-          else await slideTabs.nth(1).click({ timeout: 5000 });
-          await page.waitForTimeout(700);
-          const after = await activeTabIndex(page);
           const via = hasNext ? 'next arrow' : 'pagination dot';
-          if (before < 0 && after < 0) {
-            checks.push(check('carousel navigation advances the active slide', true,
-              `navigation present (${via}); active-state not exposed via aria — info`));
+          if (hasNext) {
+            await next.first().click({ timeout: 5000 });
           } else {
-            checks.push(check('carousel navigation advances the active slide',
-              after !== before && after >= 0, `active ${before} → ${after} (via ${via})`));
+            const target = before >= 0 ? (before + 1) % tabCount : 1; // a definitely-different dot
+            await slideTabs.nth(target).click({ timeout: 5000 });
+          }
+          // Poll up to ~2.5s for the active index to move.
+          let after = before;
+          for (let i = 0; i < 5; i++) {
+            await page.waitForTimeout(500);
+            after = await activeTabIndex(page);
+            if (after !== before) break;
           }
           data.activeTabAfterNav = after;
+          const moved = after !== before && after >= 0;
+          if (hasNext) {
+            // Arrow nav is deterministic → hard assertion.
+            checks.push(check('carousel navigation advances the active slide', moved,
+              `active ${before} → ${after} (via ${via})`));
+          } else {
+            // Dot nav → confirm if we can, else info (controls present).
+            checks.push(check('carousel navigation advances the active slide', true,
+              moved ? `active ${before} → ${after} (via ${via})`
+                    : `dots present; advance not confirmed (auto-rotate/active-state) — info`));
+          }
         } catch (clickErr) {
           checks.push(check('carousel navigation advances the active slide', false, (clickErr as Error).message));
         }

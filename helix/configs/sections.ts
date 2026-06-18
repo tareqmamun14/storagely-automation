@@ -114,6 +114,12 @@ export const SECTIONS: SectionDef[] = [
     description: 'Expect: <title> + meta description, canonical URL, Open Graph (og:title/og:image), viewport, html lang, exactly one <h1>, valid JSON-LD (SelfStorage/LocalBusiness + name/address, FAQ, breadcrumbs), and NO unresolved {tokens} in element attributes (alt/title/aria-label/src/href).',
     order: 14,
   },
+  {
+    id: 'integrity',
+    label: 'Data Integrity',
+    description: 'Expect: review count + star rating agree everywhere on the page, no placeholder (555-01xx) phone numbers, and no unresolved {template.token}/{{token}} in visible text.',
+    order: 15,
+  },
 ];
 
 /** All section IDs in display order — convenience for tests + the reporter. */

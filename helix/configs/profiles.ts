@@ -93,13 +93,14 @@ export interface ClientProfile {
  * These never indicate a real break, so allow-listing them keeps "no false
  * flags" without masking genuine errors (anything else still fails the check).
  */
+// NOTE: console classification now lives in LiveFacilityPage.auditConsole(),
+// which NEVER allow-lists first-party errors (React #4xx + [icon-leak] hard-fail)
+// and only sets aside specific THIRD-PARTY analytics hosts. This list is kept
+// only for the (now-unused) ClientProfile.consoleAllowlist field; it must NOT
+// contain first-party patterns (no React #418, no first-party API errors) so it
+// can never be re-wired to swallow a real bug.
 const HELIX_CONSOLE_ALLOWLIST: RegExp[] = [
-  /v4_api_atlas_location/i,
-  /v4\/endpoints\/.*\.json/i,
-  /Minified React error #418/i,
-  /react\.dev\/errors\/418/i,
-  // Third-party marketing/analytics beacons that fail independently of the
-  // storage page itself (e.g. a Bing UET tag returning 400). Not a page defect.
+  // Third-party marketing/analytics beacons only (fail independently of the page).
   /bat\.bing\.com/i,
   /facebook\.com\/tr/i,
   /googletagmanager\.com|google-analytics\.com/i,

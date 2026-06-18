@@ -68,7 +68,10 @@ export class SeoHeadSection implements ISectionDetector {
           }
         }
         // ── attribute token scan (rendered DOM) ──
-        const tokenRe = /\{[a-zA-Z0-9_.]+\}/g;
+        // Match {namespaced.token} (single brace WITH a dot) or {{any}} (double
+        // brace) — same pattern as DataIntegrity, so a literal like {2024} is not
+        // mistaken for an unresolved template token.
+        const tokenRe = /\{\{\s*[\w.$-]+\s*\}\}|\{\s*[\w$-]*\.[\w.$-]+\s*\}/g;
         const attrLeaks = new Set<string>();
         for (const attr of ['alt', 'title', 'aria-label', 'placeholder', 'src', 'href']) {
           for (const el of Array.from(document.querySelectorAll('[' + attr + ']'))) {
