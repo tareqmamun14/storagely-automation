@@ -79,7 +79,6 @@ body
 | Distinct Storage | distinctstorage.com | — |
 | Rhino Storage | rhino-storage.com | — |
 | Storage Depot LA | storagedepotla.com | Contact page empty in staging |
-| ULok | ulok.com | Storerocket — prod only, no staging |
 | Mini Mall | minimallstorage.com | ⭐ Yardi client |
 | Storsafe | storsafe.com | — |
 | Almighty Storage | almightystorage.com | No FAQ accordion |
@@ -93,7 +92,6 @@ body
 | SiteLink Corp Code (staging only) | bluebirdstorage, sunbirdstorage | Admin must set corp code in Settings > Integrations before rent flow |
 | hCaptcha on Step 4 (not RENT NOW) | Mini Mall (staging) | Captcha fires before "Continue to next step" — test pauses for manual solve |
 | hCaptcha on RENT NOW | All SPC production clients | Test pauses for manual solve, then clicks RENT NOW |
-| Storerocket (no staging) | ULok | Prod only, skip in staging |
 
 ### 5. SPC Rent Form Sections & Selectors
 
@@ -194,7 +192,6 @@ CVV           → getByRole('textbox', {name:'CVV'}) | input[name="cvv"]
 - **DO NOT** add `?cacheBust=` to `bluebirdstorage.ca` or `redrocksstorage.com` URLs — it causes navigation abort.
 - **DO NOT** use `getByPlaceholder('Address')` without `{ exact: true }` — it matches the Email field too.
 - **DO NOT** assume Rhino Storage has a Rent button — it only has Join Waitlist.
-- **DO NOT** add ULok (ulok.com) to staging test runs — Storerocket has no staging equivalent.
 - **ALWAYS** check `CURRENT_ENVIRONMENT` from `configs/urls.ts` to pick the right URL set.
 - **ALWAYS** use `.first()` on multi-match locators for rent/reserve buttons.
 - **ONLY** write test code that follows the Page Object Model pattern in `pages/`.

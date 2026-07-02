@@ -42,7 +42,7 @@ export const CUSTOMER_URLS = {
     'https://test.staging.storagely-api.com/storage-boss/storage-units/louisiana/ponchatoula/west-pine-street',       // StorageBoss| SiteLink
   ],
   [Environment.PRODUCTION]: [
-    'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road',              // Distinct    | storEDGE
+    'https://rent.distinctstorage.com/storage-units/connecticut/new-milford/kent-road',              // Distinct    | storEDGE
     'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive',                  // Rhino       | SiteLink
     'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road',         // Gatekeeper  | SiteLink
     'https://storagedepotla.com/storage-units/louisiana/hammond/north-morrison-blvd',            // StorageBoss | SiteLink
@@ -51,7 +51,7 @@ export const CUSTOMER_URLS = {
 
 // FMS platform for each V1 production URL (used for logging)
 export const FMS_PLATFORM: Record<string, string> = {
-  'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road':        'storEDGE',
+  'https://rent.distinctstorage.com/storage-units/connecticut/new-milford/kent-road':        'storEDGE',
   'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive':            'SiteLink',
   'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road':   'SiteLink',
   'https://storagedepotla.com/storage-units/louisiana/hammond/north-morrison-blvd':      'SiteLink',
@@ -189,7 +189,6 @@ export const STORAGE_SITE_URLS = {
     'https://test.staging.storagely-api.com/distinct-storage/',          // Distinct
     'https://test.staging.storagely-api.com/rhino-storage/',             // Rhino
     'https://test.staging.storagely-api.com/storage-boss/',              // StorageBoss   ⚠️ staging contact empty
-    // ulok.com — uses Storerocket, no staging equivalent (prod-only)
     'https://test.staging.storagely-api.com/mini-mall-storage/',         // Mini Mall ⭐
     'https://test.staging.storagely-api.com/storsafe-self-storage/',     // Storsafe
   ],
@@ -203,16 +202,14 @@ export const STORAGE_SITE_URLS = {
     'https://distinctstorage.com/',        // Distinct
     'https://rhino-storage.com/',          // Rhino
     'https://storagedepotla.com/',         // StorageBoss
-    'https://ulok.com',                    // ULok (Storerocket — prod only)
     'https://minimallstorage.com/',        // Mini Mall ⭐
     'https://www.storsafe.com/',           // Storsafe
     'https://www.almightystorage.com/',    // Almighty Storage
-    'https://selfstorage.ca/',             // U-Lock Mini Storage / SelfStorage.ca
   ]
 };
 
 // Sites that use Storerocket (no staging equivalent — skipped in staging)
-export const STOREROCKET_SITES = ['ulok.com'];
+export const STOREROCKET_SITES: string[] = [];
 
 // Staging sites whose contact page is empty/broken (contact test skipped in staging)
 export const STAGING_CONTACT_SKIP = ['sunbirdstorage', 'bluebirdstorage', 'storage-boss'];
@@ -309,9 +306,8 @@ export const PRICING_VALIDATION_LOCATIONS: PricingLocationConfig[] = [
 
   // --- V1 Clients ---
   // storEDGE
-  { url: 'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road',                                        fms: 'storEDGE', version: 'V1', label: 'Distinct Storage — New Milford, CT' },
+  { url: 'https://rent.distinctstorage.com/storage-units/connecticut/new-milford/kent-road',                                        fms: 'storEDGE', version: 'V1', label: 'Distinct Storage — New Milford, CT' },
   // SiteLink
-  { url: 'https://selfstorage.ca/storage-units/british-columbia/mission/gill-avenue',                                          fms: 'SiteLink', version: 'V1', label: 'U-Lock Mini Storage — Mission, BC' },
   // SSM
   { url: 'https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road',                                             fms: 'SSM',      version: 'V2', label: 'Smart Storage Ohio — Macedonia, OH' },
 
@@ -360,7 +356,7 @@ export const UNIT_FEATURES_CONFLICT_LOCATIONS: UnitFeaturesLocationConfig[] = [
   // --- storEDGE clients ---
   { url: 'https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue',                          fms: 'storEDGE', label: 'Columbia Self Storage — South Plainfield, NJ'    },
   { url: 'https://purelystorage.com/storage-units/washington/pasco/north-road-44',                                              fms: 'storEDGE', label: 'Purely Storage — Pasco, WA'                      },
-  { url: 'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road',                                        fms: 'storEDGE', label: 'Distinct Storage — New Milford, CT'              },
+  { url: 'https://rent.distinctstorage.com/storage-units/connecticut/new-milford/kent-road',                                        fms: 'storEDGE', label: 'Distinct Storage — New Milford, CT'              },
   { url: 'https://www.storsafe.com/storage-units/iowa/altoona/34th-avenue-southwest',                                          fms: 'storEDGE', label: 'StorSafe — Altoona, IA'                          },
 
   // --- SiteLink clients ---
@@ -370,7 +366,6 @@ export const UNIT_FEATURES_CONFLICT_LOCATIONS: UnitFeaturesLocationConfig[] = [
   { url: 'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive',                                           fms: 'SiteLink', label: 'Rhino Storage — Covington, LA'                   },
   { url: 'https://gatekeeperstoragega.com/storage-units/georgia/peachtree-city/senoia-road',                                   fms: 'SiteLink', label: 'Gatekeeper Self Storage — Peachtree City, GA'   },
   { url: 'https://storagedepotla.com/storage-units/louisiana/hammond/north-morrison-blvd',                                     fms: 'SiteLink', label: 'Storage Depot LA — Hammond, LA'                },
-  { url: 'https://selfstorage.ca/storage-units/british-columbia/mission/gill-avenue',                                          fms: 'SiteLink', label: 'U-Lock Mini Storage — Mission, BC'              },
 
   // --- SSM clients ---
   { url: 'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',                                 fms: 'SSM',      label: 'Storage Star — Colorado Springs, CO'               },
@@ -407,7 +402,7 @@ export const MINI_MALL_RENTAL_URLS: Record<string, MiniMallRentalConfig[]> = {
   ],
   [Environment.PRODUCTION]: [
     { url: 'https://minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard',                                                          fms: 'SiteLink', label: '⭐ Mini Mall SiteLink — Sainte-Thérèse, QC' },
-    { url: 'https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd',                                                fms: 'Yardi',    label: '⭐ Mini Mall Yardi — Birmingham, AL' },
+    { url: 'https://minimallstorage.com/storage-units/florida/deland/golf-club-drive',                                                fms: 'Yardi',    label: '⭐ Mini Mall Yardi — DeLand, FL' },
   ],
 };
 

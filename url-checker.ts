@@ -60,7 +60,6 @@ ESM: Riverfront Self Storage,riverfrontselfstorage.com
 SSUN: z_NOT USED | Route 36 Storage,route36storage.selfstorageunitsnearby.com
 ASG: The Storage Advantage - Roxborough Storage,roxboroughstorage.thestorageadvantage.com
 ASG: The Storage Advantage - Safe Storage,safestorage.thestorageadvantage.com
-U-Lock Mini Storage,selfstorage.ca
 SSUN: Self Storage Units Nearby,selfstorageunitsnearby.com
 SSUN: z_NOT USED | Slate Storage,slatestorage.selfstorageunitsnearby.com
 Smart Space Storage,smartspace.biz
@@ -86,7 +85,6 @@ ASG: The Storage Advantage - The Storage Space,thestoragespace.thestorageadvanta
 VSG: Thunderbolt Self Storage,thunderboltselfstorage.victorystoragegroup.com
 ASG: The Storage Advantage - Topeka Self Storage,topekaselfstorage.thestorageadvantage.com
 ASG: The Storage Advantage - TriLink Storage,trilinkstorage.thestorageadvantage.com
-Downtown U-Lok Storage,ulok.com
 PM: USA Rent-A-Space,usarent-a-space.com
 VSG: Victory Drive Self Storage,victorydriveselfstorage.victorystoragegroup.com
 VSG: Victory Storage Group,victorystoragegroup.com

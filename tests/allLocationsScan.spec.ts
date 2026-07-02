@@ -19,8 +19,6 @@ import { scanUnitConflicts } from '../utils/unitConflictScan';
 // Mini Mall is excluded — it has its own dedicated, optimized scan in
 // tests/miniMallFullScan.spec.ts (uses dedicated aggregate pages).
 //
-// Storerocket-fronted sites (ulok.com) are also skipped — they are external
-// pages without our normal carousel/units structure.
 //
 // PRODUCTION ONLY:
 //   Staging serves placeholder URLs that 404; this test would produce
@@ -230,7 +228,7 @@ test.describe('🔭 All Locations — Full Scan (All Clients, All Pages)', () =>
     const clientHomepages = getStorageSiteUrls().filter(u => {
       const host = u.toLowerCase();
       if (host.includes('minimallstorage'))                            return false; // dedicated mini-mall scan
-      if (STOREROCKET_SITES.some(s => host.includes(s.toLowerCase()))) return false; // ulok.com etc.
+      if (STOREROCKET_SITES.some(s => host.includes(s.toLowerCase()))) return false;
       return true;
     });
 

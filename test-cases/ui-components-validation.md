@@ -34,7 +34,7 @@ A multi-module suite that verifies the core UI components across all Storagely c
 
 ### Production
 
-Includes all of the above plus **ULok** (Storerocket — prod only, skipped in staging) and **Storsafe**.
+Includes all of the above plus **Storsafe**.
 
 ---
 

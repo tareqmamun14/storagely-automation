@@ -19,7 +19,7 @@
 const http  = require('http');
 const fs    = require('fs');
 const path  = require('path');
-const { spawn } = require('child_process');
+const { spawn, execSync } = require('child_process');
 const { randomUUID } = require('crypto');
 
 const ROOT       = path.resolve(__dirname, '..');
@@ -70,8 +70,7 @@ const FMS_BY_SLUG = {
   'mini-mall-storage':        'Yardi',
   'mini-mall-storage-yardi':  'Yardi',
   'minimallstorage':          'Yardi',
-  // External (Storerocket-fronted) — both run on SiteLink
-  'ulok':                     'SiteLink',
+  // External (Storerocket-fronted)
   'almightystorage':          'SiteLink',
 };
 function fmsFor(id) { return FMS_BY_SLUG[id] || '—'; }
@@ -733,6 +732,23 @@ const server = http.createServer((req, res) => {
   }
   serveStatic(req, res);
 });
+
+function freePort(port) {
+  try {
+    const out = execSync(`netstat -ano | findstr ":${port}"`, { encoding: 'utf8' });
+    const pids = new Set();
+    for (const line of out.split('\n')) {
+      const m = line.trim().match(/LISTENING\s+(\d+)/);
+      if (m && m[1] !== '0') pids.add(m[1]);
+    }
+    for (const pid of pids) {
+      try { execSync(`taskkill /F /PID ${pid}`, { stdio: 'ignore' }); } catch {}
+    }
+    if (pids.size) console.log(`  Killed stale process(es) on port ${port}: PIDs ${[...pids].join(', ')}`);
+  } catch {}
+}
+
+freePort(PORT);
 
 server.listen(PORT, () => {
   const url = `http://localhost:${PORT}`;

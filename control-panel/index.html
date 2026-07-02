@@ -1407,38 +1407,43 @@ boot();
 
 // ── Lifecycle sync: Ctrl+C in terminal closes this tab; closing tab stops server ──
 (function connectHeartbeat() {
-  const hb = new EventSource('/api/heartbeat');
-  let errCount = 0;
+  let dead = false;
+  let hb;
 
-  hb.addEventListener('shutdown', () => {
-    hb.close();
-    window.close();
-    // Fallback — window.close() may be blocked by the browser
-    setTimeout(() => {
-      document.body.innerHTML =
-        '<div style="display:flex;align-items:center;justify-content:center;height:100vh;' +
-        'font:20px/1.4 -apple-system,sans-serif;color:#8b93a7;background:#0f1115">' +
-        '<div style="text-align:center"><div style="font-size:36px;margin-bottom:12px">' +
-        '⏹</div>Server stopped.<br>' +
-        '<span style="font-size:14px;opacity:.7">You can close this tab.</span></div></div>';
-    }, 500);
-  });
+  function showDead(icon, title) {
+    dead = true;
+    document.body.innerHTML =
+      '<div style="display:flex;align-items:center;justify-content:center;height:100vh;' +
+      'font:20px/1.4 -apple-system,sans-serif;color:#8b93a7;background:#0f1115">' +
+      '<div style="text-align:center"><div style="font-size:36px;margin-bottom:12px">' +
+      icon + '</div>' + title + '<br>' +
+      '<span style="font-size:14px;opacity:.7">You can close this tab.</span></div></div>';
+  }
 
-  hb.onopen = () => { errCount = 0; };
-  hb.onmessage = () => { errCount = 0; };
+  function connect() {
+    if (dead) return;
+    hb = new EventSource('/api/heartbeat');
+    let errCount = 0;
 
-  hb.onerror = () => {
-    errCount++;
-    if (errCount > 2) {
+    hb.addEventListener('shutdown', () => {
       hb.close();
-      document.body.innerHTML =
-        '<div style="display:flex;align-items:center;justify-content:center;height:100vh;' +
-        'font:20px/1.4 -apple-system,sans-serif;color:#8b93a7;background:#0f1115">' +
-        '<div style="text-align:center"><div style="font-size:36px;margin-bottom:12px">' +
-        '🔌</div>Server disconnected.<br>' +
-        '<span style="font-size:14px;opacity:.7">You can close this tab.</span></div></div>';
-    }
-  };
+      window.close();
+      setTimeout(() => showDead('⏹', 'Server stopped.'), 500);
+    });
+
+    hb.onopen = () => { errCount = 0; };
+    hb.onmessage = () => { errCount = 0; };
+
+    hb.onerror = () => {
+      errCount++;
+      if (errCount > 2) {
+        hb.close();
+        setTimeout(connect, 2000);
+      }
+    };
+  }
+
+  connect();
 })();
 </script>
 </body>

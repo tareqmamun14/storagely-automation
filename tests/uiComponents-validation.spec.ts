@@ -1322,8 +1322,6 @@ function buildImageScanTargets(): LocationImageTarget[] {
       url: 'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive' },
     { fms: 'SSM',      version: 'V2', label: 'Storage Star — Anchorage, AK (SSM)',
       url: 'https://www.storagestar.com/storage-units/alaska/anchorage/boniface' },
-    { fms: 'SiteLink', version: 'V1', label: 'U-Lock Mini Storage — Nanaimo, BC (SiteLink)',
-      url: 'https://selfstorage.ca/storage-units/british-columbia/nanaimo/wellington-road' },
     { fms: 'Yardi',    version: 'V2', label: '⭐ Mini Mall Storage — Birmingham, AL (Yardi)',
       url: 'https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd' },
   ];

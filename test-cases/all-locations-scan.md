@@ -18,7 +18,7 @@ For **every Storagely client** (V1 + V2, excluding Mini Mall and Storerocket sit
    - **Unit Feature Conflict scan** — same conflicting-pair list as Mini Mall scan (Climate vs Non-Climate, Covered vs Uncovered, etc.).
 3. **Reports** per-client summaries plus a grand total, with a detailed failure dump showing every broken/placeholder image grouped by location.
 
-Mini Mall is excluded from this scan because it has its own dedicated, optimized full scan ([tests/miniMallFullScan.spec.ts](../tests/miniMallFullScan.spec.ts)) that uses dedicated US/Canada aggregate pages instead of the per-client crawl. Storerocket-fronted sites (`ulok.com`) are excluded because they're external pages without our normal carousel/units markup.
+Mini Mall is excluded from this scan because it has its own dedicated, optimized full scan ([tests/miniMallFullScan.spec.ts](../tests/miniMallFullScan.spec.ts)) that uses dedicated US/Canada aggregate pages instead of the per-client crawl.
 
 ---
 
