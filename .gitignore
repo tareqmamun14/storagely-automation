@@ -15,8 +15,8 @@ scan-progress.txt
 .env.local
 .env.*
 
-# Helix test results
-helix/test-results/
+# Flex test results
+flex/test-results/
 
 # Playwright MCP inspection artifacts (local only)
 .playwright-mcp/

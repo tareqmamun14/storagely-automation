@@ -14,6 +14,6 @@
     "types": ["@playwright/test", "node"], 
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["tests/**/*.ts", "playwright.config.ts", "tests/payment-verification.spec.js", "zunk/payment-verification2.spec.ts", "helix/**/*.ts"],
+  "include": ["tests/**/*.ts", "playwright.config.ts", "tests/payment-verification.spec.js", "zunk/payment-verification2.spec.ts", "flex/**/*.ts"],
   "exclude": ["node_modules"]
 }

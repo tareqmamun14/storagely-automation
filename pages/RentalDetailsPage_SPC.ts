@@ -346,7 +346,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
   // DISCOUNT TIMING & BREAKDOWN
   // ============================================
 
-  // Helix renders a custom <select>-style "When to Apply Discount" control —
+  // Flex renders a custom <select>-style "When to Apply Discount" control —
   // NOT a native <select> and NOT label-associated. Verified live on Safeguard:
   //   <div class="relative flex flex-col gap-px" options="…" modelvalue="…">
   //     <label for="select-XXXX">Select When to Apply Discount</label>   ← no element has id=select-XXXX,
@@ -359,7 +359,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
   //   </div>
   // Leaving it unset keeps the Rent Now button pointer-events-none. Anchored on
   // the label TEXT (not ids / CSS classes) so it tolerates markup churn and
-  // applies unchanged to future Helix clients.
+  // applies unchanged to future Flex clients.
 
   /** Wrapper <div> of the discount-timing control (0 matches when not present). */
   private get discountTimingWrapper(): Locator {
@@ -373,7 +373,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
    *
    * @param preferred exact option label to pick (e.g. "This Month"). When omitted
    *   or not found, the FIRST real option (after the placeholder) is chosen — so
-   *   new Helix clients work with no extra config.
+   *   new Flex clients work with no extra config.
    * @returns the option text actually selected, or null when no dropdown present.
    */
   async selectDiscountTimingIfPresent(preferred?: string): Promise<string | null> {
@@ -1785,6 +1785,46 @@ export class RentalDetailsPageSinglePage extends BasePage {
   }
 
   /**
+   * Scroll the hCaptcha widget toward the TOP of the viewport so its challenge
+   * popup (opened when the user clicks the checkbox) has vertical room and its
+   * "Verify" button is not cropped below the fold. Fixes the Safeguard SPC case
+   * where the Rent-Now captcha sits at the bottom of a long single-page form.
+   * Best-effort — swallows all errors and never blocks the manual solve.
+   */
+  private async scrollCaptchaIntoRoom(): Promise<void> {
+    try {
+      await this.page.evaluate(() => {
+        const measure = (el: Element) => {
+          const r = el.getBoundingClientRect();
+          return { el: el as HTMLElement, absTop: r.top + window.scrollY, h: r.height };
+        };
+        const real = (sel: string) => Array.from(document.querySelectorAll(sel))
+          .map(measure).filter(c => c.h > 20 && c.absTop > 0);
+        // Anchor on the hCaptcha WIDGET itself (there are usually several iframes,
+        // incl. a zero-size one — filter to real ones). Prefer the TOPMOST real
+        // captcha widget (the checkbox); fall back to the Rent-Now button.
+        const captcha = real('.h-captcha, [data-hcaptcha-widget-id], iframe[src*="hcaptcha.com"], iframe[title*="hcaptcha" i], iframe[title*="captcha" i]')
+          .sort((a, b) => a.absTop - b.absTop);
+        const target = captcha[0] || real('#rent-now, button#rent-now').sort((a, b) => a.absTop - b.absTop)[0];
+        if (!target) return;
+
+        // The V2 SPC checkout renders the captcha inside a `md:sticky` sidebar, so
+        // a plain window scroll can't lift it — it stays pinned near the bottom of
+        // the viewport and the challenge popup opens cropped. Neutralise any
+        // sticky/fixed ancestor first so the widget scrolls normally, THEN lift it
+        // to ~120px from the top, giving the challenge the full viewport below.
+        for (let cur: HTMLElement | null = target.el.parentElement; cur && cur !== document.body; cur = cur.parentElement) {
+          const pos = getComputedStyle(cur).position;
+          if (pos === 'sticky' || pos === 'fixed') cur.style.setProperty('position', 'static', 'important');
+        }
+        const absTop = target.el.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: Math.max(0, absTop - 120), left: 0, behavior: 'instant' as ScrollBehavior });
+      });
+      await this.page.waitForTimeout(400); // let layout settle before the user clicks
+    } catch { /* non-critical */ }
+  }
+
+  /**
    * Wait for the user to manually solve hCaptcha.
    * Prints a visible prompt in the terminal, then polls every 2 s until
    * a solved-captcha signal is detected. Checks multiple indicators:
@@ -1813,6 +1853,15 @@ export class RentalDetailsPageSinglePage extends BasePage {
     console.log('🛑  3. Automation will continue AUTOMATICALLY once solved');
     console.log('🛑  (No time limit — take as long as you need)');
     console.log('🛑 ═══════════════════════════════════════════════════════════\n');
+
+    // Give the hCaptcha challenge popup room to render fully. On long single-page
+    // forms (e.g. Safeguard SPC) the Rent-Now captcha sits at the very BOTTOM of
+    // the page, so when the user clicks the checkbox the challenge opens with its
+    // "Verify"/confirm button cropped below the fold and unclickable. Scroll the
+    // captcha widget up toward the top of the viewport FIRST — hCaptcha anchors
+    // the popup to the checkbox at open time, so lifting the checkbox up gives the
+    // popup vertical room. Best-effort: never throws, never blocks the solve.
+    await this.scrollCaptchaIntoRoom();
 
     const pollInterval = 500; // Check every 500ms for fast detection
     let pollCount = 0;

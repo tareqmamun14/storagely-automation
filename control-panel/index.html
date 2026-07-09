@@ -193,44 +193,44 @@
     color: #b87a1d;
   }
 
-  /* ── Helix (v4) — teal accent ────────────────────────────────── */
-  details.suite.helix-suite {
+  /* ── Flex (v4) — teal accent ────────────────────────────────── */
+  details.suite.flex-suite {
     border-color: #2da88833;
     background: color-mix(in srgb, #2da888 6%, var(--panel-2));
   }
-  details.suite.helix-suite > summary {
+  details.suite.flex-suite > summary {
     background: color-mix(in srgb, #2da888 10%, var(--panel-2));
   }
-  details.suite.helix-suite > summary .suite-name {
+  details.suite.flex-suite > summary .suite-name {
     color: #2da888;
   }
-  details.suite.helix-suite .body {
+  details.suite.flex-suite .body {
     border-top-color: #2da88833;
   }
-  :root[data-theme="light"] details.suite.helix-suite {
+  :root[data-theme="light"] details.suite.flex-suite {
     border-color: #2da88844;
     background: color-mix(in srgb, #2da888 8%, #fff);
   }
-  :root[data-theme="light"] details.suite.helix-suite > summary {
+  :root[data-theme="light"] details.suite.flex-suite > summary {
     background: color-mix(in srgb, #2da888 12%, #fff);
   }
-  :root[data-theme="light"] details.suite.helix-suite > summary .suite-name {
+  :root[data-theme="light"] details.suite.flex-suite > summary .suite-name {
     color: #1e7d62;
   }
 
-  /* ── Helix nested groups (collapsible, collapsed by default) ───────── */
-  details.helix-group {
+  /* ── Flex nested groups (collapsible, collapsed by default) ───────── */
+  details.flex-group {
     border: 1px solid var(--line); border-radius: 6px; background: var(--panel); margin: 8px 0;
   }
-  details.helix-group > summary {
+  details.flex-group > summary {
     list-style: none; cursor: pointer; padding: 7px 10px; display: flex; align-items: center; gap: 8px;
     font-size: 12px; font-weight: 600; color: var(--text);
   }
-  details.helix-group > summary::-webkit-details-marker { display: none; }
-  details.helix-group > summary::after { content: '▸'; margin-left: auto; color: var(--muted); transition: transform .15s; }
-  details.helix-group[open] > summary::after { transform: rotate(90deg); }
-  details.helix-group > summary .grp-desc { font-weight: 400; color: var(--muted); font-size: 11px; }
-  details.helix-group .hg-body { padding: 8px 12px 12px; border-top: 1px solid var(--line); }
+  details.flex-group > summary::-webkit-details-marker { display: none; }
+  details.flex-group > summary::after { content: '▸'; margin-left: auto; color: var(--muted); transition: transform .15s; }
+  details.flex-group[open] > summary::after { transform: rotate(90deg); }
+  details.flex-group > summary .grp-desc { font-weight: 400; color: var(--muted); font-size: 11px; }
+  details.flex-group .hg-body { padding: 8px 12px 12px; border-top: 1px solid var(--line); }
   /* Small Prod/Test env badge on facility rows */
   .env-badge {
     display: inline-block; padding: 1px 6px; font-size: 10px; font-weight: 600;
@@ -239,7 +239,7 @@
   }
   .env-badge.prod { background: #1f5a3c33; color: #6dd4a4; border-color: #1f5a3c; }
   .env-badge.test { background: #5a3e1f33; color: #f5b651; border-color: #5a3e1f; }
-  .helix-env-bar {
+  .flex-env-bar {
     display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center;
     padding: 8px 10px; margin-bottom: 6px; border-radius: 6px;
     background: color-mix(in srgb, #2da888 8%, var(--panel));
@@ -320,31 +320,31 @@
       <!-- ── Suites ── -->
       <div class="small" style="margin-bottom:6px">Pick suites to run. Open each card to fine-tune clients/modules.</div>
 
-      <!-- ═══ Helix (v4) — kept at the TOP: this is the launch pipeline ═══ -->
-      <details class="suite helix-suite" id="suite-helix">
+      <!-- ═══ Flex (v4) — kept at the TOP: this is the launch pipeline ═══ -->
+      <details class="suite flex-suite" id="suite-flex">
         <summary>
-          <label class="switch" onclick="event.stopPropagation()"><input class="suite-toggle" data-suite="helix" type="checkbox" /><span class="track"></span></label>
-          <span class="suite-name">Helix (v4) — launch pipeline</span>
+          <label class="switch" onclick="event.stopPropagation()"><input class="suite-toggle" data-suite="flex" type="checkbox" /><span class="track"></span></label>
+          <span class="suite-name">Flex (v4) — launch pipeline</span>
           <span class="suite-desc">E2E rent journey · live page health · per-section checks · editor smoke</span>
         </summary>
         <div class="body">
           <!-- Prod / Test toggle — top of the card, independent of the global env. Prod default. -->
-          <div class="helix-env-bar">
+          <div class="flex-env-bar">
             <div class="col">
-              <div class="small"><b>Helix environment</b> <span class="small">(independent of the top-level Environment above)</span></div>
+              <div class="small"><b>Flex environment</b> <span class="small">(independent of the top-level Environment above)</span></div>
               <div class="row" style="margin-top:4px">
-                <label class="switch"><input id="helixEnvProd" type="radio" name="helixEnv" value="production" checked /><span class="track"></span><span class="lbl">Production</span></label>
-                <label class="switch"><input id="helixEnvTest" type="radio" name="helixEnv" value="test" /><span class="track"></span><span class="lbl">Test / Stage</span></label>
+                <label class="switch"><input id="flexEnvProd" type="radio" name="flexEnv" value="production" checked /><span class="track"></span><span class="lbl">Production</span></label>
+                <label class="switch"><input id="flexEnvTest" type="radio" name="flexEnv" value="test" /><span class="track"></span><span class="lbl">Test / Stage</span></label>
               </div>
             </div>
             <div class="small" style="flex:1;min-width:200px">
               <b>Production</b> = real customer domains (e.g. <code>www.safeguardit.com</code>) — the post-release regression, same cadence as V1/V2.<br/>
-              <b>Test / Stage</b> = <code>*.test.getstoragely.com</code>. Every Helix client uses the same page template, so these checks apply to each new client automatically.
+              <b>Test / Stage</b> = <code>*.test.getstoragely.com</code>. Every Flex client uses the same page template, so these checks apply to each new client automatically.
             </div>
           </div>
 
           <!-- ── Group: Test Layers ── -->
-          <details class="helix-group" id="helix-grp-layers">
+          <details class="flex-group" id="flex-grp-layers">
             <summary>Journey Steps <span class="grp-desc">— ONE browser per facility, run top-down</span></summary>
             <div class="hg-body">
               <div class="small" style="margin-bottom:6px">
@@ -353,56 +353,65 @@
                 <b>Each as own test</b> and <b>Editor</b> are separate browser modes, not part of the single-browser journey.
               </div>
               <div class="check-list">
-                <label title="Click Rent Now on a unit → navigate to V2 SPC /step-four → fill the full SPC form (name, email, phone, address, alternate contact, driver's license, DOB, payment info) → select add-ons (e.g. 24 Hour Access) → select discount timing (e.g. This Month) → submit. Uses test card (expected decline). Runs LAST because it navigates away from the facility page."><input type="checkbox" id="helix-mod-e2e" data-mod="e2e" checked /> Rent Flow — click Rent Now → fill SPC form → submit</label>
-                <label title="Verifies: page title matches expected pattern · facility heading visible · no leaked {template_tokens} in page text · no leaked {tokens} in img src / link href attributes · all visible images load (≤20% tolerance) · units section visible with valid Rent Now links pointing to /step-four · no JavaScript console errors. All run in the same single browser."><input type="checkbox" id="helix-mod-live" data-mod="live" checked /> Page Health — title, heading, tokens, images, links, console errors</label>
-                <label title="Verifies 8 page sections top→bottom in the SAME browser: Nav (≥3 items, blog link, my-account link, contact dropdown) · Header (heading, rating/reviews, hours, phone, address) · Carousel (slides, prev/next nav, images load) · Amenities (≥1 listed) · Units (dimensions, prices web ≤ standard, Rent Now + Reserve, unique IDs) · FAQ (collapsible Q&A) · Gallery (images load) · Footer (columns, social links, copyright). Which sections to verify is configurable in the Page Sections group below."><input type="checkbox" id="helix-mod-sections" data-mod="sections" checked /> Page Sections — nav, header, carousel, amenities, units, faq, gallery, footer</label>
-                <label title="DEBUG MODE: runs each section as its own isolated test in a separate browser. Much slower but pinpoints exactly which section/facility fails. Use when you need to isolate a single section. Not part of the single-browser journey — separate browsers per section per facility."><input type="checkbox" id="helix-mod-sections-each" data-mod="sections-each" /> Sections — each as own test (slower, separate browsers)</label>
-                <label title="Editor tests at sites.apps.mystoragely.com: login → verify palette loads with all 56 components → check preview iframe renders → verify all sidebar tabs are accessible and clickable → no unresolved tokens in preview. Needs HELIX_PASSWORD. Runs in its own browser (separate login)."><input type="checkbox" id="helix-mod-editor" data-mod="editor" /> Editor Smoke — palette inventory, preview, sidebar tabs</label>
+                <label title="Click Rent Now on a unit → navigate to V2 SPC /step-four → fill the full SPC form (name, email, phone, address, alternate contact, driver's license, DOB, payment info) → select add-ons (e.g. 24 Hour Access) → select discount timing (e.g. This Month) → submit. Uses test card (expected decline). Runs LAST because it navigates away from the facility page."><input type="checkbox" id="flex-mod-e2e" data-mod="e2e" checked /> Rent Flow — click Rent Now → fill SPC form → submit</label>
+                <label title="Verifies: page title matches expected pattern · facility heading visible · no leaked {template_tokens} in page text · no leaked {tokens} in img src / link href attributes · all visible images load (≤20% tolerance) · units section visible with valid Rent Now links pointing to /step-four · no JavaScript console errors. All run in the same single browser."><input type="checkbox" id="flex-mod-live" data-mod="live" checked /> Page Health — title, heading, tokens, images, links, console errors</label>
+                <label title="Verifies 8 page sections top→bottom in the SAME browser: Nav (≥3 items, blog link, my-account link, contact dropdown) · Header (heading, rating/reviews, hours, phone, address) · Carousel (slides, prev/next nav, images load) · Amenities (≥1 listed) · Units (dimensions, prices web ≤ standard, Rent Now + Reserve, unique IDs) · FAQ (collapsible Q&A) · Gallery (images load) · Footer (columns, social links, copyright). Which sections to verify is configurable in the Page Sections group below."><input type="checkbox" id="flex-mod-sections" data-mod="sections" checked /> Page Sections — nav, header, carousel, amenities, units, faq, gallery, footer</label>
+                <label title="DEBUG MODE: runs each section as its own isolated test in a separate browser. Much slower but pinpoints exactly which section/facility fails. Use when you need to isolate a single section. Not part of the single-browser journey — separate browsers per section per facility."><input type="checkbox" id="flex-mod-sections-each" data-mod="sections-each" /> Sections — each as own test (slower, separate browsers)</label>
+                <label title="Editor tests at sites.apps.mystoragely.com: login → verify palette loads with all 56 components → check preview iframe renders → verify all sidebar tabs are accessible and clickable → no unresolved tokens in preview. Needs FLEX_PASSWORD. Runs in its own browser (separate login)."><input type="checkbox" id="flex-mod-editor" data-mod="editor" /> Editor Smoke — palette inventory, preview, sidebar tabs</label>
               </div>
             </div>
           </details>
 
-          <!-- ── Group: Page Sections (drives HELIX_SECTIONS — only affects the Sections layers) ── -->
-          <details class="helix-group" id="helix-grp-sections">
+          <!-- ── Group: Page Sections (drives FLEX_SECTIONS — only affects the Sections layers) ── -->
+          <details class="flex-group" id="flex-grp-sections">
             <summary>Page Sections <span class="grp-desc">— which sections the Sections layers verify</span></summary>
             <div class="hg-body">
               <div class="small" style="margin-bottom:6px">Each section is a generic, layout-tolerant detector with a defined expected behaviour (hover for details). All checked = verify every section. Only applies when a <b>Sections</b> layer above is on.</div>
-              <div id="helix-section-checks" class="check-list"></div>
+              <div id="flex-section-checks" class="check-list"></div>
               <div class="toolbar" style="margin-top:6px">
-                <button id="helix-section-all" class="ghost" type="button">all</button>
-                <button id="helix-section-none" class="ghost" type="button">none</button>
+                <button id="flex-section-all" class="ghost" type="button">all</button>
+                <button id="flex-section-none" class="ghost" type="button">none</button>
               </div>
             </div>
           </details>
 
-          <!-- ── Group: Facilities (drives HELIX_FACILITY_FILTER — filtered by the Prod/Test toggle) ── -->
-          <details class="helix-group" id="helix-grp-facilities">
+          <!-- ── Group: Client Suite (drives FLEX_CLIENT — run Safeguard vs Minimal independently) ── -->
+          <details class="flex-group" id="flex-grp-client" open>
+            <summary>Client Suite <span class="grp-desc">— run one client's suite on its own, or all</span></summary>
+            <div class="hg-body">
+              <div class="small" style="margin-bottom:6px">Pick a <b>single client's suite</b> to run it independently, or <b>All clients</b>. <b>Safeguard</b> is the standard/reusable template; <b>Minimal</b> (Mini Mall) is the unique one. This filters the Facilities list below.</div>
+              <div id="flex-client-select" class="row"></div>
+            </div>
+          </details>
+
+          <!-- ── Group: Facilities (drives FLEX_FACILITY_FILTER — filtered by the Prod/Test toggle + Client Suite) ── -->
+          <details class="flex-group" id="flex-grp-facilities">
             <summary>Facilities <span class="grp-desc">— which locations to run against</span></summary>
             <div class="hg-body">
-              <div class="small" style="margin-bottom:6px">Locations in the selected environment. All checked = run every facility in this env. Add an on-demand URL under <b>Ad-hoc URL</b> below without touching code.</div>
-              <div id="helix-facility-checks" class="check-list"></div>
+              <div class="small" style="margin-bottom:6px">Locations in the selected environment + client suite. All checked = run every facility shown. Add an on-demand URL under <b>Ad-hoc URL</b> below without touching code.</div>
+              <div id="flex-facility-checks" class="check-list"></div>
               <div class="toolbar" style="margin-top:6px">
-                <button id="helix-facility-all" class="ghost" type="button">all</button>
-                <button id="helix-facility-none" class="ghost" type="button">none</button>
+                <button id="flex-facility-all" class="ghost" type="button">all</button>
+                <button id="flex-facility-none" class="ghost" type="button">none</button>
               </div>
             </div>
           </details>
 
           <!-- ── Group: Editor & Auth ── -->
-          <details class="helix-group" id="helix-grp-editor">
+          <details class="flex-group" id="flex-grp-editor">
             <summary>Editor &amp; Auth <span class="grp-desc">— login for editor tests</span></summary>
             <div class="hg-body">
               <div class="small" style="margin-bottom:4px"><b>Editor password</b> <span class="small">(tareq@storagely.io — only needed for the Editor layer; saved in browser)</span></div>
-              <input id="helix-password" type="password" placeholder="Enter Helix editor password" style="width:100%" />
+              <input id="flex-password" type="password" placeholder="Enter Flex editor password" style="width:100%" />
             </div>
           </details>
 
           <!-- ── Group: Ad-hoc URL ── -->
-          <details class="helix-group" id="helix-grp-custom">
-            <summary>Ad-hoc URL <span class="grp-desc">— test any single Helix v4 page on demand</span></summary>
+          <details class="flex-group" id="flex-grp-custom">
+            <summary>Ad-hoc URL <span class="grp-desc">— test any single Flex v4 page on demand</span></summary>
             <div class="hg-body">
-              <div class="small" style="margin-bottom:4px">Paste any Helix v4 location URL to run the SAME tests on demand against just that page (client auto-detected — a minimallstorage.com URL runs the Mini Mall UI components + Reserve modal + the Yardi v2 rent-error fetch). Leave blank to use the facilities above.</div>
-              <input id="helix-custom-url" type="text" placeholder="https://minimallstorage.com/storage-units/... or https://www.safeguardit.com/storage-units/..." style="width:100%;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace" />
+              <div class="small" style="margin-bottom:4px">Paste any Flex v4 location URL to run the SAME tests on demand against just that page (client auto-detected — a minimallstorage.com URL runs the Mini Mall UI components + Reserve modal + the Yardi v2 rent-error fetch). Leave blank to use the facilities above.</div>
+              <input id="flex-custom-url" type="text" placeholder="https://minimallstorage.com/storage-units/... or https://www.safeguardit.com/storage-units/..." style="width:100%;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace" />
             </div>
           </details>
         </div>
@@ -568,11 +577,6 @@
           </div>
           <div id="build-clients" class="check-list"></div>
           <div id="build-corp-codes" style="margin-top:8px"></div>
-          <div id="build-yardi-banner" class="build-banner" style="display:none">
-            <b>⚠ Manual reminder — Yardi (Mini Mall):</b> automated regression doesn't cover Yardi.
-            After this run, manually spot-check on the build instance:
-            <code id="build-yardi-url" style="display:block;margin-top:4px"></code>
-          </div>
         </div>
       </details>
 
@@ -669,20 +673,21 @@ async function boot() {
   renderExtras();
   renderBuildClients();
   renderMiniMallRentPresets();
-  renderHelixSections();
-  renderHelixFacilities();
-  refreshHelixSectionVisibility();
+  renderFlexSections();
+  renderFlexClients();
+  renderFlexFacilities();
+  refreshFlexSectionVisibility();
   renderPresets();
   hookCmdPreview();
   applyBuildEnvLock();
   refreshCmdPreview();
 
-  // Restore saved Helix password from localStorage
-  const savedHelixPwd = localStorage.getItem('panel.helix.password');
-  if (savedHelixPwd && $('#helix-password')) $('#helix-password').value = savedHelixPwd;
-  if ($('#helix-password')) {
-    $('#helix-password').addEventListener('change', () => {
-      localStorage.setItem('panel.helix.password', $('#helix-password').value);
+  // Restore saved Flex password from localStorage
+  const savedFlexPwd = localStorage.getItem('panel.flex.password');
+  if (savedFlexPwd && $('#flex-password')) $('#flex-password').value = savedFlexPwd;
+  if ($('#flex-password')) {
+    $('#flex-password').addEventListener('change', () => {
+      localStorage.setItem('panel.flex.password', $('#flex-password').value);
     });
   }
 }
@@ -787,7 +792,6 @@ function renderBuildClients() {
     root.appendChild(lbl);
   }
   renderBuildCorpCodes();
-  refreshYardiBanner();
 }
 
 // ─── Mini-Mall Rental presets (hard-coded, env-aware) ──────────────
@@ -808,16 +812,16 @@ function renderMiniMallRentPresets() {
   }
 }
 
-// ─── Helix env (Prod/Test toggle within the Helix card) ─────────────
-function currentHelixEnv() {
-  const r = $('input[name=helixEnv]:checked');
+// ─── Flex env (Prod/Test toggle within the Flex card) ─────────────
+function currentFlexEnv() {
+  const r = $('input[name=flexEnv]:checked');
   return r ? r.value : 'production';
 }
 
-// ─── Helix Sections (parsed from helix/configs/sections.ts) ──────────
-function renderHelixSections() {
-  const root = $('#helix-section-checks'); if (!root) return; root.innerHTML = '';
-  const sections = (CFG.helix && CFG.helix.sections) || [];
+// ─── Flex Sections (parsed from flex/configs/sections.ts) ──────────
+function renderFlexSections() {
+  const root = $('#flex-section-checks'); if (!root) return; root.innerHTML = '';
+  const sections = (CFG.flex && CFG.flex.sections) || [];
   if (sections.length === 0) {
     root.innerHTML = '<div class="small">No sections discovered</div>';
     return;
@@ -830,34 +834,78 @@ function renderHelixSections() {
   }
 }
 
-// ─── Helix Facilities (parsed from helix/configs/facilities.ts) ──────
-// Filtered by the Prod/Test toggle so the list only shows facilities that will
-// actually run in the selected environment. Each row carries a Prod/Stage badge.
-function renderHelixFacilities() {
-  const root = $('#helix-facility-checks'); if (!root) return; root.innerHTML = '';
-  const env = currentHelixEnv();
-  const facs = ((CFG.helix && CFG.helix.facilities) || []).filter(f => (f.env || 'production') === env);
+// ─── Flex Client Suite (parsed from flex/configs/facilities.ts) ────
+// A single-select "run this client's suite on its own" control. 'all' runs
+// every client. Safeguard = standard/reusable template; Minimal = unique one.
+const FLEX_CLIENT_LABELS = { safeguard: 'Safeguard', minimall: 'Minimal (Mini Mall)' };
+function flexClientLabel(slug) {
+  return FLEX_CLIENT_LABELS[slug] || slug.replace(/\b\w/g, c => c.toUpperCase());
+}
+function currentFlexClient() {
+  const r = $('input[name=flexClient]:checked');
+  return r ? r.value : 'all';
+}
+function renderFlexClients() {
+  const root = $('#flex-client-select'); if (!root) return; root.innerHTML = '';
+  const clients = (CFG.flex && CFG.flex.clients) || [];
+  const opts = [{ v: 'all', l: 'All clients' }, ...clients.map(c => ({ v: c, l: flexClientLabel(c) }))];
+  for (const o of opts) {
+    const lbl = document.createElement('label');
+    lbl.className = 'switch';
+    lbl.innerHTML =
+      `<input type="radio" name="flexClient" value="${escapeAttr(o.v)}" ${o.v === 'all' ? 'checked' : ''} />` +
+      `<span class="track"></span><span class="lbl">${escapeHtml(o.l)}</span>`;
+    root.appendChild(lbl);
+  }
+}
+
+// ─── Flex Facilities (parsed from flex/configs/facilities.ts) ──────
+// Filtered by the Prod/Test toggle AND the Client Suite selector so the list
+// only shows facilities that will actually run. Rows are grouped by client
+// (with a subheading) when "All clients" is selected. Each row carries a
+// Prod/Stage badge.
+function renderFlexFacilities() {
+  const root = $('#flex-facility-checks'); if (!root) return; root.innerHTML = '';
+  const env = currentFlexEnv();
+  const client = currentFlexClient();
+  let facs = ((CFG.flex && CFG.flex.facilities) || []).filter(f => (f.env || 'production') === env);
+  if (client !== 'all') facs = facs.filter(f => (f.client || '') === client);
   if (facs.length === 0) {
-    root.innerHTML = `<div class="small">No ${env === 'test' ? 'test/stage' : 'production'} facilities configured yet</div>`;
+    root.innerHTML = `<div class="small">No ${env === 'test' ? 'test/stage' : 'production'} facilities${client !== 'all' ? ' for ' + escapeHtml(flexClientLabel(client)) : ''} configured yet</div>`;
     return;
   }
-  for (const f of facs) {
+  const badgeFor = (f) => f.env === 'test'
+    ? '<span class="env-badge test" title="Test / stage domain">Stage</span>'
+    : '<span class="env-badge prod" title="Production domain">Prod</span>';
+  const addRow = (f) => {
     const lbl = document.createElement('label');
     lbl.title = f.url;
-    const badge = f.env === 'test'
-      ? '<span class="env-badge test" title="Test / stage domain">Stage</span>'
-      : '<span class="env-badge prod" title="Production domain">Prod</span>';
-    lbl.innerHTML = `<input type="checkbox" data-facility="${escapeAttr(f.id)}" data-env="${escapeAttr(f.env || 'production')}" checked /> <span class="name">${escapeHtml(f.name)}</span> ${badge}`;
+    lbl.innerHTML = `<input type="checkbox" data-facility="${escapeAttr(f.id)}" data-env="${escapeAttr(f.env || 'production')}" data-client="${escapeAttr(f.client || '')}" checked /> <span class="name">${escapeHtml(f.name)}</span> ${badgeFor(f)}`;
     root.appendChild(lbl);
+  };
+  if (client === 'all') {
+    // Group by client with a subheading so the two suites read as distinct.
+    const byClient = {};
+    for (const f of facs) (byClient[f.client || 'other'] ||= []).push(f);
+    for (const slug of Object.keys(byClient)) {
+      const head = document.createElement('div');
+      head.className = 'small';
+      head.style.cssText = 'margin:6px 0 2px;font-weight:600;opacity:.8';
+      head.textContent = flexClientLabel(slug);
+      root.appendChild(head);
+      byClient[slug].forEach(addRow);
+    }
+  } else {
+    facs.forEach(addRow);
   }
 }
 
 // Dim the Page Sections group when no Sections layer is selected — the section
 // filter only affects those layers, so this signals "this won't do anything yet".
 // (Facilities always apply, so that group is never dimmed.)
-function refreshHelixSectionVisibility() {
-  const sectionsOn = $$('#suite-helix .body input[data-mod="sections"]:checked, #suite-helix .body input[data-mod="sections-each"]:checked').length > 0;
-  const grp = $('#helix-grp-sections');
+function refreshFlexSectionVisibility() {
+  const sectionsOn = $$('#suite-flex .body input[data-mod="sections"]:checked, #suite-flex .body input[data-mod="sections-each"]:checked').length > 0;
+  const grp = $('#flex-grp-sections');
   if (grp) {
     grp.style.opacity = sectionsOn ? '' : '.55';
     const desc = grp.querySelector('.grp-desc');
@@ -889,53 +937,41 @@ function renderBuildCorpCodes() {
   }
 }
 
-// Build instance run uses staging URLs, so swap default base for the build base
-// when forming the Yardi reminder URL.
-function refreshYardiBanner() {
-  const checked = $$('#build-clients input:checked').filter(i => i.dataset.fms === 'Yardi');
-  const banner = $('#build-yardi-banner');
-  if (checked.length === 0) { banner.style.display = 'none'; return; }
-  banner.style.display = 'block';
-  const base = ($('#buildBase').value.trim() || 'https://<build>.staging.storagely-api.com').replace(/\/$/, '');
-  const slugs = checked.map(i => i.dataset.id);
-  $('#build-yardi-url').textContent = slugs.map(s => `${base}/${s}/`).join('\n');
-}
 
 // Delegated listener — keep the corp-code rows + banner in sync as user toggles.
 document.addEventListener('change', e => {
-  if (e.target.matches('#build-clients input')) { renderBuildCorpCodes(); refreshYardiBanner(); }
-  if (e.target.matches('#buildBase')) refreshYardiBanner();
+  if (e.target.matches('#build-clients input')) { renderBuildCorpCodes(); }
   // "Page Sections" (single-browser journey) and "Sections — each as own test"
   // (separate-browser pinpoint mode) verify the SAME detectors. They are
   // alternatives, never both — checking one unchecks the other so sections are
   // never run twice in one cycle.
-  if (e.target.matches('#suite-helix .body input[data-mod="sections"]') && e.target.checked) {
-    const other = $('#suite-helix .body input[data-mod="sections-each"]');
+  if (e.target.matches('#suite-flex .body input[data-mod="sections"]') && e.target.checked) {
+    const other = $('#suite-flex .body input[data-mod="sections-each"]');
     if (other) other.checked = false;
   }
-  if (e.target.matches('#suite-helix .body input[data-mod="sections-each"]') && e.target.checked) {
-    const other = $('#suite-helix .body input[data-mod="sections"]');
+  if (e.target.matches('#suite-flex .body input[data-mod="sections-each"]') && e.target.checked) {
+    const other = $('#suite-flex .body input[data-mod="sections"]');
     if (other) other.checked = false;
   }
   // Show / hide the section + facility filter panels when section modules toggle.
-  if (e.target.matches('#suite-helix .body input[data-mod]')) refreshHelixSectionVisibility();
+  if (e.target.matches('#suite-flex .body input[data-mod]')) refreshFlexSectionVisibility();
 });
 
 // All / none helpers for the section + facility filter check-lists.
 document.addEventListener('click', e => {
-  if (e.target.id === 'helix-section-all')     { $$('#helix-section-checks  input').forEach(c => c.checked = true);  refreshCmdPreview(); }
-  if (e.target.id === 'helix-section-none')    { $$('#helix-section-checks  input').forEach(c => c.checked = false); refreshCmdPreview(); }
-  if (e.target.id === 'helix-facility-all')    { $$('#helix-facility-checks input').forEach(c => c.checked = true);  refreshCmdPreview(); }
-  if (e.target.id === 'helix-facility-none')   { $$('#helix-facility-checks input').forEach(c => c.checked = false); refreshCmdPreview(); }
+  if (e.target.id === 'flex-section-all')     { $$('#flex-section-checks  input').forEach(c => c.checked = true);  refreshCmdPreview(); }
+  if (e.target.id === 'flex-section-none')    { $$('#flex-section-checks  input').forEach(c => c.checked = false); refreshCmdPreview(); }
+  if (e.target.id === 'flex-facility-all')    { $$('#flex-facility-checks input').forEach(c => c.checked = true);  refreshCmdPreview(); }
+  if (e.target.id === 'flex-facility-none')   { $$('#flex-facility-checks input').forEach(c => c.checked = false); refreshCmdPreview(); }
 });
 document.addEventListener('input', e => {
-  if (e.target.matches('#buildBase')) refreshYardiBanner();
 });
 
-// Helix Prod/Test toggle — re-render the env-filtered facility list.
+// Flex Prod/Test toggle + Client Suite selector — re-render the filtered
+// facility list (facilities depend on BOTH env and selected client).
 document.addEventListener('change', e => {
-  if (e.target.matches('input[name=helixEnv]')) {
-    renderHelixFacilities();
+  if (e.target.matches('input[name=flexEnv]') || e.target.matches('input[name=flexClient]')) {
+    renderFlexFacilities();
     refreshCmdPreview();
   }
 });
@@ -1002,7 +1038,7 @@ $$('button[data-add]').forEach(b => b.addEventListener('click', () => addExtraRo
 // Build-instance quick pickers
 function setBuildChecked(predicate) {
   $$('#build-clients input').forEach(c => c.checked = predicate(c));
-  renderBuildCorpCodes(); refreshYardiBanner(); refreshCmdPreview();
+  renderBuildCorpCodes(); refreshCmdPreview();
 }
 $('#build-pick-all').addEventListener('click',  () => setBuildChecked(()  => true));
 $('#build-pick-none').addEventListener('click', () => setBuildChecked(()  => false));
@@ -1123,13 +1159,14 @@ function collectSettings() {
       clients: buildClients,
       corpCodes: buildCorpCodes,
     },
-    helix: {
-      env: currentHelixEnv(),
-      modules: $$('#suite-helix .body input[data-mod]:checked').map(c => c.dataset.mod),
-      password: $('#helix-password') ? $('#helix-password').value : null,
-      customUrl: ($('#helix-custom-url') ? $('#helix-custom-url').value.trim() : '') || null,
-      sections: $$('#helix-section-checks input:checked').map(c => c.dataset.section),
-      facilities: $$('#helix-facility-checks input:checked').map(c => c.dataset.facility),
+    flex: {
+      env: currentFlexEnv(),
+      client: currentFlexClient(),
+      modules: $$('#suite-flex .body input[data-mod]:checked').map(c => c.dataset.mod),
+      password: $('#flex-password') ? $('#flex-password').value : null,
+      customUrl: ($('#flex-custom-url') ? $('#flex-custom-url').value.trim() : '') || null,
+      sections: $$('#flex-section-checks input:checked').map(c => c.dataset.section),
+      facilities: $$('#flex-facility-checks input:checked').map(c => c.dataset.facility),
     },
     // For preview only — NOT sent to server.
     _checkedClientUrls: { ui: clientUrls('ui'), spc: clientUrls('spc'), v1: clientUrls('v1') },
@@ -1196,32 +1233,34 @@ function applyPreset(p) {
         if (inp && code) inp.value = code;
       }
     }
-    refreshYardiBanner();
   }
-  // helix — env + modules + section/facility filters
-  if (s.helix) {
-    if (s.helix.env) {
-      const r = $(`input[name=helixEnv][value=${s.helix.env}]`); if (r) r.checked = true;
+  // flex — env + modules + section/facility filters
+  if (s.flex) {
+    if (s.flex.env) {
+      const r = $(`input[name=flexEnv][value=${s.flex.env}]`); if (r) r.checked = true;
     }
-    // Re-render facilities for the (possibly changed) env before applying checks.
-    renderHelixFacilities();
-    if (Array.isArray(s.helix.modules)) {
-      $$('#suite-helix .body input[data-mod]').forEach(c => {
-        c.checked = s.helix.modules.includes(c.dataset.mod);
+    if (s.flex.client) {
+      const r = $(`input[name=flexClient][value=${cssEscape(s.flex.client)}]`); if (r) r.checked = true;
+    }
+    // Re-render facilities for the (possibly changed) env + client before applying checks.
+    renderFlexFacilities();
+    if (Array.isArray(s.flex.modules)) {
+      $$('#suite-flex .body input[data-mod]').forEach(c => {
+        c.checked = s.flex.modules.includes(c.dataset.mod);
       });
     }
-    if (Array.isArray(s.helix.sections)) {
-      const want = new Set(s.helix.sections);
-      $$('#helix-section-checks input').forEach(c => { c.checked = want.has(c.dataset.section); });
+    if (Array.isArray(s.flex.sections)) {
+      const want = new Set(s.flex.sections);
+      $$('#flex-section-checks input').forEach(c => { c.checked = want.has(c.dataset.section); });
     }
-    if (Array.isArray(s.helix.facilities)) {
-      const want = new Set(s.helix.facilities);
-      $$('#helix-facility-checks input').forEach(c => { c.checked = want.has(c.dataset.facility); });
+    if (Array.isArray(s.flex.facilities)) {
+      const want = new Set(s.flex.facilities);
+      $$('#flex-facility-checks input').forEach(c => { c.checked = want.has(c.dataset.facility); });
     }
-    if (typeof s.helix.customUrl === 'string' && $('#helix-custom-url')) {
-      $('#helix-custom-url').value = s.helix.customUrl;
+    if (typeof s.flex.customUrl === 'string' && $('#flex-custom-url')) {
+      $('#flex-custom-url').value = s.flex.customUrl;
     }
-    refreshHelixSectionVisibility();
+    refreshFlexSectionVisibility();
   }
   applyBuildEnvLock();
   refreshCmdPreview();
@@ -1273,14 +1312,14 @@ function refreshCmdPreview() {
     effSuites = s.suites;
   }
   const specs = effSuites.map(x => specMap[x]).filter(Boolean);
-  // Helix — uses its own config. The e2e/live/sections checkboxes are STEPS of
+  // Flex — uses its own config. The e2e/live/sections checkboxes are STEPS of
   // ONE top-down journey per facility (one browser per customer), not separate
-  // browsers. They map to HELIX_LAYERS pre-checks; rent always runs. Keep this
+  // browsers. They map to FLEX_LAYERS pre-checks; rent always runs. Keep this
   // preview aligned with server.js buildRunCommand().
-  let helixArgs = null;
-  let helixLayers = null;
-  if (effSuites.includes('helix')) {
-    const hm = $$('#suite-helix .body input[data-mod]:checked').map(c => c.dataset.mod);
+  let flexArgs = null;
+  let flexLayers = null;
+  if (effSuites.includes('flex')) {
+    const hm = $$('#suite-flex .body input[data-mod]:checked').map(c => c.dataset.mod);
     const journeyLayers = [];
     if (hm.includes('live'))     journeyLayers.push('health');
     if (hm.includes('sections')) journeyLayers.push('sections');
@@ -1290,22 +1329,22 @@ function refreshCmdPreview() {
     if (runJourney || hm.includes('sections-each')) projects.add('live');
     if (hm.includes('editor')) projects.add('editor');
     if (projects.size > 0) {
-      helixArgs = ['npx', 'playwright', 'test', '--config=helix/playwright.config.ts'];
-      for (const p of projects) helixArgs.push('--project=' + p);
+      flexArgs = ['npx', 'playwright', 'test', '--config=flex/playwright.config.ts'];
+      for (const p of projects) flexArgs.push('--project=' + p);
       const greps = [];
-      if (runJourney) greps.push('Helix Facility Journey');
+      if (runJourney) greps.push('Flex Facility Journey');
       // Skip the per-section pinpoint specs if the journey already does sections —
       // same detectors, never run both (matches server.js buildRunCommand()).
       if (hm.includes('sections-each') && !journeyLayers.includes('sections')) greps.push('Section:');
-      if (greps.length && !hm.includes('editor')) helixArgs.push('--grep', greps.join('|'));
-      if (s.headed) helixArgs.push('--headed');
-      if (s.workers) helixArgs.push('--workers', String(s.workers));
-      if (runJourney) helixLayers = journeyLayers.join(',');
+      if (greps.length && !hm.includes('editor')) flexArgs.push('--grep', greps.join('|'));
+      if (s.headed) flexArgs.push('--headed');
+      if (s.workers) flexArgs.push('--workers', String(s.workers));
+      if (runJourney) flexLayers = journeyLayers.join(',');
     }
   }
   let args;
-  if (helixArgs) {
-    args = helixArgs;
+  if (flexArgs) {
+    args = flexArgs;
   } else {
     args = ['npx', 'playwright', 'test', ...specs];
     if (effSuites.includes('ui') && s.ui.modules.length) args.push('--grep', '"' + s.ui.modules.join('|') + '"');
@@ -1313,9 +1352,15 @@ function refreshCmdPreview() {
     if (s.workers) args.push('--workers', String(s.workers));
     if (effSuites.includes('minimall') || effSuites.includes('allpages')) args.push('--project=chrome');
   }
-  let line = '$ ' + (specs.length === 0 && !helixArgs ? '(no suites selected)' : args.join(' '));
-  if (helixLayers) {
-    line += `\n  HELIX_LAYERS=${helixLayers}  (one browser per facility · top-down)`;
+  let line = '$ ' + (specs.length === 0 && !flexArgs ? '(no suites selected)' : args.join(' '));
+  if (flexLayers) {
+    line += `\n  FLEX_LAYERS=${flexLayers}  (one browser per facility · top-down)`;
+  }
+  if (flexArgs) {
+    const fClient = currentFlexClient();
+    const envBits = [`FLEX_ENV=${currentFlexEnv()}`];
+    if (fClient !== 'all') envBits.push(`FLEX_CLIENT=${fClient}`);
+    line += `\n  ${envBits.join('  ')}`;
   }
   if (s.suites.includes('build') && s.build?.base) {
     line += `\n  STORAGELY_ENV=staging  STORAGELY_BUILD_BASE=${s.build.base}  (clients: ${(s.build.clients || []).length || 0})`;

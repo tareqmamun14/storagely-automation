@@ -142,6 +142,21 @@ function parseUrlsConfig() {
   };
 }
 
+// Brand token from a production hostname = the registrable domain's SECOND-LEVEL
+// label, NOT the first hostname segment. This correctly ignores infra
+// subdomains like www / ww2 / rent / book (e.g. "rent.distinctstorage.com" →
+// "distinctstorage", not "rent"). Two-label suffixes (.co.uk, .com.au) are
+// handled so the brand isn't read as "co"/"com".
+function registrableName(hostname) {
+  const parts = hostname.split('.').filter(Boolean);
+  if (parts.length <= 2) return parts[0] || hostname;
+  const twoLabelSuffix = /^(co|com|org|net|gov|edu|ac)$/i;
+  const sldIdx = twoLabelSuffix.test(parts[parts.length - 2]) && parts.length >= 3
+    ? parts.length - 3   // e.g. brand.co.uk  → "brand"
+    : parts.length - 2;  // e.g. rent.brand.com → "brand"
+  return parts[sldIdx];
+}
+
 // Friendly label for a URL (e.g. "https://bluebirdstorage.ca/..." → "Bluebird Storage")
 function labelFor(url) {
   try {
@@ -150,8 +165,7 @@ function labelFor(url) {
       const slug = u.pathname.split('/').filter(Boolean)[0] || u.hostname;
       return slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
     }
-    let host = u.hostname.replace(/^www\./, '').replace(/^ww2\./, '');
-    host = host.split('.')[0];
+    const host = registrableName(u.hostname);
     return host.replace(/storage$/i, ' Storage').replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()).trim();
   } catch { return url; }
 }
@@ -161,14 +175,14 @@ function idFor(url) {
   try {
     const u = new URL(url);
     if (u.hostname.includes('staging')) return u.pathname.split('/').filter(Boolean)[0] || u.hostname;
-    return u.hostname.replace(/^www\./, '').replace(/^ww2\./, '').split('.')[0];
+    return registrableName(u.hostname);
   } catch { return url; }
 }
 
-// ───────── Parse Helix client sites from helix/configs/urls.ts ─────────
-function parseHelixSites() {
+// ───────── Parse Flex client sites from flex/configs/urls.ts ─────────
+function parseFlexSites() {
   try {
-    const content = fs.readFileSync(path.join(ROOT, 'helix', 'configs', 'urls.ts'), 'utf8');
+    const content = fs.readFileSync(path.join(ROOT, 'flex', 'configs', 'urls.ts'), 'utf8');
     const sites = [];
     const re = /url:\s*'([^']+)'[\s\S]*?label:\s*'([^']+)'/g;
     let m;
@@ -177,12 +191,12 @@ function parseHelixSites() {
   } catch { return []; }
 }
 
-// ───────── Parse Helix section manifest from helix/configs/sections.ts ─────────
-// Each entry maps to a toggle in the control panel's Helix card. Adding a
+// ───────── Parse Flex section manifest from flex/configs/sections.ts ─────────
+// Each entry maps to a toggle in the control panel's Flex card. Adding a
 // section in sections.ts auto-surfaces here — no panel code change needed.
-function parseHelixSections() {
+function parseFlexSections() {
   try {
-    const content = fs.readFileSync(path.join(ROOT, 'helix', 'configs', 'sections.ts'), 'utf8');
+    const content = fs.readFileSync(path.join(ROOT, 'flex', 'configs', 'sections.ts'), 'utf8');
     const out = [];
     const re = /\{\s*id:\s*'([^']+)'\s*,\s*label:\s*'([^']+)'\s*,\s*description:\s*'([^']+)'\s*,\s*order:\s*(\d+)/g;
     let m;
@@ -193,15 +207,17 @@ function parseHelixSections() {
   } catch { return []; }
 }
 
-// ───────── Parse Helix facilities from helix/configs/facilities.ts ─────────
-function parseHelixFacilities() {
+// ───────── Parse Flex facilities from flex/configs/facilities.ts ─────────
+function parseFlexFacilities() {
   try {
-    const content = fs.readFileSync(path.join(ROOT, 'helix', 'configs', 'facilities.ts'), 'utf8');
+    const content = fs.readFileSync(path.join(ROOT, 'flex', 'configs', 'facilities.ts'), 'utf8');
     const out = [];
-    // Each facility is a multi-line object; pull id + name + env + url out of each block.
-    const re = /id:\s*'([^']+)'\s*,[\s\S]*?name:\s*'([^']+)'\s*,[\s\S]*?env:\s*'([^']+)'\s*,[\s\S]*?url:\s*'([^']+)'/g;
+    // Each facility is a multi-line object; pull id + name + client + env + url
+    // out of each block (field order in facilities.ts: id, name, client, env, url).
+    // `client` drives the control panel's per-client suite selector (FLEX_CLIENT).
+    const re = /id:\s*'([^']+)'\s*,[\s\S]*?name:\s*'([^']+)'\s*,[\s\S]*?client:\s*'([^']+)'\s*,[\s\S]*?env:\s*'([^']+)'\s*,[\s\S]*?url:\s*'([^']+)'/g;
     let m;
-    while ((m = re.exec(content))) out.push({ id: m[1], name: m[2], env: m[3], url: m[4] });
+    while ((m = re.exec(content))) out.push({ id: m[1], name: m[2], client: m[3], env: m[4], url: m[5] });
     return out;
   } catch { return []; }
 }
@@ -252,7 +268,7 @@ function buildConfigPayload() {
     return Array.from(map.values()).map(c => ({ ...c, suites: Array.from(c.suites) }));
   }
   return {
-    suites: ['ui', 'spc', 'v1', 'admin', 'datasync', 'minimallrent', 'minimall', 'allpages', 'build', 'helix'],
+    suites: ['ui', 'spc', 'v1', 'admin', 'datasync', 'minimallrent', 'minimall', 'allpages', 'build', 'flex'],
     clients: {
       ui:  { staging: decorate(parsed.ui.staging),  production: decorate(parsed.ui.production)  },
       spc: { staging: decorate(parsed.spc.staging), production: decorate(parsed.spc.production) },
@@ -279,11 +295,17 @@ function buildConfigPayload() {
       { id: 'location', label: 'Location Page',        grep: 'Location Page'        },
     ],
     defaultPresets: readJsonSafe(DEFAULT_PRESETS_FILE, []),
-    helix: {
-      sites: parseHelixSites(),
-      sections: parseHelixSections(),
-      facilities: parseHelixFacilities(),
-    },
+    flex: (() => {
+      const facilities = parseFlexFacilities();
+      return {
+        sites: parseFlexSites(),
+        sections: parseFlexSections(),
+        facilities,
+        // Distinct client slugs → drives the per-client suite selector so
+        // Safeguard and Minimal can be run as completely separate suites.
+        clients: [...new Set(facilities.map(f => f.client).filter(Boolean))],
+      };
+    })(),
   };
 }
 
@@ -323,16 +345,21 @@ function buildRunCommand(req) {
   if (req.minimallrent?.customSitelink) env.STORAGELY_MMRENT_CUSTOM_SITELINK = req.minimallrent.customSitelink;
   if (req.minimallrent?.customYardi)    env.STORAGELY_MMRENT_CUSTOM_YARDI    = req.minimallrent.customYardi;
   if (req.minimallrent?.filter)         env.STORAGELY_MMRENT_FILTER          = req.minimallrent.filter;
-  if (req.helix?.password)              env.HELIX_PASSWORD                   = req.helix.password;
-  if (req.helix?.customUrl)             env.HELIX_CUSTOM_URL                 = req.helix.customUrl;
-  // Helix has its OWN prod/test toggle, independent of the top-level Storagely env.
+  if (req.flex?.password)              env.FLEX_PASSWORD                   = req.flex.password;
+  if (req.flex?.customUrl)             env.FLEX_CUSTOM_URL                 = req.flex.customUrl;
+  // Flex has its OWN prod/test toggle, independent of the top-level Storagely env.
   // Defaults to production (post-release regression) when unset.
-  if (req.helix?.env)                   env.HELIX_ENV                        = req.helix.env;
-  if (Array.isArray(req.helix?.sections) && req.helix.sections.length) {
-    env.HELIX_SECTIONS = req.helix.sections.join(',');
+  if (req.flex?.env)                   env.FLEX_ENV                        = req.flex.env;
+  // Per-client suite selector — run Safeguard OR Minimal as a standalone suite.
+  // 'all' (or unset) = every client. Accepts a slug or comma-separated slugs.
+  if (req.flex?.client && req.flex.client !== 'all') {
+    env.FLEX_CLIENT = Array.isArray(req.flex.client) ? req.flex.client.join(',') : String(req.flex.client);
   }
-  if (Array.isArray(req.helix?.facilities) && req.helix.facilities.length) {
-    env.HELIX_FACILITY_FILTER = req.helix.facilities.join(',');
+  if (Array.isArray(req.flex?.sections) && req.flex.sections.length) {
+    env.FLEX_SECTIONS = req.flex.sections.join(',');
+  }
+  if (Array.isArray(req.flex?.facilities) && req.flex.facilities.length) {
+    env.FLEX_FACILITY_FILTER = req.flex.facilities.join(',');
   }
 
   let suites = Array.isArray(req.suites) ? req.suites.slice() : [];
@@ -402,21 +429,21 @@ function buildRunCommand(req) {
   };
   const specs = suites.map(s => specMap[s]).filter(Boolean);
 
-  // Helix suite — uses its own playwright config with project-based routing.
+  // Flex suite — uses its own playwright config with project-based routing.
   //
   // The e2e / live / sections checkboxes are STEPS of ONE top-down journey per
   // facility (facility-journey.spec.ts), exactly like V1/SPC: one browser per
-  // customer. All are selectable — uncheck any to skip. Checkbox → HELIX_LAYERS:
+  // customer. All are selectable — uncheck any to skip. Checkbox → FLEX_LAYERS:
   //
   //   live            → 'health'   (page health + token audit)
   //   sections        → 'sections' (section detectors, single navigation)
   //   e2e             → 'rent'     (SPC form fill + submit — runs LAST)
   //   sections-each   → SLOWER pinpoint mode: each section as its own
-  //                     isolated test/browser (helix/tests/live/sections/*.spec.ts)
+  //                     isolated test/browser (flex/tests/live/sections/*.spec.ts)
   //   editor          → 'editor' project (separate login browser)
-  let helixCmd = null;
-  if (suites.includes('helix')) {
-    const hm = req.helix?.modules || ['e2e', 'live', 'sections'];
+  let flexCmd = null;
+  if (suites.includes('flex')) {
+    const hm = req.flex?.modules || ['e2e', 'live', 'sections'];
 
     // Which layers does the unified journey run? The journey runs whenever any
     // of e2e / live / sections is selected. All are optional.
@@ -431,15 +458,15 @@ function buildRunCommand(req) {
     if (hm.includes('editor')) projects.add('editor');
 
     if (projects.size > 0) {
-      const args = ['playwright', 'test', '--config=helix/playwright.config.ts'];
+      const args = ['playwright', 'test', '--config=flex/playwright.config.ts'];
       for (const p of projects) args.push('--project=' + p);
 
       // Narrow within the live project via --grep. The unified journey is one
-      // describe block ("Helix Facility Journey"); the pinpoint mode uses the
+      // describe block ("Flex Facility Journey"); the pinpoint mode uses the
       // per-section "Section:" blocks. Editor specs live in their own project.
       if (!hm.includes('editor')) {
         const greps = [];
-        if (runJourney) greps.push('Helix Facility Journey');
+        if (runJourney) greps.push('Flex Facility Journey');
         // "Sections — each as own test" only runs the per-section pinpoint specs
         // when the journey is NOT already verifying sections. They check the same
         // detectors, so never run both in one cycle (the UI enforces this too).
@@ -448,42 +475,57 @@ function buildRunCommand(req) {
         if (greps.length) args.push('--grep', greps.join('|'));
       }
 
-      // Tell the journey spec which layers to run. An empty HELIX_LAYERS would
+      // Tell the journey spec which layers to run. An empty FLEX_LAYERS would
       // mean "all layers", so only set it when the journey actually runs.
-      if (runJourney) env.HELIX_LAYERS = journeyLayers.join(',');
+      if (runJourney) env.FLEX_LAYERS = journeyLayers.join(',');
 
       if (req.headed) args.push('--headed');
       if (req.workers && Number(req.workers) > 0) args.push('--workers', String(req.workers));
-      helixCmd = { cmd: 'npx', args, env, allure: 'off' };
+      flexCmd = { cmd: 'npx', args, env, allure: 'off' };
     }
   }
 
-  if (specs.length === 0 && !helixCmd) return null;
+  // ── Assemble the command LIST ───────────────────────────────────────
+  // A single run can span TWO playwright invocations: the regular specs
+  // (root config) and Flex (its own config). They can't be merged into one
+  // `npx playwright test` call — different --config — so they run as separate
+  // processes, back-to-back, streaming into the SAME run. This is what makes
+  // "Flex + SPC + V1 + Mini Mall" all execute from one launch instead of the
+  // old behavior where Flex short-circuited everything else.
+  const commands = [];
 
-  // Helix has its own config — if selected, it takes priority.
-  if (helixCmd) return helixCmd;
+  // Regular specs (root playwright config) — run FIRST.
+  if (specs.length > 0) {
+    const args = ['playwright', 'test', ...specs];
 
-  const args = ['playwright', 'test', ...specs];
+    // UI sub-modules → playwright --grep (only meaningful when UI is selected)
+    if (suites.includes('ui') && req.ui?.modules?.length) {
+      const greps = req.ui.modules.map(m => m).filter(Boolean);
+      if (greps.length) args.push('--grep', greps.join('|'));
+    }
 
-  // UI sub-modules → playwright --grep (only meaningful when UI is selected)
-  if (suites.includes('ui') && req.ui?.modules?.length) {
-    const greps = req.ui.modules.map(m => m).filter(Boolean);
-    if (greps.length) args.push('--grep', greps.join('|'));
+    if (req.headed) args.push('--headed');
+    if (req.workers && Number(req.workers) > 0) args.push('--workers', String(req.workers));
+    // mini-mall scan + all-pages scan need --project=chrome
+    if (suites.includes('minimall') || suites.includes('allpages')) args.push('--project=chrome');
+    // mini-mall rental always runs headed (captcha)
+    if (suites.includes('minimallrent') && !req.headed) args.push('--headed');
+
+    // Allure reporter when requested
+    if (req.allure === 'serve' || req.allure === 'deploy') {
+      args.push('--reporter=allure-playwright');
+    }
+
+    const label = suites.filter(s => specMap[s]).join('+') || 'tests';
+    commands.push({ cmd: 'npx', args, env, allure: req.allure || 'off', label });
   }
 
-  if (req.headed) args.push('--headed');
-  if (req.workers && Number(req.workers) > 0) args.push('--workers', String(req.workers));
-  // mini-mall scan + all-pages scan need --project=chrome
-  if (suites.includes('minimall') || suites.includes('allpages')) args.push('--project=chrome');
-  // mini-mall rental always runs headed (captcha)
-  if (suites.includes('minimallrent') && !req.headed) args.push('--headed');
+  // Flex (separate config) — runs as its OWN process, LAST, so its per-facility
+  // journey reports are the final thing in the log.
+  if (flexCmd) commands.push({ ...flexCmd, label: 'flex' });
 
-  // Allure reporter when requested
-  if (req.allure === 'serve' || req.allure === 'deploy') {
-    args.push('--reporter=allure-playwright');
-  }
-
-  return { cmd: 'npx', args, env, allure: req.allure || 'off' };
+  if (commands.length === 0) return null;
+  return commands;
 }
 
 // ───────── /api/run handler ─────────
@@ -499,7 +541,7 @@ function startRun(req, res) {
     const stamp   = new Date().toISOString().replace(/[:.]/g, '-');
     const logFile = path.join(LOGS_DIR, `run-${stamp}.log`);
     const logFd   = fs.openSync(logFile, 'a');
-    const entry   = { proc: null, buffer: [], listeners: new Set(), done: false, exitCode: null, startedAt: Date.now(), logFile, logFd };
+    const entry   = { proc: null, buffer: [], listeners: new Set(), done: false, stopped: false, exitCode: null, startedAt: Date.now(), logFile, logFd };
     runs.set(id, entry);
 
     // On win32 with shell:true, args are concatenated into a cmd.exe command
@@ -510,47 +552,44 @@ function startRun(req, res) {
       if (a === '' || /[\s&|^<>"]/.test(a)) return '"' + a.replace(/"/g, '\\"') + '"';
       return a;
     };
-    const safeArgs = built.args.map(quoteWinShell);
+    // buildRunCommand now returns an ARRAY of commands. A single run can span
+    // two playwright processes: the regular specs (root config) and Flex
+    // (its own config). They cannot be one `npx playwright test` call
+    // (different --config), so we spawn them one after another, streaming all
+    // output into this one run. That is what makes "Flex + SPC + V1 + Mini
+    // Mall" all execute from a single launch.
+    const commands = built;
+    const allureMode = (commands.find(c => c.allure && c.allure !== 'off') || {}).allure || 'off';
 
-    // Header lines so the user sees the actual command being executed.
-    const header =
-      `[36m╭─ Storagely Test Run ──────────────────────────────────╮[0m\n` +
-      `[36m│[0m env=${body.env || '(default)'}  headed=${!!body.headed}  workers=${body.workers || '(auto)'}  allure=${built.allure}\n` +
-      `[36m│[0m suites: ${(body.suites || []).join(', ') || '(none)'}\n` +
-      `[36m│[0m cmd: ${built.cmd} ${safeArgs.join(' ')}\n` +
-      `[36m╰───────────────────────────────────────────────────────╯[0m\n`;
+    // Header: the run config + every command that will execute, in order.
+    let header =
+      `[36m+-- Storagely Test Run --------------------------------------+[0m\n` +
+      `[36m|[0m env=${body.env || '(default)'}  headed=${!!body.headed}  workers=${body.workers || '(auto)'}  allure=${allureMode}\n` +
+      `[36m|[0m suites: ${(body.suites || []).join(', ') || '(none)'}\n`;
+    commands.forEach((c, i) => {
+      const tag = commands.length > 1 ? ` [${i + 1}/${commands.length}]` : '';
+      header += `[36m|[0m cmd${tag}: ${c.cmd} ${c.args.map(quoteWinShell).join(' ')}\n`;
+    });
+    header += `[36m+------------------------------------------------------------+[0m\n`;
     pushLine(entry, header);
     process.stdout.write(header);
 
-    const proc = spawn(built.cmd, safeArgs, {
-      cwd: ROOT, env: built.env, shell: process.platform === 'win32',
-    });
-    entry.proc = proc;
+    let cmdIdx = 0;
+    let anyFail = false;
 
-    proc.on('error', err => {
-      const msg = `\n[31m✖ Failed to start process: ${err.message}[0m\n`;
-      pushLine(entry, msg);
-      process.stdout.write(msg);
-      entry.exitCode = -1;
+    const finishRun = () => {
+      entry.exitCode = anyFail ? 1 : 0;
       entry.done = true;
-      closeListeners(entry);
-    });
-    proc.stdout.on('data', chunk => fanout(entry, chunk));
-    proc.stderr.on('data', chunk => fanout(entry, chunk));
-    proc.on('close', code => {
-      entry.exitCode = code;
-      entry.done = true;
-      const tail =
-`\n── RUN FINISHED — PLEASE REVIEW RESULTS (exit ${code}) ──\n`;
+      const tail = `\n== RUN FINISHED - PLEASE REVIEW RESULTS (exit ${entry.exitCode}) ==\n`;
       pushLine(entry, tail);
       process.stdout.write(tail);
-      // Optional Allure post-step
-      if (built.allure === 'serve' || built.allure === 'deploy') {
-        const post = built.allure === 'serve'
+      // Optional Allure post-step: runs once, after every command completes.
+      if (allureMode === 'serve' || allureMode === 'deploy') {
+        const post = allureMode === 'serve'
           ? { cmd: 'npm', args: ['run', 'allure:serve'] }
           : { cmd: 'npm', args: ['run', 'test:deploy'] };
-        pushLine(entry, `\n[36m▶ Starting allure: ${post.cmd} ${post.args.join(' ')}[0m\n`);
-        const allure = spawn(post.cmd, post.args, { cwd: ROOT, env: built.env, shell: process.platform === 'win32' });
+        pushLine(entry, `\n[36m> Starting allure: ${post.cmd} ${post.args.join(' ')}[0m\n`);
+        const allure = spawn(post.cmd, post.args, { cwd: ROOT, env: commands[0].env, shell: process.platform === 'win32' });
         allure.stdout.on('data', c => fanout(entry, c));
         allure.stderr.on('data', c => fanout(entry, c));
         allure.on('close', () => closeListeners(entry));
@@ -558,8 +597,48 @@ function startRun(req, res) {
       } else {
         closeListeners(entry);
       }
-    });
+    };
 
+    const runNext = () => {
+      if (entry.stopped || cmdIdx >= commands.length) return finishRun();
+      const c = commands[cmdIdx];
+      const safeArgs = c.args.map(quoteWinShell);
+
+      // Step banner when a run has more than one command.
+      if (commands.length > 1) {
+        const banner = `\n[36m== Step ${cmdIdx + 1}/${commands.length} - ${c.label} =============================[0m\n`;
+        pushLine(entry, banner);
+        process.stdout.write(banner);
+      }
+
+      const proc = spawn(c.cmd, safeArgs, {
+        cwd: ROOT, env: c.env, shell: process.platform === 'win32',
+      });
+      entry.proc = proc;
+
+      // A spawn can emit BOTH 'error' and 'close'; guard so we advance once.
+      let settled = false;
+      const advance = (failed) => {
+        if (settled) return;
+        settled = true;
+        if (failed) anyFail = true;
+        cmdIdx++;
+        if (entry.stopped) return finishRun();
+        runNext();
+      };
+
+      proc.on('error', err => {
+        const msg = `\n[31mx Failed to start process: ${err.message}[0m\n`;
+        pushLine(entry, msg);
+        process.stdout.write(msg);
+        advance(true);
+      });
+      proc.stdout.on('data', chunk => fanout(entry, chunk));
+      proc.stderr.on('data', chunk => fanout(entry, chunk));
+      proc.on('close', code => advance(!!code));
+    };
+
+    runNext();
     send(res, 200, { runId: id });
   }).catch(err => send(res, 500, { error: String(err) }));
 }

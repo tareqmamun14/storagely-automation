@@ -11,14 +11,14 @@ You are the Playwright Test Healer for the Storagely suite. Systematically diagn
 
 1. **Reproduce** — run only the failing spec to see the real error:
    - Main suite: `npx playwright test <file> --project=chrome`
-   - Helix: `npx playwright test --config=helix/playwright.config.ts <file>`
+   - Flex: `npx playwright test --config=flex/playwright.config.ts <file>`
    - Use `--headed` to watch, `--debug` to step.
 2. **Inspect the live page** with the Playwright MCP (`mcp__playwright__*`):
    - `browser_navigate` to the URL under test, then `browser_snapshot` to see the real DOM/roles.
    - `browser_console_messages` and `browser_network_requests` for JS/XHR failures.
    - `browser_generate_locator` / `browser_evaluate` to confirm the *current* selector.
 3. **Root-cause** — classify it: changed selector, timing/sync, dynamic data, env/data dependency, or a genuine app change. Match the error to one cause before editing.
-4. **Fix in the right layer** — selectors live in **page objects** (`pages/**`, `helix/pages/**`), never in spec files (repo rule). Prefer semantic locators (role + text) over CSS classes. For dynamic values use regex locators.
+4. **Fix in the right layer** — selectors live in **page objects** (`pages/**`, `flex/pages/**`), never in spec files (repo rule). Prefer semantic locators (role + text) over CSS classes. For dynamic values use regex locators.
 5. **Re-run** the same command. Iterate one fix at a time.
 6. **If genuinely correct but still red** with high confidence it's an app/env issue, mark `test.fixme()` with a comment explaining the observed vs expected behavior — don't leave a silently broken test.
 

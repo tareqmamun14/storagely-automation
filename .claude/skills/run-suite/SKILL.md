@@ -19,9 +19,9 @@ Pick the correct command and flags instead of guessing. Source of truth: [packag
 | Mini Mall full scan | `npm run run:minimall` |
 | Mini Mall rental (headed) | `npm run run:minimallrent` |
 | All locations scan | `npm run run:allpages` |
-| Helix (all, headed) | `npm run run:helix` |
-| Helix live / editor / e2e / health | `npm run run:helix:live` / `:editor` / `:e2e` / `:health` |
-| Helix visual baseline (+ update) | `npm run run:helix:visual` (`:update` to re-baseline) |
+| Flex (all, headed) | `npm run run:flex` |
+| Flex live / editor / e2e / health | `npm run run:flex:live` / `:editor` / `:e2e` / `:health` |
+| Flex visual baseline (+ update) | `npm run run:flex:visual` (`:update` to re-baseline) |
 
 A specific file: `npx playwright test <file> --project=chrome` (add `--headed` / `--debug`).
 
@@ -30,7 +30,7 @@ A specific file: `npx playwright test <file> --project=chrome` (add `--headed` /
 - `STORAGELY_UI_CLIENTS` / `STORAGELY_SPC_CLIENTS` / `STORAGELY_V1_CLIENTS` — comma-sep client substrings to KEEP
 - `STORAGELY_*_EXTRA` — comma-sep extra URLs to append
 - `STORAGELY_DS_ENV=stage|prod`, `STORAGELY_DS_CLIENTS=SiteLink,storEDGE,SSM`, `STORAGELY_SITELINK_STAGE_PWD=...`
-- Helix login: `HELIX_PASSWORD=...`
+- Flex login: `FLEX_PASSWORD=...`
 
 PowerShell example (run SPC on staging for two clients):
 ```powershell

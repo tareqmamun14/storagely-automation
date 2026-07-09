@@ -506,7 +506,20 @@ export class StorageListingPage extends BasePage {
       if (currentUrl.includes('/storage-units-near-me') || currentUrl.includes('/find-storage')) {
         throw new Error(`Wrong button clicked - navigated to ${currentUrl}`);
       }
-      
+
+      // Detect homepage bounce (lost/expired session redirects to /?st or bare domain)
+      // Same pattern as distinctstorage.com — the rent button navigates but the session
+      // is gone, so the server bounces back to the homepage instead of step_four.
+      try {
+        const parsedUrl = new URL(currentUrl);
+        const barePath = parsedUrl.pathname.replace(/\/+$/, '');
+        if (barePath === '' || barePath === '/') {
+          throw new Error(`Rent button redirected to the homepage (${currentUrl}) instead of step_four — likely a lost/expired session`);
+        }
+      } catch (urlError) {
+        if ((urlError as Error).message.includes('Rent button redirected')) throw urlError;
+      }
+
       // ==========================================
       // DIRECT RENT FLOW (already on step_four)
       // ==========================================
@@ -529,7 +542,8 @@ export class StorageListingPage extends BasePage {
       // or when the page hasn't fully hydrated). Reload and try again.
       const isRetryable =
         msg.includes('No rent, pricing option, reserve, or waitlist buttons') ||
-        msg.includes('Wrong button clicked - navigated to');
+        msg.includes('Wrong button clicked - navigated to') ||
+        msg.includes('Rent button redirected to the homepage');
 
       if (retryCount < MAX_RETRIES && isRetryable) {
         console.log(`\n⚠️  [${Date.now() - startTime}ms] Rent button search failed on attempt ${retryCount + 1}: "${msg.substring(0, 120)}"`);

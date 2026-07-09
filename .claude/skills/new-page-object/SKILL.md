@@ -1,14 +1,14 @@
 ---
 name: new-page-object
-description: Scaffold a new Page Object Model class (or a Helix section) following this repo's conventions. Use when adding coverage for a new page/flow/component — e.g. "create a page object for the new pricing modal", "add a POM for the waitlist flow", "scaffold a Helix footer section".
+description: Scaffold a new Page Object Model class (or a Flex section) following this repo's conventions. Use when adding coverage for a new page/flow/component — e.g. "create a page object for the new pricing modal", "add a POM for the waitlist flow", "scaffold a Flex footer section".
 ---
 
 # Create a Page Object following repo conventions
 
-Page Objects encapsulate all selectors and actions for a page. Match the existing files before inventing structure — read a close neighbor first (`pages/StorageListingPage.ts`, `pages/RentalDetailsPage_V1.ts`, `pages/ContactPage.ts`, or for Helix `helix/pages/sections/*.ts`).
+Page Objects encapsulate all selectors and actions for a page. Match the existing files before inventing structure — read a close neighbor first (`pages/StorageListingPage.ts`, `pages/RentalDetailsPage_V1.ts`, `pages/ContactPage.ts`, or for Flex `flex/pages/sections/*.ts`).
 
 ## Conventions
-- **Location**: main flows → `pages/`; Helix → `helix/pages/` (sections under `helix/pages/sections/`).
+- **Location**: main flows → `pages/`; Flex → `flex/pages/` (sections under `flex/pages/sections/`).
 - **Naming**: PascalCase class + file, e.g. `PricingPage.ts` exporting `class PricingPage`. Flow variants get a suffix: `_V1`, `_SPC`.
 - **Constructor** takes the Playwright `Page`: `constructor(private page: Page) {}`.
 - **Selectors live here, nowhere else.** No raw selectors in spec files (hard repo rule). Define locators as readonly fields or getters.
@@ -23,5 +23,5 @@ Page Objects encapsulate all selectors and actions for a page. Match the existin
 4. Add/extend the spec that uses it (specs call POM methods only).
 5. Run it: `npx playwright test <spec> --project=chrome --headed`.
 
-## Helix sections
-Helix sections follow the `helix/pages/sections/*.ts` pattern and register in `index.ts` + `types.ts`; the manifest (`configs/components.ts`, `configs/facilities.ts`) is the source of truth — see [helix/CLAUDE.md](../../../helix/CLAUDE.md).
+## Flex sections
+Flex sections follow the `flex/pages/sections/*.ts` pattern and register in `index.ts` + `types.ts`; the manifest (`configs/components.ts`, `configs/facilities.ts`) is the source of truth — see [flex/CLAUDE.md](../../../flex/CLAUDE.md).

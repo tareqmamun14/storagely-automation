@@ -12,7 +12,8 @@
       "WebFetch(domain:safeguard.test.getstoragely.com)",
       "Bash(node -e ' *)",
       "WebFetch(domain:app.storagely.io)",
-      "mcp__playwright__browser_snapshot"
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_evaluate"
     ]
   }
 }
