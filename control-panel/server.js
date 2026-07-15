@@ -361,6 +361,16 @@ function buildRunCommand(req) {
   if (Array.isArray(req.flex?.facilities) && req.flex.facilities.length) {
     env.FLEX_FACILITY_FILTER = req.flex.facilities.join(',');
   }
+  // Rent-flow depth: 'handshake' = autonomous-safe checkout-entry verification
+  // (no fill/captcha/submit); 'full' = drive the checkout to submit (manual
+  // captcha on prod). Unset → the journey's env-aware default (prod→handshake,
+  // test→full).
+  if (req.flex?.rentMode === 'handshake' || req.flex?.rentMode === 'full') {
+    env.FLEX_RENT_MODE = req.flex.rentMode;
+  }
+  // Random location sampling — widen coverage on prod ("random", "random:3").
+  // The suite force-disables it whenever a run pins facilities / a custom URL.
+  if (req.flex?.sample) env.FLEX_SAMPLE = String(req.flex.sample);
 
   let suites = Array.isArray(req.suites) ? req.suites.slice() : [];
 
@@ -742,6 +752,241 @@ function stopRun(req, res, id) {
   send(res, 200, { stopped: true });
 }
 
+// ───────── Flex Issues DB + per-client coverage ─────────
+// The dashboard behind the panel's "Issues & Coverage" card. Two sources:
+//   • flex/issue-db/issues.json — COMMITTED, human-triaged issue database
+//     (the suite's known-issue gate reads the same file — see
+//     flex/configs/issueDb.ts). The panel auto-APPENDS newly-seen issues
+//     (status 'new'; exploratory finds → 'candidate') but NEVER auto-triages —
+//     only the buttons below change a status.
+//   • flex/test-results/journey/*.json — per-facility journey reports; the
+//     LATEST report per facility is the "current truth" for coverage and for
+//     bumping lastSeen/occurrences on issues.
+const FLEX_ISSUE_DB_FILE = path.join(ROOT, 'flex', 'issue-db', 'issues.json');
+const FLEX_JOURNEY_DIR   = path.join(ROOT, 'flex', 'test-results', 'journey');
+const ISSUE_STATUSES = ['new', 'candidate', 'false-flag', 'informed', 'acknowledged', 'fixed'];
+
+// MUST stay identical to normalizeCheck()/issueSignature() in flex/configs/issueDb.ts.
+function normalizeCheck(name) {
+  return String(name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+function issueSignature(client, area, checkName) {
+  return `${String(client || '').toLowerCase()}|${String(area || '').toLowerCase()}|${normalizeCheck(checkName)}`;
+}
+
+function readIssueDb() {
+  const raw = readJsonSafe(FLEX_ISSUE_DB_FILE, { issues: [] });
+  return { _comment: raw._comment, issues: Array.isArray(raw.issues) ? raw.issues : [] };
+}
+function writeIssueDb(db) {
+  try {
+    fs.mkdirSync(path.dirname(FLEX_ISSUE_DB_FILE), { recursive: true });
+    writeJsonSafe(FLEX_ISSUE_DB_FILE, { _comment: db._comment, issues: db.issues });
+  } catch (e) { console.log('  issue-db write failed:', String(e)); }
+}
+
+/** Latest journey report per facility id. */
+function latestJourneyReports() {
+  let files = [];
+  try { files = fs.readdirSync(FLEX_JOURNEY_DIR).filter(f => f.endsWith('.json')); } catch { return []; }
+  const byFacility = new Map();
+  for (const f of files) {
+    let rep;
+    try { rep = JSON.parse(fs.readFileSync(path.join(FLEX_JOURNEY_DIR, f), 'utf8')); } catch { continue; }
+    const id = rep && rep.facility && rep.facility.id;
+    if (!id || !rep.timestamp) continue;
+    const prev = byFacility.get(id);
+    if (!prev || String(rep.timestamp) > String(prev.rep.timestamp)) byFacility.set(id, { rep, file: f });
+  }
+  return [...byFacility.values()];
+}
+
+const KNOWN_TAG_RE = /^\[known:(false-flag|informed|acknowledged)\s*#([a-z0-9-]+)/i;
+
+/** One check → an "observation" (fail / known-tagged / exploratory FINDING) or null. */
+function classifyCheck(client, area, name, passed, detail) {
+  const d = String(detail || '');
+  const known = d.match(KNOWN_TAG_RE);
+  if (known) {
+    return { kind: 'known', client, area, check: name, detail: d,
+             sig: issueSignature(client, area, name), knownStatus: known[1].toLowerCase(), knownId: known[2] };
+  }
+  if (/^explore:\s*/i.test(name) && /^FINDING:/i.test(d)) {
+    const probeId = name.replace(/^explore:\s*/i, '');
+    return { kind: 'finding', client, area: 'exploratory', check: probeId,
+             detail: d.replace(/^FINDING:\s*/i, ''), sig: issueSignature(client, 'exploratory', probeId) };
+  }
+  if (!passed) return { kind: 'fail', client, area, check: name, detail: d, sig: issueSignature(client, area, name) };
+  return null;
+}
+
+/** Walk one report → observations, at sub-check granularity for sections. */
+function observationsFromReport(rep) {
+  const out = [];
+  const client = (rep.facility && rep.facility.client) || '';
+  for (const step of rep.steps || []) {
+    if (step.status === 'skipped') continue;
+    for (const ck of step.checks || []) {
+      if (Array.isArray(ck.sub)) {
+        for (const sub of ck.sub) {
+          const obs = classifyCheck(client, ck.name, sub.name, sub.passed, sub.detail);
+          if (obs) out.push(obs);
+        }
+      } else if (step.id === 'sections') {
+        // Legacy report (pre-`sub` enrichment): section entries can't be
+        // attributed at check level — skip for issue-filing (coverage still
+        // shows them); the next run writes sub-checks and files precisely.
+        continue;
+      } else {
+        const obs = classifyCheck(client, step.id, ck.name, ck.passed, ck.detail);
+        if (obs) out.push(obs);
+      }
+    }
+  }
+  return out;
+}
+
+function uniqueIssueId(db, obs) {
+  const base = normalizeCheck(`${obs.client}-${obs.area}-${obs.check}`).slice(0, 60) || 'issue';
+  let id = base, n = 2;
+  while (db.issues.some(i => i.id === id)) id = `${base}-${n++}`;
+  return id;
+}
+
+/** Merge latest-report observations into the DB. Returns true when the DB changed. */
+function syncIssuesFromReports(db, latest) {
+  let changed = false;
+  const bySig = new Map();
+  for (const issue of db.issues) for (const s of issue.signatures || []) bySig.set(s, issue);
+
+  for (const { rep } of latest) {
+    const ts = String(rep.timestamp || '');
+    const url = (rep.facility && rep.facility.url) || '';
+    const bumped = new Set(); // one bump per issue per report
+    for (const obs of observationsFromReport(rep)) {
+      let issue = bySig.get(obs.sig);
+      if (!issue) {
+        issue = {
+          id: uniqueIssueId(db, obs),
+          signatures: [obs.sig],
+          client: obs.client,
+          area: obs.area,
+          check: obs.check,
+          title: obs.kind === 'finding'
+            ? `[exploratory] ${obs.check}: ${obs.detail.slice(0, 90)}`
+            : `${obs.area}: ${obs.check}`,
+          detail: obs.detail.slice(0, 400),
+          source: obs.kind === 'finding' ? 'exploratory' : 'suite',
+          status: obs.kind === 'finding' ? 'candidate' : 'new',
+          slackChannel: '',
+          comments: [],
+          firstSeen: ts, lastSeen: ts, occurrences: 1,
+          urls: url ? [url] : [],
+        };
+        db.issues.push(issue);
+        bySig.set(obs.sig, issue);
+        changed = true;
+      } else if (ts > String(issue.lastSeen || '') && !bumped.has(issue.id)) {
+        bumped.add(issue.id);
+        issue.lastSeen = ts;
+        issue.occurrences = (issue.occurrences || 0) + 1;
+        if (obs.detail) issue.detail = obs.detail.slice(0, 400);
+        if (url && !(issue.urls || []).includes(url)) issue.urls = [...(issue.urls || []), url].slice(-6);
+        changed = true;
+      }
+    }
+  }
+  return changed;
+}
+
+/** Per-facility coverage summary (the "passed log") from the latest report. */
+function coverageFromReport(rep, file) {
+  const steps = (rep.steps || []).map(s => ({
+    id: s.id, label: s.label, status: s.status,
+    passed: (s.checks || []).filter(c => c.passed).length,
+    failed: (s.checks || []).filter(c => !c.passed).length,
+    total: (s.checks || []).length,
+    durationMs: s.durationMs || 0,
+  }));
+  const failing = [], known = [], exploratory = [];
+  let anomalies = null;
+  for (const step of rep.steps || []) {
+    for (const ck of step.checks || []) {
+      if (Array.isArray(ck.sub)) {
+        if (ck.name === 'anomalies') {
+          const info = ck.sub.find(s => /data anomalies surfaced/i.test(s.name));
+          anomalies = (info && info.detail) || ck.detail || null;
+        }
+        for (const sub of ck.sub) {
+          const d = String(sub.detail || '');
+          if (KNOWN_TAG_RE.test(d)) known.push({ area: ck.name, check: sub.name, detail: d.slice(0, 220) });
+          else if (!sub.passed) failing.push({ area: ck.name, check: sub.name, detail: d.slice(0, 220) });
+          else if (/^explore:/i.test(sub.name) && /^FINDING:/i.test(d)) {
+            exploratory.push({ probe: sub.name.replace(/^explore:\s*/i, ''), detail: d.slice(0, 220) });
+          }
+        }
+      } else {
+        const d = String(ck.detail || '');
+        if (KNOWN_TAG_RE.test(d)) known.push({ area: step.id, check: ck.name, detail: d.slice(0, 220) });
+        else if (!ck.passed) failing.push({ area: step.id, check: ck.name, detail: d.slice(0, 220) });
+      }
+    }
+  }
+  return {
+    facilityId: rep.facility && rep.facility.id,
+    name: rep.facility && rep.facility.name,
+    client: (rep.facility && rep.facility.client) || '?',
+    url: rep.facility && rep.facility.url,
+    timestamp: rep.timestamp,
+    durationMs: rep.totalDurationMs || 0,
+    steps, failing, known, anomalies, exploratory,
+    reportFile: file,
+  };
+}
+
+/** GET /api/flex/issues payload: triaged DB (+liveness) and per-facility coverage. */
+function aggregateFlexIssues() {
+  const db = readIssueDb();
+  const latest = latestJourneyReports();
+  if (syncIssuesFromReports(db, latest)) writeIssueDb(db);
+
+  const seenSigs = new Set();
+  const latestByClient = {};
+  for (const { rep } of latest) {
+    for (const obs of observationsFromReport(rep)) seenSigs.add(obs.sig);
+    const c = (rep.facility && rep.facility.client) || '?';
+    if (!latestByClient[c] || String(rep.timestamp) > String(latestByClient[c])) latestByClient[c] = rep.timestamp;
+  }
+  const issues = db.issues.map(i => ({
+    ...i,
+    seenInLatest: (i.signatures || []).some(s => seenSigs.has(s)),
+    clientLatestRunAt: latestByClient[i.client] || null,
+  }));
+  return { issues, coverage: latest.map(({ rep, file }) => coverageFromReport(rep, file)), statuses: ISSUE_STATUSES };
+}
+
+/** POST /api/flex/issue-update {id, status?, comment?, slackChannel?} */
+function updateFlexIssue(req, res) {
+  return readBody(req).then(raw => {
+    try {
+      const body = JSON.parse(raw || '{}');
+      const db = readIssueDb();
+      const issue = db.issues.find(i => i.id === body.id);
+      if (!issue) return send(res, 404, { error: `no issue with id "${body.id}"` });
+      if (body.status !== undefined) {
+        if (!ISSUE_STATUSES.includes(body.status)) return send(res, 400, { error: `bad status "${body.status}"` });
+        issue.status = body.status;
+      }
+      if (typeof body.slackChannel === 'string') issue.slackChannel = body.slackChannel.trim();
+      if (typeof body.comment === 'string' && body.comment.trim()) {
+        issue.comments = [...(issue.comments || []), { text: body.comment.trim(), at: new Date().toISOString() }];
+      }
+      writeIssueDb(db);
+      send(res, 200, { ok: true, issue });
+    } catch (e) { send(res, 400, { error: String(e) }); }
+  });
+}
+
 // ───────── Static file serving ─────────
 function serveStatic(req, res) {
   const p = req.url === '/' ? '/index.html' : req.url;
@@ -797,6 +1042,14 @@ const server = http.createServer((req, res) => {
       try { writeJsonSafe(EXTRA_CLIENTS_FILE, JSON.parse(raw || '{}')); send(res, 200, { ok: true }); }
       catch (e) { send(res, 400, { error: String(e) }); }
     });
+  }
+  // Flex Issues dashboard — triaged issue DB + per-client coverage.
+  if (url === '/api/flex/issues' && req.method === 'GET') {
+    try { return send(res, 200, aggregateFlexIssues()); }
+    catch (e) { return send(res, 500, { error: String(e) }); }
+  }
+  if (url === '/api/flex/issue-update' && req.method === 'POST') {
+    return updateFlexIssue(req, res);
   }
   // Saved corp codes (slug → code), used by Build Instance Regression so the
   // user doesn't have to re-paste passwords on every run.

@@ -37,13 +37,30 @@ export class CarouselSection implements ISectionDetector {
       }, SLIDE_SEL);
       data.totalSlides = total;
 
+      // Prev/Next ARROW controls. The aria-label wording varies by template:
+      // Carroll/Chicago use "Previous slide"/"Next slide"; Storage Star uses
+      // "Previous photo"/"Next photo". Match the arrow forms explicitly (plus a
+      // broad "prev" catch) so a new template's wording doesn't false-fail — but
+      // keep "next" specific to slide/photo/image so it can't match unrelated
+      // "next" affordances elsewhere on the page.
+      const prev = page.locator('[aria-label="Previous slide" i], [aria-label="Previous photo" i], [aria-label="Previous image" i], [aria-label="Previous" i], [aria-label*="prev" i]');
+      const next = page.locator('[aria-label="Next slide" i], [aria-label="Next photo" i], [aria-label="Next image" i], [aria-label="Next" i], [aria-label*="next slide" i], [aria-label*="next photo" i]');
+      const hasPrev = (await prev.count()) > 0;
+      const hasNext = (await next.count()) > 0;
+      const hasArrows = hasPrev && hasNext;
+      data.hasArrows = hasArrows;
+
+      // A carousel exposes its slides via pagination DOTS and/or prev/next
+      // ARROWS. Carroll ships dots (+arrows); Storage Star ships ARROWS ONLY
+      // (no dots). Requiring dots would false-fail a perfectly good arrow
+      // carousel, so accept either control mechanism here.
       checks.push(check(
-        'slide indicators present',
-        tabCount > 0,
-        `${tabCount} tab(s), total ${total}`,
+        'slide indicators or nav arrows present',
+        tabCount > 0 || hasArrows,
+        tabCount > 0 ? `${tabCount} dot(s), total ${total}` : hasArrows ? 'prev/next arrows (no dots)' : 'no carousel controls found',
       ));
 
-      // Tab count should match the "of N" embedded in the label.
+      // Tab count should match the "of N" embedded in the label (dot carousels).
       if (tabCount > 0 && total > 0) {
         checks.push(check(
           'tab count matches advertised total',
@@ -52,15 +69,8 @@ export class CarouselSection implements ISectionDetector {
         ));
       }
 
-      // Navigation: a carousel is navigable via prev/next ARROWS *or* pagination
-      // DOTS. Carroll ships arrows + dots; the Chicago template ships dots only.
-      // Requiring both arrows would false-fail a perfectly good dot carousel, so
-      // we accept either mechanism.
-      const prev = page.locator('[aria-label="Previous slide" i], [aria-label="Previous" i], [aria-label*="prev" i]');
-      const next = page.locator('[aria-label="Next slide" i], [aria-label="Next" i], [aria-label*="next slide" i]');
-      const hasPrev = (await prev.count()) > 0;
-      const hasNext = (await next.count()) > 0;
-      const navigable = (hasPrev && hasNext) || tabCount >= 2;
+      // Navigation: navigable via prev/next ARROWS *or* ≥2 pagination DOTS.
+      const navigable = hasArrows || tabCount >= 2;
       checks.push(check(
         'carousel is navigable (arrows or pagination dots)',
         navigable,

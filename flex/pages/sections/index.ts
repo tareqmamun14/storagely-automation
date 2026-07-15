@@ -21,6 +21,8 @@ import { UHaulSection } from './UHaulSection';
 import { SeoSection } from './SeoSection';
 import { SeoHeadSection } from './SeoHeadSection';
 import { DataIntegritySection } from './DataIntegritySection';
+import { AnomaliesSection } from './AnomaliesSection';
+import { ExploratorySection } from './ExploratorySection';
 
 export const SECTION_DETECTORS: ISectionDetector[] = [
   new NavSection(),
@@ -41,6 +43,14 @@ export const SECTION_DETECTORS: ISectionDetector[] = [
   new SeoHeadSection(),
   // Universal: cross-field data consistency (review counts, rating, phone, tokens).
   new DataIntegritySection(),
+  // Universal: anomaly scan — catches unusual DATA our fixed checks miss, routes
+  // by source (FMS vs product), and learns run-over-run. Runs LAST so it can read
+  // the whole page after the other detectors have settled it.
+  new AnomaliesSection(),
+  // Universal: exploratory rotation — probes something NEW each run (info-only;
+  // findings become CANDIDATE issues in the panel dashboard). Runs after the
+  // anomaly scan so fixed checks + anomalies stay the authoritative gate.
+  new ExploratorySection(),
 ];
 
 export function getDetector(id: string): ISectionDetector {
@@ -54,5 +64,5 @@ export {
   NavSection, FacilityHeaderSection, CarouselSection, AmenitiesSection, FAQSection,
   UnitsSection, GallerySection, FooterSection,
   FiltersSection, PromoSection, ReviewsSection, UHaulSection, SeoSection, SeoHeadSection,
-  DataIntegritySection,
+  DataIntegritySection, AnomaliesSection, ExploratorySection,
 };

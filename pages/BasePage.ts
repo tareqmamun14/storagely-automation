@@ -1,12 +1,23 @@
 // pages/BasePage.ts
 
 import { Page, expect, Locator } from '@playwright/test';
+import { dismissMarketingModal } from '../utils/dismissMarketingModal';
 
 export class BasePage {
   readonly page: Page;
 
   constructor(page: Page) {
     this.page = page;
+  }
+
+  /**
+   * Dismiss the post-login "Manifesto" product-showcase marketing modal that
+   * Storagely admin shows on the landing page. Call right after any admin login
+   * so it can't overlay the dashboard and block subsequent clicks. No-op when
+   * the modal is absent. See utils/dismissMarketingModal.ts.
+   */
+  async dismissPostLoginModal(timeoutMs = 5000): Promise<void> {
+    await dismissMarketingModal(this.page, timeoutMs);
   }
 
   /**

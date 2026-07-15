@@ -257,6 +257,21 @@ export function formatFindings(r: SectionResult): string {
         `  social=${(d.socialPlatforms || []).join(',')}` +
         (cols ? `  (${truncate(cols, 60)})` : '');
     }
+    case 'anomalies': {
+      const list = Array.isArray(d.anomalies) ? d.anomalies : [];
+      if (list.length === 0) return `${d.unitCount || 0} units · no anomalies`;
+      const tag = (a: any) => `[${a.source}${a.status === 'acknowledged' ? '/known' : a.status === 'new' ? '/NEW' : ''}]`;
+      const summary = list.slice(0, 6).map((a: any) => `${tag(a)} ${a.code}${a.context ? ' ' + a.context : ''}`).join(' · ');
+      const newCount = list.filter((a: any) => a.status === 'new').length;
+      return `${list.length} anomaly(ies): ${summary}${list.length > 6 ? ` …+${list.length - 6}` : ''}`
+        + (newCount ? `  •  ${newCount} NEW` : '')
+        + (d.drift ? `  •  drift: ${d.drift}` : '');
+    }
+    case 'exploratory': {
+      const probes = Array.isArray(d.probes) ? d.probes : [];
+      const findings = typeof d.findings === 'number' ? d.findings : 0;
+      return `probed: ${probes.join(', ') || '(none)'}${findings ? `  •  ${findings} FINDING(s) → candidates for triage` : '  •  all clean'}`;
+    }
     default: return '';
   }
 }

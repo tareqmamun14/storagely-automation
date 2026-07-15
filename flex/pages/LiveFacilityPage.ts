@@ -127,7 +127,26 @@ export class LiveFacilityPage {
     // whole journey at goto(); we then give DCL + networkidle generous
     // best-effort windows so the checks have content to work against. The HTTP
     // status still comes from the committed main-document response.
-    const response = await this.page.goto(url, { waitUntil: 'commit', timeout: 90_000 });
+    //
+    // Prod CDNs/WAFs also intermittently reject an automated navigation OUTRIGHT
+    // with a transient network error (ERR_INVALID_RESPONSE / ERR_TIMED_OUT /
+    // ERR_CONNECTION_*), especially when runs land close together. That's a
+    // throttle artifact, not a down site — so retry once after a short backoff
+    // before giving up (a genuinely down site still fails both attempts, so this
+    // never masks a real outage).
+    let response = null;
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        response = await this.page.goto(url, { waitUntil: 'commit', timeout: 90_000 });
+        break;
+      } catch (err) {
+        const msg = ((err as Error).message || '').split('\n')[0];
+        const transient = /ERR_INVALID_RESPONSE|ERR_TIMED_OUT|ERR_CONNECTION|ERR_NETWORK_CHANGED|ERR_HTTP2|ERR_EMPTY_RESPONSE|NS_ERROR/i.test(msg);
+        if (attempt === 2 || !transient) throw err;
+        console.log(`⚠️ Navigation attempt ${attempt} failed (${msg.slice(0, 80)}) — retrying in 8s (likely CDN throttle)…`);
+        await this.page.waitForTimeout(8000);
+      }
+    }
     this.lastNavStatus = response ? response.status() : null;
     await this.page.waitForLoadState('domcontentloaded', { timeout: 60_000 }).catch(() => {});
     await this.page.waitForLoadState('networkidle', { timeout: 30_000 }).catch(() => {});

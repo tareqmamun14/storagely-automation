@@ -23,6 +23,9 @@ export class AdminLoginPage extends BasePage {
     await this.emailInput.fill(email);
     await this.passwordInput.fill(password);
     await this.loginButton.click();
+    // Right after login lands, close the "Manifesto" product-showcase modal that
+    // overlays the dashboard — otherwise it intercepts the first post-login click.
+    await this.dismissPostLoginModal();
   }
 
   /**

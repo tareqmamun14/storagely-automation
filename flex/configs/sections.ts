@@ -120,6 +120,18 @@ export const SECTIONS: SectionDef[] = [
     description: 'Expect: review count + star rating agree everywhere on the page, no placeholder (555-01xx) phone numbers, and no unresolved {template.token}/{{token}} in visible text.',
     order: 15,
   },
+  {
+    id: 'anomalies',
+    label: 'Anomaly Scan',
+    description: 'Catch-all for UNUSUAL data our fixed checks don’t cover: a $0/negative rate, a warehouse-sized "unit" (e.g. 20\'×141\'), a rate far above the run median, a web>standard inversion. Routes each finding by SOURCE (FMS data vs Storagely product vs unknown) and LEARNS run-over-run — a curated known-list quiets acknowledged quirks and a local baseline marks each new-vs-recurring. FMS-sourced quirks are surfaced as info (Storagely doesn’t own FMS data); only a NEW product-side anomaly fails.',
+    order: 16,
+  },
+  {
+    id: 'exploratory',
+    label: 'Exploratory Probe',
+    description: 'Tests something NEW each run: rotates through a catalog of industry-aware probes (click-to-call, rating sanity, local-SEO city match, teaser-price truth, size/price ladder, mixed content, duplicate meta…). INFO-ONLY — a finding never fails the run; it surfaces as a CANDIDATE issue in the panel’s Issues dashboard for triage. FLEX_EXPLORE_N sets probes/run (default 4, 0 disables).',
+    order: 17,
+  },
 ];
 
 /** All section IDs in display order — convenience for tests + the reporter. */

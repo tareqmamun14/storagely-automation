@@ -123,7 +123,11 @@ export const DEFAULT_PROFILE: ClientProfile = {
   },
   rentHandoff: {
     label: 'V2 SPC /step-four',
-    rentLinkText: /rent now/i,
+    // The standard-template Rent CTA reads "Rent Now" on Safeguard but just
+    // "Rent" on Storage Star — both hand off to the SAME /step-four SPC. Accept
+    // either so any future standard client auto-works (the checkout-path filter
+    // in UnitsSection still keeps a stray "Rent Online" nav link out).
+    rentLinkText: /rent now|^rent\b/i,
     pathPattern: /\/step-four/,
     unitParam: 'unit_id',
     hrefContains: '/step-four',
@@ -135,6 +139,26 @@ export const DEFAULT_PROFILE: ClientProfile = {
 
 const PROFILES: Record<string, ClientProfile> = {
   safeguard: { ...DEFAULT_PROFILE, client: 'safeguard' },
+
+  // Storage Star — migrated to Flex on PRODUCTION (legacy V1/SPC still runs on
+  // stage). Uses the STANDARD (Safeguard-baseline) template: flat unit grid,
+  // "Amenities" heading, SPC /step-four checkout — so it inherits DEFAULT_PROFILE.
+  // Two verified live differences from Safeguard's top nav (confirmed on
+  // storagestar.com/…/marco-island/east-elkcam-circle), so we relax those checks
+  // to avoid false flags — everything else is the standard behavior:
+  //   • No Blog link in the top nav (Safeguard has one).
+  //   • "Contact" is a direct /contact LINK, not a dropdown button.
+  // Its Rent CTA reads "Rent" (not "Rent Now") but still → /step-four; the
+  // broadened DEFAULT rentLinkText above already covers that.
+  storagestar: {
+    ...DEFAULT_PROFILE,
+    client: 'storagestar',
+    nav: {
+      ...DEFAULT_PROFILE.nav,
+      expectBlogLink: false,
+      expectContactDropdown: false,
+    },
+  },
 
   minimall: {
     client: 'minimall',

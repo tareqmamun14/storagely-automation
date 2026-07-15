@@ -17,6 +17,8 @@
  *    Flex post-release regression runs against these, same as V1/V2 prod runs.
  *  - 'test'       — the Flex test/stage domain (*.test.getstoragely.com).
  */
+import { getLocationPool, sampleSize, samplePool } from './locationPool';
+
 export type FlexEnv = 'production' | 'test';
 
 export interface FlexFacility {
@@ -125,6 +127,23 @@ export const FACILITIES: FlexFacility[] = [
     expectedHeading: /self storage units birmingham|mini mall storage|richard.arrington/i,
     features: { ...MINIMALL_FEATURES },
   },
+  // Storage Star — migrated to Flex on PRODUCTION. Standard (Safeguard-baseline)
+  // template: flat unit grid, "Amenities", SPC /step-four checkout. It DOES ship
+  // the bottom long-form SEO copy block, so hasSeo is on (the other Mini-Mall-only
+  // sections stay off). Legacy V1/SPC still covers Storage Star on STAGE; this row
+  // is the prod Flex coverage. Client 'storagestar' → standard profile with two
+  // nav relaxations (no blog link, Contact is a link not a dropdown) — see profiles.ts.
+  {
+    id: 'storagestar-marco-island-elkcam',
+    name: 'Storage Star — Marco Island, FL (E Elkcam Circle)',
+    client: 'storagestar',
+    env: 'production',
+    url: 'https://www.storagestar.com/storage-units/florida/marco-island/east-elkcam-circle',
+    expectedTitle: /self storage.*marco island|marco island.*storage|storage star/i,
+    expectedHeading: /storage star|elkcam|marco island/i,
+    features: { ...ALL_FEATURES, hasSeo: true },
+  },
+
   // TODO(minimall): when a Mini Mall Flex staging mirror is available, add the
   // matching { …, env: 'test', url: 'https://…' } row here so FLEX_ENV=test
   // exercises the same suite pre-production.
@@ -209,6 +228,43 @@ export function getAllFacilities(): FlexFacility[] {
 
   const clients = (process.env.FLEX_CLIENT || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
 
+  // ── Random location sampling (opt-in via FLEX_SAMPLE; prod-only) ──────────
+  // Widen coverage by running RANDOM locations from each selected client's pool
+  // instead of the single pinned registry URL. DISABLED whenever the run pins
+  // locations (a FLEX_FACILITY_FILTER, or FLEX_CUSTOM_URL handled above) so an
+  // investigation/retry always hits the same page. Picks are made ONCE here and
+  // reused for the whole run, so Playwright retries never re-sample.
+  const pinned = filter.length > 0;
+  const n = sampleSize(pinned);
+  if (n != null && env === 'production') {
+    const selectedClients = clients.length ? clients : getClients().map(c => c.toLowerCase());
+    const sampled: FlexFacility[] = [];
+    const picked: string[] = [];
+    for (const client of selectedClients) {
+      const pool = getLocationPool(client);
+      if (pool.length === 0) {
+        // No pool for this client → fall back to its registry facilities.
+        sampled.push(...FACILITIES.filter(f => f.env === env && f.client.toLowerCase() === client));
+        continue;
+      }
+      samplePool(pool, n).forEach((url, i) => {
+        const c = clientForUrl(url);
+        sampled.push({
+          id: `sample-${client}-${i + 1}-${slugForUrl(url)}`,
+          name: `Sample — ${labelForUrl(url)}`,
+          client: c, env, url,
+          expectedTitle: /.+/, expectedHeading: /.+/,
+          features: { ...featuresForClient(c) },
+        });
+        picked.push(url);
+      });
+    }
+    if (sampled.length) {
+      console.log(`\n  🎲 FLEX_SAMPLE=random:${n} — sampling ${sampled.length} location(s) this run:\n    ${picked.join('\n    ')}\n    (reproduce a finding by pinning FLEX_CUSTOM_URL=<url>)\n`);
+      return sampled;
+    }
+  }
+
   let base = FACILITIES.filter(f => f.env === env);
   if (clients.length > 0) base = base.filter(f => clients.includes(f.client.toLowerCase()));
   if (filter.length > 0) base = base.filter(f => filter.includes(f.id));
@@ -244,6 +300,7 @@ export function clientForUrl(url: string): string {
   try { host = new URL(url).hostname.toLowerCase(); } catch { return 'default'; }
   if (host.includes('minimallstorage') || host.includes('mini-mall')) return 'minimall';
   if (host.includes('safeguard')) return 'safeguard';
+  if (host.includes('storagestar')) return 'storagestar';
   return hostBrand(url);
 }
 
@@ -270,9 +327,12 @@ export function detectTemplate(url: string): { client: string; template: Templat
   return { client, template, features: template === 'minimall' ? MINIMALL_FEATURES : ALL_FEATURES };
 }
 
-/** Feature set for a custom URL's client — Mini Mall gets its extra sections. */
+/** Feature set for a custom/sampled URL's client. Mini Mall gets its extra
+ *  sections; Storage Star is the standard template PLUS the SEO copy block. */
 function featuresForClient(client: string): typeof MINIMALL_FEATURES | typeof ALL_FEATURES {
-  return client === 'minimall' ? MINIMALL_FEATURES : ALL_FEATURES;
+  if (client === 'minimall') return MINIMALL_FEATURES;
+  if (client === 'storagestar') return { ...ALL_FEATURES, hasSeo: true };
+  return ALL_FEATURES;
 }
 
 function slugForUrl(url: string): string {

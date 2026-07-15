@@ -96,7 +96,7 @@ export const SINGLE_PAGE_RENT_URLS = {
     'https://purelystorage.com/storage-units/washington/pasco/north-road-44',                       // Purely         | storEDGE
     'https://www.yourwaystorage.com/storage-units/georgia/augusta/walton-way-ext',                  // YourWay        | SSM
     'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',               // Red Rocks      | SiteLink
-    'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',           // Storage Star   | SSM
+    //'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',         // Storage Star | SSM — MOVED TO FLEX: prod runs from the Flex card (client "storagestar"); staging above still runs legacy SPC.
     'https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road',                       // Smart Ohio     | SSM
     'https://www.storsafe.com/storage-units/florida/melbourne/north-highway-1',                     // Storsafe       | storEDGE
     'https://www.easystopstorage.com/storage-units/texas/bushland/south-fm-2381',                   // Easy Stop      | SiteLink
@@ -124,7 +124,7 @@ export const SINGLE_PAGE_FMS_PLATFORM: Record<string, string> = CURRENT_ENVIRONM
   'https://purelystorage.com/storage-units/washington/pasco/north-road-44':                    'storEDGE',
   'https://www.yourwaystorage.com/storage-units/georgia/augusta/walton-way-ext':               'SSM',
   'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue':            'SiteLink',
-  'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive':        'SSM',
+  //'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive':      'SSM',  // Storage Star — prod moved to Flex
   'https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road':                   'SSM',
   'https://www.storsafe.com/storage-units/florida/melbourne/north-highway-1':                  'storEDGE',
   'https://www.easystopstorage.com/storage-units/texas/bushland/south-fm-2381':                'SiteLink',
@@ -151,7 +151,7 @@ export const CAPTCHA_CUSTOMER_URLS: string[] = CURRENT_ENVIRONMENT === Environme
   'https://purelystorage.com/storage-units/washington/pasco/north-road-44',                    // Purely
   'https://www.yourwaystorage.com/storage-units/georgia/augusta/walton-way-ext',               // YourWay
   'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',            // Red Rocks
-  'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',        // Storage Star
+  //'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',      // Storage Star — prod moved to Flex (no legacy prod captcha entry needed)
   'https://smartstorageohio.com/storage-units/ohio/macedonia/bavaria-road',                   // Smart Ohio
   //'https://www.storsafe.com/storage-units/florida/melbourne/north-highway-1',                // Storsafe (disabled)
 ];

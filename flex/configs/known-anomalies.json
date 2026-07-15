@@ -1,0 +1,40 @@
+{
+  "_comment": "Curated, COMMITTED list of anomalies the team has triaged. Matched by client+code (context ignored; '*' = any). An acknowledged anomaly is reported as INFO (never fails the run), so the Flex run converges to clean as known quirks are added here. Only humans edit this file — the suite never auto-suppresses a real bug. See flex/configs/anomalyPolicy.ts.",
+  "acknowledged": [
+    {
+      "client": "storagestar",
+      "code": "extreme-dimensions",
+      "source": "fms",
+      "status": "known-fms",
+      "note": "Storage Star exposes warehouse-sized 'units' straight from the SSM FMS feed (e.g. 20'x141', 201'x106' at the Avon CO location). Legacy shows the same values — Storagely does not author unit dimensions. Not a product bug; FMS/ops data cleanup."
+    },
+    {
+      "client": "storagestar",
+      "code": "zero-price",
+      "source": "fms",
+      "status": "known-fms",
+      "note": "Some Storage Star units show a $0/mo web rate straight from the FMS feed (Avon CO). Legacy shows the same. FMS/ops data issue, not a Storagely binding bug."
+    },
+    {
+      "client": "storagestar",
+      "code": "extreme-price",
+      "source": "fms",
+      "status": "known-fms",
+      "note": "Storage Star's mis-configured warehouse units carry ~$5k-6k/mo standard rates from the FMS. Same root cause as extreme-dimensions."
+    },
+    {
+      "client": "storagestar",
+      "code": "price-outlier",
+      "source": "fms",
+      "status": "known-fms",
+      "note": "The same FMS-mis-configured warehouse units also read as statistical price outliers (rate far above the median). Same root cause; acknowledged so the run converges. Remove this entry if you want a NEW Storage Star outlier to stand out again."
+    },
+    {
+      "client": "storagestar",
+      "code": "price-inversion",
+      "source": "fms",
+      "status": "reported",
+      "note": "On a couple of units the WEB rate exceeds the struck STANDARD rate (Marco Island 5x5 $40>$38, 10x10 $158>$149). Reported to the team 2026-07-14; rates originate in the FMS."
+    }
+  ]
+}

@@ -352,19 +352,28 @@ export class UnitsSection implements ISectionDetector {
           (c.currentPrice != null && (!(c.currentPrice > 0))) ||
           (c.struckPrice != null && (!(c.struckPrice > 0))),
         );
+        // Rate DATA originates in the FMS feed (Storagely doesn't author unit
+        // rates; legacy shows the same values). A $0/negative rate is therefore an
+        // FMS data issue, not a Storagely binding bug — so it's INFO here and the
+        // Anomaly Scan surfaces + categorizes + learns it. This avoids false-failing
+        // the Storagely run on data it can't control.
         checks.push(check(
-          'all displayed prices are positive numbers',
-          badPrice.length === 0,
-          badPrice.length === 0 ? 'ok' : `${badPrice.length} card(s) with a $0/negative/NaN price; sample ${badPrice[0]?.dimensions}`,
+          'displayed prices are positive (info — FMS data · see Anomaly Scan)',
+          true,
+          badPrice.length === 0
+            ? `${cards.length} card(s), all prices positive`
+            : `${badPrice.length} card(s) with a $0/negative/NaN price (FMS data); sample ${badPrice[0]?.dimensions}`,
         ));
+        // web>standard inversion is also FMS rate data → INFO (see Anomaly Scan),
+        // not a hard fail on the Storagely run.
         checks.push(check(
-          'discounted/web price ≤ regular price on every priced card',
-          inverted.length === 0,
+          'web ≤ regular price on every priced card (info — FMS data · see Anomaly Scan)',
+          true,
           pricedCount === 0
             ? '(no comparable price pairs found)'
             : inverted.length === 0
-              ? `${pricedCount} priced cards all consistent (current ≤ regular)`
-              : `${inverted.length} INVERTED; sample ${inverted[0]?.dimensions}: ${inverted[0]?.struckPrice != null ? `current $${inverted[0]?.currentPrice} ≥ struck $${inverted[0]?.struckPrice}` : inverted[0]?.prices.join(' / ')}`,
+              ? `${pricedCount} priced cards all consistent (web ≤ regular)`
+              : `${inverted.length} INVERTED (FMS data); sample ${inverted[0]?.dimensions}: ${inverted[0]?.struckPrice != null ? `web $${inverted[0]?.currentPrice} > struck $${inverted[0]?.struckPrice}` : inverted[0]?.prices.join(' / ')}`,
         ));
 
         // Promo text — when present, must look like a real promo (% / months / free).

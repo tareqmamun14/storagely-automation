@@ -2,6 +2,7 @@
 // Login page for Data Sync tests - independent POM, no dependency on existing files
 
 import { Page, expect } from '@playwright/test';
+import { dismissMarketingModal } from '../utils/dismissMarketingModal';
 
 const STAGE_GOTO_TIMEOUT = 120_000;     // 2 min — stage server can be very slow
 const STAGE_REDIRECT_TIMEOUT = 120_000; // 2 min — login redirect can lag
@@ -96,6 +97,9 @@ export class DataSyncLoginPage {
     } catch {
       console.log('⚠️ waitForLoadState timed out after login — continuing (URL is correct)');
     }
+    // Close the post-login "Manifesto" marketing modal before the corp-code /
+    // integrations steps run — it overlays the dashboard and blocks clicks.
+    await dismissMarketingModal(this.page);
     console.log('✅ Stage login successful');
   }
 
@@ -136,6 +140,8 @@ export class DataSyncLoginPage {
     }
     await this.page.waitForLoadState('domcontentloaded', { timeout: 30_000 }).catch(() => {});
     await this.waitForGlobalLoader();
+    // Close the post-login "Manifesto" marketing modal before any post-login steps.
+    await dismissMarketingModal(this.page);
     console.log('✅ Prod login successful');
   }
 }

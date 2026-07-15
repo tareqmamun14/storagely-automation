@@ -26,7 +26,9 @@ import { getAllFacilities, FlexFacility } from '../../configs/facilities';
 import { getEnabledSections } from '../../configs/sections';
 import { sectionPassed } from '../../pages/sections/types';
 import { getClientProfile, getRentHandoff } from '../../configs/profiles';
+import { applyKnownIssueGate } from '../../configs/issueDb';
 import { YardiCheckoutStartPage } from '../../pages/YardiCheckoutStartPage';
+import { SpcCheckoutEntryPage } from '../../pages/SpcCheckoutEntryPage';
 import { RentalDetailsPageSinglePage } from '../../../pages/RentalDetailsPage_SPC';
 import { MiniMallRentalPage } from '../../../pages/MiniMallRentalPage';
 import { SINGLE_PAGE_USER } from '../../../configs/credentials';
@@ -45,6 +47,21 @@ function layerOn(name: 'health' | 'sections' | 'rent'): boolean {
   return LAYERS.includes(name);
 }
 
+// ── Rent-flow depth — FLEX_RENT_MODE=full|handshake ────────────
+// 'handshake' (autonomous-safe): click Rent → verify the checkout ENTRY
+//   rendered with the right unit context → STOP. No form fill, no manual
+//   captcha, no submits against a live FMS — safe to run unattended against
+//   PRODUCTION on every regression, so reserve+rent coverage never gets skipped.
+// 'full' (user-present): drive the checkout to submit (SPC test-card decline /
+//   Yardi rent-outcome fetch), pausing for manual captcha where gated.
+// Default: production → handshake, test/stage → full (captcha-free there).
+type RentMode = 'full' | 'handshake';
+function resolveRentMode(env: string): RentMode {
+  const raw = (process.env.FLEX_RENT_MODE || '').trim().toLowerCase();
+  if (raw === 'full' || raw === 'handshake') return raw;
+  return env === 'production' ? 'handshake' : 'full';
+}
+
 // ── Per-client SPC config ───────────────────────────────────────
 interface ClientSpcConfig {
   addons: string[];
@@ -58,6 +75,15 @@ const SPC_CONFIG_BY_CLIENT: Record<string, ClientSpcConfig> = {
     captchaAtRentNow: true,
     captchaAtStepFour: false,
     discountTimingOptions: ['This Month', 'Next Month'],
+  },
+  // Storage Star — same standard /step-four SPC checkout as Safeguard. Prod SPC
+  // gates the RENT NOW submit behind a manual hCaptcha (user solves it), so the
+  // journey removes its timeout. Add-ons / discount-timing are Safeguard-specific
+  // chrome, so left empty here (the SPC form fill handles an empty add-on list).
+  storagestar: {
+    addons: [],
+    captchaAtRentNow: true,
+    captchaAtStepFour: false,
   },
 };
 function spcConfigFor(facility: FlexFacility): ClientSpcConfig {
@@ -74,7 +100,10 @@ test.describe('Flex Facility Journey', () => {
 
   for (const facility of facilities) {
     const cfg = spcConfigFor(facility);
-    const hasCaptcha = cfg.captchaAtRentNow || cfg.captchaAtStepFour || getRentHandoff(facility.client).manualCaptcha;
+    const rentMode = resolveRentMode(facility.env);
+    // Handshake mode never reaches a captcha, so the normal timeout applies.
+    const hasCaptcha = rentMode === 'full' &&
+      (cfg.captchaAtRentNow || cfg.captchaAtStepFour || getRentHandoff(facility.client).manualCaptcha);
 
     test(`${facility.name} — full journey`, async ({ page }) => {
       test.setTimeout(hasCaptcha ? 0 : 8 * 60_000);
@@ -189,6 +218,13 @@ test.describe('Flex Facility Journey', () => {
           collector.check('Resource/analytics/3rd-party console (info)', true,
             `resource-errors=${audit.resourceErr.length}, analytics=${audit.analytics.length}, third-party=${audit.thirdParty.length}`);
 
+          // Known-issue gate: triaged issues (informed / acknowledged /
+          // false-flag in flex/issue-db/issues.json) demote to tagged info —
+          // a red journey always means something NEW.
+          const demotedHealth = applyKnownIssueGate(facility.client, 'health', collector.activeChecks);
+          if (demotedHealth.length) {
+            console.log(`  ⚑ known-issue gate (health): ${demotedHealth.map(d => `${d.name} → ${d.status} #${d.issueId}`).join(' · ')}`);
+          }
           for (const ck of collector.activeChecks) {
             if (!ck.passed) expect.soft(false, `Health: ${ck.name} — ${ck.detail}`).toBe(true);
           }
@@ -215,6 +251,16 @@ test.describe('Flex Facility Journey', () => {
             facilityId: facility.id, facilityName: facility.name, url: facility.url,
             client: facility.client,
           }, ids);
+
+          // Known-issue gate (per section-check): triaged issues demote to
+          // tagged info BEFORE section pass/fail is computed — red = NEW only.
+          const demotedSec: string[] = [];
+          for (const r of results) {
+            for (const d of applyKnownIssueGate(facility.client, r.sectionId, r.checks)) {
+              demotedSec.push(`${r.sectionId}: ${d.name} → ${d.status} #${d.issueId}`);
+            }
+          }
+          if (demotedSec.length) console.log(`  ⚑ known-issue gate (sections): ${demotedSec.join(' · ')}`);
 
           collector.addSectionResults(results, sectionLabels);
 
@@ -255,13 +301,40 @@ test.describe('Flex Facility Journey', () => {
 
           const handoff = getRentHandoff(facility.client);
 
-          // Safeguard's Rent CTA is uniquely "Rent Now"; Mini Mall's link reads
-          // "Rent" (which also matches a #-only top-nav "Rent Unit"), so target
-          // the Mini Mall link by its checkout href to be safe.
-          const rentLink = handoff.drivesSpcForm
-            ? page.getByRole('link', { name: /rent now/i }).first()
-            : page.locator(`a[href*="${handoff.hrefContains}"]`).first();
-          await rentLink.scrollIntoViewIfNeeded({ timeout: 10_000 });
+          // Locate the card's REAL Rent CTA by its checkout href — robust across
+          // link-text differences ("Rent Now" on Safeguard, "Rent" on Storage Star
+          // / Mini Mall) and both handoffs (/step-four, /yardi/start). The href is
+          // the contract; a stray top-nav "Rent Online/Unit" link never carries it.
+          //
+          // EXCLUDE aria-hidden anchors: Storage Star (and other standard-template
+          // cards) wrap each unit in an invisible full-card click overlay —
+          // `<a aria-hidden="true" tabindex="-1" class="absolute inset-0" …same href>`
+          // — layered ON TOP of the visible "Rent" button. A plain .first() hits
+          // that overlay, not the button (unreliable click → sometimes the SPA
+          // routes to /storage-units-near-me instead of checkout). Dropping the
+          // aria-hidden overlay leaves the actual, visible Rent CTA.
+          // Pick the first ACTIONABLE Rent CTA, not the first in DOM order:
+          // Mini Mall renders units in AUTO-ROTATING carousels, so the first
+          // matching link can sit on a slide that never becomes "stable" —
+          // scrollIntoViewIfNeeded then times out (observed: Birmingham).
+          // Probe candidates in order with a short stability budget and take
+          // the first that settles; fall back to a raw DOM scroll on the first.
+          const rentCandidates = page.locator(`a[href*="${handoff.hrefContains}"]:not([aria-hidden="true"])`);
+          const candidateCount = Math.min(await rentCandidates.count(), 12);
+          let rentLink = rentCandidates.first();
+          let anchored = false;
+          for (let i = 0; i < candidateCount && !anchored; i++) {
+            const cand = rentCandidates.nth(i);
+            if (!(await cand.isVisible().catch(() => false))) continue;
+            try {
+              await cand.scrollIntoViewIfNeeded({ timeout: 2500 });
+              rentLink = cand;
+              anchored = true;
+            } catch { /* unstable (rotating slide) — try the next candidate */ }
+          }
+          if (!anchored) {
+            await rentLink.evaluate(el => el.scrollIntoView({ block: 'center', inline: 'center' })).catch(() => {});
+          }
           await page.waitForTimeout(300);
           const beforeUrl = page.url();
           await rentLink.click({ timeout: 15_000 });
@@ -286,7 +359,26 @@ test.describe('Flex Facility Journey', () => {
           await page.waitForLoadState('networkidle', { timeout: 30_000 }).catch(() => {});
           collector.check(`Navigate to ${handoff.label}`, true, page.url());
 
-          if (handoff.drivesSpcForm) {
+          if (rentMode === 'handshake') {
+            // ── HANDSHAKE (autonomous-safe): verify the checkout ENTRY carries
+            // the right rental context, then STOP — no form fill, no captcha,
+            // no submit against the live FMS. FLEX_RENT_MODE=full (or the
+            // panel's "Full checkout" depth) drives the checkout to submit.
+            const entry = handoff.drivesSpcForm
+              ? await new SpcCheckoutEntryPage(page).verifyHandoff(facility.expectedHeading, handoff)
+              : await new YardiCheckoutStartPage(page).verifyHandoff(facility.expectedHeading);
+            for (const c of entry.checks) {
+              collector.check(c.name, c.passed, c.detail,
+                c.passed ? undefined : `Inspect the ${handoff.label} checkout entry page`);
+            }
+            const demotedRent = applyKnownIssueGate(facility.client, 'rent', collector.activeChecks);
+            if (demotedRent.length) {
+              console.log(`  ⚑ known-issue gate (rent): ${demotedRent.map(d => `${d.name} → ${d.status} #${d.issueId}`).join(' · ')}`);
+            }
+            for (const c of collector.activeChecks) {
+              if (!c.passed) expect.soft(false, `Rent handshake: ${c.name} — ${c.detail}`).toBe(true);
+            }
+          } else if (handoff.drivesSpcForm) {
           // ── Safeguard: drive the on-page V2 SPC form to submit ──
           const spcForm = new RentalDetailsPageSinglePage(page);
           await spcForm.fillCompleteSinglePageForm({

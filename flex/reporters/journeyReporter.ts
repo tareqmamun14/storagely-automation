@@ -22,6 +22,13 @@ export interface StepCheck {
   detail?: string;
   /** Where to look on the live page if this check failed. */
   inspectHint?: string;
+  /**
+   * Section entries only: the granular per-check results inside the section.
+   * Carried into the JSON artifact so the control panel's Issues dashboard can
+   * aggregate at check level (signatures, known-issue tags, exploratory
+   * FINDINGs) instead of parsing detail strings.
+   */
+  sub?: Array<{ name: string; passed: boolean; detail?: string }>;
 }
 
 export interface JourneyStep {
@@ -95,11 +102,16 @@ export class JourneyCollector {
       const countsLabel = `${passedCount}/${totalCount} checks`;
       const label = sectionLabels?.[r.sectionId] || r.sectionId;
 
+      // Granular per-check results ride along into the JSON artifact (the
+      // panel dashboard aggregates at check level; terminal/MD are unchanged).
+      const sub = r.checks.map(c => ({ name: c.name, passed: c.passed, detail: c.detail }));
+
       if (ok) {
         this.active.checks.push({
           name: r.sectionId,
           passed: true,
           detail: findings ? `${countsLabel}  •  ${findings}` : countsLabel,
+          sub,
         });
       } else {
         const failures = r.checks.filter(c => !c.passed);
@@ -111,6 +123,7 @@ export class JourneyCollector {
           passed: false,
           detail: `${countsLabel}  •  FAILED: ${failDetail}`,
           inspectHint: `Inspect the "${label}" section on the facility page`,
+          sub,
         });
       }
     }

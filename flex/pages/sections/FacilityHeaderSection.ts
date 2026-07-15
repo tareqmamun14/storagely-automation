@@ -52,11 +52,17 @@ export class FacilityHeaderSection implements ISectionDetector {
         checks.push(check('rating block parseable', false, 'no rating/review pattern detected in body text'));
       }
 
-      // Office hours + access hours buttons — they show truncated day-of-week label.
+      // Office hours + access hours — the label WORDING varies by template:
+      //   • Carroll / Safeguard render "Office:" / "Access:"  (colon)
+      //   • Birmingham renders "Office Hours" / "Access Hours" (the word "Hours",
+      //     no colon) — e.g. "Office Hours Wed: 8:30am – 5:30pm".
+      // Match BOTH forms so a legit "Office Hours" label isn't false-flagged as
+      // "no hours-labeled element". (verified live on all three.)
       const hoursTexts = await page.evaluate(() => {
+        const HOURS_LABEL = /\b(office|access)\s*(?:hours\b|[:\n])/i;
         const all = Array.from(document.querySelectorAll<HTMLElement>('button, span, div'))
           .map(el => el.innerText?.trim() || '')
-          .filter(t => /office\s*[:\n]/i.test(t) || /access\s*[:\n]/i.test(t))
+          .filter(t => HOURS_LABEL.test(t))
           .filter(t => t.length < 60);
         return Array.from(new Set(all));
       });
