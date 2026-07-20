@@ -5,6 +5,9 @@ const AUTH_FILE = path.join(__dirname, 'fixtures', 'auth', 'editor.json');
 
 export default defineConfig({
   testDir: './tests',
+  // Pins one random seed per run so FLEX_SAMPLE picks identical locations in
+  // the runner AND every worker process (test titles must match everywhere).
+  globalSetup: require.resolve('./global-setup'),
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: 1,

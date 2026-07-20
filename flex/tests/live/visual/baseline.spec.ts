@@ -31,7 +31,9 @@
 import { test, expect, Page } from '@playwright/test';
 import { getAllFacilities } from '../../../configs/facilities';
 
-const facilities = getAllFacilities();
+// Snapshots are keyed per facility id — the target pages must be STABLE, so
+// skip run-to-run dynamic selection (rotation / FLEX_SAMPLE) here.
+const facilities = getAllFacilities({ noDynamic: true });
 
 // Sensible defaults for "image content has changed meaningfully" detection.
 // Looser than Playwright's defaults so CDN re-encoding doesn't trigger flake;

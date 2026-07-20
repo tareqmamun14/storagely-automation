@@ -61,6 +61,13 @@ export interface SectionContext {
    * baseline, so existing single-client behavior is preserved.
    */
   client: string;
+  /**
+   * THIS PAGE's checkout handoff, resolved from the live DOM by the caller
+   * (LiveFacilityPage.resolveRentHandoff). Mixed-FMS clients hand off
+   * differently per location (Mini Mall: Yardi vs SiteLink pages), so
+   * detectors must prefer this over the client profile's static default.
+   */
+  handoff?: import('../../configs/profiles').RentHandoff;
 }
 
 /** Roll all sub-checks up into a pass/fail. */

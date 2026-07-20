@@ -40,4 +40,4 @@ Remind the user to push at the end of a task.
 - Suites: `npm run run:v1 | run:spc | run:uic | run:admin | run:datasync | run:minimall | run:allpages`
 - Flex: `npm run run:flex*` (see `package.json`)
 - Single file: `npx playwright test <file> --project=chrome --headed`
-- Control panel (toggles instead of flags): `npm run panel` → http://localhost:5173
+- 🛰️ **Storagely Regression Control Panel** (launch toggles · issue triage dashboard · live console): `npm run panel` → http://localhost:5173

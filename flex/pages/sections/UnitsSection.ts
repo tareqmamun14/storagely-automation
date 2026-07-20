@@ -30,7 +30,7 @@ export class UnitsSection implements ISectionDetector {
     const data: Record<string, unknown> = {};
 
     try {
-      const handoff = getRentHandoff(ctx.client);
+      const handoff = ctx.handoff ?? getRentHandoff(ctx.client);
 
       // Wait until at least one Rent CTA appears — guards against lazy-rendered grids.
       await page.getByRole('link', { name: handoff.rentLinkText }).first()

@@ -17,7 +17,7 @@
  *    Flex post-release regression runs against these, same as V1/V2 prod runs.
  *  - 'test'       — the Flex test/stage domain (*.test.getstoragely.com).
  */
-import { getLocationPool, sampleSize, samplePool } from './locationPool';
+import { getLocationPool, sampleSize, samplePool, readRunRotation } from './locationPool';
 
 export type FlexEnv = 'production' | 'test';
 
@@ -139,7 +139,10 @@ export const FACILITIES: FlexFacility[] = [
     client: 'storagestar',
     env: 'production',
     url: 'https://www.storagestar.com/storage-units/florida/marco-island/east-elkcam-circle',
-    expectedTitle: /self storage.*marco island|marco island.*storage|storage star/i,
+    // Title must name STORAGE + the location; brand/promo wording varies
+    // (observed 2026-07-20: "…Marco Island | $1 Move In" promo title replaced
+    // "…| Storage Star"). Both old and promo titles satisfy storage+location.
+    expectedTitle: /storage.*(marco island|elkcam)|(marco island|elkcam).*storage/i,
     expectedHeading: /storage star|elkcam|marco island/i,
     features: { ...ALL_FEATURES, hasSeo: true },
   },
@@ -200,7 +203,14 @@ export function getSelectedFlexEnv(): FlexEnv {
  *     profile + sections, so the SAME tests run). When a custom URL is given we
  *     run ONLY those URLs — "test exactly what I pasted" — not the registry.
  */
-export function getAllFacilities(): FlexFacility[] {
+export function getAllFacilities(opts: {
+  /**
+   * Skip run-to-run DYNAMIC selection (rotation + FLEX_SAMPLE) and use the
+   * stable registry rows. For specs keyed per facility id — e.g. visual
+   * baselines, whose snapshots must always target the same pages.
+   */
+  noDynamic?: boolean;
+} = {}): FlexFacility[] {
   const env = getSelectedFlexEnv();
   const filter = (process.env.FLEX_FACILITY_FILTER || '').split(',').map(s => s.trim()).filter(Boolean);
 
@@ -235,7 +245,7 @@ export function getAllFacilities(): FlexFacility[] {
   // investigation/retry always hits the same page. Picks are made ONCE here and
   // reused for the whole run, so Playwright retries never re-sample.
   const pinned = filter.length > 0;
-  const n = sampleSize(pinned);
+  const n = opts.noDynamic ? null : sampleSize(pinned);
   if (n != null && env === 'production') {
     const selectedClients = clients.length ? clients : getClients().map(c => c.toLowerCase());
     const sampled: FlexFacility[] = [];
@@ -265,10 +275,61 @@ export function getAllFacilities(): FlexFacility[] {
     }
   }
 
+  // ── Rotating single-location regression (the DEFAULT prod cadence) ────────
+  // One location per client per run: fast regressions, and successive runs
+  // advance through each client's CURATED rotation list (registry rows +
+  // committed seed pool — never the unvetted discovered cache), so coverage
+  // spreads across locations run over run. The pick is pinned ONCE per run by
+  // flex/global-setup.ts (test-results/run-rotation.json) so every worker and
+  // retry agrees on the same page. Skipped when the run pins locations
+  // (filter/custom URL), when FLEX_ROTATE=off (→ every registry row, the old
+  // behavior), on the test env, and for noDynamic callers (visual baselines).
+  const rotationOn = !opts.noDynamic && !pinned && env === 'production'
+    && (process.env.FLEX_ROTATE || '').trim().toLowerCase() !== 'off';
+  if (rotationOn) {
+    const selectedClients = clients.length ? clients : getClients().map(c => c.toLowerCase());
+    const picks = readRunRotation();
+    const rotated: FlexFacility[] = [];
+    for (const client of selectedClients) {
+      const url = picks?.[client];
+      if (url) {
+        const registryRow = FACILITIES.find(f => f.env === env && f.url === url);
+        if (registryRow) { rotated.push(registryRow); continue; }
+        const c = clientForUrl(url);
+        rotated.push({
+          id: `rotation-${client}-${slugForUrl(url)}`,
+          name: `Rotation — ${labelForUrl(url)}`,
+          client: c, env, url,
+          expectedTitle: /.+/, expectedHeading: /.+/,
+          features: { ...featuresForClient(c) },
+        });
+      } else {
+        // No pinned pick (e.g. --list skips globalSetup): the client's first
+        // registry row is the stable anchor — still exactly one per client.
+        const anchor = FACILITIES.find(f => f.env === env && f.client.toLowerCase() === client);
+        if (anchor) rotated.push(anchor);
+      }
+    }
+    if (rotated.length) {
+      console.log(`\n  🔄 rotation — ONE location per client this run:\n    ${rotated.map(f => f.url).join('\n    ')}\n    (next regression advances to the next pooled location · FLEX_ROTATE=off = every registry row · pin with FLEX_CUSTOM_URL to investigate)\n`);
+      return rotated;
+    }
+  }
+
   let base = FACILITIES.filter(f => f.env === env);
   if (clients.length > 0) base = base.filter(f => clients.includes(f.client.toLowerCase()));
   if (filter.length > 0) base = base.filter(f => filter.includes(f.id));
   return base;
+}
+
+/** Registry URLs per client for an env — feeds the rotation list (see global-setup.ts). */
+export function registryUrlsByClient(env: FlexEnv): Record<string, string[]> {
+  const map: Record<string, string[]> = {};
+  for (const f of FACILITIES.filter(x => x.env === env)) {
+    const c = f.client.toLowerCase();
+    (map[c] = map[c] || []).push(f.url);
+  }
+  return map;
 }
 
 /** Distinct client slugs in the registry (for the control panel's per-client suites). */

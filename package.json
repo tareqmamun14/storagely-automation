@@ -30,6 +30,7 @@
     "run:flex:editor":   "npx playwright test --config=flex/playwright.config.ts --project=editor",
     "run:flex:e2e":      "npx playwright test --config=flex/playwright.config.ts --project=live tests/e2e/",
     "run:flex:health":   "npx playwright test --config=flex/playwright.config.ts --project=live tests/live/",
+    "run:flex:discover": "node flex/scripts/discover-locations.js",
     "run:flex:sections":      "npx playwright test --config=flex/playwright.config.ts --project=live --grep \"Flex . All Sections\"",
     "run:flex:sections:each": "npx playwright test --config=flex/playwright.config.ts --project=live --grep \"Section:\"",
     "run:flex:visual":         "npx playwright test --config=flex/playwright.config.ts --project=live --grep \"Visual baseline\"",

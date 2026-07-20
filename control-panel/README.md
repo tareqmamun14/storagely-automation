@@ -1,7 +1,17 @@
-# Storagely Test Control Panel
+# 🛰️ Storagely — Regression Control Panel
 
-A local, zero-dependency web UI to run the Playwright tests with toggles instead
-of editing config files or remembering CLI commands.
+A local, zero-dependency web UI that is the single command center for the whole
+regression system: launch any suite with toggles instead of CLI flags, watch
+runs stream live, and triage findings in the built-in Issues & Coverage
+dashboard (backed by the committed `flex/issue-db/issues.json`).
+
+Three views, one topbar (▶ Run / ■ Stop always available):
+
+| View | What lives there |
+|---|---|
+| 🚀 **Launch** | Environment, global options, every suite (Flex pipeline first: journey steps, checkout depth, 🔄 rotation, random sampling, 🌐 sitemap pool growth, sections, clients, facilities, ad-hoc URL) + command preview |
+| 🐞 **Issues & Coverage** | Per-client issue triage (Informed / Acknowledge / False flag / Fixed, comments, Slack channel) + per-facility pass log from the latest journey reports — feeds the suite's known-issue gate |
+| 📟 **Live Console** | Streamed run output (auto-opens on ▶ Run) |
 
 ## Start it
 

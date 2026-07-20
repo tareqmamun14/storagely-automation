@@ -76,6 +76,58 @@ tagged info-passes — a RED journey always means something NEW. Statuses are
 managed in the control panel's 🐞 Issues & Coverage card (which also auto-files
 new failures + exploratory findings, per client). `fixed` re-arms the check.
 
+**Page-aware handoff (mixed-FMS clients).** A client profile's rent handoff is
+a DEFAULT, not a truth: Mini Mall has Yardi locations (`/yardi/start`) AND
+SiteLink locations (`/step-four`, e.g. Sainte-Thérèse QC) on Flex. The journey
+resolves each PAGE's real handoff from the live DOM
+(`LiveFacilityPage.resolveRentHandoff`) and passes it to health, sections
+(`ctx.handoff`), and the rent step. Sainte-Thérèse note: it's also a FRENCH
+template variant (fr-ca) — do NOT add it to rotation until a variant profile
+exists (its sections false-flag against the Mini Mall template expectations).
+
+**Sibling cross-check** (journey step 5, auto): when a NEW section failure
+survives the gate, the journey re-runs exactly those detectors on a sibling
+location of the same client and attaches a verdict — `SYSTEMIC` (sibling fails
+too → template/config-level) vs `PAGE-SPECIFIC` (sibling clean → local to this
+page). Info-only; `FLEX_SIBLING=off` disables.
+
+**Regression cadence — one location per client per run (rotation, DEFAULT).**
+A prod regression runs ONE location per client; the NEXT regression advances
+to the next location in the client's CURATED rotation list (registry rows +
+committed seeds in `configs/locationPool.ts` — never the unvetted discovered
+cache). Fast runs, coverage spreads run-over-run. The pick is advanced+pinned
+ONCE per run by `global-setup.ts` (`test-results/run-rotation.json` +
+`rotation-state.json`) so workers/retries agree. Overrides:
+- Pinning (`FLEX_CUSTOM_URL` / `FLEX_FACILITY_FILTER`, or unchecking 🔄 Rotate
+  in the panel) — investigations/verifications always hit the exact page.
+- `FLEX_ROTATE=off` — every registry row in one run (the old default).
+- `FLEX_SAMPLE=random[:N]` — wide sweep over the FULL pool incl. sitemap-
+  discovered URLs (`npm run run:flex:discover` / panel 🌐 button grows it;
+  robots.txt-aware). Sample picks are seed-pinned per run (`run-seed.json`).
+
+**Growing the FIXED test pool (graduation).** The source of truth is the live
+page DOM — fixed checks encode what we've LEARNED about it. The pool grows
+along this path, so nothing stays ad-hoc and nothing is duplicated:
+1. Exploratory probe FINDING → auto-filed as a `candidate` issue (dashboard).
+2. Triage: real + worth guarding → probe gets `alwaysRun: true` (runs every
+   journey, still info-only); bad probe → fix it (`false-flag` on the issue).
+3. Full graduation: port the logic into the owning section detector as a
+   hard-fail check, remove/retire the probe, note it on the issue.
+4. Discovered-URL graduation: a sitemap URL that proved healthy can be added
+   to the committed seed pool → it joins the default rotation.
+
+**Red-run TRIAGE PROTOCOL (script bug vs product bug).** A failure is only a
+product bug once the script is exonerated — never blame the page first:
+1. Read the journey report: the failing check's detail + the SIBLING verdict
+   (SYSTEMIC vs PAGE-SPECIFIC) + trace/screenshot artifacts.
+2. Verify the live DOM (Playwright MCP: navigate → snapshot → generate
+   locator) — is the element there but our selector/assumption stale?
+3. Script's fault → fix the detector NOW; mark the issue `false-flag` until
+   the fix lands (run stays green, dashboard shows "suite fix needed").
+4. Real product bug → `informed`/`acknowledged` (+ Slack channel, comment);
+   the gate keeps future runs green while the dashboard tracks it. When dev
+   ships the fix → `fixed` re-arms the check.
+
 The old layout (rent-journey + page-health + all-sections as separate specs)
 spawned ~13 browsers per facility and never ran the full rent flow — replaced.
 

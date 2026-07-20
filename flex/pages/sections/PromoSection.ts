@@ -68,14 +68,25 @@ export class PromoSection implements ISectionDetector {
         };
       });
       data.badges = badges;
+      // Per-card promo badges are PROMO-STYLE data, not template structure:
+      // weeks-free promos badge each unit card, "75% off first 8 weeks"-style
+      // banner promos often don't, and a location may run no promo at all
+      // (Elizabethton TN showed both realities within one week). Badge
+      // presence is therefore INFO — the HARD promo checks stay structural:
+      // banner image loads, token-free, rail labelled while active,
+      // pricing disclaimer present.
+      const promoActive = badges.freeBadgeCount >= 1 || badges.featured || badges.limited || !!banner;
       checks.push(check(
-        'at least one "Weeks Free" promo badge on a unit card',
-        badges.freeBadgeCount >= 1,
-        badges.freeBadgeCount ? `${badges.freeBadgeCount} badge(s), e.g. "${badges.freeBadge}"` : '(none)',
+        'per-card promo badges (info — promo-style dependent)',
+        true,
+        badges.freeBadgeCount
+          ? `${badges.freeBadgeCount} "Weeks Free" badge(s), e.g. "${badges.freeBadge}"`
+          : promoActive ? 'none — banner/rail-style promo without per-card badges'
+          : 'none — no active promos on this location',
       ));
       checks.push(check(
-        'Featured / Limited-time deal rail labelled',
-        badges.featured || badges.limited,
+        'Featured / Limited-time deal rail labelled' + (promoActive ? '' : ' (info — no active promos)'),
+        Boolean(badges.featured || badges.limited || !promoActive),
         `featured=${badges.featured}, limited-time=${badges.limited}`,
       ));
       // Low-stock badges are intermittent (depend on availability) — info only.

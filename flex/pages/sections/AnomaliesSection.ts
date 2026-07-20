@@ -32,7 +32,7 @@ export class AnomaliesSection implements ISectionDetector {
     const data: Record<string, unknown> = {};
 
     try {
-      const handoff = getRentHandoff(ctx.client);
+      const handoff = ctx.handoff ?? getRentHandoff(ctx.client);
 
       // ── Extract per-unit numbers (dims + web/standard rate) from the grid ──
       const facts = await page.evaluate(({ hrefContains }) => {

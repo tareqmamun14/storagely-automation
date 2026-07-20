@@ -1,6 +1,6 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { ISectionDetector, SectionContext, SectionResult, SECTION_DETECTORS, getDetector, settleImages } from './sections';
-import { getRentHandoff, RentHandoff } from '../configs/profiles';
+import { getRentHandoff, getHandoffCandidates, RentHandoff } from '../configs/profiles';
 
 /**
  * LiveFacilityPage — page object for a published Flex v4 facility page.
@@ -484,8 +484,31 @@ export class LiveFacilityPage {
    *   • Mini Mall           → /yardi/start?unit=<positive int>&type=rent
    * Passing no client falls back to the Safeguard contract (existing callers).
    */
-  static validateRentNowUrl(href: string, client?: string) {
-    const handoff = getRentHandoff(client);
+  /**
+   * Detect this PAGE's actual checkout handoff by probing the DOM. Mixed-FMS
+   * clients hand off differently per location (Mini Mall: Yardi locations →
+   * /yardi/start, SiteLink locations like Sainte-Thérèse QC → /step-four), so
+   * the client profile's handoff is only the default — whichever candidate
+   * actually has visible Rent anchors on the page wins.
+   */
+  async resolveRentHandoff(client?: string): Promise<RentHandoff> {
+    const candidates = getHandoffCandidates(client);
+    for (const h of candidates) {
+      const n = await this.page
+        .locator(`a[href*="${h.hrefContains}"]:not([aria-hidden="true"])`)
+        .count().catch(() => 0);
+      if (n > 0) {
+        if (h.hrefContains !== candidates[0].hrefContains) {
+          console.log(`  🧭 handoff detected from page DOM: ${h.label} (profile default: ${candidates[0].label})`);
+        }
+        return h;
+      }
+    }
+    return candidates[0]; // no rent anchors at all — downstream checks report it
+  }
+
+  static validateRentNowUrl(href: string, client?: string, handoffOverride?: RentHandoff) {
+    const handoff = handoffOverride ?? getRentHandoff(client);
     const url = new URL(href);
     expect(url.pathname, `Rent handoff path should match ${handoff.label}`).toMatch(handoff.pathPattern);
     const unitId = url.searchParams.get(handoff.unitParam);

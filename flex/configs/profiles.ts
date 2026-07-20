@@ -198,3 +198,21 @@ export function getClientProfile(client: string | undefined): ClientProfile {
 export function getRentHandoff(client: string | undefined): RentHandoff {
   return getClientProfile(client).rentHandoff;
 }
+
+/**
+ * All known handoff shapes, the client's profile default FIRST. A client's
+ * profile handoff is a DEFAULT, not a truth: mixed-FMS clients exist (Mini
+ * Mall has Yardi locations on /yardi/start AND SiteLink locations on
+ * /step-four, both on Flex). Page-aware code probes the live DOM against
+ * these candidates and uses whichever actually has Rent anchors — see
+ * LiveFacilityPage.resolveRentHandoff().
+ */
+export function getHandoffCandidates(client: string | undefined): RentHandoff[] {
+  const all = [
+    getRentHandoff(client),
+    DEFAULT_PROFILE.rentHandoff,          // V2 SPC /step-four
+    getClientProfile('minimall').rentHandoff, // Yardi v2 /yardi/start
+  ];
+  const seen = new Set<string>();
+  return all.filter(h => !seen.has(h.hrefContains) && Boolean(seen.add(h.hrefContains)));
+}

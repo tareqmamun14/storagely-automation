@@ -358,8 +358,14 @@ function buildRunCommand(req) {
   if (Array.isArray(req.flex?.sections) && req.flex.sections.length) {
     env.FLEX_SECTIONS = req.flex.sections.join(',');
   }
-  if (Array.isArray(req.flex?.facilities) && req.flex.facilities.length) {
-    env.FLEX_FACILITY_FILTER = req.flex.facilities.join(',');
+  // Rotate ON (panel default, or flag absent = old clients): one rotating
+  // location per client per run — the facilities list is NOT pinned. Rotate
+  // OFF: pin the checked facilities and disable suite-side rotation.
+  if (req.flex?.rotate === false) {
+    env.FLEX_ROTATE = 'off';
+    if (Array.isArray(req.flex?.facilities) && req.flex.facilities.length) {
+      env.FLEX_FACILITY_FILTER = req.flex.facilities.join(',');
+    }
   }
   // Rent-flow depth: 'handshake' = autonomous-safe checkout-entry verification
   // (no fill/captcha/submit); 'full' = drive the checkout to submit (manual
@@ -371,6 +377,9 @@ function buildRunCommand(req) {
   // Random location sampling — widen coverage on prod ("random", "random:3").
   // The suite force-disables it whenever a run pins facilities / a custom URL.
   if (req.flex?.sample) env.FLEX_SAMPLE = String(req.flex.sample);
+  // Verification mode: force EXACT exploratory probe(s) — the Re-verify button
+  // uses this to confirm/refute a finding without touching probe rotation.
+  if (req.flex?.exploreForce) env.FLEX_EXPLORE_FORCE = String(req.flex.exploreForce);
 
   let suites = Array.isArray(req.suites) ? req.suites.slice() : [];
 
@@ -932,6 +941,16 @@ function coverageFromReport(rep, file) {
       }
     }
   }
+  // Sibling cross-check verdicts (SYSTEMIC vs PAGE-SPECIFIC) — surfaced so the
+  // dashboard + copy summaries can say whether a failure is template-level.
+  const verdicts = [];
+  for (const step of rep.steps || []) {
+    if (step.id !== 'sibling') continue;
+    for (const ck of step.checks || []) {
+      const vm = String(ck.name || '').match(/^verdict:\s*(.+)$/i);
+      if (vm) verdicts.push({ section: vm[1].trim(), detail: String(ck.detail || '').slice(0, 240) });
+    }
+  }
   return {
     facilityId: rep.facility && rep.facility.id,
     name: rep.facility && rep.facility.name,
@@ -939,7 +958,7 @@ function coverageFromReport(rep, file) {
     url: rep.facility && rep.facility.url,
     timestamp: rep.timestamp,
     durationMs: rep.totalDurationMs || 0,
-    steps, failing, known, anomalies, exploratory,
+    steps, failing, known, anomalies, exploratory, verdicts,
     reportFile: file,
   };
 }
@@ -1051,6 +1070,26 @@ const server = http.createServer((req, res) => {
   if (url === '/api/flex/issue-update' && req.method === 'POST') {
     return updateFlexIssue(req, res);
   }
+  // Full journey report for one facility (latest) — powers the detail modal.
+  if (url.startsWith('/api/flex/report') && req.method === 'GET') {
+    try {
+      const fid = new URL(url, 'http://x').searchParams.get('facilityId') || '';
+      const hit = latestJourneyReports().find(r => r.rep.facility && r.rep.facility.id === fid);
+      if (!hit) return send(res, 404, { error: `no report for facility "${fid}"` });
+      return send(res, 200, { report: hit.rep, file: hit.file });
+    } catch (e) { return send(res, 500, { error: String(e) }); }
+  }
+  // Grow the Flex location pools from each client's sitemap (robots.txt-aware).
+  // Writes flex/test-results/location-pools/<client>.json — the cache the
+  // suite's FLEX_SAMPLE random sampling reads.
+  if (url === '/api/flex/discover-locations' && req.method === 'POST') {
+    return (async () => {
+      try {
+        const { discoverAll } = require(path.join(ROOT, 'flex', 'scripts', 'discover-locations.js'));
+        send(res, 200, { results: await discoverAll() });
+      } catch (e) { send(res, 500, { error: String(e) }); }
+    })();
+  }
   // Saved corp codes (slug → code), used by Build Instance Regression so the
   // user doesn't have to re-paste passwords on every run.
   if (url === '/api/corp-codes' && req.method === 'GET') {
@@ -1085,7 +1124,7 @@ freePort(PORT);
 server.listen(PORT, () => {
   const url = `http://localhost:${PORT}`;
   console.log('');
-  console.log('  🎛️  Storagely Test Control Panel running at ' + url);
+  console.log('  🛰️  Storagely — Regression Control Panel running at ' + url);
   console.log('  (Ctrl+C to stop. Test output also streams here.)');
   console.log('');
   // Auto-open browser when not suppressed

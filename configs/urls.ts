@@ -401,7 +401,12 @@ export const MINI_MALL_RENTAL_URLS: Record<string, MiniMallRentalConfig[]> = {
     { url: 'https://test.staging.storagely-api.com/mini-mall-storage-yardi/storage-units/alabama/birmingham/richard-arrington-jr-blvd',              fms: 'Yardi',    label: '⭐ Mini Mall Yardi — Birmingham, AL' },
   ],
   [Environment.PRODUCTION]: [
-    { url: 'https://minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard',                                                          fms: 'SiteLink', label: '⭐ Mini Mall SiteLink — Sainte-Thérèse, QC' },
+    // MOVED TO FLEX (2026-07-17): Sainte-Thérèse QC prod is now a Flex v4 page
+    // (French-market template variant, /step-four SPC handoff) — the legacy
+    // SiteLink spec can't find its rent buttons ("No rent … buttons found",
+    // run-2026-07-16T20-21). Covered by the Flex journey via Ad-hoc URL until
+    // a Flex variant profile lands; staging entry above still works.
+    // { url: 'https://minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard',                                                       fms: 'SiteLink', label: '⭐ Mini Mall SiteLink — Sainte-Thérèse, QC' },
     { url: 'https://minimallstorage.com/storage-units/florida/deland/golf-club-drive',                                                fms: 'Yardi',    label: '⭐ Mini Mall Yardi — DeLand, FL' },
   ],
 };

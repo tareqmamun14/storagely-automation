@@ -37,6 +37,14 @@ export interface ExploratoryProbe {
   title: string;
   /** The industry rationale — WHY this matters on a storage location page. */
   why: string;
+  /**
+   * GRADUATION, step 1: a probe that proved its worth (caught a real issue /
+   * guards something important) runs on EVERY journey instead of rotating.
+   * Still info-only. Step 2 (full graduation) = port the logic into the
+   * relevant section detector as a hard-fail check and remove it here —
+   * that's how the FIXED test pool grows from exploratory findings.
+   */
+  alwaysRun?: boolean;
   run(page: Page, ctx: ProbeContext): Promise<ProbeResult>;
 }
 
@@ -220,10 +228,32 @@ export const EXPLORATORY_CATALOG: ExploratoryProbe[] = [
     title: '“From $X” teaser is honest',
     why: 'A “From $29” hero above units that start at $60 is a bait complaint (and often a stale cache).',
     async run(page, ctx) {
-      const body = await page.locator('body').innerText().catch(() => '');
-      const teaser = body.match(/(?:from|starting at)\s*\$\s*(\d[\d,]*(?:\.\d+)?)/i);
-      if (!teaser) return { finding: null, detail: 'no From-$ teaser rendered (n/a)' };
-      const t = parseFloat(teaser[1].replace(/,/g, ''));
+      // HERO-scoped only: unit CARDS legitimately carry their own
+      // "Starting at $X" (that price is unit-scoped, not a page claim) —
+      // observed false-positive on Mini Mall Carroll (2026-07-17). Only a
+      // teaser in the top-of-page hero region makes a page-level promise.
+      const teaser = await page.evaluate(() => {
+        for (const el of Array.from(document.querySelectorAll<HTMLElement>('h1, h2, h3, h4, p, span, div'))) {
+          if (el.childElementCount > 0) continue; // leaf text nodes only
+          const t = (el.innerText || '').trim();
+          const m = t.match(/(?:from|starting at)\s*\$\s*(\d[\d,]*(?:\.\d+)?)/i);
+          if (!m) continue;
+          // Skip prices INSIDE a unit card (ancestor holding dims + $) — those
+          // are unit-scoped, even when a featured card sits in the hero.
+          let anc = el.parentElement; let inCard = false;
+          for (let i = 0; i < 6 && anc; i++) {
+            const at = anc.innerText || '';
+            if (/\d{1,3}\s*['′]?\s*[x×]\s*\d{1,3}/.test(at) && at.includes('$')) { inCard = true; break; }
+            anc = anc.parentElement;
+          }
+          if (inCard) continue;
+          const top = el.getBoundingClientRect().top + window.scrollY;
+          if (top < 1200) return { amount: m[1], top: Math.round(top), text: t.slice(0, 60) };
+        }
+        return null;
+      });
+      if (!teaser) return { finding: null, detail: 'no page-level From-$ teaser in the hero region (per-card "Starting at" prices are unit-scoped — n/a)' };
+      const t = parseFloat(teaser.amount.replace(/,/g, ''));
       const rates = (await extractUnitCards(page, ctx.hrefContains)).map(c => c.rate).filter((r): r is number => r != null && r > 0);
       if (!rates.length) return { finding: null, detail: `teaser $${t} but no unit rates extracted (n/a)` };
       const min = Math.min(...rates);
@@ -295,6 +325,49 @@ export const EXPLORATORY_CATALOG: ExploratoryProbe[] = [
       return {
         finding: dups.length ? `duplicate meta tags: ${dups.map(([k, n]) => `${k}×${n}`).join(', ')}` : null,
         detail: `description×${r.desc} canonical×${r.canonical} og:title×${r.ogTitle}`,
+      };
+    },
+  },
+  {
+    id: 'section-order-integrity',
+    title: 'No content renders below the footer',
+    why: 'Real incidents (user-reported 2026-07-17): the Google-reviews section rendered UNDER the footer on Elizabethton TN and vanished on Etna OH. Any component drifting below the footer means the page composition broke.',
+    alwaysRun: true, // graduated immediately — user-reported bug class, applies to every client
+    async run(page) {
+      const r = await page.evaluate(() => {
+        const footer = (document.querySelector('footer') as HTMLElement | null)
+          || Array.from(document.querySelectorAll<HTMLElement>('[class*="footer" i]')).filter(e => e.offsetHeight > 60).pop()
+          || null;
+        if (!footer) return { hasFooter: false, offenders: [] as string[] };
+        // Everything AFTER the footer in document order: later siblings of the
+        // footer and of each of its ancestors.
+        const queue: Element[] = [];
+        let cur: Element | null = footer;
+        while (cur && cur.tagName !== 'HTML') {
+          let sib = cur.nextElementSibling;
+          while (sib) { queue.push(sib); sib = sib.nextElementSibling; }
+          cur = cur.parentElement;
+        }
+        const offenders: string[] = [];
+        for (const q of queue) {
+          const h = q as HTMLElement;
+          const st = getComputedStyle(h);
+          // Overlays that legitimately live after the footer (chat widgets,
+          // cookie banners) are fixed/sticky — only in-flow CONTENT counts.
+          if (st.position === 'fixed' || st.position === 'sticky' || st.display === 'none' || st.visibility === 'hidden') continue;
+          if (h.offsetHeight < 80) continue;
+          const text = (h.innerText || '').trim();
+          if (text.length < 40) continue;
+          offenders.push(`<${h.tagName.toLowerCase()}${h.className ? ' .' + String(h.className).split(' ')[0] : ''}> "${text.slice(0, 60)}…" (${h.offsetHeight}px tall)`);
+        }
+        return { hasFooter: true, offenders: offenders.slice(0, 3) };
+      });
+      if (!r.hasFooter) return { finding: null, detail: 'no footer element found (n/a — the footer detector owns that)' };
+      return {
+        finding: r.offenders.length
+          ? `${r.offenders.length} content block(s) render BELOW the footer: ${r.offenders.join(' · ')}`
+          : null,
+        detail: r.offenders.length ? 'page composition/order broke' : 'nothing renders below the footer',
       };
     },
   },

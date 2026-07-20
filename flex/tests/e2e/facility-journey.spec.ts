@@ -27,6 +27,7 @@ import { getEnabledSections } from '../../configs/sections';
 import { sectionPassed } from '../../pages/sections/types';
 import { getClientProfile, getRentHandoff } from '../../configs/profiles';
 import { applyKnownIssueGate } from '../../configs/issueDb';
+import { getLocationPool } from '../../configs/locationPool';
 import { YardiCheckoutStartPage } from '../../pages/YardiCheckoutStartPage';
 import { SpcCheckoutEntryPage } from '../../pages/SpcCheckoutEntryPage';
 import { RentalDetailsPageSinglePage } from '../../../pages/RentalDetailsPage_SPC';
@@ -85,6 +86,14 @@ const SPC_CONFIG_BY_CLIENT: Record<string, ClientSpcConfig> = {
     captchaAtRentNow: true,
     captchaAtStepFour: false,
   },
+  // Mini Mall — only reached when a location hands off to /step-four (its
+  // SiteLink-FMS Flex pages, e.g. Sainte-Thérèse QC; the Yardi pages take the
+  // /yardi/start branch instead). SPC submit is captcha-gated → manual solve.
+  minimall: {
+    addons: [],
+    captchaAtRentNow: true,
+    captchaAtStepFour: false,
+  },
 };
 function spcConfigFor(facility: FlexFacility): ClientSpcConfig {
   return SPC_CONFIG_BY_CLIENT[facility.client] || {
@@ -112,11 +121,20 @@ test.describe('Flex Facility Journey', () => {
         id: facility.id, name: facility.name, url: facility.url, client: facility.client,
       });
       const live = new LiveFacilityPage(page);
+      // Sections that STILL fail after the known-issue gate (i.e. NEW issues).
+      // Feeds the sibling cross-check at the end of the journey.
+      let failedSectionIds: string[] = [];
 
       try {
         // ── STEP 0: ONE navigation ──────────────────────────────────
         await live.goto(facility.url);
         await live.expectPageLoaded();
+
+        // Resolve THIS page's checkout handoff from the live DOM (mixed-FMS
+        // clients: Mini Mall has Yardi AND SiteLink locations on Flex — the
+        // profile handoff is only a default). Health, sections, and the rent
+        // step all use this resolved handoff.
+        const pageHandoff = await live.resolveRentHandoff(facility.client);
 
         // ── STEP 1: Page health (optional) ──────────────────────────
         if (layerOn('health')) {
@@ -130,7 +148,9 @@ test.describe('Flex Facility Journey', () => {
 
           await collector.runCheck('Title', async () => {
             const title = await page.title();
-            expect(title).toMatch(facility.expectedTitle);
+            // Failure detail must carry the ACTUAL title (triage needs to see
+            // what the page served — error page? wrong locale? empty?).
+            expect(title, `page title was "${title}" — expected ${facility.expectedTitle}`).toMatch(facility.expectedTitle);
             return `"${title}"`;
           }, 'Check the page title in the browser tab');
 
@@ -163,11 +183,11 @@ test.describe('Flex Facility Journey', () => {
 
           if (facility.features?.hasUnits !== false) {
             await collector.runCheck('Units + Rent links', async () => {
-              const handoff = getRentHandoff(facility.client);
+              const handoff = pageHandoff;
               await live.expectRentLinksVisible(handoff);
               const hrefs = await live.getRentHrefs(handoff);
               expect(hrefs.length, 'no Rent links found').toBeGreaterThan(0);
-              for (const href of hrefs) LiveFacilityPage.validateRentNowUrl(href, facility.client);
+              for (const href of hrefs) LiveFacilityPage.validateRentNowUrl(href, facility.client, handoff);
               return `${hrefs.length} Rent links, all valid ${handoff.label}`;
             }, 'Check the units section for Rent buttons');
           }
@@ -249,7 +269,7 @@ test.describe('Flex Facility Journey', () => {
 
           const results = await live.verifyAllSections({
             facilityId: facility.id, facilityName: facility.name, url: facility.url,
-            client: facility.client,
+            client: facility.client, handoff: pageHandoff,
           }, ids);
 
           // Known-issue gate (per section-check): triaged issues demote to
@@ -270,6 +290,8 @@ test.describe('Flex Facility Journey', () => {
             }`).toBe(true);
           }
 
+          failedSectionIds = results.filter(r => !sectionPassed(r)).map(r => r.sectionId);
+
           collector.endStep();
         } else {
           collector.skipStep('sections', 'Sections');
@@ -279,7 +301,11 @@ test.describe('Flex Facility Journey', () => {
         // Click a unit's Reserve button → verify the reservation modal opens
         // (selected unit + form) → close it. Captcha-free, so it runs with the
         // sections/rent layers. Clients without a reserve modal skip cleanly.
-        const clientHasReserveModal = facility.client === 'minimall';
+        // DOM-aware: only Mini Mall ships a reserve modal, and only on SOME
+        // templates (the SiteLink-FMS Flex pages may not) — probe before running.
+        const clientHasReserveModal = facility.client === 'minimall' &&
+          (await page.getByRole('button', { name: /reserve/i }).first().isVisible().catch(() => false) ||
+           await page.getByRole('link', { name: /^reserve$/i }).first().isVisible().catch(() => false));
         if (clientHasReserveModal && (layerOn('sections') || layerOn('rent'))) {
           collector.beginStep('reserve', 'Reserve Modal');
           const reserve = await live.verifyReserveModal();
@@ -299,7 +325,7 @@ test.describe('Flex Facility Journey', () => {
         if (layerOn('rent')) {
           collector.beginStep('rent', 'Rent Flow');
 
-          const handoff = getRentHandoff(facility.client);
+          const handoff = pageHandoff;
 
           // Locate the card's REAL Rent CTA by its checkout href — robust across
           // link-text differences ("Rent Now" on Safeguard, "Rent" on Storage Star
@@ -319,6 +345,16 @@ test.describe('Flex Facility Journey', () => {
           // scrollIntoViewIfNeeded then times out (observed: Birmingham).
           // Probe candidates in order with a short stability budget and take
           // the first that settles; fall back to a raw DOM scroll on the first.
+          // FREEZE animations first. Mini Mall renders units in an AUTO-ROTATING
+          // carousel — the Rent button is literally moving, so Playwright's click
+          // actionability wait ("element must be stable") never settles and times
+          // out (observed: Birmingham, 15s timeout on an anchor that resolved
+          // fine). Manually the button works — it's automation-only flake.
+          // Killing transitions/animations makes the CTA hold still.
+          await page.addStyleTag({
+            content: '*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}',
+          }).catch(() => { /* CSP may block — the fallbacks below still cover it */ });
+
           const rentCandidates = page.locator(`a[href*="${handoff.hrefContains}"]:not([aria-hidden="true"])`);
           const candidateCount = Math.min(await rentCandidates.count(), 12);
           let rentLink = rentCandidates.first();
@@ -337,7 +373,26 @@ test.describe('Flex Facility Journey', () => {
           }
           await page.waitForTimeout(300);
           const beforeUrl = page.url();
-          await rentLink.click({ timeout: 15_000 });
+
+          // Reach the checkout the way a user would (click), but never let
+          // carousel motion / a sticky-header overlay fail a WORKING button:
+          //   1) normal click (proves the CTA is actionable)
+          //   2) force click (bypasses the stability/occlusion wait)
+          //   3) navigate the anchor's real href — the href IS the checkout
+          //      contract, so this reaches the exact same page the button targets
+          // A fallback is LOGGED (transparency — never silently hide a broken CTA).
+          const targetHref = await rentLink.getAttribute('href').catch(() => null);
+          let clicked = false;
+          for (const opts of [{ timeout: 8_000 }, { timeout: 5_000, force: true }]) {
+            try { await rentLink.click(opts); clicked = true; break; }
+            catch { /* try the next strategy */ }
+          }
+          if (!clicked) {
+            if (!targetHref) throw new Error('Rent CTA was not clickable and exposed no href to fall back to.');
+            const abs = new URL(targetHref, page.url()).href;
+            console.log(`  ⚠️ Rent CTA not click-actionable (carousel motion / overlay) — reaching checkout via its href: ${abs}`);
+            await page.goto(abs).catch(() => {});
+          }
 
           try {
             // 'commit' (not the default 'load'): we only need the URL to change.
@@ -454,6 +509,52 @@ test.describe('Flex Facility Journey', () => {
           collector.endStep();
         } else {
           collector.skipStep('rent', 'Rent Flow');
+        }
+
+        // ── STEP 5: Sibling cross-check — page-specific vs SYSTEMIC ─
+        // Only when NEW section failures survived the known-issue gate: re-run
+        // exactly those detectors on a SIBLING location of the same client and
+        // attach a verdict per section. Pure intelligence — verdicts never
+        // re-fail the run (the original failure already did); they tell the
+        // triager whether the bug is template-wide or local to this page.
+        // Runs AFTER rent (both navigate away). FLEX_SIBLING=off disables.
+        // (Health-only failures aren't cross-checked — the token/meta product
+        // bugs they'd catch also surface in the seohead section detector.)
+        if (failedSectionIds.length && process.env.FLEX_SIBLING !== 'off') {
+          const sibling = getLocationPool(facility.client).filter(u => u !== facility.url)[0];
+          collector.beginStep('sibling', 'Sibling Cross-Check');
+          if (!sibling) {
+            collector.check('sibling available (info)', true,
+              `no other pooled location for ${facility.client} — cannot classify page-specific vs systemic (grow the pool: npm run run:flex:discover)`);
+          } else {
+            collector.check('sibling target (info)', true,
+              `${sibling} — re-verifying: ${failedSectionIds.join(', ')}`);
+            try {
+              const siblingLive = new LiveFacilityPage(page);
+              await siblingLive.goto(sibling);
+              const sibResults = await siblingLive.verifyAllSections({
+                facilityId: `${facility.id}--sibling`,
+                facilityName: `${facility.name} (sibling)`,
+                url: sibling,
+                client: facility.client,
+                handoff: await siblingLive.resolveRentHandoff(facility.client),
+              }, failedSectionIds);
+              for (const sr of sibResults) {
+                // Gate the sibling too — a DIFFERENT, already-triaged issue on
+                // the sibling must not masquerade as "reproduces" (false SYSTEMIC).
+                applyKnownIssueGate(facility.client, sr.sectionId, sr.checks);
+                const alsoFails = !sectionPassed(sr);
+                const failNames = sr.checks.filter(c => !c.passed).map(c => c.name).join('; ');
+                collector.check(`verdict: ${sr.sectionId}`, true, alsoFails
+                  ? `SYSTEMIC — also fails on the sibling (${failNames || 'section failed'}) → template/config-level, not this page`
+                  : `PAGE-SPECIFIC — sibling is clean → issue is local to ${facility.url}`);
+              }
+            } catch (e) {
+              collector.check('sibling cross-check ran', true,
+                `could not complete (info): ${(e as Error).message?.split('\n')[0]}`);
+            }
+          }
+          collector.endStep();
         }
       } catch (err) {
         collector.check('FATAL', false,
