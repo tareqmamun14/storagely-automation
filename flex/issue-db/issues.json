@@ -1,4 +1,131 @@
 {
   "_comment": "Flex ISSUE DATABASE — committed, synced via git, shown+edited in the control panel's Issues dashboard. Suite gate: status informed/acknowledged/false-flag → matching failed checks are demoted to tagged info (a red run always means something NEW); status new → still fails; fixed → fails again if it reappears. The panel auto-appends newly-seen issues as status 'new' (or 'candidate' for exploratory finds) but NEVER auto-demotes — only a human changes a status. See flex/configs/issueDb.ts. Cleared to a fresh slate 2026-07-20; the next regression re-populates it.",
-  "issues": []
+  "issues": [
+    {
+      "id": "minimall-health-no-unresolved-tokens-in-attributes",
+      "signatures": [
+        "minimall|health|no-unresolved-tokens-in-attributes"
+      ],
+      "client": "minimall",
+      "area": "health",
+      "check": "No unresolved {tokens} in attributes",
+      "title": "health: No unresolved {tokens} in attributes",
+      "detail": "Unresolved tokens in attributes: alt={company.name}",
+      "source": "suite",
+      "status": "informed",
+      "slackChannel": "",
+      "comments": [{"text": "Informed Brady & Brice — systemic template-level issue, also on Ohio/Carroll sibling.", "at": "2026-07-23T00:00:00.000Z"}],
+      "firstSeen": "2026-07-22T21:51:26.338Z",
+      "lastSeen": "2026-07-22T21:51:26.338Z",
+      "occurrences": 1,
+      "urls": [
+        "https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd"
+      ]
+    },
+    {
+      "id": "minimall-seohead-no-unresolved-tokens-in-element-attributes",
+      "signatures": [
+        "minimall|seohead|no-unresolved-tokens-in-element-attributes"
+      ],
+      "client": "minimall",
+      "area": "seohead",
+      "check": "no unresolved {tokens} in element attributes",
+      "title": "seohead: no unresolved {tokens} in element attributes",
+      "detail": "leaked: img[alt=\"{company.name}\"]",
+      "source": "suite",
+      "status": "informed",
+      "slackChannel": "",
+      "comments": [{"text": "Informed Brady & Brice — same root cause as the health token leak.", "at": "2026-07-23T00:00:00.000Z"}],
+      "firstSeen": "2026-07-22T21:51:26.338Z",
+      "lastSeen": "2026-07-22T21:51:26.338Z",
+      "occurrences": 1,
+      "urls": [
+        "https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd"
+      ]
+    },
+    {
+      "id": "storagestar-seohead-open-graph-title-image-present",
+      "signatures": [
+        "storagestar|seohead|open-graph-title-image-present"
+      ],
+      "client": "storagestar",
+      "area": "seohead",
+      "check": "Open Graph title + image present",
+      "title": "seohead: Open Graph title + image present",
+      "detail": "og:title=ok, og:image=(missing)",
+      "source": "suite",
+      "status": "informed",
+      "slackChannel": "",
+      "comments": [{"text": "Informed Brady & Brice — systemic across Storage Star locations.", "at": "2026-07-23T00:00:00.000Z"}],
+      "firstSeen": "2026-07-22T21:52:28.163Z",
+      "lastSeen": "2026-07-22T21:52:28.163Z",
+      "occurrences": 1,
+      "urls": [
+        "https://www.storagestar.com/storage-units/colorado/avon/910-nottingham-road"
+      ]
+    },
+    {
+      "id": "storagestar-seohead-exactly-one-h1",
+      "signatures": [
+        "storagestar|seohead|exactly-one-h1"
+      ],
+      "client": "storagestar",
+      "area": "seohead",
+      "check": "exactly one <h1>",
+      "title": "seohead: exactly one <h1>",
+      "detail": "2 <h1> element(s)",
+      "source": "suite",
+      "status": "informed",
+      "slackChannel": "",
+      "comments": [{"text": "Informed Brady & Brice — systemic across Storage Star locations.", "at": "2026-07-23T00:00:00.000Z"}],
+      "firstSeen": "2026-07-22T21:52:28.163Z",
+      "lastSeen": "2026-07-22T21:52:28.163Z",
+      "occurrences": 1,
+      "urls": [
+        "https://www.storagestar.com/storage-units/colorado/avon/910-nottingham-road"
+      ]
+    },
+    {
+      "id": "storagestar-integrity-star-rating-is-consistent-across-the-p",
+      "signatures": [
+        "storagestar|integrity|star-rating-is-consistent-across-the-page"
+      ],
+      "client": "storagestar",
+      "area": "integrity",
+      "check": "star rating is consistent across the page",
+      "title": "integrity: star rating is consistent across the page",
+      "detail": "MISMATCH — page shows 4.7 vs 5 ★ in different spots",
+      "source": "suite",
+      "status": "false-flag",
+      "slackChannel": "",
+      "comments": [{"text": "False positive — the 5★ was from a nearby-locations card (different facility), not this page's own rating. Fixed the integrity check to exclude nearby-location sections.", "at": "2026-07-23T00:00:00.000Z"}],
+      "firstSeen": "2026-07-22T21:52:28.163Z",
+      "lastSeen": "2026-07-22T21:52:28.163Z",
+      "occurrences": 1,
+      "urls": [
+        "https://www.storagestar.com/storage-units/colorado/avon/910-nottingham-road"
+      ]
+    },
+    {
+      "id": "storagestar-exploratory-h1-single",
+      "signatures": [
+        "storagestar|exploratory|h1-single"
+      ],
+      "client": "storagestar",
+      "area": "exploratory",
+      "check": "h1-single",
+      "title": "[exploratory] h1-single: 2 <h1> elements (expected exactly 1)  ·  (h1 count = 2)  ·  why: Location pages live on lo",
+      "detail": "2 <h1> elements (expected exactly 1)  ·  (h1 count = 2)  ·  why: Location pages live on local SEO; multiple/missing h1 dilutes the page topic.",
+      "source": "exploratory",
+      "status": "informed",
+      "slackChannel": "",
+      "comments": [{"text": "Informed Brady & Brice — same as the seohead h1 finding.", "at": "2026-07-23T00:00:00.000Z"}],
+      "firstSeen": "2026-07-22T21:52:28.163Z",
+      "lastSeen": "2026-07-22T21:52:28.163Z",
+      "occurrences": 1,
+      "urls": [
+        "https://www.storagestar.com/storage-units/colorado/avon/910-nottingham-road"
+      ]
+    }
+  ]
 }

@@ -19,6 +19,8 @@
  */
 import { getLocationPool, sampleSize, samplePool, readRunRotation } from './locationPool';
 
+let logBannerPrinted = false;
+
 export type FlexEnv = 'production' | 'test';
 
 export interface FlexFacility {
@@ -270,7 +272,10 @@ export function getAllFacilities(opts: {
       });
     }
     if (sampled.length) {
-      console.log(`\n  🎲 FLEX_SAMPLE=random:${n} — sampling ${sampled.length} location(s) this run:\n    ${picked.join('\n    ')}\n    (reproduce a finding by pinning FLEX_CUSTOM_URL=<url>)\n`);
+      if (!logBannerPrinted) {
+        logBannerPrinted = true;
+        console.log(`\n  🎲 FLEX_SAMPLE=random:${n} — sampling ${sampled.length} location(s) this run:\n    ${picked.join('\n    ')}\n    (reproduce a finding by pinning FLEX_CUSTOM_URL=<url>)\n`);
+      }
       return sampled;
     }
   }
@@ -311,7 +316,10 @@ export function getAllFacilities(opts: {
       }
     }
     if (rotated.length) {
-      console.log(`\n  🔄 rotation — ONE location per client this run:\n    ${rotated.map(f => f.url).join('\n    ')}\n    (next regression advances to the next pooled location · FLEX_ROTATE=off = every registry row · pin with FLEX_CUSTOM_URL to investigate)\n`);
+      if (!logBannerPrinted) {
+        logBannerPrinted = true;
+        console.log(`\n  🔄 rotation — ONE location per client this run:\n    ${rotated.map(f => f.url).join('\n    ')}\n    (next regression advances to the next pooled location · FLEX_ROTATE=off = every registry row · pin with FLEX_CUSTOM_URL to investigate)\n`);
+      }
       return rotated;
     }
   }

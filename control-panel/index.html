@@ -433,6 +433,12 @@
   .comment-line { font-size: 11px; color: var(--muted); margin: 5px 0 0 2px; padding-left: 8px; border-left: 2px solid var(--line); }
   .cov-tile[data-report] { cursor: pointer; }
   .issue-card[data-issue-open] { cursor: pointer; }
+  .issue-card.prio-high { border-left: 3px solid var(--down); }
+  .issue-card.prio-low { opacity: 0.75; }
+  .issue-card.prio-low:hover { opacity: 1; }
+  .prio-chip { font-size: 9px; font-weight: 700; letter-spacing: .5px; padding: 1px 6px; border-radius: 4px; }
+  .prio-chip.high { color: var(--down); background: color-mix(in srgb, var(--down) 12%, transparent); }
+  .prio-chip.low { color: var(--muted); background: color-mix(in srgb, var(--muted) 10%, transparent); }
   .mini-copy { font-size: 10px; padding: 1px 7px; border-radius: 6px; flex: 0 0 auto; }
 
   /* ── Modal ────────────────────────────────────────────────────────── */
@@ -1531,6 +1537,15 @@ const ISSUE_STATUS_META = {
   'acknowledged': { lbl: 'ACKNOWLEDGED', hint: 'real bug, triaged/backlogged — tracked, runs stay green' },
   'fixed':        { lbl: 'FIXED',        hint: 're-armed — if it reappears the run fails loudly' },
 };
+function issuePriority(i) {
+  const a = (i.area || '').toLowerCase();
+  const c = (i.check || '').toLowerCase();
+  if (a === 'rent') return 'high';
+  if (a === 'health' && /http status|react.*crash|units.*rent/i.test(c)) return 'high';
+  if (a === 'seohead' || a === 'integrity' || a === 'exploratory') return 'low';
+  if (a === 'health' && /token.*attribute/i.test(c)) return 'low';
+  return 'normal';
+}
 function escIss(s) {
   return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
@@ -1627,9 +1642,12 @@ function renderClientIssueCard(client, issues, cov) {
       const comments = (i.comments || []).map(cm =>
         `<div class="comment-line">${escIss(cm.text)} <i>· ${issDate(cm.at)}</i></div>`).join('');
       const slackTag = i.slackChannel ? ` · 💬 ${escIss(i.slackChannel)}` : '';
-      return `<div class="issue-card" data-issue-open="${escIss(i.id)}" title="Click for full details, evidence & re-verify">
+      const prio = issuePriority(i);
+      const prioChip = prio === 'high' ? ' <span class="prio-chip high">HIGH</span>'
+        : prio === 'low' ? ' <span class="prio-chip low">LOW</span>' : '';
+      return `<div class="issue-card prio-${prio}" data-issue-open="${escIss(i.id)}" title="Click for full details, evidence & re-verify">
         <div class="issue-top">
-          ${issueChip(i.status)}
+          ${issueChip(i.status)}${prioChip}
           <span class="issue-title">${escIss(i.title)}</span>
           <span class="issue-meta" title="area: ${escIss(i.area)} · first seen ${issDate(i.firstSeen)}">×${i.occurrences || 1} · last ${issDate(i.lastSeen)}</span>${gone}
         </div>
@@ -1782,17 +1800,16 @@ function formatRunCopy(c) {
 }
 function formatIssueCopy(i) {
   if (!i) return '';
-  const L = [`🔴 Storagely regression — issue: ${i.title}`,
-    `Status: ${(ISSUE_STATUS_META[i.status] || {}).lbl || i.status} · seen ×${i.occurrences || 1} · first ${issDate(i.firstSeen)} → last ${issDate(i.lastSeen)}`,
-    `Check: ${i.area} / ${i.check}`];
-  for (const u of i.urls || []) L.push(`Where: ${u}`);
-  L.push(`Detail: ${i.detail || ''}`);
+  const prio = issuePriority(i);
+  const icon = prio === 'high' ? '🔴' : prio === 'low' ? '🟡' : '🟠';
+  const tag = prio === 'low' ? ' [low priority]' : '';
+  const L = [`${icon} ${i.client}${tag} — ${i.detail || i.title}`];
+  for (const u of i.urls || []) L.push(u);
   const v = (LAST_COVERAGE || []).filter(c => c.client === i.client)
     .flatMap(c => c.verdicts || []).find(v => (i.area || '').includes(v.section));
-  if (v) L.push(`Sibling verdict: ${v.detail}`);
+  if (v) L.push(`Sibling: ${v.detail}`);
   const last = (i.comments || []).slice(-1)[0];
   if (last) L.push(`Note: ${last.text}`);
-  if (i.slackChannel) L.push(`Slack: ${i.slackChannel}`);
   return L.join('\n');
 }
 function formatDeploySummary() {
@@ -1806,7 +1823,10 @@ function formatDeploySummary() {
   const open = (LAST_ISSUES || []).filter(i => ['new', 'candidate'].includes(i.status));
   const tracked = (LAST_ISSUES || []).filter(i => ['informed', 'acknowledged', 'false-flag'].includes(i.status));
   L.push(`Issues: ${open.length} awaiting triage · ${tracked.length} tracked known`);
-  for (const i of open) L.push(`  • [${(ISSUE_STATUS_META[i.status] || {}).lbl || i.status}] ${i.title} (${i.client})`);
+  const high = open.filter(i => issuePriority(i) === 'high');
+  const low = open.filter(i => issuePriority(i) !== 'high');
+  for (const i of high) L.push(`  🔴 ${i.client} — ${i.detail || i.title}`);
+  for (const i of low) L.push(`  🟡 ${i.client} [low] — ${i.detail || i.title}`);
   return L.join('\n');
 }
 

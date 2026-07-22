@@ -32,8 +32,41 @@ export class DataIntegritySection implements ISectionDetector {
         //    don't pick up phone area-codes or unit counts) ──
         const reviewCounts = new Set<number>();
         const ratings = new Set<number>();
-        const bodyText = document.body.innerText;
+
+        // Exclude "nearby / other locations" sections — their ratings belong to
+        // DIFFERENT facilities and must not be compared against this page's own.
+        const nearbyRe = /can.t find|nearby|other location|more storage/i;
+        const nearbyContainers: Element[] = [];
+        document.querySelectorAll('h2, h3').forEach(h => {
+          if (nearbyRe.test(h.textContent || '')) {
+            const container = h.closest('section') || h.parentElement;
+            if (container) nearbyContainers.push(container);
+          }
+        });
+        function isNearby(el: Element): boolean {
+          return nearbyContainers.some(c => c.contains(el));
+        }
+        const bodyEl = document.body.cloneNode(true) as HTMLElement;
+        nearbyContainers.forEach(c => {
+          const id = c.getAttribute('data-testid') || c.id;
+          const match = id
+            ? bodyEl.querySelector(`[data-testid="${id}"], #${id}`)
+            : null;
+          if (match) { match.remove(); return; }
+          const heading = c.querySelector('h2, h3');
+          if (!heading) return;
+          const txt = (heading.textContent || '').trim();
+          bodyEl.querySelectorAll('h2, h3').forEach(clH => {
+            if ((clH.textContent || '').trim() === txt) {
+              const clC = clH.closest('section') || clH.parentElement;
+              clC?.remove();
+            }
+          });
+        });
+        const bodyText = bodyEl.innerText;
+
         document.querySelectorAll('[aria-label]').forEach(e => {
+          if (isNearby(e)) return;
           const a = e.getAttribute('aria-label') || '';
           const m = a.match(/from\s+([\d,]+)\s+reviews?/i);
           if (m) reviewCounts.add(parseInt(m[1].replace(/,/g, ''), 10));
