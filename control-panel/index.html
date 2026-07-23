@@ -1530,10 +1530,10 @@ function collectSettings() {
 // Flex Issues & Coverage dashboard — /api/flex/issues (+ issue-update)
 // ─────────────────────────────────────────────────────────────────────
 const ISSUE_STATUS_META = {
-  'new':          { lbl: 'NEW',          hint: 'untriaged — the suite FAILS on this until you triage it' },
+  'new':          { lbl: 'NEW',          hint: 'untriaged — HIGH/NORMAL priority issues fail the run; LOW priority auto-demotes' },
   'candidate':    { lbl: 'CANDIDATE',    hint: 'exploratory/anomaly lead — info-only, awaiting triage' },
   'false-flag':   { lbl: 'FALSE FLAG',   hint: 'our check is wrong — suite fix needed (demoted meanwhile)' },
-  'informed':     { lbl: 'INFORMED',     hint: 'real bug, team informed — tracked, runs stay green (tagged info)' },
+  'informed':     { lbl: 'INFORMED',     hint: 'real bug, team informed — tracked, runs stay green' },
   'acknowledged': { lbl: 'ACKNOWLEDGED', hint: 'real bug, triaged/backlogged — tracked, runs stay green' },
   'fixed':        { lbl: 'FIXED',        hint: 're-armed — if it reappears the run fails loudly' },
 };
@@ -1657,6 +1657,7 @@ function renderClientIssueCard(client, issues, cov) {
           <button class="act reopen" type="button" data-iss-reverify="${escIss(i.id)}" title="Pinned rerun of exactly this check on exactly this page — confirms real vs false flag.">🔎 Re-verify</button>
           <span class="spacer"></span>
           <button class="ghost mini-copy" type="button" data-iss-copy="${escIss(i.id)}" title="Copy a paste-ready failure report for the team">📋 copy</button>
+          <button class="ghost mini-copy" type="button" data-iss-delete="${escIss(i.id)}" title="Remove this issue from the database" style="color:var(--muted)">✕</button>
         </div>
         <details class="issue-more">
           <summary>💬 ${(i.comments || []).length} note(s)${slackTag} — open to comment / set Slack channel</summary>
@@ -1698,6 +1699,18 @@ async function flexIssueUpdate(id, patch) {
   loadFlexIssues();
 }
 
+async function flexIssueDelete(id) {
+  if (!confirm('Remove this issue from the database? It will reappear if the check fails again on the next run.')) return;
+  try {
+    const r = await fetch('/api/flex/issue-delete', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+    });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+  } catch (e) { alert('Issue delete failed: ' + e); }
+  loadFlexIssues();
+}
+
 (function wireFlexRotate() {
   const cb = $('#flex-rotate'); if (!cb) return;
   const apply = () => { const list = $('#flex-facility-checks'); if (list) list.style.opacity = cb.checked ? '0.45' : '1'; };
@@ -1729,6 +1742,8 @@ async function flexIssueUpdate(id, patch) {
     if (cp) { e.stopPropagation(); return copyTextToClipboard(formatRunCopy((LAST_COVERAGE || []).find(c => c.facilityId === cp.dataset.copyRun)), cp); }
     const ci = e.target.closest('button[data-iss-copy]');
     if (ci) { e.stopPropagation(); return copyTextToClipboard(formatIssueCopy((LAST_ISSUES || []).find(i => i.id === ci.dataset.issCopy)), ci); }
+    const del = e.target.closest('button[data-iss-delete]');
+    if (del) { e.stopPropagation(); return flexIssueDelete(del.dataset.issDelete); }
     const rv = e.target.closest('button[data-iss-reverify]');
     if (rv) { e.stopPropagation(); return reverifyIssue(rv.dataset.issReverify); }
     const b = e.target.closest('button[data-iss-act]');

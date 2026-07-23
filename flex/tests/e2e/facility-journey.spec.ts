@@ -26,7 +26,7 @@ import { getAllFacilities, FlexFacility } from '../../configs/facilities';
 import { getEnabledSections } from '../../configs/sections';
 import { sectionPassed } from '../../pages/sections/types';
 import { getClientProfile, getRentHandoff } from '../../configs/profiles';
-import { applyKnownIssueGate } from '../../configs/issueDb';
+import { applyKnownIssueGate, applyPriorityGate } from '../../configs/issueDb';
 import { getLocationPool } from '../../configs/locationPool';
 import { YardiCheckoutStartPage } from '../../pages/YardiCheckoutStartPage';
 import { SpcCheckoutEntryPage } from '../../pages/SpcCheckoutEntryPage';
@@ -245,6 +245,10 @@ test.describe('Flex Facility Journey', () => {
           if (demotedHealth.length) {
             console.log(`  ⚑ known-issue gate (health): ${demotedHealth.map(d => `${d.name} → ${d.status} #${d.issueId}`).join(' · ')}`);
           }
+          const prioHealth = applyPriorityGate('health', collector.activeChecks);
+          if (prioHealth.length) {
+            console.log(`  ⚑ priority gate (health): ${prioHealth.join(' · ')} → low-priority, not blocking`);
+          }
           for (const ck of collector.activeChecks) {
             if (!ck.passed) expect.soft(false, `Health: ${ck.name} — ${ck.detail}`).toBe(true);
           }
@@ -281,6 +285,16 @@ test.describe('Flex Facility Journey', () => {
             }
           }
           if (demotedSec.length) console.log(`  ⚑ known-issue gate (sections): ${demotedSec.join(' · ')}`);
+
+          // Priority gate: LOW-priority section failures (seohead, integrity,
+          // exploratory) auto-demote to tagged info — they're still reported
+          // but never turn the run red.
+          const prioSec: string[] = [];
+          for (const r of results) {
+            const demoted = applyPriorityGate(r.sectionId, r.checks);
+            for (const name of demoted) prioSec.push(`${r.sectionId}: ${name}`);
+          }
+          if (prioSec.length) console.log(`  ⚑ priority gate (sections): ${prioSec.join(' · ')} → low-priority, not blocking`);
 
           collector.addSectionResults(results, sectionLabels);
 

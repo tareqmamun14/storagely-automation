@@ -1070,6 +1070,20 @@ const server = http.createServer((req, res) => {
   if (url === '/api/flex/issue-update' && req.method === 'POST') {
     return updateFlexIssue(req, res);
   }
+  if (url === '/api/flex/issue-delete' && req.method === 'POST') {
+    return readBody(req).then(raw => {
+      try {
+        const { id } = JSON.parse(raw || '{}');
+        if (!id) return send(res, 400, { error: 'missing id' });
+        const db = readIssueDb();
+        const idx = db.issues.findIndex(i => i.id === id);
+        if (idx < 0) return send(res, 404, { error: `no issue with id "${id}"` });
+        db.issues.splice(idx, 1);
+        writeIssueDb(db);
+        send(res, 200, { ok: true, deleted: id });
+      } catch (e) { send(res, 400, { error: String(e) }); }
+    });
+  }
   // Full journey report for one facility (latest) — powers the detail modal.
   if (url.startsWith('/api/flex/report') && req.method === 'GET') {
     try {

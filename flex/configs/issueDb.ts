@@ -15,11 +15,21 @@
  *   'fixed'        believed fixed → NOT demoted; if it reappears the run
  *                  fails loudly again (regression!)
  *
- * The gate demotes matching FAILED checks to tagged info-passes, so a red
- * journey always means SOMETHING NEW. Triaged issues stay visible — tagged in
- * every report and listed in the panel dashboard — instead of re-failing every
- * run. Only humans (via the panel or an edit) change a status; the panel
- * auto-APPENDS new issues but never auto-demotes them.
+ * TWO layers of gating prevent noise from turning runs red:
+ *
+ * 1. Known-issue gate: triaged issues (informed / acknowledged / false-flag)
+ *    demote matching FAILED checks to tagged info-passes — a red journey
+ *    always means SOMETHING NEW.
+ *
+ * 2. Priority gate: LOW-priority areas (seohead, integrity, exploratory) and
+ *    low-priority health checks (token attributes) auto-demote even when NEW.
+ *    Only HIGH/NORMAL priority failures (rent flow, page crash, HTTP errors,
+ *    broken components) can turn a run red.
+ *
+ * Triaged issues stay visible — tagged in every report and listed in the
+ * panel dashboard — instead of re-failing every run. Only humans (via the
+ * panel or an edit) change a status; the panel auto-APPENDS new issues but
+ * never auto-demotes them.
  */
 import * as fs from 'fs';
 import * as path from 'path';
@@ -50,6 +60,48 @@ const DB_FILE = path.resolve(__dirname, '..', 'issue-db', 'issues.json');
 
 /** Statuses that demote a matching FAILED check to a tagged info-pass. */
 const DEMOTABLE: ReadonlySet<string> = new Set(['false-flag', 'informed', 'acknowledged']);
+
+// ── Priority classification ──────────────────────────────────────────
+// Shared between the suite gate and the control panel. HIGH = broken
+// feature / checkout; LOW = SEO meta, data-consistency cosmetics,
+// exploratory probes, attribute-only tokens. Everything else = NORMAL.
+const LOW_AREAS: ReadonlySet<string> = new Set(['seohead', 'integrity', 'exploratory']);
+const HIGH_HEALTH_RE = /http status|react.*crash|units.*rent/i;
+const LOW_HEALTH_RE  = /token.*attribute/i;
+
+export type CheckPriority = 'high' | 'normal' | 'low';
+
+export function checkPriority(area: string, checkName: string): CheckPriority {
+  const a = (area || '').toLowerCase();
+  const c = (checkName || '').toLowerCase();
+  if (a === 'rent') return 'high';
+  if (a === 'health' && HIGH_HEALTH_RE.test(c)) return 'high';
+  if (LOW_AREAS.has(a)) return 'low';
+  if (a === 'health' && LOW_HEALTH_RE.test(c)) return 'low';
+  return 'normal';
+}
+
+/**
+ * Auto-demote LOW-priority failed checks to tagged info-passes.
+ * Runs AFTER the known-issue gate. This ensures minor findings (seohead,
+ * integrity cosmetics, exploratory probes) never turn a run red — they're
+ * still visible in the report and dashboard, just not blocking.
+ */
+export function applyPriorityGate(
+  area: string,
+  checks: ReadonlyArray<{ name: string; passed: boolean; detail?: string }>,
+): string[] {
+  const demoted: string[] = [];
+  for (const ck of checks) {
+    if (ck.passed) continue;
+    if (checkPriority(area, ck.name) === 'low') {
+      ck.passed = true;
+      ck.detail = `[low-priority] ${ck.detail || ''}`.trim();
+      demoted.push(ck.name);
+    }
+  }
+  return demoted;
+}
 
 /**
  * "Open Graph title + image present" → "open-graph-title-image-present".

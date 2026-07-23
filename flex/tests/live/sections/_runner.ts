@@ -21,6 +21,7 @@ import { getAllFacilities, FlexFacility } from '../../../configs/facilities';
 import { isSectionEnabled, getSection } from '../../../configs/sections';
 import { printSectionResult } from '../../../reporters/sectionReporter';
 import { sectionPassed } from '../../../pages/sections/types';
+import { applyPriorityGate } from '../../../configs/issueDb';
 
 export function runSectionSuite(sectionId: string): void {
   const section = getSection(sectionId);
@@ -51,7 +52,8 @@ export function runSectionSuite(sectionId: string): void {
 
         printSectionResult(result);
 
-        // Failure message points at the first failed check — actionable, not noisy.
+        applyPriorityGate(sectionId, result.checks);
+
         if (!sectionPassed(result)) {
           const first = result.checks.find(c => !c.passed);
           const reason = first
