@@ -33,6 +33,10 @@ export interface FlexFacility {
   expectedTitle: RegExp;
   /** Facility heading pattern (the big H3 / H1 the user sees in the header). */
   expectedHeading: RegExp;
+  /** Always include this facility in every run alongside the rotation pick.
+   *  Use for facilities that cover a unique FMS/locale variant (e.g. SiteLink
+   *  French page alongside the Yardi rotation for the same client). */
+  alwaysRun?: boolean;
   /** Optional toggles — used by tests to skip checks when a section is intentionally absent. */
   features?: {
     hasUnits?: boolean;
@@ -127,6 +131,22 @@ export const FACILITIES: FlexFacility[] = [
     url: 'https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd',
     expectedTitle: /self storage|birmingham|mini mall/i,
     expectedHeading: /self storage units birmingham|mini mall storage|richard.arrington/i,
+    features: { ...MINIMALL_FEATURES },
+  },
+  // Mini Mall SiteLink / French (fr-ca) — Sainte-Thérèse QC. This location
+  // hands off to /step-four (SiteLink FMS) instead of /yardi/start. The page
+  // is hosted on fr-ca.minimallstorage.com; section headings are English
+  // ("Customer Reviews", "Amenities", "Have a Question?") so the standard
+  // detectors work without a locale variant profile. SEO copy + H1 are French.
+  {
+    id: 'minimall-sainte-therese-place-sicard',
+    name: 'Mini Mall — Sainte-Thérèse, QC (Place Sicard) [SiteLink/fr-ca]',
+    client: 'minimall',
+    env: 'production',
+    url: 'https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard',
+    expectedTitle: /entreposage|sainte.th/i,
+    expectedHeading: /entreposage|sainte.th/i,
+    alwaysRun: true,
     features: { ...MINIMALL_FEATURES },
   },
   // Storage Star — migrated to Flex on PRODUCTION. Standard (Safeguard-baseline)
@@ -271,6 +291,14 @@ export function getAllFacilities(opts: {
         picked.push(url);
       });
     }
+    // Append alwaysRun facilities (same as rotation path).
+    const sampledAlways = FACILITIES.filter(f =>
+      f.env === env && f.alwaysRun
+      && selectedClients.includes(f.client.toLowerCase())
+      && !sampled.some(r => r.url === f.url),
+    );
+    sampled.push(...sampledAlways);
+
     if (sampled.length) {
       if (!logBannerPrinted) {
         logBannerPrinted = true;
@@ -315,10 +343,21 @@ export function getAllFacilities(opts: {
         if (anchor) rotated.push(anchor);
       }
     }
+    // Always-run facilities: append any alwaysRun facilities for selected
+    // clients that aren't already the rotation pick (covers unique FMS/locale
+    // variants that must run every regression alongside the rotating pick).
+    const pinned_always = FACILITIES.filter(f =>
+      f.env === env && f.alwaysRun
+      && selectedClients.includes(f.client.toLowerCase())
+      && !rotated.some(r => r.url === f.url),
+    );
+    rotated.push(...pinned_always);
+
     if (rotated.length) {
       if (!logBannerPrinted) {
         logBannerPrinted = true;
-        console.log(`\n  🔄 rotation — ONE location per client this run:\n    ${rotated.map(f => f.url).join('\n    ')}\n    (next regression advances to the next pooled location · FLEX_ROTATE=off = every registry row · pin with FLEX_CUSTOM_URL to investigate)\n`);
+        const pinnedNote = pinned_always.length ? ` + ${pinned_always.length} always-run` : '';
+        console.log(`\n  🔄 rotation — ONE location per client${pinnedNote} this run:\n    ${rotated.map(f => f.url).join('\n    ')}\n    (next regression advances to the next pooled location · FLEX_ROTATE=off = every registry row · pin with FLEX_CUSTOM_URL to investigate)\n`);
       }
       return rotated;
     }
@@ -330,10 +369,12 @@ export function getAllFacilities(opts: {
   return base;
 }
 
-/** Registry URLs per client for an env — feeds the rotation list (see global-setup.ts). */
+/** Registry URLs per client for an env — feeds the rotation list (see global-setup.ts).
+ *  Excludes alwaysRun facilities — they run every time regardless, so including
+ *  them in the rotation pool would waste a slot (they'd be picked AND appended). */
 export function registryUrlsByClient(env: FlexEnv): Record<string, string[]> {
   const map: Record<string, string[]> = {};
-  for (const f of FACILITIES.filter(x => x.env === env)) {
+  for (const f of FACILITIES.filter(x => x.env === env && !x.alwaysRun)) {
     const c = f.client.toLowerCase();
     (map[c] = map[c] || []).push(f.url);
   }

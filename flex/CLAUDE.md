@@ -81,9 +81,10 @@ a DEFAULT, not a truth: Mini Mall has Yardi locations (`/yardi/start`) AND
 SiteLink locations (`/step-four`, e.g. Sainte-Thérèse QC) on Flex. The journey
 resolves each PAGE's real handoff from the live DOM
 (`LiveFacilityPage.resolveRentHandoff`) and passes it to health, sections
-(`ctx.handoff`), and the rent step. Sainte-Thérèse note: it's also a FRENCH
-template variant (fr-ca) — do NOT add it to rotation until a variant profile
-exists (its sections false-flag against the Mini Mall template expectations).
+(`ctx.handoff`), and the rent step. Sainte-Thérèse (fr-ca.minimallstorage.com)
+is a SiteLink / French page — verified 2026-08-03: section headings are
+English ("Customer Reviews", "Amenities", "Have a Question?") so the standard
+minimall profile works; only SEO copy + H1 are French. Added to rotation.
 
 **Sibling cross-check** (journey step 5, auto): when a NEW section failure
 survives the gate, the journey re-runs exactly those detectors on a sibling

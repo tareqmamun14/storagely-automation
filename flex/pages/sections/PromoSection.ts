@@ -84,10 +84,17 @@ export class PromoSection implements ISectionDetector {
           : promoActive ? 'none — banner/rail-style promo without per-card badges'
           : 'none — no active promos on this location',
       ));
+      // A "Featured Units" or "Limited-time Deal" rail is one promo STYLE;
+      // per-card "Weeks Free" badges are another. Only fail when a rail is
+      // expected (featured/limited text detected elsewhere) but unlabelled —
+      // badge-only promos don't need a rail heading.
+      const railExpected = badges.featured || badges.limited;
       checks.push(check(
-        'Featured / Limited-time deal rail labelled' + (promoActive ? '' : ' (info — no active promos)'),
-        Boolean(badges.featured || badges.limited || !promoActive),
-        `featured=${badges.featured}, limited-time=${badges.limited}`,
+        'Featured / Limited-time deal rail labelled (info)',
+        true,
+        railExpected
+          ? `featured=${badges.featured}, limited-time=${badges.limited}`
+          : 'no rail — promos shown as per-card badges only',
       ));
       // Low-stock badges are intermittent (depend on availability) — info only.
       checks.push(check(

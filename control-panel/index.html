@@ -214,8 +214,25 @@
     white-space: pre-wrap; word-break: break-word; border: 1px solid var(--line);
   }
   :root[data-theme="light"] #output { background: #0e1117; color: #e7eaf2; }
-  /* Console view: let the output own the screen */
+  /* Console view: split layout — log + results side by side */
+  .console-split { display: flex; gap: 10px; }
+  .console-log { flex: 1; min-width: 0; }
+  .console-results { width: 380px; flex-shrink: 0; display: flex; flex-direction: column; }
   #view-console #output { min-height: calc(100vh - 230px); max-height: calc(100vh - 230px); }
+  #results-panel { background: #0a0c11; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; min-height: calc(100vh - 230px); max-height: calc(100vh - 230px); }
+  :root[data-theme="light"] #results-panel { background: #0e1117; }
+  #results-table { flex: 1; overflow: auto; }
+  #results-table table { width: 100%; border-collapse: collapse; font: 12px/1.5 ui-monospace, Menlo, Consolas, monospace; }
+  #results-table th { position: sticky; top: 0; background: #12151e; text-align: left; padding: 6px 10px; font-weight: 600; font-size: 10px; letter-spacing: .4px; text-transform: uppercase; color: #707888; border-bottom: 1px solid #1e2230; }
+  #results-table td { padding: 6px 10px; border-bottom: 1px solid #1a1e2a; vertical-align: top; color: #d6dae3; }
+  #results-table tr.pass td:first-child { color: #6dd4a4; font-weight: 700; }
+  #results-table tr.fail td:first-child { color: #ef6678; font-weight: 700; }
+  #results-table tr.fail td { color: #ef6678; }
+  #results-table .res-msg { max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; color: #93a0b0; }
+  #results-table .res-msg:hover { white-space: normal; word-break: break-word; }
+  #results-head { padding: 10px 12px; font-weight: 700; font-size: 13px; color: #d6dae3; border-bottom: 1px solid #1e2230; display: flex; align-items: center; gap: 8px; background: #0d0f18; }
+  #results-head .res-count { font-weight: 400; font-size: 11px; color: #707888; }
+  .results-empty { display: flex; align-items: center; justify-content: center; flex: 1; color: #404858; font: 12px/1.4 ui-monospace, Menlo, Consolas, monospace; text-align: center; padding: 20px; }
   .ansi-31, .ansi-91 { color: #ef6678; }
   .ansi-32, .ansi-92 { color: #6dd4a4; }
   .ansi-33, .ansi-93 { color: #f5b651; }
@@ -354,10 +371,6 @@
 
   /* ── Issues & Coverage dashboard ─────────────────────────────────── */
   .legend-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
-  .client-card {
-    border: 1px solid var(--line); border-radius: 12px; background: var(--panel-2);
-    padding: 12px 14px; margin-bottom: 14px;
-  }
   .client-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
   .client-name { font-size: 14px; font-weight: 700; letter-spacing: .2px; }
   .stat-chip {
@@ -440,6 +453,47 @@
   .prio-chip.high { color: var(--down); background: color-mix(in srgb, var(--down) 12%, transparent); }
   .prio-chip.low { color: var(--muted); background: color-mix(in srgb, var(--muted) 10%, transparent); }
   .mini-copy { font-size: 10px; padding: 1px 7px; border-radius: 6px; flex: 0 0 auto; }
+
+  /* ── Latest run summary (top of Issues tab) ─────────────────────── */
+  .run-summary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; margin-bottom: 14px; }
+  .run-summary-tile {
+    display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+    border: 1px solid var(--line); border-radius: 10px; background: var(--panel-2);
+    border-left: 4px solid var(--up); transition: transform .12s, box-shadow .15s;
+  }
+  .run-summary-tile:hover { transform: translateY(-1px); box-shadow: 0 6px 16px #00000020; }
+  .run-summary-tile.fail { border-left-color: var(--down); }
+  .run-summary-tile.warn { border-left-color: var(--warn); }
+  .run-summary-icon { font-size: 18px; flex: 0 0 28px; text-align: center; }
+  .run-summary-info { flex: 1; min-width: 0; }
+  .run-summary-client { font-weight: 700; font-size: 13px; }
+  .run-summary-msg { font-size: 11px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .run-summary-msg:hover { white-space: normal; word-break: break-word; }
+  .run-summary-rent { font-size: 11px; margin-top: 3px; padding: 3px 8px; border-radius: 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: ui-monospace, Menlo, Consolas, monospace; }
+  .run-summary-rent:hover { white-space: normal; word-break: break-word; }
+  .run-summary-rent.pass { background: rgba(34, 192, 127, 0.12); color: var(--up); border: 1px solid rgba(34, 192, 127, 0.25); }
+  .run-summary-rent.fail { background: rgba(236, 95, 91, 0.12); color: var(--down); border: 1px solid rgba(236, 95, 91, 0.25); }
+  .run-summary-rent.skip { background: rgba(147, 168, 179, 0.1); color: var(--muted); border: 1px solid var(--line); }
+  .run-summary-when { font-size: 10px; color: var(--muted); white-space: nowrap; flex: 0 0 auto; }
+  .cov-rent { font-size: 11px; margin-top: 4px; padding: 4px 8px; border-radius: 6px; font-family: ui-monospace, Menlo, Consolas, monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cov-rent:hover { white-space: normal; word-break: break-all; }
+  .cov-rent.pass { background: rgba(34, 192, 127, 0.10); color: var(--up); border: 1px solid rgba(34, 192, 127, 0.2); }
+  .cov-rent.fail { background: rgba(236, 95, 91, 0.10); color: var(--down); border: 1px solid rgba(236, 95, 91, 0.2); }
+  .cov-rent.skip { background: rgba(147, 168, 179, 0.08); color: var(--muted); border: 1px solid var(--line); }
+
+  /* ── Collapsible client sections ─────────────────────────────────── */
+  details.client-section { margin-bottom: 14px; }
+  details.client-section > summary {
+    list-style: none; cursor: pointer; display: flex; align-items: center; gap: 8px;
+    padding: 10px 14px; border: 1px solid var(--line); border-radius: 12px;
+    background: var(--panel-2); transition: background .15s, border-color .15s;
+  }
+  details.client-section > summary::-webkit-details-marker { display: none; }
+  details.client-section > summary::after { content: '▸'; margin-left: auto; color: var(--muted); transition: transform .15s; font-size: 14px; }
+  details.client-section[open] > summary::after { transform: rotate(90deg); }
+  details.client-section[open] > summary { border-radius: 12px 12px 0 0; border-bottom-color: transparent; }
+  details.client-section > summary:hover { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
+  details.client-section .client-body { padding: 12px 14px 14px; border: 1px solid var(--line); border-top: none; border-radius: 0 0 12px 12px; background: var(--panel); }
 
   /* ── Modal ────────────────────────────────────────────────────────── */
   #modal-root { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; }
@@ -933,7 +987,17 @@
       <button id="clearBtn" class="ghost" title="Clear output">Clear</button>
     </div>
     <div class="card-body">
-      <div id="output">Sentinel ready. Configure a launch, then press ▶ Run.\n</div>
+      <div class="console-split">
+        <div class="console-log">
+          <div id="output">Sentinel ready. Configure a launch, then press ▶ Run.\n</div>
+        </div>
+        <div class="console-results">
+          <div id="results-panel">
+            <div id="results-head">Results <span class="res-count" id="results-count"></span></div>
+            <div id="results-table"><div class="results-empty">Waiting for run...<br/>Results will appear here<br/>as each client finishes.</div></div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
   </main>
@@ -1572,9 +1636,60 @@ function renderFlexIssues(data) {
   if (badge) { badge.hidden = open === 0; badge.textContent = String(open); }
   const clients = [...new Set([...issues.map(i => i.client), ...coverage.map(c => c.client)])].sort();
   if (!clients.length) { root.innerHTML = '<i>No journey reports yet — run the Flex suite once, then refresh.</i>'; return; }
-  root.innerHTML = clients.map(c =>
+
+  const summaryHtml = renderLatestRunSummary(clients, coverage);
+  const sectionsHtml = clients.map(c =>
     renderClientIssueCard(c, issues.filter(i => i.client === c), coverage.filter(x => x.client === c))
   ).join('');
+  root.innerHTML = summaryHtml + sectionsHtml;
+}
+
+function renderLatestRunSummary(clients, coverage) {
+  let totalPass = 0, totalFail = 0;
+  const tiles = clients.map(c => {
+    const cov = coverage.filter(x => x.client === c);
+    const label = (typeof flexClientLabel === 'function' ? flexClientLabel(c) : c) || c;
+    if (!cov.length) return `<div class="run-summary-tile warn"><span class="run-summary-icon">—</span><div class="run-summary-info"><div class="run-summary-client">${escIss(label)}</div><div class="run-summary-msg">No run data yet</div></div></div>`;
+    const latest = cov.reduce((a, b) => (String(a.timestamp || '') > String(b.timestamp || '') ? a : b));
+    const hasFails = latest.failing?.length > 0;
+    const hasKnown = latest.known?.length > 0;
+    const rentFail = (latest.steps || []).some(s => /rent|reserve/i.test(s.label) && s.failed > 0);
+    const isMajorFail = hasFails && rentFail;
+    const isMinorFail = hasFails && !rentFail;
+    if (hasFails) totalFail++; else totalPass++;
+    const cls = isMajorFail ? 'fail' : (isMinorFail || hasKnown ? 'warn' : '');
+    const icon = isMajorFail ? '✗' : (isMinorFail ? '⚑' : (hasKnown ? '⚑' : '✓'));
+    const failCount = (latest.failing || []).length;
+    const msg = hasFails
+      ? `${failCount} failing: ${latest.failing.map(f => f.check).join(', ')}`
+      : (hasKnown ? `${latest.known.length} tracked (not blocking)` : 'All checks passed');
+    const steps = (latest.steps || []).filter(s => s.status !== 'skipped');
+    const stepsSummary = steps.map(s => {
+      const ok = s.failed === 0;
+      return `<span style="color:${ok ? 'var(--up)' : 'var(--down)'}">${ok ? '✓' : '✗'} ${s.label} ${s.passed}/${s.total}</span>`;
+    }).join(' · ');
+    // Rent result highlight
+    const rr = latest.rentResult;
+    let rentHtml = '';
+    if (rr) {
+      const rcls = rr.passed == null ? 'skip' : (rr.passed ? 'pass' : 'fail');
+      const ricon = rr.passed == null ? '⏭' : (rr.passed ? '✓' : '✗');
+      rentHtml = `<div class="run-summary-rent ${rcls}" title="${escIss(rr.detail)}">${ricon} Rent: ${escIss(rr.detail)}</div>`;
+    }
+    return `<div class="run-summary-tile ${cls}">
+      <span class="run-summary-icon" style="color:${isMajorFail ? 'var(--down)' : (isMinorFail ? 'var(--warn)' : 'var(--up)')}">${icon}</span>
+      <div class="run-summary-info">
+        <div class="run-summary-client">${escIss(label)} <span style="font-weight:400;font-size:11px">${stepsSummary}</span></div>
+        <div class="run-summary-msg" title="${escIss(msg)}">${escIss(msg)}</div>
+        ${rentHtml}
+      </div>
+      <span class="run-summary-when">${issDate(latest.timestamp)}</span>
+    </div>`;
+  }).join('');
+  const passHtml = totalPass ? `<span style="color:var(--up);font-weight:700">${totalPass} passed</span>` : '';
+  const failHtml = totalFail ? `<span style="color:var(--down);font-weight:700">${totalFail} failed</span>` : '';
+  const sep = passHtml && failHtml ? ' · ' : '';
+  return `<div class="sec-label" style="margin-top:0">Latest Run — ${passHtml}${sep}${failHtml}</div><div class="run-summary-grid">${tiles}</div>`;
 }
 
 function issueChip(status) {
@@ -1584,8 +1699,8 @@ function issueChip(status) {
 
 function stepBadge(s) {
   if (s.status === 'skipped') return `<span class="step-pill skip">⏭ ${escIss(s.label)}</span>`;
-  const cls = s.failed > 0 ? 'bad' : 'ok';
-  return `<span class="step-pill ${cls}">${s.failed > 0 ? '✗' : '✓'} ${escIss(s.label)} ${s.passed}/${s.total}</span>`;
+  const ok = s.failed === 0;
+  return `<span class="step-pill ${ok ? 'ok' : 'bad'}"><span style="color:${ok ? 'var(--up)' : 'var(--down)'};font-weight:700">${ok ? '✓' : '✗'}</span> ${escIss(s.label)} <span style="color:var(--up)">${s.passed}</span>/${s.total}${s.failed > 0 ? ` · <span style="color:var(--down)">${s.failed} failed</span>` : ''}</span>`;
 }
 
 function renderClientIssueCard(client, issues, cov) {
@@ -1593,8 +1708,9 @@ function renderClientIssueCard(client, issues, cov) {
   const openCount = issues.filter(i => ['new', 'candidate'].includes(i.status)).length;
   const trackedCount = issues.filter(i => ['informed', 'acknowledged', 'false-flag'].includes(i.status)).length;
 
-  // Coverage tiles — health color on the left edge, one compact line per signal.
-  const covHtml = cov.map(c => {
+  // Coverage tiles — latest 2 runs only, newest first.
+  const sortedCov = cov.slice().sort((a, b) => String(b.timestamp || '').localeCompare(String(a.timestamp || ''))).slice(0, 2);
+  const covHtml = sortedCov.map(c => {
     const health = c.failing?.length ? 'bad' : (c.known?.length ? 'warn' : 'ok');
     const notes = [];
     if (c.failing?.length) {
@@ -1612,6 +1728,14 @@ function renderClientIssueCard(client, issues, cov) {
     for (const v of c.verdicts || []) {
       notes.push(`<div class="cov-note anom" title="${escIss(v.detail)}">🧭 sibling verdict [${escIss(v.section)}]: ${escIss(v.detail.slice(0, 90))}</div>`);
     }
+    // Rent result highlight in coverage tile
+    let covRentHtml = '';
+    if (c.rentResult) {
+      const rr = c.rentResult;
+      const rcls = rr.passed == null ? 'skip' : (rr.passed ? 'pass' : 'fail');
+      const ricon = rr.passed == null ? '⏭' : (rr.passed ? '✓' : '✗');
+      covRentHtml = `<div class="cov-rent ${rcls}" title="${escIss(rr.detail)}">${ricon} Rent: ${escIss(rr.detail)}</div>`;
+    }
     return `<div class="cov-tile ${health}" data-report="${escIss(c.facilityId)}" title="Click for the full check-by-check report">
       <div class="cov-top">
         <a class="cov-name" href="${escIss(c.url)}" target="_blank" title="${escIss(c.url)}">${escIss(c.name)}</a>
@@ -1619,6 +1743,7 @@ function renderClientIssueCard(client, issues, cov) {
         <button class="ghost mini-copy" type="button" data-copy-run="${escIss(c.facilityId)}" title="Copy this run's paste-ready summary">📋</button>
       </div>
       <div>${(c.steps || []).map(stepBadge).join('')}</div>
+      ${covRentHtml}
       ${notes.join('')}
     </div>`;
   }).join('') || '<div class="grp-desc">no journey report yet — run the Flex suite once</div>';
@@ -1674,18 +1799,22 @@ function renderClientIssueCard(client, issues, cov) {
   const triageChip = openCount
     ? `<span class="stat-chip warn">${openCount} awaiting triage</span>`
     : `<span class="stat-chip okay">all triaged ✓</span>`;
-  return `<div class="client-card">
-    <div class="client-head">
+  return `<details class="client-section" open>
+    <summary>
       <span class="client-name">${escIss(label)}</span>
       ${triageChip}
       <span class="stat-chip">${trackedCount} tracked</span>
       <span class="stat-chip">${issues.length} total</span>
+      <span class="spacer"></span>
+      ${issues.length > 0 ? `<button class="ghost mini-copy" type="button" data-client-clear="${escIss(client)}" title="Remove all issues for this client from the database" style="color:var(--muted);font-size:11px" onclick="event.stopPropagation()">🗑 Clear all</button>` : ''}
+    </summary>
+    <div class="client-body">
+      <div class="sec-label" style="margin-top:0">Coverage — latest run per location</div>
+      <div class="cov-grid">${covHtml}</div>
+      <div class="sec-label">Issues</div>
+      ${issuesHtml}
     </div>
-    <div class="sec-label">Coverage — latest run per location</div>
-    <div class="cov-grid">${covHtml}</div>
-    <div class="sec-label">Issues</div>
-    ${issuesHtml}
-  </div>`;
+  </details>`;
 }
 
 async function flexIssueUpdate(id, patch) {
@@ -1708,6 +1837,23 @@ async function flexIssueDelete(id) {
     });
     if (!r.ok) throw new Error('HTTP ' + r.status);
   } catch (e) { alert('Issue delete failed: ' + e); }
+  loadFlexIssues();
+}
+
+async function flexClientClearAll(client) {
+  const label = (typeof flexClientLabel === 'function' ? flexClientLabel(client) : client) || client;
+  const clientIssues = (LAST_ISSUES || []).filter(i => i.client === client);
+  if (!clientIssues.length) return;
+  if (!confirm(`Remove all ${clientIssues.length} issue(s) for ${label}?\n\nThey will reappear if the checks fail again on the next run.`)) return;
+  try {
+    const r = await fetch('/api/flex/issue-delete', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ client }),
+    });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const j = await r.json();
+    showToast(`🗑 Cleared ${j.deletedCount || 0} issue(s) for ${escIss(label)}`);
+  } catch (e) { alert('Bulk clear failed: ' + e); }
   loadFlexIssues();
 }
 
@@ -1744,6 +1890,8 @@ async function flexIssueDelete(id) {
     if (ci) { e.stopPropagation(); return copyTextToClipboard(formatIssueCopy((LAST_ISSUES || []).find(i => i.id === ci.dataset.issCopy)), ci); }
     const del = e.target.closest('button[data-iss-delete]');
     if (del) { e.stopPropagation(); return flexIssueDelete(del.dataset.issDelete); }
+    const clearAll = e.target.closest('button[data-client-clear]');
+    if (clearAll) { e.stopPropagation(); return flexClientClearAll(clearAll.dataset.clientClear); }
     const rv = e.target.closest('button[data-iss-reverify]');
     if (rv) { e.stopPropagation(); return reverifyIssue(rv.dataset.issReverify); }
     const b = e.target.closest('button[data-iss-act]');
@@ -1806,6 +1954,7 @@ function formatRunCopy(c) {
   if (!c) return '';
   const L = [`${covHealth(c)} Storagely regression — ${c.name}`, c.url,
     `Run ${issDate(c.timestamp)} · ${(c.durationMs / 1000).toFixed(0)}s · ${(c.steps || []).map(stepLine).filter(Boolean).join(' · ')}`];
+  if (c.rentResult) L.push(`${c.rentResult.passed ? '✓' : '✗'} Rent: ${c.rentResult.detail}`);
   for (const f of c.failing || []) L.push(`❌ ${f.area}/${f.check} — ${f.detail}`);
   if (c.known?.length) L.push(`⚑ known/tracked (not failing): ${c.known.map(k => k.check).join(' · ')}`);
   if (c.anomalies && !/no anomalies/i.test(c.anomalies)) L.push(`△ data anomalies: ${c.anomalies}`);
@@ -1831,6 +1980,7 @@ function formatDeploySummary() {
   const L = [`🛰️ Storagely regression summary — ${new Date().toISOString().slice(0, 16).replace('T', ' ')}`];
   for (const c of LAST_COVERAGE || []) {
     let line = `${covHealth(c)} ${c.name} — ${(c.steps || []).map(stepLine).filter(Boolean).join(' · ')} (${issDate(c.timestamp)})`;
+    if (c.rentResult) line += ` | Rent: ${c.rentResult.passed ? '✓' : '✗'} ${c.rentResult.detail.slice(0, 80)}`;
     if (c.failing?.length) line += ` — FAILING: ${c.failing.map(f => f.check).join(' · ')}`;
     else if (c.known?.length) line += ` — known tracked: ${c.known.map(k => k.check).join(' · ')}`;
     L.push(line);
@@ -1932,7 +2082,7 @@ async function reverifyIssue(id) {
 }
 async function launchScopedRun(payload, onEnd) {
   setRunning(true);
-  $('#output').textContent = '';
+  $('#output').textContent = ''; clearResults();
   const r = await fetch('/api/run', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
   const j = await r.json();
   if (!r.ok) { showToast('⚠️ Run failed to start: ' + (j.error || r.status)); setRunning(false); return; }
@@ -2188,7 +2338,7 @@ $('#runBtn').addEventListener('click', async () => {
   }
 
   setRunning(true);
-  $('#output').textContent = '';
+  $('#output').textContent = ''; clearResults();
 
   const r = await fetch('/api/run', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(s) });
   const j = await r.json();
@@ -2205,7 +2355,7 @@ $('#stopBtn').addEventListener('click', async () => {
   if (!CURRENT_RUN) return;
   await fetch('/api/stop/' + CURRENT_RUN.runId, { method: 'POST' });
 });
-$('#clearBtn').addEventListener('click', () => { $('#output').textContent = ''; });
+$('#clearBtn').addEventListener('click', () => { $('#output').textContent = ''; clearResults(); });
 
 function setRunning(on) {
   $('#runBtn').disabled = on;
@@ -2223,10 +2373,14 @@ function markStatus(state) {
 // ─────────────────────────────────────────────────────────────────────
 const out = $('#output');
 function appendLine(s) {
-  // Convert ANSI color escapes to spans, drop other escape sequences.
   const html = ansiToHtml(s);
   out.insertAdjacentHTML('beforeend', html);
   out.scrollTop = out.scrollHeight;
+  for (const line of s.split('\n')) {
+    if (!line.trim()) continue;
+    const r = parseResultLine(line);
+    if (r) addResult(r);
+  }
 }
 function ansiToHtml(s) {
   // Strip cursor/erase sequences, keep colors.
@@ -2239,6 +2393,137 @@ function ansiToHtml(s) {
     return c ? `<span class="ansi-${c}">` : '';
   });
   return escapeHtml(s).replace(/&lt;\/span&gt;/g, '</span>').replace(/&lt;span class="ansi-(\d+)"&gt;/g, '<span class="ansi-$1">');
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// Live results table — parses log lines for per-client pass/fail
+// ─────────────────────────────────────────────────────────────────────
+const liveResults = [];
+let pendingClient = null;          // { name, pass } from "TEST COMPLETED/FAILED FOR:" line
+let pendingFlexClient = null;      // "JOURNEY REPORT — X" → next "N passed" line
+let pendingFlexLines = 0;
+
+function stripAnsi(s) { return s.replace(/\x1b?\[[\d;]*m|\x1b?\[[?0-9;]*[A-HJKSTfhlmsu]/g, ''); }
+
+function cleanClientName(raw) {
+  return raw.replace(/^[⭐★\s]+/, '').trim();
+}
+
+function parseResultLine(raw) {
+  const s = stripAnsi(raw);
+
+  // ── SPC / V1 / Mini Mall: per-client completion markers ──
+
+  // "✅ TEST COMPLETED FOR: ClientName" = PASSED
+  const completedMatch = s.match(/TEST COMPLETED FOR:\s*(.+?)$/);
+  if (completedMatch) {
+    pendingClient = { name: cleanClientName(completedMatch[1]), pass: true };
+    return null;
+  }
+
+  // "❌ TEST FAILED FOR: ClientName" = FAILED
+  const failedMatch = s.match(/TEST FAILED FOR:\s*(.+?)$/);
+  if (failedMatch) {
+    pendingClient = { name: cleanClientName(failedMatch[1]), pass: false };
+    return null;
+  }
+
+  // "📊 Result: ..." or "📊 Final Result: ..." — message for passed tests
+  if (pendingClient) {
+    const resultMatch = s.match(/(?:Final\s+)?Result:\s*(.+?)$/);
+    if (resultMatch) {
+      const r = { client: pendingClient.name, pass: pendingClient.pass, msg: resultMatch[1].trim() };
+      pendingClient = null;
+      return r;
+    }
+
+    // "💥 Error: ..." — message for failed tests
+    const errorMatch = s.match(/Error:\s*(.+?)$/);
+    if (errorMatch) {
+      const r = { client: pendingClient.name, pass: pendingClient.pass, msg: errorMatch[1].trim() };
+      pendingClient = null;
+      return r;
+    }
+  }
+
+  // End-of-run summary table rows — update existing results or add new ones
+  const tableRow = s.match(/^\s*\d+\s*\|\s*(.+?)\s*\|\s*(.+?)\s*\|\s*(.+?(?:PASSED|FAILED).*?)\s*\|\s*(.*)$/);
+  if (tableRow) {
+    const col1 = tableRow[1].trim();
+    const col2 = tableRow[2].trim();
+    const passed = /PASSED/i.test(tableRow[3]);
+    const msg = tableRow[4].trim();
+    const isFmsCol = /^(?:SiteLink|Yardi|storEDGE|SSM|Unknown)$/i.test(col1);
+    const client = isFmsCol ? col2 : col1;
+    const existing = liveResults.find(r => r.client === client);
+    if (existing) {
+      existing.pass = passed;
+      existing.msg = msg;
+      renderResults();
+      return null;
+    }
+    return { client, pass: passed, msg };
+  }
+
+  // ── Flex journey report ──
+
+  const flexReport = s.match(/JOURNEY REPORT\s*[—–-]+\s*(.+?)$/);
+  if (flexReport) {
+    pendingFlexClient = flexReport[1].trim();
+    pendingFlexLines = 6;
+    return null;
+  }
+
+  if (pendingFlexClient) {
+    pendingFlexLines--;
+    const flexSummary = s.match(/(\d+)\s+passed.*?(\d+)\s+failed/);
+    if (flexSummary) {
+      const passed = parseInt(flexSummary[1], 10);
+      const failed = parseInt(flexSummary[2], 10);
+      const client = pendingFlexClient;
+      pendingFlexClient = null;
+      return { client, pass: failed === 0, msg: failed > 0 ? `${passed} passed, ${failed} failed` : `${passed} passed — all checks OK` };
+    }
+    const flexAllPass = s.match(/(\d+)\s+passed/);
+    if (flexAllPass && !s.includes('failed')) {
+      const client = pendingFlexClient;
+      pendingFlexClient = null;
+      return { client, pass: true, msg: `${flexAllPass[1]} passed — all checks OK` };
+    }
+    if (pendingFlexLines <= 0) pendingFlexClient = null;
+  }
+
+  return null;
+}
+
+function addResult(r) {
+  liveResults.push(r);
+  renderResults();
+}
+
+function renderResults() {
+  const table = $('#results-table');
+  const count = $('#results-count');
+  if (!table) return;
+  const passed = liveResults.filter(r => r.pass).length;
+  const failed = liveResults.filter(r => !r.pass).length;
+  count.textContent = `${liveResults.length} done` + (failed ? ` · ${failed} failed` : '');
+  count.style.color = failed ? '#ef6678' : '';
+  table.innerHTML = `<table><thead><tr><th></th><th>Client</th><th>Result</th></tr></thead><tbody>${
+    liveResults.map(r => `<tr class="${r.pass ? 'pass' : 'fail'}"><td>${r.pass ? '✓' : '✗'}</td><td>${escapeHtml(r.client)}</td><td class="res-msg" title="${escapeAttr(r.msg)}">${escapeHtml(r.msg)}</td></tr>`).join('')
+  }</tbody></table>`;
+  table.scrollTop = table.scrollHeight;
+}
+
+function clearResults() {
+  liveResults.length = 0;
+  pendingClient = null;
+  pendingFlexClient = null;
+  pendingFlexLines = 0;
+  const table = $('#results-table');
+  const count = $('#results-count');
+  if (table) table.innerHTML = '<div class="results-empty">Waiting for run...<br/>Results will appear here<br/>as each client finishes.</div>';
+  if (count) count.textContent = '';
 }
 
 // ─────────────────────────────────────────────────────────────────────

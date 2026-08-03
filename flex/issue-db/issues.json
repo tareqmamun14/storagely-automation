@@ -21,11 +21,12 @@
         }
       ],
       "firstSeen": "2026-07-22T21:51:26.338Z",
-      "lastSeen": "2026-07-23T11:58:40.100Z",
-      "occurrences": 2,
+      "lastSeen": "2026-08-03T20:02:15.905Z",
+      "occurrences": 6,
       "urls": [
         "https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd",
-        "https://minimallstorage.com/storage-units/ohio/carroll/columbus-lancaster-road"
+        "https://minimallstorage.com/storage-units/ohio/carroll/columbus-lancaster-road",
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
     },
     {
@@ -48,11 +49,12 @@
         }
       ],
       "firstSeen": "2026-07-22T21:51:26.338Z",
-      "lastSeen": "2026-07-23T11:58:40.100Z",
-      "occurrences": 2,
+      "lastSeen": "2026-08-03T20:02:15.905Z",
+      "occurrences": 6,
       "urls": [
         "https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd",
-        "https://minimallstorage.com/storage-units/ohio/carroll/columbus-lancaster-road"
+        "https://minimallstorage.com/storage-units/ohio/carroll/columbus-lancaster-road",
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
     },
     {
@@ -75,11 +77,12 @@
         }
       ],
       "firstSeen": "2026-07-22T21:52:28.163Z",
-      "lastSeen": "2026-07-23T12:00:18.731Z",
-      "occurrences": 2,
+      "lastSeen": "2026-08-03T20:04:17.957Z",
+      "occurrences": 5,
       "urls": [
         "https://www.storagestar.com/storage-units/colorado/avon/910-nottingham-road",
-        "https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive"
+        "https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive",
+        "https://www.storagestar.com/storage-units/florida/marco-island/east-elkcam-circle"
       ]
     },
     {
@@ -91,7 +94,7 @@
       "area": "seohead",
       "check": "exactly one <h1>",
       "title": "seohead: exactly one <h1>",
-      "detail": "2 <h1> element(s)",
+      "detail": "[known:informed #storagestar-seohead-exactly-one-h1] 2 <h1> element(s)",
       "source": "suite",
       "status": "informed",
       "slackChannel": "",
@@ -102,50 +105,8 @@
         }
       ],
       "firstSeen": "2026-07-22T21:52:28.163Z",
-      "lastSeen": "2026-07-22T21:52:28.163Z",
-      "occurrences": 1,
-      "urls": [
-        "https://www.storagestar.com/storage-units/colorado/avon/910-nottingham-road"
-      ]
-    },
-    {
-      "id": "storagestar-integrity-star-rating-is-consistent-across-the-p",
-      "signatures": [
-        "storagestar|integrity|star-rating-is-consistent-across-the-page"
-      ],
-      "client": "storagestar",
-      "area": "integrity",
-      "check": "star rating is consistent across the page",
-      "title": "integrity: star rating is consistent across the page",
-      "detail": "MISMATCH — page shows 4.7 vs 5 ★ in different spots",
-      "source": "suite",
-      "status": "false-flag",
-      "slackChannel": "",
-      "comments": [],
-      "firstSeen": "2026-07-22T21:52:28.163Z",
-      "lastSeen": "2026-07-22T21:52:28.163Z",
-      "occurrences": 1,
-      "urls": [
-        "https://www.storagestar.com/storage-units/colorado/avon/910-nottingham-road"
-      ]
-    },
-    {
-      "id": "storagestar-exploratory-h1-single",
-      "signatures": [
-        "storagestar|exploratory|h1-single"
-      ],
-      "client": "storagestar",
-      "area": "exploratory",
-      "check": "h1-single",
-      "title": "[exploratory] h1-single: 2 <h1> elements (expected exactly 1)  ·  (h1 count = 2)  ·  why: Location pages live on lo",
-      "detail": "2 <h1> elements (expected exactly 1)  ·  (h1 count = 2)  ·  why: Location pages live on local SEO; multiple/missing h1 dilutes the page topic.",
-      "source": "exploratory",
-      "status": "candidate",
-      "slackChannel": "",
-      "comments": [],
-      "firstSeen": "2026-07-22T21:52:28.163Z",
-      "lastSeen": "2026-07-22T21:52:28.163Z",
-      "occurrences": 1,
+      "lastSeen": "2026-07-30T20:06:13.476Z",
+      "occurrences": 2,
       "urls": [
         "https://www.storagestar.com/storage-units/colorado/avon/910-nottingham-road"
       ]
@@ -232,6 +193,165 @@
       "occurrences": 1,
       "urls": [
         "https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive"
+      ]
+    },
+    {
+      "id": "minimall-units-no-duplicate-unit-listings-fr-ca",
+      "signatures": [
+        "minimall|units|no-duplicate-unit-listings-unique-unit-ids-per-list"
+      ],
+      "client": "minimall",
+      "area": "units",
+      "check": "no duplicate unit listings (unique unit ids per list)",
+      "title": "units: duplicate unit IDs on French SiteLink page (Sainte-Thérèse)",
+      "detail": "[known:acknowledged #minimall-units-no-duplicate-unit-listings-fr-ca] 3 unit(s) duplicated within one list: 6186485×2, 6186485×6, 6186485×3 (12 cards, 1 unique)",
+      "source": "suite",
+      "status": "acknowledged",
+      "slackChannel": "",
+      "comments": [
+        {
+          "text": "FMS/SiteLink data issue — the API returns the same unit_id across different size categories on the fr-ca Place Sicard location. Page renders correctly; IDs just aren't unique.",
+          "at": "2026-08-03T00:00:00.000Z"
+        }
+      ],
+      "firstSeen": "2026-08-03T14:12:15.000Z",
+      "lastSeen": "2026-08-03T14:20:50.567Z",
+      "occurrences": 2,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-seo-content-missing-fr-ca",
+      "signatures": [
+        "minimall|seo|2-seo-content-headings",
+        "minimall|seo|1-substantial-seo-paragraph",
+        "minimall|seo|seo-block-has-internal-links"
+      ],
+      "client": "minimall",
+      "area": "seo",
+      "check": "SEO content block (headings + paragraphs + links)",
+      "title": "seo: French page missing SEO content (Sainte-Thérèse)",
+      "detail": "[known:acknowledged #minimall-seo-content-missing-fr-ca] *Frais d'activation uniques de 35 $ applicables à toutes les unités. + Frais et taxes applicables. Facturation de 28 jours (cycles de 4 semaines). Le taux d'introduction s'applique jusqu'à 16 semaines (le cas échéant, consultez le bail pour plus de détails). 4 semaines libres s'appliquent au taux d'introduction et ne le sont pas incluez les ",
+      "source": "suite",
+      "status": "acknowledged",
+      "slackChannel": "",
+      "comments": [
+        {
+          "text": "French fr-ca page doesn't have SEO content authored yet — content/template gap, not a script issue.",
+          "at": "2026-08-03T00:00:00.000Z"
+        }
+      ],
+      "firstSeen": "2026-08-03T14:12:15.000Z",
+      "lastSeen": "2026-08-03T14:20:50.567Z",
+      "occurrences": 2,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "storagestar-units-filter-control-present-above-unit-list",
+      "signatures": [
+        "storagestar|units|filter-control-present-above-unit-list"
+      ],
+      "client": "storagestar",
+      "area": "units",
+      "check": "Filter control present above unit list",
+      "title": "units: Filter control present above unit list",
+      "detail": "(missing)",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-07-30T20:06:13.476Z",
+      "lastSeen": "2026-07-30T20:06:13.476Z",
+      "occurrences": 1,
+      "urls": [
+        "https://www.storagestar.com/storage-units/colorado/avon/910-nottingham-road"
+      ]
+    },
+    {
+      "id": "storagestar-exploratory-h1-single",
+      "signatures": [
+        "storagestar|exploratory|h1-single"
+      ],
+      "client": "storagestar",
+      "area": "exploratory",
+      "check": "h1-single",
+      "title": "[exploratory] h1-single: 2 <h1> elements (expected exactly 1)  ·  (h1 count = 2)  ·  why: Location pages live on lo",
+      "detail": "2 <h1> elements (expected exactly 1)  ·  (h1 count = 2)  ·  why: Location pages live on local SEO; multiple/missing h1 dilutes the page topic.",
+      "source": "exploratory",
+      "status": "candidate",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-07-30T20:06:13.476Z",
+      "lastSeen": "2026-07-30T20:06:13.476Z",
+      "occurrences": 1,
+      "urls": [
+        "https://www.storagestar.com/storage-units/colorado/avon/910-nottingham-road"
+      ]
+    },
+    {
+      "id": "safeguard-units-filter-control-present-above-unit-list",
+      "signatures": [
+        "safeguard|units|filter-control-present-above-unit-list"
+      ],
+      "client": "safeguard",
+      "area": "units",
+      "check": "Filter control present above unit list",
+      "title": "units: Filter control present above unit list",
+      "detail": "(missing)",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-07-30T20:00:32.972Z",
+      "lastSeen": "2026-07-30T20:00:32.972Z",
+      "occurrences": 1,
+      "urls": [
+        "https://www.safeguardit.com/storage-units/connecticut/bridgeport/west-end-west-side"
+      ]
+    },
+    {
+      "id": "minimall-units-more-units-see-all-units-expander-present",
+      "signatures": [
+        "minimall|units|more-units-see-all-units-expander-present"
+      ],
+      "client": "minimall",
+      "area": "units",
+      "check": "\"More units / See All Units\" expander present",
+      "title": "units: \"More units / See All Units\" expander present",
+      "detail": "0 expander(s)",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-07-30T20:01:19.871Z",
+      "lastSeen": "2026-07-30T20:01:19.871Z",
+      "occurrences": 1,
+      "urls": [
+        "https://minimallstorage.com/storage-units/ohio/carroll/columbus-lancaster-road"
+      ]
+    },
+    {
+      "id": "minimall-promo-featured-limited-time-deal-rail-labelled",
+      "signatures": [
+        "minimall|promo|featured-limited-time-deal-rail-labelled"
+      ],
+      "client": "minimall",
+      "area": "promo",
+      "check": "Featured / Limited-time deal rail labelled",
+      "title": "promo: Featured / Limited-time deal rail labelled",
+      "detail": "featured=false, limited-time=false",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-03T20:02:15.905Z",
+      "lastSeen": "2026-08-03T20:02:15.905Z",
+      "occurrences": 1,
+      "urls": [
+        "https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd"
       ]
     }
   ]

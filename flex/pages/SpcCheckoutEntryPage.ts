@@ -45,8 +45,11 @@ export class SpcCheckoutEntryPage {
     const hasFirstName = await firstName.isVisible().catch(() => false);
 
     // 3) Money rendered — the SPC breakdown ("Total Due Today") or any $ amount.
+    //    French-Canadian format: "28,96 $" (number before $, comma decimal).
     const bodyText = await p.locator('body').innerText().catch(() => '');
-    const hasTotal = /total\s+due\s+today/i.test(bodyText) || /\$\s*\d[\d,]*(\.\d{2})?/.test(bodyText);
+    const hasTotal = /total\s+due\s+today/i.test(bodyText)
+      || /\$\s*\d[\d,]*(\.\d{2})?/.test(bodyText)
+      || /\d[\d\s,.]*\s*\$/.test(bodyText);
 
     // 4) Same facility context (INFO — some SPC templates only show the unit,
     //    not the facility name; a miss is reported, never failed).

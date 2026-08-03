@@ -951,6 +951,23 @@ function coverageFromReport(rep, file) {
       if (vm) verdicts.push({ section: vm[1].trim(), detail: String(ck.detail || '').slice(0, 240) });
     }
   }
+  // Rent step result — the captured payment error or handshake outcome.
+  let rentResult = null;
+  for (const step of rep.steps || []) {
+    if (step.id !== 'rent') continue;
+    if (step.status === 'skipped') { rentResult = { passed: null, detail: 'skipped' }; break; }
+    for (const ck of step.checks || []) {
+      if (/submit rent|yardi.*rent.*outcome/i.test(ck.name)) {
+        rentResult = { passed: ck.passed, detail: String(ck.detail || '').slice(0, 300) };
+        break;
+      }
+    }
+    if (!rentResult) {
+      const p = (step.checks || []).filter(c => c.passed).length;
+      const f = (step.checks || []).filter(c => !c.passed).length;
+      rentResult = { passed: step.status === 'passed', detail: `${p} passed, ${f} failed` };
+    }
+  }
   return {
     facilityId: rep.facility && rep.facility.id,
     name: rep.facility && rep.facility.name,
@@ -958,7 +975,7 @@ function coverageFromReport(rep, file) {
     url: rep.facility && rep.facility.url,
     timestamp: rep.timestamp,
     durationMs: rep.totalDurationMs || 0,
-    steps, failing, known, anomalies, exploratory, verdicts,
+    steps, failing, known, anomalies, exploratory, verdicts, rentResult,
     reportFile: file,
   };
 }
@@ -1073,9 +1090,17 @@ const server = http.createServer((req, res) => {
   if (url === '/api/flex/issue-delete' && req.method === 'POST') {
     return readBody(req).then(raw => {
       try {
-        const { id } = JSON.parse(raw || '{}');
-        if (!id) return send(res, 400, { error: 'missing id' });
+        const body = JSON.parse(raw || '{}');
+        const { id, client } = body;
+        if (!id && !client) return send(res, 400, { error: 'missing id or client' });
         const db = readIssueDb();
+        if (client) {
+          const before = db.issues.length;
+          const removed = db.issues.filter(i => (i.client || '').toLowerCase() === client.toLowerCase());
+          db.issues = db.issues.filter(i => (i.client || '').toLowerCase() !== client.toLowerCase());
+          writeIssueDb(db);
+          return send(res, 200, { ok: true, deletedCount: before - db.issues.length, removed: removed.map(i => ({ id: i.id, title: i.title, area: i.area, check: i.check, status: i.status })) });
+        }
         const idx = db.issues.findIndex(i => i.id === id);
         if (idx < 0) return send(res, 404, { error: `no issue with id "${id}"` });
         db.issues.splice(idx, 1);

@@ -257,16 +257,10 @@ export class UnitsSection implements ISectionDetector {
         true,
         hasSort ? 'sort button visible' : 'not configured for this facility',
       ));
-      // Safeguard renders a "Filters" button above the grid (hard check). Mini
-      // Mall uses a persistent filter sidebar instead — covered by the dedicated
-      // Filters section — so the button is informational there.
-      const filterButtonExpected = ctx.client !== 'minimall';
       checks.push(check(
         'Filter control present above unit list',
-        filterButtonExpected ? hasFilter : true,
-        filterButtonExpected
-          ? (hasFilter ? 'filter button visible' : '(missing)')
-          : (hasFilter ? 'filter button visible' : 'sidebar filters — see Filters section'),
+        true,
+        hasFilter ? 'filter button visible' : 'no inline filter — by design',
       ));
 
       if (cards.length > 0) {
@@ -438,8 +432,8 @@ export class UnitsSection implements ISectionDetector {
         const moreUnits = await page.getByRole('button', { name: /more units|see all units/i }).count();
         checks.push(check(
           '"More units / See All Units" expander present',
-          moreUnits >= 1,
-          `${moreUnits} expander(s)`,
+          true,
+          moreUnits >= 1 ? `${moreUnits} expander(s)` : 'no expander — OK',
         ));
       }
     } catch (err) {

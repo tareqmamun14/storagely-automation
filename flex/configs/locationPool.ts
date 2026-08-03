@@ -34,6 +34,7 @@ export const LOCATION_POOL: Record<string, string[]> = {
   minimall: [
     'https://minimallstorage.com/storage-units/ohio/carroll/columbus-lancaster-road',
     'https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd',
+    // French SiteLink page is alwaysRun in the registry — not in the rotation pool.
   ],
   safeguard: [
     'https://www.safeguardit.com/storage-units/connecticut/bridgeport/west-end-west-side',
