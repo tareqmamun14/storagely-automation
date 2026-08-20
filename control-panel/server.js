@@ -56,6 +56,8 @@ const FMS_BY_SLUG = {
   'gatekeeperstoragega':      'SiteLink',
   'storage-boss':             'SiteLink',
   'storagedepotla':           'SiteLink',
+  'safeguard-self-storage':   'SiteLink',
+  'safeguardit':              'SiteLink',
   'selfstorage':              'SiteLink',
   'easy-stop-storage':        'SiteLink',
   'easystopstorage':          'SiteLink',
@@ -222,6 +224,38 @@ function parseFlexFacilities() {
   } catch { return []; }
 }
 
+// ───────── Parse reservation targets from configs/reservations.ts ─────────
+// Regex-based like parseUrlsConfig — drives the panel's 📝 Reservation card.
+function parseReservationTargets() {
+  try {
+    const file = fs.readFileSync(path.join(ROOT, 'configs', 'reservations.ts'), 'utf8');
+    const m = file.match(/export const RESERVATION_TARGETS[^=]*=\s*\[([\s\S]*?)\n\];/);
+    if (!m) return [];
+    const inner = m[1];
+    const keyRe = /key:\s*'([^']+)'/g;
+    const hits = [];
+    let km;
+    while ((km = keyRe.exec(inner))) {
+      // Skip commented-out entries.
+      const lineStart = inner.lastIndexOf('\n', km.index) + 1;
+      if (inner.slice(lineStart, km.index).trim().startsWith('//')) continue;
+      hits.push({ key: km[1], start: km.index });
+    }
+    return hits.map((k, i) => {
+      const slice = inner.slice(k.start, hits[i + 1] ? hits[i + 1].start : inner.length);
+      const pick = (name) => (slice.match(new RegExp(name + ":\\s*'([^']+)'")) || [])[1] || '';
+      return {
+        key: k.key,
+        label: pick('label') || k.key,
+        fms: pick('fms') || '—',
+        driver: pick('driver') || '',
+        staging: pick('staging') || null,
+        production: pick('production') || null,
+      };
+    });
+  } catch { return []; }
+}
+
 // ───────── /api/config ─────────
 function buildConfigPayload() {
   const parsed = parseUrlsConfig();
@@ -275,6 +309,7 @@ function buildConfigPayload() {
       v1:  { staging: decorate(parsed.v1.staging),  production: decorate(parsed.v1.production)  },
     },
     buildClients: buildInstanceClients(),
+    reservations: parseReservationTargets(),
     datasync: {
       // Data Sync uses 3 fixed FMS clients; environment & corp pwd are options.
       clients: [
@@ -345,6 +380,12 @@ function buildRunCommand(req) {
   if (req.minimallrent?.customSitelink) env.STORAGELY_MMRENT_CUSTOM_SITELINK = req.minimallrent.customSitelink;
   if (req.minimallrent?.customYardi)    env.STORAGELY_MMRENT_CUSTOM_YARDI    = req.minimallrent.customYardi;
   if (req.minimallrent?.filter)         env.STORAGELY_MMRENT_FILTER          = req.minimallrent.filter;
+  // 📝 Reservation submissions — enabled clients (configs/reservations.ts keys).
+  // The owning suite (SPC / Flex journey) submits a REAL reservation on that
+  // client's designated location and requires the confirmation message.
+  if (Array.isArray(req.reservation) && req.reservation.length) {
+    env.STORAGELY_RESERVATION = req.reservation.join(',');
+  }
   if (req.flex?.password)              env.FLEX_PASSWORD                   = req.flex.password;
   if (req.flex?.customUrl)             env.FLEX_CUSTOM_URL                 = req.flex.customUrl;
   // Flex has its OWN prod/test toggle, independent of the top-level Storagely env.

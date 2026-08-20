@@ -379,6 +379,121 @@ export class LiveFacilityPage {
     return { ok: checks.every(c => c.passed), checks };
   }
 
+  /**
+   * 📝 RESERVATION SUBMISSION (Flex reserve modal — e.g. Safeguard Addison).
+   * Opens the first unit's Reserve modal, fills tenant details, ensures the
+   * SMS-consent toggle is ON, picks Today as the move-in date, clicks
+   * "Complete Reservation", then races the confirmation message against an
+   * error — an error, or silence, is a FAILURE. This submits a REAL
+   * reservation; the journey records it for cancellation.
+   *
+   * DOM verified live on safeguardit.com/…/addison/lake-street (2026-08-21):
+   * role=dialog "Finalize Reservation" · inputs name=first_name/last_name/
+   * email/phone · SMS-consent checkbox (default-checked) · Today/Tomorrow/
+   * Calendar move-in buttons · "Complete Reservation" submit · dialog shows
+   * "SELECTED UNIT 8' x 3' … $32.50/mo".
+   */
+  async submitReservation(tenant: { firstName: string; lastName: string; email: string; phone: string }):
+    Promise<{ ok: boolean; message: string; unit: string }> {
+    const page = this.page;
+    console.log('\n📝 RESERVATION: opening the reserve modal...');
+
+    const reserveBtn = page.locator('button:visible').filter({ hasText: /^Reserve$/ }).first();
+    await reserveBtn.waitFor({ state: 'visible', timeout: 15_000 });
+    await reserveBtn.scrollIntoViewIfNeeded({ timeout: 5000 }).catch(() => {});
+    await reserveBtn.click({ timeout: 10_000 });
+
+    const dialog = page.locator('[role="dialog"]').first();
+    await dialog.waitFor({ state: 'visible', timeout: 15_000 });
+    console.log('  ✓ Reserve modal open (role=dialog)');
+
+    // Unit identity BEFORE submitting — feeds the cancellation record.
+    const dlgText = (await dialog.innerText().catch(() => '')) || '';
+    const unit = dlgText.split('\n').map(s => s.trim()).filter(Boolean)
+      .slice(0, 8).filter(s => !/finalize|when are you moving/i.test(s)).join(' · ').slice(0, 160)
+      || '(unit details not captured)';
+    console.log(`  ✓ Unit: ${unit}`);
+
+    // Tenant details.
+    const fill = async (name: string, value: string, label: string) => {
+      const el = dialog.locator(`input[name="${name}"]`).first();
+      await el.click();
+      await el.fill(value);
+      console.log(`  ✓ ${label}: ${value}`);
+    };
+    await fill('first_name', tenant.firstName, 'First name');
+    await fill('last_name', tenant.lastName, 'Last name');
+    await fill('email', tenant.email, 'Email');
+    await fill('phone', tenant.phone, 'Phone');
+
+    // Move-in date — pick Today explicitly.
+    const todayBtn = dialog.locator('button').filter({ hasText: /^today/i }).first();
+    if (await todayBtn.isVisible().catch(() => false)) {
+      await todayBtn.click().catch(() => {});
+      console.log('  ✓ Move-in date: Today');
+    }
+
+    // SMS-consent toggle ("By providing your phone number, you…") — must be ON.
+    const consent = dialog.locator('input[type="checkbox"]').first();
+    if (await consent.count().catch(() => 0)) {
+      const on = await consent.isChecked().catch(() => false);
+      if (!on) await consent.check({ force: true }).catch(() => {});
+      console.log(`  ✓ SMS consent toggle: ${on ? 'already enabled' : 'enabled'}`);
+    }
+
+    console.log('  🖱️ Clicking Complete Reservation...');
+    await dialog.locator('button').filter({ hasText: /complete reservation/i }).first().click({ timeout: 10_000 });
+
+    // Race confirmation vs error — grab whichever appears first, fast.
+    const started = Date.now();
+    while (Date.now() - started < 30_000) {
+      const outcome = await page.evaluate(() => {
+        const vis = (el: Element) => !!((el as HTMLElement).offsetWidth || (el as HTMLElement).offsetHeight);
+        const clean = (s: string) => s.replace(/\s+/g, ' ').trim();
+        for (const el of document.querySelectorAll('[data-id*="toast"], .toast, [role="alert"], .alert-danger, [class*="error"], [class*="Error"]')) {
+          const t = clean(el.textContent || '');
+          if (vis(el) && t && /error|invalid|failed|unable|wrong|not available|already|required/i.test(t)) {
+            return { kind: 'error', text: t.slice(0, 300) };
+          }
+        }
+        for (const el of document.querySelectorAll('[role="dialog"], [class*="confirm"], [class*="success"], [class*="thank"]')) {
+          const t = clean(el.textContent || '');
+          if (vis(el) && t && /(reservation|reserved|request).{0,80}(confirm|success|complete|received)|thank(s| you)|confirmation (number|#|email)|successfully/i.test(t)) {
+            return { kind: 'ok', text: t.slice(0, 400) };
+          }
+        }
+        return null;
+      }).catch(() => null);
+      if (outcome) {
+        if (outcome.kind === 'ok') {
+          console.log(`  ✅ RESERVATION CONFIRMED: ${outcome.text}`);
+          await this.dismissReservationModal();
+          return { ok: true, message: outcome.text, unit };
+        }
+        console.log(`  ❌ RESERVATION ERROR: ${outcome.text}`);
+        await this.dismissReservationModal();
+        return { ok: false, message: outcome.text, unit };
+      }
+      await page.waitForTimeout(150);
+    }
+    console.log('  ❌ RESERVATION: no confirmation AND no error within 30s — treating as FAILURE');
+    await this.dismissReservationModal();
+    return { ok: false, message: 'No confirmation or error message appeared within 30s of submitting the reservation', unit };
+  }
+
+  /** Close whatever reservation/confirmation modal is open so the journey's
+   *  next steps (rent flow) see a clean listing page. */
+  private async dismissReservationModal(): Promise<void> {
+    const page = this.page;
+    for (let i = 0; i < 3; i++) {
+      const dlg = page.locator('[role="dialog"]').first();
+      if (!(await dlg.isVisible().catch(() => false))) return;
+      await page.getByRole('button', { name: /close|done|ok|×/i }).first().click({ timeout: 1500 }).catch(() => {});
+      await page.keyboard.press('Escape').catch(() => {});
+      await page.waitForTimeout(400);
+    }
+  }
+
   // ── Quality checks ─────────────────────────────────────────────────────
 
   getConsoleErrors(): string[] {

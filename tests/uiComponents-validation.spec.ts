@@ -1317,7 +1317,7 @@ function buildImageScanTargets(): LocationImageTarget[] {
     { fms: 'storEDGE', version: 'V1', label: 'Distinct Storage — New Milford, CT (storEDGE)',
       url: 'https://distinctstorage.com/storage-units/connecticut/new-milford/kent-road' },
     { fms: 'SiteLink', version: 'V2', label: 'Bluebird Storage — Calgary, AB (SiteLink)',
-      url: 'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland' },
+      url: 'https://bluebirdstorage.ca/storage-units/alberta/calgary/blackfoot' },
     { fms: 'SSM',      version: 'V2', label: 'Storage Star — Colorado Springs, CO (SSM)',
       url: 'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive' },
     { fms: 'SSM',      version: 'V2', label: 'Storage Star — Anchorage, AK (SSM)',

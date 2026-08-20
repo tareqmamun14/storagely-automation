@@ -78,7 +78,7 @@ export const FMS_PLATFORM: Record<string, string> = {
 export const SINGLE_PAGE_RENT_URLS = {
   [Environment.STAGING]: [
     'https://test.staging.storagely-api.com/columbia-self-storage/storage-units/new-jersey/south-plainfield/park-avenue',     // Columbia       | storEDGE
-    'https://test.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/mayland',                           // Bluebird       | SiteLink
+    'https://test.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/blackfoot',                           // Bluebird       | SiteLink
     'https://test.staging.storagely-api.com/sunbirdstorage/storage-units/nc/winston-salem/country-club',                      // Sunbird        | SiteLink
     'https://test.staging.storagely-api.com/purely-storage/storage-units/washington/pasco/north-road-44',                     // Purely         | storEDGE
     'https://test.staging.storagely-api.com/yourway-storage/storage-units/georgia/augusta/walton-way-ext',                    // YourWay        | SSM
@@ -87,11 +87,12 @@ export const SINGLE_PAGE_RENT_URLS = {
     'https://test.staging.storagely-api.com/storsafe-self-storage/storage-units/florida/melbourne/north-highway-1',           // Storsafe       | storEDGE
     'https://test.staging.storagely-api.com/smart-self-storage-ohio/storage-units/ohio/macedonia/bavaria-road',             // Smart Ohio     | SSM
     'https://test.staging.storagely-api.com/easy-stop-storage/storage-units/texas/bushland/south-fm-2381',                  // Easy Stop      | SiteLink
+    'https://test.staging.storagely-api.com/safeguard-self-storage/storage-units/connecticut/bridgeport/west-end-west-side', // Safeguard      | SiteLink — staging/build only: prod is Flex (run from the Flex card). Legacy location page → step-four SPC. Corp code via panel Build card.
     //'https://test.staging.storagely-api.com/mini-mall-storage/storage-units/alabama/courtland/highway-33',                  // Mini Mall      | SiteLink (disabled)
   ],
   [Environment.PRODUCTION]: [
     'https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue',    // Columbia       | storEDGE
-    'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland',                             // Bluebird       | SiteLink
+    'https://bluebirdstorage.ca/storage-units/alberta/calgary/blackfoot',                             // Bluebird       | SiteLink
     'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club',                       // Sunbird        | SiteLink
     'https://purelystorage.com/storage-units/washington/pasco/north-road-44',                       // Purely         | storEDGE
     'https://www.yourwaystorage.com/storage-units/georgia/augusta/walton-way-ext',                  // YourWay        | SSM
@@ -107,7 +108,7 @@ export const SINGLE_PAGE_RENT_URLS = {
 // --- 2b. FMS Platform for each SPC URL (used for logging) ---
 export const SINGLE_PAGE_FMS_PLATFORM: Record<string, string> = CURRENT_ENVIRONMENT === Environment.STAGING ? {
   'https://test.staging.storagely-api.com/columbia-self-storage/storage-units/new-jersey/south-plainfield/park-avenue': 'storEDGE',
-  'https://test.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/mayland':                       'SiteLink',
+  'https://test.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/blackfoot':                       'SiteLink',
   'https://test.staging.storagely-api.com/sunbirdstorage/storage-units/nc/winston-salem/country-club':                  'SiteLink',
   'https://test.staging.storagely-api.com/purely-storage/storage-units/washington/pasco/north-road-44':                 'storEDGE',
   'https://test.staging.storagely-api.com/yourway-storage/storage-units/georgia/augusta/walton-way-ext':                'SSM',
@@ -116,10 +117,11 @@ export const SINGLE_PAGE_FMS_PLATFORM: Record<string, string> = CURRENT_ENVIRONM
   'https://test.staging.storagely-api.com/storsafe-self-storage/storage-units/florida/melbourne/north-highway-1':      'storEDGE',
   'https://test.staging.storagely-api.com/smart-self-storage-ohio/storage-units/ohio/macedonia/bavaria-road':           'SSM',
   'https://test.staging.storagely-api.com/easy-stop-storage/storage-units/texas/bushland/south-fm-2381':               'SiteLink',
+  'https://test.staging.storagely-api.com/safeguard-self-storage/storage-units/connecticut/bridgeport/west-end-west-side': 'SiteLink',
   //'https://test.staging.storagely-api.com/mini-mall-storage/storage-units/alabama/courtland/highway-33':              'SiteLink',
 } : {
   'https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue': 'storEDGE',
-  'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland':                          'SiteLink',
+  'https://bluebirdstorage.ca/storage-units/alberta/calgary/blackfoot':                          'SiteLink',
   'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club':                    'SiteLink',
   'https://purelystorage.com/storage-units/washington/pasco/north-road-44':                    'storEDGE',
   'https://www.yourwaystorage.com/storage-units/georgia/augusta/walton-way-ext':               'SSM',
@@ -137,7 +139,7 @@ export const SINGLE_PAGE_FMS_PLATFORM: Record<string, string> = CURRENT_ENVIRONM
 // Add/remove URLs here when a client enables/disables captcha.
 export const CAPTCHA_CUSTOMER_URLS: string[] = CURRENT_ENVIRONMENT === Environment.STAGING ? [
   //'https://test.staging.storagely-api.com/columbia-self-storage/storage-units/new-jersey/south-plainfield/park-avenue', // Columbia
-  //'https://test.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/mayland',                       // Bluebird
+  //'https://test.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/blackfoot',                       // Bluebird
   //'https://test.staging.storagely-api.com/sunbirdstorage/storage-units/nc/winston-salem/country-club',                  // Sunbird
   //'https://test.staging.storagely-api.com/purely-storage/storage-units/washington/pasco/north-road-44',                 // Purely
   //'https://test.staging.storagely-api.com/yourway-storage/storage-units/georgia/augusta/walton-way-ext',                // YourWay
@@ -146,7 +148,7 @@ export const CAPTCHA_CUSTOMER_URLS: string[] = CURRENT_ENVIRONMENT === Environme
   //'https://test.staging.storagely-api.com/storsafe-self-storage/storage-units/florida/melbourne/north-highway-1',     // Storsafe (no captcha)
 ] : [
   'https://www.columbiaselfstorage.com/storage-units/new-jersey/south-plainfield/park-avenue', // Columbia
-  'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland',                          // Bluebird
+  'https://bluebirdstorage.ca/storage-units/alberta/calgary/blackfoot',                          // Bluebird
   'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club',                    // Sunbird
   'https://purelystorage.com/storage-units/washington/pasco/north-road-44',                    // Purely
   'https://www.yourwaystorage.com/storage-units/georgia/augusta/walton-way-ext',               // YourWay
@@ -261,6 +263,7 @@ const _BASE_STAGING_CORP_CODE_CLIENTS: Record<string, string> = {
   'storage-boss':             'P?artie42!',
   'easy-stop-storage':        'E6oVs7YRD5Crst!',
   'gatekeeper-self-storage':  'Oct#2024!!',
+  'safeguard-self-storage':   '$Afe*1922',
 };
 
 // Optional Control-Panel runtime overrides (slug → corp code).
@@ -300,7 +303,7 @@ export const PRICING_VALIDATION_LOCATIONS: PricingLocationConfig[] = [
   { url: 'https://www.columbiaselfstorage.com/storage-units/arizona/cottonwood/az-260',                                        fms: 'storEDGE', version: 'V2', label: 'Columbia Self Storage — Cottonwood, AZ' },
   // SiteLink
   { url: 'https://app.storagely.io/green-valley-storage/storage-units/arizona/green-valley/west-duval-commerce-court',          fms: 'SiteLink', version: 'V2', label: 'Green Valley (Argus) — Green Valley, AZ' },
-  { url: 'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland',                                                   fms: 'SiteLink', version: 'V2', label: 'Bluebird Storage — Calgary, AB' },
+  { url: 'https://bluebirdstorage.ca/storage-units/alberta/calgary/blackfoot',                                                   fms: 'SiteLink', version: 'V2', label: 'Bluebird Storage — Calgary, AB' },
   // SSM
   { url: 'https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive',                                  fms: 'SSM',      version: 'V2', label: 'Storage Star — Colorado Springs, CO' },
 
@@ -360,7 +363,7 @@ export const UNIT_FEATURES_CONFLICT_LOCATIONS: UnitFeaturesLocationConfig[] = [
   { url: 'https://www.storsafe.com/storage-units/iowa/altoona/34th-avenue-southwest',                                          fms: 'storEDGE', label: 'StorSafe — Altoona, IA'                          },
 
   // --- SiteLink clients ---
-  { url: 'https://bluebirdstorage.ca/storage-units/alberta/calgary/mayland',                                                   fms: 'SiteLink', label: 'Bluebird Storage — Calgary, AB'                  },
+  { url: 'https://bluebirdstorage.ca/storage-units/alberta/calgary/blackfoot',                                                   fms: 'SiteLink', label: 'Bluebird Storage — Calgary, AB'                  },
   { url: 'https://sunbirdstorage.com/storage-units/nc/winston-salem/country-club',                                             fms: 'SiteLink', label: 'Sunbird Storage — Winston-Salem, NC'             },
   { url: 'https://ww2.redrocksstorage.com/storage-units/colorado/aurora/east-14th-avenue',                                     fms: 'SiteLink', label: 'Red Rocks Storage — Aurora, CO'                  },
   { url: 'https://rhino-storage.com/storage-units/louisiana/covington/philip-drive',                                           fms: 'SiteLink', label: 'Rhino Storage — Covington, LA'                   },

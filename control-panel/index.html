@@ -215,20 +215,36 @@
   }
   :root[data-theme="light"] #output { background: #0e1117; color: #e7eaf2; }
   /* Console view: split layout — log + results side by side */
-  .console-split { display: flex; gap: 10px; }
+  .console-split { display: flex; gap: 6px; }
   .console-log { flex: 1; min-width: 0; }
-  .console-results { width: 380px; flex-shrink: 0; display: flex; flex-direction: column; }
+  .console-results { width: 480px; min-width: 300px; max-width: 75vw; flex-shrink: 0; display: flex; flex-direction: column; }
+  /* Drag bar between log and results — grab to resize the results pane */
+  .console-resizer {
+    flex: 0 0 8px; cursor: col-resize; border-radius: 4px; position: relative;
+    background: transparent; touch-action: none;
+  }
+  .console-resizer::after {
+    content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 3px; height: 44px; border-radius: 2px; background: var(--line);
+  }
+  .console-resizer:hover, .console-resizer.dragging { background: var(--accent-soft); }
+  .console-resizer:hover::after, .console-resizer.dragging::after { background: var(--accent); }
   #view-console #output { min-height: calc(100vh - 230px); max-height: calc(100vh - 230px); }
   #results-panel { background: #0a0c11; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; min-height: calc(100vh - 230px); max-height: calc(100vh - 230px); }
   :root[data-theme="light"] #results-panel { background: #0e1117; }
   #results-table { flex: 1; overflow: auto; }
-  #results-table table { width: 100%; border-collapse: collapse; font: 12px/1.5 ui-monospace, Menlo, Consolas, monospace; }
+  /* table-layout: fixed — the Result column absorbs all spare width (no
+     horizontal scrollbar); long text ellipsizes and expands on hover. */
+  #results-table table { width: 100%; border-collapse: collapse; table-layout: fixed; font: 12px/1.5 ui-monospace, Menlo, Consolas, monospace; }
   #results-table th { position: sticky; top: 0; background: #12151e; text-align: left; padding: 6px 10px; font-weight: 600; font-size: 10px; letter-spacing: .4px; text-transform: uppercase; color: #707888; border-bottom: 1px solid #1e2230; }
-  #results-table td { padding: 6px 10px; border-bottom: 1px solid #1a1e2a; vertical-align: top; color: #d6dae3; }
+  #results-table th:nth-child(1) { width: 28px; }
+  #results-table th:nth-child(2) { width: 32%; }
+  #results-table th:nth-child(3) { width: 82px; }
+  #results-table td { padding: 6px 10px; border-bottom: 1px solid #1a1e2a; vertical-align: top; color: #d6dae3; overflow-wrap: break-word; }
   #results-table tr.pass td:first-child { color: #6dd4a4; font-weight: 700; }
   #results-table tr.fail td:first-child { color: #ef6678; font-weight: 700; }
   #results-table tr.fail td { color: #ef6678; }
-  #results-table .res-msg { max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; color: #93a0b0; }
+  #results-table .res-msg { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; color: #93a0b0; }
   #results-table .res-msg:hover { white-space: normal; word-break: break-word; }
   #results-head { padding: 10px 12px; font-weight: 700; font-size: 13px; color: #d6dae3; border-bottom: 1px solid #1e2230; display: flex; align-items: center; gap: 8px; background: #0d0f18; }
   #results-head .res-count { font-weight: 400; font-size: 11px; color: #707888; }
@@ -622,6 +638,8 @@
     <div class="card-head">
       <h2>Suites</h2>
       <span class="spacer"></span>
+      <button id="suites-all" class="ghost" type="button" title="Check all suites">all</button>
+      <button id="suites-none" class="ghost" type="button" title="Uncheck all suites">none</button>
       <span class="small">toggle a suite on, open its card to fine-tune</span>
     </div>
     <div class="card-body">
@@ -752,7 +770,11 @@
         <div class="body">
           <div class="small" style="margin-bottom:6px">Modules (leave all unchecked = run them all):</div>
           <div id="ui-modules" class="check-list"></div>
-          <div class="small" style="margin:10px 0 6px">Clients:</div>
+          <div class="row" style="margin:10px 0 6px;align-items:center">
+            <div class="small" style="flex:1">Clients:</div>
+            <button class="ghost cl-all" data-target="ui-clients" type="button">all</button>
+            <button class="ghost cl-none" data-target="ui-clients" type="button">none</button>
+          </div>
           <div id="ui-clients" class="check-list"></div>
           <div class="small" style="margin:10px 0 4px">Add ad-hoc URLs (one per line — used for THIS run, plus saved permanently below):</div>
           <textarea id="ui-extras" placeholder="https://example.com/"></textarea>
@@ -767,7 +789,11 @@
           <span class="suite-desc">Single-page checkout — rentReserveSPC-validation.spec.ts</span>
         </summary>
         <div class="body">
-          <div class="small" style="margin-bottom:6px">Clients:</div>
+          <div class="row" style="margin-bottom:6px;align-items:center">
+            <div class="small" style="flex:1">Clients:</div>
+            <button class="ghost cl-all" data-target="spc-clients" type="button">all</button>
+            <button class="ghost cl-none" data-target="spc-clients" type="button">none</button>
+          </div>
           <div id="spc-clients" class="check-list"></div>
           <div class="small" style="margin:10px 0 4px">Add ad-hoc URLs (one per line):</div>
           <textarea id="spc-extras" placeholder="https://example.com/storage-units/..."></textarea>
@@ -782,7 +808,11 @@
           <span class="suite-desc">Multi-step rent — rentReserveV1-validation.spec.ts</span>
         </summary>
         <div class="body">
-          <div class="small" style="margin-bottom:6px">Clients:</div>
+          <div class="row" style="margin-bottom:6px;align-items:center">
+            <div class="small" style="flex:1">Clients:</div>
+            <button class="ghost cl-all" data-target="v1-clients" type="button">all</button>
+            <button class="ghost cl-none" data-target="v1-clients" type="button">none</button>
+          </div>
           <div id="v1-clients" class="check-list"></div>
           <div class="small" style="margin:10px 0 4px">Add ad-hoc URLs (one per line):</div>
           <textarea id="v1-extras" placeholder="https://example.com/storage-units/..."></textarea>
@@ -814,6 +844,23 @@
             </div>
           </div>
           <div class="small" style="margin:6px 0 0;color:var(--warn)">⚠️ If a custom URL is provided for a flow, it overrides the preset for that flow.</div>
+        </div>
+      </details>
+
+      <!-- 📝 Reservation Submissions — REAL reservations; master toggle + per-client ticks -->
+      <details class="suite" id="suite-reservation">
+        <summary>
+          <label class="switch" onclick="event.stopPropagation()"><input id="reservation-master" type="checkbox" checked /><span class="track"></span></label>
+          <span class="suite-name">📝 Reservation Submissions</span>
+          <span class="suite-desc">Real reservation on the fixed location → confirmation required → Slack auto-post</span>
+        </summary>
+        <div class="body">
+          <div class="small" style="margin-bottom:6px">
+            Runs inside the owning suite (Bluebird → <b>SPC</b> · Safeguard → <b>Flex</b>) on the client's <b>fixed location</b> — regular runs untouched.
+            <b>Pass</b> = confirmation captured → cancellation message auto-posts to Slack.
+            <b>Fail</b> = no Slack post — red row in Results + full details in the log.
+          </div>
+          <div id="reservation-clients" class="check-list"></div>
         </div>
       </details>
 
@@ -850,7 +897,11 @@
               <input id="dsCorp" type="text" placeholder="Gate5rocks!" style="width:100%" />
             </div>
           </div>
-          <div class="small" style="margin:10px 0 6px">FMS clients:</div>
+          <div class="row" style="margin:10px 0 6px;align-items:center">
+            <div class="small" style="flex:1">FMS clients:</div>
+            <button class="ghost cl-all" data-target="ds-clients" type="button">all</button>
+            <button class="ghost cl-none" data-target="ds-clients" type="button">none</button>
+          </div>
           <div id="ds-clients" class="check-list"></div>
         </div>
       </details>
@@ -991,6 +1042,7 @@
         <div class="console-log">
           <div id="output">Sentinel ready. Configure a launch, then press ▶ Run.\n</div>
         </div>
+        <div class="console-resizer" id="console-resizer" title="Drag to resize the Results pane"></div>
         <div class="console-results">
           <div id="results-panel">
             <div id="results-head">Results <span class="res-count" id="results-count"></span></div>
@@ -1080,6 +1132,7 @@ async function boot() {
   renderClientLists();
   renderExtras();
   renderBuildClients();
+  renderReservationClients();
   renderMiniMallRentPresets();
   renderFlexSections();
   renderFlexClients();
@@ -1108,6 +1161,45 @@ async function boot() {
 // When the user toggles "Image & Carousel (PROD)" on we auto-check only
 // these clients in the UI list so it visibly matches what will actually run.
 const IMAGE_SCAN_CLIENT_IDS = ['distinctstorage', 'bluebirdstorage', 'storagestar', 'selfstorage', 'minimallstorage'];
+
+// 📝 Reservation Submissions — targets from configs/reservations.ts via
+// CFG.reservations. ENV-AWARE: a client only renders enabled when it has a
+// designated location for the environment selected at the top (Build Instance
+// counts as staging — the runner swaps the host). Master toggle OFF = nothing
+// runs; ON = the ticked clients run, ticked by default where available.
+function renderReservationClients() {
+  const root = $('#reservation-clients'); if (!root) return;
+  root.innerHTML = '';
+  const list = CFG.reservations || [];
+  if (!list.length) {
+    root.innerHTML = '<div class="small">no reservation targets defined — add one in <code>configs/reservations.ts</code></div>';
+    return;
+  }
+  const env = currentEnv(); // 'production' | 'staging' (build → staging)
+  for (const r of list) {
+    const url = env === 'production' ? r.production : r.staging;
+    const lbl = document.createElement('label');
+    if (url) {
+      lbl.title = `${r.label}\nFixed ${env} location: ${url}\nDriver: ${r.driver}`;
+      lbl.innerHTML = `<input type="checkbox" data-key="${escapeAttr(r.key)}" checked /> <span class="name">${escapeHtml(r.label)}</span> ${fmsBadge(r.fms)}`;
+    } else {
+      lbl.title = `${r.label} has no designated ${env} location — reservations for it only run on ${r.production ? 'production' : 'staging'}.`;
+      lbl.style.opacity = '.45';
+      lbl.innerHTML = `<input type="checkbox" data-key="${escapeAttr(r.key)}" disabled /> <span class="name">${escapeHtml(r.label)}</span> <span class="small">(no ${env} location)</span> ${fmsBadge(r.fms)}`;
+    }
+    root.appendChild(lbl);
+  }
+  applyReservationMasterState();
+}
+
+// Master toggle OFF → grey + disable the client list (and collectSettings sends none).
+function applyReservationMasterState() {
+  const master = $('#reservation-master');
+  const root = $('#reservation-clients');
+  if (!master || !root) return;
+  root.style.opacity = master.checked ? '' : '.45';
+  root.style.pointerEvents = master.checked ? '' : 'none';
+}
 
 function renderUiModules() {
   const root = $('#ui-modules'); root.innerHTML = '';
@@ -1373,6 +1465,28 @@ document.addEventListener('click', e => {
   if (e.target.id === 'flex-section-none')    { $$('#flex-section-checks  input').forEach(c => c.checked = false); refreshCmdPreview(); }
   if (e.target.id === 'flex-facility-all')    { $$('#flex-facility-checks input').forEach(c => c.checked = true);  refreshCmdPreview(); }
   if (e.target.id === 'flex-facility-none')   { $$('#flex-facility-checks input').forEach(c => c.checked = false); refreshCmdPreview(); }
+
+  // Suite-level all / none
+  if (e.target.id === 'suites-all') {
+    $$('.suite-toggle').forEach(c => { if (!c.disabled) c.checked = true; });
+    $$('details.suite').forEach(d => { const t = d.querySelector('.suite-toggle'); if (t && t.checked) d.open = true; });
+    refreshCmdPreview();
+  }
+  if (e.target.id === 'suites-none') {
+    $$('.suite-toggle').forEach(c => { if (!c.disabled) c.checked = false; });
+    $$('details.suite').forEach(d => { const t = d.querySelector('.suite-toggle'); if (t && !t.checked) d.open = false; });
+    refreshCmdPreview();
+  }
+
+  // Per-suite client all / none (data-target points to the container id)
+  if (e.target.matches('.cl-all[data-target]')) {
+    $$('#' + e.target.dataset.target + ' input[type=checkbox]').forEach(c => c.checked = true);
+    refreshCmdPreview();
+  }
+  if (e.target.matches('.cl-none[data-target]')) {
+    $$('#' + e.target.dataset.target + ' input[type=checkbox]').forEach(c => c.checked = false);
+    refreshCmdPreview();
+  }
 });
 document.addEventListener('input', e => {
 });
@@ -1391,7 +1505,12 @@ document.addEventListener('change', e => {
   if (e.target.matches('input[name=env]')) {
     for (const s of ['ui','spc','v1']) paintClients(s);
     renderMiniMallRentPresets();
+    renderReservationClients();   // 📝 env-aware availability + ticks
     applyBuildEnvLock();
+    refreshCmdPreview();
+  }
+  if (e.target.id === 'reservation-master') {
+    applyReservationMasterState();
     refreshCmdPreview();
   }
 });
@@ -1564,6 +1683,12 @@ function collectSettings() {
       customYardi: mmrentCustomYardi || null,
       filter: mmrentFilter || null,
     },
+    // 📝 Reservation submissions — master toggle OFF sends none; ON sends the
+    // ticked (and env-available) clients. Slack posting is automatic in the
+    // runner (utils/reservationRecord.ts) — nothing to configure here.
+    reservation: ($('#reservation-master') && $('#reservation-master').checked)
+      ? $$('#reservation-clients input:checked').filter(c => !c.disabled).map(c => c.dataset.key)
+      : [],
     build: {
       base: $('#buildBase').value.trim(),
       clients: buildClients,
@@ -1806,7 +1931,7 @@ function renderClientIssueCard(client, issues, cov) {
       <span class="stat-chip">${trackedCount} tracked</span>
       <span class="stat-chip">${issues.length} total</span>
       <span class="spacer"></span>
-      ${issues.length > 0 ? `<button class="ghost mini-copy" type="button" data-client-clear="${escIss(client)}" title="Remove all issues for this client from the database" style="color:var(--muted);font-size:11px" onclick="event.stopPropagation()">🗑 Clear all</button>` : ''}
+      ${issues.length > 0 ? `<button class="ghost mini-copy" type="button" data-client-clear="${escIss(client)}" title="Remove all issues for this client from the database" style="color:var(--muted);font-size:11px" onclick="event.stopPropagation(); flexClientClearAll(this.dataset.clientClear)">🗑 Clear all</button>` : ''}
     </summary>
     <div class="client-body">
       <div class="sec-label" style="margin-top:0">Coverage — latest run per location</div>
@@ -2380,7 +2505,37 @@ function appendLine(s) {
     if (!line.trim()) continue;
     const r = parseResultLine(line);
     if (r) addResult(r);
+    captchaAlert(line);
   }
+}
+
+// ── Captcha pause alert — beep + flash the tab whenever a run prints a
+// manual-captcha banner (rent flow OR 📝 reservation). The banner line itself
+// names what it's for (e.g. "This is for the RESERVATION of: <client>").
+let _captchaAlertAt = 0;
+let _captchaFlashTimer = null;
+function captchaAlert(line) {
+  if (!/Manual step required|needs a MANUAL solve/i.test(line)) return;
+  const now = Date.now();
+  if (now - _captchaAlertAt < 20_000) return; // debounce banner repeats
+  _captchaAlertAt = now;
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const beep = (at, freq) => {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.type = 'sine'; o.frequency.value = freq; g.gain.value = 0.12;
+      o.start(ctx.currentTime + at); o.stop(ctx.currentTime + at + 0.18);
+    };
+    beep(0, 880); beep(0.25, 660); beep(0.5, 880);
+  } catch { /* audio blocked until first user gesture — the tab flash still shows */ }
+  const original = document.title;
+  if (_captchaFlashTimer) clearInterval(_captchaFlashTimer);
+  let n = 0;
+  _captchaFlashTimer = setInterval(() => {
+    document.title = (n++ % 2) ? '🛑 CAPTCHA NEEDED' : original;
+    if (n > 30) { clearInterval(_captchaFlashTimer); _captchaFlashTimer = null; document.title = original; }
+  }, 800);
 }
 function ansiToHtml(s) {
   // Strip cursor/erase sequences, keep colors.
@@ -2402,6 +2557,55 @@ const liveResults = [];
 let pendingClient = null;          // { name, pass } from "TEST COMPLETED/FAILED FOR:" line
 let pendingFlexClient = null;      // "JOURNEY REPORT — X" → next "N passed" line
 let pendingFlexLines = 0;
+let clientFmsMap = {};             // client name → FMS (from "🏢 TESTING:" + "⚙️ Platform:" banner pairs)
+let lastTestingClient = null;
+
+function canonFms(x) {
+  const m = { storedge: 'storEDGE', sitelink: 'SiteLink', ssm: 'SSM', yardi: 'Yardi' };
+  return m[(x || '').trim().toLowerCase()] || '';
+}
+
+// Some specs embed the FMS in the result's client name itself
+// (e.g. Mini Mall: "TEST COMPLETED FOR: ⭐ Mini Mall Yardi — minimall Storage").
+function fmsFromName(name) {
+  const m = (name || '').match(/\b(storEDGE|SiteLink|SSM|Yardi)\b/i);
+  return m ? canonFms(m[1]) : '';
+}
+
+// Last-resort lookup: the panel's own client lists (CFG.clients) carry each
+// client's FMS — match the log's client name against them. Log names differ
+// from panel labels in filler words ("columbiaself Storage" vs "Columbia Self
+// Storage"), so compare with self/storage/punctuation stripped out.
+let fmsRegistry = null;
+function normClientKey(s) {
+  return (s || '').toLowerCase().replace(/[^a-z0-9]/g, '')
+    .replace(/selfstorage/g, '').replace(/storage/g, '').replace(/self/g, '');
+}
+function fmsFromRegistry(name) {
+  if (!CFG) return '';
+  if (!fmsRegistry) {
+    fmsRegistry = {};
+    for (const suite of Object.keys(CFG.clients || {})) {
+      for (const env of Object.keys(CFG.clients[suite] || {})) {
+        for (const c of (CFG.clients[suite][env] || [])) {
+          const f = canonFms(c.fms);
+          const k = normClientKey(c.label || c.name || c.id || '');
+          if (f && k) fmsRegistry[k] = f;
+        }
+      }
+    }
+  }
+  const key = normClientKey(name);
+  if (!key) return '';
+  if (fmsRegistry[key]) return fmsRegistry[key];
+  // Prefix match for names the logs truncate/extend — require ≥4 chars so
+  // short keys can't cross-match.
+  for (const k of Object.keys(fmsRegistry)) {
+    const short = Math.min(k.length, key.length);
+    if (short >= 4 && (key.startsWith(k) || k.startsWith(key))) return fmsRegistry[k];
+  }
+  return '';
+}
 
 function stripAnsi(s) { return s.replace(/\x1b?\[[\d;]*m|\x1b?\[[?0-9;]*[A-HJKSTfhlmsu]/g, ''); }
 
@@ -2411,6 +2615,16 @@ function cleanClientName(raw) {
 
 function parseResultLine(raw) {
   const s = stripAnsi(raw);
+
+  // ── Test banner: "🏢 TESTING: Client" then "⚙️ Platform: storEDGE" —
+  //    remember each client's FMS so the Results table can show it.
+  const testingMatch = s.match(/TESTING:\s*(.+?)$/);
+  if (testingMatch) { lastTestingClient = cleanClientName(testingMatch[1]); return null; }
+  const platformMatch = s.match(/Platform:\s*([A-Za-z]+)/);
+  if (platformMatch && lastTestingClient && canonFms(platformMatch[1])) {
+    clientFmsMap[lastTestingClient] = canonFms(platformMatch[1]);
+    return null;
+  }
 
   // ── SPC / V1 / Mini Mall: per-client completion markers ──
 
@@ -2432,7 +2646,7 @@ function parseResultLine(raw) {
   if (pendingClient) {
     const resultMatch = s.match(/(?:Final\s+)?Result:\s*(.+?)$/);
     if (resultMatch) {
-      const r = { client: pendingClient.name, pass: pendingClient.pass, msg: resultMatch[1].trim() };
+      const r = { client: pendingClient.name, pass: pendingClient.pass, msg: resultMatch[1].trim(), fms: clientFmsMap[pendingClient.name] || fmsFromName(pendingClient.name) || fmsFromRegistry(pendingClient.name) };
       pendingClient = null;
       return r;
     }
@@ -2440,7 +2654,7 @@ function parseResultLine(raw) {
     // "💥 Error: ..." — message for failed tests
     const errorMatch = s.match(/Error:\s*(.+?)$/);
     if (errorMatch) {
-      const r = { client: pendingClient.name, pass: pendingClient.pass, msg: errorMatch[1].trim() };
+      const r = { client: pendingClient.name, pass: pendingClient.pass, msg: errorMatch[1].trim(), fms: clientFmsMap[pendingClient.name] || fmsFromName(pendingClient.name) || fmsFromRegistry(pendingClient.name) };
       pendingClient = null;
       return r;
     }
@@ -2455,14 +2669,17 @@ function parseResultLine(raw) {
     const msg = tableRow[4].trim();
     const isFmsCol = /^(?:SiteLink|Yardi|storEDGE|SSM|Unknown)$/i.test(col1);
     const client = isFmsCol ? col2 : col1;
+    // Summary rows carry the FMS in the other column (e.g. "Company | storEDGE | PASSED")
+    const fms = isFmsCol ? canonFms(col1) : (canonFms(col2) || clientFmsMap[client] || fmsFromName(client) || fmsFromRegistry(client));
     const existing = liveResults.find(r => r.client === client);
     if (existing) {
       existing.pass = passed;
       existing.msg = msg;
+      if (fms) existing.fms = fms;
       renderResults();
       return null;
     }
-    return { client, pass: passed, msg };
+    return { client, pass: passed, msg, fms };
   }
 
   // ── Flex journey report ──
@@ -2482,13 +2699,13 @@ function parseResultLine(raw) {
       const failed = parseInt(flexSummary[2], 10);
       const client = pendingFlexClient;
       pendingFlexClient = null;
-      return { client, pass: failed === 0, msg: failed > 0 ? `${passed} passed, ${failed} failed` : `${passed} passed — all checks OK` };
+      return { client, pass: failed === 0, msg: failed > 0 ? `${passed} passed, ${failed} failed` : `${passed} passed — all checks OK`, fms: fmsFromName(client) };
     }
     const flexAllPass = s.match(/(\d+)\s+passed/);
     if (flexAllPass && !s.includes('failed')) {
       const client = pendingFlexClient;
       pendingFlexClient = null;
-      return { client, pass: true, msg: `${flexAllPass[1]} passed — all checks OK` };
+      return { client, pass: true, msg: `${flexAllPass[1]} passed — all checks OK`, fms: fmsFromName(client) };
     }
     if (pendingFlexLines <= 0) pendingFlexClient = null;
   }
@@ -2509,8 +2726,8 @@ function renderResults() {
   const failed = liveResults.filter(r => !r.pass).length;
   count.textContent = `${liveResults.length} done` + (failed ? ` · ${failed} failed` : '');
   count.style.color = failed ? '#ef6678' : '';
-  table.innerHTML = `<table><thead><tr><th></th><th>Client</th><th>Result</th></tr></thead><tbody>${
-    liveResults.map(r => `<tr class="${r.pass ? 'pass' : 'fail'}"><td>${r.pass ? '✓' : '✗'}</td><td>${escapeHtml(r.client)}</td><td class="res-msg" title="${escapeAttr(r.msg)}">${escapeHtml(r.msg)}</td></tr>`).join('')
+  table.innerHTML = `<table><thead><tr><th></th><th>Client</th><th>FMS</th><th>Result</th></tr></thead><tbody>${
+    liveResults.map(r => `<tr class="${r.pass ? 'pass' : 'fail'}"><td>${r.pass ? '✓' : '✗'}</td><td>${escapeHtml(r.client)}</td><td>${fmsBadge(r.fms)}</td><td class="res-msg" title="${escapeAttr(r.msg)}">${escapeHtml(r.msg)}</td></tr>`).join('')
   }</tbody></table>`;
   table.scrollTop = table.scrollHeight;
 }
@@ -2520,11 +2737,53 @@ function clearResults() {
   pendingClient = null;
   pendingFlexClient = null;
   pendingFlexLines = 0;
+  clientFmsMap = {};
+  lastTestingClient = null;
   const table = $('#results-table');
   const count = $('#results-count');
   if (table) table.innerHTML = '<div class="results-empty">Waiting for run...<br/>Results will appear here<br/>as each client finishes.</div>';
   if (count) count.textContent = '';
 }
+
+// ── Results pane resize bar — drag left/right; width persists per browser ──
+(() => {
+  const bar = $('#console-resizer');
+  const pane = document.querySelector('.console-results');
+  if (!bar || !pane) return;
+  const KEY = 'panel.resultsWidth';
+  const saved = parseInt(localStorage.getItem(KEY) || '', 10);
+  if (saved) pane.style.width = Math.max(300, saved) + 'px';
+  let dragging = false;
+  bar.addEventListener('pointerdown', e => {
+    dragging = true;
+    bar.classList.add('dragging');
+    bar.setPointerCapture(e.pointerId);
+    document.body.style.userSelect = 'none';
+    e.preventDefault();
+  });
+  bar.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    const split = bar.parentElement.getBoundingClientRect();
+    let w = split.right - e.clientX - 6;
+    w = Math.max(300, Math.min(w, split.width * 0.75));
+    pane.style.width = w + 'px';
+  });
+  const endDrag = () => {
+    if (!dragging) return;
+    dragging = false;
+    bar.classList.remove('dragging');
+    document.body.style.userSelect = '';
+    const w = parseInt(pane.style.width, 10);
+    if (w) localStorage.setItem(KEY, String(w));
+  };
+  bar.addEventListener('pointerup', endDrag);
+  bar.addEventListener('pointercancel', endDrag);
+  // Double-click resets to the default width.
+  bar.addEventListener('dblclick', () => {
+    pane.style.width = '';
+    localStorage.removeItem(KEY);
+  });
+})();
 
 // ─────────────────────────────────────────────────────────────────────
 // Misc utils

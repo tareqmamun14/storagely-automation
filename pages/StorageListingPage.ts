@@ -1,5 +1,6 @@
 import { Page } from '@playwright/test';
 import { BasePage } from './BasePage';
+import { CURRENT_ENVIRONMENT, Environment } from '../configs/urls';
 
 export class StorageListingPage extends BasePage {
   constructor(page: Page) {
@@ -136,6 +137,164 @@ export class StorageListingPage extends BasePage {
     }
     
     return buttonText;
+  }
+
+  /**
+   * 📝 RESERVATION SUBMISSION (legacy V2 SPC listing page — e.g. Bluebird).
+   * Opens the first unit's reserve modal, fills tenant details, solves/waits
+   * for the in-modal hCaptcha checkbox, clicks RESERVE THIS UNIT, then races
+   * the confirmation message against an error. This submits a REAL
+   * reservation — the caller must record it (utils/reservationRecord.ts).
+   *
+   * DOM verified live on bluebirdstorage.ca/…/blackfoot (2026-08-21):
+   * form #reservUnitFrom in .modal-body · fields #rsv_first_name /
+   * #rsv_last_name / #rsv_email / #phone-input · hCaptcha widget iframe in
+   * the form · submit button#mySubmitReserve · hidden unit_id_input carries
+   * the unit id.
+   */
+  async submitReservation(
+    tenant: { firstName: string; lastName: string; email: string; phone: string },
+    clientName = 'this client',
+  ): Promise<{ ok: boolean; message: string; unit: string }> {
+    const p = this.page;
+    console.log('\n📝 RESERVATION: opening the reserve modal...');
+
+    const reserveBtn = p.locator('a.reserveBtnPop:visible').first();
+    await reserveBtn.waitFor({ state: 'visible', timeout: 15_000 });
+    await reserveBtn.scrollIntoViewIfNeeded().catch(() => {});
+    await reserveBtn.click();
+
+    const form = p.locator('#reservUnitFrom');
+    await form.waitFor({ state: 'visible', timeout: 15_000 });
+    console.log('  ✓ Reserve modal open (#reservUnitFrom)');
+
+    // Capture the unit identity BEFORE submitting (for the cancellation record).
+    const unit = await p.evaluate(() => {
+      const f = document.querySelector('#reservUnitFrom');
+      const val = (n: string) => (f?.querySelector(`input[name="${n}"]`) as HTMLInputElement | null)?.value || '';
+      const body = f?.closest('.modal-body') as HTMLElement | null;
+      const summary = (body?.innerText || '').split('\n').map(s => s.trim()).filter(Boolean).slice(0, 8)
+        .filter(s => !/choose your desired|move in date/i.test(s)).join(' · ').slice(0, 160);
+      return `${summary}${val('unit_id_input') ? ` · unit_id=${val('unit_id_input')}` : ''}${val('unit_type_id') ? ` · unit_type_id=${val('unit_type_id')}` : ''}`;
+    }).catch(() => '(unit details not captured)');
+    console.log(`  ✓ Unit: ${unit}`);
+
+    // Tenant details — click-then-fill like the rent flows.
+    const fill = async (sel: string, value: string, label: string) => {
+      const el = form.locator(sel).first();
+      await el.click();
+      await el.fill(value);
+      console.log(`  ✓ ${label}: ${value}`);
+    };
+    await fill('#rsv_first_name', tenant.firstName, 'First name');
+    await fill('#rsv_last_name', tenant.lastName, 'Last name');
+    await fill('#rsv_email', tenant.email, 'Email');
+    await fill('#phone-input', tenant.phone, 'Phone');
+
+    // Move-in date — if the form's hidden date is empty, pick today in the picker.
+    const dateSet = await form.locator('input[name="date"]').inputValue().catch(() => '');
+    if (!dateSet) {
+      const today = p.locator('#reservUnitFrom .datepicker td.today, #reservUnitFrom td.today, .modal-body td.today').first();
+      if (await today.isVisible().catch(() => false)) {
+        await today.click().catch(() => {});
+        console.log('  ✓ Picked today as the move-in date');
+      }
+    }
+
+    // hCaptcha checkbox inside the modal — click it, then wait for the token.
+    // STAGING never enforces the captcha (the widget may render anyway), so
+    // wait briefly and submit regardless. PROD enforces it: wait as long as it
+    // takes, announcing when a manual challenge solve is needed.
+    const captchaFrameEl = form.locator('iframe[src*="hcaptcha"]').first();
+    if (await captchaFrameEl.count().catch(() => 0)) {
+      console.log('  🔐 hCaptcha checkbox present — clicking "I am human"...');
+      await p.frameLocator('#reservUnitFrom iframe[src*="hcaptcha"]')
+        .locator('#checkbox, [role="checkbox"]').first().click({ timeout: 10_000 }).catch(() => {});
+      const solved = async () => p.evaluate(() => {
+        const f = document.querySelector('#reservUnitFrom');
+        const ta = f?.querySelector('textarea[name="h-captcha-response"]') as HTMLTextAreaElement | null;
+        if (ta?.value) return true;
+        const ifr = f?.querySelector('iframe[data-hcaptcha-response]');
+        return !!(ifr && (ifr.getAttribute('data-hcaptcha-response') || '').length > 0);
+      }).catch(() => false);
+      const isStaging = CURRENT_ENVIRONMENT === Environment.STAGING;
+      let waited = 0;
+      while (!(await solved())) {
+        if (isStaging && waited >= 10_000) {
+          console.log('  - captcha token not issued after 10s — staging does not enforce it, submitting anyway');
+          break;
+        }
+        if (!isStaging && waited === 15_000) {
+          // Same banner style as the rent flow's manual-captcha pause — plus a
+          // terminal bell (\x07) so the pause is audible; the control panel
+          // also beeps + flashes the tab on this line.
+          console.log('\x07\n🛑 ═══════════════════════════════════════════════════════════');
+          console.log('🛑  hCaptcha DETECTED — Manual step required!');
+          console.log(`🛑  📝 This is for the RESERVATION of: ${clientName}`);
+          console.log(`🛑  URL: ${p.url()}`);
+          console.log('🛑  1. Switch to the BROWSER WINDOW for the URL above');
+          console.log('🛑  2. Solve the hCaptcha challenge in the reserve modal');
+          console.log('🛑  3. Automation will continue AUTOMATICALLY once solved');
+          console.log('🛑  (No time limit — take as long as you need)');
+          console.log('🛑 ═══════════════════════════════════════════════════════════\n');
+        } else if (!isStaging && waited > 15_000 && waited % 30_000 === 0) {
+          console.log(`⏳ Still waiting for the RESERVATION captcha solve for ${clientName}... (${waited / 1000}s)`);
+        }
+        await this.wait(1000);
+        waited += 1000;
+      }
+      if (await solved()) console.log('  ✅ hCaptcha solved');
+    } else {
+      console.log('  - no hCaptcha in the reserve modal (staging) — continuing');
+    }
+
+    // Submit and race confirmation vs error.
+    console.log('  🖱️ Clicking RESERVE THIS UNIT...');
+    await form.locator('#mySubmitReserve').click();
+    const outcome = await this.raceReservationOutcome();
+    return { ...outcome, unit };
+  }
+
+  /**
+   * After a reservation submit: poll fast (150ms) and grab the FIRST outcome —
+   * a confirmation message (pass) or an error message (fail). Neither within
+   * the deadline is also a fail (silent submits hide revenue-impacting bugs).
+   */
+  private async raceReservationOutcome(deadlineMs = 30_000): Promise<{ ok: boolean; message: string; unit: string }> {
+    const p = this.page;
+    const started = Date.now();
+    while (Date.now() - started < deadlineMs) {
+      const outcome = await p.evaluate(() => {
+        const vis = (el: Element) => !!((el as HTMLElement).offsetWidth || (el as HTMLElement).offsetHeight);
+        const clean = (s: string) => s.replace(/\s+/g, ' ').trim();
+        // Error surfaces: toasts, alerts, in-modal validation text.
+        for (const el of document.querySelectorAll('[data-id*="toast"], .toast, [role="alert"], .alert-danger, .toast-container, .error, .text-danger')) {
+          const t = clean(el.textContent || '');
+          if (vis(el) && t && /error|invalid|failed|unable|wrong|not available|already|required/i.test(t)) {
+            return { kind: 'error', text: t.slice(0, 300) };
+          }
+        }
+        // Confirmation surfaces: any visible modal/section announcing success.
+        for (const el of document.querySelectorAll('.modal-body, .modal-content, [role="dialog"], .swal2-popup, [class*="confirm"], [class*="success"], [class*="thank"]')) {
+          const t = clean(el.textContent || '');
+          if (vis(el) && t && /(reservation|reserved|request).{0,80}(confirm|success|complete|received)|thank(s| you)|confirmation (number|#|email)|successfully/i.test(t)) {
+            return { kind: 'ok', text: t.slice(0, 400) };
+          }
+        }
+        return null;
+      }).catch(() => null);
+      if (outcome) {
+        if (outcome.kind === 'ok') {
+          console.log(`  ✅ RESERVATION CONFIRMED: ${outcome.text}`);
+          return { ok: true, message: outcome.text, unit: '' };
+        }
+        console.log(`  ❌ RESERVATION ERROR: ${outcome.text}`);
+        return { ok: false, message: outcome.text, unit: '' };
+      }
+      await this.wait(150);
+    }
+    console.log('  ❌ RESERVATION: no confirmation AND no error within 30s — treating as FAILURE');
+    return { ok: false, message: 'No confirmation or error message appeared within 30s of submitting the reservation', unit: '' };
   }
 
   /**

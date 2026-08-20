@@ -86,6 +86,17 @@ is a SiteLink / French page — verified 2026-08-03: section headings are
 English ("Customer Reviews", "Amenities", "Have a Question?") so the standard
 minimall profile works; only SEO copy + H1 are French. Added to rotation.
 
+**📝 Reservation submission (panel-toggled).** The journey's reserve step has
+two depths: the read-only modal check (default), and a REAL reservation
+SUBMISSION when the panel's "📝 Reservation Submissions" toggle enables a
+client (`STORAGELY_RESERVATION`) — fill tenant details → submit → REQUIRE the
+confirmation message (error/silence = FAIL; that bug class was revenue-
+impacting on prod). Only ever runs on the client's DESIGNATED location from
+`configs/reservations.ts` (rotation pins it in when enabled). Every submission
+is recorded in `test-results/reservations/` with a Slack-ready cancellation
+message for Jacob. Adding a client = one manifest entry in
+`configs/reservations.ts`.
+
 **Sibling cross-check** (journey step 5, auto): when a NEW section failure
 survives the gate, the journey re-runs exactly those detectors on a sibling
 location of the same client and attaches a verdict — `SYSTEMIC` (sibling fails

@@ -14,13 +14,42 @@ import { ADMIN_CREDENTIALS } from '../configs/credentials';
 // When the env var is unset, behavior is identical to before.
 const STAGING_BASE = (process.env.STORAGELY_BUILD_BASE?.trim() || 'https://test.staging.storagely-api.com').replace(/\/$/, '');
 
+// Flex URLs use {client}.test.getstoragely.com — the hostname prefix maps to
+// the staging admin slug used by STAGING_CORP_CODE_CLIENTS. Add entries here
+// when onboarding a new SiteLink client that has both a Flex site and a legacy
+// staging admin slug.
+const FLEX_HOST_TO_SLUG: Record<string, string> = {
+  'safeguard':       'safeguard-self-storage',
+  'mini-mall':       'mini-mall-storage',
+  'gatekeeper':      'gatekeeper-self-storage',
+  'easy-stop':       'easy-stop-storage',
+  'storage-boss':    'storage-boss',
+  'bluebirdstorage': 'bluebirdstorage',
+  'sunbirdstorage':  'sunbirdstorage',
+};
+
 /**
  * Extract the client slug from a staging or production URL.
- * e.g. "https://test.staging.storagely-api.com/bluebirdstorage/storage-units/..." → "bluebirdstorage"
+ * Handles both legacy staging URLs and Flex-style URLs:
+ *   "https://test.staging.storagely-api.com/safeguard-self-storage/..." → "safeguard-self-storage"
+ *   "https://safeguard.test.getstoragely.com/..."                      → "safeguard-self-storage"
  */
 export function getClientSlug(url: string): string | null {
   try {
     const urlObj = new URL(url);
+
+    // Flex URLs: {prefix}.test.getstoragely.com → look up the admin slug
+    const host = urlObj.hostname;
+    if (host.endsWith('.test.getstoragely.com')) {
+      const prefix = host.replace('.test.getstoragely.com', '');
+      if (prefix in FLEX_HOST_TO_SLUG) return FLEX_HOST_TO_SLUG[prefix];
+      // Try partial match (e.g. "fr-ca.minimallstorage" → check if any key is a substring)
+      for (const [key, slug] of Object.entries(FLEX_HOST_TO_SLUG)) {
+        if (prefix.includes(key)) return slug;
+      }
+    }
+
+    // Legacy staging: first path segment is the slug
     const parts = urlObj.pathname.split('/').filter(Boolean);
     return parts[0] || null;
   } catch {

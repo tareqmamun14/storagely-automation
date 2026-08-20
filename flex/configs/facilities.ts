@@ -18,8 +18,33 @@
  *  - 'test'       — the Flex test/stage domain (*.test.getstoragely.com).
  */
 import { getLocationPool, sampleSize, samplePool, readRunRotation } from './locationPool';
+import { enabledReservationKeys, RESERVATION_TARGETS, normalizeReservationUrl } from '../../configs/reservations';
 
 let logBannerPrinted = false;
+let reservationPinLogPrinted = false;
+
+/**
+ * 📝 Reservation pinning — when the panel enables reservation submission for a
+ * client (STORAGELY_RESERVATION), that client's DESIGNATED reservation facility
+ * must be part of the run even if rotation/sampling picked a different
+ * location. Mirrors the alwaysRun append.
+ */
+function reservationPinnedFacilities(env: FlexEnv, selectedClients: string[], already: { url: string }[]): FlexFacility[] {
+  const keys = enabledReservationKeys();
+  if (!keys.length) return [];
+  const wanted = new Set<string>();
+  for (const t of RESERVATION_TARGETS) {
+    if (!keys.includes(t.key)) continue;
+    for (const u of Object.values(t.urls)) if (u) wanted.add(normalizeReservationUrl(u));
+  }
+  return FACILITIES.filter(f => f.env === env
+    && selectedClients.includes(f.client.toLowerCase())
+    && wanted.has(normalizeReservationUrl(f.url))
+    && !already.some(r => normalizeReservationUrl(r.url) === normalizeReservationUrl(f.url)))
+    // Appended purely for the reservation — the journey skips every other step
+    // on this facility (the regular run continues on the rotation pick).
+    .map(f => ({ ...f, reservationOnly: true, name: `${f.name} [reservation only]` }));
+}
 
 export type FlexEnv = 'production' | 'test';
 
@@ -37,6 +62,9 @@ export interface FlexFacility {
    *  Use for facilities that cover a unique FMS/locale variant (e.g. SiteLink
    *  French page alongside the Yardi rotation for the same client). */
   alwaysRun?: boolean;
+  /** 📝 Set on facilities appended purely for a reservation submission — the
+   *  journey then runs ONLY the reservation step (no health/sections/rent). */
+  reservationOnly?: boolean;
   /** Optional toggles — used by tests to skip checks when a section is intentionally absent. */
   features?: {
     hasUnits?: boolean;
@@ -95,14 +123,17 @@ const MINIMALL_FEATURES = {
  */
 export const FACILITIES: FlexFacility[] = [
   // ── PRODUCTION (real customer domains) ──────────────────────────────────
+  // Addison IL is also Safeguard's DESIGNATED RESERVATION location
+  // (configs/reservations.ts) — keep this row's URL identical to the manifest.
+  // Bridgeport (the previous row) stays in the rotation via locationPool seeds.
   {
-    id: 'safeguard-bridgeport-west-end',
-    name: 'Safeguard — Bridgeport, CT (West End / West Side)',
+    id: 'safeguard-addison-lake-street',
+    name: 'Safeguard — Addison, IL (Lake Street)',
     client: 'safeguard',
     env: 'production',
-    url: 'https://www.safeguardit.com/storage-units/connecticut/bridgeport/west-end-west-side',
-    expectedTitle: /self storage.*bridgeport|bridgeport.*storage|safeguard/i,
-    expectedHeading: /safeguard.*self storage|west end|west side|bridgeport/i,
+    url: 'https://www.safeguardit.com/storage-units/illinois/addison/lake-street',
+    expectedTitle: /self storage.*addison|addison.*storage|safeguard/i,
+    expectedHeading: /safeguard.*self storage|addison|lake street/i,
     features: { ...ALL_FEATURES },
   },
 
@@ -298,6 +329,8 @@ export function getAllFacilities(opts: {
       && !sampled.some(r => r.url === f.url),
     );
     sampled.push(...sampledAlways);
+    // 📝 Reservation pinning — designated reservation facilities must run.
+    sampled.push(...reservationPinnedFacilities(env, selectedClients, sampled));
 
     if (sampled.length) {
       if (!logBannerPrinted) {
@@ -352,6 +385,13 @@ export function getAllFacilities(opts: {
       && !rotated.some(r => r.url === f.url),
     );
     rotated.push(...pinned_always);
+    // 📝 Reservation pinning — designated reservation facilities must run.
+    const pinned_reservation = reservationPinnedFacilities(env, selectedClients, rotated);
+    if (pinned_reservation.length && !reservationPinLogPrinted) {
+      reservationPinLogPrinted = true;
+      console.log(`  📝 reservation pinning — added ${pinned_reservation.map(f => f.name).join(', ')} (designated reservation location)`);
+    }
+    rotated.push(...pinned_reservation);
 
     if (rotated.length) {
       if (!logBannerPrinted) {
@@ -366,6 +406,12 @@ export function getAllFacilities(opts: {
   let base = FACILITIES.filter(f => f.env === env);
   if (clients.length > 0) base = base.filter(f => clients.includes(f.client.toLowerCase()));
   if (filter.length > 0) base = base.filter(f => filter.includes(f.id));
+  // 📝 Reservation pinning applies here too (FLEX_ROTATE=off / pinned
+  // facilities): the FIXED reservation location always joins the run when its
+  // toggle is on — no rotation or filtering can drop it.
+  const baseClients = clients.length ? clients
+    : [...new Set(FACILITIES.filter(f => f.env === env).map(f => f.client.toLowerCase()))];
+  base = [...base, ...reservationPinnedFacilities(env, baseClients, base)];
   return base;
 }
 

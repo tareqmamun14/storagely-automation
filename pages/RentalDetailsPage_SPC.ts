@@ -614,7 +614,8 @@ export class RentalDetailsPageSinglePage extends BasePage {
       northCarolina?: string,
       georgia?: string,
       arizona?: string,
-      colorado?: string
+      colorado?: string,
+      quebec?: string
     },
     zipCode: string,
     alternateFirstName?: string,
@@ -968,6 +969,9 @@ export class RentalDetailsPageSinglePage extends BasePage {
         stateValue = userData.province.colorado || 'Colorado';
       } else if (currentUrl.includes('sunbirdstorage.com')) {
         stateValue = userData.province.northCarolina || 'North Carolina';
+      } else if (currentUrl.includes('fr-ca.minimallstorage.com') || currentUrl.includes('/quebec/')) {
+        stateValue = userData.province.quebec || 'Quebec';
+        fieldLabel = 'Province';
       } else if (currentUrl.includes('minimallstorage.com') || currentUrl.includes('mini-mall-storage')) {
         stateValue = userData.province.alabama || 'Alabama';
       } else if (userData.province.alabama) {
@@ -1578,10 +1582,13 @@ export class RentalDetailsPageSinglePage extends BasePage {
         stateName = province.colorado || 'Colorado';
       } else if (currentUrl.includes('sunbirdstorage.com')) {
         stateName = province.northCarolina || 'North Carolina';
+      } else if (currentUrl.includes('fr-ca.minimallstorage.com') || currentUrl.includes('/quebec/')) {
+        stateName = province.quebec || 'Quebec';
+        fieldLabel = 'Billing Province';
       } else if (currentUrl.includes('minimallstorage.com') || currentUrl.includes('mini-mall-storage')) {
         stateName = province.alabama || 'Alabama';
       }
-      
+
       await this.selectDropdownOption(
         this.billingStateField,
         stateName,
@@ -1826,12 +1833,15 @@ export class RentalDetailsPageSinglePage extends BasePage {
 
   /**
    * Wait for the user to manually solve hCaptcha.
-   * Prints a visible prompt in the terminal, then polls every 2 s until
-   * a solved-captcha signal is detected. Checks multiple indicators:
-   *   1. textarea[name="h-captcha-response"] has a token value
-   *   2. textarea[name="g-recaptcha-response"] has a token value
-   *   3. Any element with a non-empty [data-hcaptcha-response] attribute
-   * There is NO time limit — it waits as long as you need.
+   *
+   * 1. Tries to click the captcha checkbox programmatically first.
+   * 2. Polls every 500ms for a solved token AND watches for the challenge
+   *    popup (the large image-grid iframe hCaptcha opens).
+   * 3. If 30 seconds pass with NO challenge popup and NO solve, the widget
+   *    is presumed stuck (rendered but non-functional, like the Storage Star
+   *    case where the checkbox was unclickable). Throws an error so the
+   *    spec-level retry loop can refresh the page and re-run the full flow.
+   * 4. Once a challenge IS visible, waits indefinitely — the user is solving.
    */
   async waitForManualCaptcha(clientName?: string): Promise<void> {
     const currentUrl = this.page.url();
@@ -1851,47 +1861,47 @@ export class RentalDetailsPageSinglePage extends BasePage {
     console.log('🛑  1. Switch to the BROWSER WINDOW for the URL above');
     console.log('🛑  2. Solve the hCaptcha checkbox / challenge');
     console.log('🛑  3. Automation will continue AUTOMATICALLY once solved');
-    console.log('🛑  (No time limit — take as long as you need)');
+    console.log('🛑  (If the widget is stuck, automation will auto-refresh + retry)');
     console.log('🛑 ═══════════════════════════════════════════════════════════\n');
 
-    // Give the hCaptcha challenge popup room to render fully. On long single-page
-    // forms (e.g. Safeguard SPC) the Rent-Now captcha sits at the very BOTTOM of
-    // the page, so when the user clicks the checkbox the challenge opens with its
-    // "Verify"/confirm button cropped below the fold and unclickable. Scroll the
-    // captcha widget up toward the top of the viewport FIRST — hCaptcha anchors
-    // the popup to the checkbox at open time, so lifting the checkbox up gives the
-    // popup vertical room. Best-effort: never throws, never blocks the solve.
     await this.scrollCaptchaIntoRoom();
 
-    const pollInterval = 500; // Check every 500ms for fast detection
-    let pollCount = 0;
+    // Try to click the hCaptcha checkbox programmatically (like the reserve
+    // flow does). If the widget is healthy this triggers the challenge or
+    // auto-solves; if stuck, the click either throws or has no effect —
+    // the stuck-timeout below catches it either way.
+    try {
+      await this.page.frameLocator('iframe[src*="hcaptcha"]').first()
+        .locator('#checkbox, [role="checkbox"]').first()
+        .click({ timeout: 8000 });
+      console.log('  ✓ Clicked hCaptcha checkbox programmatically');
+    } catch {
+      console.log('  ⚠️ Could not auto-click hCaptcha checkbox — waiting for manual interaction');
+    }
 
-    // Poll indefinitely until hCaptcha solved signal is found
+    const pollInterval = 500;
+    let pollCount = 0;
+    let challengeDetected = false;
+    const STUCK_TIMEOUT_POLLS = 60; // 30s (60 × 500ms) — enough for a working widget to respond
+
     while (true) {
+      // ── Check: solved? ──
       try {
         const solved = await this.page.evaluate(() => {
-          // Check 1: textarea[name="h-captcha-response"]
           const hTa = document.querySelector('textarea[name="h-captcha-response"]') as HTMLTextAreaElement | null;
           if (hTa && hTa.value && hTa.value.length > 0) return 'h-captcha-response textarea';
-
-          // Check 2: textarea[name="g-recaptcha-response"] (hCaptcha backwards-compat)
           const gTa = document.querySelector('textarea[name="g-recaptcha-response"]') as HTMLTextAreaElement | null;
           if (gTa && gTa.value && gTa.value.length > 0) return 'g-recaptcha-response textarea';
-
-          // Check 3: [data-hcaptcha-response] attribute on any wrapper element
           const wrapper = document.querySelector('[data-hcaptcha-response]') as HTMLElement | null;
           if (wrapper) {
             const resp = wrapper.getAttribute('data-hcaptcha-response');
             if (resp && resp.length > 0) return 'data-hcaptcha-response attribute';
           }
-
-          // Check 4: iframe with title containing "hCaptcha" that has data-hcaptcha-response
           const iframes = document.querySelectorAll('iframe');
           for (const iframe of iframes) {
             const resp = iframe.getAttribute('data-hcaptcha-response');
             if (resp && resp.length > 0) return 'iframe data-hcaptcha-response';
           }
-
           return '';
         });
 
@@ -1903,10 +1913,46 @@ export class RentalDetailsPageSinglePage extends BasePage {
         // page might be navigating — ignore
       }
 
+      // ── Check: challenge popup visible? ──
+      // hCaptcha opens a large (>200×200) iframe overlay for the image grid.
+      // Once it appears, the user is actively solving — disable the stuck timer.
+      if (!challengeDetected) {
+        try {
+          challengeDetected = await this.page.evaluate(() => {
+            const frames = document.querySelectorAll('iframe');
+            for (const f of frames) {
+              const r = f.getBoundingClientRect();
+              if (r.width > 200 && r.height > 200 &&
+                  (f.src.includes('hcaptcha') || (f.title || '').toLowerCase().includes('captcha'))) {
+                return true;
+              }
+            }
+            return false;
+          });
+          if (challengeDetected) {
+            console.log('  🧩 hCaptcha challenge appeared — waiting for manual solve (no time limit)...');
+          }
+        } catch { /* ignore */ }
+      }
+
       pollCount++;
-      // Log a reminder every 30 seconds (60 polls × 500ms)
-      if (pollCount % 60 === 0) {
-        // Play a single beep reminder
+
+      // ── Stuck detection ──
+      // 30 seconds with no challenge and no solve = widget is broken (checkbox
+      // rendered but non-functional). Throw to trigger the spec's outer retry
+      // loop, which refreshes the page and re-runs the entire flow.
+      if (!challengeDetected && pollCount >= STUCK_TIMEOUT_POLLS) {
+        const elapsed = Math.round(pollCount * pollInterval / 1000);
+        console.log(`\n⚠️ hCaptcha widget appears STUCK — no challenge and no solve after ${elapsed}s`);
+        console.log('   Throwing to trigger full-flow retry (page will be refreshed)...\n');
+        throw new Error(
+          `hCaptcha widget unresponsive — no challenge or solve after ${elapsed}s. Retrying full flow.`
+        );
+      }
+
+      // Reminder beep every 30s (only once the challenge is up — before that
+      // the stuck timer is running and will throw if nothing happens).
+      if (challengeDetected && pollCount % 60 === 0) {
         try {
           const reminder = require('child_process').exec(
             'powershell -NoProfile -Command "[System.Media.SystemSounds]::Exclamation.Play()"',
@@ -1969,6 +2015,32 @@ export class RentalDetailsPageSinglePage extends BasePage {
   }
 
   /**
+   * Remove stale "provided email is invalid" toasts thrown by the background
+   * abandoned-cart capture (POST /user/cart) while the form was being filled.
+   * Prod runs server-side email verification on that LEAD CAPTURE only — the
+   * actual checkout (/user/checkout) accepts the same address, so these toasts
+   * are known noise, not a rent blocker (verified live 2026-08-07: cart 422s
+   * for both fill() and manual typing; checkout proceeds to card decline).
+   */
+  private async dismissCartCaptureEmailToast(): Promise<void> {
+    try {
+      const removed = await this.page.evaluate(() => {
+        const containers = document.querySelectorAll(
+          '[data-id*="toast-notification"], .toast-container, .toast, [role="alert"], .Toastify__toast'
+        );
+        let n = 0;
+        containers.forEach(el => {
+          if (/provided email is invalid/i.test(el.textContent || '')) { el.remove(); n++; }
+        });
+        return n;
+      });
+      if (removed > 0) {
+        console.log(`  ℹ️ Dismissed ${removed} stale "email invalid" toast(s) from the background cart capture (known prod noise — not a rent blocker)`);
+      }
+    } catch { /* page context busy — toasts will age out on their own */ }
+  }
+
+  /**
    * Click RENT NOW button and capture error message
    */
   async clickRentNowAndCaptureError(hasCaptcha: boolean = false, clientName?: string): Promise<string> {
@@ -1983,12 +2055,21 @@ export class RentalDetailsPageSinglePage extends BasePage {
       // Minimize live chat if present
       await this.minimizeLiveChat();
 
+      // Clear stale "email invalid" toasts thrown by the background cart capture
+      // during form fill — otherwise the post-click toast scan reports them
+      // instead of the real checkout result.
+      await this.dismissCartCaptureEmailToast();
+
       // Set up network response listener BEFORE clicking RENT NOW
       // This captures the API error even if the toast doesn't display it
       let apiErrorMessage = '';
       const responseHandler = async (response: any) => {
         try {
           const url = response.url();
+          // Background abandoned-cart capture (POST /user/cart) — prod rejects the QA
+          // email with 422 "The provided email is invalid", but /user/checkout accepts
+          // the same address, so a cart 422 must never be reported as the rent result.
+          if (url.includes('/user/cart')) return;
           const status = response.status();
           // Capture error responses from rent/payment/move-in API calls
           if (status >= 400 || (url.includes('/rent') || url.includes('/move-in') || url.includes('/payment') || url.includes('/checkout') || url.includes('/lease') || url.includes('/order') || url.includes('/transaction') || url.includes('/process') || url.includes('/reserve') || url.includes('/submit') || url.includes('/user/checkout'))) {

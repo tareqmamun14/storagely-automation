@@ -1,0 +1,15 @@
+{
+  "client": "safeguard",
+  "label": "Safeguard — Addison, IL Lake Street (Flex)",
+  "locationUrl": "https://www.safeguardit.com/storage-units/illinois/addison/lake-street",
+  "unit": "SELECTED UNIT · 8' x 3' · Climate-Controlled · 1st Floor Access · $32.50 · /mo · WEB RATE · $65/mo",
+  "tenant": {
+    "firstName": "TestReservation",
+    "lastName": "Testing",
+    "email": "tareq@storagely.io",
+    "phone": "2125556789"
+  },
+  "confirmation": "Selected Unit8' x 3'Climate-Controlled1st Floor Access$32.50/moWEB RATE$65/moSTANDARD RATE50% Off 2 MonthsYour unit has been reserved!Thank you for reserving your unit at Illinois - Addison - Lake Street. Our local team will be reaching out to you soon to schedule a tour.Close",
+  "env": "production",
+  "submittedAt": "2026-08-20T20:03:05.000Z"
+}

@@ -21,8 +21,8 @@
         }
       ],
       "firstSeen": "2026-07-22T21:51:26.338Z",
-      "lastSeen": "2026-08-03T20:02:15.905Z",
-      "occurrences": 6,
+      "lastSeen": "2026-08-20T20:17:09.077Z",
+      "occurrences": 12,
       "urls": [
         "https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd",
         "https://minimallstorage.com/storage-units/ohio/carroll/columbus-lancaster-road",
@@ -49,8 +49,8 @@
         }
       ],
       "firstSeen": "2026-07-22T21:51:26.338Z",
-      "lastSeen": "2026-08-03T20:02:15.905Z",
-      "occurrences": 6,
+      "lastSeen": "2026-08-20T20:17:09.077Z",
+      "occurrences": 12,
       "urls": [
         "https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd",
         "https://minimallstorage.com/storage-units/ohio/carroll/columbus-lancaster-road",
@@ -66,7 +66,7 @@
       "area": "seohead",
       "check": "Open Graph title + image present",
       "title": "seohead: Open Graph title + image present",
-      "detail": "[known:informed #storagestar-seohead-open-graph-title-image-present] og:title=ok, og:image=uploads/1716410570366self-storage-units-colorado-s",
+      "detail": "[known:informed #storagestar-seohead-open-graph-title-image-present] og:title=ok, og:image=(missing)",
       "source": "suite",
       "status": "informed",
       "slackChannel": "",
@@ -77,8 +77,8 @@
         }
       ],
       "firstSeen": "2026-07-22T21:52:28.163Z",
-      "lastSeen": "2026-08-03T20:04:17.957Z",
-      "occurrences": 5,
+      "lastSeen": "2026-08-20T16:25:44.542Z",
+      "occurrences": 9,
       "urls": [
         "https://www.storagestar.com/storage-units/colorado/avon/910-nottingham-road",
         "https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive",
@@ -215,8 +215,8 @@
         }
       ],
       "firstSeen": "2026-08-03T14:12:15.000Z",
-      "lastSeen": "2026-08-03T14:20:50.567Z",
-      "occurrences": 2,
+      "lastSeen": "2026-08-03T20:17:16.748Z",
+      "occurrences": 3,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -232,7 +232,7 @@
       "area": "seo",
       "check": "SEO content block (headings + paragraphs + links)",
       "title": "seo: French page missing SEO content (Sainte-Thérèse)",
-      "detail": "[known:acknowledged #minimall-seo-content-missing-fr-ca] *Frais d'activation uniques de 35 $ applicables à toutes les unités. + Frais et taxes applicables. Facturation de 28 jours (cycles de 4 semaines). Le taux d'introduction s'applique jusqu'à 16 semaines (le cas échéant, consultez le bail pour plus de détails). 4 semaines libres s'appliquent au taux d'introduction et ne le sont pas incluez les ",
+      "detail": "[known:acknowledged #minimall-seo-content-missing-fr-ca] Un peu comme un garde-robe. Idéal pour l’équipement sportif, les articles saisonniers et les boîtes supplémentaires.",
       "source": "suite",
       "status": "acknowledged",
       "slackChannel": "",
@@ -243,8 +243,8 @@
         }
       ],
       "firstSeen": "2026-08-03T14:12:15.000Z",
-      "lastSeen": "2026-08-03T14:20:50.567Z",
-      "occurrences": 2,
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 8,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -352,6 +352,573 @@
       "occurrences": 1,
       "urls": [
         "https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd"
+      ]
+    },
+    {
+      "id": "minimall-exploratory-address-state-consistency",
+      "signatures": [
+        "minimall|exploratory|address-state-consistency"
+      ],
+      "client": "minimall",
+      "area": "exploratory",
+      "check": "address-state-consistency",
+      "title": "[exploratory] address-state-consistency: URL state \"quebec\" (?) not found anywhere in the page text  ·  (state=\"quebec\" abbrev=— pr",
+      "detail": "URL state \"quebec\" (?) not found anywhere in the page text  ·  (state=\"quebec\" abbrev=— present=false)  ·  why: URL says one state, page shows another → wrong-facility data wiring (real incidents happen on migrations).",
+      "source": "exploratory",
+      "status": "candidate",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-03T20:17:16.748Z",
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 4,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-health-units-rent-links",
+      "signatures": [
+        "minimall|health|units-rent-links"
+      ],
+      "client": "minimall",
+      "area": "health",
+      "check": "Units + Rent links",
+      "title": "health: Units + Rent links",
+      "detail": "no Rent links found",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-07T22:21:14.189Z",
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 5,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-nav-my-account-tenant-portal-link-or-account-menu",
+      "signatures": [
+        "minimall|nav|my-account-tenant-portal-link-or-account-menu"
+      ],
+      "client": "minimall",
+      "area": "nav",
+      "check": "My Account — tenant portal link or account menu",
+      "title": "nav: My Account — tenant portal link or account menu",
+      "detail": "No My Account / Login item found in header",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-07T22:21:14.189Z",
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 5,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-nav-menu-dropdown-triggers-present",
+      "signatures": [
+        "minimall|nav|menu-dropdown-triggers-present"
+      ],
+      "client": "minimall",
+      "area": "nav",
+      "check": "menu dropdown triggers present",
+      "title": "nav: menu dropdown triggers present",
+      "detail": "missing trigger(s): ^find storage$, ^getting started$, ^resources$, ^about$",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-07T22:21:14.189Z",
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 5,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-nav-header-action-ctas-present",
+      "signatures": [
+        "minimall|nav|header-action-ctas-present"
+      ],
+      "client": "minimall",
+      "area": "nav",
+      "check": "header action CTAs present",
+      "title": "nav: header action CTAs present",
+      "detail": "missing: pay online, rent unit, call us",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-07T22:21:14.189Z",
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 5,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-header-office-or-access-hours-present",
+      "signatures": [
+        "minimall|header|office-or-access-hours-present"
+      ],
+      "client": "minimall",
+      "area": "header",
+      "check": "office or access hours present",
+      "title": "header: office or access hours present",
+      "detail": "no hours-labeled element",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-07T22:21:14.189Z",
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 5,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-header-what-will-fit-button-present",
+      "signatures": [
+        "minimall|header|what-will-fit-button-present"
+      ],
+      "client": "minimall",
+      "area": "header",
+      "check": "\"What Will Fit?\" button present",
+      "title": "header: \"What Will Fit?\" button present",
+      "detail": "(missing)",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-07T22:21:14.189Z",
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 5,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-amenities-amenities-facility-features-heading-visib",
+      "signatures": [
+        "minimall|amenities|amenities-facility-features-heading-visible"
+      ],
+      "client": "minimall",
+      "area": "amenities",
+      "check": "Amenities / Facility Features heading visible",
+      "title": "amenities: Amenities / Facility Features heading visible",
+      "detail": "no heading matching /facility features|amenit(y|ies)/i",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-07T22:21:14.189Z",
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 5,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-amenities-at-least-1-amenity-listed",
+      "signatures": [
+        "minimall|amenities|at-least-1-amenity-listed"
+      ],
+      "client": "minimall",
+      "area": "amenities",
+      "check": "at least 1 amenity listed",
+      "title": "amenities: at least 1 amenity listed",
+      "detail": "(none extracted)",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-07T22:21:14.189Z",
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 5,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-units-at-least-1-unit-card-rendered",
+      "signatures": [
+        "minimall|units|at-least-1-unit-card-rendered"
+      ],
+      "client": "minimall",
+      "area": "units",
+      "check": "at least 1 unit card rendered",
+      "title": "units: at least 1 unit card rendered",
+      "detail": "0 unit card(s) detected",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-07T22:21:14.189Z",
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 5,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-faq-at-least-1-faq-question-found",
+      "signatures": [
+        "minimall|faq|at-least-1-faq-question-found"
+      ],
+      "client": "minimall",
+      "area": "faq",
+      "check": "at least 1 FAQ question found",
+      "title": "faq: at least 1 FAQ question found",
+      "detail": "(no question rows detected)",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-07T22:21:14.189Z",
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 5,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-filters-unit-features-filters-present",
+      "signatures": [
+        "minimall|filters|unit-features-filters-present"
+      ],
+      "client": "minimall",
+      "area": "filters",
+      "check": "Unit Features filters present",
+      "title": "filters: Unit Features filters present",
+      "detail": "(none found)",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-07T22:21:14.189Z",
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 5,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-filters-unit-size-filters-present",
+      "signatures": [
+        "minimall|filters|unit-size-filters-present"
+      ],
+      "client": "minimall",
+      "area": "filters",
+      "check": "Unit Size filters present",
+      "title": "filters: Unit Size filters present",
+      "detail": "0 size filter(s)",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-07T22:21:14.189Z",
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 5,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-filters-card-row-layout-toggle-present",
+      "signatures": [
+        "minimall|filters|card-row-layout-toggle-present"
+      ],
+      "client": "minimall",
+      "area": "filters",
+      "check": "Card / Row layout toggle present",
+      "title": "filters: Card / Row layout toggle present",
+      "detail": "(layout toggle not found)",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-07T22:21:14.189Z",
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 5,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-filters-quick-filter-chips-present-above-grid",
+      "signatures": [
+        "minimall|filters|quick-filter-chips-present-above-grid"
+      ],
+      "client": "minimall",
+      "area": "filters",
+      "check": "quick-filter chips present above grid",
+      "title": "filters: quick-filter chips present above grid",
+      "detail": "0 chip(s)",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-07T22:21:14.189Z",
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 5,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-promo-pricing-disclaimer-present",
+      "signatures": [
+        "minimall|promo|pricing-disclaimer-present"
+      ],
+      "client": "minimall",
+      "area": "promo",
+      "check": "pricing disclaimer present",
+      "title": "promo: pricing disclaimer present",
+      "detail": "(no disclaimer footnote found)",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-07T22:21:14.189Z",
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 5,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-reviews-customer-reviews-heading-visible",
+      "signatures": [
+        "minimall|reviews|customer-reviews-heading-visible"
+      ],
+      "client": "minimall",
+      "area": "reviews",
+      "check": "Customer Reviews heading visible",
+      "title": "reviews: Customer Reviews heading visible",
+      "detail": "",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-07T22:21:14.189Z",
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 5,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-uhaul-u-haul-price-present",
+      "signatures": [
+        "minimall|uhaul|u-haul-price-present"
+      ],
+      "client": "minimall",
+      "area": "uhaul",
+      "check": "U-Haul price present",
+      "title": "uhaul: U-Haul price present",
+      "detail": "(no price found)",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-07T22:21:14.189Z",
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 5,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-uhaul-u-haul-reserve-now-cta-present",
+      "signatures": [
+        "minimall|uhaul|u-haul-reserve-now-cta-present"
+      ],
+      "client": "minimall",
+      "area": "uhaul",
+      "check": "U-Haul \"Reserve Now\" CTA present",
+      "title": "uhaul: U-Haul \"Reserve Now\" CTA present",
+      "detail": "(no reserve button)",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-07T22:21:14.189Z",
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 5,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-exploratory-unit-cta-coverage",
+      "signatures": [
+        "minimall|exploratory|unit-cta-coverage"
+      ],
+      "client": "minimall",
+      "area": "exploratory",
+      "check": "unit-cta-coverage",
+      "title": "[exploratory] unit-cta-coverage: 26/26 unit card(s) show no Rent/Reserve/Call CTA text  ·  (26 cards · 0 with CTA)  ·  why:",
+      "detail": "28/28 unit card(s) show no Rent/Reserve/Call CTA text  ·  (28 cards · 0 with CTA)  ·  why: A card with no Rent/Reserve/Call path is dead inventory — renters bounce.",
+      "source": "exploratory",
+      "status": "candidate",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-07T22:21:14.189Z",
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 3,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-reserve-reserve-button-present",
+      "signatures": [
+        "minimall|reserve|reserve-button-present"
+      ],
+      "client": "minimall",
+      "area": "reserve",
+      "check": "Reserve button present",
+      "title": "reserve: Reserve button present",
+      "detail": "(none)",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-07T22:21:14.189Z",
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 5,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-rent-fatal",
+      "signatures": [
+        "minimall|rent|fatal"
+      ],
+      "client": "minimall",
+      "area": "rent",
+      "check": "FATAL",
+      "title": "rent: FATAL",
+      "detail": "❌ CRITICAL ERROR: Failed to fill single-page rental form - Card Number field not found — payment form may not have loaded or uses an unsupported iframe/widget",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-07T22:21:14.189Z",
+      "lastSeen": "2026-08-20T20:18:40.548Z",
+      "occurrences": 5,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "storagestar-exploratory-section-order-integrity",
+      "signatures": [
+        "storagestar|exploratory|section-order-integrity"
+      ],
+      "client": "storagestar",
+      "area": "exploratory",
+      "check": "section-order-integrity",
+      "title": "[exploratory] section-order-integrity: 1 content block(s) render BELOW the footer: <div .min-w-0> \"Nick D\nAug 2026\n\nI have never ",
+      "detail": "1 content block(s) render BELOW the footer: <div .min-w-0> \"Nick D\nAug 2026\n\nI have never had an issue at this storage f…\" (1407px tall)  ·  (page composition/order broke)  ·  why: Real incidents (user-reported 2026-07-17): the Google-reviews section rendered UNDER the footer on Elizabethton TN and vanished on Etna OH. Any component drifting below the footer means the page composition broke.",
+      "source": "exploratory",
+      "status": "candidate",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-11T17:28:59.703Z",
+      "lastSeen": "2026-08-11T17:28:59.703Z",
+      "occurrences": 1,
+      "urls": [
+        "https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive"
+      ]
+    },
+    {
+      "id": "minimall-exploratory-meta-description",
+      "signatures": [
+        "minimall|exploratory|meta-description"
+      ],
+      "client": "minimall",
+      "area": "exploratory",
+      "check": "meta-description",
+      "title": "[exploratory] meta-description: meta description length 244 (healthy: 50–170)  ·  (244 chars: \"Qu’il s’agisse de résidents",
+      "detail": "meta description length 244 (healthy: 50–170)  ·  (244 chars: \"Qu’il s’agisse de résidents, d’étudiants ou de propriétaires d’entreprise, le Mi…\")  ·  why: The SERP snippet for “storage units in <city>” comes from this tag; too short/long gets rewritten.",
+      "source": "exploratory",
+      "status": "candidate",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-14T21:35:09.851Z",
+      "lastSeen": "2026-08-14T21:35:09.851Z",
+      "occurrences": 1,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "minimall-exploratory-title-city-match",
+      "signatures": [
+        "minimall|exploratory|title-city-match"
+      ],
+      "client": "minimall",
+      "area": "exploratory",
+      "check": "title-city-match",
+      "title": "[exploratory] title-city-match: city \"sainte therese\" (from URL) appears in neither <title> nor <h1>  ·  (city=\"sainte the",
+      "detail": "city \"sainte therese\" (from URL) appears in neither <title> nor <h1>  ·  (city=\"sainte therese\" · title=\"Unités d’entreposage libre-service sécurisées Sainte-Thérèse\" · h1=\"Unités d’entreposage libre-service sécur\")  ·  why: Renters search “storage units <city>” — the city must appear in title or H1 to rank locally.",
+      "source": "exploratory",
+      "status": "candidate",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-14T21:35:09.851Z",
+      "lastSeen": "2026-08-14T21:35:09.851Z",
+      "occurrences": 1,
+      "urls": [
+        "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
+      ]
+    },
+    {
+      "id": "safeguard-rent-navigate-to-v2-spc-step-four",
+      "signatures": [
+        "safeguard|rent|navigate-to-v2-spc-step-four"
+      ],
+      "client": "safeguard",
+      "area": "rent",
+      "check": "Navigate to V2 SPC /step-four",
+      "title": "rent: Navigate to V2 SPC /step-four",
+      "detail": "Did not navigate. Before: https://www.safeguardit.com/storage-units/connecticut/bridgeport/west-end-west-side — After: https://www.safeguardit.com/storage-units/connecticut/bridgeport/west-end-west-side",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-20T16:22:50.239Z",
+      "lastSeen": "2026-08-20T16:22:50.239Z",
+      "occurrences": 1,
+      "urls": [
+        "https://www.safeguardit.com/storage-units/connecticut/bridgeport/west-end-west-side"
+      ]
+    },
+    {
+      "id": "safeguard-rent-fatal",
+      "signatures": [
+        "safeguard|rent|fatal"
+      ],
+      "client": "safeguard",
+      "area": "rent",
+      "check": "FATAL",
+      "title": "rent: FATAL",
+      "detail": "Rent did not navigate to V2 SPC /step-four.",
+      "source": "suite",
+      "status": "new",
+      "slackChannel": "",
+      "comments": [],
+      "firstSeen": "2026-08-20T16:22:50.239Z",
+      "lastSeen": "2026-08-20T16:22:50.239Z",
+      "occurrences": 1,
+      "urls": [
+        "https://www.safeguardit.com/storage-units/connecticut/bridgeport/west-end-west-side"
       ]
     }
   ]

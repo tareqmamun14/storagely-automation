@@ -7,7 +7,8 @@
  *     ┌─ open the facility page (once) ─────────────────────────────┐
  *     │  STEP 1  Page health        (selectable — checked by default) │
  *     │  STEP 2  Page sections      (selectable — checked by default) │
- *     │  STEP 3  Reserve modal      (placeholder — not implemented)   │
+ *     │  STEP 3  Reserve modal      (read-only check · or 📝 SUBMISSION │
+ *     │           when the panel's Reservation toggle enables it)      │
  *     │  STEP 4  Rent flow          (selectable — always LAST)        │
  *     └───────────────────────────────────────────────────────────────┘
  *
@@ -33,6 +34,9 @@ import { SpcCheckoutEntryPage } from '../../pages/SpcCheckoutEntryPage';
 import { RentalDetailsPageSinglePage } from '../../../pages/RentalDetailsPage_SPC';
 import { MiniMallRentalPage } from '../../../pages/MiniMallRentalPage';
 import { SINGLE_PAGE_USER } from '../../../configs/credentials';
+import { setupCorpCodeIfNeeded } from '../../../utils/corpCodeSetup';
+import { reservationTargetForUrl, reservationEnabled, RESERVATION_TENANT } from '../../../configs/reservations';
+import { recordReservation } from '../../../utils/reservationRecord';
 import {
   JourneyCollector,
   printJourneyReport,
@@ -127,7 +131,17 @@ test.describe('Flex Facility Journey', () => {
 
       try {
         // ── STEP 0: ONE navigation ──────────────────────────────────
-        await live.goto(facility.url);
+        // 📝 Reservation-target pages load with a cache-buster (same idea as
+        // the legacy suites' navigateWithCacheBusting) so the reserve modal
+        // reflects LIVE availability, never a CDN-cached page. Other flex
+        // pages keep the plain URL (CDN throttling tolerance).
+        const facilityRsvTarget = reservationTargetForUrl(facility.url);
+        const isReservationTargetPage = !!(facilityRsvTarget && reservationEnabled(facilityRsvTarget.key));
+        const navUrl = isReservationTargetPage
+          ? `${facility.url}${facility.url.includes('?') ? '&' : '?'}cacheBust=${Date.now()}-${Math.random().toString(36).slice(2)}`
+          : facility.url;
+        if (isReservationTargetPage) console.log(`  💾 reservation visit — cache busting ENABLED: ${navUrl}`);
+        await live.goto(navUrl);
         await live.expectPageLoaded();
 
         // Resolve THIS page's checkout handoff from the live DOM (mixed-FMS
@@ -136,8 +150,13 @@ test.describe('Flex Facility Journey', () => {
         // step all use this resolved handoff.
         const pageHandoff = await live.resolveRentHandoff(facility.client);
 
+        // 📝 Facilities appended purely for a reservation submission run ONLY
+        // the reservation step — the regular journey continues on the
+        // rotation pick, so no health/sections/rent here.
+        const reservationOnlyRun = !!facility.reservationOnly;
+
         // ── STEP 1: Page health (optional) ──────────────────────────
-        if (layerOn('health')) {
+        if (layerOn('health') && !reservationOnlyRun) {
           collector.beginStep('health', 'Page Health');
 
           await collector.runCheck('HTTP status', async () => {
@@ -259,7 +278,7 @@ test.describe('Flex Facility Journey', () => {
         }
 
         // ── STEP 2: Page sections (optional) ────────────────────────
-        if (layerOn('sections')) {
+        if (layerOn('sections') && !reservationOnlyRun) {
           collector.beginStep('sections', 'Sections');
 
           const sectionDefs = getEnabledSections();
@@ -312,15 +331,44 @@ test.describe('Flex Facility Journey', () => {
         }
 
         // ── STEP 3: Reserve modal ───────────────────────────────────
-        // Click a unit's Reserve button → verify the reservation modal opens
-        // (selected unit + form) → close it. Captcha-free, so it runs with the
-        // sections/rent layers. Clients without a reserve modal skip cleanly.
-        // DOM-aware: only Mini Mall ships a reserve modal, and only on SOME
-        // templates (the SiteLink-FMS Flex pages may not) — probe before running.
+        // Two depths:
+        //   • 📝 SUBMISSION — when this facility is a client's DESIGNATED
+        //     reservation location (configs/reservations.ts) AND the panel's
+        //     Reservation toggle enabled it (STORAGELY_RESERVATION): fill the
+        //     modal, submit a REAL reservation, require the confirmation
+        //     message (error/silence = FAIL — that bug class was revenue-
+        //     impacting on prod), and record it for cancellation via Jacob.
+        //   • read-only — Mini Mall's modal open/close verification (existing).
+        const rsvTarget = reservationTargetForUrl(facility.url);
+        const doReservationSubmit = !!(rsvTarget && rsvTarget.driver === 'flex'
+          && reservationEnabled(rsvTarget.key)
+          && (reservationOnlyRun || layerOn('sections') || layerOn('rent')));
         const clientHasReserveModal = facility.client === 'minimall' &&
           (await page.getByRole('button', { name: /reserve/i }).first().isVisible().catch(() => false) ||
            await page.getByRole('link', { name: /^reserve$/i }).first().isVisible().catch(() => false));
-        if (clientHasReserveModal && (layerOn('sections') || layerOn('rent'))) {
+        if (doReservationSubmit) {
+          collector.beginStep('reserve', 'Reserve Modal — SUBMISSION');
+          const rsvName = `📝 Reservation — ${facility.name}`;
+          console.log(`\n🏢 TESTING: ${rsvName}`);
+          console.log(`⚙️  Platform: ${rsvTarget!.fms}`);
+          const rsv = await live.submitReservation(RESERVATION_TENANT);
+          collector.check('Reservation submitted — confirmation shown', rsv.ok, rsv.message,
+            rsv.ok ? undefined : 'Open the reserve modal on the designated location, submit, and check what comes back');
+          if (rsv.ok) {
+            recordReservation({
+              client: rsvTarget!.key, label: rsvTarget!.label, locationUrl: facility.url,
+              unit: rsv.unit, tenant: RESERVATION_TENANT,
+              confirmation: rsv.message, env: facility.env, submittedAt: new Date().toISOString(),
+            });
+            console.log(`\n✅ TEST COMPLETED FOR: ${rsvName}`);
+            console.log(`📊 Result: ${rsv.message}`);
+          } else {
+            console.error(`\n❌ TEST FAILED FOR: ${rsvName}`);
+            console.error(`💥 Error: ${rsv.message}`);
+            expect.soft(false, `Reservation submission failed: ${rsv.message}`).toBe(true);
+          }
+          collector.endStep();
+        } else if (clientHasReserveModal && (layerOn('sections') || layerOn('rent'))) {
           collector.beginStep('reserve', 'Reserve Modal');
           const reserve = await live.verifyReserveModal();
           for (const c of reserve.checks) {
@@ -336,8 +384,17 @@ test.describe('Flex Facility Journey', () => {
         }
 
         // ── STEP 4: Rent flow (runs LAST — navigates away to V2 SPC) ─
-        if (layerOn('rent')) {
+        // 📝 reservation-only facilities skip it: the reservation visit does
+        // ONLY the reservation; rent coverage stays on the rotation pick.
+        if (layerOn('rent') && !reservationOnlyRun) {
           collector.beginStep('rent', 'Rent Flow');
+
+          // PRE-STEP: Corp Code Setup (staging SiteLink only) — set the corp
+          // password in admin before the checkout page loads. No-op in prod.
+          const browser = page.context().browser();
+          if (browser) {
+            await setupCorpCodeIfNeeded(browser, facility.url);
+          }
 
           const handoff = pageHandoff;
 
@@ -433,9 +490,19 @@ test.describe('Flex Facility Journey', () => {
             // the right rental context, then STOP — no form fill, no captcha,
             // no submit against the live FMS. FLEX_RENT_MODE=full (or the
             // panel's "Full checkout" depth) drives the checkout to submit.
-            const entry = handoff.drivesSpcForm
-              ? await new SpcCheckoutEntryPage(page).verifyHandoff(facility.expectedHeading, handoff)
-              : await new YardiCheckoutStartPage(page).verifyHandoff(facility.expectedHeading);
+            let entry;
+            if (handoff.drivesSpcForm) {
+              const spcEntry = new SpcCheckoutEntryPage(page);
+              entry = await spcEntry.verifyHandoff(facility.expectedHeading, handoff);
+              // VBP: when the unit offers Value-Based Pricing tiers, click
+              // between them and verify the pricing breakdown reloads cleanly
+              // (no error toast), then restore the default tier. Info-skip
+              // when the unit has no tiers.
+              const vbp = await spcEntry.probeValueBasedPricing();
+              entry.checks.push(...vbp.checks);
+            } else {
+              entry = await new YardiCheckoutStartPage(page).verifyHandoff(facility.expectedHeading);
+            }
             for (const c of entry.checks) {
               collector.check(c.name, c.passed, c.detail,
                 c.passed ? undefined : `Inspect the ${handoff.label} checkout entry page`);
@@ -449,6 +516,16 @@ test.describe('Flex Facility Journey', () => {
             }
           } else if (handoff.drivesSpcForm) {
           // ── Safeguard: drive the on-page V2 SPC form to submit ──
+          // VBP first: when the unit offers Value-Based Pricing tiers, click
+          // between them and verify the pricing breakdown reloads cleanly,
+          // then restore the default tier before the usual fill → submit.
+          const vbpProbe = await new SpcCheckoutEntryPage(page).probeValueBasedPricing();
+          for (const c of vbpProbe.checks) {
+            collector.check(c.name, c.passed, c.detail,
+              c.passed ? undefined : 'Click between the VBP tiers on /step-four and inspect the pricing breakdown');
+            if (!c.passed) expect.soft(false, `VBP: ${c.name} — ${c.detail}`).toBe(true);
+          }
+
           const spcForm = new RentalDetailsPageSinglePage(page);
           await spcForm.fillCompleteSinglePageForm({
             firstName:           SINGLE_PAGE_USER.firstName,
