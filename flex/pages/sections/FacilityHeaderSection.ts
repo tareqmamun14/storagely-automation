@@ -59,7 +59,9 @@ export class FacilityHeaderSection implements ISectionDetector {
       // Match BOTH forms so a legit "Office Hours" label isn't false-flagged as
       // "no hours-labeled element". (verified live on all three.)
       const hoursTexts = await page.evaluate(() => {
-        const HOURS_LABEL = /\b(office|access)\s*(?:hours\b|[:\n])/i;
+        // Bilingual: fr-ca renders "Bureau: Mercredi : 9h00 – 17h00" and
+        // "Accès : Tous les jours de 6 h à 22 h" (verified live 2026-08-25).
+        const HOURS_LABEL = /\b(office|access|bureau|acc[eè]s)\s*(?:hours\b|[:\n])/i;
         const all = Array.from(document.querySelectorAll<HTMLElement>('button, span, div'))
           .map(el => el.innerText?.trim() || '')
           .filter(t => HOURS_LABEL.test(t))
@@ -83,7 +85,8 @@ export class FacilityHeaderSection implements ISectionDetector {
       // binding ("Office:" with an empty / {token} / "Invalid Date" value) that
       // the presence check above would wave through. Deliberately broad across
       // casing + colon variants so it never false-flags a legit schedule.
-      const HOURS_VALUE = /\d{1,2}(:\d{2})?\s*(am|pm)|\d{1,2}:\d{2}|closed|24\s*\/?\s*7|24\s*hours?|open 24/i;
+      // French time formats: "9h00", "6 h à 22 h", "fermé".
+      const HOURS_VALUE = /\d{1,2}(:\d{2})?\s*(am|pm)|\d{1,2}:\d{2}|\d{1,2}\s*h(\d{2})?\b|closed|fermé|24\s*\/?\s*7|24\s*hours?|open 24/i;
       const hoursWithValue = hoursTexts.filter(t => HOURS_VALUE.test(t));
       checks.push(check(
         'office/access hours show a real schedule (time range or Closed)',
@@ -153,12 +156,18 @@ export class FacilityHeaderSection implements ISectionDetector {
       // the FAQ jump link. (Client-specific header chrome — gated to minimall.)
       if (ctx.client === 'minimall') {
         // "What Will Fit?" is a <button> on some templates and an <a> anchor
-        // (#what-will-fit) on others — accept either.
+        // (#what-will-fit) on others — accept either. The fr-ca template does
+        // NOT ship it at all (verified live 2026-08-25) → info-pass there.
+        const isFrCa = /(^|\/\/)fr-ca\./.test(ctx.url);
         const hasWhatWillFit =
           (await page.getByRole('button', { name: /what will fit/i }).count()) > 0 ||
           (await page.getByRole('link', { name: /what will fit/i }).count()) > 0;
         const hasFaqJump = (await page.getByRole('link', { name: /^faq$/i }).count()) > 0;
-        checks.push(check('"What Will Fit?" button present', hasWhatWillFit, hasWhatWillFit ? 'ok' : '(missing)'));
+        checks.push(check(
+          isFrCa ? '"What Will Fit?" button (info — not on the fr-ca template)' : '"What Will Fit?" button present',
+          isFrCa ? true : hasWhatWillFit,
+          hasWhatWillFit ? 'ok' : (isFrCa ? 'not offered on fr-ca — info only' : '(missing)'),
+        ));
         checks.push(check('FAQ jump link present', hasFaqJump, hasFaqJump ? 'ok' : '(missing)'));
       }
     } catch (err) {

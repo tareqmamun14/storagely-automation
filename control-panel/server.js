@@ -554,6 +554,17 @@ function buildRunCommand(req) {
   // old behavior where Flex short-circuited everything else.
   const commands = [];
 
+  // 📝 Reservation submissions — their OWN process, FIRST, independent of the
+  // suite selection (panel toggle ON = they run no matter what else runs).
+  // Always headed: prod reserve modals gate the submit behind a manual hCaptcha.
+  if (Array.isArray(req.reservation) && req.reservation.length) {
+    commands.push({
+      cmd: 'npx',
+      args: ['playwright', 'test', 'tests/reservationSubmission.spec.ts', '--headed'],
+      env, allure: 'off', label: 'reservation',
+    });
+  }
+
   // Regular specs (root playwright config) — run FIRST.
   if (specs.length > 0) {
     const args = ['playwright', 'test', ...specs];

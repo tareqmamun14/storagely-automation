@@ -21,8 +21,8 @@
         }
       ],
       "firstSeen": "2026-07-22T21:51:26.338Z",
-      "lastSeen": "2026-08-20T20:17:09.077Z",
-      "occurrences": 12,
+      "lastSeen": "2026-08-25T19:44:19.523Z",
+      "occurrences": 15,
       "urls": [
         "https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd",
         "https://minimallstorage.com/storage-units/ohio/carroll/columbus-lancaster-road",
@@ -49,8 +49,8 @@
         }
       ],
       "firstSeen": "2026-07-22T21:51:26.338Z",
-      "lastSeen": "2026-08-20T20:17:09.077Z",
-      "occurrences": 12,
+      "lastSeen": "2026-08-25T19:44:19.523Z",
+      "occurrences": 15,
       "urls": [
         "https://minimallstorage.com/storage-units/alabama/birmingham/richard-arrington-jr-blvd",
         "https://minimallstorage.com/storage-units/ohio/carroll/columbus-lancaster-road",
@@ -77,8 +77,8 @@
         }
       ],
       "firstSeen": "2026-07-22T21:52:28.163Z",
-      "lastSeen": "2026-08-20T16:25:44.542Z",
-      "occurrences": 9,
+      "lastSeen": "2026-08-24T18:15:03.229Z",
+      "occurrences": 11,
       "urls": [
         "https://www.storagestar.com/storage-units/colorado/avon/910-nottingham-road",
         "https://www.storagestar.com/storage-units/colorado/colorado-springs/aerotech-drive",
@@ -109,27 +109,6 @@
       "occurrences": 2,
       "urls": [
         "https://www.storagestar.com/storage-units/colorado/avon/910-nottingham-road"
-      ]
-    },
-    {
-      "id": "safeguard-integrity-no-unresolved-template-tokens-in-visible",
-      "signatures": [
-        "safeguard|integrity|no-unresolved-template-tokens-in-visible-text"
-      ],
-      "client": "safeguard",
-      "area": "integrity",
-      "check": "no unresolved {template.tokens} in visible text",
-      "title": "integrity: no unresolved {template.tokens} in visible text",
-      "detail": "leaked: {v2_api_location.location_image}, {v2_api_location.locations_features}, {v2_api_location.rating_value}, {v2_api_location.review_count}, {v2_api_location.reviews}, {v2_api_location.meta.google_reviews_url}, {v2_api_location.city}, {v2_api_location_units.unit_type}, {v2_api_location_units.width_original}, {v2_api_location_units.length_original}",
-      "source": "suite",
-      "status": "new",
-      "slackChannel": "",
-      "comments": [],
-      "firstSeen": "2026-07-23T11:58:25.460Z",
-      "lastSeen": "2026-07-23T11:58:25.460Z",
-      "occurrences": 1,
-      "urls": [
-        "https://www.safeguardit.com/storage-units/connecticut/bridgeport/west-end-west-side"
       ]
     },
     {
@@ -243,8 +222,8 @@
         }
       ],
       "firstSeen": "2026-08-03T14:12:15.000Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 8,
+      "lastSeen": "2026-08-25T20:07:55.309Z",
+      "occurrences": 11,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -289,27 +268,6 @@
       "occurrences": 1,
       "urls": [
         "https://www.storagestar.com/storage-units/colorado/avon/910-nottingham-road"
-      ]
-    },
-    {
-      "id": "safeguard-units-filter-control-present-above-unit-list",
-      "signatures": [
-        "safeguard|units|filter-control-present-above-unit-list"
-      ],
-      "client": "safeguard",
-      "area": "units",
-      "check": "Filter control present above unit list",
-      "title": "units: Filter control present above unit list",
-      "detail": "(missing)",
-      "source": "suite",
-      "status": "new",
-      "slackChannel": "",
-      "comments": [],
-      "firstSeen": "2026-07-30T20:00:32.972Z",
-      "lastSeen": "2026-07-30T20:00:32.972Z",
-      "occurrences": 1,
-      "urls": [
-        "https://www.safeguardit.com/storage-units/connecticut/bridgeport/west-end-west-side"
       ]
     },
     {
@@ -369,8 +327,8 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-03T20:17:16.748Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 4,
+      "lastSeen": "2026-08-25T20:07:55.309Z",
+      "occurrences": 5,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -390,8 +348,8 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-07T22:21:14.189Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 5,
+      "lastSeen": "2026-08-25T20:07:55.309Z",
+      "occurrences": 8,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -411,8 +369,8 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-07T22:21:14.189Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 5,
+      "lastSeen": "2026-08-25T19:46:14.117Z",
+      "occurrences": 8,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -432,8 +390,8 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-07T22:21:14.189Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 5,
+      "lastSeen": "2026-08-25T19:46:14.117Z",
+      "occurrences": 8,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -453,8 +411,8 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-07T22:21:14.189Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 5,
+      "lastSeen": "2026-08-25T19:46:14.117Z",
+      "occurrences": 8,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -474,8 +432,8 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-07T22:21:14.189Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 5,
+      "lastSeen": "2026-08-25T19:46:14.117Z",
+      "occurrences": 8,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -495,8 +453,8 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-07T22:21:14.189Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 5,
+      "lastSeen": "2026-08-25T19:46:14.117Z",
+      "occurrences": 8,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -516,8 +474,8 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-07T22:21:14.189Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 5,
+      "lastSeen": "2026-08-25T19:46:14.117Z",
+      "occurrences": 8,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -537,8 +495,8 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-07T22:21:14.189Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 5,
+      "lastSeen": "2026-08-25T19:46:14.117Z",
+      "occurrences": 8,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -558,8 +516,8 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-07T22:21:14.189Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 5,
+      "lastSeen": "2026-08-25T20:07:55.309Z",
+      "occurrences": 8,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -579,8 +537,8 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-07T22:21:14.189Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 5,
+      "lastSeen": "2026-08-25T19:46:14.117Z",
+      "occurrences": 8,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -600,8 +558,8 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-07T22:21:14.189Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 5,
+      "lastSeen": "2026-08-25T19:46:14.117Z",
+      "occurrences": 8,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -621,8 +579,8 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-07T22:21:14.189Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 5,
+      "lastSeen": "2026-08-25T19:46:14.117Z",
+      "occurrences": 8,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -642,8 +600,8 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-07T22:21:14.189Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 5,
+      "lastSeen": "2026-08-25T19:46:14.117Z",
+      "occurrences": 8,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -663,8 +621,8 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-07T22:21:14.189Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 5,
+      "lastSeen": "2026-08-25T19:46:14.117Z",
+      "occurrences": 8,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -684,8 +642,8 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-07T22:21:14.189Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 5,
+      "lastSeen": "2026-08-25T19:46:14.117Z",
+      "occurrences": 8,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -705,8 +663,8 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-07T22:21:14.189Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 5,
+      "lastSeen": "2026-08-25T19:46:14.117Z",
+      "occurrences": 8,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -726,8 +684,8 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-07T22:21:14.189Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 5,
+      "lastSeen": "2026-08-25T19:46:14.117Z",
+      "occurrences": 8,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -747,8 +705,8 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-07T22:21:14.189Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 5,
+      "lastSeen": "2026-08-25T19:46:14.117Z",
+      "occurrences": 8,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -762,14 +720,14 @@
       "area": "exploratory",
       "check": "unit-cta-coverage",
       "title": "[exploratory] unit-cta-coverage: 26/26 unit card(s) show no Rent/Reserve/Call CTA text  ·  (26 cards · 0 with CTA)  ·  why:",
-      "detail": "28/28 unit card(s) show no Rent/Reserve/Call CTA text  ·  (28 cards · 0 with CTA)  ·  why: A card with no Rent/Reserve/Call path is dead inventory — renters bounce.",
+      "detail": "26/26 unit card(s) show no Rent/Reserve/Call CTA text  ·  (26 cards · 0 with CTA)  ·  why: A card with no Rent/Reserve/Call path is dead inventory — renters bounce.",
       "source": "exploratory",
       "status": "candidate",
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-07T22:21:14.189Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 3,
+      "lastSeen": "2026-08-25T20:07:55.309Z",
+      "occurrences": 4,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -789,8 +747,8 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-07T22:21:14.189Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 5,
+      "lastSeen": "2026-08-25T19:46:14.117Z",
+      "occurrences": 8,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -810,8 +768,8 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-07T22:21:14.189Z",
-      "lastSeen": "2026-08-20T20:18:40.548Z",
-      "occurrences": 5,
+      "lastSeen": "2026-08-25T19:46:14.117Z",
+      "occurrences": 8,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -852,8 +810,8 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-14T21:35:09.851Z",
-      "lastSeen": "2026-08-14T21:35:09.851Z",
-      "occurrences": 1,
+      "lastSeen": "2026-08-25T19:46:14.117Z",
+      "occurrences": 4,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
       ]
@@ -873,52 +831,10 @@
       "slackChannel": "",
       "comments": [],
       "firstSeen": "2026-08-14T21:35:09.851Z",
-      "lastSeen": "2026-08-14T21:35:09.851Z",
-      "occurrences": 1,
+      "lastSeen": "2026-08-25T19:46:14.117Z",
+      "occurrences": 4,
       "urls": [
         "https://fr-ca.minimallstorage.com/storage-units/quebec/sainte-therese/place-sicard"
-      ]
-    },
-    {
-      "id": "safeguard-rent-navigate-to-v2-spc-step-four",
-      "signatures": [
-        "safeguard|rent|navigate-to-v2-spc-step-four"
-      ],
-      "client": "safeguard",
-      "area": "rent",
-      "check": "Navigate to V2 SPC /step-four",
-      "title": "rent: Navigate to V2 SPC /step-four",
-      "detail": "Did not navigate. Before: https://www.safeguardit.com/storage-units/connecticut/bridgeport/west-end-west-side — After: https://www.safeguardit.com/storage-units/connecticut/bridgeport/west-end-west-side",
-      "source": "suite",
-      "status": "new",
-      "slackChannel": "",
-      "comments": [],
-      "firstSeen": "2026-08-20T16:22:50.239Z",
-      "lastSeen": "2026-08-20T16:22:50.239Z",
-      "occurrences": 1,
-      "urls": [
-        "https://www.safeguardit.com/storage-units/connecticut/bridgeport/west-end-west-side"
-      ]
-    },
-    {
-      "id": "safeguard-rent-fatal",
-      "signatures": [
-        "safeguard|rent|fatal"
-      ],
-      "client": "safeguard",
-      "area": "rent",
-      "check": "FATAL",
-      "title": "rent: FATAL",
-      "detail": "Rent did not navigate to V2 SPC /step-four.",
-      "source": "suite",
-      "status": "new",
-      "slackChannel": "",
-      "comments": [],
-      "firstSeen": "2026-08-20T16:22:50.239Z",
-      "lastSeen": "2026-08-20T16:22:50.239Z",
-      "occurrences": 1,
-      "urls": [
-        "https://www.safeguardit.com/storage-units/connecticut/bridgeport/west-end-west-side"
       ]
     }
   ]

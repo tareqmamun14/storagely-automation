@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Flex v4 — UNIFIED FACILITY JOURNEY (one browser per customer/facility).
  *
  * Single source of truth for the control-panel Flex run. Mirrors V1/SPC:
@@ -36,7 +36,7 @@ import { MiniMallRentalPage } from '../../../pages/MiniMallRentalPage';
 import { SINGLE_PAGE_USER } from '../../../configs/credentials';
 import { setupCorpCodeIfNeeded } from '../../../utils/corpCodeSetup';
 import { reservationTargetForUrl, reservationEnabled, RESERVATION_TENANT } from '../../../configs/reservations';
-import { recordReservation } from '../../../utils/reservationRecord';
+import { recordReservation, recentReservationExists } from '../../../utils/reservationRecord';
 import {
   JourneyCollector,
   printJourneyReport,
@@ -92,11 +92,12 @@ const SPC_CONFIG_BY_CLIENT: Record<string, ClientSpcConfig> = {
   },
   // Mini Mall — only reached when a location hands off to /step-four (its
   // SiteLink-FMS Flex pages, e.g. Sainte-Thérèse QC; the Yardi pages take the
-  // /yardi/start branch instead). SPC submit is captcha-gated → manual solve.
+  // /yardi/start branch instead). These are TWO-STEP checkouts with the
+  // hCaptcha on STEP 4 (before "Passer à l'étape suivante") — manual solve.
   minimall: {
     addons: [],
-    captchaAtRentNow: true,
-    captchaAtStepFour: false,
+    captchaAtRentNow: false,
+    captchaAtStepFour: true,
   },
 };
 function spcConfigFor(facility: FlexFacility): ClientSpcConfig {
@@ -109,10 +110,16 @@ const facilities = getAllFacilities();
 const runStamp = new Date().toISOString().replace(/[:.]/g, '-').replace('T', '_').slice(0, 19);
 
 test.describe('Flex Facility Journey', () => {
-  test.describe.configure({ retries: 0 });
+  // One automatic retry: a failed journey re-runs once on a fresh browser
+  // (rotation picks are pinned per run, so the retry hits the SAME page).
+  // Prod CDNs throttle automation hard enough that transient reds are real.
+  test.describe.configure({ retries: 1 });
 
   for (const facility of facilities) {
     const cfg = spcConfigFor(facility);
+    // fr-ca full checkout is supported: its FRENCH two-step layout ("Passer à
+    // l'étape suivante", tenant fields with English name attributes) is driven
+    // by the SPC driver's bilingual two-step path (verified live 2026-08-26).
     const rentMode = resolveRentMode(facility.env);
     // Handshake mode never reaches a captcha, so the normal timeout applies.
     const hasCaptcha = rentMode === 'full' &&
@@ -143,6 +150,10 @@ test.describe('Flex Facility Journey', () => {
         if (isReservationTargetPage) console.log(`  💾 reservation visit — cache busting ENABLED: ${navUrl}`);
         await live.goto(navUrl);
         await live.expectPageLoaded();
+        // Wait for the client-side unit data before ANY checks — a throttled
+        // load renders branding while units are still hydrating, which used to
+        // read as "0 unit cards / no Rent links" on a perfectly healthy page.
+        await live.waitForUnitData();
 
         // Resolve THIS page's checkout handoff from the live DOM (mixed-FMS
         // clients: Mini Mall has Yardi AND SiteLink locations on Flex — the
@@ -344,9 +355,16 @@ test.describe('Flex Facility Journey', () => {
           && reservationEnabled(rsvTarget.key)
           && (reservationOnlyRun || layerOn('sections') || layerOn('rent')));
         const clientHasReserveModal = facility.client === 'minimall' &&
-          (await page.getByRole('button', { name: /reserve/i }).first().isVisible().catch(() => false) ||
-           await page.getByRole('link', { name: /^reserve$/i }).first().isVisible().catch(() => false));
-        if (doReservationSubmit) {
+          (await page.getByRole('button', { name: /r[eé]serve/i }).first().isVisible().catch(() => false) ||
+           await page.getByRole('link', { name: /^r[eé]serve$/i }).first().isVisible().catch(() => false));
+        if (doReservationSubmit && test.info().retry > 0 && recentReservationExists(rsvTarget!.key)) {
+          // Journey retry after attempt 1 already submitted — never double-book.
+          collector.beginStep('reserve', 'Reserve Modal — SUBMISSION');
+          collector.check('Reservation submitted — confirmation shown', true,
+            'already submitted on attempt 1 (record < 30 min old) — not resubmitting on retry');
+          console.log('📝 RESERVATION: already submitted this run — skipping resubmission on retry');
+          collector.endStep();
+        } else if (doReservationSubmit) {
           collector.beginStep('reserve', 'Reserve Modal — SUBMISSION');
           const rsvName = `📝 Reservation — ${facility.name}`;
           console.log(`\n🏢 TESTING: ${rsvName}`);
@@ -514,6 +532,9 @@ test.describe('Flex Facility Journey', () => {
             for (const c of collector.activeChecks) {
               if (!c.passed) expect.soft(false, `Rent handshake: ${c.name} — ${c.detail}`).toBe(true);
             }
+            // Parseable marker → the panel Results row shows the handshake outcome.
+            const unitCheck = entry.checks.find(c => c.name.includes('unit'));
+            console.log(`📊 Flex Rent Result <<${facility.name}>>: checkout handshake ${entry.ok ? 'verified' : 'FAILED'} — ${unitCheck ? unitCheck.detail : 'no submit (autonomous mode)'}`);
           } else if (handoff.drivesSpcForm) {
           // ── Safeguard: drive the on-page V2 SPC form to submit ──
           // VBP first: when the unit offers Value-Based Pricing tiers, click
@@ -558,6 +579,9 @@ test.describe('Flex Facility Journey', () => {
           collector.check('Submit rent', typeof result === 'string',
             `Result: ${result || '(no response)'}`,
             typeof result !== 'string' ? 'Check the Rent Now submit button and payment validation on /step-four' : undefined);
+          // Parseable marker → the control panel's Results row shows the
+          // fetched rent result, same as the SPC/V1 rows.
+          console.log(`📊 Flex Rent Result <<${facility.name}>>: ${result || '(no response)'}`);
           expect(typeof result === 'string', 'expected a string submit result').toBe(true);
           } else {
             // ── Mini Mall: verify the Yardi checkout ENTRY rendered, then DRIVE
@@ -594,6 +618,7 @@ test.describe('Flex Facility Journey', () => {
             const fetched = /^SUCCESS|^ERROR/.test(rentResult);
             collector.check('Yardi v2 rent — outcome fetched', fetched, rentResult,
               fetched ? undefined : 'Yardi did not redirect or surface an error — inspect the checkout');
+            console.log(`📊 Flex Rent Result <<${facility.name}>>: ${rentResult}`);
             expect(fetched, `Yardi rent outcome: ${rentResult}`).toBe(true);
           }
 

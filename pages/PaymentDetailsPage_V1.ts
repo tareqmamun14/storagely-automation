@@ -1,5 +1,6 @@
 import { Page } from '@playwright/test';
 import { BasePage } from './BasePage';
+import { fillExpiry } from '../utils/expiryField';
 
 export class PaymentDetailsPage extends BasePage {
   constructor(page: Page) {
@@ -179,7 +180,8 @@ export class PaymentDetailsPage extends BasePage {
         await this.page.keyboard.press('Tab');
 
         await this.cardExpiryInput.waitFor({ state: 'visible', timeout: 10000 });
-        await this.cardExpiryInput.fill(paymentData.expiryDate);
+        // MM/YY-mask-aware fill (platform expiry fix 2026-08)
+        await fillExpiry(this.cardExpiryInput, paymentData.expiryDate, 'Expiry (V1)');
         await this.page.keyboard.press('Tab');
 
         await this.cardCvvInput.waitFor({ state: 'visible', timeout: 10000 });

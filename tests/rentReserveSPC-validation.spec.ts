@@ -4,8 +4,6 @@ import { cleanupOldErrorScreenshots, takeErrorScreenshot } from '../utils/screen
 import { SINGLE_PAGE_USER } from '../configs/credentials';
 import { RentResultCollector } from '../utils/RentResultCollector';
 import { setupCorpCodeIfNeeded } from '../utils/corpCodeSetup';
-import { enabledTargets, designatedUrlFor, RESERVATION_TENANT } from '../configs/reservations';
-import { recordReservation } from '../utils/reservationRecord';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -78,7 +76,12 @@ function readAllResults(): any[] {
 
 function isRetryableUnexpectedError(errorMsg: string): boolean {
   if (!errorMsg) return false;
-  return errorMsg.toLowerCase().includes('unexpected error');
+  const m = errorMsg.toLowerCase();
+  // Inconclusive outcomes retry the WHOLE flow (2 attempts) before being
+  // reported: no result fetched, or a toast that never rendered its details.
+  return m.includes('unexpected error')
+    || m.includes('failed to fetch error message')
+    || m.includes('toast appeared but details not rendered');
 }
 
 test.describe('Single-Page Rent Verification Tests', () => {
@@ -131,42 +134,9 @@ test.describe('Single-Page Rent Verification Tests', () => {
           await setupCorpCodeIfNeeded(browser, baseURL);
         }
 
-        // ============================================
-        // PRE-STEP 2: 📝 RESERVATION SUBMISSION (panel-toggled)
-        // ============================================
-        // FIXED location, no rotation ever: the flow explicitly opens the
-        // client's DESIGNATED reservation page (configs/reservations.ts) —
-        // independent of whatever URL the rent test below uses — clicks the
-        // reserve button, fills tenant details, submits a REAL reservation and
-        // requires a confirmation message (an error, or silence, is a FAILURE —
-        // that class of bug was revenue-impacting on prod). The usual rent flow
-        // then proceeds normally (it re-navigates to its own URL).
-        const rsvTarget = enabledTargets('legacy-spc')
-          .find(t => baseURL.toLowerCase().includes(t.key));
-        const rsvUrl = rsvTarget ? designatedUrlFor(rsvTarget) : null;
-        if (rsvTarget && rsvUrl) {
-          const rsvName = `📝 Reservation — ${companyName}`;
-          console.log(`\n🏢 TESTING: ${rsvName}`);
-          console.log(`⚙️  Platform: ${platform}`);
-          console.log(`📍 Designated reservation location (fixed): ${rsvUrl}`);
-          test.setTimeout(0); // captcha in the reserve modal may need a manual solve
-          await storageListingPage.navigateWithCacheBusting(rsvUrl);
-          const rsv = await storageListingPage.submitReservation(RESERVATION_TENANT, companyName);
-          if (rsv.ok) {
-            recordReservation({
-              client: rsvTarget.key, label: rsvTarget.label, locationUrl: rsvUrl,
-              unit: rsv.unit || '(see modal capture in log)', tenant: RESERVATION_TENANT,
-              confirmation: rsv.message, env: CURRENT_ENVIRONMENT, submittedAt: new Date().toISOString(),
-            });
-            console.log(`\n✅ TEST COMPLETED FOR: ${rsvName}`);
-            console.log(`📊 Result: ${rsv.message}`);
-          } else {
-            console.error(`\n❌ TEST FAILED FOR: ${rsvName}`);
-            console.error(`💥 Error: ${rsv.message}`);
-            await takeErrorScreenshot(page, `reservation-${rsvTarget.key}`).catch(() => {});
-            throw new Error(`RESERVATION FAILED for ${companyName}: ${rsv.message}`);
-          }
-        }
+        // 📝 Reservation submissions moved to their own standalone spec
+        // (tests/reservationSubmission.spec.ts) — the panel launches it as a
+        // separate process whenever the Reservation toggle is on.
 
         // ── Unified retry loop ──
         // Retries the WHOLE flow (navigate → click rent → fill form → submit)

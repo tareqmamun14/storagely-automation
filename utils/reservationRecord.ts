@@ -32,7 +32,7 @@ export function recordReservation(rec: ReservationRecord): void {
     console.warn(`⚠️ Could not write reservation record: ${(e as Error).message}`);
   }
 
-  const local = new Date(rec.submittedAt).toLocaleString();
+  const local = `${usEasternTime(rec.submittedAt)} (${rec.submittedAt} UTC)`;
   console.log('\n📝 ══════════ TEST RESERVATION SUBMITTED — CUSTOMER MUST CANCEL ══════════');
   console.log(`📝  Client:     ${rec.label} (${rec.env})`);
   console.log(`📝  Location:   ${rec.locationUrl}`);
@@ -47,11 +47,14 @@ export function recordReservation(rec: ReservationRecord): void {
 
   // Default = the published "Test Reservation Alerts" Slack workflow, posting
   // into #test-reservation-notification-for-cancellation (verified live
-  // 2026-08-21). The panel's Slack-webhook field (STORAGELY_SLACK_WEBHOOK)
-  // overrides it, e.g. to switch channels.
+  // 2026-08-21). STORAGELY_SLACK_WEBHOOK overrides it, e.g. to switch channels.
+  // PRODUCTION ONLY: staging/build reservations need no customer cancellation,
+  // so they never post — the record + log block still capture them.
   const DEFAULT_SLACK_WEBHOOK = 'https://hooks.slack.com/triggers/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';
   const webhook = process.env.STORAGELY_SLACK_WEBHOOK?.trim() || DEFAULT_SLACK_WEBHOOK;
-  if (webhook) {
+  if (rec.env !== 'production') {
+    console.log(`📤 Slack post skipped — ${rec.env} reservation (customers only need to cancel PROD ones)`);
+  } else if (webhook) {
     // Two payload fields so BOTH webhook kinds work:
     //  • text    — full message incl. <@mention> tokens (classic incoming
     //              webhooks parse these into real pings)
@@ -71,6 +74,15 @@ export function recordReservation(rec: ReservationRecord): void {
  *  (the workflow types the mentions itself around the {{details}} variable). */
 export function slackDetails(rec: ReservationRecord): string {
   return messageBody(rec);
+}
+
+/** True when this client already has a reservation record newer than
+ *  `withinMs` — used by retried journeys to avoid double-booking. */
+export function recentReservationExists(clientKey: string, withinMs = 30 * 60_000): boolean {
+  try {
+    const rec = JSON.parse(fs.readFileSync(path.join(OUT_DIR, `latest-${clientKey}.json`), 'utf8'));
+    return Date.now() - new Date(rec.submittedAt).getTime() < withinMs;
+  } catch { return false; }
 }
 
 // Slack destination: #channel C0BRQ9W55KK (storagely-workspace).
@@ -97,8 +109,19 @@ function confirmationSnippet(raw: string): string {
  * PLAIN TEXT on purpose: Slack workflow variables render literally (no
  * markdown, no underline), so caps + spacing are the formatting tools.
  */
+/** US Eastern timestamp with an explicit label. The QA machine runs on GMT+6,
+ *  so unlabeled local times confused the team (Jacob, 2026-08-21) — customer-
+ *  facing notifications always use US Eastern, labeled "ET". */
+function usEasternTime(iso: string): string {
+  return new Date(iso).toLocaleString('en-US', {
+    timeZone: 'America/New_York',
+    month: 'numeric', day: 'numeric', year: 'numeric',
+    hour: 'numeric', minute: '2-digit',
+  }) + ' ET';
+}
+
 function messageBody(rec: ReservationRecord): string {
-  const when = new Date(rec.submittedAt).toLocaleString();
+  const when = usEasternTime(rec.submittedAt);
   const customer = rec.label.split(' — ')[0];
   const unit = rec.unit.replace(/^SELECTED UNIT · /i, '').replace(/\$([\d.]+) · \/mo/g, '$$$1/mo');
   return [

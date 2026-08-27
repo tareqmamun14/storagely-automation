@@ -340,7 +340,8 @@ export class LiveFacilityPage {
     // actionability timeout for a button that never becomes visible and the
     // click never lands (observed on Minimal/Birmingham: 25 Reserve buttons, 11
     // hidden → "no modal" false-flag). `button:visible` skips the twins.
-    const reserveBtn = page.locator('button:visible').filter({ hasText: /^Reserve$/ }).first();
+    // fr-ca renders "Réserve" (verified live 2026-08-25) — accept both.
+    const reserveBtn = page.locator('button:visible').filter({ hasText: /^R[eé]serve$/i }).first();
     const hasReserve = (await reserveBtn.count()) > 0;
     checks.push({ name: 'Reserve button present', passed: hasReserve, detail: hasReserve ? 'ok' : '(none)' });
     if (!hasReserve) return { ok: false, checks };
@@ -355,11 +356,11 @@ export class LiveFacilityPage {
 
     if (opened) {
       const dlgText = (await dialog.innerText().catch(() => '')) || '';
-      const hasHeading = /finaliz\w*\s+reservation|reservation/i.test(dlgText)
-        || (await page.getByRole('heading', { name: /finaliz\w*\s+reservation|reservation/i }).count()) > 0;
-      const hasSelectedUnit = /selected unit/i.test(dlgText) || /\d{1,3}\s*['′]?\s*[x×]\s*\d{1,3}/i.test(dlgText);
-      const hasForm = (await dialog.getByRole('textbox', { name: /first name|email/i }).count()) > 0
-        || /first name|email/i.test(dlgText);
+      const hasHeading = /finali[sz]\w*\s+(la\s+)?r[eé]serv|reservation|réservation/i.test(dlgText)
+        || (await page.getByRole('heading', { name: /finali[sz]|r[eé]serv/i }).count()) > 0;
+      const hasSelectedUnit = /selected unit|unité sélectionnée/i.test(dlgText) || /\d{1,3}\s*['′]?\s*[x×]\s*\d{1,3}/i.test(dlgText);
+      const hasForm = (await dialog.getByRole('textbox', { name: /first name|email|prénom|courriel/i }).count()) > 0
+        || /first name|email|prénom|courriel/i.test(dlgText);
       checks.push({ name: 'modal shows "Finalize Reservation"', passed: hasHeading, detail: hasHeading ? 'ok' : 'no reservation heading' });
       checks.push({ name: 'modal shows the selected unit', passed: hasSelectedUnit, detail: hasSelectedUnit ? 'ok' : 'no selected-unit details' });
       checks.push({ name: 'modal has a reservation form', passed: hasForm, detail: hasForm ? 'name/email fields present' : 'no form fields' });
@@ -492,6 +493,35 @@ export class LiveFacilityPage {
       await page.keyboard.press('Escape').catch(() => {});
       await page.waitForTimeout(400);
     }
+  }
+
+  /**
+   * Unit-data readiness gate — flex pages hydrate their unit list client-side,
+   * and a CDN-throttled load can render branding/SEO while the unit data is
+   * still absent (seen on fr-ca 2026-08-25: 0 unit cards + 0 rent links across
+   * BOTH attempts, page healthy minutes later). Poll for rent/reserve CTAs or
+   * dimension cards before the checks run so a slow data fetch never reads as
+   * a broken page. Non-fatal: pages without units (waitlist-only) proceed
+   * after the wait with a logged warning.
+   */
+  async waitForUnitData(maxMs = 45_000): Promise<boolean> {
+    const started = Date.now();
+    while (Date.now() - started < maxMs) {
+      const ready = await this.page.evaluate(() => {
+        const vis = (el: Element) => !!((el as HTMLElement).offsetWidth || (el as HTMLElement).offsetHeight);
+        if ([...document.querySelectorAll('a')].some(a => /step-four|\/yardi\//.test((a as HTMLAnchorElement).href || '') && vis(a))) return true;
+        if ([...document.querySelectorAll('button')].some(b => /^r[eé]serve$/i.test((b.textContent || '').trim()) && vis(b))) return true;
+        return false;
+      }).catch(() => false);
+      if (ready) {
+        const waited = Date.now() - started;
+        if (waited > 2000) console.log(`  ⏳ unit data appeared after ${(waited / 1000).toFixed(1)}s (slow hydration — CDN throttle)`);
+        return true;
+      }
+      await this.page.waitForTimeout(1000);
+    }
+    console.log(`  ⚠️ no unit data (rent/reserve CTAs) after ${maxMs / 1000}s — page may be waitlist-only or data failed to load`);
+    return false;
   }
 
   // ── Quality checks ─────────────────────────────────────────────────────

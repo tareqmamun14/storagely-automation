@@ -1,6 +1,7 @@
 import { Page, Locator } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { CURRENT_ENVIRONMENT, Environment } from '../configs/urls';
+import { fillExpiry } from '../utils/expiryField';
 
 /** Escape regex metacharacters for safe insertion into a dynamic RegExp source. */
 function escapeRegex(s: string): string {
@@ -563,11 +564,22 @@ export class RentalDetailsPageSinglePage extends BasePage {
    * Step 4 has tenant details + captcha + "CONTINUE TO NEXT STEP";
    * Step 5 (step=2) has payment details + "Rent Now".
    */
+  // Bilingual: fr-ca renders "Passer à l'étape suivante" (verified live
+  // 2026-08-26) — missing it made the driver take the single-page path and
+  // die at "Card Number field not found".
+  private get twoStepContinueBtn() {
+    // Stable id (verified live 2026-08-26); text fallback covers older builds.
+    // NOTE: the button stays pointer-events-none until the step-4 captcha is
+    // solved — the two-step flow waits for the manual solve before clicking.
+    return this.page.locator('#continue-next-step')
+      .or(this.page.getByRole('button', { name: /continue to next step|passer à l.étape suivante/i }))
+      .first();
+  }
+
   private async isTwoStepLayout(): Promise<boolean> {
     try {
       // Same button element used in rentReservation step-four flow
-      const continueBtn = this.page.getByRole('button', { name: 'CONTINUE TO NEXT STEP' });
-      return await continueBtn.isVisible({ timeout: 3000 });
+      return await this.twoStepContinueBtn.isVisible({ timeout: 3000 });
     } catch {
       return false;
     }
@@ -579,7 +591,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
    */
   private async clickContinueToNextStep(): Promise<void> {
     console.log(`[${new Date().toISOString()}] 📍 Clicking "CONTINUE TO NEXT STEP"...`);
-    const continueBtn = this.page.getByRole('button', { name: 'CONTINUE TO NEXT STEP' });
+    const continueBtn = this.twoStepContinueBtn;
     await this.safeScroll(continueBtn);
     await continueBtn.waitFor({ state: 'visible', timeout: 10000 });
     await continueBtn.click({ timeout: 10000 });
@@ -970,7 +982,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
       } else if (currentUrl.includes('sunbirdstorage.com')) {
         stateValue = userData.province.northCarolina || 'North Carolina';
       } else if (currentUrl.includes('fr-ca.minimallstorage.com') || currentUrl.includes('/quebec/')) {
-        stateValue = userData.province.quebec || 'Quebec';
+        stateValue = userData.province.quebec || 'Québec';
         fieldLabel = 'Province';
       } else if (currentUrl.includes('minimallstorage.com') || currentUrl.includes('mini-mall-storage')) {
         stateValue = userData.province.alabama || 'Alabama';
@@ -1209,9 +1221,28 @@ export class RentalDetailsPageSinglePage extends BasePage {
       console.log(`  ✓ Selected ${fieldName}: ${optionText}`);
       return;
     } catch (error) {
+      // Fallback to direct option click
+    }
+
+    // Strategy 1b: options already visible after the click — click directly,
+    // NO typing first. fr-ca renders the province list as plain <p> rows the
+    // moment the field is clicked, and typing filters the list with
+    // accent-sensitive matching ("Quebec" never matches "Québec").
+    // (verified live on fr-ca step-four 2026-08-26)
+    try {
+      const directOption = this.page.getByRole('paragraph').filter({ hasText: optionText }).first();
+      if (await directOption.isVisible({ timeout: 800 }).catch(() => false)) {
+        await directOption.click({ timeout: 1500 });
+        const val = await field.inputValue().catch(() => '');
+        if (val && val.trim().length > 0) {
+          console.log(`  ✓ Selected ${fieldName}: ${optionText} (direct option click)`);
+          return;
+        }
+      }
+    } catch (error) {
       // Fallback to type-to-filter approach
     }
-    
+
     // Strategy 2: Type-to-filter — clear field, type the value, then pick from filtered dropdown
     // This is more reliable for multi-word states like "North Carolina"
     try {
@@ -1360,11 +1391,9 @@ export class RentalDetailsPageSinglePage extends BasePage {
     await this.cardNumberField.fill(paymentData.cardNumber);
     console.log(`  ✓ Filled Card Number: ${paymentData.cardNumber}`);
 
-    // Expiry
+    // Expiry — via the shared MM/YY-mask-aware helper (platform fix 2026-08)
     await this.safeScroll(this.expiryField);
-    await this.expiryField.click();
-    await this.expiryField.fill(paymentData.expiryDate);
-    console.log(`  ✓ Filled Expiry: ${paymentData.expiryDate}`);
+    await fillExpiry(this.expiryField, paymentData.expiryDate, 'Filled Expiry');
 
     // CVV
     await this.safeScroll(this.cvvField);
@@ -1412,9 +1441,7 @@ export class RentalDetailsPageSinglePage extends BasePage {
 
           const expiryInput = frame.locator('input[name="exp-date"], input[name="expiry"], input[placeholder*="MM" i], input[autocomplete="cc-exp"]').first();
           if (await expiryInput.isVisible({ timeout: 2000 }).catch(() => false)) {
-            await expiryInput.click();
-            await expiryInput.fill(paymentData.expiryDate);
-            console.log(`  ✓ Filled Expiry (iframe): ${paymentData.expiryDate}`);
+            await fillExpiry(expiryInput, paymentData.expiryDate, 'Filled Expiry (iframe)');
           }
 
           const cvvInput = frame.locator('input[name="cvc"], input[name="cvv"], input[placeholder*="CVV" i], input[placeholder*="CVC" i], input[autocomplete="cc-csc"]').first();
@@ -1487,11 +1514,9 @@ export class RentalDetailsPageSinglePage extends BasePage {
       await this.cardNumberField.fill(paymentData.cardNumber);
       console.log(`  ✓ Filled Card Number: ${paymentData.cardNumber}`);
 
-      // Expiry
+      // Expiry — via the shared MM/YY-mask-aware helper (platform fix 2026-08)
       await this.safeScroll(this.expiryField);
-      await this.expiryField.click();
-      await this.expiryField.fill(paymentData.expiryDate);
-      console.log(`  ✓ Filled Expiry: ${paymentData.expiryDate}`);
+      await fillExpiry(this.expiryField, paymentData.expiryDate, 'Filled Expiry');
 
       // CVV
       await this.safeScroll(this.cvvField);

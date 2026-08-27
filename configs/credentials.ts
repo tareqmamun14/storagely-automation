@@ -62,7 +62,7 @@ export const SINGLE_PAGE_USER = {
     georgia: 'Georgia',
     arizona: 'Arizona',
     colorado: 'Colorado',
-    quebec: 'Quebec'
+    quebec: 'Québec' // fr-ca pages render the accented form (verified live 2026-08-26)
   },
   zipCode: '27012', // NC zip for Clemmons
   alternateFirstName: 'Test1',

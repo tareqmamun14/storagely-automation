@@ -42,7 +42,7 @@ export class UHaulSection implements ISectionDetector {
         let hasReserveCta = false;
         for (const c of cards) {
           const innerReserve = Array.from(c.querySelectorAll<HTMLElement>('button, a'))
-            .some(b => /reserve/i.test((b.textContent || '') + ' ' + (b.getAttribute('aria-label') || '')));
+            .some(b => /r[eé]serv/i.test((b.textContent || '') + ' ' + (b.getAttribute('aria-label') || ''))); // fr-ca: "Réserve maintenant"
           const selfClickable = c.tagName === 'BUTTON' || c.tagName === 'A';
           if (innerReserve || selfClickable) { hasReserveCta = true; break; }
         }
@@ -73,15 +73,23 @@ export class UHaulSection implements ISectionDetector {
           info.imgLoaded !== false,
           info.imgLoaded === null ? 'no image element in block' : (info.imgLoaded ? `ok ("${info.imgAlt}")` : 'naturalWidth=0'),
         ));
+        // fr-ca renders the U-Haul block WITHOUT a price (verified live
+        // 2026-08-25: "LOCATION DE CAMIONS U-HAUL … Réservez votre location…")
+        // and French prices elsewhere read "37 $" — accept both formats, and
+        // info-tolerate a missing price on the fr-ca template.
+        const isFrCa = /(^|\/\/)fr-ca\./.test(ctx.url);
+        const hasPrice = /\$\s*\d|\d[\d\s,]*\s*\$/.test(info.price);
         checks.push(check(
-          'U-Haul price present',
-          /\$\d/.test(info.price),
-          info.price || '(no price found)',
+          isFrCa ? 'U-Haul price (info — fr-ca template has none)' : 'U-Haul price present',
+          isFrCa ? true : hasPrice,
+          info.price || (isFrCa ? 'no price on fr-ca — info only' : '(no price found)'),
         ));
+        // fr-ca's U-Haul block is text+image only — no CTA at all (verified
+        // live 2026-08-25: no buttons/anchors in the block, card not clickable).
         checks.push(check(
-          'U-Haul "Reserve Now" CTA present',
-          info.hasReserveCta,
-          info.hasReserveCta ? 'ok' : '(no reserve button)',
+          isFrCa ? 'U-Haul "Reserve Now" CTA (info — fr-ca block has none)' : 'U-Haul "Reserve Now" CTA present',
+          isFrCa ? true : info.hasReserveCta,
+          info.hasReserveCta ? 'ok' : (isFrCa ? 'no CTA on fr-ca — info only' : '(no reserve button)'),
         ));
       }
     } catch (err) {

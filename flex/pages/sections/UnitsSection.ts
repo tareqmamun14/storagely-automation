@@ -84,10 +84,11 @@ export class UnitsSection implements ISectionDetector {
           let lastGood: HTMLElement | null = null;
           for (let i = 0; i < 15 && cur; i++) {
             const text = cur.innerText || '';
-            const hasPrice = /\$\s*\d/.test(text);
+            // Price in EN ("$37") or FR ("37 $" / "36,50 $") format.
+            const hasPrice = /\$\s*\d|\d(?:[.,]\d{2})?\s*\$/.test(text);
             const hasDim   = /\d{1,3}\s*['′]?\s*[x×]\s*\d{1,3}/i.test(text);
             const rentLinkCount = Array.from(cur.querySelectorAll('a')).filter(matchesRentCta).length;
-            const reserveCount  = (text.match(/\breserve\b/gi) || []).length;
+            const reserveCount  = (text.match(/\br[eé]serve\b/gi) || []).length;
             // Crossed into the neighbour card — back off to the previous-good level.
             // Each unit card may have at most 2 Rent Now occurrences (mobile +
             // desktop variants of the same unit) AND at most 2 Reserve occurrences.
@@ -110,12 +111,12 @@ export class UnitsSection implements ISectionDetector {
           const dimM = text.match(/(\d{1,3})['′]?\s*[x×]\s*(\d{1,3})['′]?/i);
           // Square footage like "25 sq ft"
           const sqM  = text.match(/(\d{2,5})\s*sq\.?\s*ft/i);
-          // Promo — first line containing "Off" or "Free" or percentage
+          // Promo — first line containing "Off" or "Free" (fr: gratuit/rabais) or percentage
           const promoLine = text.split('\n').find(line =>
-            /off|free|promo|deal|save|months?/i.test(line) && /(\d+%|months?|\$)/i.test(line)
+            /off|free|promo|deal|save|months?|gratuit|rabais|mois/i.test(line) && /(\d+%|months?|\$|mois|semaines?)/i.test(line)
           ) || '';
-          // Prices — capture every $X / $X.XX in the card.
-          const priceMatches = Array.from(text.matchAll(/\$\d{1,4}(?:\.\d{2})?/g)).map(m => m[0]);
+          // Prices — capture every $X / $X.XX (EN) or "X $" / "X,XX $" (FR) in the card.
+          const priceMatches = Array.from(text.matchAll(/\$\d{1,4}(?:\.\d{2})?|\d{1,4}(?:[.,]\d{2})?\s*\$/g)).map(m => m[0]);
           // Features — words like "Climate-Controlled", "Elevator Access", "Drive Up" near top of card.
           const featureKeywords = ['climate', 'elevator', 'drive', 'indoor', 'outdoor', '24', 'access', 'parking', 'temperature'];
           const features = Array.from(new Set(
@@ -127,7 +128,7 @@ export class UnitsSection implements ISectionDetector {
           ));
 
           const hasReserve = !!Array.from(root.querySelectorAll<HTMLElement>('button'))
-            .find(b => /^reserve$/i.test((b.innerText || '').trim()));
+            .find(b => /^r[eé]serve$/i.test((b.innerText || '').trim())); // fr-ca: "Réserve"
 
           // Struck ("regular") vs current ("intro/discounted") price, by the
           // line-through style. The discounted price MUST be lower than the
@@ -136,13 +137,14 @@ export class UnitsSection implements ISectionDetector {
           let struckPrice: number | null = null;
           let currentPrice: number | null = null;
           const pricedEls = Array.from(root.querySelectorAll<HTMLElement>('*'))
-            .filter(e => e.children.length === 0 && /\$\s?\d/.test(e.textContent || ''));
+            .filter(e => e.children.length === 0 && /\$\s?\d|\d(?:[.,]\d{2})?\s*\$/.test(e.textContent || ''));
           for (const e of pricedEls) {
             const cs = getComputedStyle(e);
             const isStruck = (cs.textDecorationLine || '').includes('line-through') || e.tagName === 'DEL' || e.tagName === 'S';
-            const m = (e.textContent || '').match(/\$\s?(\d{1,4}(?:\.\d{2})?)/);
+            // EN "$37" / "$36.50" — or FR "37 $" / "36,50 $" (comma decimals).
+            const m = (e.textContent || '').match(/\$\s?(\d{1,4}(?:\.\d{2})?)|(\d{1,4}(?:[.,]\d{2})?)\s*\$/);
             if (!m) continue;
-            const val = parseFloat(m[1]);
+            const val = parseFloat((m[1] || m[2]).replace(',', '.'));
             if (isStruck) { if (struckPrice == null) struckPrice = val; }
             else if (currentPrice == null) currentPrice = val;
           }
@@ -192,7 +194,7 @@ export class UnitsSection implements ISectionDetector {
         const isVis = (el: Element) => (el as HTMLElement).offsetParent !== null || el.getClientRects().length > 0;
         const visibleRent = rentLinks.filter(isVis);
         const rentLinkCount = visibleRent.length;
-        const reserveCount = Array.from(document.querySelectorAll('button')).filter(b => /^reserve$/i.test((b.innerText || '').trim()) && isVis(b)).length;
+        const reserveCount = Array.from(document.querySelectorAll('button')).filter(b => /^r[eé]serve$/i.test((b.innerText || '').trim()) && isVis(b)).length; // fr-ca: "Réserve"
         const allUnitIds = visibleRent.map(a => { try { const u = new URL(a.href); return u.searchParams.get('unit') || u.searchParams.get('unit_id') || ''; } catch { return ''; } }).filter(Boolean);
 
         // Assign each VISIBLE Rent CTA to its list/track = the CLOSEST ancestor
@@ -374,7 +376,7 @@ export class UnitsSection implements ISectionDetector {
         // Defends against the common "promo bound but template literal leaked" bug.
         const cardsWithPromo = cards.filter(c => c.promo);
         const malformedPromo = cardsWithPromo.filter(c =>
-          !/(\d+\s*%|month|free|save|\$\d)/i.test(c.promo)
+          !/(\d+\s*%|month|free|save|\$\d|\d\s*\$|gratuit|rabais|mois|semaines?)/i.test(c.promo)
         );
         checks.push(check(
           'every promo line looks well-formed',

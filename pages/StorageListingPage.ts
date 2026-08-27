@@ -201,12 +201,20 @@ export class StorageListingPage extends BasePage {
       }
     }
 
-    // hCaptcha checkbox inside the modal — click it, then wait for the token.
-    // STAGING never enforces the captcha (the widget may render anyway), so
-    // wait briefly and submit regardless. PROD enforces it: wait as long as it
-    // takes, announcing when a manual challenge solve is needed.
+    // hCaptcha checkbox inside the modal.
+    // STAGING: the server does NOT enforce the captcha — and clicking the
+    // checkbox OPENS the challenge popover, which then COVERS the submit
+    // button and dead-ends the flow (seen 2026-08-21). So on staging we never
+    // touch the widget and submit directly.
+    // PROD enforces it: click the checkbox, then wait as long as it takes,
+    // announcing when a manual challenge solve is needed.
+    const isStaging = CURRENT_ENVIRONMENT === Environment.STAGING;
     const captchaFrameEl = form.locator('iframe[src*="hcaptcha"]').first();
-    if (await captchaFrameEl.count().catch(() => 0)) {
+    if (!(await captchaFrameEl.count().catch(() => 0))) {
+      console.log('  - no hCaptcha in the reserve modal — continuing');
+    } else if (isStaging) {
+      console.log('  - hCaptcha widget present but STAGING does not enforce it — submitting without touching it');
+    } else {
       console.log('  🔐 hCaptcha checkbox present — clicking "I am human"...');
       await p.frameLocator('#reservUnitFrom iframe[src*="hcaptcha"]')
         .locator('#checkbox, [role="checkbox"]').first().click({ timeout: 10_000 }).catch(() => {});
@@ -217,14 +225,9 @@ export class StorageListingPage extends BasePage {
         const ifr = f?.querySelector('iframe[data-hcaptcha-response]');
         return !!(ifr && (ifr.getAttribute('data-hcaptcha-response') || '').length > 0);
       }).catch(() => false);
-      const isStaging = CURRENT_ENVIRONMENT === Environment.STAGING;
       let waited = 0;
       while (!(await solved())) {
-        if (isStaging && waited >= 10_000) {
-          console.log('  - captcha token not issued after 10s — staging does not enforce it, submitting anyway');
-          break;
-        }
-        if (!isStaging && waited === 15_000) {
+        if (waited === 15_000) {
           // Same banner style as the rent flow's manual-captcha pause — plus a
           // terminal bell (\x07) so the pause is audible; the control panel
           // also beeps + flashes the tab on this line.
@@ -237,20 +240,27 @@ export class StorageListingPage extends BasePage {
           console.log('🛑  3. Automation will continue AUTOMATICALLY once solved');
           console.log('🛑  (No time limit — take as long as you need)');
           console.log('🛑 ═══════════════════════════════════════════════════════════\n');
-        } else if (!isStaging && waited > 15_000 && waited % 30_000 === 0) {
+        } else if (waited > 15_000 && waited % 30_000 === 0) {
           console.log(`⏳ Still waiting for the RESERVATION captcha solve for ${clientName}... (${waited / 1000}s)`);
         }
         await this.wait(1000);
         waited += 1000;
       }
-      if (await solved()) console.log('  ✅ hCaptcha solved');
-    } else {
-      console.log('  - no hCaptcha in the reserve modal (staging) — continuing');
+      console.log('  ✅ hCaptcha solved');
     }
 
-    // Submit and race confirmation vs error.
+    // Submit and race confirmation vs error. Fallback chain because SiteLink
+    // sometimes hides #mySubmitReserve via CSS, and lingering overlays can
+    // cover it — a force/JS click still submits the form.
     console.log('  🖱️ Clicking RESERVE THIS UNIT...');
-    await form.locator('#mySubmitReserve').click();
+    const submitBtn = form.locator('#mySubmitReserve');
+    try {
+      await submitBtn.click({ timeout: 8_000 });
+    } catch {
+      console.log('  - standard submit click blocked (hidden button / overlay) — force-clicking');
+      try { await submitBtn.click({ timeout: 5_000, force: true }); }
+      catch { await submitBtn.evaluate((el) => (el as HTMLElement).click()); }
+    }
     const outcome = await this.raceReservationOutcome();
     return { ...outcome, unit };
   }

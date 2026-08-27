@@ -550,9 +550,11 @@ export function getCompanyNameFromUrl(url: string): string {
       const pathParts = urlObj.pathname.split('/');
       return pathParts[1].replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
     } else {
-      // Production: company name is the hostname
+      // Production: company name is the hostname — skip infra subdomains
+      // (rent.distinctstorage.com must read "distinctstorage", not "rent").
       const hostParts = host.split('.');
-      if (hostParts[0] === 'www') {
+      const infra = ['www', 'ww2', 'rent', 'book', 'app', 'fr-ca'];
+      if (infra.includes(hostParts[0]) && hostParts.length > 2) {
         return hostParts[1].replace(/storage$/, ' Storage');
       } else {
         return hostParts[0].replace(/storage$/, ' Storage');

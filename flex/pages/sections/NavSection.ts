@@ -86,7 +86,7 @@ export class NavSection implements ISectionDetector {
 
       // ── 3. My Account — tenant-portal link OR account dropdown button ─
       if (nav.expectMyAccount) {
-        const myAcct = headerItems.find(i => /my account|^account$|login|sign ?in/i.test(i.text));
+        const myAcct = headerItems.find(i => /my account|^account$|login|sign ?in|mon compte|connexion/i.test(i.text));
         const myAcctHref = myAcct?.href || '';
         let myAcctExternal = false, myAcctHost = '';
         if (myAcctHref) {

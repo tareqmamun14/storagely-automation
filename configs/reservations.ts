@@ -66,14 +66,18 @@ export const RESERVATION_TARGETS: ReservationTarget[] = [
     captchaCheckbox: true,
   },
   {
+    // Legacy location page on app.storagely.io (NOT the Flex site) — same
+    // #reservUnitFrom modal as Bluebird, verified live 2026-08-21. The custom
+    // <sh_reservebtntext_…> tags are text wrappers INSIDE a.reserveBtnPop.
     key: 'safeguard',
-    label: 'Safeguard — Addison, IL Lake Street (Flex)',
+    label: 'Safeguard — Clemmons, NC Test Ave (legacy)',
     fms: 'SiteLink',
-    driver: 'flex',
+    driver: 'legacy-spc',
     urls: {
-      production: 'https://www.safeguardit.com/storage-units/illinois/addison/lake-street',
+      staging:    'https://test.staging.storagely-api.com/safeguard-self-storage/storage-units/north-carolina/clemmons/testave',
+      production: 'https://app.storagely.io/safeguard-self-storage/storage-units/north-carolina/clemmons/testave',
     },
-    smsConsentToggle: true,
+    captchaCheckbox: true,
   },
   // ONLY Bluebird + Safeguard are live (user decision 2026-08-21).
   // Mini Mall — pending customer confirmation; add its entry here when green-lit.

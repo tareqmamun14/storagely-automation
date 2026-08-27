@@ -1,7 +1,7 @@
 {
   "client": "bluebird",
   "label": "Bluebird Storage — Calgary, Blackfoot (SPC)",
-  "locationUrl": "https://test.staging.storagely-api.com/bluebirdstorage/storage-units/alberta/calgary/blackfoot",
+  "locationUrl": "https://bluebirdstorage.ca/storage-units/alberta/calgary/blackfoot",
   "unit": "Storage Unit · Parking · 0' · WIDTH · x · 20' · DEPTH · $100/month · unit_id=143037 · unit_type_id=1572",
   "tenant": {
     "firstName": "TestReservation",
@@ -10,6 +10,6 @@
     "phone": "2125556789"
   },
   "confirmation": "Your unit has been reserved Thank you for reserving your unit at Bluebird Self Storage - Calgary - Blackfoot. Our local team will be reaching out to you soon to schedule a tour. Close",
-  "env": "staging",
-  "submittedAt": "2026-08-20T19:57:41.285Z"
+  "env": "production",
+  "submittedAt": "2026-08-21T22:17:55.232Z"
 }

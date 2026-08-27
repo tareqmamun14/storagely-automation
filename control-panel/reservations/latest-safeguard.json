@@ -1,15 +1,15 @@
 {
   "client": "safeguard",
-  "label": "Safeguard — Addison, IL Lake Street (Flex)",
-  "locationUrl": "https://www.safeguardit.com/storage-units/illinois/addison/lake-street",
-  "unit": "SELECTED UNIT · 8' x 3' · Climate-Controlled · 1st Floor Access · $32.50 · /mo · WEB RATE · $65/mo",
+  "label": "Safeguard — Thornwood, NY Broadway (legacy)",
+  "locationUrl": "https://app.storagely.io/safeguard-self-storage/storage-units/ny-thornwood-broadway?location=190204T",
+  "unit": "Storage Unit · 10X20OSP · 10' · WIDTH · x · 0' · DEPTH · $49/month · unit_id=47729 · unit_type_id=1668",
   "tenant": {
     "firstName": "TestReservation",
     "lastName": "Testing",
     "email": "tareq@storagely.io",
     "phone": "2125556789"
   },
-  "confirmation": "Selected Unit8' x 3'Climate-Controlled1st Floor Access$32.50/moWEB RATE$65/moSTANDARD RATE50% Off 2 MonthsYour unit has been reserved!Thank you for reserving your unit at Illinois - Addison - Lake Street. Our local team will be reaching out to you soon to schedule a tour.Close",
+  "confirmation": "Your unit has been reserved! Thank you for reserving your unit at Safeguard Self Storage. Our local team will be reaching out to you soon to schedule a tour. Close",
   "env": "production",
-  "submittedAt": "2026-08-20T20:03:05.000Z"
+  "submittedAt": "2026-08-21T22:18:09.481Z"
 }

@@ -1,5 +1,6 @@
 import { Page } from '@playwright/test';
 import { BasePage } from './BasePage';
+import { fillExpiry } from '../utils/expiryField';
 
 export class MiniMallRentalPage extends BasePage {
   constructor(page: Page) {
@@ -463,9 +464,8 @@ export class MiniMallRentalPage extends BasePage {
       console.log(`  ✓ Card Number: ${paymentInfo.cardNumber}`);
 
       await this.safeScroll(this.expiryField);
-      await this.expiryField.click();
-      await this.expiryField.fill(paymentInfo.expiryDate);
-      console.log(`  ✓ Expiry: ${paymentInfo.expiryDate}`);
+      // MM/YY-mask-aware fill (platform expiry fix 2026-08)
+      await fillExpiry(this.expiryField, paymentInfo.expiryDate, 'Expiry');
 
       await this.safeScroll(this.cvvField);
       await this.cvvField.click();
@@ -589,9 +589,7 @@ export class MiniMallRentalPage extends BasePage {
 
           const expiryInput = frame.locator('input[name="exp-date"], input[name="expiry"], input[placeholder*="MM" i], input[autocomplete="cc-exp"]').first();
           if (await expiryInput.isVisible({ timeout: 2000 }).catch(() => false)) {
-            await expiryInput.click();
-            await expiryInput.fill(paymentData.expiryDate);
-            console.log(`  ✓ Expiry (iframe): ${paymentData.expiryDate}`);
+            await fillExpiry(expiryInput, paymentData.expiryDate, 'Expiry (iframe)');
           }
 
           const cvvInput = frame.locator('input[name="cvc"], input[name="cvv"], input[placeholder*="CVV" i], input[autocomplete="cc-csc"]').first();

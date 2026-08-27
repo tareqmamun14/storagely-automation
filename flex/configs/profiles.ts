@@ -127,7 +127,7 @@ export const DEFAULT_PROFILE: ClientProfile = {
     // "Rent" on Storage Star — both hand off to the SAME /step-four SPC. Accept
     // either so any future standard client auto-works (the checkout-path filter
     // in UnitsSection still keeps a stray "Rent Online" nav link out).
-    rentLinkText: /rent now|^rent\b/i,
+    rentLinkText: /rent now|^rent\b|^louer\b/i, // fr-ca SPC pages label the CTA "Louer"
     pathPattern: /\/step-four/,
     unitParam: 'unit_id',
     hrefContains: '/step-four',
@@ -163,18 +163,26 @@ const PROFILES: Record<string, ClientProfile> = {
   minimall: {
     client: 'minimall',
     // Mini Mall titles the features block "Facility Features".
-    amenitiesHeading: /facility features|amenit(y|ies)/i,
+    amenitiesHeading: /facility features|amenit(y|ies)|commodités/i, // fr-ca: "Commodités"
     nav: {
       minItems: 3,
       expectBlogLink: false,        // Blog lives in the footer, not the top nav
       expectContactDropdown: false, // no Contact dropdown
       expectMyAccount: true,        // present as a dropdown BUTTON, not a direct link
-      dropdownTriggers: [/^find storage$/i, /^getting started$/i, /^resources$/i, /^about$/i],
-      actionCtas: [/pay online/i, /rent unit/i, /call us/i],
+      // Bilingual: the fr-ca page (Sainte-Thérèse) is fully localized —
+      // "Trouver le stockage / Commencer / Ressources / À propos" and
+      // "Payez en ligne / Unité à loyer / Appelez-nous" (verified live 2026-08-25).
+      dropdownTriggers: [
+        /^find storage$|^trouver le stockage$/i,
+        /^getting started$|^commencer$/i,
+        /^resources$|^ressources$/i,
+        /^about$|^à propos$/i,
+      ],
+      actionCtas: [/pay online|payez en ligne/i, /rent unit|unité à loyer/i, /call us|appelez-nous/i],
     },
     rentHandoff: {
       label: 'Yardi v2 /yardi/start',
-      rentLinkText: /^rent\b/i,     // link reads "Rent" (Reserve is a separate button)
+      rentLinkText: /^rent\b|^louer\b/i, // "Rent" · fr-ca reads "Louer" (verified live 2026-08-25)
       pathPattern: /\/yardi\/start/,
       unitParam: 'unit',
       requireType: 'rent',

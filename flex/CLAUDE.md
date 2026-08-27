@@ -82,9 +82,18 @@ SiteLink locations (`/step-four`, e.g. Sainte-Thérèse QC) on Flex. The journey
 resolves each PAGE's real handoff from the live DOM
 (`LiveFacilityPage.resolveRentHandoff`) and passes it to health, sections
 (`ctx.handoff`), and the rent step. Sainte-Thérèse (fr-ca.minimallstorage.com)
-is a SiteLink / French page — verified 2026-08-03: section headings are
-English ("Customer Reviews", "Amenities", "Have a Question?") so the standard
-minimall profile works; only SEO copy + H1 are French. Added to rotation.
+is a SiteLink / FULLY FRENCH page (re-verified 2026-08-25 — it was English-
+sectioned in early August, then localized): "Avis des clients", "Commodités",
+"Mon compte", "Réserve" buttons, "Bureau:/Accès:" hours, French checkout
+("Résumé de la location", Prénom/Adresse courriel). Detectors carry bilingual
+patterns for it, and FULL rent mode is supported: its checkout is the Mini Mall
+TWO-STEP layout (step 4 tenant + hCaptcha + "Passer à l'étape suivante" → step
+5 payment) driven by the SPC driver's bilingual two-step path (field name
+attributes are English; province = "Québec"). "What Will Fit?", the U-Haul
+price/CTA, and the pricing disclaimer don't exist on this template → info-passes.
+The journey also gates on `waitForUnitData()` after navigation — a throttled
+load can render branding while units are still hydrating, which used to read
+as "0 unit cards" on a healthy page.
 
 **📝 Reservation submission (panel-toggled).** The journey's reserve step has
 two depths: the read-only modal check (default), and a REAL reservation

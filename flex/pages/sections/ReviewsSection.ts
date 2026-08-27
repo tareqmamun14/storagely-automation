@@ -28,7 +28,8 @@ export class ReviewsSection implements ISectionDetector {
     const data: Record<string, unknown> = {};
 
     try {
-      const heading = page.getByRole('heading', { name: /customer reviews|reviews/i }).first();
+      // Bilingual: fr-ca renders "Avis des clients" (verified live 2026-08-25).
+      const heading = page.getByRole('heading', { name: /customer reviews|reviews|avis des clients|avis/i }).first();
       const hasHeading = (await heading.count()) > 0;
       checks.push(check('Customer Reviews heading visible', hasHeading));
 

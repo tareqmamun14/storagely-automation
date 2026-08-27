@@ -43,8 +43,11 @@ export class FiltersSection implements ISectionDetector {
       ));
 
       // ── Unit Features checkboxes (with live counts) ──────────────────
+      // Bilingual — fr-ca labels verified live 2026-08-25: "Climat contrôlé",
+      // "Entrée par ascenseur / extérieure / intérieure du corridor",
+      // "Non climatisé", "Porte enroulable", "Stationnement".
       const featureBoxes = page.getByRole('checkbox', {
-        name: /climate controlled|drive up|ground floor|interior hallway|non-climate|parking/i,
+        name: /climate controlled|drive up|ground floor|interior hallway|non-climate|parking|climat contrôlé|non climatisé|entrée|porte enroulable|stationnement/i,
       });
       const featureNames = (await featureBoxes.evaluateAll(
         els => els.map(e => {
@@ -70,7 +73,7 @@ export class FiltersSection implements ISectionDetector {
       ));
 
       // ── Unit Size checkboxes ─────────────────────────────────────────
-      const sizeBoxes = page.getByRole('checkbox', { name: /small units|medium units|large units/i });
+      const sizeBoxes = page.getByRole('checkbox', { name: /small units|medium units|large units|petites unités|unités moyennes|grandes unités/i });
       const sizeCount = await sizeBoxes.count();
       data.sizeFilterCount = sizeCount;
       checks.push(check(
@@ -80,7 +83,7 @@ export class FiltersSection implements ISectionDetector {
       ));
 
       // ── Storage Usage buttons ────────────────────────────────────────
-      const usageButtons = page.getByRole('button', { name: /^(apartment|home|college|commercial|business)$/i });
+      const usageButtons = page.getByRole('button', { name: /^(apartment|home|college|commercial|business|appartement|accueil|collège|affaires)$/i });
       const usageCount = await usageButtons.count();
       data.storageUsageCount = usageCount;
       checks.push(check(
@@ -90,8 +93,8 @@ export class FiltersSection implements ISectionDetector {
       ));
 
       // ── Card / Row layout toggle — non-destructive flip & restore ────
-      const cardBtn = page.getByRole('button', { name: /^card$/i }).first();
-      const rowBtn = page.getByRole('button', { name: /^row$/i }).first();
+      const cardBtn = page.getByRole('button', { name: /^card$|^carte$/i }).first();
+      const rowBtn = page.getByRole('button', { name: /^row$|^rangée$/i }).first();
       const hasToggle = (await cardBtn.count()) > 0 && (await rowBtn.count()) > 0;
       checks.push(check('Card / Row layout toggle present', hasToggle,
         hasToggle ? 'card + row controls found' : '(layout toggle not found)'));
@@ -115,7 +118,7 @@ export class FiltersSection implements ISectionDetector {
 
       // ── Quick-filter chips above the grid ────────────────────────────
       const chips = page.getByRole('button', {
-        name: /(climate controlled|drive up unit|parking)\s*\(\d+\)/i,
+        name: /(climate controlled|drive up unit|parking|climat contrôlé|stationnement)\s*\(\d+\)/i,
       });
       const chipCount = await chips.count();
       data.quickFilterChips = chipCount;

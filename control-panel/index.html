@@ -244,8 +244,8 @@
   #results-table tr.pass td:first-child { color: #6dd4a4; font-weight: 700; }
   #results-table tr.fail td:first-child { color: #ef6678; font-weight: 700; }
   #results-table tr.fail td { color: #ef6678; }
-  #results-table .res-msg { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; color: #93a0b0; }
-  #results-table .res-msg:hover { white-space: normal; word-break: break-word; }
+  /* Always show the FULL result — wrap in place, never truncate. */
+  #results-table .res-msg { white-space: normal; word-break: break-word; font-size: 11px; color: #93a0b0; }
   #results-head { padding: 10px 12px; font-weight: 700; font-size: 13px; color: #d6dae3; border-bottom: 1px solid #1e2230; display: flex; align-items: center; gap: 8px; background: #0d0f18; }
   #results-head .res-count { font-weight: 400; font-size: 11px; color: #707888; }
   .results-empty { display: flex; align-items: center; justify-content: center; flex: 1; color: #404858; font: 12px/1.4 ui-monospace, Menlo, Consolas, monospace; text-align: center; padding: 20px; }
@@ -850,15 +850,14 @@
       <!-- 📝 Reservation Submissions — REAL reservations; master toggle + per-client ticks -->
       <details class="suite" id="suite-reservation">
         <summary>
-          <label class="switch" onclick="event.stopPropagation()"><input id="reservation-master" type="checkbox" checked /><span class="track"></span></label>
+          <label class="switch" onclick="event.stopPropagation()"><input id="reservation-master" type="checkbox" /><span class="track"></span></label>
           <span class="suite-name">📝 Reservation Submissions</span>
           <span class="suite-desc">Real reservation on the fixed location → confirmation required → Slack auto-post</span>
         </summary>
         <div class="body">
           <div class="small" style="margin-bottom:6px">
-            Runs inside the owning suite (Bluebird → <b>SPC</b> · Safeguard → <b>Flex</b>) on the client's <b>fixed location</b> — regular runs untouched.
-            <b>Pass</b> = confirmation captured → cancellation message auto-posts to Slack.
-            <b>Fail</b> = no Slack post — red row in Results + full details in the log.
+            Runs as its <b>own process, first</b> — with any suites, or alone. Each ticked client: open its <b>fixed location</b> → reserve → verify the <b>confirmation message</b>.
+            <b>Pass</b> = cancellation message auto-posts to Slack. <b>Fail</b> = no post — red row in Results + details in the log.
           </div>
           <div id="reservation-clients" class="check-list"></div>
         </div>
@@ -2447,7 +2446,7 @@ function refreshCmdPreview() {
 // ─────────────────────────────────────────────────────────────────────
 $('#runBtn').addEventListener('click', async () => {
   const s = collectSettings(); delete s._checkedClientUrls;
-  if (!s.suites.length) return appendLine('\n[31m✖ Pick at least one suite.[0m\n');
+  if (!s.suites.length && !(s.reservation && s.reservation.length)) return appendLine('\n[31m✖ Pick at least one suite (or enable a Reservation submission).[0m\n');
 
   // Build-instance pre-flight: require base URL, persist corp codes for next time.
   if (s.suites.includes('build')) {
@@ -2558,7 +2557,10 @@ let pendingClient = null;          // { name, pass } from "TEST COMPLETED/FAILED
 let pendingFlexClient = null;      // "JOURNEY REPORT — X" → next "N passed" line
 let pendingFlexLines = 0;
 let clientFmsMap = {};             // client name → FMS (from "🏢 TESTING:" + "⚙️ Platform:" banner pairs)
+let flexRentResults = {};          // flex facility name → fetched rent result ("📊 Flex Rent Result [name]: …")
 let lastTestingClient = null;
+let lastSeenUrl = '';              // listing page from "🌐 URL:" line
+let lastCheckoutUrl = '';          // checkout page from "Navigated to:" line
 
 function canonFms(x) {
   const m = { storedge: 'storEDGE', sitelink: 'SiteLink', ssm: 'SSM', yardi: 'Yardi' };
@@ -2607,7 +2609,22 @@ function fmsFromRegistry(name) {
   return '';
 }
 
-function stripAnsi(s) { return s.replace(/\x1b?\[[\d;]*m|\x1b?\[[?0-9;]*[A-HJKSTfhlmsu]/g, ''); }
+// ESC is optional only for color codes ("[31m" with a lost ESC is unambiguous);
+// letter-terminated cursor codes REQUIRE the ESC byte — otherwise plain text
+// like "[SiteLink/fr-ca]" gets its "[S" eaten as a fake scroll-up code.
+function stripAnsi(s) { return s.replace(/\x1b?\[[\d;]*m|\x1b\[[?0-9;]*[A-HJKSTfhlmsu]/g, ''); }
+
+// FMS for flex journey rows — their labels don't name the FMS, so resolve the
+// brand through the client registry: hostname ("Rotation — safeguardit.com (…)")
+// or the brand prefix before the first dash ("Mini Mall — Carroll, OH (…)").
+function flexFms(name) {
+  const direct = fmsFromName(name);
+  if (direct) return direct;
+  const host = ((name || '').match(/([a-z0-9-]+)\.(?:com|ca|io|net)\b/i) || [])[1];
+  if (host) { const f = fmsFromRegistry(host); if (f) return f; }
+  const brand = (name || '').split('—')[0].trim();
+  return brand ? fmsFromRegistry(brand) : '';
+}
 
 function cleanClientName(raw) {
   return raw.replace(/^[⭐★\s]+/, '').trim();
@@ -2619,12 +2636,28 @@ function parseResultLine(raw) {
   // ── Test banner: "🏢 TESTING: Client" then "⚙️ Platform: storEDGE" —
   //    remember each client's FMS so the Results table can show it.
   const testingMatch = s.match(/TESTING:\s*(.+?)$/);
-  if (testingMatch) { lastTestingClient = cleanClientName(testingMatch[1]); return null; }
+  if (testingMatch) { lastTestingClient = cleanClientName(testingMatch[1]); lastSeenUrl = ''; lastCheckoutUrl = ''; return null; }
   const platformMatch = s.match(/Platform:\s*([A-Za-z]+)/);
   if (platformMatch && lastTestingClient && canonFms(platformMatch[1])) {
     clientFmsMap[lastTestingClient] = canonFms(platformMatch[1]);
     return null;
   }
+
+  // "📍 Fixed reservation location (env): …" — the reservation spec's URL line.
+  const rsvLoc = s.match(/Fixed reservation location[^:]*:\s*(https?:\/\/\S+)/);
+  if (rsvLoc) { lastSeenUrl = rsvLoc[1]; return null; }
+  // "📊 Flex Rent Result <<facility>>: …" — the journey's fetched rent outcome,
+  // shown on the facility's Results row like the SPC/V1 messages. (<<>> because
+  // stripAnsi eats "[S…" sequences — a bare "[" + capital letter looks like an
+  // ANSI remnant to it.)
+  const flexRent = s.match(/Flex Rent Result <<(.+?)>>:\s*(.+)$/);
+  if (flexRent) { flexRentResults[flexRent[1].trim()] = flexRent[2].trim(); return null; }
+
+  // Capture listing URL ("🌐 URL: ...") and checkout URL ("Navigated to: ...")
+  const urlMatch = s.match(/URL:\s*(https?:\/\/\S+)/);
+  if (urlMatch && !s.includes('Navigated')) { lastSeenUrl = urlMatch[1]; return null; }
+  const navMatch = s.match(/Navigated to:\s*(https?:\/\/\S+)/);
+  if (navMatch) { lastCheckoutUrl = navMatch[1]; return null; }
 
   // ── SPC / V1 / Mini Mall: per-client completion markers ──
 
@@ -2646,16 +2679,16 @@ function parseResultLine(raw) {
   if (pendingClient) {
     const resultMatch = s.match(/(?:Final\s+)?Result:\s*(.+?)$/);
     if (resultMatch) {
-      const r = { client: pendingClient.name, pass: pendingClient.pass, msg: resultMatch[1].trim(), fms: clientFmsMap[pendingClient.name] || fmsFromName(pendingClient.name) || fmsFromRegistry(pendingClient.name) };
-      pendingClient = null;
+      const r = { client: pendingClient.name, pass: pendingClient.pass, msg: resultMatch[1].trim(), fms: clientFmsMap[pendingClient.name] || fmsFromName(pendingClient.name) || fmsFromRegistry(pendingClient.name), url: lastCheckoutUrl || lastSeenUrl };
+      pendingClient = null; lastSeenUrl = ''; lastCheckoutUrl = '';
       return r;
     }
 
     // "💥 Error: ..." — message for failed tests
     const errorMatch = s.match(/Error:\s*(.+?)$/);
     if (errorMatch) {
-      const r = { client: pendingClient.name, pass: pendingClient.pass, msg: errorMatch[1].trim(), fms: clientFmsMap[pendingClient.name] || fmsFromName(pendingClient.name) || fmsFromRegistry(pendingClient.name) };
-      pendingClient = null;
+      const r = { client: pendingClient.name, pass: pendingClient.pass, msg: errorMatch[1].trim(), fms: clientFmsMap[pendingClient.name] || fmsFromName(pendingClient.name) || fmsFromRegistry(pendingClient.name), url: lastCheckoutUrl || lastSeenUrl };
+      pendingClient = null; lastSeenUrl = ''; lastCheckoutUrl = '';
       return r;
     }
   }
@@ -2679,7 +2712,7 @@ function parseResultLine(raw) {
       renderResults();
       return null;
     }
-    return { client, pass: passed, msg, fms };
+    return { client, pass: passed, msg, fms, url: lastCheckoutUrl || lastSeenUrl };
   }
 
   // ── Flex journey report ──
@@ -2693,19 +2726,35 @@ function parseResultLine(raw) {
 
   if (pendingFlexClient) {
     pendingFlexLines--;
+    // The line right under the JOURNEY REPORT header is the facility URL —
+    // freshest link for this row.
+    const bareUrl = s.trim().match(/^(https?:\/\/\S+)$/);
+    if (bareUrl) { lastSeenUrl = bareUrl[1]; return null; }
     const flexSummary = s.match(/(\d+)\s+passed.*?(\d+)\s+failed/);
     if (flexSummary) {
       const passed = parseInt(flexSummary[1], 10);
       const failed = parseInt(flexSummary[2], 10);
       const client = pendingFlexClient;
+      const rent = flexRentResults[client];
       pendingFlexClient = null;
-      return { client, pass: failed === 0, msg: failed > 0 ? `${passed} passed, ${failed} failed` : `${passed} passed — all checks OK`, fms: fmsFromName(client) };
+      const base = failed > 0 ? `${passed} passed, ${failed} failed` : `${passed} passed`;
+      return { client, pass: failed === 0, msg: base + (rent ? ` — rent: ${rent}` : (failed > 0 ? '' : ' — all checks OK')), fms: flexFms(client), url: lastSeenUrl || lastCheckoutUrl };
     }
     const flexAllPass = s.match(/(\d+)\s+passed/);
     if (flexAllPass && !s.includes('failed')) {
       const client = pendingFlexClient;
+      const rent = flexRentResults[client];
       pendingFlexClient = null;
-      return { client, pass: true, msg: `${flexAllPass[1]} passed — all checks OK`, fms: fmsFromName(client) };
+      return { client, pass: true, msg: `${flexAllPass[1]} passed` + (rent ? ` — rent: ${rent}` : ' — all checks OK'), fms: flexFms(client), url: lastSeenUrl || lastCheckoutUrl };
+    }
+    // Summary with ONLY failures ("4 failed • 56.3s" — zero passed steps):
+    // without this, a fully-red journey produced NO Results row at all.
+    const flexAllFail = s.match(/(\d+)\s+failed/);
+    if (flexAllFail && !/passed/.test(s)) {
+      const client = pendingFlexClient;
+      const rent = flexRentResults[client];
+      pendingFlexClient = null;
+      return { client, pass: false, msg: `${flexAllFail[1]} failed` + (rent ? ` — rent: ${rent}` : ' — see the journey report in the log'), fms: flexFms(client), url: lastSeenUrl || lastCheckoutUrl };
     }
     if (pendingFlexLines <= 0) pendingFlexClient = null;
   }
@@ -2718,16 +2767,21 @@ function addResult(r) {
   renderResults();
 }
 
+// Result messages always render fully wrapped — no expand/collapse needed.
+
 function renderResults() {
   const table = $('#results-table');
   const count = $('#results-count');
   if (!table) return;
   const passed = liveResults.filter(r => r.pass).length;
   const failed = liveResults.filter(r => !r.pass).length;
-  count.textContent = `${liveResults.length} done` + (failed ? ` · ${failed} failed` : '');
-  count.style.color = failed ? '#ef6678' : '';
+  count.innerHTML = `<span style="color:#4caf50">${liveResults.length} done</span>` + (failed ? ` · <span style="color:#ef6678">${failed} failed</span>` : '');
   table.innerHTML = `<table><thead><tr><th></th><th>Client</th><th>FMS</th><th>Result</th></tr></thead><tbody>${
-    liveResults.map(r => `<tr class="${r.pass ? 'pass' : 'fail'}"><td>${r.pass ? '✓' : '✗'}</td><td>${escapeHtml(r.client)}</td><td>${fmsBadge(r.fms)}</td><td class="res-msg" title="${escapeAttr(r.msg)}">${escapeHtml(r.msg)}</td></tr>`).join('')
+    liveResults.map(r => {
+      // Every row links to the page it tested (when the URL was captured).
+      const urlLink = r.url ? ` <a href="${escapeAttr(r.url)}" target="_blank" rel="noopener" style="color:#5b8cff;text-decoration:none;font-weight:600;white-space:nowrap" title="${escapeAttr(r.url)}">URL ↗</a>` : '';
+      return `<tr class="${r.pass ? 'pass' : 'fail'}"><td>${r.pass ? '✓' : '✗'}</td><td>${escapeHtml(r.client)}</td><td>${fmsBadge(r.fms)}</td><td class="res-msg">${escapeHtml(r.msg)}${urlLink}</td></tr>`;
+    }).join('')
   }</tbody></table>`;
   table.scrollTop = table.scrollHeight;
 }
@@ -2739,6 +2793,9 @@ function clearResults() {
   pendingFlexLines = 0;
   clientFmsMap = {};
   lastTestingClient = null;
+  lastSeenUrl = '';
+  lastCheckoutUrl = '';
+  flexRentResults = {};
   const table = $('#results-table');
   const count = $('#results-count');
   if (table) table.innerHTML = '<div class="results-empty">Waiting for run...<br/>Results will appear here<br/>as each client finishes.</div>';
